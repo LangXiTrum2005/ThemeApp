@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Controller Widget</string>
+    <string name="cc_accessibility_description" translatable="false">Control Center overlay — enables system-wide pull-down panel for quick toggles</string>
+
+</resources>

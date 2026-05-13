@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+
+    <color name="surface">#F9F9FA</color>
+    <color name="surfaceBg">#FFFFFF</color>
+    <color name="surfacePrimaryHighEm">#6635F2</color>
+    <color name="surfacePrimaryLowEm">#EAE8FF</color>
+    <color name="surfacePrimaryBaseEm">#F4F3FF</color>
+    <color name="surfacePrimaryMedEm">#8D7AFF</color>
+    <color name="surfaceSecondaryBaseEm">#FFF3FD</color>
+    <color name="surfaceSecondaryMedEm">#FF6DE9</color>
+    <color name="surfaceDangerHighEm">#F03D3D</color>
+
+    <color name="surfaceInfoLowEm">#DEEFFD</color>
+    <color name="surfaceInfoBaseEm">#F1F8FE</color>
+    <color name="surfaceSuccessLowEm">#D4F7CF</color>
+    <color name="textWhite">#FFFFFF</color>
+    <color name="textBlack">#000000</color>
+    <color name="textHighEm">#0A0C11</color>
+    <color name="textMedEm">#5B616D</color>
+    <color name="textInfoHighEm">#1080D6</color>
+    <color name="textDangerLowEm">#FDE7E7</color>
+    <color name="textDangerHighEm">#E92020</color>
+    <color name="textSecondaryLowEm">#E316C7</color>
+    <color name="colorPrimary">#D7D5FF</color>
+    <color name="outlineEm">#EBECF0</color>
+    <color name="outlinePrimaryMedEm">#BBB3FF</color>
+    <color name="outlineSecondaryMedEm">#FFA3F2</color>
+    <color name="surfaceWarningHighEm">#FCBF04</color>
+    <color name="textLowEm">#8C929C</color>
+    <color name="surface2">#F4F4F6</color>
+    <color name="textBaseEm">#C3C6CC</color>
+    <color name="surfacePrimaryHighEmV2">#7B5CFA</color>
+    <color name="surfaceSecondaryHighEm">#FF2EE7</color>
+    <color name="outlineSuccessMedEm">#7FE76F</color>
+    <color name="surfaceSecondaryLowEm">#FFE6FD</color>
+    <color name="surfaceSuccessBaseEm">#E8FBE5</color>
+    <color name="surfaceSuccessHighEm">#35C220</color>
+    <color name="surfaceLowEm">#DEEFFD</color>
+    <color name="successLowEm">#D4F7CF</color>
+    <color name="surfaceDisabledLowEm">#EBECF0</color>
+    <color name="infoMedEm">#118BE8</color>
+    <color name="surfaceDangerLowEm">#FCD9D9</color>
+    <color name="outlineInfoHighEm">#118BE8</color>
+    <color name="surfaceDangerBaseEm">#FEECEC</color>
+    <color name="primaryContainer">#D0E4FF</color>
+    <color name="onPrimaryContainer">#001D35</color>
+    <color name="primary">#327FC9</color>
+    <color name="ripple">#D8D8D8</color>
+    <color name="textSuccessHighEm">#2A9919</color>
+    <color name="transparent">#00FFFFFF</color>
+
+    <color name="surface_0">#FFFFFF</color>
+    <color name="surface_1">#F9F9FA</color>
+    <color name="surface_2">#F4F4F6</color>
+    <color name="surface_3">#EBECF0</color>
+    <color name="surface_4">#DDDFE4</color>
+    <color name="surface_secondary_high_em">#52B7FF</color>
+
+    <color name="surface_dark_0">#070707</color>
+    <color name="surface_dark_1">#111111</color>
+    <color name="surface_dark_2">#141414</color>
+    <color name="surface_dark_3">#202020</color>
+    <color name="surface_dark_4">#3A3A3A</color>
+
+    <color name="primary_high_em">#F23561</color>
+    <color name="primary_med_em">#FF5D84</color>
+    <color name="primary_low_em">#FFC7D4</color>
+    <color name="primary_base_em">#FFF3F6</color>
+    <color name="high_em">#0A0C11</color>
+    <color name="primary_text_high_em">#6635F2</color>
+    <color name="disable_med_em">#C3C6CC</color>
+
+    <color name="secondary_high_em">#1084D7</color>
+    <color name="secondary_med_em">#FF6DE9</color>
+    <color name="secondary_low_em">#FFE6FD</color>
+    <color name="secondary_base_em">#FFF3FD</color>
+
+    <color name="success_high_em">#35C220</color>
+    <color name="success_med_em">#35C220</color>
+
+    <color name="info_high_em">#118BE8</color>
+    <color name="info_med_em">#59B0F3</color>
+    <color name="info_low_em">#DEEFFD</color>
+
+
+    <color name="warning_high_em">#FCBF04</color>
+    <color name="warning_med_em">#FDCB35</color>
+
+    <color name="danger_high_em">#E92020</color>
+    <color name="danger_med_em">#F36363</color>
+    <color name="danger_base_em">#FEF5F5</color>
+
+    <color name="med_em">#5B616D</color>
+
+    <color name="text_high_em">#0A0C11</color>
+    <color name="text_med_em">#5B616D</color>
+    <color name="text_low_em">#8C929C</color>
+    <color name="text_base_em">#C3C6CC</color>
+
+    <color name="outline_high_em">#C3C6CC</color>
+    <color name="outline_med_em">#DDDFE4</color>
+    <color name="outline_low_em">#EBECF0</color>
+    <color name="outline_base_em">#F4F4F6</color>
+
+    <color name="blood_pressure_high_em">#0FC0C1</color>
+
+    <color name="inverse_black_neutral">#FFFFFF</color>
+
+    <color name="weight_high_em">#0AAC56</color>
+    <color name="water_high_em">#228CF0</color>
+
+    <color name="heart_rest_slow">#3A68FF</color>
+    <color name="heart_rest_normal">#00BE0D</color>
+    <color name="heart_rest_fast">#FF5E00</color>
+
+    <color name="heart_warm_up">#6300D4</color>
+    <color name="heart_target_hr_training">#C34AFF</color>
+    <color name="heart_high_intensity">#FF9100</color>
+    <color name="heart_extreme">#FF0000</color>
+    <color name="low_em">#8C929C</color>
+    <color name="success_low_em">#7FE76F</color>
+    <color name="base_em">#C3C6CC</color>
+    <color name="onBackground">#161C1C</color>
+
+    <color name="my_spinner_dropdown_background">#F0F0F0</color>
+    <color name="drawable_end_ic">#F7B733</color>
+    <color name="outline_hover">#3FC3C6CC</color>
+
+    <color name="align">#8D7AFF</color>
+
+    <color name="color1">#095a93</color>
+
+</resources>

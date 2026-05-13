@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="SeekBarControlView">
+        <attr name="iconMarginBottom" format="dimension" />
+        <attr name="iconWH" format="dimension" />
+        <attr name="defaultHeight" format="dimension" />
+        <attr name="defaultWidth" format="dimension" />
+    </declare-styleable>
+</resources>

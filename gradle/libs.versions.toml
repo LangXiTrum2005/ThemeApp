@@ -1,0 +1,120 @@
+[versions]
+agp = "9.2.1"
+glide = "5.0.7"
+kotlinxSerializationJson = "1.7.3"
+kotlinxCoroutines = "1.9.0"
+adjustAndroid = "5.6.1"
+amplituda = "v2.3.1"
+applovinqualityservicegradleplugin = "5.9.5"
+desugar_jdk_libs = "2.1.5"
+kotlin = "2.3.21"
+coreKtx = "1.18.0"
+junit = "4.13.2"
+junitVersion = "1.3.0"
+espressoCore = "3.7.0"
+libpag = "4.5.52"
+lifecycleRuntimeKtx = "2.10.0"
+hiltAndroid = "2.59.2"
+ksp = "2.3.6"
+appcompat = "1.7.1"
+playServicesAds = "25.2.0"
+firebaseBom = "34.13.0"
+installreferrer = "2.2"
+playServicesAppset = "16.1.0"
+playServicesAdsIdentifier = "18.3.0"
+material = "1.13.0"
+media3Exoplayer = "1.10.0"
+roomRuntime = "2.8.4"
+firebaseCore = "21.1.1"
+googleServices = "4.4.4"
+firebase-crashlytics = "3.0.7"
+facebook = "6.21.0.2"
+inferAnnotation = "0.18.0"
+facebookAndroidSdk = "18.2.3"
+gson = "2.14.0"
+sdpAndroid = "1.1.1"
+shimmer = "0.5.0"
+constraintlayout = "2.2.1"
+cardview = "1.0.0"
+sspAndroid = "1.1.1"
+lifecycleProcess = "2.10.0"
+applovin = "13.6.2.0"
+mintegral = "17.1.51.0"
+facebookAdapter = "6.21.0.0"
+mintegralAdapter = "17.1.51.0"
+googleAdapter = "25.2.0.0"
+userMessagingPlatform = "4.0.0"
+billing = "8.3.0"
+installreferrerVersion = "2.2"
+recyclerview = "1.4.0"
+activityKtx = "1.13.0"
+eventbus = "3.3.1"
+
+[libraries]
+
+adjust-android = { module = "com.adjust.sdk:adjust-android", version.ref = "adjustAndroid" }
+adjust-android-huawei-referrer = { module = "com.adjust.sdk:adjust-android-huawei-referrer", version.ref = "adjustAndroid" }
+adjust-android-webbridge = { module = "com.adjust.sdk:adjust-android-webbridge", version.ref = "adjustAndroid" }
+glide = { module = "com.github.bumptech.glide:glide", version.ref = "glide" }
+libpag = { module = "com.tencent.tav:libpag", version.ref = "libpag" }
+play-services-ads-identifier = { module = "com.google.android.gms:play-services-ads-identifier", version.ref = "playServicesAdsIdentifier" }
+material = { group = "com.google.android.material", name = "material", version.ref = "material" }
+eventbus = { module = "org.greenrobot:eventbus", version.ref = "eventbus" }
+
+androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
+junit = { group = "junit", name = "junit", version.ref = "junit" }
+androidx-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junitVersion" }
+androidx-espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espressoCore" }
+androidx-lifecycle-runtime-ktx = { group = "androidx.lifecycle", name = "lifecycle-runtime-ktx", version.ref = "lifecycleRuntimeKtx" }
+hilt-android = { module = "com.google.dagger:hilt-android", version.ref = "hiltAndroid" }
+hilt-compiler = { module = "com.google.dagger:hilt-compiler", version.ref = "hiltAndroid" }
+androidx-appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "appcompat" }
+play-services-ads = { module = "com.google.android.gms:play-services-ads", version.ref = "playServicesAds" }
+firebase-bom = { module = "com.google.firebase:firebase-bom", version.ref = "firebaseBom" }
+google-firebase-analytics = { module = "com.google.firebase:firebase-analytics" }
+play-services-appset = { module = "com.google.android.gms:play-services-appset", version.ref = "playServicesAppset" }
+androidx-media3-exoplayer = { module = "androidx.media3:media3-exoplayer", version.ref = "media3Exoplayer" }
+androidx-media3-exoplayer-dash = { module = "androidx.media3:media3-exoplayer-dash", version.ref = "media3Exoplayer" }
+androidx-media3-ui = { module = "androidx.media3:media3-ui", version.ref = "media3Exoplayer" }
+androidx-room-compiler = { module = "androidx.room:room-compiler", version.ref = "roomRuntime" }
+androidx-room-ktx = { module = "androidx.room:room-ktx", version.ref = "roomRuntime" }
+androidx-room-runtime = { module = "androidx.room:room-runtime", version.ref = "roomRuntime" }
+firebase-analytics = { module = "com.google.firebase:firebase-analytics" }
+firebase-config = { module = "com.google.firebase:firebase-config" }
+firebase-core = { module = "com.google.firebase:firebase-core", version.ref = "firebaseCore" }
+google-firebase-crashlytics = { module = "com.google.firebase:firebase-crashlytics" }
+google-firebase-crashlytics-ndk = { module = "com.google.firebase:firebase-crashlytics-ndk" }
+google-services = { module = "com.google.gms:google-services", version.ref = "googleServices" }
+facebook = { module = "com.google.ads.mediation:facebook", version.ref = "facebook" }
+infer-annotation = { module = "com.facebook.infer.annotation:infer-annotation", version.ref = "inferAnnotation" }
+facebook-android-sdk = { module = "com.facebook.android:facebook-android-sdk", version.ref = "facebookAndroidSdk" }
+gson = { module = "com.google.code.gson:gson", version.ref = "gson" }
+sdp-android = { module = "com.intuit.sdp:sdp-android", version.ref = "sdpAndroid" }
+shimmer = { module = "com.facebook.shimmer:shimmer", version.ref = "shimmer" }
+androidx-constraintlayout = { group = "androidx.constraintlayout", name = "constraintlayout", version.ref = "constraintlayout" }
+androidx-cardview = { group = "androidx.cardview", name = "cardview", version.ref = "cardview" }
+androidx-lifecycle-process = { group = "androidx.lifecycle", name = "lifecycle-process", version.ref = "lifecycleProcess" }
+mintegral = { module = "com.google.ads.mediation:mintegral", version.ref = "mintegral" }
+applovin-adapter-google = { module = "com.applovin.mediation:google-adapter", version.ref = "googleAdapter" }
+applovin-adapter-mintegral = { module = "com.applovin.mediation:mintegral-adapter", version.ref = "mintegralAdapter" }
+facebook-adapter = { module = "com.applovin.mediation:facebook-adapter", version.ref = "facebookAdapter" }
+ssp-android = { module = "com.intuit.ssp:ssp-android", version.ref = "sspAndroid" }
+user-messaging-platform = { module = "com.google.android.ump:user-messaging-platform", version.ref = "userMessagingPlatform" }
+billing = { module = "com.android.billingclient:billing", version.ref = "billing" }
+#noinspection SimilarGradleDependency
+android-installreferrer = { module = "com.android.installreferrer:installreferrer", version.ref = "installreferrerVersion" }
+androidx-recyclerview = { module = "androidx.recyclerview:recyclerview", version.ref = "recyclerview" }
+firebase-messaging = { module = "com.google.firebase:firebase-messaging" }
+kotlinx-serialization-json = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "kotlinxSerializationJson" }
+kotlinx-coroutines-android = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-android", version.ref = "kotlinxCoroutines" }
+androidx-activity-ktx = { group = "androidx.activity", name = "activity-ktx", version.ref = "activityKtx" }
+
+[plugins]
+android-application = { id = "com.android.application", version.ref = "agp" }
+kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
+kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
+hilt-android = { id = "com.google.dagger.hilt.android", version.ref = "hiltAndroid" }
+ksp-android = { id = "com.google.devtools.ksp", version.ref = "ksp" }
+android-library = { id = "com.android.library", version.ref = "agp" }
+google-services = { id = "com.google.gms.google-services", version.ref = "googleServices" }
+firebase-crashlytics = { id = "com.google.firebase.crashlytics", version.ref = "firebase-crashlytics" }

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.wavez.themewallpaper.core.controllercenter.view.CustomPullView xmlns:android="http://schemas.android.com/apk/res/android"
+<com.wavez.controllerwidget.core.controllercenter.view.CustomPullView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/pullRoot"
     android:layout_width="match_parent"
@@ -19,7 +19,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <com.wavez.themewallpaper.core.controllercenter.view.HomeCenterControllerView
+    <com.wavez.controllerwidget.core.controllercenter.view.HomeCenterControllerView
         android:id="@+id/main"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -47,4 +47,4 @@
         android:visibility="gone"
         android:textColor="#000000"
         app:layout_constraintBottom_toBottomOf="parent" />
-</com.wavez.themewallpaper.core.controllercenter.view.CustomPullView>
+</com.wavez.controllerwidget.core.controllercenter.view.CustomPullView>

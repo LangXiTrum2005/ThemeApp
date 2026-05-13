@@ -5,11 +5,11 @@ plugins {
     alias(libs.plugins.ksp.android)
     alias(libs.plugins.firebase.crashlytics)
     alias(libs.plugins.google.services)
-    id("kotlin-parcelize")
+    alias(libs.plugins.kotlin.parcelize)
 }
 
 android {
-    namespace = "com.wavez.themewallpaper"
+    namespace = "com.wavez.controllerwidget"
     compileSdk {
         version = release(36) {
             minorApiLevel = 1
@@ -21,27 +21,56 @@ android {
         minSdk = 28
         targetSdk = 36
         versionCode = 1
-        versionName = "1.0"
+        versionName = "1.0.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
     buildTypes {
-        release {
+        debug {
             isMinifyEnabled = false
+            isShrinkResources = false
+
+            buildConfigField(
+                "String",
+                "BASE_URL",
+                "\"http://192.168.1.40/server4/public/\""
+            )
+        }
+
+        release {
+            isMinifyEnabled = true
+            isShrinkResources = true
+
+            buildConfigField(
+                "String",
+                "BASE_URL",
+                "\"https://api.example.com/\""
+            )
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
         }
     }
+
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_21
         targetCompatibility = JavaVersion.VERSION_21
     }
+
     buildFeatures {
         viewBinding = true
+        buildConfig = true
     }
+}
+
+base {
+    val versionCode = android.defaultConfig.versionCode
+    val versionName = android.defaultConfig.versionName
+
+    archivesName =
+        "P67-Controller Widget-v${versionName}(${versionCode})"
 }
 
 dependencies {
@@ -66,7 +95,15 @@ dependencies {
     implementation(libs.androidx.room.runtime)
     ksp(libs.androidx.room.compiler)
     implementation(libs.user.messaging.platform)
-    implementation(libs.billing)
+    implementation(libs.retrofit)
+    implementation(libs.retrofit.converter.moshi)
+    implementation(libs.okhttp.logging.interceptor)
+    implementation(libs.moshi)
+    ksp(libs.moshi.kotlin.codegen)
+    implementation(libs.libpag)
+    implementation(libs.glide)
+    implementation(libs.eventbus)
+
     //firebase
     implementation(libs.firebase.core)
     implementation(platform(libs.firebase.bom))
@@ -89,9 +126,7 @@ dependencies {
     implementation(libs.androidx.recyclerview)
     implementation(libs.kotlinx.serialization.json)
     implementation(libs.kotlinx.coroutines.android)
+    implementation(libs.billing)
 
-    implementation(libs.libpag)
-    implementation(libs.glide)
-    implementation(libs.eventbus)
 
 }

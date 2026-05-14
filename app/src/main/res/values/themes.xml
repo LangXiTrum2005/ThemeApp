@@ -12,6 +12,14 @@
 
     <style name="Theme.ThemeWallpaper" parent="Base.Theme.P67ControllerWidget" />
 
+    <style name="Theme.ScreenRecordPermission" parent="Theme.Material3.DayNight.NoActionBar">
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:backgroundDimEnabled">false</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowActionBar">false</item>
+    </style>
+
     <style name="TransparentBottomSheetDialog" parent="Theme.Material3.Light.BottomSheetDialog">
         <item name="bottomSheetStyle">@style/TransparentBottomSheet</item>
     </style>

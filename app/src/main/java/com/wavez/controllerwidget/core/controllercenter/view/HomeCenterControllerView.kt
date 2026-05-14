@@ -2,18 +2,20 @@ package com.wavez.controllerwidget.core.controllercenter.view
 
 import android.accessibilityservice.AccessibilityService
 import android.app.NotificationManager
+import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
+import android.content.IntentFilter
 import android.database.ContentObserver
 import android.graphics.BitmapFactory
 import android.graphics.Color
 import android.net.Uri
 import android.os.Handler
 import android.os.Looper
-import android.provider.AlarmClock
 import android.provider.MediaStore
 import android.provider.Settings
 import android.util.AttributeSet
+import android.util.Log
 import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
@@ -21,7 +23,6 @@ import android.widget.ImageView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.graphics.drawable.toDrawable
 import androidx.core.graphics.toColorInt
-import androidx.core.net.toUri
 import com.wavez.controllerwidget.core.controllercenter.PermissionHelper
 import com.wavez.controllerwidget.core.controllercenter.controllers.BluetoothController
 import com.wavez.controllerwidget.core.controllercenter.controllers.BrightnessController
@@ -31,9 +32,13 @@ import com.wavez.controllerwidget.core.controllercenter.controllers.NetworkContr
 import com.wavez.controllerwidget.core.controllercenter.controllers.RingerMode
 import com.wavez.controllerwidget.core.controllercenter.controllers.VolumeController
 import com.wavez.controllerwidget.core.controllercenter.model.ControllerConfigModel
+import com.wavez.controllerwidget.core.controllercenter.service.record.ScreenRecordPermissionActivity
+import com.wavez.controllerwidget.core.controllercenter.service.record.ScreenRecordService
 import com.wavez.controllerwidget.core.controllercenter.utils.UtilsKt
 import com.wavez.controllerwidget.core.controllercenter.view.SeekBarControlView.OnProgressChangeListener
 import com.wavez.controllerwidget.core.extensions.onAvoidDoubleClick
+import com.wavez.controllerwidget.core.extensions.openCalculatorApp
+import com.wavez.controllerwidget.core.extensions.openStopwatchApp
 import com.wavez.controllerwidget.databinding.LayoutControllerCenterBinding
 
 class HomeCenterControllerView @JvmOverloads constructor(
@@ -42,6 +47,11 @@ class HomeCenterControllerView @JvmOverloads constructor(
     defStyleAttr: Int = 0
 ) : ConstraintLayout(context, attrs, defStyleAttr) {
 
+    companion object {
+        private const val START_RECORD_DELAY_MS = 3_000L
+        const val TAG = "HomeCenterControllerView"
+    }
+
     private val binding =
         LayoutControllerCenterBinding.inflate(LayoutInflater.from(context), this, true)
 
@@ -49,6 +59,15 @@ class HomeCenterControllerView @JvmOverloads constructor(
     private var onDismiss: () -> Unit = {}
     private var boundMedia: MediaController? = null
     private var suppressNextAutoRotateObserver = false
+    private var writeSettingsRequestOpening = false
+
+    private val screenRecordStateReceiver = object : BroadcastReceiver() {
+        override fun onReceive(context: Context, intent: Intent) {
+            if (intent.action != ScreenRecordService.ACTION_RECORDING_STATE_CHANGED) return
+            val isRecording = intent.getBooleanExtra(ScreenRecordService.EXTRA_IS_RECORDING, false)
+            post { syncRecordVideoState(isRecording, playAnim = true) }
+        }
+    }
 
     private val autoRotateObserver = object : ContentObserver(Handler(Looper.getMainLooper())) {
         override fun onChange(selfChange: Boolean, uri: Uri?) {
@@ -372,6 +391,10 @@ class HomeCenterControllerView @JvmOverloads constructor(
         )
         binding.brightness.progressListener = object : OnProgressChangeListener {
             override fun onProgressChanged(progress: Int) {
+                if (!brightness.canWriteSettings()) {
+                    openWriteSettingsOnce()
+                    return
+                }
                 brightness.setBrightness(progress)
             }
 
@@ -399,22 +422,27 @@ class HomeCenterControllerView @JvmOverloads constructor(
             dismiss()
         }
         binding.timing.onAvoidDoubleClick {
-            openActivity(Intent(AlarmClock.ACTION_SHOW_ALARMS))
-            dismiss()
+            if (context.openStopwatchApp()) dismiss()
         }
         binding.calculator.onAvoidDoubleClick {
-            openCalculator()
-            dismiss()
+            if (context.openCalculatorApp()) dismiss()
         }
         binding.recordAudio.onAvoidDoubleClick {
             openActivity(Intent(MediaStore.Audio.Media.RECORD_SOUND_ACTION))
             dismiss()
         }
+
         binding.recordVideo.onAvoidDoubleClick {
-            binding.recordVideo.setState(AnimationImageView.State.Open, playAnim = true)
-            openActivity(Intent(MediaStore.ACTION_VIDEO_CAPTURE))
-            dismiss()
+            if (ScreenRecordService.isRecording()) {
+                binding.recordVideo.setState(AnimationImageView.State.Close, playAnim = true)
+                context.startService(ScreenRecordService.stopIntent(context))
+                dismiss()
+            } else {
+                binding.recordVideo.setState(AnimationImageView.State.Open, playAnim = true)
+                ScreenRecordPermissionActivity.start(context, START_RECORD_DELAY_MS)
+            }
         }
+
         binding.battery.onAvoidDoubleClick {
             openActivity(Intent(Settings.ACTION_BATTERY_SAVER_SETTINGS))
             dismiss()
@@ -443,6 +471,7 @@ class HomeCenterControllerView @JvmOverloads constructor(
     }
 
     private fun syncStaticStates(volume: VolumeController) {
+        syncRecordVideoState(ScreenRecordService.isRecording(), playAnim = false)
         binding.autoRotate.setState(
             if (isAutoRotateOn()) AnimationImageView.State.Open else AnimationImageView.State.Close,
             playAnim = false
@@ -535,29 +564,12 @@ class HomeCenterControllerView @JvmOverloads constructor(
         false
     }
 
-    private fun openCalculator() {
-        val intents = listOf(
-            Intent().setClassName(
-                "com.google.android.calculator",
-                "com.android.calculator2.Calculator"
-            ),
-            Intent().setClassName("com.android.calculator2", "com.android.calculator2.Calculator"),
-            Intent(Intent.ACTION_MAIN).addCategory(Intent.CATEGORY_APP_CALCULATOR)
-        )
-        intents.firstOrNull { intent ->
-            openActivity(intent, swallowError = true)
-        } ?: openActivity(
-            Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS)
-                .setData("package:com.android.calculator2".toUri()),
-            swallowError = true
-        )
-    }
-
     private fun openActivity(intent: Intent, swallowError: Boolean = false): Boolean {
         return try {
             context.startActivity(intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK))
             true
         } catch (e: Exception) {
+            Log.d(TAG, "openActivity: Failed to open activity with intent: $intent", e)
             if (!swallowError) dismiss()
             false
         }
@@ -578,9 +590,38 @@ class HomeCenterControllerView @JvmOverloads constructor(
         onDismiss.invoke()
     }
 
+    private fun openWriteSettingsOnce() {
+        if (writeSettingsRequestOpening) return
+        writeSettingsRequestOpening = true
+        runCatching {
+            PermissionHelper.openWriteSettingsPage(context)
+        }.onFailure {
+            Log.e(TAG, "openWriteSettingsOnce: failed", it)
+        }
+        dismiss()
+    }
+
+    private fun syncRecordVideoState(isRecording: Boolean, playAnim: Boolean) {
+        binding.recordVideo.setState(
+            if (isRecording) {
+                AnimationImageView.State.Open
+            } else {
+                AnimationImageView.State.Close
+            },
+            playAnim = playAnim
+        )
+    }
+
+
     override fun onAttachedToWindow() {
         super.onAttachedToWindow()
         boundMedia?.let { syncMediaState(it, refreshSessions = true) }
+        syncRecordVideoState(ScreenRecordService.isRecording(), playAnim = false)
+        context.registerReceiver(
+            screenRecordStateReceiver,
+            IntentFilter(ScreenRecordService.ACTION_RECORDING_STATE_CHANGED),
+            Context.RECEIVER_NOT_EXPORTED
+        )
         context.contentResolver.registerContentObserver(
             Settings.System.getUriFor(Settings.System.ACCELEROMETER_ROTATION),
             false,
@@ -590,13 +631,16 @@ class HomeCenterControllerView @JvmOverloads constructor(
 
     override fun onDetachedFromWindow() {
         super.onDetachedFromWindow()
+        runCatching { context.unregisterReceiver(screenRecordStateReceiver) }
         context.contentResolver.unregisterContentObserver(autoRotateObserver)
     }
 
     override fun onVisibilityChanged(changedView: View, visibility: Int) {
         super.onVisibilityChanged(changedView, visibility)
         if (changedView == this && visibility == VISIBLE) {
+            writeSettingsRequestOpening = false
             boundMedia?.let { syncMediaState(it, refreshSessions = true) }
+            syncRecordVideoState(ScreenRecordService.isRecording(), playAnim = false)
         }
     }
 }

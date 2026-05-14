@@ -1,0 +1,42 @@
+package com.wavez.controllerwidget.ui.home
+
+import android.util.Log
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import com.wavez.controllerwidget.core.base.UiState
+import com.wavez.controllerwidget.data.model.WallpaperModel
+import com.wavez.controllerwidget.data.repository.WallpaperRepository
+import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.launch
+import javax.inject.Inject
+
+@HiltViewModel
+class MainViewModel  @Inject constructor(
+    private val wallpaperRepository: WallpaperRepository
+): ViewModel() {
+
+    private val _wallpapersState =
+        MutableStateFlow<UiState<List<WallpaperModel>>>(UiState.Idle)
+    val wallpapersState: StateFlow<UiState<List<WallpaperModel>>> =
+        _wallpapersState.asStateFlow()
+
+    fun getWallpapers(forceRefresh: Boolean = false) {
+        viewModelScope.launch {
+            _wallpapersState.value = UiState.Loading
+            Log.d("Log_data", "getWallpapers: start")
+
+            val result = wallpaperRepository.getAllWallpapersUnlimited(forceRefresh)
+            result.onSuccess { wallpapers ->
+                Log.d("Log_data", "getWallpapers: $wallpapers")
+                _wallpapersState.value = UiState.Data(wallpapers)
+            }.onFailure { error ->
+                val message = error.message.orEmpty().ifBlank { "Unknown error" }
+                Log.e("Log_data", "onFailure: $message", error)
+                _wallpapersState.value = UiState.Error(error, message)
+            }
+        }
+    }
+}

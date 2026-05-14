@@ -2,4 +2,11 @@
     <string name="app_name">Controller Widget</string>
     <string name="cc_accessibility_description" translatable="false">Control Center overlay — enables system-wide pull-down panel for quick toggles</string>
 
+    <string name="screen_recording_channel">Screen recording</string>
+    <string name="screen_recording_title">Recording screen</string>
+    <string name="screen_recording_message">Tap Stop to finish recording</string>
+    <string name="screen_recording_stop">Stop</string>
+    <string name="screen_recording_saved">Video saved</string>
+    <string name="screen_recording_notification_required">Please allow notification permission to start recording</string>
+
 </resources>

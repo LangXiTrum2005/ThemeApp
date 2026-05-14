@@ -14,7 +14,7 @@ data class WallpaperModel(
     override val name: String,
     @param:Json(name = "thumb")
     override val thumb: String,
-    @param:Json(name = "premium")
+    @param:Json(name = "is_vip")
     override val premium: Int,
     @param:Json(name = "url")
     override val url: String,

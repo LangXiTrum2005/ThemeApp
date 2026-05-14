@@ -19,14 +19,10 @@ data class ControllerModel(
     override val name: String,
     @param:Json(name = "thumb")
     override val thumb: String,
-    @param:Json(name = "premium")
+    @param:Json(name = "is_vip")
     override val premium: Int,
     @param:Json(name = "url")
     override val url: String,
     @param:Json(name = "category_id")
     override val categoryId: String,
-    @param:Json(name = "like")
-    override val like: Int,
-    @param:Json(name = "view")
-    override val view: Int,
-) : Controller
+) : ThemeRemoteItem

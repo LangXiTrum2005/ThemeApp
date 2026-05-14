@@ -3,6 +3,10 @@ package com.wavez.controllerwidget.core.di
 import android.content.Context
 import com.wavez.controllerwidget.data.repository.SharedPref
 import com.wavez.controllerwidget.data.repository.SharedPreferencesImpl
+import com.wavez.controllerwidget.data.repository.ThemeControllerRepository
+import com.wavez.controllerwidget.data.repository.ThemeControllerRepositoryImpl
+import com.wavez.controllerwidget.data.repository.WallpaperRepository
+import com.wavez.controllerwidget.data.repository.WallpaperRepositoryImpl
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -19,6 +23,18 @@ class AppModule {
     fun provideSharedPrefProvider(
         @ApplicationContext context: Context,
     ): SharedPref = SharedPreferencesImpl(context)
+
+    @Provides
+    @Singleton
+    fun provideWallpaperRepository(
+        impl: WallpaperRepositoryImpl,
+    ): WallpaperRepository = impl
+
+    @Provides
+    @Singleton
+    fun provideThemeControllerRepository(
+        impl: ThemeControllerRepositoryImpl,
+    ): ThemeControllerRepository = impl
 
     /*@Singleton
     @Provides

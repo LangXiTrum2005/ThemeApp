@@ -3,7 +3,6 @@ package com.wavez.controllerwidget.core.controllercenter.controllers
 import android.content.Context
 import android.provider.Settings
 import android.util.Log
-import com.wavez.controllerwidget.core.controllercenter.PermissionHelper
 import dagger.hilt.android.qualifiers.ApplicationContext
 import javax.inject.Inject
 import kotlin.math.roundToInt
@@ -11,10 +10,11 @@ import kotlin.math.roundToInt
 class BrightnessController @Inject constructor(
     @ApplicationContext private val context: Context
 ) {
+    fun canWriteSettings(): Boolean = Settings.System.canWrite(context)
+
     fun setBrightness(progress: Int) {
-        if (!Settings.System.canWrite(context)) {
+        if (!canWriteSettings()) {
             Log.e("ControlCenter", "BrightnessController: WRITE_SETTINGS not granted")
-            PermissionHelper.openWriteSettingsPage(context)
             return
         }
         try {

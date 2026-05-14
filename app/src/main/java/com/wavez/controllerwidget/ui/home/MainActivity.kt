@@ -9,12 +9,15 @@ import android.os.Bundle
 import android.view.ViewGroup
 import android.widget.Button
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.activity.viewModels
 import com.wavez.controllerwidget.core.base.BaseActivity
+import com.wavez.controllerwidget.core.base.UiState
 import com.wavez.controllerwidget.core.controllercenter.PermissionHelper
 import com.wavez.controllerwidget.core.controllercenter.RequiredPermission
 import com.wavez.controllerwidget.core.controllercenter.ThemeLoader
 import com.wavez.controllerwidget.core.controllercenter.model.ControllerConfigModel
 import com.wavez.controllerwidget.core.controllercenter.service.ControlCenterService
+import com.wavez.controllerwidget.core.extensions.collectWithLifecycle
 import com.wavez.controllerwidget.databinding.ActivityMainBinding
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -30,6 +33,8 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
             return Intent(activity, MainActivity::class.java)
         }
     }
+
+    private val viewModel by viewModels<MainViewModel>()
 
     private var panelActive = false
 
@@ -48,8 +53,29 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
 
     override fun initConfig(savedInstanceState: Bundle?) {
         super.initConfig(savedInstanceState)
+        observeViewModel()
+        viewModel.getWallpapers()
         binding.togglePanelButton.setOnClickListener { togglePanel() }
         requestPermissions.launch(runtimePermissions.toTypedArray())
+    }
+
+    private fun observeViewModel() {
+        viewModel.wallpapersState.collectWithLifecycle(this) { state ->
+            when (state) {
+                UiState.Idle -> Unit
+                UiState.Loading -> {
+                    // Show loading view here.
+                }
+
+                is UiState.Data -> {
+                    // Bind state.value to RecyclerView/adapter here.
+                }
+
+                is UiState.Error -> {
+                    // Show state.message to user here.
+                }
+            }
+        }
     }
 
     override fun onResume() {
@@ -93,8 +119,9 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
     private fun togglePanel() {
         panelActive = !panelActive
         sendBroadcast(
-            Intent(ControlCenterService.Companion.ACTION_ACTIVE_CONTROL_PANEL)
-                .putExtra(ControlCenterService.Companion.EXTRA_SHOW, panelActive)
+            Intent(ControlCenterService.Companion.ACTION_ACTIVE_CONTROL_PANEL).putExtra(
+                ControlCenterService.Companion.EXTRA_SHOW, panelActive
+            )
         )
         binding.togglePanelButton.text = if (panelActive) "Hide Panel" else "Show Panel"
     }
@@ -121,8 +148,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
                 }
             }
             layoutParams = ViewGroup.MarginLayoutParams(
-                ViewGroup.LayoutParams.MATCH_PARENT,
-                ViewGroup.LayoutParams.WRAP_CONTENT
+                ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT
             ).apply {
                 topMargin = 4.dp
                 bottomMargin = 4.dp

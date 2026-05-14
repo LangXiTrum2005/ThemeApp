@@ -1,4 +1,4 @@
-package com.wavez.controllerwidget.core.notification
+package com.wavez.controllerwidget.ui.notification
 
 import android.app.NotificationChannel
 import android.app.NotificationManager

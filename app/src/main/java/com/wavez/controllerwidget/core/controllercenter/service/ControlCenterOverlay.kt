@@ -9,13 +9,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewConfiguration
 import android.view.WindowManager
-import com.wavez.controllerwidget.core.controllercenter.ThemeLoader
 import com.wavez.controllerwidget.core.controllercenter.controllers.BluetoothController
 import com.wavez.controllerwidget.core.controllercenter.controllers.BrightnessController
 import com.wavez.controllerwidget.core.controllercenter.controllers.FlashlightController
 import com.wavez.controllerwidget.core.controllercenter.controllers.MediaController
 import com.wavez.controllerwidget.core.controllercenter.controllers.NetworkController
 import com.wavez.controllerwidget.core.controllercenter.controllers.VolumeController
+import com.wavez.controllerwidget.core.controllercenter.model.ControllerConfigModel
 import com.wavez.controllerwidget.core.controllercenter.utils.UtilsKt
 import com.wavez.controllerwidget.core.controllercenter.view.PullDirection
 import com.wavez.controllerwidget.core.controllercenter.view.PullingListener
@@ -45,9 +45,9 @@ class ControlCenterOverlay(private val context: Context) {
 
     // ─── Public API ───────────────────────────────────────────────
 
-    fun init() {
-        initPullBar()
-        initScene()
+    fun init(config: ControllerConfigModel) {
+        initPullBar(config)
+        initScene(config)
     }
 
     fun bindControllers(
@@ -72,6 +72,14 @@ class ControlCenterOverlay(private val context: Context) {
 
     fun hide() = hidePanel()
 
+    // Reload the overlay views in-place with a new theme config, without detaching from WindowManager.
+    fun reload(config: ControllerConfigModel) {
+        pullBarBinding.pullBarLayout.alpha = config.controllerJsonConfig.pullBarAlpha.coerceIn(0.3f, 1f)
+        UtilsKt.loadImageOptimizeRam(sceneBinding.background, config.homeBackground)
+        sceneBinding.main.initData(config)
+        Log.d(TAG, "Theme reloaded: ${config.key}")
+    }
+
     fun destroy() {
         detachPullBar()
         detachPanel()
@@ -79,12 +87,10 @@ class ControlCenterOverlay(private val context: Context) {
 
     // ─── Pull bar ─────────────────────────────────────────────────
 
-    private fun initPullBar() {
+    private fun initPullBar(config: ControllerConfigModel) {
         pullBarBinding = LayoutPullBarBinding.inflate(LayoutInflater.from(context))
 
-        val model = ThemeLoader.load(context)
-        val cfg = model.controllerJsonConfig
-        pullBarBinding.pullBarLayout.alpha = cfg.pullBarAlpha.coerceIn(0.3f, 1f)
+        pullBarBinding.pullBarLayout.alpha = config.controllerJsonConfig.pullBarAlpha.coerceIn(0.3f, 1f)
 
         pullBarBinding.pullBarLayout.setPullDirection(PullDirection.DOWN)
         pullBarBinding.pullBarLayout.setPullingListener(object : PullingListener {
@@ -143,13 +149,11 @@ class ControlCenterOverlay(private val context: Context) {
 
     // ─── Scene panel ──────────────────────────────────────────────
 
-    private fun initScene() {
+    private fun initScene(config: ControllerConfigModel) {
         sceneBinding = SceneControlCenterBinding.inflate(LayoutInflater.from(context))
 
-        val model = ThemeLoader.load(context)
-        UtilsKt.loadImageOptimizeRam(sceneBinding.background, model.homeBackground)
-
-        sceneBinding.main.initData(model)
+        UtilsKt.loadImageOptimizeRam(sceneBinding.background, config.homeBackground)
+        sceneBinding.main.initData(config)
         sceneBinding.main.setDismissListener { hidePanel() }
 
         sceneBinding.pullRoot.setPullDirection(PullDirection.UP)

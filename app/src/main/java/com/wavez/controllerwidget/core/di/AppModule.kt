@@ -1,6 +1,15 @@
 package com.wavez.controllerwidget.core.di
 
 import android.content.Context
+import androidx.room.Room
+import com.wavez.controllerwidget.ads.AppRemoteConfig
+import com.wavez.controllerwidget.ads.AppRemoteConfigImpl
+import com.wavez.controllerwidget.data.local.dao.DownloadedThemeDao
+import com.wavez.controllerwidget.data.local.dao.DownloadedWallpaperDao
+import com.wavez.controllerwidget.data.local.database.AppDatabase
+import com.wavez.controllerwidget.data.local.ThemeStorageConfig
+import com.wavez.controllerwidget.data.repository.LanguageRepository
+import com.wavez.controllerwidget.data.repository.LanguageRepositoryImpl
 import com.wavez.controllerwidget.data.repository.SharedPref
 import com.wavez.controllerwidget.data.repository.SharedPreferencesImpl
 import com.wavez.controllerwidget.data.repository.ThemeControllerRepository
@@ -36,25 +45,29 @@ class AppModule {
         impl: ThemeControllerRepositoryImpl,
     ): ThemeControllerRepository = impl
 
-    /*@Singleton
     @Provides
-    fun provideAppLocalDatabase(@ApplicationContext context: Context): AppDatabase {
+    @Singleton
+    fun provideAppDatabase(
+        @ApplicationContext context: Context,
+    ): AppDatabase {
         return Room.databaseBuilder(
-            context, AppDatabase::class.java, LOCAL_DB_NAME
+            context,
+            AppDatabase::class.java,
+            ThemeStorageConfig.DATABASE_NAME
         ).build()
-    }
-    @Provides
-    fun provideExoPlayerManager(
-        @ApplicationContext context: Context
-    ): PlayerManager {
-        return ExoPlayerManagerImpl(context)
     }
 
     @Provides
-    fun providePreviewService(
-        playerManager: PlayerManager,
-        sharedPref: SharedPref
-    ): PreviewService = PreviewService(playerManager, sharedPref)
+    @Singleton
+    fun provideDownloadedThemeDao(
+        database: AppDatabase,
+    ): DownloadedThemeDao = database.downloadedThemeDao()
+
+    @Provides
+    @Singleton
+    fun provideDownloadedWallpaperDao(
+        database: AppDatabase,
+    ): DownloadedWallpaperDao = database.downloadedWallpaperDao()
 
     @Provides
     @Singleton
@@ -64,14 +77,11 @@ class AppModule {
 
     @Provides
     fun provideAppRemoteConfig(
-        adsSharedPref: AdsSharedPref,
         sharedPref: SharedPref
     ): AppRemoteConfig {
         return AppRemoteConfigImpl(
-            adsSharedPref,
             sharedPref
         )
-    }*/
-
+    }
 
 }

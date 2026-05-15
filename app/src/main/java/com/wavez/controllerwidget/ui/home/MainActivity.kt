@@ -15,7 +15,6 @@ import com.wavez.controllerwidget.core.base.UiState
 import com.wavez.controllerwidget.core.controllercenter.PermissionHelper
 import com.wavez.controllerwidget.core.controllercenter.RequiredPermission
 import com.wavez.controllerwidget.core.controllercenter.ThemeLoader
-import com.wavez.controllerwidget.core.controllercenter.model.ControllerConfigModel
 import com.wavez.controllerwidget.core.controllercenter.service.ControlCenterService
 import com.wavez.controllerwidget.core.extensions.collectWithLifecycle
 import com.wavez.controllerwidget.databinding.ActivityMainBinding
@@ -105,7 +104,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
                 "Theme: READY"
             } else {
                 setTextColor(Color.rgb(230, 81, 0))
-                "Theme: $missingCount/${ControllerConfigModel.Companion.REQUIRED_ASSETS.size} files missing - copy assets to filesDir/theme/theme_1/"
+                "Theme: $missingCount/${ThemeLoader.REQUIRED_ASSETS.size} files missing - copy assets to filesDir/theme/theme_1/"
             }
         }
 

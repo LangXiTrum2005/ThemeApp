@@ -7,12 +7,16 @@ import android.content.Intent
 import android.content.IntentFilter
 import android.util.Log
 import android.view.accessibility.AccessibilityEvent
+import com.wavez.controllerwidget.core.controllercenter.ThemeLoader
 import com.wavez.controllerwidget.core.controllercenter.controllers.BluetoothController
 import com.wavez.controllerwidget.core.controllercenter.controllers.BrightnessController
 import com.wavez.controllerwidget.core.controllercenter.controllers.FlashlightController
 import com.wavez.controllerwidget.core.controllercenter.controllers.MediaController
 import com.wavez.controllerwidget.core.controllercenter.controllers.NetworkController
 import com.wavez.controllerwidget.core.controllercenter.controllers.VolumeController
+import com.wavez.controllerwidget.core.controllercenter.model.ControllerConfigModel
+import com.wavez.controllerwidget.data.local.theme.ThemeFilePathProvider
+import com.wavez.controllerwidget.data.repository.SharedPref
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -22,54 +26,64 @@ class ControlCenterService : AccessibilityService() {
     companion object {
         const val ACTION_ACTIVE_CONTROL_PANEL =
             "com.wavez.themewallpaper.controlcenter.ACTION_ACTIVE_CONTROL_PANEL"
+        const val ACTION_RELOAD_THEME =
+            "com.wavez.themewallpaper.controlcenter.ACTION_RELOAD_THEME"
         const val EXTRA_SHOW = "extra_show"
         private const val TAG = "ControlCenter"
     }
 
     @Inject
     lateinit var volumeController: VolumeController
-
     @Inject
     lateinit var brightnessController: BrightnessController
-
     @Inject
     lateinit var networkController: NetworkController
-
     @Inject
     lateinit var bluetoothController: BluetoothController
-
     @Inject
     lateinit var flashlightController: FlashlightController
-
     @Inject
     lateinit var mediaController: MediaController
+    @Inject
+    lateinit var sharedPref: SharedPref
+    @Inject
+    lateinit var themeFilePathProvider: ThemeFilePathProvider
 
     private var overlay: ControlCenterOverlay? = null
 
-    private val panelToggleReceiver = object : BroadcastReceiver() {
+    private val controlReceiver = object : BroadcastReceiver() {
         override fun onReceive(context: Context, intent: Intent) {
-            if (intent.action != ACTION_ACTIVE_CONTROL_PANEL) return
-            val show = intent.getBooleanExtra(EXTRA_SHOW, false)
-            Log.d(TAG, "Broadcast received: show=$show")
-            if (show) overlay?.show() else overlay?.hide()
+            when (intent.action) {
+                ACTION_ACTIVE_CONTROL_PANEL -> {
+                    val show = intent.getBooleanExtra(EXTRA_SHOW, false)
+                    Log.d(TAG, "Panel toggle: show=$show")
+                    if (show) overlay?.show() else overlay?.hide()
+                }
+
+                ACTION_RELOAD_THEME -> {
+                    Log.d(TAG, "Theme reload requested")
+                    overlay?.reload(loadActiveTheme())
+                }
+            }
         }
     }
 
     override fun onServiceConnected() {
         super.onServiceConnected()
         Log.d(TAG, "onServiceConnected — service running")
+
         try {
-            registerReceiver(
-                panelToggleReceiver,
-                IntentFilter(ACTION_ACTIVE_CONTROL_PANEL),
-                RECEIVER_NOT_EXPORTED
-            )
+            val filter = IntentFilter().apply {
+                addAction(ACTION_ACTIVE_CONTROL_PANEL)
+                addAction(ACTION_RELOAD_THEME)
+            }
+            registerReceiver(controlReceiver, filter, RECEIVER_NOT_EXPORTED)
         } catch (_: Exception) {
             Log.e(TAG, "Failed to register receiver")
         }
 
         overlay = ControlCenterOverlay(this)
-        overlay?.init()
+        overlay?.init(loadActiveTheme())
         overlay?.bindControllers(
             network = networkController,
             bluetooth = bluetoothController,
@@ -85,7 +99,7 @@ class ControlCenterService : AccessibilityService() {
 
     override fun onDestroy() {
         super.onDestroy()
-        runCatching { unregisterReceiver(panelToggleReceiver) }
+        runCatching { unregisterReceiver(controlReceiver) }
         overlay?.destroy()
         runCatching {
             volumeController.release()
@@ -94,5 +108,20 @@ class ControlCenterService : AccessibilityService() {
             flashlightController.release()
             mediaController.release()
         }
+    }
+
+    // Loads the theme the user last applied, falling back to the built-in default if:
+    // - No theme has been applied yet (activeThemeId is null)
+    // - The extracted directory is missing or empty (e.g., storage was cleared)
+    private fun loadActiveTheme(): ControllerConfigModel {
+        val themeId = sharedPref.activeThemeId
+        if (themeId != null) {
+            val dir = themeFilePathProvider.getExtractedThemeDir(themeId)
+            if (dir.isDirectory && dir.listFiles()?.isNotEmpty() == true) {
+                return ThemeLoader.loadFromDirectory(dir, themeId)
+            }
+            Log.w(TAG, "Active theme dir missing for $themeId, falling back to default")
+        }
+        return ThemeLoader.load(this)
     }
 }

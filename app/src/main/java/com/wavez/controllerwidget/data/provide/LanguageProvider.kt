@@ -5,143 +5,194 @@ import com.wavez.controllerwidget.data.model.LanguageModel
 
 object LanguageProvider {
 
+
     const val LANGUAGE_DEFAULT_OF_DEVICE = "zzz"
+
+    val localeTranslateDefaults = listOf(
+        "af",
+        "am",
+        "az",
+        "be",
+        "bn",
+        "bn_rBD",
+        "ca",
+        "ceb",
+        "cs",
+        "et",
+        "fa",
+        "gl",
+        "gu",
+        "ha",
+        "ga",
+        "hr",
+        "hu",
+        "ig",
+        "in",
+        "jv",
+        "kk",
+        "km",
+        "kn",
+        "ml",
+        "mr",
+        "ms",
+        "my",
+        "ne",
+        "nl",
+        "pa",
+        "ps",
+        "ro",
+        "sd",
+        "si",
+        "sk",
+        "sl",
+        "sr",
+        "su",
+        "ta",
+        "te",
+        "tg",
+        "uk",
+        "ur",
+        "uz",
+        "yo",
+        "ar",
+        "da",
+        "de",
+        "el",
+        "en",
+        "es",
+        "es_rES",
+        "es_rUS",
+        "ru",
+        "it",
+        "ja",
+        "fi",
+        "tl",
+        "fr",
+        "ko",
+        "fr_rCA",
+        "hi",
+        "no",
+        "vi",
+        "pt",
+        "pt_rBR",
+        "pl",
+        "sv",
+        "th",
+        "tr",
+        "zh",
+        "zh_rCN",
+        "zh_rHK",
+        "zh_rTW"
+    )
 
     private val defaultLang = LanguageModel(
         code = LANGUAGE_DEFAULT_OF_DEVICE,
-        name = "Device default",
-        flag = R.drawable.ic_language,
+        name = "Default",
+        englishName = "System Default",
+        flag = R.drawable.ic_language
     )
 
     private val enLang = LanguageModel(
         code = "en",
         name = "English",
-        flag = R.drawable.flag_lan_gb,
+        englishName = "English",
+        flag = R.drawable.flag_lan_gb
     )
 
     private val frLang = LanguageModel(
         code = "fr",
         name = "Français",
-        flag = R.drawable.flag_lan_fr,
+        englishName = "French",
+        flag = R.drawable.flag_lan_fr
     )
 
     private val esLang = LanguageModel(
         code = "es",
         name = "Español",
-        flag = R.drawable.flag_lan_es,
+        englishName = "Spanish",
+        flag = R.drawable.flag_lan_es
     )
 
     private val ptLang = LanguageModel(
         code = "pt",
         name = "Português",
-        flag = R.drawable.flag_lan_pt,
-    )
-
-    private val trLang = LanguageModel(
-        code = "tr",
-        name = "Türkçe",
-        flag = R.drawable.flag_lan_tr,
+        englishName = "Portuguese",
+        flag = R.drawable.flag_lan_pt
     )
 
     private val inLang = LanguageModel(
-        code = "id",
+        code = "id", // sửa lại đúng ISO code
         name = "Bahasa Indonesia",
-        flag = R.drawable.flag_lan_id,
-    )
-
-    private val viLang = LanguageModel(
-        code = "vi",
-        name = "Tiếng Việt",
-        flag = R.drawable.flag_lan_vn,
-    )
-
-    private val koLang = LanguageModel(
-        code = "ko",
-        name = "한국어",
-        flag = R.drawable.flag_lan_kr,
-    )
-
-    private val hiLang = LanguageModel(
-        code = "hi",
-        name = "हिन्दी",
-        flag = R.drawable.flag_lan_in,
-    )
-
-    private val deLang = LanguageModel(
-        code = "de",
-        name = "Deutsch",
-        flag = R.drawable.flag_germany,
-    )
-
-    private val nlLang = LanguageModel(
-        code = "nl",
-        name = "Nederlands",
-        flag = R.drawable.flag_lan_nl,
-    )
-
-    private val itLang = LanguageModel(
-        code = "it",
-        name = "Italiano",
-        flag = R.drawable.flag_lan_it,
+        englishName = "Indonesian",
+        flag = R.drawable.flag_lan_id
     )
 
     private val zhCNLang = LanguageModel(
         code = "zh-CN",
         name = "中文",
-        flag = R.drawable.flag_lan_cn,
+        englishName = "Chinese (Simplified)",
+        flag = R.drawable.flag_lan_cn
     )
 
-    private val caLang = LanguageModel(
-        code = "en-CA",
-        name = "English (Canada)",
-        flag = R.drawable.flag_lan_ca,
+    private val hiLang = LanguageModel(
+        code = "hi",
+        name = "हिन्दी",
+        englishName = "Hindi",
+        flag = R.drawable.flag_lan_in
+    )
+
+    private val deLang = LanguageModel(
+        code = "de",
+        name = "Deutsch",
+        englishName = "German",
+        flag = R.drawable.flag_germany
+    )
+
+    private val viLang = LanguageModel(
+        code = "vi",
+        name = "Tiếng Việt",
+        englishName = "Vietnamese",
+        flag = R.drawable.flag_lan_vn
+    )
+
+    private val itLang = LanguageModel(
+        code = "it",
+        name = "Italiano",
+        englishName = "Italian",
+        flag = R.drawable.flag_lan_it
     )
 
     private val availableLanguages = arrayListOf(
         enLang,
-        ptLang,
-        trLang,
-        inLang,
-        frLang,
-        nlLang,
-        viLang,
-        caLang,
-        koLang,
-        hiLang,
-        deLang,
         esLang,
-        itLang
+        deLang,
+        ptLang,
+        inLang,
+        hiLang,
+        viLang,
+        frLang,
+        zhCNLang,
+        itLang,
     )
 
-    /**
-     * Logic sắp xếp ngôn ngữ:
-     * - Nếu device language có trong danh sách → lên đầu
-     * - Nếu không → thêm "Device default" ở đầu
-     * - English luôn hiển thị thứ hai
-     * - Các ngôn ngữ còn lại sắp theo alphabet (theo name)
-     */
     fun getLanguages(deviceLanguage: String): List<LanguageModel> {
-        val result = mutableListOf<LanguageModel>()
-
-        val deviceLangModel =
-            availableLanguages.find { it.code.equals(deviceLanguage, ignoreCase = true) }
-        if (deviceLangModel != null) {
-            result.add(deviceLangModel)
+        val deviceLanguageInList = availableLanguages.find { it.code == deviceLanguage }
+        val sortedList = availableLanguages.toMutableList()
+        if (deviceLanguageInList != null) {
+            sortedList.remove(deviceLanguageInList)
+            sortedList.add(0, deviceLanguageInList)
         } else {
-            result.add(defaultLang)
+            val deviceLanguageTranslate = localeTranslateDefaults.find { it == deviceLanguage }
+            if (deviceLanguageTranslate != null) {
+                sortedList.add(0, defaultLang)
+            }
         }
-        if (deviceLangModel?.code != enLang.code) {
-            result.add(enLang)
-        }
-        val remaining = availableLanguages
-            .filter { it.code != deviceLangModel?.code && it.code != enLang.code }
-            .sortedBy { it.name.lowercase() }
-
-        result.addAll(remaining)
-        return result
+        return sortedList
     }
 
-    fun getLanguageConfig(languageCode: String): LanguageModel =
-        availableLanguages.firstOrNull { it.code == languageCode }
+
+    fun getLanguageConfig(languageCode: String): LanguageModel {
+        return availableLanguages.firstOrNull { it.code == languageCode }
             ?: availableLanguages.first()
+    }
 }

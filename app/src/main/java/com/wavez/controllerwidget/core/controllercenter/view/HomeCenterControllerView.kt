@@ -58,6 +58,7 @@ class HomeCenterControllerView @JvmOverloads constructor(
     private var config = ControllerConfigModel()
     private var onDismiss: () -> Unit = {}
     private var boundMedia: MediaController? = null
+    private var boundBrightness: BrightnessController? = null
     private var suppressNextAutoRotateObserver = false
     private var writeSettingsRequestOpening = false
 
@@ -79,6 +80,13 @@ class HomeCenterControllerView @JvmOverloads constructor(
                 if (isAutoRotateOn()) AnimationImageView.State.Open else AnimationImageView.State.Close,
                 playAnim = true
             )
+        }
+    }
+
+    private val brightnessObserver = object : ContentObserver(Handler(Looper.getMainLooper())) {
+        override fun onChange(selfChange: Boolean, uri: Uri?) {
+            val pct = boundBrightness?.getBrightness() ?: return
+            post { binding.brightness.syncProgress(pct) }
         }
     }
 
@@ -121,25 +129,25 @@ class HomeCenterControllerView @JvmOverloads constructor(
         binding.autoRotate.initData(
             openPath = m.lockingSelectedIcon,
             closePath = m.lockingIcon,
-            openAnim = m.lockingOpenAnimation,
-            closeAnim = m.lockingCloseAnimation,
+            openAnim = "",
+            closeAnim = "",
             initState = AnimationImageView.State.Close,
             playAnim = false
         )
         binding.mute.initData(
             openPath = m.ringSelectedIcon,
             closePath = m.ringIcon,
-            openAnim = m.ringOpenAnimation,
-            closeAnim = m.ringCloseAnimation,
+            openAnim = "",
+            closeAnim = "",
             initState = AnimationImageView.State.Close,
             playAnim = false
         )
         // focusIcon = wide Focus-mode pill → fits the full-width doNotDisturb slot
         binding.doNotDisturb.initData(
-            openPath = m.focusSelectedIcon,
-            closePath = m.focusIcon,
-            openAnim = m.focusOpenAnimation,
-            closeAnim = m.focusCloseAnimation,
+            openPath = m.focusIcon,
+            closePath = m.focusSelectedIcon,
+            openAnim = "",
+            closeAnim = "",
             initState = AnimationImageView.State.Close,
             playAnim = false
         )
@@ -148,8 +156,8 @@ class HomeCenterControllerView @JvmOverloads constructor(
         binding.flash.initData(
             openPath = m.flashlightSelectedIcon,
             closePath = m.flashlightIcon,
-            openAnim = m.flashlightOpenAnimation,
-            closeAnim = m.flashlightCloseAnimation,
+            openAnim = "",
+            closeAnim = "",
             initState = AnimationImageView.State.Close,
             playAnim = false
         )
@@ -381,6 +389,7 @@ class HomeCenterControllerView @JvmOverloads constructor(
     }
 
     private fun bindBrightness(brightness: BrightnessController) {
+        boundBrightness = brightness
         binding.brightness.initData(
             iconActive = config.lightIcon,
             iconNormal = config.lightIcon,
@@ -397,7 +406,6 @@ class HomeCenterControllerView @JvmOverloads constructor(
                 }
                 brightness.setBrightness(progress)
             }
-
         }
     }
 
@@ -627,12 +635,18 @@ class HomeCenterControllerView @JvmOverloads constructor(
             false,
             autoRotateObserver
         )
+        context.contentResolver.registerContentObserver(
+            Settings.System.getUriFor(Settings.System.SCREEN_BRIGHTNESS),
+            false,
+            brightnessObserver
+        )
     }
 
     override fun onDetachedFromWindow() {
         super.onDetachedFromWindow()
         runCatching { context.unregisterReceiver(screenRecordStateReceiver) }
         context.contentResolver.unregisterContentObserver(autoRotateObserver)
+        context.contentResolver.unregisterContentObserver(brightnessObserver)
     }
 
     override fun onVisibilityChanged(changedView: View, visibility: Int) {
@@ -641,6 +655,7 @@ class HomeCenterControllerView @JvmOverloads constructor(
             writeSettingsRequestOpening = false
             boundMedia?.let { syncMediaState(it, refreshSessions = true) }
             syncRecordVideoState(ScreenRecordService.isRecording(), playAnim = false)
+            boundBrightness?.let { binding.brightness.syncProgress(it.getBrightness()) }
         }
     }
 }

@@ -8,9 +8,11 @@ interface SharedPref {
 
     val editor: SharedPreferences.Editor
 
-    var appLanguage: String
+    fun getConfigLanguage(): String
 
-    var severRoot : String
+    fun setConfigLanguage(language: String)
+
+    var severRoot: String
 
     var isNeedSetLanguage: Boolean
 
@@ -34,4 +36,43 @@ interface SharedPref {
     fun shouldAskPermission(): Boolean
 
     fun onPermissionDenied()
+
+    ///ads
+
+    var interOpenAdsGap: Long
+
+    var nativeAdPreloadCount: Int
+
+    var interAdsGap: Long
+
+    var openAdsGap: Long
+
+    var lastTimeShowOpenAdSplash : Long
+
+    var shouldShowNativeLanguage1: Boolean
+    var shouldShowNativeLanguage2: Boolean
+
+    var shouldShowNativeObd1Click : Boolean
+    var shouldShowNativeObd1 : Boolean
+    var shouldShowNativeAdFull1: Boolean
+    var shouldShowNativeAdFull2: Boolean
+    var shouldBannerSplash : Boolean
+    var shouldShowInterSplash : Boolean
+
+    var shouldShowBannerHome : Boolean
+    var shouldShowNativeHome : Boolean
+    var shouldShowNativeSelectApp : Boolean
+    var shouldShowNativeBoostSuccess : Boolean
+    var shouldShowNativeConfig : Boolean
+
+    var shouldShowRewardSelect : Boolean
+    var shouldShowRewardConfig : Boolean
+
+    var shouldShowBannerInApp : Boolean
+    var shouldShowNativeInApp : Boolean
+    var shouldShowInterInApp : Boolean
+    var shouldShowOpenAd : Boolean
+
+    // ID of the controller theme currently applied by the user. Null = use built-in default.
+    var activeThemeId: String?
 }

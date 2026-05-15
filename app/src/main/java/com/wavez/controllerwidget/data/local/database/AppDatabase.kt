@@ -1,15 +1,21 @@
-//package com.wavez.themewallpaper.data.db.database
-//
-//import androidx.room.Database
-//import androidx.room.RoomDatabase
-//import com.example.m52_reverseaudio_challenge.reverseaudio.data.db.entity.AudioRecordEntity
-//import com.example.m52_reverseaudio_challenge.reverseaudio.data.db.entity.UserLevelResultEntity
-//
-//@Database(
-//    entities = [AudioRecordEntity::class, UserLevelResultEntity::class],
-//    version = 1,
-//    exportSchema = false
-//)
-//abstract class AppDatabase : RoomDatabase() {
-//
-//}
+package com.wavez.controllerwidget.data.local.database
+
+import androidx.room.Database
+import androidx.room.RoomDatabase
+import androidx.room.migration.Migration
+import androidx.sqlite.db.SupportSQLiteDatabase
+import com.wavez.controllerwidget.data.local.dao.DownloadedThemeDao
+import com.wavez.controllerwidget.data.local.dao.DownloadedWallpaperDao
+import com.wavez.controllerwidget.data.local.entity.DownloadedThemeEntity
+import com.wavez.controllerwidget.data.local.entity.DownloadedWallpaperEntity
+
+@Database(
+    entities = [DownloadedThemeEntity::class, DownloadedWallpaperEntity::class],
+    version = 2,
+    exportSchema = false,
+)
+abstract class AppDatabase : RoomDatabase() {
+
+    abstract fun downloadedThemeDao(): DownloadedThemeDao
+    abstract fun downloadedWallpaperDao(): DownloadedWallpaperDao
+}

@@ -14,7 +14,12 @@ import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 import java.util.concurrent.TimeUnit
+import javax.inject.Qualifier
 import javax.inject.Singleton
+
+@Qualifier
+@Retention(AnnotationRetention.BINARY)
+annotation class DownloadClient
 
 @Module
 @InstallIn(SingletonComponent::class)
@@ -68,5 +73,19 @@ object NetworkModule {
     fun provideThemeWallpaperApiService(
         retrofit: Retrofit,
     ): ControllerWidgetApiService = retrofit.create(ControllerWidgetApiService::class.java)
+
+    @Provides
+    @Singleton
+    @DownloadClient
+    fun provideDownloadOkHttpClient(
+        loggingInterceptor: HttpLoggingInterceptor,
+    ): OkHttpClient {
+        return OkHttpClient.Builder()
+            .connectTimeout(NetworkConstants.CONNECT_TIMEOUT_SECONDS, TimeUnit.SECONDS)
+            .readTimeout(NetworkConstants.DOWNLOAD_READ_TIMEOUT_SECONDS, TimeUnit.SECONDS)
+            .writeTimeout(NetworkConstants.DOWNLOAD_WRITE_TIMEOUT_SECONDS, TimeUnit.SECONDS)
+            .addInterceptor(loggingInterceptor)
+            .build()
+    }
 
 }

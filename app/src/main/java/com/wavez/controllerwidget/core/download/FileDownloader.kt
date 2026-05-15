@@ -39,10 +39,7 @@ class FileDownloader @Inject constructor(
             throw NetworkDownloadException("Unexpected HTTP status: ${response.code}")
         }
 
-        val body = response.body ?: run {
-            response.close()
-            throw NetworkDownloadException("Response body is null for url: $url")
-        }
+        val body = response.body
 
         val contentLength = body.contentLength()
         destFile.parentFile?.mkdirs()

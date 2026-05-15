@@ -18,7 +18,7 @@ class ThemeDownloader @Inject constructor(
     private val fileDownloader: FileDownloader,
     private val pathProvider: ThemeFilePathProvider,
     private val storageManager: ThemeStorageManager,
-    @IoDispatcher private val ioDispatcher: CoroutineDispatcher,
+    @param:IoDispatcher private val ioDispatcher: CoroutineDispatcher,
 ) {
     /**
      * Downloads the zip at [url] for [themeId], validates it, then atomically extracts it.

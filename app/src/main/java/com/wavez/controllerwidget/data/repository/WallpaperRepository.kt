@@ -18,6 +18,5 @@ interface WallpaperRepository {
 
     suspend fun getLocalWallpaperFile(wallpaperId: String): File?
 
-    // Validates the local file exists and returns it so the caller can apply it via WallpaperManagerCore.
-    suspend fun applyWallpaper(wallpaper: WallpaperModel): Result<File>
+    suspend fun applyWallpaper(wallpaper: WallpaperModel): Result<Unit>
 }

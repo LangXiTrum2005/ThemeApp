@@ -1,5 +1,6 @@
 package com.wavez.controllerwidget.core.wallpaper.setter
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.os.Build
 
@@ -61,6 +62,7 @@ internal object ManufacturerCompat {
 
     // ── Helpers ──────────────────────────────────────────────────────────────
 
+    @SuppressLint("PrivateApi")
     private fun readSystemProperty(key: String): String = try {
         val cls = Class.forName("android.os.SystemProperties")
         cls.getMethod("get", String::class.java).invoke(null, key) as? String ?: ""

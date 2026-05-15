@@ -6,7 +6,13 @@
       "Bash(awk '{print $NF}')",
       "Bash(Test-Path \"D:\\\\p67-theme-wallpaper\\\\app\\\\src\\\\main\\\\java\\\\com\\\\wavez\\\\themewallpaper\\\\core\\\\controllercenter\\\\view\\\\CustomPullView.kt\")",
       "Bash(cd \"C:\\\\Users\\\\Admin\\\\Downloads\\\\controlwidget\" && ls)",
-      "PowerShell(Get-ChildItem \"C:\\\\Users\\\\Admin\\\\Downloads\\\\controlwidget\\\\apk_extract\\\\res\\\\layout\" | Where-Object { $_.Name -match \"hd_\" } | Select-Object Name)"
+      "PowerShell(Get-ChildItem \"C:\\\\Users\\\\Admin\\\\Downloads\\\\controlwidget\\\\apk_extract\\\\res\\\\layout\" | Where-Object { $_.Name -match \"hd_\" } | Select-Object Name)",
+      "Bash(Remove-Item \"D:\\\\p67-theme-wallpaper\\\\app\\\\src\\\\main\\\\java\\\\com\\\\wavez\\\\controllerwidget\\\\core\\\\wallpaper\\\\controller\\\\VideoWallpaperController.kt\",)",
+      "Bash(\"D:\\\\p67-theme-wallpaper\\\\app\\\\src\\\\main\\\\java\\\\com\\\\wavez\\\\controllerwidget\\\\core\\\\wallpaper\\\\controller\\\\VideoWallpaperService.kt\",)",
+      "Bash(\"D:\\\\p67-theme-wallpaper\\\\app\\\\src\\\\main\\\\java\\\\com\\\\wavez\\\\controllerwidget\\\\core\\\\wallpaper\\\\controller\\\\WavezVideoWallpaperService.kt\",)",
+      "Bash(\"D:\\\\p67-theme-wallpaper\\\\app\\\\src\\\\main\\\\java\\\\com\\\\wavez\\\\controllerwidget\\\\core\\\\wallpaper\\\\controller\\\\GifWallpaperController.kt\",)",
+      "Bash(\"D:\\\\p67-theme-wallpaper\\\\app\\\\src\\\\main\\\\java\\\\com\\\\wavez\\\\controllerwidget\\\\core\\\\wallpaper\\\\controller\\\\GifWallpaperService.kt\",)",
+      "Bash(./gradlew assembleDebug)"
     ]
   }
 }

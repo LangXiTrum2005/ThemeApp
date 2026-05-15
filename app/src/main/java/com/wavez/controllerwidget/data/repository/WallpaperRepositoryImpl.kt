@@ -1,21 +1,29 @@
 package com.wavez.controllerwidget.data.repository
 
+import android.net.Uri
 import com.wavez.controllerwidget.core.di.IoDispatcher
 import com.wavez.controllerwidget.core.download.DownloadState
 import com.wavez.controllerwidget.core.download.WallpaperDownloader
+import com.wavez.controllerwidget.core.wallpaper.WallpaperManagerCore
+import com.wavez.controllerwidget.core.wallpaper.model.WallpaperOptions
+import com.wavez.controllerwidget.core.wallpaper.model.WallpaperResult
+import com.wavez.controllerwidget.core.wallpaper.model.WallpaperSource
 import com.wavez.controllerwidget.data.local.dao.DownloadedWallpaperDao
 import com.wavez.controllerwidget.data.local.entity.DownloadedWallpaperEntity
 import com.wavez.controllerwidget.data.local.wallpaper.WallpaperStorageManager
 import com.wavez.controllerwidget.data.model.DownloadedResInfo
 import com.wavez.controllerwidget.data.model.WallpaperCategoryModel
 import com.wavez.controllerwidget.data.model.WallpaperModel
+import com.wavez.controllerwidget.data.model.WallpaperType
+import com.wavez.controllerwidget.data.model.wallpaperType
 import com.wavez.controllerwidget.data.network.api.ControllerWidgetApiService
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.flow.channelFlow
 import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.withContext
 import java.io.File
+import java.io.IOException
 import javax.inject.Inject
 
 class WallpaperRepositoryImpl @Inject constructor(
@@ -23,6 +31,7 @@ class WallpaperRepositoryImpl @Inject constructor(
     private val wallpaperDownloader: WallpaperDownloader,
     private val wallpaperStorageManager: WallpaperStorageManager,
     private val downloadedWallpaperDao: DownloadedWallpaperDao,
+    private val wallpaperManagerCore: WallpaperManagerCore,
     @IoDispatcher private val ioDispatcher: CoroutineDispatcher,
 ) : WallpaperRepository {
 
@@ -51,41 +60,40 @@ class WallpaperRepositoryImpl @Inject constructor(
             .onSuccess { cachedWallpapers = it }
     }
 
-    override fun downloadWallpaper(wallpaper: WallpaperModel): Flow<DownloadState<File>> = flow {
-        // Short-circuit: already fully downloaded
-        if (checkWallpaperDownloaded(wallpaper.id)) {
-            val localFile = wallpaperStorageManager.getWallpaperFile(wallpaper.id)
-            emit(DownloadState.Success(localFile))
-            return@flow
-        }
-        // Remove any orphaned DB record before starting fresh
-        downloadedWallpaperDao.deleteByWallpaperId(wallpaper.id)
-
-        wallpaperDownloader.download(wallpaper.id, wallpaper.url).collect { state ->
-            when (state) {
-                is DownloadState.Saving -> {
-                    emit(DownloadState.Saving)
-                    // File is fully on disk — persist Room record
-                    val localFile = wallpaperStorageManager.getWallpaperFile(wallpaper.id)
-                    downloadedWallpaperDao.upsert(
-                        DownloadedWallpaperEntity(
-                            wallpaperId = wallpaper.id,
-                            filePath = localFile.absolutePath,
-                            downloadedAt = System.currentTimeMillis(),
-                            fileSize = localFile.length(),
-                        )
-                    )
-                    // Fire-and-forget stats update; failure must not block the download result
-                    runCatching {
-                        DownloadedResInfo.fromResource(wallpaper)
-                            ?.let { apiService.updateWallpaperDownloadAmount(it) }
-                    }
-                    emit(DownloadState.Success(localFile))
-                }
-                else -> emit(state)
+    override fun downloadWallpaper(wallpaper: WallpaperModel): Flow<DownloadState<File>> =
+        channelFlow {
+            // Short-circuit: already fully downloaded
+            if (checkWallpaperDownloaded(wallpaper.id)) {
+                send(DownloadState.Success(wallpaperStorageManager.getWallpaperFile(wallpaper.id)))
+                return@channelFlow
             }
-        }
-    }.flowOn(ioDispatcher)
+            // Remove any orphaned DB record before starting fresh
+            downloadedWallpaperDao.deleteByWallpaperId(wallpaper.id)
+
+            wallpaperDownloader.download(wallpaper.id, wallpaper.url).collect { state ->
+                when (state) {
+                    is DownloadState.Saving -> {
+                        send(DownloadState.Saving)
+                        val localFile = wallpaperStorageManager.getWallpaperFile(wallpaper.id)
+                        downloadedWallpaperDao.upsert(
+                            DownloadedWallpaperEntity(
+                                wallpaperId = wallpaper.id,
+                                filePath = localFile.absolutePath,
+                                downloadedAt = System.currentTimeMillis(),
+                                fileSize = localFile.length(),
+                            )
+                        )
+                        runCatching {
+                            DownloadedResInfo.fromResource(wallpaper)
+                                ?.let { apiService.updateWallpaperDownloadAmount(it) }
+                        }
+                        send(DownloadState.Success(localFile))
+                    }
+
+                    else -> send(state)
+                }
+            }
+        }.flowOn(ioDispatcher)
 
     override suspend fun checkWallpaperDownloaded(wallpaperId: String): Boolean =
         withContext(ioDispatcher) {
@@ -113,14 +121,29 @@ class WallpaperRepositoryImpl @Inject constructor(
             }
         }
 
-    override suspend fun applyWallpaper(wallpaper: WallpaperModel): Result<File> =
-        withContext(ioDispatcher) {
-            runCatching {
-                getLocalWallpaperFile(wallpaper.id)
-                    ?: error("Wallpaper is not downloaded: ${wallpaper.id}")
-                // TODO: call WallpaperManagerCore in the ViewModel using this File:
-                //   val options = WallpaperOptions(source = WallpaperSource.StaticImage(Uri.fromFile(file)))
-                //   wallpaperManagerCore.applyWallpaper(options).collect { ... }
+    override suspend fun applyWallpaper(wallpaper: WallpaperModel): Result<Unit> =
+        runCatching {
+            val source: WallpaperSource = when (wallpaper.wallpaperType) {
+                WallpaperType.IMAGE -> WallpaperSource.OnlineImage(wallpaper.url)
+                WallpaperType.GIF -> WallpaperSource.Gif(Uri.fromFile(ensureDownloaded(wallpaper)))
+                WallpaperType.VIDEO -> WallpaperSource.Video(Uri.fromFile(ensureDownloaded(wallpaper)))
+            }
+            wallpaperManagerCore.applyWallpaper(WallpaperOptions(source = source))
+                .collect { result ->
+                    if (result is WallpaperResult.Error) throw result.exception
+                }
+        }
+
+    private suspend fun ensureDownloaded(wallpaper: WallpaperModel): File {
+        getLocalWallpaperFile(wallpaper.id)?.let { return it }
+        var downloaded: File? = null
+        downloadWallpaper(wallpaper).collect { state ->
+            when (state) {
+                is DownloadState.Success -> downloaded = state.file
+                is DownloadState.Failure -> throw IOException("Download failed: ${state.error}")
+                else -> {}
             }
         }
+        return downloaded ?: error("Download produced no file for ${wallpaper.id}")
+    }
 }

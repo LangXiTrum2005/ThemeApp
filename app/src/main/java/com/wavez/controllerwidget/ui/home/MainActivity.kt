@@ -6,8 +6,10 @@ import android.content.Intent
 import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import com.wavez.controllerwidget.core.base.BaseActivity
@@ -17,6 +19,7 @@ import com.wavez.controllerwidget.core.controllercenter.RequiredPermission
 import com.wavez.controllerwidget.core.controllercenter.ThemeLoader
 import com.wavez.controllerwidget.core.controllercenter.service.ControlCenterService
 import com.wavez.controllerwidget.core.extensions.collectWithLifecycle
+import com.wavez.controllerwidget.data.model.WallpaperModel
 import com.wavez.controllerwidget.databinding.ActivityMainBinding
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -56,26 +59,42 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
         viewModel.getWallpapers()
         binding.togglePanelButton.setOnClickListener { togglePanel() }
         requestPermissions.launch(runtimePermissions.toTypedArray())
+        binding.testGifWallpaperButton.setOnClickListener {
+            viewModel.applyWallpaper(
+                WallpaperModel(
+                    id         = "test_gif_001",
+                    name       = "Test GIF",
+                    thumb      = "",
+                    premium    = 0,
+                    url        = "https://cdn.leansoft-ai.com/ls35-emoji-keyboard/thumbnails/00001_cbn_Dont_Touch_NInja_Gif/previews/type_4/theme_preview.gif",
+                    categoryId = "test",
+                )
+            )
+        }
     }
 
     private fun observeViewModel() {
         viewModel.wallpapersState.collectWithLifecycle(this) { state ->
             when (state) {
-                UiState.Idle -> Unit
-                UiState.Loading -> {
-                    // Show loading view here.
-                }
-
-                is UiState.Data -> {
-                    // Bind state.value to RecyclerView/adapter here.
-                }
-
+                UiState.Idle    -> Unit
+                UiState.Loading -> { /* Show loading */ }
+                is UiState.Data -> { /* Bind to RecyclerView */ }
+                is UiState.Error -> { /* Show error */ }
+            }
+        }
+        viewModel.applyState.collectWithLifecycle(this) { state ->
+            when (state) {
+                UiState.Idle    -> Unit
+                UiState.Loading -> Toast.makeText(this, "Đang xử lý wallpaper…", Toast.LENGTH_SHORT).show()
+                is UiState.Data -> Toast.makeText(this, "Wallpaper đã được apply!", Toast.LENGTH_SHORT).show()
                 is UiState.Error -> {
-                    // Show state.message to user here.
+                    Log.d("log_loiii", "observeViewModel: ${state.message}")
+                    Toast.makeText(this, "Lỗi: ${state.message}", Toast.LENGTH_LONG).show()
                 }
             }
         }
     }
+
 
     override fun onResume() {
         super.onResume()

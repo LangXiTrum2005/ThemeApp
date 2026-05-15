@@ -14,14 +14,17 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class MainViewModel  @Inject constructor(
+class MainViewModel @Inject constructor(
     private val wallpaperRepository: WallpaperRepository
-): ViewModel() {
+) : ViewModel() {
 
     private val _wallpapersState =
         MutableStateFlow<UiState<List<WallpaperModel>>>(UiState.Idle)
     val wallpapersState: StateFlow<UiState<List<WallpaperModel>>> =
         _wallpapersState.asStateFlow()
+
+    private val _applyState = MutableStateFlow<UiState<Unit>>(UiState.Idle)
+    val applyState: StateFlow<UiState<Unit>> = _applyState.asStateFlow()
 
     fun getWallpapers(forceRefresh: Boolean = false) {
         viewModelScope.launch {
@@ -37,6 +40,19 @@ class MainViewModel  @Inject constructor(
                 Log.e("Log_data", "onFailure: $message", error)
                 _wallpapersState.value = UiState.Error(error, message)
             }
+        }
+    }
+
+    fun applyWallpaper(wallpaper: WallpaperModel) {
+        viewModelScope.launch {
+            _applyState.value = UiState.Loading
+            wallpaperRepository.applyWallpaper(wallpaper)
+                .onSuccess { _applyState.value = UiState.Data(Unit) }
+                .onFailure { error ->
+                    val message = error.message.orEmpty().ifBlank { "Unknown error" }
+                    Log.e("Log_data", "applyWallpaper failed: $message", error)
+                    _applyState.value = UiState.Error(error, message)
+                }
         }
     }
 }

@@ -5,6 +5,7 @@ import android.net.Uri
 
 sealed class WallpaperSource {
     data class StaticImage(val uri: Uri) : WallpaperSource()
+    data class OnlineImage(val url: String) : WallpaperSource()
     data class Gif(val uri: Uri) : WallpaperSource()
     data class Video(val uri: Uri) : WallpaperSource()
     data class Live(val componentName: ComponentName) : WallpaperSource()

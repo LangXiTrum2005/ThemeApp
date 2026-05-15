@@ -5,7 +5,7 @@ import com.wavez.controllerwidget.data.local.wallpaper.WallpaperFilePathProvider
 import com.wavez.controllerwidget.data.local.wallpaper.WallpaperStorageManager
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.flow.channelFlow
 import kotlinx.coroutines.flow.flowOn
 import java.io.File
 import javax.inject.Inject
@@ -23,47 +23,43 @@ class WallpaperDownloader @Inject constructor(
      * Emits [DownloadState] values. Room record insertion is NOT done here — the caller
      * (repository) is responsible for inserting after receiving [DownloadState.Saving].
      */
-    fun download(wallpaperId: String, url: String): Flow<DownloadState<File>> = flow {
-        emit(DownloadState.Idle)
+    fun download(wallpaperId: String, url: String): Flow<DownloadState<File>> = channelFlow {
+        send(DownloadState.Idle)
 
         val tempFile = pathProvider.getTempWallpaperFile(wallpaperId)
         tempFile.parentFile?.mkdirs()
         tempFile.delete()
 
-        // --- Step 1: download PNG to temp file ---
         try {
             fileDownloader.download(url, tempFile) { percent ->
-                emit(DownloadState.Downloading(percent))
+                send(DownloadState.Downloading(percent))
             }
         } catch (e: NetworkDownloadException) {
             tempFile.delete()
-            emit(DownloadState.Failure(DownloadError.NetworkError(e)))
-            return@flow
+            send(DownloadState.Failure(DownloadError.NetworkError(e)))
+            return@channelFlow
         } catch (e: FileWriteDownloadException) {
             tempFile.delete()
-            emit(DownloadState.Failure(DownloadError.FileWriteError(e)))
-            return@flow
+            send(DownloadState.Failure(DownloadError.FileWriteError(e)))
+            return@channelFlow
         } catch (e: EmptyFileDownloadException) {
             tempFile.delete()
-            emit(DownloadState.Failure(DownloadError.EmptyFile))
-            return@flow
+            send(DownloadState.Failure(DownloadError.EmptyFile))
+            return@channelFlow
         } catch (e: Throwable) {
             tempFile.delete()
-            emit(DownloadState.Failure(DownloadError.UnknownError(e)))
-            return@flow
+            send(DownloadState.Failure(DownloadError.UnknownError(e)))
+            return@channelFlow
         }
 
-        // --- Step 2: atomically move temp → final ---
-        val finalFile = try {
+        try {
             storageManager.moveTempToFinal(wallpaperId)
         } catch (e: Throwable) {
             tempFile.delete()
-            emit(DownloadState.Failure(DownloadError.MoveError(e)))
-            return@flow
+            send(DownloadState.Failure(DownloadError.MoveError(e)))
+            return@channelFlow
         }
 
-        // Signal to the caller that the file is on disk — Room record should be inserted now.
-        // The caller (repository) is responsible for emitting Success after the DB write.
-        emit(DownloadState.Saving)
+        send(DownloadState.Saving)
     }.flowOn(ioDispatcher)
 }

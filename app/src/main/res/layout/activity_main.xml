@@ -47,4 +47,13 @@
         android:layout_marginTop="28dp"
         android:orientation="vertical" />
 
+    <Button
+        android:id="@+id/testGifWallpaperButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:backgroundTint="#1976D2"
+        android:text="Test GIF Wallpaper"
+        android:textColor="@android:color/white" />
+
 </LinearLayout>

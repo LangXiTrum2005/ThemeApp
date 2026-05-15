@@ -4,6 +4,7 @@ import android.content.Context
 import androidx.room.Room
 import com.wavez.controllerwidget.ads.AppRemoteConfig
 import com.wavez.controllerwidget.ads.AppRemoteConfigImpl
+import com.wavez.controllerwidget.core.wallpaper.WallpaperManagerCore
 import com.wavez.controllerwidget.data.local.dao.DownloadedThemeDao
 import com.wavez.controllerwidget.data.local.dao.DownloadedWallpaperDao
 import com.wavez.controllerwidget.data.local.database.AppDatabase
@@ -74,6 +75,12 @@ class AppModule {
     fun provideLanguageRepository(
         sharedPref: SharedPref,
     ): LanguageRepository = LanguageRepositoryImpl(sharedPref)
+
+    @Provides
+    @Singleton
+    fun provideWallpaperManagerCore(
+        @ApplicationContext context: Context,
+    ): WallpaperManagerCore = WallpaperManagerCore(context)
 
     @Provides
     fun provideAppRemoteConfig(

@@ -13,13 +13,13 @@ import javax.inject.Singleton
 
 @Singleton
 class WallpaperDownloader @Inject constructor(
-    private val fileDownloader: FileDownloader,
+    private val fileDownloadHelper: FileDownloadHelper,
     private val pathProvider: WallpaperFilePathProvider,
     private val storageManager: WallpaperStorageManager,
     @IoDispatcher private val ioDispatcher: CoroutineDispatcher,
 ) {
     /**
-     * Downloads the PNG at [url] for [wallpaperId] and saves it atomically.
+     * Downloads the image at [url] for [wallpaperId] and saves it atomically.
      * Emits [DownloadState] values. Room record insertion is NOT done here — the caller
      * (repository) is responsible for inserting after receiving [DownloadState.Saving].
      */
@@ -30,27 +30,11 @@ class WallpaperDownloader @Inject constructor(
         tempFile.parentFile?.mkdirs()
         tempFile.delete()
 
-        try {
-            fileDownloader.download(url, tempFile) { percent ->
-                send(DownloadState.Downloading(percent))
+        fileDownloadHelper.downloadFile(url, tempFile) { send(it) }
+            ?.let { error ->
+                send(DownloadState.Failure(error))
+                return@channelFlow
             }
-        } catch (e: NetworkDownloadException) {
-            tempFile.delete()
-            send(DownloadState.Failure(DownloadError.NetworkError(e)))
-            return@channelFlow
-        } catch (e: FileWriteDownloadException) {
-            tempFile.delete()
-            send(DownloadState.Failure(DownloadError.FileWriteError(e)))
-            return@channelFlow
-        } catch (e: EmptyFileDownloadException) {
-            tempFile.delete()
-            send(DownloadState.Failure(DownloadError.EmptyFile))
-            return@channelFlow
-        } catch (e: Throwable) {
-            tempFile.delete()
-            send(DownloadState.Failure(DownloadError.UnknownError(e)))
-            return@channelFlow
-        }
 
         try {
             storageManager.moveTempToFinal(wallpaperId)

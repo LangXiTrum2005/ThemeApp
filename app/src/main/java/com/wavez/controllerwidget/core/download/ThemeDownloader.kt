@@ -9,13 +9,12 @@ import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
 import java.io.File
 import java.util.zip.ZipException
-import java.util.zip.ZipInputStream
 import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
 class ThemeDownloader @Inject constructor(
-    private val fileDownloader: FileDownloader,
+    private val fileDownloadHelper: FileDownloadHelper,
     private val pathProvider: ThemeFilePathProvider,
     private val storageManager: ThemeStorageManager,
     @param:IoDispatcher private val ioDispatcher: CoroutineDispatcher,
@@ -33,40 +32,12 @@ class ThemeDownloader @Inject constructor(
         tempZip.parentFile?.mkdirs()
         tempZip.delete()
 
-        // --- Step 1: download zip to temp file ---
-        try {
-            fileDownloader.download(url, tempZip) { percent ->
-                emit(DownloadState.Downloading(percent))
+        // --- Step 1+2: download zip to temp file + validate ---
+        fileDownloadHelper.downloadAndValidateZip(url, tempZip) { emit(it) }
+            ?.let { error ->
+                emit(DownloadState.Failure(error))
+                return@flow
             }
-        } catch (e: NetworkDownloadException) {
-            tempZip.delete()
-            emit(DownloadState.Failure(DownloadError.NetworkError(e)))
-            return@flow
-        } catch (e: FileWriteDownloadException) {
-            tempZip.delete()
-            emit(DownloadState.Failure(DownloadError.FileWriteError(e)))
-            return@flow
-        } catch (e: EmptyFileDownloadException) {
-            tempZip.delete()
-            emit(DownloadState.Failure(DownloadError.EmptyFile))
-            return@flow
-        } catch (e: Throwable) {
-            tempZip.delete()
-            emit(DownloadState.Failure(DownloadError.UnknownError(e)))
-            return@flow
-        }
-
-        // --- Step 2: validate the zip is readable ---
-        val isValidZip = try {
-            ZipInputStream(tempZip.inputStream()).use { zis -> zis.nextEntry != null }
-        } catch (_: ZipException) {
-            false
-        }
-        if (!isValidZip) {
-            tempZip.delete()
-            emit(DownloadState.Failure(DownloadError.InvalidZip))
-            return@flow
-        }
 
         // --- Step 3: move temp zip → final zip ---
         val finalZip = pathProvider.getThemeFile(themeId)

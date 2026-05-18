@@ -2,6 +2,7 @@ package com.wavez.controllerwidget.data.local.wallpaper
 
 import android.content.Context
 import com.wavez.controllerwidget.data.local.WallpaperStorageConfig
+import com.wavez.controllerwidget.data.local.sanitize
 import dagger.hilt.android.qualifiers.ApplicationContext
 import java.io.File
 import javax.inject.Inject
@@ -30,7 +31,5 @@ class WallpaperFilePathProvider @Inject constructor(
         return File(context.filesDir, WallpaperStorageConfig.WALLPAPER_BASE_DIR)
     }
 
-    private fun sanitize(value: String): String {
-        return value.replace(Regex("[^A-Za-z0-9._-]"), "_")
-    }
+
 }

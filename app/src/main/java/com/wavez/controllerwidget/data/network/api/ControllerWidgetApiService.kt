@@ -3,12 +3,15 @@ package com.wavez.controllerwidget.data.network.api
 import com.wavez.controllerwidget.data.model.ControllerCategoryListResponse
 import com.wavez.controllerwidget.data.model.ControllerListResponse
 import com.wavez.controllerwidget.data.model.DownloadedResInfo
+import com.wavez.controllerwidget.data.model.IconPackDetailResponse
+import com.wavez.controllerwidget.data.model.IconPackListResponse
 import com.wavez.controllerwidget.data.model.WallpaperCategoryListResponse
 import com.wavez.controllerwidget.data.model.WallpaperListResponse
 import okhttp3.ResponseBody
 import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.POST
+import retrofit2.http.Path
 
 interface ControllerWidgetApiService {
 
@@ -28,5 +31,12 @@ interface ControllerWidgetApiService {
 
     @POST("api/updatedownloadp67")
     suspend fun updateWallpaperDownloadAmount(@Body info: DownloadedResInfo): Result<ResponseBody>
+
+    //icon packs
+    @GET("p67geticonpacks")
+    suspend fun getIconPacks(): IconPackListResponse
+
+    @GET("p67geticonpackdetail/{id}")
+    suspend fun getIconPackDetail(@Path("id") id: String): IconPackDetailResponse
 
 }

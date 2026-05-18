@@ -18,3 +18,9 @@ object WallpaperStorageConfig {
     const val WALLPAPER_TEMP_SUFFIX = ".tmp"
     const val DEFAULT_WALLPAPER_EXTENSION = "png"
 }
+
+object IconPackStorageConfig {
+    const val ICON_PACK_BASE_DIR = "icon_packs"
+    const val ICON_PACK_TEMP_SUFFIX = ".zip.tmp"
+    const val ICON_PACK_MANIFEST_FILE = "manifest.json"
+}

@@ -2,12 +2,12 @@ package com.wavez.controllerwidget.data.local.theme
 
 import com.wavez.controllerwidget.core.di.IoDispatcher
 import com.wavez.controllerwidget.data.local.ThemeStorageConfig
+import com.wavez.controllerwidget.data.local.unzipSafely
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.withContext
 import java.io.ByteArrayInputStream
 import java.io.File
 import java.io.InputStream
-import java.util.zip.ZipInputStream
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -93,27 +93,4 @@ class ThemeStorageManager @Inject constructor(
         }
     }
 
-    private fun unzipSafely(zipFile: File, targetDir: File) {
-        ZipInputStream(zipFile.inputStream().buffered()).use { zip ->
-            while (true) {
-                val entry = zip.nextEntry ?: break
-                val outFile = File(targetDir, entry.name)
-                val canonicalTarget = targetDir.canonicalPath + File.separator
-                val canonicalOut = outFile.canonicalPath
-                if (!canonicalOut.startsWith(canonicalTarget)) {
-                    error("Invalid zip entry path: ${entry.name}")
-                }
-
-                if (entry.isDirectory) {
-                    outFile.mkdirs()
-                } else {
-                    outFile.parentFile?.mkdirs()
-                    outFile.outputStream().use { output ->
-                        zip.copyTo(output)
-                    }
-                }
-                zip.closeEntry()
-            }
-        }
-    }
 }

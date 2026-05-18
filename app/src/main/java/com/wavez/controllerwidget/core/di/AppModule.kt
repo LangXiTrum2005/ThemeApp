@@ -15,6 +15,8 @@ import com.wavez.controllerwidget.data.repository.SharedPref
 import com.wavez.controllerwidget.data.repository.SharedPreferencesImpl
 import com.wavez.controllerwidget.data.repository.ThemeControllerRepository
 import com.wavez.controllerwidget.data.repository.ThemeControllerRepositoryImpl
+import com.wavez.controllerwidget.data.repository.IconPackRepository
+import com.wavez.controllerwidget.data.repository.IconPackRepositoryImpl
 import com.wavez.controllerwidget.data.repository.WallpaperRepository
 import com.wavez.controllerwidget.data.repository.WallpaperRepositoryImpl
 import dagger.Module
@@ -33,6 +35,12 @@ class AppModule {
     fun provideSharedPrefProvider(
         @ApplicationContext context: Context,
     ): SharedPref = SharedPreferencesImpl(context)
+
+    @Provides
+    @Singleton
+    fun provideIconPackRepository(
+        impl: IconPackRepositoryImpl,
+    ): IconPackRepository = impl
 
     @Provides
     @Singleton

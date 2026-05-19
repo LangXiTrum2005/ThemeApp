@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center"
+    android:orientation="horizontal"
+    android:paddingHorizontal="16dp"
+    android:paddingVertical="10dp">
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tvTitle"
+        style="@style/NunitoExtraBold.24"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:text="@string/wallpapers"
+        android:textColor="@color/primary_high_em" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/btnPremium"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="?selectableItemBackground"
+        android:src="@drawable/ic_premium" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/btnDownloaded"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="?selectableItemBackground"
+        android:src="@drawable/ic_download_toolbar" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/btnSetting"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="?selectableItemBackground"
+        android:src="@drawable/ic_setting" />
+
+
+</LinearLayout>

@@ -12,7 +12,8 @@
       "Bash(\"D:\\\\p67-theme-wallpaper\\\\app\\\\src\\\\main\\\\java\\\\com\\\\wavez\\\\controllerwidget\\\\core\\\\wallpaper\\\\controller\\\\WavezVideoWallpaperService.kt\",)",
       "Bash(\"D:\\\\p67-theme-wallpaper\\\\app\\\\src\\\\main\\\\java\\\\com\\\\wavez\\\\controllerwidget\\\\core\\\\wallpaper\\\\controller\\\\GifWallpaperController.kt\",)",
       "Bash(\"D:\\\\p67-theme-wallpaper\\\\app\\\\src\\\\main\\\\java\\\\com\\\\wavez\\\\controllerwidget\\\\core\\\\wallpaper\\\\controller\\\\GifWallpaperService.kt\",)",
-      "Bash(./gradlew assembleDebug)"
+      "Bash(./gradlew assembleDebug)",
+      "Bash(Select-String -Pattern \"DataStore|dataStore|Preferences\\\\.Key\")"
     ]
   }
 }

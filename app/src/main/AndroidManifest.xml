@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:tools="http://schemas.android.com/tools" >
 
     <uses-permission android:name="android.permission.SET_WALLPAPER" />
     <uses-permission android:name="android.permission.SET_WALLPAPER_HINTS" />
@@ -110,30 +110,36 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:usesCleartextTraffic="true"
-        android:theme="@style/Theme.ThemeWallpaper">
-
-        <!-- Sample AdMob app ID: ca-app-pub-3940256099942544~3347511713 -->
+        android:theme="@style/Theme.ThemeWallpaper"
+        android:usesCleartextTraffic="true" >
+        <activity
+            android:name=".ui.wallpaper.ApplyWallpaperActivity"
+            android:exported="false"
+            android:theme="@style/Theme.ThemeWallpaper" />
+        <activity
+            android:name=".ui.wallpaper.PreviewWallpaperActivity"
+            android:exported="false"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.ThemeWallpaper" /> <!-- Sample AdMob app ID: ca-app-pub-3940256099942544~3347511713 -->
         <meta-data
             android:name="com.google.android.gms.ads.APPLICATION_ID"
             android:value="ca-app-pub-3940256099942544~3347511713" />
 
         <activity
             android:name=".ui.home.MainActivity"
-            android:screenOrientation="portrait"
-            android:exported="false" />
+            android:exported="false"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".core.controllercenter.service.record.ScreenRecordPermissionActivity"
             android:excludeFromRecents="true"
             android:exported="false"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.ScreenRecordPermission" />
-
         <activity
             android:name=".ui.launch.LaunchActivity"
             android:exported="true"
             android:screenOrientation="portrait"
-            android:theme="@style/Theme.ThemeWallpaper">
+            android:theme="@style/Theme.ThemeWallpaper" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -145,7 +151,7 @@
             android:name=".core.wallpaper.controller.WavezLiveWallpaperService"
             android:exported="true"
             android:label="@string/app_name"
-            android:permission="android.permission.BIND_WALLPAPER">
+            android:permission="android.permission.BIND_WALLPAPER" >
             <intent-filter>
                 <action android:name="android.service.wallpaper.WallpaperService" />
             </intent-filter>
@@ -156,7 +162,7 @@
         </service>
         <service
             android:name=".ui.notification.FMMessagingService"
-            android:exported="false">
+            android:exported="false" >
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
@@ -164,15 +170,13 @@
         <service
             android:name=".core.controllercenter.service.record.ScreenRecordService"
             android:exported="false"
-            android:foregroundServiceType="mediaProjection" />
-
-        <!-- Accessibility Service (Control Center backbone) -->
+            android:foregroundServiceType="mediaProjection" /> <!-- Accessibility Service (Control Center backbone) -->
         <service
             android:name=".core.controllercenter.service.ControlCenterService"
             android:enabled="true"
             android:exported="true"
             android:permission="android.permission.BIND_ACCESSIBILITY_SERVICE"
-            tools:ignore="AccessibilityPolicy">
+            tools:ignore="AccessibilityPolicy" >
             <intent-filter>
                 <action android:name="android.accessibilityservice.AccessibilityService" />
             </intent-filter>
@@ -184,14 +188,14 @@
         <service
             android:name=".core.controllercenter.service.ControlNotificationListener"
             android:exported="true"
-            android:permission="android.permission.BIND_NOTIFICATION_LISTENER_SERVICE">
+            android:permission="android.permission.BIND_NOTIFICATION_LISTENER_SERVICE" >
             <intent-filter>
                 <action android:name="android.service.notification.NotificationListenerService" />
             </intent-filter>
         </service> <!-- Boot Receiver -->
         <receiver
             android:name=".core.controllercenter.BootReceiver"
-            android:exported="true">
+            android:exported="true" >
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
             </intent-filter>
@@ -201,7 +205,7 @@
             android:name="androidx.core.content.FileProvider"
             android:authorities="${applicationId}.provider"
             android:exported="false"
-            android:grantUriPermissions="true">
+            android:grantUriPermissions="true" >
             <meta-data
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/provider_paths" />

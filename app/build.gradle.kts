@@ -75,12 +75,15 @@ base {
 
 dependencies {
     implementation(libs.androidx.activity.ktx)
+    implementation("androidx.fragment:fragment-ktx:1.8.2")
     implementation(libs.androidx.constraintlayout)
     implementation(libs.androidx.cardview)
     implementation(libs.androidx.appcompat)
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.lifecycle.process)
+    implementation(libs.androidx.navigation.fragment.ktx)
+    implementation(libs.androidx.navigation.ui.ktx)
     implementation(libs.material)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
@@ -103,6 +106,7 @@ dependencies {
     implementation(libs.libpag)
     implementation(libs.glide)
     implementation(libs.eventbus)
+    implementation("com.airbnb.android:lottie:6.7.1")
 
     //firebase
     implementation(libs.firebase.core)

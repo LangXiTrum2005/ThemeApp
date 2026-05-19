@@ -1,9 +1,10 @@
-package com.wavez.controllerwidget.ui.home
+package com.wavez.controllerwidget.ui.home.viewmodel
 
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.wavez.controllerwidget.core.base.UiState
+import com.wavez.controllerwidget.core.wallpaper.model.WallpaperTarget
 import com.wavez.controllerwidget.data.model.WallpaperModel
 import com.wavez.controllerwidget.data.repository.WallpaperRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -46,7 +47,7 @@ class MainViewModel @Inject constructor(
     fun applyWallpaper(wallpaper: WallpaperModel) {
         viewModelScope.launch {
             _applyState.value = UiState.Loading
-            wallpaperRepository.applyWallpaper(wallpaper)
+            wallpaperRepository.applyWallpaper(wallpaper, WallpaperTarget.HOME)
                 .onSuccess { _applyState.value = UiState.Data(Unit) }
                 .onFailure { error ->
                     val message = error.message.orEmpty().ifBlank { "Unknown error" }

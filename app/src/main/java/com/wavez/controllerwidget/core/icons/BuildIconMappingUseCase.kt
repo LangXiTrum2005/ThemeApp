@@ -1,4 +1,4 @@
-package com.wavez.controllerwidget.domain.usecase
+package com.wavez.controllerwidget.core.icons
 
 import com.wavez.controllerwidget.core.di.IoDispatcher
 import com.wavez.controllerwidget.data.local.iconpack.InstalledAppProvider

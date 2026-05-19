@@ -8,6 +8,7 @@ import com.wavez.controllerwidget.core.wallpaper.WallpaperManagerCore
 import com.wavez.controllerwidget.core.wallpaper.model.WallpaperOptions
 import com.wavez.controllerwidget.core.wallpaper.model.WallpaperResult
 import com.wavez.controllerwidget.core.wallpaper.model.WallpaperSource
+import com.wavez.controllerwidget.core.wallpaper.model.WallpaperTarget
 import com.wavez.controllerwidget.data.local.dao.DownloadedWallpaperDao
 import com.wavez.controllerwidget.data.local.entity.DownloadedWallpaperEntity
 import com.wavez.controllerwidget.data.local.wallpaper.WallpaperStorageManager
@@ -32,7 +33,7 @@ class WallpaperRepositoryImpl @Inject constructor(
     private val wallpaperStorageManager: WallpaperStorageManager,
     private val downloadedWallpaperDao: DownloadedWallpaperDao,
     private val wallpaperManagerCore: WallpaperManagerCore,
-    @IoDispatcher private val ioDispatcher: CoroutineDispatcher,
+    @param:IoDispatcher private val ioDispatcher: CoroutineDispatcher,
 ) : WallpaperRepository {
 
     private var cachedCategories: List<WallpaperCategoryModel>? = null
@@ -58,6 +59,16 @@ class WallpaperRepositoryImpl @Inject constructor(
 
         return repositoryRequest { apiService.getAllWallpapersUnlimited() }
             .onSuccess { cachedWallpapers = it }
+    }
+
+    override suspend fun getWallpapersByCategory(
+        categoryId: String,
+        forceRefresh: Boolean
+    ): Result<List<WallpaperModel>> {
+        val allResult = getAllWallpapersUnlimited(forceRefresh)
+        return allResult.map { wallpapers ->
+            wallpapers.filter { it.categoryId == categoryId }
+        }
     }
 
     override fun downloadWallpaper(wallpaper: WallpaperModel): Flow<DownloadState<File>> =
@@ -121,14 +132,22 @@ class WallpaperRepositoryImpl @Inject constructor(
             }
         }
 
-    override suspend fun applyWallpaper(wallpaper: WallpaperModel): Result<Unit> =
+    override suspend fun applyWallpaper(
+        wallpaper: WallpaperModel,
+        wallpaperTarget: WallpaperTarget
+    ): Result<Unit> =
         runCatching {
             val source: WallpaperSource = when (wallpaper.wallpaperType) {
                 WallpaperType.IMAGE -> WallpaperSource.OnlineImage(wallpaper.url)
                 WallpaperType.GIF -> WallpaperSource.Gif(Uri.fromFile(ensureDownloaded(wallpaper)))
                 WallpaperType.VIDEO -> WallpaperSource.Video(Uri.fromFile(ensureDownloaded(wallpaper)))
             }
-            wallpaperManagerCore.applyWallpaper(WallpaperOptions(source = source))
+            wallpaperManagerCore.applyWallpaper(
+                WallpaperOptions(
+                    source = source,
+                    target = wallpaperTarget
+                )
+            )
                 .collect { result ->
                     if (result is WallpaperResult.Error) throw result.exception
                 }

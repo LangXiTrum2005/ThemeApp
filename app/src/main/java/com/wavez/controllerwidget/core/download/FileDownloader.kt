@@ -13,8 +13,8 @@ import javax.inject.Singleton
 
 @Singleton
 class FileDownloader @Inject constructor(
-    @DownloadClient private val okHttpClient: OkHttpClient,
-    @IoDispatcher private val ioDispatcher: CoroutineDispatcher,
+    @param:DownloadClient private val okHttpClient: OkHttpClient,
+    @param:IoDispatcher private val ioDispatcher: CoroutineDispatcher,
 ) {
     /**
      * Downloads [url] and writes bytes to [destFile].
@@ -27,7 +27,10 @@ class FileDownloader @Inject constructor(
         destFile: File,
         onProgress: suspend (percent: Int) -> Unit,
     ): File = withContext(ioDispatcher) {
-        val request = Request.Builder().url(url).build()
+        val request = Request.Builder()
+            .url(url)
+            .header("Accept-Encoding", "identity")
+            .build()
         val response = try {
             okHttpClient.newCall(request).execute()
         } catch (e: IOException) {
@@ -43,12 +46,14 @@ class FileDownloader @Inject constructor(
 
         val contentLength = body.contentLength()
         destFile.parentFile?.mkdirs()
+        onProgress(if (contentLength > 0) 0 else -1)
 
         try {
             body.byteStream().use { input ->
                 destFile.outputStream().use { output ->
                     val buffer = ByteArray(DEFAULT_BUFFER_SIZE)
                     var bytesRead = 0L
+                    var lastPercent = if (contentLength > 0) 0 else -1
                     var read: Int
                     while (input.read(buffer).also { read = it } != -1) {
                         output.write(buffer, 0, read)
@@ -58,7 +63,10 @@ class FileDownloader @Inject constructor(
                         } else {
                             -1
                         }
-                        onProgress(percent)
+                        if (percent != lastPercent) {
+                            lastPercent = percent
+                            onProgress(percent)
+                        }
                     }
                 }
             }

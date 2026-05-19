@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/nav_theme"
+        android:title="@string/themes"
+        android:icon="@drawable/ic_tab_theme_selector"
+        />
+
+    <item android:id="@+id/nav_wallpaper"
+        android:title="@string/wallpapers"
+        android:icon="@drawable/ic_tab_wallpaper_selector"
+        />
+
+    <item android:id="@+id/nav_icons"
+        android:title="@string/icons"
+        android:icon="@drawable/ic_tab_icons_selector"
+        />
+</menu>

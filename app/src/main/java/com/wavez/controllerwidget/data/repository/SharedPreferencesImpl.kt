@@ -46,6 +46,8 @@ class SharedPreferencesImpl(context: Context) : SharedPref {
 
         private const val ACTIVE_THEME_ID = "active_theme_id"
 
+        private const val UNLOCKED_VIP_WALLPAPER_IDS = "unlocked_vip_wallpaper_ids"
+
     }
 
     override val sharedPref: SharedPreferences =
@@ -294,5 +296,18 @@ class SharedPreferencesImpl(context: Context) : SharedPref {
         set(value) {
             sharedPref.edit { putString(ACTIVE_THEME_ID, value) }
         }
+
+    override fun isWallpaperUnlocked(wallpaperId: String): Boolean {
+        return sharedPref.getStringSet(UNLOCKED_VIP_WALLPAPER_IDS, emptySet())
+            ?.contains(wallpaperId) == true
+    }
+
+    override fun unlockWallpaper(wallpaperId: String) {
+        val unlockedIds = sharedPref.getStringSet(UNLOCKED_VIP_WALLPAPER_IDS, emptySet())
+            ?.toMutableSet()
+            ?: mutableSetOf()
+        unlockedIds.add(wallpaperId)
+        sharedPref.edit { putStringSet(UNLOCKED_VIP_WALLPAPER_IDS, unlockedIds) }
+    }
 
 }

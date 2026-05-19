@@ -6,4 +6,33 @@
         <attr name="defaultHeight" format="dimension" />
         <attr name="defaultWidth" format="dimension" />
     </declare-styleable>
+
+    <!-- Custom attributes for ThemeTabIcon -->
+    <declare-styleable name="ThemeTabIcon">
+        <attr name="tabActiveBackground" format="reference|color" />
+        <attr name="tabInactiveBackground" format="reference|color" />
+        <attr name="tabActiveTextColor" format="color" />
+        <attr name="tabInactiveTextColor" format="color" />
+        <attr name="tabIcon" format="reference" />
+        <attr name="tabText" format="string" />
+    </declare-styleable>
+
+    <!-- res/values/attrs.xml -->
+    <declare-styleable name="IconTextButton">
+        <attr name="btnIcon" format="reference"/>
+        <attr name="btnText" format="string"/>
+        <attr name="btnBackground" format="reference"/>
+        <attr name="btnTextColor" format="color|reference"/>
+    </declare-styleable>
+
+    <declare-styleable name="ServerErrorView">
+        <attr name="errorIcon" format="reference" />
+        <attr name="errorTitle" format="string" />
+        <attr name="errorMessage" format="string" />
+        <attr name="errorButtonText" format="string" />
+    </declare-styleable>
+
+    <declare-styleable name="ServerLoadingView">
+        <attr name="loadingMessage" format="string" />
+    </declare-styleable>
 </resources>

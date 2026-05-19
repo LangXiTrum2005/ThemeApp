@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="36dp"
+        android:background="@drawable/border_28"
+        android:backgroundTint="@color/white"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/ivIcon"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:src="@drawable/ic_premium"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/btnClose"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_close"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintTop_toBottomOf="@+id/ivIcon">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                style="@style/NunitoBold.20"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="24dp"
+                android:layout_marginTop="16dp"
+                android:text="@string/premium_theme"
+                android:textAlignment="center"
+                android:textColor="@color/text_high_em" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                style="@style/NunitoMedium.14"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="24dp"
+                android:layout_marginTop="16dp"
+                android:lineSpacingExtra="5sp"
+                android:text="@string/watch_a_short_ad_for_free_access_upgrade_to_premium_for_unlimited_use"
+                android:textColor="@color/text_med_em"
+                app:layout_constraintBottom_toBottomOf="@+id/ic3"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/ic3"
+                app:layout_constraintTop_toTopOf="@+id/ic3" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:orientation="vertical">
+
+                <com.wavez.controllerwidget.ui.customview.IconTextButton
+                    android:id="@+id/btnWathAd"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:btnBackground="@drawable/bg_button_outline_1"
+                    app:btnIcon="@drawable/ic_ad"
+                    app:btnText="@string/watch_ad"
+                    app:btnTextColor="@color/primary_text_high_em" />
+
+                <com.wavez.controllerwidget.ui.customview.IconTextButton
+                    android:id="@+id/btnGoPremium"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    app:btnBackground="@drawable/bg_button_1"
+                    app:btnIcon="@drawable/ic_diamon"
+                    app:btnText="@string/go_premium" />
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</LinearLayout>

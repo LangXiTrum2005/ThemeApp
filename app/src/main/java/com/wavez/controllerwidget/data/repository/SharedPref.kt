@@ -75,4 +75,8 @@ interface SharedPref {
 
     // ID of the controller theme currently applied by the user. Null = use built-in default.
     var activeThemeId: String?
+
+    fun isWallpaperUnlocked(wallpaperId: String): Boolean
+
+    fun unlockWallpaper(wallpaperId: String)
 }

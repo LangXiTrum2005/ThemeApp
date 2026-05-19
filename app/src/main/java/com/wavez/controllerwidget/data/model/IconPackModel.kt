@@ -13,7 +13,6 @@ data class IconPackModel(
     @param:Json(name = "name") override val name: String,
     @param:Json(name = "categoryId") override val categoryId: String,
     @param:Json(name = "thumbnail") override val thumb: String,
-    @param:Json(name = "previewImages") val previewImages: List<String>,
     @param:Json(name = "iconCount") val iconCount: Int,
     @param:Json(name = "isPremium") override val premium: Int,
     @param:Json(name = "description") val description: String? = null,

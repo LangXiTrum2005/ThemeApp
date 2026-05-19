@@ -46,8 +46,10 @@ data class IconMappingItem(
     val isManualMapped: Boolean,
 )
 
+@JsonClass(generateAdapter = true)
 data class ManualIconMapping(
-    val iconId: String,
-    val packageName: String,
-    val appName: String,
+    @param:Json(name = "iconPackId") val iconPackId: String,
+    @param:Json(name = "iconId") val iconId: String,
+    @param:Json(name = "packageName") val packageName: String,
+    @param:Json(name = "appName") val appName: String,
 )

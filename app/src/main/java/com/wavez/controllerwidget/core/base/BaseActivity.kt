@@ -20,7 +20,10 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.viewbinding.ViewBinding
 import com.wavez.controllerwidget.R
+import com.wavez.controllerwidget.core.di.AppModuleEntry
+import com.wavez.controllerwidget.data.repository.LanguageRepository
 import com.wavez.controllerwidget.data.repository.SharedPref
+import dagger.hilt.android.EntryPointAccessors
 import kotlinx.coroutines.launch
 import org.greenrobot.eventbus.EventBus
 import java.util.Locale
@@ -49,16 +52,16 @@ abstract class BaseActivity<T : ViewBinding> :
         super.onPause()
     }
 
-    /* override fun attachBaseContext(newBase: Context) {
- //        val languageProvider: LanguageRepository by lazy {
- //            EntryPointAccessors.fromApplication(
- //                newBase.applicationContext, AppModuleEntry::class.java
- //            ).getLanguageRepository()
- //        }
- //        val wrappedContext = updateLocaleFormat(newBase, languageProvider.getConfigLanguageCode())
+    override fun attachBaseContext(newBase: Context) {
+         val languageProvider: LanguageRepository by lazy {
+             EntryPointAccessors.fromApplication(
+                 newBase.applicationContext, AppModuleEntry::class.java
+             ).getLanguageRepository()
+         }
+         val wrappedContext = updateLocaleFormat(newBase, languageProvider.getConfigLanguageCode())
          super.attachBaseContext(wrappedContext)
      }
- */
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()

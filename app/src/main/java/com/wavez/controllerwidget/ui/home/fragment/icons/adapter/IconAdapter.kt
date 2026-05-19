@@ -1,0 +1,29 @@
+package com.wavez.controllerwidget.ui.home.fragment.icons.adapter
+
+import android.content.Context
+import android.view.LayoutInflater
+import android.view.ViewGroup
+import com.wavez.controllerwidget.core.base.BaseRecyclerViewAdapter
+import com.wavez.controllerwidget.core.extensions.loadWithLoading
+import com.wavez.controllerwidget.data.model.IconPackModel
+import com.wavez.controllerwidget.databinding.ItemIconBinding
+
+class IconAdapter : BaseRecyclerViewAdapter<IconPackModel, ItemIconBinding>() {
+    override fun providesItemViewBinding(
+        parent: ViewGroup,
+        viewType: Int
+    ): ItemIconBinding {
+        return ItemIconBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+    }
+
+    override fun bindData(
+        binding: ItemIconBinding,
+        data: IconPackModel,
+        position: Int,
+        context: Context
+    ) {
+        binding.ivImage.loadWithLoading(data.thumb, loadingView = binding.viewLoading.root)
+    }
+
+
+}

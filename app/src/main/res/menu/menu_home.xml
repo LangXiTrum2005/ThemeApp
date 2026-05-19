@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/nav_theme"
+        android:icon="@drawable/ic_tab_theme_selector"
+        android:title="@string/themes" />
+
+    <item
+        android:id="@+id/nav_wallpaper"
+        android:icon="@drawable/ic_tab_wallpaper_selector"
+        android:title="@string/wallpapers" />
+
+    <item
+        android:id="@+id/nav_icons"
+        android:icon="@drawable/ic_tab_icons_selector"
+        android:title="@string/icons" />
+
+    <item
+        android:id="@+id/nav_gallery"
+        android:icon="@drawable/ic_tab_gallery_selector"
+        android:title="@string/my_gallery" />
+</menu>

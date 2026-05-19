@@ -22,5 +22,5 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "Control Widget"
+rootProject.name = "P67-ThemeWallpaper"
 include(":app")

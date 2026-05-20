@@ -13,33 +13,50 @@ class IconTextButton @JvmOverloads constructor(
     context: Context, attrs: AttributeSet? = null
 ) : LinearLayout(context, attrs) {
 
+    private val iconView: AppCompatImageView
+    private val textView: AppCompatTextView
+
     init {
         inflate(context, R.layout.layout_icon_button, this)
         orientation = HORIZONTAL
         gravity = Gravity.CENTER
 
+        iconView = findViewById(R.id.btnIcon)
+        textView = findViewById(R.id.btnText)
+
         context.obtainStyledAttributes(attrs, R.styleable.IconTextButton).use {
-            val iconView = findViewById<AppCompatImageView>(R.id.btnIcon)
-            val iconRes = it.getResourceId(
-                R.styleable.IconTextButton_btnIcon,
-                0
-            )
+            val iconRes = it.getResourceId(R.styleable.IconTextButton_btnIcon, 0)
+            setIcon(iconRes)
 
-            if (iconRes != 0) {
-                iconView.visibility = VISIBLE
-                iconView.setImageResource(iconRes)
-            } else {
-                iconView.visibility = GONE
-            }
-
-            val tv = findViewById<AppCompatTextView>(R.id.btnText)
-            tv.text = it.getString(R.styleable.IconTextButton_btnText)
+            textView.text = it.getString(R.styleable.IconTextButton_btnText)
 
             val textColor = it.getColor(R.styleable.IconTextButton_btnTextColor, Color.WHITE)
-            tv.setTextColor(textColor)
+            textView.setTextColor(textColor)
+
             it.getResourceId(R.styleable.IconTextButton_btnBackground, 0)
                 .takeIf { res -> res != 0 }
                 ?.let { res -> setBackgroundResource(res) }
         }
+    }
+
+    fun setText(text: String) {
+        textView.text = text
+    }
+
+    fun setTextColor(color: Int) {
+        textView.setTextColor(color)
+    }
+
+    fun setIcon(iconRes: Int) {
+        if (iconRes != 0) {
+            iconView.visibility = VISIBLE
+            iconView.setImageResource(iconRes)
+        } else {
+            iconView.visibility = GONE
+        }
+    }
+
+    fun setButtonBackground(backgroundRes: Int) {
+        setBackgroundResource(backgroundRes)
     }
 }

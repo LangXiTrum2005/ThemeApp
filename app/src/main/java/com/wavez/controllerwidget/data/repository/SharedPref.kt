@@ -79,4 +79,8 @@ interface SharedPref {
     fun isWallpaperUnlocked(wallpaperId: String): Boolean
 
     fun unlockWallpaper(wallpaperId: String)
+
+    fun isIconUnlocked(iconId: String): Boolean
+
+    fun unlockIcon(iconId: String)
 }

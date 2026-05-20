@@ -20,11 +20,11 @@
             android:orientation="horizontal">
 
             <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvName"
                 style="@style/NunitoMedium.16"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Pastel"
                 android:textColor="@color/textHighEm" />
 
             <androidx.appcompat.widget.AppCompatTextView

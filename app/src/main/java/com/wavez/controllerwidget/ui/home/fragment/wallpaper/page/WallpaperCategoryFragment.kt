@@ -1,6 +1,7 @@
 package com.wavez.controllerwidget.ui.home.fragment.wallpaper.page
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
@@ -62,6 +63,7 @@ class WallpaperCategoryFragment : BaseFragment<FragmentWallpaperCategoryBinding>
         viewModel.wallpapersState.collectWithLifecycle(this) {
             when (it) {
                 is UiState.Error -> {
+                    Log.d("log_error", "initObserver: ${it.throwable}")
                     binding.viewError.isVisible = true
                     binding.rcvWallpaper.isVisible = false
                 }

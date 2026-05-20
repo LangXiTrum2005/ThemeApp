@@ -44,5 +44,14 @@
     <string name="download_failed">Download failed</string>
     <string name="my_gallery">My Gallery</string>
     <string name="view_all">View all</string>
+    <string name="this_action_may_show_ads">This action may contain ads</string>
+    <string name="install">Install</string>
+    <string name="install_all_icons">Install all icons</string>
+    <string name="unlock">Unlock</string>
+    <string name="choose">Choose</string>
+    <string name="no_icons_to_install">No icons available to install</string>
+    <string name="shortcut_install_requested">Shortcut install requested</string>
+    <string name="shortcut_install_failed">Could not install shortcut</string>
+    <string name="select_app">Select app</string>
 
 </resources>

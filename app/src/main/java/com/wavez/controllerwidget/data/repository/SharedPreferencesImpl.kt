@@ -48,6 +48,8 @@ class SharedPreferencesImpl(context: Context) : SharedPref {
 
         private const val UNLOCKED_VIP_WALLPAPER_IDS = "unlocked_vip_wallpaper_ids"
 
+        private const val UNLOCKED_ICON_IDS = "unlocked_icon_ids"
+
     }
 
     override val sharedPref: SharedPreferences =
@@ -308,6 +310,19 @@ class SharedPreferencesImpl(context: Context) : SharedPref {
             ?: mutableSetOf()
         unlockedIds.add(wallpaperId)
         sharedPref.edit { putStringSet(UNLOCKED_VIP_WALLPAPER_IDS, unlockedIds) }
+    }
+
+    override fun isIconUnlocked(iconId: String): Boolean {
+        return sharedPref.getStringSet(UNLOCKED_ICON_IDS, emptySet())
+            ?.contains(iconId) == true
+    }
+
+    override fun unlockIcon(iconId: String) {
+        val unlockedIds = sharedPref.getStringSet(UNLOCKED_ICON_IDS, emptySet())
+            ?.toMutableSet()
+            ?: mutableSetOf()
+        unlockedIds.add(iconId)
+        sharedPref.edit { putStringSet(UNLOCKED_ICON_IDS, unlockedIds) }
     }
 
 }

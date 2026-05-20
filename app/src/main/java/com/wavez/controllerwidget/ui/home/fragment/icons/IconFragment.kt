@@ -43,6 +43,13 @@ class IconFragment : BaseFragment<FragmentIconBinding>() {
             viewModel.getIcons()
         }
 
+        iconAdapter.onClickItem = { pack ->
+            startActivity(
+                com.wavez.controllerwidget.ui.iconpack.SetIconsActivity.newIntent(
+                    requireContext(), pack.id, pack.name
+                )
+            )
+        }
     }
 
     override fun initObserver() {

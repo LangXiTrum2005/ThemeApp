@@ -326,7 +326,9 @@
         <item name="android:paddingHorizontal">16dp</item>
     </style>
 
-
+    <style name="round_img_4">
+        <item name="cornerSize">4dp</item>
+    </style>
     <style name="round_img_12">
         <item name="cornerSize">12dp</item>
     </style>

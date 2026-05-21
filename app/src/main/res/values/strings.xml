@@ -53,5 +53,16 @@
     <string name="shortcut_install_requested">Shortcut install requested</string>
     <string name="shortcut_install_failed">Could not install shortcut</string>
     <string name="select_app">Select app</string>
+    <string name="cannot_open_target_app">Cannot open target app</string>
+    <string name="shortcut_applied_successfully">Shortcut applied successfully!</string>
+    <string name="suggested_icons">Suggested icons</string>
+    <string name="empty_gallery_title">Your category is empty.</string>
+    <string name="empty_gallery_message">Start downloading wallpapers, control, and icon packs to build your perfect setup.</string>
+    <string name="setting">Setting</string>
+    <string name="language">Language</string>
+    <string name="feedback">Feedback</string>
+    <string name="privacy_policy">Privacy policy</string>
+    <string name="feedback_email">support@wavez.com</string>
+    <string name="privacy_policy_url">https://wavez.com/privacy-policy</string>
 
 </resources>

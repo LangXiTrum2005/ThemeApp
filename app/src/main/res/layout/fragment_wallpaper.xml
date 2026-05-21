@@ -40,7 +40,7 @@
             android:layout_weight="1"
             android:background="@color/transparent"
             app:tabIndicatorHeight="0dp"
-            app:tabMode="scrollable"
+            app:tabMode="auto"
             app:tabPaddingBottom="0dp"
             app:tabPaddingEnd="8dp"
             app:tabPaddingStart="0dp"

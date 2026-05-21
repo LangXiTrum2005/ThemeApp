@@ -21,6 +21,8 @@ interface WallpaperRepository {
 
     suspend fun getLocalWallpaperFile(wallpaperId: String): File?
 
+    fun observeDownloadedWallpapers(): Flow<List<WallpaperModel>>
+
     fun canDownloadWallpaper(wallpaper: WallpaperModel): Boolean
 
     fun unlockWallpaper(wallpaper: WallpaperModel)

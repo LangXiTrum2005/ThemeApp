@@ -9,7 +9,9 @@ import com.wavez.controllerwidget.core.extensions.loadWithLoading
 import com.wavez.controllerwidget.data.model.IconPackModel
 import com.wavez.controllerwidget.databinding.ItemIconBinding
 
-class IconAdapter : BaseRecyclerViewAdapter<IconPackModel, ItemIconBinding>() {
+class IconAdapter(
+    private val isApply: Boolean = false
+) : BaseRecyclerViewAdapter<IconPackModel, ItemIconBinding>() {
 
     override fun providesItemViewBinding(parent: ViewGroup, viewType: Int): ItemIconBinding {
         return ItemIconBinding.inflate(LayoutInflater.from(parent.context), parent, false)
@@ -21,8 +23,12 @@ class IconAdapter : BaseRecyclerViewAdapter<IconPackModel, ItemIconBinding>() {
         position: Int,
         context: Context,
     ) {
+        binding.tvName.isVisible = !isApply
+        binding.tvViewAll.isVisible = !isApply
+
         binding.tvName.text = data.name
         binding.ivImage.isVisible = true
         binding.ivImage.loadWithLoading(data.thumb, loadingView = binding.viewLoading.root)
+
     }
 }

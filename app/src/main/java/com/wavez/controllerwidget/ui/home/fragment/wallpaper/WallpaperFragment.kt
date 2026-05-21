@@ -19,6 +19,7 @@ import com.wavez.controllerwidget.ui.customview.ThemeTabIcon
 import com.wavez.controllerwidget.ui.home.dialog.FilterPopupHelper
 import com.wavez.controllerwidget.ui.home.fragment.wallpaper.adapter.CategoryPagerAdapter
 import com.wavez.controllerwidget.ui.home.fragment.wallpaper.viewmodel.WallpaperViewModel
+import com.wavez.controllerwidget.ui.setting.SettingActivity
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -117,7 +118,7 @@ class WallpaperFragment : BaseFragment<FragmentWallpaperBinding>() {
             }
 
             btnSetting.setOnClickListener {
-
+                startActivity(SettingActivity.newIntent(requireContext()))
             }
 
         }

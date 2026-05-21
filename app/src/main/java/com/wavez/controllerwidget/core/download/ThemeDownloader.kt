@@ -1,8 +1,8 @@
 package com.wavez.controllerwidget.core.download
 
 import com.wavez.controllerwidget.core.di.IoDispatcher
-import com.wavez.controllerwidget.data.local.theme.ThemeFilePathProvider
-import com.wavez.controllerwidget.data.local.theme.ThemeStorageManager
+import com.wavez.controllerwidget.data.local.controller.ControllerFilePathProvider
+import com.wavez.controllerwidget.data.local.controller.ControllerStorageManager
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
@@ -15,8 +15,8 @@ import javax.inject.Singleton
 @Singleton
 class ThemeDownloader @Inject constructor(
     private val fileDownloadHelper: FileDownloadHelper,
-    private val pathProvider: ThemeFilePathProvider,
-    private val storageManager: ThemeStorageManager,
+    private val pathProvider: ControllerFilePathProvider,
+    private val storageManager: ControllerStorageManager,
     @param:IoDispatcher private val ioDispatcher: CoroutineDispatcher,
 ) {
     /**

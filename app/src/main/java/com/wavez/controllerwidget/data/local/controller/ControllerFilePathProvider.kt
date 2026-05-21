@@ -1,4 +1,4 @@
-package com.wavez.controllerwidget.data.local.theme
+package com.wavez.controllerwidget.data.local.controller
 
 import android.content.Context
 import com.wavez.controllerwidget.data.local.ThemeStorageConfig
@@ -9,7 +9,7 @@ import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
-class ThemeFilePathProvider @Inject constructor(
+class ControllerFilePathProvider @Inject constructor(
     @ApplicationContext private val context: Context,
 ) {
     fun getThemeFile(themeId: String): File {

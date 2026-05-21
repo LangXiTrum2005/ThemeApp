@@ -93,6 +93,7 @@
 
         <intent>
             <action android:name="android.intent.action.MAIN" />
+
             <category android:name="android.intent.category.LAUNCHER" />
         </intent>
         <intent>
@@ -101,7 +102,6 @@
     </queries>
 
     <uses-permission android:name="com.samsung.android.mapsagent.permission.READ_APP_INFO" />
-    <uses-permission android:name="com.android.launcher.permission.INSTALL_SHORTCUT"/>
 
     <application
         android:name=".MyApplication"
@@ -114,13 +114,22 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ThemeWallpaper"
         android:usesCleartextTraffic="true">
-
+        <activity
+            android:name=".ui.search.SearchActivity"
+            android:exported="false" />
         <activity
             android:name=".ui.iconpack.SetIconsActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".ui.wallpaper.ApplyWallpaperActivity"
             android:exported="false"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.ThemeWallpaper" />
+        <activity
+            android:name=".ui.iconpack.ApplyIconsActivity"
+            android:exported="false"
+            android:screenOrientation="portrait"
             android:theme="@style/Theme.ThemeWallpaper" />
         <activity
             android:name=".ui.wallpaper.PreviewWallpaperActivity"
@@ -136,6 +145,11 @@
             android:exported="false"
             android:screenOrientation="portrait" />
         <activity
+            android:name=".ui.setting.SettingActivity"
+            android:exported="false"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.ThemeWallpaper" />
+        <activity
             android:name=".core.controllercenter.service.record.ScreenRecordPermissionActivity"
             android:excludeFromRecents="true"
             android:exported="false"
@@ -150,6 +164,26 @@
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".ui.iconpack.activities.ShortcutProxyActivity"
+            android:excludeFromRecents="true"
+            android:exported="true"
+            android:icon="@drawable/icon_translucent"
+            android:launchMode="singleInstance"
+            android:noHistory="true"
+            android:roundIcon="@drawable/icon_translucent"
+            android:theme="@style/Theme.Shortcut.Transparent">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data
+                    android:host="shortcut"
+                    android:scheme="demoicons" />
             </intent-filter>
         </activity>
 

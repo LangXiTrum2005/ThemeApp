@@ -12,6 +12,7 @@ import com.wavez.controllerwidget.core.extensions.collectWithLifecycle
 import com.wavez.controllerwidget.databinding.FragmentIconBinding
 import com.wavez.controllerwidget.ui.home.fragment.icons.adapter.IconAdapter
 import com.wavez.controllerwidget.ui.home.fragment.icons.viewmodel.IconsViewModel
+import com.wavez.controllerwidget.ui.setting.SettingActivity
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -38,6 +39,9 @@ class IconFragment : BaseFragment<FragmentIconBinding>() {
 
     override fun initListener() {
         super.initListener()
+        binding.toolbar.btnSetting.setOnClickListener {
+            startActivity(SettingActivity.newIntent(requireContext()))
+        }
 
         binding.viewError.setOnRetryClickListener {
             viewModel.getIcons()

@@ -21,6 +21,7 @@ class SetIconAdapter : ListAdapter<IconPackItemUi, SetIconAdapter.IconViewHolder
     }
 
     var onActionClick: ((IconPackItemUi, SetIconState) -> Unit)? = null
+    var onEditClick: ((IconPackItemUi) -> Unit)? = null
 
     override fun getItemId(position: Int): Long = getItem(position).id
 
@@ -61,7 +62,10 @@ class SetIconAdapter : ListAdapter<IconPackItemUi, SetIconAdapter.IconViewHolder
             val targetIcon = item.targetIcon
             binding.ivAppIcon.isVisible = targetIcon != null
             binding.tvPlus.visibility = if (targetIcon == null) View.VISIBLE else View.GONE
-            binding.ivEdit.isVisible = item.isInstallable && item.isManualMappingRequired
+            binding.ivEdit.isVisible = item.isInstallable
+            binding.ivEdit.setOnClickListener {
+                onEditClick?.invoke(item)
+            }
 
             if (targetIcon != null) {
                 binding.ivAppIcon.setImageDrawable(targetIcon)

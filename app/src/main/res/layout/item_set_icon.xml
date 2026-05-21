@@ -68,7 +68,6 @@
         android:layout_height="24dp"
         android:layout_marginStart="4dp"
         android:src="@drawable/ic_edit_pencil"
-        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="@id/containerAppIcon"
         app:layout_constraintStart_toEndOf="@id/containerAppIcon"
         app:layout_constraintTop_toTopOf="@id/containerAppIcon"

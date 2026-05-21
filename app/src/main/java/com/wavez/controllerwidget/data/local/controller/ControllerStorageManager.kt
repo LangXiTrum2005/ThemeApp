@@ -1,4 +1,4 @@
-package com.wavez.controllerwidget.data.local.theme
+package com.wavez.controllerwidget.data.local.controller
 
 import com.wavez.controllerwidget.core.di.IoDispatcher
 import com.wavez.controllerwidget.data.local.ThemeStorageConfig
@@ -12,8 +12,8 @@ import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
-class ThemeStorageManager @Inject constructor(
-    private val pathProvider: ThemeFilePathProvider,
+class ControllerStorageManager @Inject constructor(
+    private val pathProvider: ControllerFilePathProvider,
     @IoDispatcher private val ioDispatcher: CoroutineDispatcher,
 ) {
     suspend fun getThemeFile(themeId: String): File = withContext(ioDispatcher) {

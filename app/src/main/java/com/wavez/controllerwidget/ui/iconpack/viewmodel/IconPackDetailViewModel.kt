@@ -37,6 +37,8 @@ class IconPackDetailViewModel @Inject constructor(
     private val manualMappings = mutableMapOf<Long, AppInfo>()
     private var pendingIconId: Long? = null
 
+    var currentIconPackId : String? = null
+
     fun load(id: String, forceRefresh: Boolean = false) {
         viewModelScope.launch {
             _uiState.value = UiState.Loading

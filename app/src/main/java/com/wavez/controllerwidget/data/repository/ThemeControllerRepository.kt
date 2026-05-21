@@ -21,6 +21,8 @@ interface ThemeControllerRepository {
 
     suspend fun getLocalThemeFile(themeId: String): File?
 
+    fun observeDownloadedThemes(): Flow<List<ControllerModel>>
+
     suspend fun applyTheme(theme: ControllerModel): Result<ControllerConfigModel>
 
     fun downloadControllerTheme(theme: ControllerModel): Flow<DownloadState<File>>

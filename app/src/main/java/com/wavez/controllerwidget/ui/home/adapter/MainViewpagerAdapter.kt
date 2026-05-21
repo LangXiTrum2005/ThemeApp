@@ -5,7 +5,8 @@ import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.Lifecycle
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.wavez.controllerwidget.ui.home.fragment.icons.IconFragment
-import com.wavez.controllerwidget.ui.home.fragment.ThemeFragment
+import com.wavez.controllerwidget.ui.home.fragment.theme.ThemeFragment
+import com.wavez.controllerwidget.ui.home.fragment.mygallery.MyGalleryFragment
 import com.wavez.controllerwidget.ui.home.fragment.wallpaper.WallpaperFragment
 
 class MainPagerAdapter(
@@ -19,6 +20,6 @@ class MainPagerAdapter(
             MainTab.THEMES -> ThemeFragment.newInstance()
             MainTab.WALLPAPERS -> WallpaperFragment.newInstance()
             MainTab.ICONS -> IconFragment.newInstance()
-            MainTab.MY_GALLERY -> ThemeFragment.newInstance()
+            MainTab.MY_GALLERY -> MyGalleryFragment.newInstance()
         }
 }

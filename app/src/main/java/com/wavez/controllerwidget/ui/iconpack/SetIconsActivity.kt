@@ -57,6 +57,7 @@ class SetIconsActivity : BaseActivity<ActivitySetIconsBinding>(),
     override fun initConfig(savedInstanceState: Bundle?) {
         super.initConfig(savedInstanceState)
         val packId = intent.getStringExtra(EXTRA_PACK_ID) ?: return finish()
+        viewModel.currentIconPackId = packId
         viewModel.load(packId)
     }
 
@@ -69,7 +70,7 @@ class SetIconsActivity : BaseActivity<ActivitySetIconsBinding>(),
                 Toast.makeText(this, R.string.no_icons_to_install, Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
-            installableItems.forEach(::installShortcut)
+            installAllShortcuts(installableItems)
         }
 
         adapter.onActionClick = { item, state ->
@@ -78,6 +79,10 @@ class SetIconsActivity : BaseActivity<ActivitySetIconsBinding>(),
                 SetIconState.INSTALL -> installShortcut(item)
                 SetIconState.CHOOSE -> showSelectApp(item)
             }
+        }
+
+        adapter.onEditClick = { item ->
+            showSelectApp(item)
         }
     }
 
@@ -124,22 +129,43 @@ class SetIconsActivity : BaseActivity<ActivitySetIconsBinding>(),
 
     private fun installShortcut(item: IconPackItemUi) {
         if (!item.canInstall) return
-        val packageName = item.targetPackageName ?: return
         lifecycleScope.launch {
-            iconShortcutInstaller.installShortcut(
-                targetPackageName = packageName,
-                customIconUrl = item.iconUrl,
-                label = item.targetLabel,
-            ).onSuccess {
-                Toast.makeText(
-                    this@SetIconsActivity, R.string.shortcut_install_requested, Toast.LENGTH_SHORT
-                ).show()
-            }.onFailure {
+            val success = requestInstallShortcut(item)
+            if (success) {
+                openApplyIcons()
+            } else {
                 Toast.makeText(
                     this@SetIconsActivity, R.string.shortcut_install_failed, Toast.LENGTH_SHORT
                 ).show()
             }
         }
+    }
+
+    private fun installAllShortcuts(items: List<IconPackItemUi>) {
+        lifecycleScope.launch {
+            val hasSuccess = items.map { requestInstallShortcut(it) }.any { it }
+            if (hasSuccess) {
+                openApplyIcons()
+            } else {
+                Toast.makeText(
+                    this@SetIconsActivity, R.string.shortcut_install_failed, Toast.LENGTH_SHORT
+                ).show()
+            }
+        }
+    }
+
+    private suspend fun requestInstallShortcut(item: IconPackItemUi): Boolean {
+        val packageName = item.targetPackageName ?: return false
+        return iconShortcutInstaller.installShortcut(
+            targetPackageName = packageName,
+            customIconUrl = item.iconUrl,
+            label = item.targetLabel,
+        ).isSuccess
+    }
+
+    private fun openApplyIcons() {
+        val packId = viewModel.currentIconPackId ?: return
+        startActivity(ApplyIconsActivity.newIntent(this, packId))
     }
 
     override fun onAppSelected(appInfo: AppInfo) {

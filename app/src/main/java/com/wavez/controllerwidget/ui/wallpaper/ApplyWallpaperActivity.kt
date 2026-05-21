@@ -48,6 +48,7 @@ class ApplyWallpaperActivity : BaseActivity<ActivityApplyWallpaperBinding>() {
 
     override fun initConfig(savedInstanceState: Bundle?) {
         super.initConfig(savedInstanceState)
+        viewModel.currentWallpaper = wallpaperModel
         viewModel.getWallpapersByCategory()
         binding.rcvWallpaper.adapter = wallpaperAdapter
     }
@@ -55,15 +56,11 @@ class ApplyWallpaperActivity : BaseActivity<ActivityApplyWallpaperBinding>() {
     override fun initView(savedInstanceState: Bundle?) {
         super.initView(savedInstanceState)
         wallpaperModel?.let { wallpaper ->
-            Glide.with(this)
-                .load(wallpaper.url)
+            Glide.with(this).load(wallpaper.url)
                 .transition(DrawableTransitionOptions.withCrossFade(300))
                 .listener(object : RequestListener<Drawable> {
                     override fun onLoadFailed(
-                        p0: GlideException?,
-                        p1: Any?,
-                        p2: com.bumptech.glide.request.target.Target<Drawable?>?,
-                        p3: Boolean
+                        p0: GlideException?, p1: Any?, p2: Target<Drawable?>?, p3: Boolean
                     ): Boolean {
                         return false
                     }
@@ -77,8 +74,7 @@ class ApplyWallpaperActivity : BaseActivity<ActivityApplyWallpaperBinding>() {
                     ): Boolean {
                         return false
                     }
-                })
-                .into(binding.ivImage)
+                }).into(binding.ivImage)
         }
     }
 
@@ -87,6 +83,10 @@ class ApplyWallpaperActivity : BaseActivity<ActivityApplyWallpaperBinding>() {
 
         binding.btnBack.setOnClickListener {
             onHandleBackPressed()
+        }
+
+        wallpaperAdapter.onClickItem = { wallpaper ->
+            startActivity(PreviewWallpaperActivity.newIntent(this, wallpaper))
         }
     }
 

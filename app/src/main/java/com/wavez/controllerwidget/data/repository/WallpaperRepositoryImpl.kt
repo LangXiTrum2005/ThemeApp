@@ -14,9 +14,9 @@ import com.wavez.controllerwidget.data.local.entity.DownloadedWallpaperEntity
 import com.wavez.controllerwidget.data.local.wallpaper.WallpaperStorageManager
 import com.wavez.controllerwidget.data.model.DownloadedResInfo
 import com.wavez.controllerwidget.data.model.WallpaperCategoryModel
-import com.wavez.controllerwidget.data.model.WallpaperModel
-import com.wavez.controllerwidget.data.model.WallpaperType
-import com.wavez.controllerwidget.data.model.wallpaperType
+import com.wavez.controllerwidget.data.model.wallpaper.WallpaperModel
+import com.wavez.controllerwidget.data.model.wallpaper.WallpaperType
+import com.wavez.controllerwidget.data.model.wallpaper.wallpaperType
 import com.wavez.controllerwidget.data.network.api.ControllerWidgetApiService
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.Flow

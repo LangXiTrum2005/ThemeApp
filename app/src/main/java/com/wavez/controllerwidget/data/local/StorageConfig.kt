@@ -2,7 +2,8 @@ package com.wavez.controllerwidget.data.local
 
 object ThemeStorageConfig {
     const val DATABASE_NAME = "controller_widget.db"
-    const val DOWNLOADED_THEME_TABLE = "downloaded_theme"
+    const val DOWNLOADED_THEME_TABLE = "downloaded_controller"
+    const val DOWNLOADED_P67_THEME_TABLE = "downloaded_theme"
     const val THEME_BASE_DIR = "theme"
     const val THEME_ARCHIVE_DIR = "archives"
     const val THEME_EXTRACTED_DIR = "extracted"

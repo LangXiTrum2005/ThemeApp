@@ -1,4 +1,4 @@
-package com.wavez.controllerwidget.data.model
+package com.wavez.controllerwidget.data.model.wallpaper
 
 enum class WallpaperType { IMAGE, GIF, VIDEO }
 

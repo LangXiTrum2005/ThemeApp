@@ -2,6 +2,7 @@ package com.wavez.controllerwidget.core.extensions
 
 import android.app.Activity
 import android.app.LocaleManager
+import android.content.ActivityNotFoundException
 import android.content.Context
 import android.content.ContextWrapper
 import android.content.Intent
@@ -130,4 +131,28 @@ fun Context.assetToCacheFile(assetPath: String): File {
         }
     }
     return outFile
+}
+
+fun Context.openInternetSettings() {
+    val intent = try {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+            Intent(Settings.Panel.ACTION_INTERNET_CONNECTIVITY)
+        } else {
+            Intent(Settings.ACTION_WIFI_SETTINGS)
+        }
+    } catch (e: Exception) {
+        Intent(Settings.ACTION_WIRELESS_SETTINGS)
+    }
+
+    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+
+    try {
+        startActivity(intent)
+    } catch (_: ActivityNotFoundException) {
+        startActivity(
+            Intent(Settings.ACTION_SETTINGS).apply {
+                addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+            }
+        )
+    }
 }

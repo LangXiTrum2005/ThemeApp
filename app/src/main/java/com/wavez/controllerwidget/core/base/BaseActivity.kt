@@ -21,8 +21,11 @@ import androidx.lifecycle.repeatOnLifecycle
 import androidx.viewbinding.ViewBinding
 import com.wavez.controllerwidget.R
 import com.wavez.controllerwidget.core.di.AppModuleEntry
+import com.wavez.controllerwidget.core.extensions.collectWithLifecycle
+import com.wavez.controllerwidget.core.utils.NetworkTracker
 import com.wavez.controllerwidget.data.repository.LanguageRepository
 import com.wavez.controllerwidget.data.repository.SharedPref
+import com.wavez.controllerwidget.ui.dialog.NetworkDialog
 import dagger.hilt.android.EntryPointAccessors
 import kotlinx.coroutines.launch
 import org.greenrobot.eventbus.EventBus
@@ -44,6 +47,10 @@ abstract class BaseActivity<T : ViewBinding> :
 
     abstract fun bindingView(): T
 
+    private var networkTracker: NetworkTracker? = null
+    private var networkDialog: NetworkDialog? = null
+
+
     override fun onResume() {
         super.onResume()
     }
@@ -53,14 +60,14 @@ abstract class BaseActivity<T : ViewBinding> :
     }
 
     override fun attachBaseContext(newBase: Context) {
-         val languageProvider: LanguageRepository by lazy {
-             EntryPointAccessors.fromApplication(
-                 newBase.applicationContext, AppModuleEntry::class.java
-             ).getLanguageRepository()
-         }
-         val wrappedContext = updateLocaleFormat(newBase, languageProvider.getConfigLanguageCode())
-         super.attachBaseContext(wrappedContext)
-     }
+        val languageProvider: LanguageRepository by lazy {
+            EntryPointAccessors.fromApplication(
+                newBase.applicationContext, AppModuleEntry::class.java
+            ).getLanguageRepository()
+        }
+        val wrappedContext = updateLocaleFormat(newBase, languageProvider.getConfigLanguageCode())
+        super.attachBaseContext(wrappedContext)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -73,6 +80,7 @@ abstract class BaseActivity<T : ViewBinding> :
                 }
             },
         )
+        networkTracker = NetworkTracker(this, lifecycle)
         if (registerEventBus) EventBus.getDefault().register(this)
         setContentView(binding.root)
         ViewCompat.setOnApplyWindowInsetsListener(binding.root) { v, insets ->
@@ -81,9 +89,9 @@ abstract class BaseActivity<T : ViewBinding> :
             insets
         }
         hideBottomNavigation()
-        window.statusBarColor = ContextCompat.getColor(this, R.color.black)
+        window.statusBarColor = ContextCompat.getColor(this, R.color.white)
         WindowCompat.getInsetsController(window, window.decorView).isAppearanceLightStatusBars =
-            false
+            true
         initView(savedInstanceState)
         initConfig(savedInstanceState)
         initListener()
@@ -115,6 +123,14 @@ abstract class BaseActivity<T : ViewBinding> :
 //                premiumViewModel.isPremium.collect {
 //                    onVipChangedState(it)
 //                }
+            }
+        }
+
+        networkTracker?.isConnectedFlow?.collectWithLifecycle(this) { isConnected ->
+            if (isConnected) {
+                dismissNetworkDialog()
+            } else {
+                showNetworkDialog()
             }
         }
     }
@@ -200,6 +216,25 @@ abstract class BaseActivity<T : ViewBinding> :
         interstitialManager.showAdFullScreen(this) {
             onBack()
         }*/
+    }
+
+    private fun showNetworkDialog() {
+        if (isFinishing || supportFragmentManager.isStateSaved) return
+        (supportFragmentManager.findFragmentByTag(NetworkDialog.TAG) as? NetworkDialog)?.let {
+            networkDialog = it
+            return
+        }
+        NetworkDialog.newInstance().also { dialog ->
+            networkDialog = dialog
+            dialog.show(supportFragmentManager, NetworkDialog.TAG)
+        }
+    }
+
+    private fun dismissNetworkDialog() {
+        val dialog = networkDialog
+            ?: supportFragmentManager.findFragmentByTag(NetworkDialog.TAG) as? NetworkDialog
+        dialog?.dismissAllowingStateLoss()
+        networkDialog = null
     }
 
     override fun onDestroy() {

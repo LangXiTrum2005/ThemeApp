@@ -15,7 +15,7 @@ import com.bumptech.glide.request.target.Target
 import com.wavez.controllerwidget.core.base.BaseActivity
 import com.wavez.controllerwidget.core.base.UiState
 import com.wavez.controllerwidget.core.extensions.getParcel
-import com.wavez.controllerwidget.data.model.WallpaperModel
+import com.wavez.controllerwidget.data.model.wallpaper.WallpaperModel
 import com.wavez.controllerwidget.databinding.ActivityApplyWallpaperBinding
 import com.wavez.controllerwidget.ui.home.fragment.wallpaper.adapter.WallpaperAdapter
 import com.wavez.controllerwidget.ui.wallpaper.viewmodel.ApplyWallpaperViewModel

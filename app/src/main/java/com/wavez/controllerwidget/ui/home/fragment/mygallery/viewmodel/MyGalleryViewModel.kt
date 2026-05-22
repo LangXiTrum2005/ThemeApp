@@ -4,8 +4,9 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.wavez.controllerwidget.core.base.UiState
 import com.wavez.controllerwidget.data.model.ControllerModel
-import com.wavez.controllerwidget.data.model.WallpaperModel
-import com.wavez.controllerwidget.data.repository.ThemeControllerRepository
+import com.wavez.controllerwidget.data.model.theme.ThemeModel
+import com.wavez.controllerwidget.data.model.wallpaper.WallpaperModel
+import com.wavez.controllerwidget.data.repository.ThemeRepository
 import com.wavez.controllerwidget.data.repository.WallpaperRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -18,12 +19,12 @@ import javax.inject.Inject
 
 @HiltViewModel
 class MyGalleryViewModel @Inject constructor(
-    private val themeControllerRepository: ThemeControllerRepository,
+    private val themeRepository: ThemeRepository,
     private val wallpaperRepository: WallpaperRepository,
 ) : ViewModel() {
 
-    private val _themesState = MutableStateFlow<UiState<List<ControllerModel>>>(UiState.Idle)
-    val themesState: StateFlow<UiState<List<ControllerModel>>> = _themesState.asStateFlow()
+    private val _themesState = MutableStateFlow<UiState<List<ThemeModel>>>(UiState.Idle)
+    val themesState: StateFlow<UiState<List<ThemeModel>>> = _themesState.asStateFlow()
 
     private val _wallpapersState = MutableStateFlow<UiState<List<WallpaperModel>>>(UiState.Idle)
     val wallpapersState: StateFlow<UiState<List<WallpaperModel>>> = _wallpapersState.asStateFlow()
@@ -35,7 +36,7 @@ class MyGalleryViewModel @Inject constructor(
 
     private fun observeDownloadedThemes() {
         viewModelScope.launch {
-            themeControllerRepository.observeDownloadedThemes()
+            themeRepository.observeDownloadedThemes()
                 .onStart { _themesState.value = UiState.Loading }
                 .catch { throwable ->
                     _themesState.value = UiState.Error(
@@ -65,9 +66,4 @@ class MyGalleryViewModel @Inject constructor(
         }
     }
 
-    fun applyTheme(theme: ControllerModel) {
-        viewModelScope.launch {
-            themeControllerRepository.applyTheme(theme)
-        }
-    }
 }

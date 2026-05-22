@@ -65,7 +65,7 @@ class SetIconsActivity : BaseActivity<ActivitySetIconsBinding>(),
         super.initListener()
         binding.btnBack.setOnClickListener { onHandleBackPressed() }
         binding.btnInstallAll.setOnClickListener {
-            val installableItems = latestItems.filter { it.canInstall }
+            val installableItems = latestItems.filter { it.canInstall && !it.isApplied }
             if (installableItems.isEmpty()) {
                 Toast.makeText(this, R.string.no_icons_to_install, Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
@@ -75,6 +75,7 @@ class SetIconsActivity : BaseActivity<ActivitySetIconsBinding>(),
 
         adapter.onActionClick = { item, state ->
             when (state) {
+                SetIconState.APPLIED -> installShortcut(item)
                 SetIconState.UNLOCK -> unlockIcon(item)
                 SetIconState.INSTALL -> installShortcut(item)
                 SetIconState.CHOOSE -> showSelectApp(item)
@@ -132,6 +133,7 @@ class SetIconsActivity : BaseActivity<ActivitySetIconsBinding>(),
         lifecycleScope.launch {
             val success = requestInstallShortcut(item)
             if (success) {
+                viewModel.markIconApplied(item.id)
                 openApplyIcons()
             } else {
                 Toast.makeText(
@@ -143,8 +145,11 @@ class SetIconsActivity : BaseActivity<ActivitySetIconsBinding>(),
 
     private fun installAllShortcuts(items: List<IconPackItemUi>) {
         lifecycleScope.launch {
-            val hasSuccess = items.map { requestInstallShortcut(it) }.any { it }
-            if (hasSuccess) {
+            val appliedIds = items.mapNotNull { item ->
+                if (requestInstallShortcut(item)) item.id else null
+            }
+            if (appliedIds.isNotEmpty()) {
+                viewModel.markIconsApplied(appliedIds)
                 openApplyIcons()
             } else {
                 Toast.makeText(

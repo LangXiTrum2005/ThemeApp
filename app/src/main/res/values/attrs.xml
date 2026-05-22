@@ -20,6 +20,7 @@
     <!-- res/values/attrs.xml -->
     <declare-styleable name="IconTextButton">
         <attr name="btnIcon" format="reference"/>
+        <attr name="btnIconRight" format="reference"/>
         <attr name="btnText" format="string"/>
         <attr name="btnBackground" format="reference"/>
         <attr name="btnTextColor" format="color|reference"/>

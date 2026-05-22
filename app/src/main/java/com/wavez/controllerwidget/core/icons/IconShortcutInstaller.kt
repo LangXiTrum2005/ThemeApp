@@ -78,6 +78,12 @@ class IconShortcutInstaller @Inject constructor(
         }
     }
 
+    fun isShortcutPinned(targetPackageName: String): Boolean {
+        val shortcutManager = context.getSystemService(ShortcutManager::class.java)
+        val shortcutId = shortcutIdForPackage(targetPackageName)
+        return shortcutManager.pinnedShortcuts.any { it.id == shortcutId }
+    }
+
     private suspend fun requestPinShortcut(
         shortcutManager: ShortcutManager,
         shortcut: ShortcutInfo,

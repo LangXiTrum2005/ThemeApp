@@ -3,7 +3,7 @@ package com.wavez.controllerwidget.data.repository
 import com.wavez.controllerwidget.core.download.DownloadState
 import com.wavez.controllerwidget.core.wallpaper.model.WallpaperTarget
 import com.wavez.controllerwidget.data.model.WallpaperCategoryModel
-import com.wavez.controllerwidget.data.model.WallpaperModel
+import com.wavez.controllerwidget.data.model.wallpaper.WallpaperModel
 import kotlinx.coroutines.flow.Flow
 import java.io.File
 

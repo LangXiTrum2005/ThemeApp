@@ -14,6 +14,7 @@ class IconTextButton @JvmOverloads constructor(
 ) : LinearLayout(context, attrs) {
 
     private val iconView: AppCompatImageView
+    private val iconRightView: AppCompatImageView
     private val textView: AppCompatTextView
 
     init {
@@ -22,11 +23,15 @@ class IconTextButton @JvmOverloads constructor(
         gravity = Gravity.CENTER
 
         iconView = findViewById(R.id.btnIcon)
+        iconRightView = findViewById(R.id.btnIconRight)
         textView = findViewById(R.id.btnText)
 
         context.obtainStyledAttributes(attrs, R.styleable.IconTextButton).use {
             val iconRes = it.getResourceId(R.styleable.IconTextButton_btnIcon, 0)
             setIcon(iconRes)
+
+            val iconRightRes = it.getResourceId(R.styleable.IconTextButton_btnIconRight, 0)
+            setIconRight(iconRightRes)
 
             textView.text = it.getString(R.styleable.IconTextButton_btnText)
 
@@ -53,6 +58,15 @@ class IconTextButton @JvmOverloads constructor(
             iconView.setImageResource(iconRes)
         } else {
             iconView.visibility = GONE
+        }
+    }
+
+    fun setIconRight(iconRes: Int) {
+        if (iconRes != 0) {
+            iconRightView.visibility = VISIBLE
+            iconRightView.setImageResource(iconRes)
+        } else {
+            iconRightView.visibility = GONE
         }
     }
 

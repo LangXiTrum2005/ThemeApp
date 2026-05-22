@@ -7,7 +7,7 @@ import androidx.fragment.app.activityViewModels
 import com.example.m65_gamemodefps.core.base.BaseFragment
 import com.wavez.controllerwidget.core.base.UiState
 import com.wavez.controllerwidget.core.extensions.collectWithLifecycle
-import com.wavez.controllerwidget.data.model.WallpaperModel
+import com.wavez.controllerwidget.data.model.wallpaper.WallpaperModel
 import com.wavez.controllerwidget.databinding.FragmentMyGalleryPageBinding
 import com.wavez.controllerwidget.ui.home.fragment.mygallery.adapter.MyGalleryWallpaperAdapter
 import com.wavez.controllerwidget.ui.home.fragment.mygallery.viewmodel.MyGalleryViewModel

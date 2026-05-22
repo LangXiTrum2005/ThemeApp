@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import androidx.core.view.isVisible
 import com.wavez.controllerwidget.core.base.BaseRecyclerViewAdapter
 import com.wavez.controllerwidget.core.extensions.loadWithLoading
-import com.wavez.controllerwidget.data.model.WallpaperModel
+import com.wavez.controllerwidget.data.model.wallpaper.WallpaperModel
 import com.wavez.controllerwidget.databinding.ItemWallpaperBinding
 
 class WallpaperAdapter : BaseRecyclerViewAdapter<WallpaperModel, ItemWallpaperBinding>() {
@@ -27,7 +27,7 @@ class WallpaperAdapter : BaseRecyclerViewAdapter<WallpaperModel, ItemWallpaperBi
         position: Int,
         context: Context
     ) {
-        binding.tvImage.loadWithLoading(data.thumb, binding.viewLoading.root)
+        binding.ivImage.loadWithLoading(data.thumb, binding.viewLoading.root)
         binding.ivVip.isVisible = data.isVip()
     }
 }

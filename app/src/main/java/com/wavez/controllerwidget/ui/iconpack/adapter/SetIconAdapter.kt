@@ -3,6 +3,7 @@ package com.wavez.controllerwidget.ui.iconpack.adapter
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
@@ -84,6 +85,7 @@ class SetIconAdapter : ListAdapter<IconPackItemUi, SetIconAdapter.IconViewHolder
         private fun bindAction(item: IconPackItemUi) {
             val context = binding.root.context
             val state = when {
+                item.isApplied -> SetIconState.APPLIED
                 item.canInstall -> SetIconState.INSTALL
                 item.isInstallable -> SetIconState.UNLOCK
                 else -> SetIconState.CHOOSE
@@ -91,24 +93,47 @@ class SetIconAdapter : ListAdapter<IconPackItemUi, SetIconAdapter.IconViewHolder
 
             binding.btnAction.animate().alpha(1f).setDuration(80).withEndAction {
                 when (state) {
+                    SetIconState.APPLIED -> {
+                        binding.btnAction.setText(context.getString(R.string.applied))
+                        binding.btnAction.setIcon(R.drawable.ic_check_circle)
+                        binding.btnAction.setTextColor(
+                            ContextCompat.getColor(context, R.color.success_high_em)
+                        )
+                        binding.btnAction.setButtonBackground(R.drawable.bg_button_applied)
+                    }
+
                     SetIconState.UNLOCK -> {
                         binding.btnAction.setText(context.getString(R.string.unlock))
                         binding.btnAction.setIcon(R.drawable.ic_play)
+                        binding.btnAction.setTextColor(
+                            ContextCompat.getColor(context, R.color.primary_high_em)
+                        )
+                        binding.btnAction.setButtonBackground(R.drawable.bg_button_outline_1)
                     }
 
                     SetIconState.INSTALL -> {
                         binding.btnAction.setText(context.getString(R.string.install))
                         binding.btnAction.setIcon(R.drawable.ic_download_2)
+                        binding.btnAction.setTextColor(
+                            ContextCompat.getColor(context, R.color.primary_high_em)
+                        )
+                        binding.btnAction.setButtonBackground(R.drawable.bg_button_outline_1)
                     }
 
                     SetIconState.CHOOSE -> {
                         binding.btnAction.setText(context.getString(R.string.choose))
                         binding.btnAction.setIcon(0)
+                        binding.btnAction.setTextColor(
+                            ContextCompat.getColor(context, R.color.primary_high_em)
+                        )
+                        binding.btnAction.setButtonBackground(R.drawable.bg_button_outline_1)
                     }
                 }
 
                 binding.btnAction.setOnClickListener {
-                    onActionClick?.invoke(item, state)
+                    if (state != SetIconState.APPLIED) {
+                        onActionClick?.invoke(item, state)
+                    }
                 }
             }.start()
         }

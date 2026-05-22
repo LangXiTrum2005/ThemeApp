@@ -13,6 +13,11 @@
     <string name="icons">Icons</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="search_themes">Search themes</string>
+    <string name="search_wallpapers">Search wallpapers</string>
+    <string name="most_popular">Most popular</string>
+    <string name="newest_themes">Newest themes</string>
+    <string name="newest_wallpapers">Newest wallpapers</string>
+    <string name="no_results_found_for">No results found for\n\"%1$s\"</string>
     <string name="categories">Categories</string>
     <!-- Strings used for fragments for navigation -->
     <string name="first_fragment_label">First Fragment</string>
@@ -64,5 +69,17 @@
     <string name="privacy_policy">Privacy policy</string>
     <string name="feedback_email">support@wavez.com</string>
     <string name="privacy_policy_url">https://wavez.com/privacy-policy</string>
+    <string name="collection">Collection</string>
+    <string name="get_themes">Get themes</string>
+    <string name="theme_saved">Theme saved</string>
+    <string name="theme_save_failed">Could not save theme</string>
+    <string name="successfully">Successfully</string>
+    <string name="s_applied_successfully">%s applied successfully!</string>
+    <string name="suggested_themes">Suggested themes</string>
+    <string name="view_more_icon">View more icon</string>
+    <string name="shortcut">Shortcut</string>
+    <string name="no_internet_connection">No Internet Connection</string>
+    <string name="please_check_your_internet">Please check your internet connection on your device</string>
+    <string name="go_to_settings">Go to settings</string>
 
 </resources>

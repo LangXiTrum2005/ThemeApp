@@ -1,5 +1,6 @@
 [versions]
 agp = "9.2.1"
+fragmentKtx = "1.8.9"
 glide = "5.0.7"
 kotlinxSerializationJson = "1.11.0"
 kotlinxCoroutines = "1.11.0"
@@ -17,6 +18,7 @@ lifecycleRuntimeKtx = "2.10.0"
 hiltAndroid = "2.59.2"
 ksp = "2.3.6"
 appcompat = "1.7.1"
+lottie = "6.7.1"
 playServicesAds = "25.2.0"
 firebaseBom = "34.13.0"
 installreferrer = "2.2"
@@ -60,8 +62,10 @@ navigationUiKtx = "2.9.8"
 adjust-android = { module = "com.adjust.sdk:adjust-android", version.ref = "adjustAndroid" }
 adjust-android-huawei-referrer = { module = "com.adjust.sdk:adjust-android-huawei-referrer", version.ref = "adjustAndroid" }
 adjust-android-webbridge = { module = "com.adjust.sdk:adjust-android-webbridge", version.ref = "adjustAndroid" }
+androidx-fragment-ktx = { module = "androidx.fragment:fragment-ktx", version.ref = "fragmentKtx" }
 glide = { module = "com.github.bumptech.glide:glide", version.ref = "glide" }
 libpag = { module = "com.tencent.tav:libpag", version.ref = "libpag" }
+lottie = { module = "com.airbnb.android:lottie", version.ref = "lottie" }
 play-services-ads-identifier = { module = "com.google.android.gms:play-services-ads-identifier", version.ref = "playServicesAdsIdentifier" }
 material = { group = "com.google.android.material", name = "material", version.ref = "material" }
 eventbus = { module = "org.greenrobot:eventbus", version.ref = "eventbus" }

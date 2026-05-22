@@ -1,6 +1,6 @@
 package com.wavez.controllerwidget.data.repository
 
-import com.wavez.controllerwidget.data.model.IconPackModel
+import com.wavez.controllerwidget.data.model.icon.IconPackModel
 
 interface IconPackRepository {
 

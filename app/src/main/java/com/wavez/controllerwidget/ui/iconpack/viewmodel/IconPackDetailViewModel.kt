@@ -4,12 +4,15 @@ import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.wavez.controllerwidget.core.base.UiState
+import com.wavez.controllerwidget.core.icons.IconShortcutInstaller
 import com.wavez.controllerwidget.data.local.InstalledAppProvider
 import com.wavez.controllerwidget.data.model.AppInfo
-import com.wavez.controllerwidget.data.model.IconItemModel
-import com.wavez.controllerwidget.data.model.IconPackModel
+import com.wavez.controllerwidget.data.model.icon.IconItemModel
+import com.wavez.controllerwidget.data.model.icon.IconPackModel
 import com.wavez.controllerwidget.data.repository.IconPackRepository
 import com.wavez.controllerwidget.data.repository.SharedPref
+import com.wavez.controllerwidget.ui.iconpack.mapper.IconPackItemMapper
+import com.wavez.controllerwidget.ui.iconpack.mapper.IconPackItemMapper.Companion.normalizedAppName
 import com.wavez.controllerwidget.ui.iconpack.model.IconPackDetailState
 import com.wavez.controllerwidget.ui.iconpack.model.IconPackItemUi
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -24,6 +27,8 @@ class IconPackDetailViewModel @Inject constructor(
     private val repo: IconPackRepository,
     private val installedAppProvider: InstalledAppProvider,
     private val sharedPref: SharedPref,
+    private val iconPackItemMapper: IconPackItemMapper,
+    private val iconShortcutInstaller: IconShortcutInstaller,
 ) : ViewModel() {
 
     private val _uiState = MutableStateFlow<UiState<IconPackDetailState>>(UiState.Idle)
@@ -35,6 +40,7 @@ class IconPackDetailViewModel @Inject constructor(
 
     // Keep manual mappings by stable icon id so icons with the same app name do not overwrite each other.
     private val manualMappings = mutableMapOf<Long, AppInfo>()
+    private val appliedIconIds = mutableSetOf<Long>()
     private var pendingIconId: Long? = null
 
     var currentIconPackId : String? = null
@@ -73,6 +79,23 @@ class IconPackDetailViewModel @Inject constructor(
         updateSingleIcon(item.id)
     }
 
+    fun markIconApplied(iconId: Long) {
+        appliedIconIds.add(iconId)
+        updateSingleIcon(iconId)
+    }
+
+    fun markIconsApplied(iconIds: List<Long>) {
+        appliedIconIds.addAll(iconIds)
+        val currentState = uiState.value as? UiState.Data ?: return
+        _uiState.value = UiState.Data(
+            currentState.value.copy(
+                items = currentState.value.items.map { item ->
+                    if (item.id in iconIds) item.copy(isApplied = true) else item
+                }
+            )
+        )
+    }
+
     private fun loadInstalledAppsAndRemap() {
         viewModelScope.launch {
             val apps = installedAppProvider.getInstalledApps()
@@ -87,7 +110,7 @@ class IconPackDetailViewModel @Inject constructor(
 
     private fun emitInitialMappedState() {
         val currentPack = pack ?: return
-        val sortedIcons = currentPack.previewIcons.orEmpty()
+        val sortedIcons = currentPack.icons.orEmpty()
             .mapIndexed { index, icon -> IndexedIcon(index, mapIcon(icon)) }
             // Initial ordering only. Later item changes must keep RecyclerView positions stable.
             .sortedWith(
@@ -107,8 +130,8 @@ class IconPackDetailViewModel @Inject constructor(
     private fun updateSingleIcon(iconId: Long) {
         val currentState = uiState.value as? UiState.Data ?: return
         val currentPack = pack ?: return
-        val sourceIcon = currentPack.previewIcons.orEmpty()
-            .firstOrNull { it.stableId() == iconId }
+        val sourceIcon = currentPack.icons.orEmpty()
+            .firstOrNull { iconPackItemMapper.stableId(it) == iconId }
             ?: return
 
         val currentItems = currentState.value.items
@@ -126,36 +149,17 @@ class IconPackDetailViewModel @Inject constructor(
     }
 
     private fun mapIcon(icon: IconItemModel): IconPackItemUi {
-        val declaredPackageName = icon.packageName.takeIf { it.isNotBlank() }
-        val manualApp = manualMappings[icon.stableId()]
-        val installedApp = manualApp ?: findInstalledApp(icon, declaredPackageName)
-        val isManual = declaredPackageName == null
-
-        return IconPackItemUi(
-            id = icon.stableId(),
-            packageName = declaredPackageName,
-            appName = icon.appName,
-            iconUrl = icon.iconUrl,
-            installedApp = installedApp,
-            isInstalled = declaredPackageName != null && installedAppsByPackage.containsKey(
-                declaredPackageName
-            ),
-            isMapped = installedApp != null,
-            selectedPackageName = manualApp?.packageName,
-            selectedAppName = manualApp?.appName,
-            selectedAppIcon = manualApp?.icon,
-            isManualMappingRequired = isManual,
-            isUnlocked = sharedPref.isVip || sharedPref.isIconUnlocked(icon.stableId().toString()),
+        val iconId = iconPackItemMapper.stableId(icon)
+        val item = iconPackItemMapper.map(
+            icon = icon,
+            installedAppsByPackage = installedAppsByPackage,
+            installedAppsByName = installedAppsByName,
+            manualMapping = manualMappings[iconId],
         )
-    }
-
-    private fun findInstalledApp(icon: IconItemModel, packageName: String?): AppInfo? {
-        packageName?.let { installedAppsByPackage[it] }?.let { return it }
-        if (packageName != null) return null
-
-        // Server items without package_name may still match an installed launcher app by label.
-        val normalizedIconName = icon.appName.normalizedAppName()
-        return installedAppsByName[normalizedIconName]
+        return item.copy(
+            isApplied = appliedIconIds.contains(iconId) ||
+                item.targetPackageName?.let(iconShortcutInstaller::isShortcutPinned) == true
+        )
     }
 
     private fun IconPackItemUi.initialOrderGroup(): Int {
@@ -164,14 +168,6 @@ class IconPackDetailViewModel @Inject constructor(
             isManualMappingRequired -> ORDER_MANUAL_MAPPING
             else -> ORDER_UNMAPPED
         }
-    }
-
-    private fun IconItemModel.stableId(): Long {
-        return listOf(packageName, appName, iconUrl).joinToString("|").hashCode().toLong()
-    }
-
-    private fun String.normalizedAppName(): String {
-        return lowercase().filter { it.isLetterOrDigit() }
     }
 
     private data class IndexedIcon(

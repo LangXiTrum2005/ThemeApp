@@ -30,7 +30,7 @@ class FilterPopupHelper(
         onSelected: (FilterCategoryItem) -> Unit,
     ) {
         val binding = PopupFilterBinding.inflate(layoutInflater)
-        lateinit var popup: PopupWindow
+        var popup: PopupWindow? = null
 
         binding.rcvCategory.apply {
             layoutManager = GridLayoutManager(context, 2)
@@ -39,7 +39,7 @@ class FilterPopupHelper(
                 selectedItemId = selectedItemId,
                 onSelected = { item ->
                     onSelected(item)
-                    popup.dismiss()
+                    popup?.dismiss()
                 },
             )
         }

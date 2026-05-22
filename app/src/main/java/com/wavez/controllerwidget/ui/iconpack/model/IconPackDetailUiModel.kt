@@ -16,6 +16,7 @@ data class IconPackItemUi(
     val selectedAppIcon: Drawable? = null,
     val isManualMappingRequired: Boolean,
     val isUnlocked: Boolean,
+    val isApplied: Boolean = false,
 ) {
     val targetPackageName: String? get() = selectedPackageName ?: installedApp?.packageName
     val targetLabel: String get() = selectedAppName ?: installedApp?.appName ?: appName

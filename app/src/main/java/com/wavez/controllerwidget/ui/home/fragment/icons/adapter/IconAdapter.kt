@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import androidx.core.view.isVisible
 import com.wavez.controllerwidget.core.base.BaseRecyclerViewAdapter
 import com.wavez.controllerwidget.core.extensions.loadWithLoading
-import com.wavez.controllerwidget.data.model.IconPackModel
+import com.wavez.controllerwidget.data.model.icon.IconPackModel
 import com.wavez.controllerwidget.databinding.ItemIconBinding
 
 class IconAdapter(

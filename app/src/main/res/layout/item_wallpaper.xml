@@ -6,7 +6,7 @@
     android:layout_margin="6dp">
 
     <com.google.android.material.imageview.ShapeableImageView
-        android:id="@+id/tvImage"
+        android:id="@+id/ivImage"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:scaleType="centerCrop"
@@ -21,10 +21,10 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:visibility="gone"
-        app:layout_constraintBottom_toBottomOf="@id/tvImage"
-        app:layout_constraintEnd_toEndOf="@id/tvImage"
-        app:layout_constraintStart_toStartOf="@id/tvImage"
-        app:layout_constraintTop_toTopOf="@id/tvImage" />
+        app:layout_constraintBottom_toBottomOf="@id/ivImage"
+        app:layout_constraintEnd_toEndOf="@id/ivImage"
+        app:layout_constraintStart_toStartOf="@id/ivImage"
+        app:layout_constraintTop_toTopOf="@id/ivImage" />
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/ivVip"

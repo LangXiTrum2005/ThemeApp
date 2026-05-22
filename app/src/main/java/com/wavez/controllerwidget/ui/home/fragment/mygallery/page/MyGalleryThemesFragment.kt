@@ -7,10 +7,11 @@ import androidx.fragment.app.activityViewModels
 import com.example.m65_gamemodefps.core.base.BaseFragment
 import com.wavez.controllerwidget.core.base.UiState
 import com.wavez.controllerwidget.core.extensions.collectWithLifecycle
-import com.wavez.controllerwidget.data.model.ControllerModel
+import com.wavez.controllerwidget.data.model.theme.ThemeModel
 import com.wavez.controllerwidget.databinding.FragmentMyGalleryPageBinding
 import com.wavez.controllerwidget.ui.home.fragment.mygallery.adapter.MyGalleryThemeAdapter
 import com.wavez.controllerwidget.ui.home.fragment.mygallery.viewmodel.MyGalleryViewModel
+import com.wavez.controllerwidget.ui.theme.activities.PreviewThemeActivity
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -35,7 +36,7 @@ class MyGalleryThemesFragment : BaseFragment<FragmentMyGalleryPageBinding>() {
     override fun initListener() {
         super.initListener()
         adapter.onClickItem = { theme ->
-            viewModel.applyTheme(theme)
+            startActivity(PreviewThemeActivity.newIntent(requireContext(), theme.id))
         }
     }
 
@@ -46,7 +47,7 @@ class MyGalleryThemesFragment : BaseFragment<FragmentMyGalleryPageBinding>() {
         }
     }
 
-    private fun renderState(state: UiState<List<ControllerModel>>) {
+    private fun renderState(state: UiState<List<ThemeModel>>) {
         when (state) {
             is UiState.Data -> {
                 adapter.set(state.value)
@@ -71,6 +72,4 @@ class MyGalleryThemesFragment : BaseFragment<FragmentMyGalleryPageBinding>() {
             else -> Unit
         }
     }
-
-
 }

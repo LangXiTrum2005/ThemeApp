@@ -29,7 +29,7 @@
     <color name="outlinePrimaryMedEm">#C7B3FF</color>
     <color name="outlineSecondaryMedEm">#FFA3F2</color>
     <color name="surfaceWarningHighEm">#FCBF04</color>
-    <color name="textLowEm">#8C929C</color>
+    <color name="textLowEm">#938C9C</color>
     <color name="surface2">#F4F4F6</color>
     <color name="textBaseEm">#C3C6CC</color>
     <color name="surfacePrimaryHighEmV2">#7B5CFA</color>
@@ -46,7 +46,7 @@
     <color name="outlineInfoHighEm">#118BE8</color>
     <color name="surfaceDangerBaseEm">#FEECEC</color>
     <color name="primaryContainer">#D0E4FF</color>
-    <color name="onPrimaryContainer">#001D35</color>
+    <color name="onPrimaryContainer">#280D68</color>
     <color name="primary">#327FC9</color>
     <color name="ripple">#D8D8D8</color>
     <color name="textSuccessHighEm">#2A9919</color>
@@ -55,7 +55,7 @@
     <color name="surface_0">#FFFFFF</color>
     <color name="surface_1">#F9F9FA</color>
     <color name="surface_2">#F5F4F6</color>
-    <color name="surface_3">#EBECF0</color>
+    <color name="surface_3">#EDEBF0</color>
     <color name="surface_4">#DDDFE4</color>
     <color name="surface_secondary_high_em">#52B7FF</color>
 

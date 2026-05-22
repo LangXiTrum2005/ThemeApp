@@ -15,7 +15,7 @@ import com.wavez.controllerwidget.core.extensions.gone
 import com.wavez.controllerwidget.core.extensions.loadWithLoading
 import com.wavez.controllerwidget.core.extensions.visible
 import com.wavez.controllerwidget.core.wallpaper.model.WallpaperTarget
-import com.wavez.controllerwidget.data.model.WallpaperModel
+import com.wavez.controllerwidget.data.model.wallpaper.WallpaperModel
 import com.wavez.controllerwidget.databinding.ActivityPreviewWallpaperBinding
 import com.wavez.controllerwidget.ui.dialog.DownloadDialog
 import com.wavez.controllerwidget.ui.dialog.PremiumThemeDialog
@@ -169,12 +169,12 @@ class PreviewWallpaperActivity : BaseActivity<ActivityPreviewWallpaperBinding>()
 
     override fun onSetAsWallpaper(wallpaperTarget: WallpaperTarget) {
         viewModel.wallpaperModel?.let {
-            binding.viewLoading.visible()
+            binding.viewLoading.root.visible()
             viewModel.applyWallpaper(
                 it,
                 wallpaperTarget,
                 onResult = { state ->
-                    binding.viewLoading.gone()
+                    binding.viewLoading.root.gone()
                     if (state.isSuccess) {
                         startActivity(ApplyWallpaperActivity.newIntent(this, it))
                     }

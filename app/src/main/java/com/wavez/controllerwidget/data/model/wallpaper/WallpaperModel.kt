@@ -1,8 +1,9 @@
-package com.wavez.controllerwidget.data.model
+package com.wavez.controllerwidget.data.model.wallpaper
 
 import android.os.Parcelable
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
+import com.wavez.controllerwidget.data.model.ThemeRemoteItem
 import com.wavez.controllerwidget.data.network.model.ApiResponse
 import kotlinx.parcelize.Parcelize
 

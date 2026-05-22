@@ -19,6 +19,8 @@ import com.wavez.controllerwidget.ui.customview.ThemeTabIcon
 import com.wavez.controllerwidget.ui.home.dialog.FilterPopupHelper
 import com.wavez.controllerwidget.ui.home.fragment.wallpaper.adapter.CategoryPagerAdapter
 import com.wavez.controllerwidget.ui.home.fragment.wallpaper.viewmodel.WallpaperViewModel
+import com.wavez.controllerwidget.ui.search.SearchActivity
+import com.wavez.controllerwidget.ui.search.model.SearchMode
 import com.wavez.controllerwidget.ui.setting.SettingActivity
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -121,6 +123,10 @@ class WallpaperFragment : BaseFragment<FragmentWallpaperBinding>() {
                 startActivity(SettingActivity.newIntent(requireContext()))
             }
 
+        }
+
+        binding.edSearch.setOnClickListener {
+            startActivity(SearchActivity.newIntent(requireContext(), SearchMode.WALLPAPERS))
         }
 
         binding.viewError.setOnRetryClickListener {

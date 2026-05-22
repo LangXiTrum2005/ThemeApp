@@ -2,6 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <uses-permission android:name="android.permission.INTERNET"/>
     <uses-permission android:name="android.permission.SET_WALLPAPER" />
     <uses-permission android:name="android.permission.SET_WALLPAPER_HINTS" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
@@ -115,8 +116,29 @@
         android:theme="@style/Theme.ThemeWallpaper"
         android:usesCleartextTraffic="true">
         <activity
-            android:name=".ui.search.SearchActivity"
+            android:name=".ui.theme.activities.AppliedThemeActivity"
             android:exported="false" />
+        <!-- Sample AdMob app ID: ca-app-pub-3940256099942544~3347511713 -->
+        <meta-data
+            android:name="com.google.android.gms.ads.APPLICATION_ID"
+            android:value="ca-app-pub-3940256099942544~3347511713" />
+
+        <activity
+            android:name=".ui.theme.activities.PreviewThemeActivity"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.theme.activities.GetThemeActivity"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.theme.activities.DetailBannerActivity"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.search.SearchActivity"
+            android:exported="false"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".ui.iconpack.SetIconsActivity"
             android:exported="false"
@@ -135,11 +157,7 @@
             android:name=".ui.wallpaper.PreviewWallpaperActivity"
             android:exported="false"
             android:screenOrientation="portrait"
-            android:theme="@style/Theme.ThemeWallpaper" /> <!-- Sample AdMob app ID: ca-app-pub-3940256099942544~3347511713 -->
-        <meta-data
-            android:name="com.google.android.gms.ads.APPLICATION_ID"
-            android:value="ca-app-pub-3940256099942544~3347511713" />
-
+            android:theme="@style/Theme.ThemeWallpaper" />
         <activity
             android:name=".ui.home.MainActivity"
             android:exported="false"

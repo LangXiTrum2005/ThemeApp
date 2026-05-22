@@ -3,7 +3,7 @@ package com.wavez.controllerwidget.ui.iconpack.viewmodel
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.wavez.controllerwidget.core.base.UiState
-import com.wavez.controllerwidget.data.model.IconPackModel
+import com.wavez.controllerwidget.data.model.icon.IconPackModel
 import com.wavez.controllerwidget.data.repository.IconPackRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers

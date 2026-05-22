@@ -20,7 +20,7 @@ import com.wavez.controllerwidget.core.controllercenter.RequiredPermission
 import com.wavez.controllerwidget.core.controllercenter.ThemeLoader
 import com.wavez.controllerwidget.core.controllercenter.service.ControlCenterService
 import com.wavez.controllerwidget.core.extensions.collectWithLifecycle
-import com.wavez.controllerwidget.data.model.WallpaperModel
+import com.wavez.controllerwidget.data.model.wallpaper.WallpaperModel
 import com.wavez.controllerwidget.databinding.ActivityMainBinding
 import com.wavez.controllerwidget.ui.home.adapter.MainPagerAdapter
 import com.wavez.controllerwidget.ui.home.adapter.MainTab
@@ -68,7 +68,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
         binding.bottomNav.itemActiveIndicatorColor = null
 
         binding.bottomNav.setOnApplyWindowInsetsListener(null)
-        binding.bottomNav.setPadding(0,0,0,0)
+        binding.bottomNav.setPadding(0, 0, 0, 0)
 
     }
 
@@ -247,6 +247,10 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
                 bottomMargin = 4.dp
             }
         }
+    }
+
+    override fun onHandleBackPressed() {
+        finish()
     }
 
     private val Int.dp: Int

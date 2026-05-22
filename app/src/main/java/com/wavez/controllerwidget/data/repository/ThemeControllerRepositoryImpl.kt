@@ -8,8 +8,8 @@ import com.wavez.controllerwidget.core.controllercenter.service.ControlCenterSer
 import com.wavez.controllerwidget.core.di.IoDispatcher
 import com.wavez.controllerwidget.core.download.DownloadState
 import com.wavez.controllerwidget.core.download.ThemeDownloader
-import com.wavez.controllerwidget.data.local.dao.DownloadedThemeDao
-import com.wavez.controllerwidget.data.local.entity.DownloadedThemeEntity
+import com.wavez.controllerwidget.data.local.dao.DownloadedControllerDao
+import com.wavez.controllerwidget.data.local.entity.DownloadedControllerEntity
 import com.wavez.controllerwidget.data.local.controller.ControllerStorageManager
 import com.wavez.controllerwidget.data.model.ControllerCategoryModel
 import com.wavez.controllerwidget.data.model.ControllerModel
@@ -28,7 +28,7 @@ import javax.inject.Inject
 class ThemeControllerRepositoryImpl @Inject constructor(
     @ApplicationContext private val context: Context,
     private val apiService: ControllerWidgetApiService,
-    private val downloadedThemeDao: DownloadedThemeDao,
+    private val downloadedThemeDao: DownloadedControllerDao,
     private val themeStorageManager: ControllerStorageManager,
     private val themeDownloader: ThemeDownloader,
     private val sharedPref: SharedPref,
@@ -131,7 +131,7 @@ class ThemeControllerRepositoryImpl @Inject constructor(
                     // File is fully on disk — persist Room record
                     val zipFile = themeStorageManager.getThemeFile(theme.id)
                     downloadedThemeDao.upsert(
-                        DownloadedThemeEntity(
+                        DownloadedControllerEntity(
                             themeId = theme.id,
                             filePath = zipFile.absolutePath,
                             downloadedAt = System.currentTimeMillis(),

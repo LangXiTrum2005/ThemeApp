@@ -2,91 +2,124 @@ package com.wavez.controllerwidget.ui.home.dialog
 
 import android.app.Activity
 import android.content.Context
-import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.WindowManager
 import android.widget.PopupWindow
 import androidx.core.content.ContextCompat
-import com.google.android.material.chip.Chip
+import androidx.core.view.isVisible
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.wavez.controllerwidget.R
-import com.wavez.controllerwidget.data.model.WallpaperCategoryModel
+import com.wavez.controllerwidget.databinding.ItemPopupCategoryBinding
 import com.wavez.controllerwidget.databinding.PopupFilterBinding
+import kotlin.math.roundToInt
 
 class FilterPopupHelper(
     private val context: Context,
-    private val layoutInflater: LayoutInflater
+    private val layoutInflater: LayoutInflater,
 ) {
 
     fun show(
         anchorView: View,
         activity: Activity,
-        dimOverlay: View,
-        categories: List<WallpaperCategoryModel>,
-        selectedCategory: WallpaperCategoryModel,
-        onSelected: (String) -> Unit
+        items: List<FilterCategoryItem>,
+        selectedItemId: String,
+        onSelected: (FilterCategoryItem) -> Unit,
     ) {
         val binding = PopupFilterBinding.inflate(layoutInflater)
+        var popup: PopupWindow? = null
 
-        categories.forEach { category ->
-            val chip = Chip(context).apply {
-                text = category.name
-                isCheckable = true
-                isChecked = (category == selectedCategory)
-                setBackgroundResource(R.drawable.bg_tab_selector)
-                setTextColor(ContextCompat.getColor(context, R.color.title_tab_color))
-            }
-            binding.popupChipGroup.addView(chip)
+        binding.rcvCategory.apply {
+            layoutManager = GridLayoutManager(context, 2)
+            adapter = CategoryAdapter(
+                items = items,
+                selectedItemId = selectedItemId,
+                onSelected = { item ->
+                    onSelected(item)
+                    popup?.dismiss()
+                },
+            )
         }
 
-        dimOverlay.visibility = View.VISIBLE
-        dimOverlay.alpha = 0f
-        dimOverlay.animate().alpha(1f).setDuration(180).start()
-
-        // ✅ Dim đúng cách: dùng FLAG_DIM_BEHIND trên window của popup
-        val popup = PopupWindow(
+        popup = PopupWindow(
             binding.root,
             ViewGroup.LayoutParams.WRAP_CONTENT,
             ViewGroup.LayoutParams.WRAP_CONTENT,
-            true
+            true,
         ).apply {
-            elevation = 12f
-            setBackgroundDrawable(
-                ContextCompat.getDrawable(context, R.drawable.bg_popup_rounded)
-            )
-
-            dimOverlay.animate()
-                .alpha(0f)
-                .setDuration(180)
-                .withEndAction { dimOverlay.visibility = View.GONE }
-                .start()
+            elevation = dp(12).toFloat()
+            setBackgroundDrawable(ContextCompat.getDrawable(context, R.drawable.bg_popup_rounded))
+            isOutsideTouchable = true
         }
 
-        // Gắn dim SAU khi showAsDropDown
-        popup.showAsDropDown(anchorView, -200, 8)
-
-        // ✅ Lấy window token của popup và set dim
-        binding.root.viewTreeObserver.addOnGlobalLayoutListener {
-            val token = binding.root.applicationWindowToken
-            val wm = context.getSystemService(Context.WINDOW_SERVICE) as WindowManager
-            // Dim background của chính popup window
-        }
-
-        // Cách đúng nhất: set dimAmount trên window
+        binding.root.measure(
+            View.MeasureSpec.UNSPECIFIED,
+            View.MeasureSpec.UNSPECIFIED,
+        )
+        val xOffset = anchorView.width - binding.root.measuredWidth
+        popup.showAsDropDown(anchorView, xOffset, dp(8))
         activity.window.setDimAmount(0.5f)
         activity.window.addFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND)
 
         popup.setOnDismissListener {
             activity.window.clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND)
         }
+    }
 
-        binding.popupChipGroup.setOnCheckedStateChangeListener { group, checkedIds ->
-            val chip = group.findViewById<Chip>(
-                checkedIds.firstOrNull() ?: return@setOnCheckedStateChangeListener
+    private fun dp(value: Int): Int {
+        return (value * context.resources.displayMetrics.density).roundToInt()
+    }
+
+    private inner class CategoryAdapter(
+        private val items: List<FilterCategoryItem>,
+        private val selectedItemId: String,
+        private val onSelected: (FilterCategoryItem) -> Unit,
+    ) : RecyclerView.Adapter<CategoryAdapter.CategoryViewHolder>() {
+
+        override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CategoryViewHolder {
+            return CategoryViewHolder(
+                ItemPopupCategoryBinding.inflate(layoutInflater, parent, false),
             )
-            onSelected(chip.text.toString())
-            popup.dismiss()
+        }
+
+        override fun getItemCount(): Int = items.size
+
+        override fun onBindViewHolder(holder: CategoryViewHolder, position: Int) {
+            holder.bind(items[position])
+        }
+
+        private inner class CategoryViewHolder(
+            private val binding: ItemPopupCategoryBinding,
+        ) : RecyclerView.ViewHolder(binding.root) {
+
+            fun bind(item: FilterCategoryItem) {
+                val isSelected = item.id == selectedItemId
+                binding.container.setBackgroundResource(
+                    if (isSelected) R.drawable.bg_tab_selected else R.drawable.bg_tab_unselected,
+                )
+                binding.tvTitle.text = item.title
+                binding.tvTitle.setTextColor(
+                    ContextCompat.getColor(
+                        context,
+                        if (isSelected) R.color.white else R.color.text_med_em,
+                    ),
+                )
+                if (item.iconUrl.isNullOrEmpty()) {
+                    binding.ivIcon.isVisible = false
+                } else {
+                    binding.ivIcon.isVisible = true
+                    Glide.with(binding.ivIcon)
+                        .load(item.iconUrl)
+                        .into(binding.ivIcon)
+                }
+                binding.root.setOnClickListener {
+                    onSelected(item)
+                }
+
+            }
         }
     }
 }

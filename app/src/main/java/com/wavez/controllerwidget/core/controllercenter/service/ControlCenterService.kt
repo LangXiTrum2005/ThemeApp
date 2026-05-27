@@ -15,7 +15,7 @@ import com.wavez.controllerwidget.core.controllercenter.controllers.MediaControl
 import com.wavez.controllerwidget.core.controllercenter.controllers.NetworkController
 import com.wavez.controllerwidget.core.controllercenter.controllers.VolumeController
 import com.wavez.controllerwidget.core.controllercenter.model.ControllerConfigModel
-import com.wavez.controllerwidget.data.local.theme.ThemeFilePathProvider
+import com.wavez.controllerwidget.data.local.controller.ControllerFilePathProvider
 import com.wavez.controllerwidget.data.repository.SharedPref
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
@@ -47,7 +47,7 @@ class ControlCenterService : AccessibilityService() {
     @Inject
     lateinit var sharedPref: SharedPref
     @Inject
-    lateinit var themeFilePathProvider: ThemeFilePathProvider
+    lateinit var themeFilePathProvider: ControllerFilePathProvider
 
     private var overlay: ControlCenterOverlay? = null
 

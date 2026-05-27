@@ -1,7 +1,7 @@
 package com.wavez.controllerwidget.core.download
 
-import com.wavez.controllerwidget.core.di.DownloadClient
-import com.wavez.controllerwidget.core.di.IoDispatcher
+import com.wavez.controllerwidget.di.DownloadClient
+import com.wavez.controllerwidget.di.IoDispatcher
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.withContext
 import okhttp3.OkHttpClient

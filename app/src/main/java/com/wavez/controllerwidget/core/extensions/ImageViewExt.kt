@@ -67,3 +67,59 @@ fun ImageView.loadWithLoading(
     errorGroup?.setOnClickListener { load() }
     load()
 }
+
+fun ImageView.loadWithLoading(
+    model: Any?,
+    loadingView: View?,
+    errorView: View?,
+    clearBeforeLoad: Boolean = true,
+) {
+    fun showLoading() {
+        loadingView?.isVisible = true
+        loadingView?.isVisible = true
+        errorView?.isVisible = false
+    }
+
+    fun showError() {
+        loadingView?.isVisible = true
+        loadingView?.isVisible = false
+        errorView?.isVisible = true
+    }
+
+    fun load() {
+        if (clearBeforeLoad) {
+            setImageDrawable(null)
+        }
+        showLoading()
+
+        Glide.with(this)
+            .load(model)
+            .listener(object : RequestListener<Drawable> {
+                override fun onLoadFailed(
+                    e: GlideException?,
+                    model: Any?,
+                    target: Target<Drawable?>,
+                    isFirstResource: Boolean
+                ): Boolean {
+                    showError()
+                    return true
+                }
+
+                override fun onResourceReady(
+                    resource: Drawable,
+                    model: Any,
+                    target: Target<Drawable?>?,
+                    dataSource: DataSource,
+                    isFirstResource: Boolean
+                ): Boolean {
+                    loadingView?.isVisible = false
+                    return false
+                }
+            })
+            .into(this)
+    }
+
+    errorView?.setOnClickListener { load() }
+    load()
+}
+

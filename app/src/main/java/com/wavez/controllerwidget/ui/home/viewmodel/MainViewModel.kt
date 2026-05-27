@@ -5,7 +5,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.wavez.controllerwidget.core.base.UiState
 import com.wavez.controllerwidget.core.wallpaper.model.WallpaperTarget
-import com.wavez.controllerwidget.data.model.WallpaperModel
+import com.wavez.controllerwidget.data.local.InstalledAppProvider
+import com.wavez.controllerwidget.data.model.wallpaper.WallpaperModel
 import com.wavez.controllerwidget.data.repository.WallpaperRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -16,7 +17,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 class MainViewModel @Inject constructor(
-    private val wallpaperRepository: WallpaperRepository
+    private val wallpaperRepository: WallpaperRepository,
+    private val provider: InstalledAppProvider
 ) : ViewModel() {
 
     private val _wallpapersState =

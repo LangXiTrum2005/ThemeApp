@@ -14,7 +14,9 @@ interface SharedPref {
 
     var severRoot: String
 
-    var isNeedSetLanguage: Boolean
+    var isNeedShowLanguage: Boolean
+
+    var isNeedGotoWalkthrough: Boolean
 
     var isFirstOpenApp: Boolean
 
@@ -75,4 +77,16 @@ interface SharedPref {
 
     // ID of the controller theme currently applied by the user. Null = use built-in default.
     var activeThemeId: String?
+
+    fun isWallpaperUnlocked(wallpaperId: String): Boolean
+
+    fun unlockWallpaper(wallpaperId: String)
+
+    fun isThemeWallpaperUnlocked(wallpaperId: String): Boolean
+
+    fun unlockThemeWallpaper(wallpaperId: String)
+
+    fun isIconUnlocked(iconId: String): Boolean
+
+    fun unlockIcon(iconId: String)
 }

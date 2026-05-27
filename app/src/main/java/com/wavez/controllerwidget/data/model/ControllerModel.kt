@@ -16,7 +16,7 @@ data class ControllerModel(
     @param:Json(name = "id")
     override val id: String = "",
     @param:Json(name = "name")
-    override val name: String,
+     val name: String,
     @param:Json(name = "thumb")
     override val thumb: String,
     @param:Json(name = "is_vip")

@@ -7,7 +7,7 @@ import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.viewpager2.widget.ViewPager2
-import com.example.m65_gamemodefps.core.base.BaseFragment
+import com.wavez.controllerwidget.core.base.BaseFragment
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 import com.wavez.controllerwidget.R
@@ -19,6 +19,10 @@ import com.wavez.controllerwidget.ui.customview.ThemeTabIcon
 import com.wavez.controllerwidget.ui.home.dialog.FilterPopupHelper
 import com.wavez.controllerwidget.ui.home.fragment.wallpaper.adapter.CategoryPagerAdapter
 import com.wavez.controllerwidget.ui.home.fragment.wallpaper.viewmodel.WallpaperViewModel
+import com.wavez.controllerwidget.ui.premium.PremiumActivity
+import com.wavez.controllerwidget.ui.search.SearchActivity
+import com.wavez.controllerwidget.ui.search.model.SearchMode
+import com.wavez.controllerwidget.ui.setting.SettingActivity
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -61,6 +65,12 @@ class WallpaperFragment : BaseFragment<FragmentWallpaperBinding>() {
         binding.toolbar.tvTitle.text = getString(R.string.wallpapers)
         binding.vpTheme.registerOnPageChangeCallback(onPageChangeCallback)
     }
+
+    override fun onResume() {
+        super.onResume()
+        binding.toolbar.btnPremium.isVisible = !sharedPref.isVip
+    }
+
 
     private fun setupTabs(
         categories: List<WallpaperCategoryModel>
@@ -112,17 +122,17 @@ class WallpaperFragment : BaseFragment<FragmentWallpaperBinding>() {
     override fun initListener() {
         super.initListener()
         binding.toolbar.apply {
-            btnPremium.setOnClickListener {
-
-            }
-
             btnSetting.setOnClickListener {
-
+                startActivity(SettingActivity.newIntent(requireContext()))
             }
 
-            btnDownloaded.setOnClickListener {
-
+            btnPremium.setOnClickListener {
+                startActivity(PremiumActivity.newIntent(requireContext()))
             }
+        }
+
+        binding.edSearch.setOnClickListener {
+            startActivity(SearchActivity.newIntent(requireContext(), SearchMode.WALLPAPERS))
         }
 
         binding.viewError.setOnRetryClickListener {
@@ -136,15 +146,15 @@ class WallpaperFragment : BaseFragment<FragmentWallpaperBinding>() {
 
             val selectedPos = binding.tabCategory.selectedTabPosition.coerceAtLeast(0)
             val selectedCategory = categories.getOrElse(selectedPos) { categories.first() }
+            val popupItems = categories.map { it.toFilterCategoryItem() }
 
             filterHelper.show(
                 activity = activity ?: return@setOnClickListener,
                 anchorView = it,
-                dimOverlay = binding.dimOverlay,
-                categories = categories,
-                selectedCategory = selectedCategory,
-            ) { selectedName ->
-                val pos = categories.indexOfFirst { it.name == selectedName }
+                items = popupItems,
+                selectedItemId = selectedCategory.id,
+            ) { selectedItem ->
+                val pos = categories.indexOfFirst { category -> category.id == selectedItem.id }
                 if (pos >= 0) binding.vpTheme.currentItem = pos
             }
         }
@@ -159,18 +169,24 @@ class WallpaperFragment : BaseFragment<FragmentWallpaperBinding>() {
                     Log.d("Log_tabbb", "Data: ${it}")
                     binding.viewError.isVisible = false
                     binding.vpTheme.isVisible = true
+                    binding.viewLoading.isVisible = false
+                    val savedPosition = binding.vpTheme.currentItem
                     setupTabs(it.value)
+                    if (savedPosition > 0) binding.vpTheme.setCurrentItem(savedPosition, false)
                 }
 
                 is UiState.Error -> {
                     Log.d("Log_tabbb", "initObserver: ${it.message}")
                     binding.viewError.isVisible = true
                     binding.vpTheme.isVisible = false
+                    binding.viewLoading.isVisible = false
                 }
 
                 UiState.Loading -> {
                     binding.viewError.isVisible = false
+                    binding.viewLoading.isVisible = true
                 }
+
                 else -> {}
             }
         }

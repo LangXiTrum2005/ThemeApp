@@ -22,12 +22,14 @@ import android.text.style.UnderlineSpan
 import android.view.View
 import android.view.ViewTreeObserver
 import android.view.animation.AnimationUtils
+import android.view.inputmethod.InputMethodManager
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.content.ContextCompat
 import java.lang.reflect.Field
 import java.util.Timer
 import kotlin.concurrent.schedule
+import androidx.core.graphics.createBitmap
 
 
 fun View.onAvoidDoubleClick(
@@ -109,11 +111,7 @@ fun ImageView.tintImage(color: Int) {
 
 fun View.toBitMap(): Bitmap? {
     if (measuredWidth * measuredHeight == 0) return null
-    val b = Bitmap.createBitmap(
-        measuredWidth,
-        measuredHeight,
-        Bitmap.Config.ARGB_8888
-    )
+    val b = createBitmap(measuredWidth, measuredHeight)
     val c = Canvas(b)
     layout(left, top, right, bottom)
     draw(c)
@@ -149,6 +147,26 @@ fun View.hostedActivity() = run {
         check = check.baseContext
     }
     return@run null
+}
+
+fun View.showKeyboard() {
+    requestFocus()
+
+    post {
+        val imm = context.getSystemService(Context.INPUT_METHOD_SERVICE)
+                as InputMethodManager
+
+        imm.showSoftInput(this, InputMethodManager.SHOW_IMPLICIT)
+    }
+}
+
+fun View.hideKeyboard() {
+    clearFocus()
+
+    val imm = context.getSystemService(Context.INPUT_METHOD_SERVICE)
+            as InputMethodManager
+
+    imm.hideSoftInputFromWindow(windowToken, 0)
 }
 
 /**

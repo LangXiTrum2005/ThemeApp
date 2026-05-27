@@ -3,7 +3,7 @@ package com.wavez.controllerwidget.ui.home.fragment.wallpaper.viewmodel
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.wavez.controllerwidget.core.base.UiState
-import com.wavez.controllerwidget.data.model.WallpaperModel
+import com.wavez.controllerwidget.data.model.wallpaper.WallpaperModel
 import com.wavez.controllerwidget.data.repository.WallpaperRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow

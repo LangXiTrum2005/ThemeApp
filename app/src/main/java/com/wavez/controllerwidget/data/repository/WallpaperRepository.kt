@@ -3,7 +3,8 @@ package com.wavez.controllerwidget.data.repository
 import com.wavez.controllerwidget.core.download.DownloadState
 import com.wavez.controllerwidget.core.wallpaper.model.WallpaperTarget
 import com.wavez.controllerwidget.data.model.WallpaperCategoryModel
-import com.wavez.controllerwidget.data.model.WallpaperModel
+import com.wavez.controllerwidget.data.model.PopularCategoryModel
+import com.wavez.controllerwidget.data.model.wallpaper.WallpaperModel
 import kotlinx.coroutines.flow.Flow
 import java.io.File
 
@@ -13,6 +14,8 @@ interface WallpaperRepository {
 
     suspend fun getAllWallpapersUnlimited(forceRefresh: Boolean = false): Result<List<WallpaperModel>>
 
+    suspend fun getMostPopularWallpapers(forceRefresh: Boolean = false): Result<List<PopularCategoryModel>>
+
     suspend fun getWallpapersByCategory(categoryId: String, forceRefresh: Boolean = false): Result<List<WallpaperModel>>
 
     fun downloadWallpaper(wallpaper: WallpaperModel): Flow<DownloadState<File>>
@@ -20,6 +23,12 @@ interface WallpaperRepository {
     suspend fun checkWallpaperDownloaded(wallpaperId: String): Boolean
 
     suspend fun getLocalWallpaperFile(wallpaperId: String): File?
+
+    fun observeDownloadedWallpapers(): Flow<List<WallpaperModel>>
+
+    fun checkUnlockWallpaper(wallpaper: WallpaperModel): Boolean
+
+    fun unlockWallpaper(wallpaper: WallpaperModel)
 
     suspend fun applyWallpaper(wallpaper: WallpaperModel, wallpaperTarget: WallpaperTarget): Result<Unit>
 }

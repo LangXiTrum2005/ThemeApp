@@ -2,6 +2,7 @@ package com.wavez.controllerwidget.data.model
 
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
+import com.wavez.controllerwidget.data.model.wallpaper.WallpaperModel
 
 @JsonClass(generateAdapter = true)
 data class DownloadedResInfo(

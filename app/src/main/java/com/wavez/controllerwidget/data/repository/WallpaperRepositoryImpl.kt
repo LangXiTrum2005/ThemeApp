@@ -1,7 +1,6 @@
 package com.wavez.controllerwidget.data.repository
 
 import android.net.Uri
-import com.wavez.controllerwidget.core.di.IoDispatcher
 import com.wavez.controllerwidget.core.download.DownloadState
 import com.wavez.controllerwidget.core.download.WallpaperDownloader
 import com.wavez.controllerwidget.core.wallpaper.WallpaperManagerCore
@@ -13,15 +12,18 @@ import com.wavez.controllerwidget.data.local.dao.DownloadedWallpaperDao
 import com.wavez.controllerwidget.data.local.entity.DownloadedWallpaperEntity
 import com.wavez.controllerwidget.data.local.wallpaper.WallpaperStorageManager
 import com.wavez.controllerwidget.data.model.DownloadedResInfo
+import com.wavez.controllerwidget.data.model.PopularCategoryModel
 import com.wavez.controllerwidget.data.model.WallpaperCategoryModel
-import com.wavez.controllerwidget.data.model.WallpaperModel
-import com.wavez.controllerwidget.data.model.WallpaperType
-import com.wavez.controllerwidget.data.model.wallpaperType
+import com.wavez.controllerwidget.data.model.wallpaper.WallpaperModel
+import com.wavez.controllerwidget.data.model.wallpaper.WallpaperType
+import com.wavez.controllerwidget.data.model.wallpaper.wallpaperType
 import com.wavez.controllerwidget.data.network.api.ControllerWidgetApiService
+import com.wavez.controllerwidget.di.IoDispatcher
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.channelFlow
 import kotlinx.coroutines.flow.flowOn
+import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.withContext
 import java.io.File
 import java.io.IOException
@@ -33,11 +35,13 @@ class WallpaperRepositoryImpl @Inject constructor(
     private val wallpaperStorageManager: WallpaperStorageManager,
     private val downloadedWallpaperDao: DownloadedWallpaperDao,
     private val wallpaperManagerCore: WallpaperManagerCore,
+    private val sharedPref: SharedPref,
     @param:IoDispatcher private val ioDispatcher: CoroutineDispatcher,
 ) : WallpaperRepository {
 
     private var cachedCategories: List<WallpaperCategoryModel>? = null
     private var cachedWallpapers: List<WallpaperModel>? = null
+    private var cachedMostPopularWallpapers: List<PopularCategoryModel>? = null
 
     override suspend fun getCategoriesUnlimited(
         forceRefresh: Boolean
@@ -59,6 +63,17 @@ class WallpaperRepositoryImpl @Inject constructor(
 
         return repositoryRequest { apiService.getAllWallpapersUnlimited() }
             .onSuccess { cachedWallpapers = it }
+    }
+
+    override suspend fun getMostPopularWallpapers(
+        forceRefresh: Boolean
+    ): Result<List<PopularCategoryModel>> {
+        if (!forceRefresh) {
+            cachedMostPopularWallpapers?.let { return Result.success(it) }
+        }
+
+        return repositoryRequest { apiService.getMostPopularWallpapers() }
+            .onSuccess { cachedMostPopularWallpapers = it }
     }
 
     override suspend fun getWallpapersByCategory(
@@ -132,6 +147,27 @@ class WallpaperRepositoryImpl @Inject constructor(
             }
         }
 
+    override fun observeDownloadedWallpapers(): Flow<List<WallpaperModel>> =
+        downloadedWallpaperDao.observeAll()
+            .map { entities ->
+                val downloadedIds = entities.map { it.wallpaperId }.toSet()
+                val order = entities.mapIndexed { index, entity -> entity.wallpaperId to index }
+                    .toMap()
+                getAllWallpapersUnlimited()
+                    .getOrDefault(emptyList())
+                    .filter { it.id in downloadedIds }
+                    .sortedBy { order[it.id] ?: Int.MAX_VALUE }
+            }
+            .flowOn(ioDispatcher)
+
+    override fun checkUnlockWallpaper(wallpaper: WallpaperModel): Boolean {
+        return sharedPref.isVip || !wallpaper.isVip() || sharedPref.isWallpaperUnlocked(wallpaper.id)
+    }
+
+    override fun unlockWallpaper(wallpaper: WallpaperModel) {
+        sharedPref.unlockWallpaper(wallpaper.id)
+    }
+
     override suspend fun applyWallpaper(
         wallpaper: WallpaperModel,
         wallpaperTarget: WallpaperTarget
@@ -165,4 +201,5 @@ class WallpaperRepositoryImpl @Inject constructor(
         }
         return downloaded ?: error("Download produced no file for ${wallpaper.id}")
     }
+
 }

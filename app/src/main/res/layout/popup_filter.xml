@@ -1,16 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:orientation="vertical"
-    android:padding="12dp">
+    android:padding="10dp">
 
-    <com.google.android.material.chip.ChipGroup
-        android:id="@+id/popupChipGroup"
-        android:layout_width="wrap_content"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rcvCategory"
+        android:layout_width="296dp"
         android:layout_height="wrap_content"
-        android:maxWidth="260dp"
-        app:chipSpacing="8dp" />
+        android:clipToPadding="false"
+        android:overScrollMode="never" />
 
-</LinearLayout>
+</FrameLayout>

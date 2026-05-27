@@ -20,6 +20,7 @@
     <!-- res/values/attrs.xml -->
     <declare-styleable name="IconTextButton">
         <attr name="btnIcon" format="reference"/>
+        <attr name="btnIconRight" format="reference"/>
         <attr name="btnText" format="string"/>
         <attr name="btnBackground" format="reference"/>
         <attr name="btnTextColor" format="color|reference"/>
@@ -30,5 +31,9 @@
         <attr name="errorTitle" format="string" />
         <attr name="errorMessage" format="string" />
         <attr name="errorButtonText" format="string" />
+    </declare-styleable>
+
+    <declare-styleable name="ServerLoadingView">
+        <attr name="loadingMessage" format="string" />
     </declare-styleable>
 </resources>

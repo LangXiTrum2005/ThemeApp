@@ -2,7 +2,8 @@ package com.wavez.controllerwidget.data.local
 
 object ThemeStorageConfig {
     const val DATABASE_NAME = "controller_widget.db"
-    const val DOWNLOADED_THEME_TABLE = "downloaded_theme"
+    const val DOWNLOADED_THEME_TABLE = "downloaded_controller"
+    const val DOWNLOADED_P67_THEME_TABLE = "downloaded_theme"
     const val THEME_BASE_DIR = "theme"
     const val THEME_ARCHIVE_DIR = "archives"
     const val THEME_EXTRACTED_DIR = "extracted"
@@ -17,10 +18,4 @@ object WallpaperStorageConfig {
     const val WALLPAPER_IMAGES_DIR = "images"
     const val WALLPAPER_TEMP_SUFFIX = ".tmp"
     const val DEFAULT_WALLPAPER_EXTENSION = "png"
-}
-
-object IconPackStorageConfig {
-    const val ICON_PACK_BASE_DIR = "icon_packs"
-    const val ICON_PACK_TEMP_SUFFIX = ".zip.tmp"
-    const val ICON_PACK_MANIFEST_FILE = "manifest.json"
 }

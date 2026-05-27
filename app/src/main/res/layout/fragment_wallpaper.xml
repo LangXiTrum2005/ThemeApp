@@ -40,7 +40,7 @@
             android:layout_weight="1"
             android:background="@color/transparent"
             app:tabIndicatorHeight="0dp"
-            app:tabMode="scrollable"
+            app:tabMode="auto"
             app:tabPaddingBottom="0dp"
             app:tabPaddingEnd="8dp"
             app:tabPaddingStart="0dp"
@@ -73,13 +73,13 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toTopOf="@+id/viewTab" />
 
-    <View
-        android:id="@+id/dimOverlay"
+    <com.wavez.controllerwidget.ui.customview.ServerLoadingView
+        android:id="@+id/viewLoading"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="#80000000"
-        android:elevation="8dp"
-        android:visibility="gone" />
-
+        android:layout_height="0dp"
+        android:background="@color/white"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/viewTab" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

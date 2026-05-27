@@ -1,7 +1,9 @@
 package com.wavez.controllerwidget.core.extensions
 
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.app.LocaleManager
+import android.content.ActivityNotFoundException
 import android.content.Context
 import android.content.ContextWrapper
 import android.content.Intent
@@ -16,6 +18,8 @@ import androidx.activity.result.ActivityResultLauncher
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.net.toUri
 import androidx.core.os.LocaleListCompat
+import com.wavez.controllerwidget.ui.setting.feedback.Feedback
+import com.wavez.controllerwidget.ui.utils.EMAIL
 import java.io.File
 import java.io.InputStream
 import java.util.Locale
@@ -130,4 +134,58 @@ fun Context.assetToCacheFile(assetPath: String): File {
         }
     }
     return outFile
+}
+
+fun Context.openInternetSettings() {
+    val intent = try {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+            Intent(Settings.Panel.ACTION_INTERNET_CONNECTIVITY)
+        } else {
+            Intent(Settings.ACTION_WIFI_SETTINGS)
+        }
+    } catch (e: Exception) {
+        Intent(Settings.ACTION_WIRELESS_SETTINGS)
+    }
+
+    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+
+    try {
+        startActivity(intent)
+    } catch (_: ActivityNotFoundException) {
+        startActivity(
+            Intent(Settings.ACTION_SETTINGS).apply {
+                addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+            }
+        )
+    }
+}
+
+
+@SuppressLint("QueryPermissionsNeeded")
+fun Context.sendFeedback(feedback: Feedback) {
+    val body = buildString {
+        appendLine()
+        appendLine()
+        appendLine("----- Device Info -----")
+        appendLine("App package: $packageName")
+        appendLine("Android: ${Build.VERSION.RELEASE}")
+        appendLine("SDK: ${Build.VERSION.SDK_INT}")
+        appendLine("Device: ${Build.MANUFACTURER} ${Build.MODEL}")
+        appendLine("Description: ${feedback.description}")
+    }
+
+    val intent = Intent(Intent.ACTION_SEND_MULTIPLE).apply {
+        type = "message/rfc822"
+        putExtra(Intent.EXTRA_EMAIL, arrayOf(EMAIL))
+        putExtra(Intent.EXTRA_TEXT, body)
+        val imageUris = feedback.images.map { it }
+        if (imageUris.isNotEmpty()) {
+            putParcelableArrayListExtra(Intent.EXTRA_STREAM, ArrayList(imageUris))
+        }
+    }
+    if (intent.resolveActivity(this.packageManager) != null) {
+        this.startActivity(
+            Intent.createChooser(intent, "Send Email")
+                .apply { flags = Intent.FLAG_ACTIVITY_NEW_TASK })
+    }
 }

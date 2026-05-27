@@ -26,13 +26,6 @@
         android:src="@drawable/ic_premium" />
 
     <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/btnDownloaded"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="?selectableItemBackground"
-        android:src="@drawable/ic_download_toolbar" />
-
-    <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/btnSetting"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

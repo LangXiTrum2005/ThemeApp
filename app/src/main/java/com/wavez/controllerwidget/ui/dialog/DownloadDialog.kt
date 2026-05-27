@@ -10,15 +10,15 @@ class DownloadDialog : BaseDialogFragment<DialogDownloadBinding>() {
         return DialogDownloadBinding.inflate(layoutInflater)
     }
 
+    override fun isCancelable(): Boolean {
+        return false
+    }
+
     companion object {
-        const val TAG = "DownloadDialog"
+        const val TAG = "DownloadDialog_TAG"
         fun newInstance(): DownloadDialog {
             return DownloadDialog()
         }
-    }
-
-    override fun initListener() {
-        super.initListener()
     }
 
     override fun initConfig(view: View, savedInstanceState: Bundle?) {
@@ -29,7 +29,6 @@ class DownloadDialog : BaseDialogFragment<DialogDownloadBinding>() {
     fun updateProgress(progress: Int) {
         if (!isAdded) return
         val safeProgress = progress.coerceIn(0, 100)
-        binding.progressLimit.max = 100
         binding.progressLimit.progress = safeProgress
     }
 }

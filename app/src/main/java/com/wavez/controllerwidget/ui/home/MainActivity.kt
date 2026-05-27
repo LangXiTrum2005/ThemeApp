@@ -20,7 +20,7 @@ import com.wavez.controllerwidget.core.controllercenter.RequiredPermission
 import com.wavez.controllerwidget.core.controllercenter.ThemeLoader
 import com.wavez.controllerwidget.core.controllercenter.service.ControlCenterService
 import com.wavez.controllerwidget.core.extensions.collectWithLifecycle
-import com.wavez.controllerwidget.data.model.WallpaperModel
+import com.wavez.controllerwidget.data.model.wallpaper.WallpaperModel
 import com.wavez.controllerwidget.databinding.ActivityMainBinding
 import com.wavez.controllerwidget.ui.home.adapter.MainPagerAdapter
 import com.wavez.controllerwidget.ui.home.adapter.MainTab
@@ -68,7 +68,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
         binding.bottomNav.itemActiveIndicatorColor = null
 
         binding.bottomNav.setOnApplyWindowInsetsListener(null)
-        binding.bottomNav.setPadding(0,0,0,0)
+        binding.bottomNav.setPadding(0, 0, 0, 0)
 
     }
 
@@ -77,20 +77,20 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
         setupViewPager()
         setupBottomNavigation()
         viewModel.getWallpapers()
-        binding.togglePanelButton.setOnClickListener { togglePanel() }
-        requestPermissions.launch(runtimePermissions.toTypedArray())
-        binding.testGifWallpaperButton.setOnClickListener {
-            viewModel.applyWallpaper(
-                WallpaperModel(
-                    id = "test_gif_001",
-                    name = "Test GIF",
-                    thumb = "",
-                    premium = 0,
-                    url = "https://cdn.leansoft-ai.com/ls35-emoji-keyboard/thumbnails/00001_cbn_Dont_Touch_NInja_Gif/previews/type_4/theme_preview.gif",
-                    categoryId = "test",
-                )
-            )
-        }
+//        binding.togglePanelButton.setOnClickListener { togglePanel() }
+//        requestPermissions.launch(runtimePermissions.toTypedArray())
+//        binding.testGifWallpaperButton.setOnClickListener {
+//            viewModel.applyWallpaper(
+//                WallpaperModel(
+//                    id = "test_gif_001",
+//                    name = "Test GIF",
+//                    thumb = "",
+//                    premium = 0,
+//                    url = "https://cdn.leansoft-ai.com/ls35-emoji-keyboard/thumbnails/00001_cbn_Dont_Touch_NInja_Gif/previews/type_4/theme_preview.gif",
+//                    categoryId = "test",
+//                )
+//            )
+//        }
     }
 
 
@@ -173,7 +173,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
 
     override fun onResume() {
         super.onResume()
-        renderHomeState()
+//        renderHomeState()
     }
 
     private fun renderHomeState() {
@@ -247,6 +247,10 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
                 bottomMargin = 4.dp
             }
         }
+    }
+
+    override fun onHandleBackPressed() {
+        finish()
     }
 
     private val Int.dp: Int

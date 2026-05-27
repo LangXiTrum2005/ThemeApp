@@ -5,7 +5,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.wavez.controllerwidget.core.download.DownloadState
 import com.wavez.controllerwidget.core.wallpaper.model.WallpaperTarget
-import com.wavez.controllerwidget.data.model.WallpaperModel
+import com.wavez.controllerwidget.data.model.wallpaper.WallpaperModel
 import com.wavez.controllerwidget.data.repository.WallpaperRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableSharedFlow
@@ -17,7 +17,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class PreviewViewModel @Inject constructor(
-    private val wallpaperRepository: WallpaperRepository
+    private val wallpaperRepository: WallpaperRepository,
 ) : ViewModel() {
 
     private val _downloadState = MutableSharedFlow<DownloadState<File>>(
@@ -29,18 +29,31 @@ class PreviewViewModel @Inject constructor(
     var currentDownloadState: DownloadState<File> = DownloadState.Idle
         private set
 
-    fun downloadWallpaper(wallpaperModel: WallpaperModel) {
-        if (currentDownloadState is DownloadState.Downloading) {
+    var wallpaperModel: WallpaperModel? = null
+        private set
+
+    fun setWallpaperModel(wallpaperModel: WallpaperModel?) {
+        if (this.wallpaperModel != null || wallpaperModel == null) return
+        this.wallpaperModel = wallpaperModel
+    }
+
+    fun downloadWallpaper() {
+        if (currentDownloadState is DownloadState.Downloading ||
+            currentDownloadState is DownloadState.Saving
+        ) {
             return
         }
-        viewModelScope.launch {
-            wallpaperRepository.downloadWallpaper(wallpaperModel)
-                .collect { downloadState ->
-                    Log.d("Log_download", "downloadWallpaper: $downloadState")
-                    currentDownloadState = downloadState
-                    _downloadState.emit(downloadState)
-                }
+        wallpaperModel?.let {
+            viewModelScope.launch {
+                wallpaperRepository.downloadWallpaper(it)
+                    .collect { downloadState ->
+                        Log.d("Log_download", "downloadWallpaper: $downloadState")
+                        currentDownloadState = downloadState
+                        _downloadState.emit(downloadState)
+                    }
+            }
         }
+
     }
 
     fun isWallpaperDownloaded(wallpaperId: String, onResult: (Boolean) -> Unit) {
@@ -48,6 +61,22 @@ class PreviewViewModel @Inject constructor(
             val result = wallpaperRepository.checkWallpaperDownloaded(wallpaperId)
             onResult(result)
         }
+    }
+
+    fun checkUnlockWallpaper(wallpaperModel: WallpaperModel): Boolean {
+        return wallpaperRepository.checkUnlockWallpaper(wallpaperModel)
+    }
+
+    fun canDownloadCurrentWallpaper(): Boolean {
+        return wallpaperModel?.let(::checkUnlockWallpaper) == true
+    }
+
+    fun unlockWallpaper(wallpaperModel: WallpaperModel) {
+        wallpaperRepository.unlockWallpaper(wallpaperModel)
+    }
+
+    fun unlockCurrentWallpaper() {
+        wallpaperModel?.let(::unlockWallpaper)
     }
 
     fun applyWallpaper(

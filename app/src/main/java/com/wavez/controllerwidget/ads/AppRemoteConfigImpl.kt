@@ -1,6 +1,10 @@
 package com.wavez.controllerwidget.ads
 
 import android.util.Log
+import com.ads.admob.ShowCondition
+import com.ads.admob.interstitial_ads.AdInterstitialManager
+import com.ads.admob.native_ads.NativeAdRepository
+import com.ads.admob.open_ads.OpenAdManager
 import com.google.firebase.Firebase
 import com.google.firebase.remoteconfig.FirebaseRemoteConfig
 import com.google.firebase.remoteconfig.remoteConfig
@@ -37,9 +41,8 @@ import kotlinx.coroutines.launch
 
 class AppRemoteConfigImpl(
     private val sharedPref: SharedPref,
-//    private val adInterstitialManager: AdInterstitialManager,
-//    private val openAdManager: OpenAdManager,
-//    private val nativeAdRepository: NativeAdRepository,
+    private val adInterstitialManager: AdInterstitialManager,
+    private val openAdManager: OpenAdManager,
 ) : AppRemoteConfig {
 
     private val configDefaults: Map<String, Any> = mapOf(
@@ -85,7 +88,7 @@ class AppRemoteConfigImpl(
                         remoteConfig.getLong(NATIVE_AD_PRELOAD_COUNT_KEY).toInt()
                     Log.d(
                         "log_remote",
-                        "fetchRemoteConfig: ${remoteConfig.getBoolean(SHOULD_SHOW_BANNER_SPLASH)}"
+                        "fetchRemoteConfig: ${remoteConfig.getBoolean(SHOULD_SHOW_OPEN_AD)}"
                     )
                     sharedPref.shouldShowNativeLanguage1 =
                         remoteConfig.getBoolean(SHOULD_SHOW_NATIVE_AD_ON_FIRST_SETTING_LANGUAGE)
@@ -136,32 +139,32 @@ class AppRemoteConfigImpl(
     }
 
     private fun setupOpenAdManager() {
-//        openAdManager.setShowCondition(object : ShowCondition {
-//            override fun shouldShow(): Boolean {
-//                val isOverGap =
-//                    System.currentTimeMillis() - openAdManager.dismissFullScreenLastTime >= sharedPref.openAdsGap
-//                val isOverGapWithInterAd =
-//                    System.currentTimeMillis() - adInterstitialManager.dismissFullScreenLastTime >= sharedPref.interOpenAdsGap
-//                return isOverGap && isOverGapWithInterAd && sharedPref.shouldShowOpenAd
-//            }
-//        })
+        openAdManager.setShowCondition(object : ShowCondition {
+            override fun shouldShow(): Boolean {
+                val isOverGap =
+                    System.currentTimeMillis() - openAdManager.dismissFullScreenLastTime >= sharedPref.openAdsGap
+                val isOverGapWithInterAd =
+                    System.currentTimeMillis() - adInterstitialManager.dismissFullScreenLastTime >= sharedPref.interOpenAdsGap
+                return isOverGap && isOverGapWithInterAd && sharedPref.shouldShowOpenAd
+            }
+        })
     }
 
     private fun setupAdInterstitialManager() {
-//        adInterstitialManager.setShowCondition(object : ShowCondition {
-//            override fun shouldShow(): Boolean {
-//                val isOverGap =
-//                    System.currentTimeMillis() - adInterstitialManager.dismissFullScreenLastTime >= sharedPref.interAdsGap
-//                Log.d(
-//                    "ádadadad",
-//                    "shouldShow: $isOverGap --  ${sharedPref.interAdsGap}  ${System.currentTimeMillis() - adInterstitialManager.dismissFullScreenLastTime}"
-//                )
-//
-//                val isOverGapWithInterAd =
-//                    System.currentTimeMillis() - openAdManager.dismissFullScreenLastTime >= sharedPref.interOpenAdsGap
-//                return isOverGap && isOverGapWithInterAd && sharedPref.shouldShowInterInApp
-//            }
-//        })
+        adInterstitialManager.setShowCondition(object : ShowCondition {
+            override fun shouldShow(): Boolean {
+                val isOverGap =
+                    System.currentTimeMillis() - adInterstitialManager.dismissFullScreenLastTime >= sharedPref.interAdsGap
+                Log.d(
+                    "ádadadad",
+                    "shouldShow: $isOverGap --  ${sharedPref.interAdsGap}  ${System.currentTimeMillis() - adInterstitialManager.dismissFullScreenLastTime}"
+                )
+
+                val isOverGapWithInterAd =
+                    System.currentTimeMillis() - openAdManager.dismissFullScreenLastTime >= sharedPref.interOpenAdsGap
+                return isOverGap && isOverGapWithInterAd && sharedPref.shouldShowInterInApp
+            }
+        })
     }
 
 }

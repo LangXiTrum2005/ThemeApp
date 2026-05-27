@@ -46,6 +46,15 @@ class SharedPreferencesImpl(context: Context) : SharedPref {
 
         private const val ACTIVE_THEME_ID = "active_theme_id"
 
+        private const val UNLOCKED_VIP_WALLPAPER_IDS = "unlocked_vip_wallpaper_ids"
+
+        private const val UNLOCKED_THEME_WALLPAPER_IDS = "unlocked_theme_wallpaper_ids"
+
+        private const val UNLOCKED_ICON_IDS = "unlocked_icon_ids"
+
+        private const val IS_NEED_SHOW_LANGUAGE = "is_need_show_language"
+
+        private const val IS_NEED_GOTO_WALKTHROUGH = "is_need_goto_walkthrough"
     }
 
     override val sharedPref: SharedPreferences =
@@ -62,10 +71,15 @@ class SharedPreferencesImpl(context: Context) : SharedPref {
         editor.putString(APP_LANGUAGE, language).apply()
     }
 
-    override var isNeedSetLanguage: Boolean
-        get() = sharedPref.getBoolean(IS_NEED_SET_LANGUAGE, true)
+    override var isNeedShowLanguage: Boolean
+        get() = sharedPref.getBoolean(IS_NEED_SHOW_LANGUAGE, true)
         set(value) {
-            editor.putBoolean(IS_NEED_SET_LANGUAGE, value).apply()
+            editor.putBoolean(IS_NEED_SHOW_LANGUAGE, value).apply()
+        }
+    override var isNeedGotoWalkthrough: Boolean
+        get() = sharedPref.getBoolean(IS_NEED_GOTO_WALKTHROUGH, true)
+        set(value) {
+            editor.putBoolean(IS_NEED_GOTO_WALKTHROUGH, value).apply()
         }
 
     override var isFirstOpenApp: Boolean
@@ -294,5 +308,44 @@ class SharedPreferencesImpl(context: Context) : SharedPref {
         set(value) {
             sharedPref.edit { putString(ACTIVE_THEME_ID, value) }
         }
+
+    override fun isWallpaperUnlocked(wallpaperId: String): Boolean {
+        return sharedPref.getStringSet(UNLOCKED_VIP_WALLPAPER_IDS, emptySet())
+            ?.contains(wallpaperId) == true
+    }
+
+    override fun unlockWallpaper(wallpaperId: String) {
+        val unlockedIds = sharedPref.getStringSet(UNLOCKED_VIP_WALLPAPER_IDS, emptySet())
+            ?.toMutableSet()
+            ?: mutableSetOf()
+        unlockedIds.add(wallpaperId)
+        sharedPref.edit { putStringSet(UNLOCKED_VIP_WALLPAPER_IDS, unlockedIds) }
+    }
+
+    override fun isThemeWallpaperUnlocked(wallpaperId: String): Boolean {
+        return sharedPref.getStringSet(UNLOCKED_THEME_WALLPAPER_IDS, emptySet())
+            ?.contains(wallpaperId) == true
+    }
+
+    override fun unlockThemeWallpaper(wallpaperId: String) {
+        val unlockedIds = sharedPref.getStringSet(UNLOCKED_THEME_WALLPAPER_IDS, emptySet())
+            ?.toMutableSet()
+            ?: mutableSetOf()
+        unlockedIds.add(wallpaperId)
+        sharedPref.edit { putStringSet(UNLOCKED_THEME_WALLPAPER_IDS, unlockedIds) }
+    }
+
+    override fun isIconUnlocked(iconId: String): Boolean {
+        return sharedPref.getStringSet(UNLOCKED_ICON_IDS, emptySet())
+            ?.contains(iconId) == true
+    }
+
+    override fun unlockIcon(iconId: String) {
+        val unlockedIds = sharedPref.getStringSet(UNLOCKED_ICON_IDS, emptySet())
+            ?.toMutableSet()
+            ?: mutableSetOf()
+        unlockedIds.add(iconId)
+        sharedPref.edit { putStringSet(UNLOCKED_ICON_IDS, unlockedIds) }
+    }
 
 }

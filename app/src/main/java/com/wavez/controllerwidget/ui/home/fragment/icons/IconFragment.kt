@@ -1,0 +1,107 @@
+package com.wavez.controllerwidget.ui.home.fragment.icons
+
+import android.os.Bundle
+import android.util.Log
+import android.view.View
+import androidx.core.view.isVisible
+import androidx.fragment.app.viewModels
+import com.wavez.controllerwidget.core.base.BaseFragment
+import com.wavez.controllerwidget.R
+import com.wavez.controllerwidget.core.base.UiState
+import com.wavez.controllerwidget.core.extensions.collectWithLifecycle
+import com.wavez.controllerwidget.databinding.FragmentIconBinding
+import com.wavez.controllerwidget.ui.home.fragment.icons.adapter.IconAdapter
+import com.wavez.controllerwidget.ui.home.fragment.icons.viewmodel.IconsViewModel
+import com.wavez.controllerwidget.ui.iconpack.SetIconsActivity
+import com.wavez.controllerwidget.ui.premium.PremiumActivity
+import com.wavez.controllerwidget.ui.search.SearchActivity
+import com.wavez.controllerwidget.ui.search.model.SearchMode
+import com.wavez.controllerwidget.ui.setting.SettingActivity
+import dagger.hilt.android.AndroidEntryPoint
+
+@AndroidEntryPoint
+class IconFragment : BaseFragment<FragmentIconBinding>() {
+    override fun bindingView(): FragmentIconBinding {
+        return FragmentIconBinding.inflate(layoutInflater)
+    }
+
+    companion object {
+        fun newInstance(): IconFragment {
+            return IconFragment()
+        }
+    }
+
+    private val viewModel by viewModels<IconsViewModel>()
+
+    private val iconAdapter = IconAdapter()
+
+    override fun initView(view: View, savedInstanceState: Bundle?) {
+        super.initView(view, savedInstanceState)
+        binding.toolbar.tvTitle.text = getString(R.string.icons)
+        binding.rcvIcons.adapter = iconAdapter
+    }
+
+    override fun onResume() {
+        super.onResume()
+        binding.toolbar.btnPremium.isVisible = !sharedPref.isVip
+    }
+
+
+    override fun initListener() {
+        super.initListener()
+        binding.toolbar.btnSetting.setOnClickListener {
+            startActivity(SettingActivity.newIntent(requireContext()))
+        }
+
+        binding.toolbar.btnPremium.setOnClickListener {
+            startActivity(PremiumActivity.newIntent(requireContext()))
+        }
+
+        binding.edSearch.setOnClickListener {
+            startActivity(SearchActivity.newIntent(requireContext(), SearchMode.ICONS))
+        }
+
+
+        binding.viewError.setOnRetryClickListener {
+            viewModel.getIcons()
+        }
+
+        iconAdapter.onClickItem = { pack ->
+            startActivity(
+                SetIconsActivity.newIntent(
+                    requireContext(), pack.id, pack.name
+                )
+            )
+        }
+    }
+
+    override fun initObserver() {
+        super.initObserver()
+
+        viewModel.iconResult.collectWithLifecycle(this) {
+            when (it) {
+                is UiState.Data -> {
+                    Log.d("Log_tabbb", "Data: ${it}")
+                    binding.viewError.isVisible = false
+                    binding.viewLoading.isVisible = false
+                    iconAdapter.set(it.value)
+                }
+
+                is UiState.Error -> {
+                    Log.d("Log_tabbb", "initObserver: ${it.message}")
+                    binding.viewError.isVisible = true
+                    binding.viewLoading.isVisible = false
+                }
+
+                UiState.Loading -> {
+                    binding.viewLoading.isVisible = true
+                    binding.viewError.isVisible = false
+                }
+
+                else -> {}
+            }
+        }
+    }
+
+
+}

@@ -7,6 +7,7 @@ import android.util.AttributeSet
 import android.widget.FrameLayout
 import android.widget.TextView
 import androidx.appcompat.widget.AppCompatImageView
+import androidx.core.view.isVisible
 import com.bumptech.glide.Glide
 import com.wavez.controllerwidget.R
 import com.wavez.controllerwidget.core.extensions.gone
@@ -66,6 +67,7 @@ class ThemeTabIcon @JvmOverloads constructor(
      */
     fun activate() {
         background = activeBackground
+        ivIcon.isSelected = true
         tvName.setTextColor(activeTextColor)
     }
 
@@ -74,6 +76,7 @@ class ThemeTabIcon @JvmOverloads constructor(
      */
     fun inactivate() {
         background = inactiveBackground
+        ivIcon.isSelected = false
         tvName.setTextColor(inactiveTextColor)
     }
 
@@ -110,9 +113,8 @@ class ThemeTabIcon @JvmOverloads constructor(
      */
     fun setIcon(icon: Drawable?) {
         if (icon != null) {
-            Glide.with(context)
-                .load(icon)
-                .into(ivIcon)
+            ivIcon.isVisible = true
+            ivIcon.setImageDrawable(icon)
         } else {
             ivIcon.gone()
         }
@@ -123,6 +125,7 @@ class ThemeTabIcon @JvmOverloads constructor(
      */
     fun setIcon(iconUrl: String?) {
         if (!iconUrl.isNullOrEmpty()) {
+            ivIcon.isVisible = true
             Glide.with(context)
                 .load(iconUrl)
                 .into(ivIcon)

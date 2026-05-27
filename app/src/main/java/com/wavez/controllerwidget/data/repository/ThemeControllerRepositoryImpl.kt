@@ -5,22 +5,22 @@ import android.content.Intent
 import com.wavez.controllerwidget.core.controllercenter.ThemeLoader
 import com.wavez.controllerwidget.core.controllercenter.model.ControllerConfigModel
 import com.wavez.controllerwidget.core.controllercenter.service.ControlCenterService
-import com.wavez.controllerwidget.core.di.IoDispatcher
+import com.wavez.controllerwidget.di.IoDispatcher
 import com.wavez.controllerwidget.core.download.DownloadState
 import com.wavez.controllerwidget.core.download.ThemeDownloader
-import com.wavez.controllerwidget.data.local.dao.DownloadedThemeDao
-import com.wavez.controllerwidget.data.local.entity.DownloadedThemeEntity
-import com.wavez.controllerwidget.data.local.theme.ThemeStorageManager
+import com.wavez.controllerwidget.data.local.dao.DownloadedControllerDao
+import com.wavez.controllerwidget.data.local.entity.DownloadedControllerEntity
+import com.wavez.controllerwidget.data.local.controller.ControllerStorageManager
 import com.wavez.controllerwidget.data.model.ControllerCategoryModel
 import com.wavez.controllerwidget.data.model.ControllerModel
 import com.wavez.controllerwidget.data.model.DownloadedResInfo
 import com.wavez.controllerwidget.data.network.api.ControllerWidgetApiService
-import com.wavez.controllerwidget.data.repository.SharedPref
 import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
+import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.withContext
 import java.io.File
 import javax.inject.Inject
@@ -28,8 +28,8 @@ import javax.inject.Inject
 class ThemeControllerRepositoryImpl @Inject constructor(
     @ApplicationContext private val context: Context,
     private val apiService: ControllerWidgetApiService,
-    private val downloadedThemeDao: DownloadedThemeDao,
-    private val themeStorageManager: ThemeStorageManager,
+    private val downloadedThemeDao: DownloadedControllerDao,
+    private val themeStorageManager: ControllerStorageManager,
     private val themeDownloader: ThemeDownloader,
     private val sharedPref: SharedPref,
     @IoDispatcher private val ioDispatcher: CoroutineDispatcher,
@@ -82,6 +82,19 @@ class ThemeControllerRepositoryImpl @Inject constructor(
         }
     }
 
+    override fun observeDownloadedThemes(): Flow<List<ControllerModel>> =
+        downloadedThemeDao.observeAll()
+            .map { entities ->
+                val downloadedIds = entities.map { it.themeId }.toSet()
+                val order = entities.mapIndexed { index, entity -> entity.themeId to index }
+                    .toMap()
+                getAllControllerTheme()
+                    .getOrDefault(emptyList())
+                    .filter { it.id in downloadedIds }
+                    .sortedBy { order[it.id] ?: Int.MAX_VALUE }
+            }
+            .flowOn(ioDispatcher)
+
     override suspend fun applyTheme(theme: ControllerModel): Result<ControllerConfigModel> {
         return withContext(ioDispatcher) {
             runCatching {
@@ -118,7 +131,7 @@ class ThemeControllerRepositoryImpl @Inject constructor(
                     // File is fully on disk — persist Room record
                     val zipFile = themeStorageManager.getThemeFile(theme.id)
                     downloadedThemeDao.upsert(
-                        DownloadedThemeEntity(
+                        DownloadedControllerEntity(
                             themeId = theme.id,
                             filePath = zipFile.absolutePath,
                             downloadedAt = System.currentTimeMillis(),

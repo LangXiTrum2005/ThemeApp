@@ -5,15 +5,16 @@
 
     <color name="surface">#F9F9FA</color>
     <color name="surfaceBg">#FFFFFF</color>
-    <color name="surfacePrimaryHighEm">#6635F2</color>
-    <color name="surfacePrimaryLowEm">#EAE8FF</color>
-    <color name="surfacePrimaryBaseEm">#F4F3FF</color>
+    <color name="surfacePrimaryHighEm">#865CFA</color>
+    <color name="surfacePrimaryLowEm">#EEE8FF</color>
+    <color name="surfacePrimaryBaseEm">#F6F3FF</color>
     <color name="surfacePrimaryMedEm">#8D7AFF</color>
     <color name="surfaceSecondaryBaseEm">#FFF3FD</color>
     <color name="surfaceSecondaryMedEm">#FF6DE9</color>
     <color name="surfaceDangerHighEm">#F03D3D</color>
 
     <color name="surfaceInfoLowEm">#DEEFFD</color>
+    <color name="surfaceInfoMedEm">#59B0F3</color>
     <color name="surfaceInfoBaseEm">#F1F8FE</color>
     <color name="surfaceSuccessLowEm">#D4F7CF</color>
     <color name="textWhite">#FFFFFF</color>
@@ -29,7 +30,7 @@
     <color name="outlinePrimaryMedEm">#C7B3FF</color>
     <color name="outlineSecondaryMedEm">#FFA3F2</color>
     <color name="surfaceWarningHighEm">#FCBF04</color>
-    <color name="textLowEm">#8C929C</color>
+    <color name="textLowEm">#938C9C</color>
     <color name="surface2">#F4F4F6</color>
     <color name="textBaseEm">#C3C6CC</color>
     <color name="surfacePrimaryHighEmV2">#7B5CFA</color>
@@ -46,7 +47,7 @@
     <color name="outlineInfoHighEm">#118BE8</color>
     <color name="surfaceDangerBaseEm">#FEECEC</color>
     <color name="primaryContainer">#D0E4FF</color>
-    <color name="onPrimaryContainer">#001D35</color>
+    <color name="onPrimaryContainer">#280D68</color>
     <color name="primary">#327FC9</color>
     <color name="ripple">#D8D8D8</color>
     <color name="textSuccessHighEm">#2A9919</color>
@@ -55,7 +56,7 @@
     <color name="surface_0">#FFFFFF</color>
     <color name="surface_1">#F9F9FA</color>
     <color name="surface_2">#F5F4F6</color>
-    <color name="surface_3">#EBECF0</color>
+    <color name="surface_3">#EDEBF0</color>
     <color name="surface_4">#DDDFE4</color>
     <color name="surface_secondary_high_em">#52B7FF</color>
 
@@ -91,7 +92,7 @@
 
     <color name="danger_high_em">#E92020</color>
     <color name="danger_med_em">#F36363</color>
-    <color name="danger_base_em">#FEF5F5</color>
+    <color name="danger_base_em">#FEECEC</color>
 
     <color name="med_em">#5B616D</color>
 
@@ -129,5 +130,6 @@
     <color name="align">#8D7AFF</color>
 
     <color name="color1">#095a93</color>
+    <color name="color2">#2C2C2C</color>
 
 </resources>

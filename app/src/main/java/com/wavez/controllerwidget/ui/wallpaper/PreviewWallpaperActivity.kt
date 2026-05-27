@@ -2,28 +2,24 @@ package com.wavez.controllerwidget.ui.wallpaper
 
 import android.content.Context
 import android.content.Intent
-import android.graphics.drawable.Drawable
 import android.os.Bundle
-import android.util.Log
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.core.view.isVisible
 import androidx.lifecycle.lifecycleScope
-import com.bumptech.glide.Glide
-import com.bumptech.glide.load.DataSource
-import com.bumptech.glide.load.engine.GlideException
-import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
-import com.bumptech.glide.request.RequestListener
-import com.bumptech.glide.request.target.Target
+import com.wavez.controllerwidget.R
 import com.wavez.controllerwidget.core.base.BaseActivity
 import com.wavez.controllerwidget.core.download.DownloadState
 import com.wavez.controllerwidget.core.extensions.getParcel
 import com.wavez.controllerwidget.core.extensions.gone
+import com.wavez.controllerwidget.core.extensions.loadWithLoading
 import com.wavez.controllerwidget.core.extensions.visible
 import com.wavez.controllerwidget.core.wallpaper.model.WallpaperTarget
-import com.wavez.controllerwidget.data.model.WallpaperModel
+import com.wavez.controllerwidget.data.model.wallpaper.WallpaperModel
 import com.wavez.controllerwidget.databinding.ActivityPreviewWallpaperBinding
 import com.wavez.controllerwidget.ui.dialog.DownloadDialog
+import com.wavez.controllerwidget.ui.dialog.PremiumThemeDialog
+import com.wavez.controllerwidget.ui.premium.PremiumActivity
 import com.wavez.controllerwidget.ui.wallpaper.dialog.SetWallpaperDialog
 import com.wavez.controllerwidget.ui.wallpaper.viewmodel.PreviewViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -31,7 +27,7 @@ import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class PreviewWallpaperActivity : BaseActivity<ActivityPreviewWallpaperBinding>(),
-    SetWallpaperDialog.SetWallpaperListener {
+    SetWallpaperDialog.SetWallpaperListener, PremiumThemeDialog.PremiumThemeListener {
     override fun bindingView(): ActivityPreviewWallpaperBinding {
         return ActivityPreviewWallpaperBinding.inflate(layoutInflater)
     }
@@ -50,45 +46,26 @@ class PreviewWallpaperActivity : BaseActivity<ActivityPreviewWallpaperBinding>()
 
     private val viewModel by viewModels<PreviewViewModel>()
 
-    private val wallpaperModel: WallpaperModel? by lazy {
-        intent.getParcel(ARG_WALLPAPER) as? WallpaperModel
-    }
-
     private var downloadDialog: DownloadDialog? = null
 
     override fun initView(savedInstanceState: Bundle?) {
         super.initView(savedInstanceState)
-        wallpaperModel?.let { wallpaper ->
+        viewModel.setWallpaperModel(intent.getParcel(ARG_WALLPAPER) as? WallpaperModel)
+        viewModel.wallpaperModel?.let { wallpaper ->
             binding.viewLoadingImage.visible()
-            Glide.with(this)
-                .load(wallpaper.url)
-                .transition(DrawableTransitionOptions.withCrossFade(300))
-                .listener(object : RequestListener<Drawable> {
-                    override fun onLoadFailed(
-                        p0: GlideException?,
-                        p1: Any?,
-                        p2: Target<Drawable?>?,
-                        p3: Boolean
-                    ): Boolean {
-                        binding.viewLoadingImage.gone()
-                        return false
-                    }
-
-                    override fun onResourceReady(
-                        p0: Drawable?,
-                        p1: Any?,
-                        p2: Target<Drawable?>?,
-                        p3: DataSource?,
-                        p4: Boolean
-                    ): Boolean {
-                        binding.viewLoadingImage.gone()
-                        return false
-                    }
-                })
-                .into(binding.ivImage)
-
+            binding.ivImage.loadWithLoading(
+                wallpaper.url,
+                loadingView = binding.viewLoadingImage,
+                errorView = binding.viewError
+            )
+            updateDownloadAction()
             updateUiWallpaperDownloaded(wallpaper)
         }
+    }
+
+    override fun onVipChangedState(isPremium: Boolean) {
+        super.onVipChangedState(isPremium)
+        updateDownloadAction()
     }
 
     override fun initListener() {
@@ -99,9 +76,7 @@ class PreviewWallpaperActivity : BaseActivity<ActivityPreviewWallpaperBinding>()
         }
 
         binding.btnDownload.setOnClickListener {
-            val model = wallpaperModel ?: return@setOnClickListener
-            showDownloadDialog().updateProgress(1)
-            viewModel.downloadWallpaper(model)
+            handleDownloadClick()
         }
 
         binding.btnPreview.setOnClickListener {
@@ -123,25 +98,19 @@ class PreviewWallpaperActivity : BaseActivity<ActivityPreviewWallpaperBinding>()
             viewModel.downloadState.collect { state ->
                 when (state) {
                     is DownloadState.Downloading -> {
-                        Log.d(TAG, "initObserver: Downloading ${state.percent}")
                         showDownloadDialog().updateProgress(state.percent)
                     }
 
                     is DownloadState.Success -> {
                         dismissDownloadDialog()
-                        updateUiWallpaperDownloaded(wallpaperModel ?: return@collect)
-                        Toast.makeText(
-                            this@PreviewWallpaperActivity,
-                            "Downloaded successfully",
-                            Toast.LENGTH_SHORT
-                        ).show()
+                        updateUiWallpaperDownloaded(viewModel.wallpaperModel ?: return@collect)
                     }
 
                     is DownloadState.Failure -> {
                         dismissDownloadDialog()
                         Toast.makeText(
                             this@PreviewWallpaperActivity,
-                            "Download failed",
+                            getString(R.string.download_failed),
                             Toast.LENGTH_SHORT
                         ).show()
                     }
@@ -159,14 +128,36 @@ class PreviewWallpaperActivity : BaseActivity<ActivityPreviewWallpaperBinding>()
         })
     }
 
+    private fun updateDownloadAction() {
+        val canDownload = viewModel.canDownloadCurrentWallpaper()
+        binding.btnDownload.setText(getString(if (canDownload) R.string.download else R.string.unlock))
+        binding.btnDownload.setIcon(if (canDownload) R.drawable.ic_download else R.drawable.ic_lock_1)
+    }
+
+    private fun handleDownloadClick() {
+        if (viewModel.canDownloadCurrentWallpaper()) {
+            startDownload()
+        } else {
+            showPremiumDialog()
+        }
+    }
+
+    private fun startDownload() {
+        showDownloadDialog().updateProgress(1)
+        viewModel.downloadWallpaper()
+    }
+
+    private fun showPremiumDialog() {
+        if (supportFragmentManager.findFragmentByTag(PremiumThemeDialog.TAG) != null) return
+        PremiumThemeDialog.newInstance().show(supportFragmentManager, PremiumThemeDialog.TAG)
+    }
+
     private fun showDownloadDialog(): DownloadDialog {
         downloadDialog?.let { return it }
-
         (supportFragmentManager.findFragmentByTag(DownloadDialog.TAG) as? DownloadDialog)?.let {
             downloadDialog = it
             return it
         }
-
         return DownloadDialog.newInstance().also { dialog ->
             downloadDialog = dialog
             if (!supportFragmentManager.isStateSaved) {
@@ -190,18 +181,28 @@ class PreviewWallpaperActivity : BaseActivity<ActivityPreviewWallpaperBinding>()
     }
 
     override fun onSetAsWallpaper(wallpaperTarget: WallpaperTarget) {
-        wallpaperModel?.let {
-            binding.viewLoading.visible()
+        viewModel.wallpaperModel?.let {
+            binding.viewLoading.root.visible()
             viewModel.applyWallpaper(
                 it,
                 wallpaperTarget,
                 onResult = { state ->
-                    binding.viewLoading.gone()
+                    binding.viewLoading.root.gone()
                     if (state.isSuccess) {
                         startActivity(ApplyWallpaperActivity.newIntent(this, it))
                     }
                 }
             )
         }
+    }
+
+    override fun onWatchAdsComplete() {
+        viewModel.unlockCurrentWallpaper()
+        startDownload()
+    }
+
+
+    override fun onGoPremiumClick() {
+        startActivity(PremiumActivity.newIntent(this))
     }
 }

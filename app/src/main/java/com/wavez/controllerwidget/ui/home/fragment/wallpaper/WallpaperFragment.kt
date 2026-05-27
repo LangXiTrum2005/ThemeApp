@@ -7,7 +7,7 @@ import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.viewpager2.widget.ViewPager2
-import com.example.m65_gamemodefps.core.base.BaseFragment
+import com.wavez.controllerwidget.core.base.BaseFragment
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 import com.wavez.controllerwidget.R
@@ -19,6 +19,7 @@ import com.wavez.controllerwidget.ui.customview.ThemeTabIcon
 import com.wavez.controllerwidget.ui.home.dialog.FilterPopupHelper
 import com.wavez.controllerwidget.ui.home.fragment.wallpaper.adapter.CategoryPagerAdapter
 import com.wavez.controllerwidget.ui.home.fragment.wallpaper.viewmodel.WallpaperViewModel
+import com.wavez.controllerwidget.ui.premium.PremiumActivity
 import com.wavez.controllerwidget.ui.search.SearchActivity
 import com.wavez.controllerwidget.ui.search.model.SearchMode
 import com.wavez.controllerwidget.ui.setting.SettingActivity
@@ -64,6 +65,12 @@ class WallpaperFragment : BaseFragment<FragmentWallpaperBinding>() {
         binding.toolbar.tvTitle.text = getString(R.string.wallpapers)
         binding.vpTheme.registerOnPageChangeCallback(onPageChangeCallback)
     }
+
+    override fun onResume() {
+        super.onResume()
+        binding.toolbar.btnPremium.isVisible = !sharedPref.isVip
+    }
+
 
     private fun setupTabs(
         categories: List<WallpaperCategoryModel>
@@ -115,14 +122,13 @@ class WallpaperFragment : BaseFragment<FragmentWallpaperBinding>() {
     override fun initListener() {
         super.initListener()
         binding.toolbar.apply {
-            btnPremium.setOnClickListener {
-
-            }
-
             btnSetting.setOnClickListener {
                 startActivity(SettingActivity.newIntent(requireContext()))
             }
 
+            btnPremium.setOnClickListener {
+                startActivity(PremiumActivity.newIntent(requireContext()))
+            }
         }
 
         binding.edSearch.setOnClickListener {

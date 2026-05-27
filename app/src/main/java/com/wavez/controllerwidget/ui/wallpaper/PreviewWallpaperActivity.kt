@@ -19,6 +19,7 @@ import com.wavez.controllerwidget.data.model.wallpaper.WallpaperModel
 import com.wavez.controllerwidget.databinding.ActivityPreviewWallpaperBinding
 import com.wavez.controllerwidget.ui.dialog.DownloadDialog
 import com.wavez.controllerwidget.ui.dialog.PremiumThemeDialog
+import com.wavez.controllerwidget.ui.premium.PremiumActivity
 import com.wavez.controllerwidget.ui.wallpaper.dialog.SetWallpaperDialog
 import com.wavez.controllerwidget.ui.wallpaper.viewmodel.PreviewViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -57,8 +58,14 @@ class PreviewWallpaperActivity : BaseActivity<ActivityPreviewWallpaperBinding>()
                 loadingView = binding.viewLoadingImage,
                 errorView = binding.viewError
             )
+            updateDownloadAction()
             updateUiWallpaperDownloaded(wallpaper)
         }
+    }
+
+    override fun onVipChangedState(isPremium: Boolean) {
+        super.onVipChangedState(isPremium)
+        updateDownloadAction()
     }
 
     override fun initListener() {
@@ -119,6 +126,12 @@ class PreviewWallpaperActivity : BaseActivity<ActivityPreviewWallpaperBinding>()
             binding.viewApply.isVisible = it
             binding.btnDownload.isVisible = !it
         })
+    }
+
+    private fun updateDownloadAction() {
+        val canDownload = viewModel.canDownloadCurrentWallpaper()
+        binding.btnDownload.setText(getString(if (canDownload) R.string.download else R.string.unlock))
+        binding.btnDownload.setIcon(if (canDownload) R.drawable.ic_download else R.drawable.ic_lock_1)
     }
 
     private fun handleDownloadClick() {
@@ -183,16 +196,13 @@ class PreviewWallpaperActivity : BaseActivity<ActivityPreviewWallpaperBinding>()
         }
     }
 
-    override fun onWatchAdClick() {
+    override fun onWatchAdsComplete() {
         viewModel.unlockCurrentWallpaper()
         startDownload()
     }
 
+
     override fun onGoPremiumClick() {
-        Toast.makeText(
-            this@PreviewWallpaperActivity,
-            "Premium is not available yet",
-            Toast.LENGTH_SHORT
-        ).show()
+        startActivity(PremiumActivity.newIntent(this))
     }
 }

@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.gms.ads.nativead.NativeAdView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/native_ad_view"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#242424"
+    android:orientation="vertical">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/viewAd"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <com.google.android.gms.ads.nativead.MediaView
+            android:id="@+id/media_view"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toTopOf="@+id/viewBottom"
+            app:layout_constraintDimensionRatio="9:16"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <LinearLayout
+            android:id="@+id/viewBottom"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/white"
+            android:orientation="vertical"
+            android:padding="16dp"
+            app:layout_constraintBottom_toBottomOf="parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="70dp"
+                    android:layout_height="70dp"
+                    app:cardBackgroundColor="@android:color/transparent"
+                    app:cardCornerRadius="6dp"
+                    app:cardElevation="0dp">
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/icon_view"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent" />
+
+                </androidx.cardview.widget.CardView>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="8dp"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/head_line_view"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:ellipsize="end"
+                        android:lines="1"
+                        android:maxLines="1"
+                        android:textColor="@color/white"
+                        android:textSize="14sp"
+
+                        tools:text="Ad content" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/content_view"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="2dp"
+                        android:ellipsize="end"
+                        android:lines="2"
+                        android:maxLines="2"
+                        android:textColor="@color/white"
+                        android:textSize="12sp"
+                        tools:text="Ad content" />
+
+                </LinearLayout>
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:cardBackgroundColor="#FDA20A"
+                    app:cardCornerRadius="4dp"
+                    app:cardElevation="0dp">
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tvAd"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="4dp"
+                        android:text="Ad"
+                        android:textAllCaps="true"
+                        android:textColor="@color/black"
+                        android:textSize="12sp"
+
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                </androidx.cardview.widget.CardView>
+
+            </LinearLayout>
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/call_to_action_view"
+                android:layout_width="match_parent"
+                android:layout_height="46dp"
+                android:layout_marginTop="12dp"
+                android:background="@drawable/bg_button_1"
+                android:elevation="0dp"
+                android:gravity="center"
+                android:layout_marginBottom="24dp"
+                android:stateListAnimator="@null"
+                android:textAllCaps="false"
+                android:textColor="@color/white"
+                android:textSize="16sp"
+                app:layout_constraintTop_toBottomOf="@+id/media_view"
+                tools:text="Install" />
+
+        </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <include
+        android:id="@+id/shimmerNative"
+        layout="@layout/shimmer_full_template_ad_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+</com.google.android.gms.ads.nativead.NativeAdView>

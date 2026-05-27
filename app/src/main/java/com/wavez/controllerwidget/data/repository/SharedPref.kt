@@ -14,7 +14,9 @@ interface SharedPref {
 
     var severRoot: String
 
-    var isNeedSetLanguage: Boolean
+    var isNeedShowLanguage: Boolean
+
+    var isNeedGotoWalkthrough: Boolean
 
     var isFirstOpenApp: Boolean
 
@@ -79,6 +81,10 @@ interface SharedPref {
     fun isWallpaperUnlocked(wallpaperId: String): Boolean
 
     fun unlockWallpaper(wallpaperId: String)
+
+    fun isThemeWallpaperUnlocked(wallpaperId: String): Boolean
+
+    fun unlockThemeWallpaper(wallpaperId: String)
 
     fun isIconUnlocked(iconId: String): Boolean
 

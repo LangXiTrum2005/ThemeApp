@@ -2,10 +2,14 @@ package com.wavez.controllerwidget.ui.search.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.wavez.controllerwidget.core.extensions.normalized
+import com.wavez.controllerwidget.data.model.PopularCategoryModel
 import com.wavez.controllerwidget.data.model.WallpaperCategoryModel
+import com.wavez.controllerwidget.data.model.icon.IconPackModel
 import com.wavez.controllerwidget.data.model.theme.ThemeCategoryModel
 import com.wavez.controllerwidget.data.model.theme.ThemeModel
 import com.wavez.controllerwidget.data.model.wallpaper.WallpaperModel
+import com.wavez.controllerwidget.data.repository.IconPackRepository
 import com.wavez.controllerwidget.data.repository.ThemeRepository
 import com.wavez.controllerwidget.data.repository.WallpaperRepository
 import com.wavez.controllerwidget.ui.search.model.SearchCategoryUi
@@ -22,6 +26,7 @@ import javax.inject.Inject
 class SearchViewModel @Inject constructor(
     private val themeRepository: ThemeRepository,
     private val wallpaperRepository: WallpaperRepository,
+    private val iconPackRepository: IconPackRepository,
 ) : ViewModel() {
 
     private val _uiState = MutableStateFlow(SearchUiState())
@@ -29,8 +34,12 @@ class SearchViewModel @Inject constructor(
 
     private var themeCategories: List<ThemeCategoryModel> = emptyList()
     private var themes: List<ThemeModel> = emptyList()
+    private var mostPopularThemeCategories: List<PopularCategoryModel> = emptyList()
     private var wallpaperCategories: List<WallpaperCategoryModel> = emptyList()
     private var wallpapers: List<WallpaperModel> = emptyList()
+    private var mostPopularWallpaperCategories: List<PopularCategoryModel> = emptyList()
+    private var iconPacks: List<IconPackModel> = emptyList()
+    private var mostPopularIconCategories: List<PopularCategoryModel> = emptyList()
     private var mode: SearchMode = SearchMode.THEMES
 
     fun load(mode: SearchMode = this.mode, forceRefresh: Boolean = false) {
@@ -40,6 +49,7 @@ class SearchViewModel @Inject constructor(
             when (mode) {
                 SearchMode.THEMES -> loadThemes(forceRefresh)
                 SearchMode.WALLPAPERS -> loadWallpapers(forceRefresh)
+                SearchMode.ICONS -> loadIcons(forceRefresh)
             }
         }
     }
@@ -51,9 +61,11 @@ class SearchViewModel @Inject constructor(
     private suspend fun loadThemes(forceRefresh: Boolean) {
         val categoriesResult = themeRepository.getThemeCategories(forceRefresh)
         val themesResult = themeRepository.getThemes(forceRefresh)
+        val mostPopularResult = themeRepository.getMostPopularThemes(forceRefresh)
 
         categoriesResult.onSuccess { themeCategories = it }
         themesResult.onSuccess { themes = it }
+        mostPopularResult.onSuccess { mostPopularThemeCategories = it }
 
         val failure = categoriesResult.exceptionOrNull() ?: themesResult.exceptionOrNull()
         if (failure != null && themes.isEmpty()) {
@@ -70,12 +82,33 @@ class SearchViewModel @Inject constructor(
     private suspend fun loadWallpapers(forceRefresh: Boolean) {
         val categoriesResult = wallpaperRepository.getCategoriesUnlimited(forceRefresh)
         val wallpapersResult = wallpaperRepository.getAllWallpapersUnlimited(forceRefresh)
+        val mostPopularResult = wallpaperRepository.getMostPopularWallpapers(forceRefresh)
 
         categoriesResult.onSuccess { wallpaperCategories = it }
         wallpapersResult.onSuccess { wallpapers = it }
+        mostPopularResult.onSuccess { mostPopularWallpaperCategories = it }
 
         val failure = categoriesResult.exceptionOrNull() ?: wallpapersResult.exceptionOrNull()
         if (failure != null && wallpapers.isEmpty()) {
+            _uiState.value = _uiState.value.copy(
+                isLoading = false,
+                message = failure.message.orEmpty().ifBlank { "Could not load content" },
+            )
+            return
+        }
+
+        publish(query = _uiState.value.query, isLoading = false)
+    }
+
+    private suspend fun loadIcons(forceRefresh: Boolean) {
+        val iconsResult = iconPackRepository.getIconPacks(forceRefresh)
+        val mostPopularResult = iconPackRepository.getMostPopularIcons(forceRefresh)
+
+        iconsResult.onSuccess { iconPacks = it }
+        mostPopularResult.onSuccess { mostPopularIconCategories = it }
+
+        val failure = iconsResult.exceptionOrNull()
+        if (failure != null && iconPacks.isEmpty()) {
             _uiState.value = _uiState.value.copy(
                 isLoading = false,
                 message = failure.message.orEmpty().ifBlank { "Could not load content" },
@@ -92,6 +125,7 @@ class SearchViewModel @Inject constructor(
         val state = when (mode) {
             SearchMode.THEMES -> buildThemeState(cleanQuery, normalizedQuery, isLoading)
             SearchMode.WALLPAPERS -> buildWallpaperState(cleanQuery, normalizedQuery, isLoading)
+            SearchMode.ICONS -> buildIconState(cleanQuery, normalizedQuery, isLoading)
         }
         _uiState.value = state
     }
@@ -106,9 +140,11 @@ class SearchViewModel @Inject constructor(
             isLoading = isLoading,
             mode = SearchMode.THEMES,
             query = cleanQuery,
-            popularCategories = themeCategories.take(MAX_POPULAR_CATEGORY_COUNT).map {
-                SearchCategoryUi(id = it.id, name = it.name)
-            },
+            popularCategories = mostPopularThemeCategories.map {
+                SearchCategoryUi(id = it.category.id, name = it.category.name)
+            }.ifEmpty {
+                themeCategories.map { SearchCategoryUi(id = it.id, name = it.name) }
+            }.take(MAX_POPULAR_CATEGORY_COUNT),
             themes = themes.filterThemesByQuery(normalizedQuery, categoryNamesById),
         )
     }
@@ -123,10 +159,28 @@ class SearchViewModel @Inject constructor(
             isLoading = isLoading,
             mode = SearchMode.WALLPAPERS,
             query = cleanQuery,
-            popularCategories = wallpaperCategories.take(MAX_POPULAR_CATEGORY_COUNT).map {
-                SearchCategoryUi(id = it.id, name = it.name)
-            },
+            popularCategories = mostPopularWallpaperCategories.map {
+                SearchCategoryUi(id = it.category.id, name = it.category.name)
+            }.ifEmpty {
+                wallpaperCategories.map { SearchCategoryUi(id = it.id, name = it.name) }
+            }.take(MAX_POPULAR_CATEGORY_COUNT),
             wallpapers = wallpapers.filterWallpapersByQuery(normalizedQuery, categoryNamesById),
+        )
+    }
+
+    private fun buildIconState(
+        cleanQuery: String,
+        normalizedQuery: String,
+        isLoading: Boolean,
+    ): SearchUiState {
+        return SearchUiState(
+            isLoading = isLoading,
+            mode = SearchMode.ICONS,
+            query = cleanQuery,
+            popularCategories = mostPopularIconCategories.map {
+                SearchCategoryUi(id = it.category.id, name = it.category.name)
+            }.take(MAX_POPULAR_CATEGORY_COUNT),
+            iconPacks = iconPacks.filterIconPacksByName(normalizedQuery),
         )
     }
 
@@ -136,8 +190,10 @@ class SearchViewModel @Inject constructor(
     ): List<ThemeModel> {
         if (normalizedQuery.isBlank()) return this
         return filter { item ->
-            item.name.normalized().contains(normalizedQuery) ||
-                categoryNamesById[item.categoryId].orEmpty().normalized().contains(normalizedQuery)
+            categoryNamesById[item.categoryId].orEmpty().normalized().contains(normalizedQuery) ||
+                    item.tags.any { tag ->
+                        tag.normalized().contains(normalizedQuery)
+                    }
         }
     }
 
@@ -147,14 +203,20 @@ class SearchViewModel @Inject constructor(
     ): List<WallpaperModel> {
         if (normalizedQuery.isBlank()) return this
         return filter { item ->
-            item.name.normalized().contains(normalizedQuery) ||
-                categoryNamesById[item.categoryId].orEmpty().normalized().contains(normalizedQuery)
+            categoryNamesById[item.categoryId].orEmpty().normalized().contains(normalizedQuery) ||
+                    item.tags.any { tag ->
+                        tag.normalized().contains(normalizedQuery)
+                    }
         }
     }
 
-    private fun String.normalized(): String = lowercase().filter { it.isLetterOrDigit() }
+    private fun List<IconPackModel>.filterIconPacksByName(normalizedQuery: String): List<IconPackModel> {
+        if (normalizedQuery.isBlank()) return this
+        return filter { item -> item.name.normalized().contains(normalizedQuery) }
+    }
+
 
     private companion object {
-        const val MAX_POPULAR_CATEGORY_COUNT = 8
+        const val MAX_POPULAR_CATEGORY_COUNT = 4
     }
 }

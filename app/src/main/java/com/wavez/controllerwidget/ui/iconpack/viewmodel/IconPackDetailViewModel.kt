@@ -4,7 +4,6 @@ import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.wavez.controllerwidget.core.base.UiState
-import com.wavez.controllerwidget.core.icons.IconShortcutInstaller
 import com.wavez.controllerwidget.data.local.InstalledAppProvider
 import com.wavez.controllerwidget.data.model.AppInfo
 import com.wavez.controllerwidget.data.model.icon.IconItemModel
@@ -28,7 +27,6 @@ class IconPackDetailViewModel @Inject constructor(
     private val installedAppProvider: InstalledAppProvider,
     private val sharedPref: SharedPref,
     private val iconPackItemMapper: IconPackItemMapper,
-    private val iconShortcutInstaller: IconShortcutInstaller,
 ) : ViewModel() {
 
     private val _uiState = MutableStateFlow<UiState<IconPackDetailState>>(UiState.Idle)
@@ -43,20 +41,24 @@ class IconPackDetailViewModel @Inject constructor(
     private val appliedIconIds = mutableSetOf<Long>()
     private var pendingIconId: Long? = null
 
-    var currentIconPackId : String? = null
+    var currentIconPackId: String? = null
+    var itemIconPackItemUi : IconPackItemUi? = null
 
     fun load(id: String, forceRefresh: Boolean = false) {
         viewModelScope.launch {
             _uiState.value = UiState.Loading
             repo.getIconPackDetail(id, forceRefresh)
                 .onSuccess { loadedPack ->
+                    Log.d("log_onSuccess", "onSuccess: ${loadedPack.icons}")
+
                     pack = loadedPack
                     // The pack already contains server icons; installed apps are loaded next to build UI state.
                     loadInstalledAppsAndRemap()
                 }
                 .onFailure { t ->
                     Log.d("log_error", "load: ${t.message}")
-                    _uiState.value = UiState.Error(t, t.message.orEmpty().ifBlank { "Unknown error" })
+                    _uiState.value =
+                        UiState.Error(t, t.message.orEmpty().ifBlank { "Unknown error" })
                 }
         }
     }
@@ -74,9 +76,27 @@ class IconPackDetailViewModel @Inject constructor(
         updateSingleIcon(iconId)
     }
 
-    fun unlockIcon(item: IconPackItemUi) {
-        sharedPref.unlockIcon(item.id.toString())
-        updateSingleIcon(item.id)
+    fun unlockIcon() {
+        itemIconPackItemUi?.let {item->
+            sharedPref.unlockIcon(item.id.toString())
+            updateSingleIcon(item.id)
+        }
+    }
+
+    fun refreshUnlockState() {
+        refreshIconState()
+    }
+
+    private fun refreshIconState() {
+        val currentState = uiState.value as? UiState.Data ?: return
+        val iconsById = pack?.icons.orEmpty().associateBy(iconPackItemMapper::stableId)
+        _uiState.value = UiState.Data(
+            currentState.value.copy(
+                items = currentState.value.items.map { item ->
+                    iconsById[item.id]?.let(::mapIcon) ?: item
+                }
+            )
+        )
     }
 
     fun markIconApplied(iconId: Long) {
@@ -157,8 +177,7 @@ class IconPackDetailViewModel @Inject constructor(
             manualMapping = manualMappings[iconId],
         )
         return item.copy(
-            isApplied = appliedIconIds.contains(iconId) ||
-                item.targetPackageName?.let(iconShortcutInstaller::isShortcutPinned) == true
+            isApplied = appliedIconIds.contains(iconId)
         )
     }
 

@@ -63,12 +63,12 @@ class PreviewViewModel @Inject constructor(
         }
     }
 
-    fun canDownloadWallpaper(wallpaperModel: WallpaperModel): Boolean {
-        return wallpaperRepository.canDownloadWallpaper(wallpaperModel)
+    fun checkUnlockWallpaper(wallpaperModel: WallpaperModel): Boolean {
+        return wallpaperRepository.checkUnlockWallpaper(wallpaperModel)
     }
 
     fun canDownloadCurrentWallpaper(): Boolean {
-        return wallpaperModel?.let(::canDownloadWallpaper) == true
+        return wallpaperModel?.let(::checkUnlockWallpaper) == true
     }
 
     fun unlockWallpaper(wallpaperModel: WallpaperModel) {

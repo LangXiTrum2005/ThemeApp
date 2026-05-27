@@ -3,6 +3,7 @@ package com.wavez.controllerwidget.data.network.api
 import com.wavez.controllerwidget.data.model.ControllerCategoryListResponse
 import com.wavez.controllerwidget.data.model.ControllerListResponse
 import com.wavez.controllerwidget.data.model.DownloadedResInfo
+import com.wavez.controllerwidget.data.model.PopularCategoryListResponse
 import com.wavez.controllerwidget.data.model.WallpaperCategoryListResponse
 import com.wavez.controllerwidget.data.model.icon.IconPackListResponse
 import com.wavez.controllerwidget.data.model.theme.ThemeCategoryListResponse
@@ -23,6 +24,9 @@ interface ControllerWidgetApiService {
     @GET("p67themes")
     suspend fun getThemes(): ThemeListResponse
 
+    @GET("p67mostpopularthemes")
+    suspend fun getMostPopularThemes(): PopularCategoryListResponse
+
     //controller
     @GET("p67getcontrollercategory")
     suspend fun getCategoriesController(): ControllerCategoryListResponse
@@ -37,11 +41,17 @@ interface ControllerWidgetApiService {
     @GET("p67getallwallpapers")
     suspend fun getAllWallpapersUnlimited(): WallpaperListResponse
 
+    @GET("p67mostpopularwallpapers")
+    suspend fun getMostPopularWallpapers(): PopularCategoryListResponse
+
     @POST("api/updatedownloadp67")
     suspend fun updateWallpaperDownloadAmount(@Body info: DownloadedResInfo): Result<ResponseBody>
 
     //icon packs
     @GET("p67iconpacks")
     suspend fun getIconPacks(): IconPackListResponse
+
+    @GET("p67mostpopularicons")
+    suspend fun getMostPopularIcons(): PopularCategoryListResponse
 
 }

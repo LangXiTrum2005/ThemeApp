@@ -1,6 +1,9 @@
 package com.wavez.controllerwidget.core.extensions
 
 import android.annotation.SuppressLint
+import android.widget.TextView
+import androidx.annotation.DrawableRes
+import androidx.core.content.ContextCompat
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
@@ -70,4 +73,15 @@ fun String.toMiddleEllipsis(keepLastChars: Int): String {
     } else {
         this
     }
+}
+
+fun TextView.setDrawableStart(
+    @DrawableRes drawableRes: Int,
+) {
+    setCompoundDrawablesRelativeWithIntrinsicBounds(
+        ContextCompat.getDrawable(context, drawableRes),
+        null,
+        null,
+        null
+    )
 }

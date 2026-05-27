@@ -1,5 +1,6 @@
 package com.wavez.controllerwidget.data.repository
 
+import com.wavez.controllerwidget.data.model.PopularCategoryModel
 import com.wavez.controllerwidget.data.model.icon.IconPackModel
 import com.wavez.controllerwidget.data.network.api.ControllerWidgetApiService
 import javax.inject.Inject
@@ -11,6 +12,7 @@ class IconPackRepositoryImpl @Inject constructor(
 ) : IconPackRepository {
 
     private var cachedIconPacks: List<IconPackModel>? = null
+    private var cachedMostPopularIcons: List<PopularCategoryModel>? = null
 
     override suspend fun getIconPacks(forceRefresh: Boolean): Result<List<IconPackModel>> {
         if (!forceRefresh) {
@@ -18,6 +20,14 @@ class IconPackRepositoryImpl @Inject constructor(
         }
         return repositoryRequest { apiService.getIconPacks() }
             .onSuccess { cachedIconPacks = it }
+    }
+
+    override suspend fun getMostPopularIcons(forceRefresh: Boolean): Result<List<PopularCategoryModel>> {
+        if (!forceRefresh) {
+            cachedMostPopularIcons?.let { return Result.success(it) }
+        }
+        return repositoryRequest { apiService.getMostPopularIcons() }
+            .onSuccess { cachedMostPopularIcons = it }
     }
 
     override suspend fun getIconPackDetail(

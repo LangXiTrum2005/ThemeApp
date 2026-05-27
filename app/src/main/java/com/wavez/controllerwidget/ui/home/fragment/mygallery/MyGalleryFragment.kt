@@ -3,13 +3,15 @@ package com.wavez.controllerwidget.ui.home.fragment.mygallery
 import android.os.Bundle
 import android.view.View
 import androidx.core.content.ContextCompat
+import androidx.core.view.isVisible
 import androidx.viewpager2.widget.ViewPager2
-import com.example.m65_gamemodefps.core.base.BaseFragment
+import com.wavez.controllerwidget.core.base.BaseFragment
 import com.google.android.material.tabs.TabLayoutMediator
 import com.wavez.controllerwidget.R
 import com.wavez.controllerwidget.databinding.FragmentMyGalleryBinding
 import com.wavez.controllerwidget.ui.customview.ThemeTabIcon
 import com.wavez.controllerwidget.ui.home.fragment.mygallery.adapter.MyGalleryPagerAdapter
+import com.wavez.controllerwidget.ui.premium.PremiumActivity
 import com.wavez.controllerwidget.ui.setting.SettingActivity
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -38,10 +40,20 @@ class MyGalleryFragment : BaseFragment<FragmentMyGalleryBinding>() {
         setupPager()
     }
 
+    override fun onResume() {
+        super.onResume()
+        binding.toolbar.btnPremium.isVisible = !sharedPref.isVip
+    }
+
+
     override fun initListener() {
         super.initListener()
         binding.toolbar.btnSetting.setOnClickListener {
             startActivity(SettingActivity.newIntent(requireContext()))
+        }
+
+        binding.toolbar.btnPremium.setOnClickListener {
+            startActivity(PremiumActivity.newIntent(requireContext()))
         }
     }
 
@@ -67,9 +79,25 @@ class MyGalleryFragment : BaseFragment<FragmentMyGalleryBinding>() {
         }
         return ThemeTabIcon(requireContext()).apply {
             setName(title)
-            setIcon(if (iconRes != 0) { ContextCompat.getDrawable(requireContext(), iconRes) } else { null })
-            setActiveBackground(ContextCompat.getDrawable(requireContext(), R.drawable.bg_tab_selected))
-            setInactiveBackground(ContextCompat.getDrawable(requireContext(), R.drawable.bg_tab_unselected))
+            setIcon(
+                if (iconRes != 0) {
+                    ContextCompat.getDrawable(requireContext(), iconRes)
+                } else {
+                    null
+                }
+            )
+            setActiveBackground(
+                ContextCompat.getDrawable(
+                    requireContext(),
+                    R.drawable.bg_tab_selected
+                )
+            )
+            setInactiveBackground(
+                ContextCompat.getDrawable(
+                    requireContext(),
+                    R.drawable.bg_tab_unselected
+                )
+            )
             setActiveTextColor(ContextCompat.getColor(requireContext(), R.color.white))
             setInactiveTextColor(ContextCompat.getColor(requireContext(), R.color.text_med_em))
             inactivate()

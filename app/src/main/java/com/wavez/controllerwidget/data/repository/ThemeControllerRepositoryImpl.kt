@@ -5,7 +5,7 @@ import android.content.Intent
 import com.wavez.controllerwidget.core.controllercenter.ThemeLoader
 import com.wavez.controllerwidget.core.controllercenter.model.ControllerConfigModel
 import com.wavez.controllerwidget.core.controllercenter.service.ControlCenterService
-import com.wavez.controllerwidget.core.di.IoDispatcher
+import com.wavez.controllerwidget.di.IoDispatcher
 import com.wavez.controllerwidget.core.download.DownloadState
 import com.wavez.controllerwidget.core.download.ThemeDownloader
 import com.wavez.controllerwidget.data.local.dao.DownloadedControllerDao

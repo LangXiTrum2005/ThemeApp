@@ -131,9 +131,7 @@ class SetIconAdapter : ListAdapter<IconPackItemUi, SetIconAdapter.IconViewHolder
                 }
 
                 binding.btnAction.setOnClickListener {
-                    if (state != SetIconState.APPLIED) {
-                        onActionClick?.invoke(item, state)
-                    }
+                    onActionClick?.invoke(item, state)
                 }
             }.start()
         }

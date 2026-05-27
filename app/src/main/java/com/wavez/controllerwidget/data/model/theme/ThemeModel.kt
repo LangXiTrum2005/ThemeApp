@@ -26,6 +26,8 @@ data class ThemeModel(
     val wallpaper: ThemeWallpaperModel,
     @param:Json(name = "icons")
     val icons: List<IconItemModel>,
+    @param:Json(name = "tags")
+    val tags: List<String> = emptyList(),
 ) : Parcelable {
     fun isVip(): Boolean {
         return premium == 1

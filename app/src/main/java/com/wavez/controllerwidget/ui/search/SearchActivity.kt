@@ -5,20 +5,24 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.inputmethod.EditorInfo
 import androidx.activity.viewModels
+import androidx.core.view.updatePadding
 import androidx.core.view.isVisible
 import androidx.core.widget.doAfterTextChanged
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.wavez.controllerwidget.R
 import com.wavez.controllerwidget.core.base.BaseActivity
 import com.wavez.controllerwidget.core.extensions.collectWithLifecycle
 import com.wavez.controllerwidget.core.extensions.hideKeyboard
 import com.wavez.controllerwidget.core.extensions.showKeyboard
 import com.wavez.controllerwidget.databinding.ActivitySearchBinding
+import com.wavez.controllerwidget.ui.home.fragment.icons.adapter.IconAdapter
 import com.wavez.controllerwidget.ui.home.fragment.theme.adapter.ThemeAdapter
 import com.wavez.controllerwidget.ui.home.fragment.wallpaper.adapter.WallpaperAdapter
 import com.wavez.controllerwidget.ui.search.adapter.SearchChipAdapter
 import com.wavez.controllerwidget.ui.search.model.SearchMode
 import com.wavez.controllerwidget.ui.search.model.SearchUiState
 import com.wavez.controllerwidget.ui.search.viewmodel.SearchViewModel
+import com.wavez.controllerwidget.ui.iconpack.SetIconsActivity
 import com.wavez.controllerwidget.ui.theme.activities.PreviewThemeActivity
 import com.wavez.controllerwidget.ui.wallpaper.PreviewWallpaperActivity
 import dagger.hilt.android.AndroidEntryPoint
@@ -42,6 +46,7 @@ class SearchActivity : BaseActivity<ActivitySearchBinding>() {
     private val viewModel by viewModels<SearchViewModel>()
     private val themeAdapter = ThemeAdapter()
     private val wallpaperAdapter = WallpaperAdapter()
+    private val iconAdapter = IconAdapter()
     private val popularAdapter = SearchChipAdapter()
     private val searchMode by lazy {
         runCatching {
@@ -54,18 +59,28 @@ class SearchActivity : BaseActivity<ActivitySearchBinding>() {
         binding.rcvThemes.adapter = when (searchMode) {
             SearchMode.THEMES -> themeAdapter
             SearchMode.WALLPAPERS -> wallpaperAdapter
+            SearchMode.ICONS -> iconAdapter.also {
+                binding.rcvThemes.layoutManager = LinearLayoutManager(this)
+                val horizontalPadding = resources.getDimensionPixelSize(R.dimen._8sdp)
+                binding.rcvThemes.updatePadding(
+                    left = horizontalPadding,
+                    right = horizontalPadding,
+                )
+            }
         }
         binding.rcvPopular.adapter = popularAdapter
         binding.edSearch.setHint(
             when (searchMode) {
                 SearchMode.THEMES -> R.string.search_themes
                 SearchMode.WALLPAPERS -> R.string.search_wallpapers
+                SearchMode.ICONS -> R.string.search_icons
             }
         )
         binding.tvNewestTitle.setText(
             when (searchMode) {
                 SearchMode.THEMES -> R.string.newest_themes
                 SearchMode.WALLPAPERS -> R.string.newest_wallpapers
+                SearchMode.ICONS -> R.string.newest_icons
             }
         )
         binding.edSearch.showKeyboard()
@@ -107,6 +122,9 @@ class SearchActivity : BaseActivity<ActivitySearchBinding>() {
         wallpaperAdapter.onClickItem = { wallpaper ->
             startActivity(PreviewWallpaperActivity.newIntent(this, wallpaper))
         }
+        iconAdapter.onClickItem = { pack ->
+            startActivity(SetIconsActivity.newIntent(this, pack.id, pack.name))
+        }
     }
 
     override fun initObserver() {
@@ -135,6 +153,7 @@ class SearchActivity : BaseActivity<ActivitySearchBinding>() {
         when (state.mode) {
             SearchMode.THEMES -> themeAdapter.set(state.themes)
             SearchMode.WALLPAPERS -> wallpaperAdapter.set(state.wallpapers)
+            SearchMode.ICONS -> iconAdapter.set(state.iconPacks)
         }
         binding.tvEmpty.text = getString(
             R.string.no_results_found_for,

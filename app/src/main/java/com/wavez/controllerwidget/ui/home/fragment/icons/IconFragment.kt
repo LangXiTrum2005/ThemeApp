@@ -5,13 +5,17 @@ import android.util.Log
 import android.view.View
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
-import com.example.m65_gamemodefps.core.base.BaseFragment
+import com.wavez.controllerwidget.core.base.BaseFragment
 import com.wavez.controllerwidget.R
 import com.wavez.controllerwidget.core.base.UiState
 import com.wavez.controllerwidget.core.extensions.collectWithLifecycle
 import com.wavez.controllerwidget.databinding.FragmentIconBinding
 import com.wavez.controllerwidget.ui.home.fragment.icons.adapter.IconAdapter
 import com.wavez.controllerwidget.ui.home.fragment.icons.viewmodel.IconsViewModel
+import com.wavez.controllerwidget.ui.iconpack.SetIconsActivity
+import com.wavez.controllerwidget.ui.premium.PremiumActivity
+import com.wavez.controllerwidget.ui.search.SearchActivity
+import com.wavez.controllerwidget.ui.search.model.SearchMode
 import com.wavez.controllerwidget.ui.setting.SettingActivity
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -37,11 +41,26 @@ class IconFragment : BaseFragment<FragmentIconBinding>() {
         binding.rcvIcons.adapter = iconAdapter
     }
 
+    override fun onResume() {
+        super.onResume()
+        binding.toolbar.btnPremium.isVisible = !sharedPref.isVip
+    }
+
+
     override fun initListener() {
         super.initListener()
         binding.toolbar.btnSetting.setOnClickListener {
             startActivity(SettingActivity.newIntent(requireContext()))
         }
+
+        binding.toolbar.btnPremium.setOnClickListener {
+            startActivity(PremiumActivity.newIntent(requireContext()))
+        }
+
+        binding.edSearch.setOnClickListener {
+            startActivity(SearchActivity.newIntent(requireContext(), SearchMode.ICONS))
+        }
+
 
         binding.viewError.setOnRetryClickListener {
             viewModel.getIcons()
@@ -49,7 +68,7 @@ class IconFragment : BaseFragment<FragmentIconBinding>() {
 
         iconAdapter.onClickItem = { pack ->
             startActivity(
-                com.wavez.controllerwidget.ui.iconpack.SetIconsActivity.newIntent(
+                SetIconsActivity.newIntent(
                     requireContext(), pack.id, pack.name
                 )
             )

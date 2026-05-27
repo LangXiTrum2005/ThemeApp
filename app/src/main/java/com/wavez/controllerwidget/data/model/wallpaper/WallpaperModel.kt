@@ -14,9 +14,7 @@ typealias WallpaperListResponse = ApiResponse<List<WallpaperModel>>
 data class WallpaperModel(
     @param:Json(name = "id")
     override val id: String = "",
-    @param:Json(name = "name")
-    override val name: String,
-    @param:Json(name = "thumb")
+    @param:Json(name = "thumb_small")
     override val thumb: String,
     @param:Json(name = "is_vip")
     override val premium: Int,
@@ -24,6 +22,8 @@ data class WallpaperModel(
     override val url: String,
     @param:Json(name = "category_id")
     override val categoryId: String,
+    @param:Json(name = "tags")
+    val tags: List<String> = emptyList(),
 ) : ThemeRemoteItem, Parcelable {
         fun isVip(): Boolean {
             return premium == 1

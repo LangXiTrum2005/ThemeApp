@@ -10,7 +10,7 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.viewpager2.widget.ViewPager2
-import com.example.m65_gamemodefps.core.base.BaseFragment
+import com.wavez.controllerwidget.core.base.BaseFragment
 import com.google.android.material.tabs.TabLayoutMediator
 import com.wavez.controllerwidget.R
 import com.wavez.controllerwidget.core.base.UiState
@@ -23,6 +23,7 @@ import com.wavez.controllerwidget.ui.home.fragment.theme.adapter.ThemeBannerAdap
 import com.wavez.controllerwidget.ui.home.fragment.theme.adapter.ThemeCategoryPagerAdapter
 import com.wavez.controllerwidget.ui.home.fragment.theme.transformer.ThemeBannerPageTransformer
 import com.wavez.controllerwidget.ui.home.fragment.theme.viewmodel.ThemeViewModel
+import com.wavez.controllerwidget.ui.premium.PremiumActivity
 import com.wavez.controllerwidget.ui.search.SearchActivity
 import com.wavez.controllerwidget.ui.search.model.SearchMode
 import com.wavez.controllerwidget.ui.setting.SettingActivity
@@ -66,10 +67,19 @@ class ThemeFragment : BaseFragment<FragmentThemeBinding>() {
         startBannerAutoScroll()
     }
 
+    override fun onResume() {
+        super.onResume()
+        binding.toolbar.btnPremium.isVisible = !sharedPref.isVip
+    }
+
     override fun initListener() {
         super.initListener()
         binding.toolbar.btnSetting.setOnClickListener {
             startActivity(SettingActivity.newIntent(requireContext()))
+        }
+
+        binding.toolbar.btnPremium.setOnClickListener {
+            startActivity(PremiumActivity.newIntent(requireContext()))
         }
 
         binding.edSearch.setOnClickListener {
@@ -114,6 +124,7 @@ class ThemeFragment : BaseFragment<FragmentThemeBinding>() {
 
     override fun initObserver() {
         super.initObserver()
+
         viewModel.categoriesResult.collectWithLifecycle(this) { state ->
             when (state) {
                 is UiState.Data -> {
@@ -177,8 +188,10 @@ class ThemeFragment : BaseFragment<FragmentThemeBinding>() {
     private fun setupBanners(categories: List<ThemeCategoryModel>) {
         val bannerCategories = categories.filter { !it.banner.isNullOrBlank() }
         binding.vpBanner.isVisible = bannerCategories.isNotEmpty()
-        bannerAdapter.submit(bannerCategories)
-        if (bannerCategories.size >= MIN_INFINITE_BANNER_COUNT) {
+        val bannersChanged = bannerAdapter.submit(bannerCategories)
+        if (bannerCategories.size >= MIN_INFINITE_BANNER_COUNT &&
+            (bannersChanged || binding.vpBanner.currentItem == 0)
+        ) {
             val startPosition = Int.MAX_VALUE / 2
             binding.vpBanner.setCurrentItem(
                 startPosition - bannerAdapter.realPosition(startPosition),

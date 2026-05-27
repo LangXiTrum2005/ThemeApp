@@ -9,11 +9,18 @@ import android.content.IntentFilter
 import android.content.pm.ShortcutInfo
 import android.content.pm.ShortcutManager
 import android.graphics.Bitmap
+import android.graphics.Canvas
+import android.graphics.Color
+import android.graphics.Paint
+import android.graphics.PorterDuff
+import android.graphics.Rect
 import android.graphics.drawable.Icon
 import android.os.SystemClock
 import androidx.core.content.ContextCompat
+import androidx.core.graphics.createBitmap
 import androidx.core.net.toUri
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.DecodeFormat
 import com.wavez.controllerwidget.ui.iconpack.activities.ShortcutProxyActivity
 import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.Dispatchers
@@ -32,6 +39,8 @@ class IconShortcutInstaller @Inject constructor(
         const val SHORTCUT_URI_SCHEME = "controllerwidget"
         const val SHORTCUT_URI_HOST = "shortcut"
         const val ACTION_SHORTCUT_PINNED = "com.wavez.controllerwidget.action.SHORTCUT_PINNED"
+
+        private const val ICON_SIZE = 256
     }
 
     suspend fun installShortcut(
@@ -50,7 +59,15 @@ class IconShortcutInstaller @Inject constructor(
         val mainActivity = launchIntent.component?.className
             ?: error("Cannot find launcher activity for $targetPackageName")
 
-        val bitmap = loadIconBitmap(customIconUrl)
+        val src = loadIconBitmap(customIconUrl)
+
+        val bitmap = try {
+            createShortcutIconBitmap(src)
+        } finally {
+            if (!src.isRecycled) src.recycle()
+        }
+
+
         val proxyComponent = ComponentName(context, ShortcutProxyActivity::class.java)
         val targetIntent = Intent(
             Intent.ACTION_VIEW,
@@ -67,7 +84,7 @@ class IconShortcutInstaller @Inject constructor(
             .setShortLabel(label)
             .setLongLabel(label)
             .setActivity(proxyComponent)
-            .setIcon(Icon.createWithAdaptiveBitmap(bitmap))
+            .setIcon(Icon.createWithBitmap(bitmap))
             .setIntent(targetIntent)
             .build()
 
@@ -88,7 +105,8 @@ class IconShortcutInstaller @Inject constructor(
         shortcutManager: ShortcutManager,
         shortcut: ShortcutInfo,
     ) = suspendCancellableCoroutine { continuation ->
-        val callbackAction = "$ACTION_SHORTCUT_PINNED.${shortcut.id}.${SystemClock.elapsedRealtimeNanos()}"
+        val callbackAction =
+            "$ACTION_SHORTCUT_PINNED.${shortcut.id}.${SystemClock.elapsedRealtimeNanos()}"
         val callbackIntent = Intent(callbackAction).setPackage(context.packageName)
         val receiver = object : BroadcastReceiver() {
             override fun onReceive(context: Context, intent: Intent) {
@@ -126,12 +144,37 @@ class IconShortcutInstaller @Inject constructor(
         }
     }
 
-    private suspend fun loadIconBitmap(url: String): Bitmap = withContext(Dispatchers.IO) {
-        Glide.with(context)
-            .asBitmap()
-            .load(url)
-            .submit()
-            .get()
+    private suspend fun loadIconBitmap(url: String): Bitmap =
+        withContext(Dispatchers.IO) {
+            Glide.with(context)
+                .asBitmap()
+                .load(url)
+                .override(ICON_SIZE, ICON_SIZE)
+                .centerInside()
+                .format(DecodeFormat.PREFER_ARGB_8888)
+                .disallowHardwareConfig()
+                .submit(ICON_SIZE, ICON_SIZE)
+                .get()
+        }
+
+    private fun createShortcutIconBitmap(src: Bitmap): Bitmap {
+        val size = ICON_SIZE
+
+        val output = createBitmap(size, size)
+        val canvas = Canvas(output)
+
+        canvas.drawColor(Color.TRANSPARENT, PorterDuff.Mode.CLEAR)
+
+        val paint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
+            isFilterBitmap = true
+            isDither = true
+        }
+
+        val rect = Rect(0, 0, size, size)
+
+        canvas.drawBitmap(src, null, rect, paint)
+
+        return output
     }
 
     private fun shortcutIdForPackage(packageName: String): String {

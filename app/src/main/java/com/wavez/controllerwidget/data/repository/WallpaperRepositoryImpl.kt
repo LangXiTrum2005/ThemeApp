@@ -1,7 +1,6 @@
 package com.wavez.controllerwidget.data.repository
 
 import android.net.Uri
-import com.wavez.controllerwidget.core.di.IoDispatcher
 import com.wavez.controllerwidget.core.download.DownloadState
 import com.wavez.controllerwidget.core.download.WallpaperDownloader
 import com.wavez.controllerwidget.core.wallpaper.WallpaperManagerCore
@@ -13,11 +12,13 @@ import com.wavez.controllerwidget.data.local.dao.DownloadedWallpaperDao
 import com.wavez.controllerwidget.data.local.entity.DownloadedWallpaperEntity
 import com.wavez.controllerwidget.data.local.wallpaper.WallpaperStorageManager
 import com.wavez.controllerwidget.data.model.DownloadedResInfo
+import com.wavez.controllerwidget.data.model.PopularCategoryModel
 import com.wavez.controllerwidget.data.model.WallpaperCategoryModel
 import com.wavez.controllerwidget.data.model.wallpaper.WallpaperModel
 import com.wavez.controllerwidget.data.model.wallpaper.WallpaperType
 import com.wavez.controllerwidget.data.model.wallpaper.wallpaperType
 import com.wavez.controllerwidget.data.network.api.ControllerWidgetApiService
+import com.wavez.controllerwidget.di.IoDispatcher
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.channelFlow
@@ -40,6 +41,7 @@ class WallpaperRepositoryImpl @Inject constructor(
 
     private var cachedCategories: List<WallpaperCategoryModel>? = null
     private var cachedWallpapers: List<WallpaperModel>? = null
+    private var cachedMostPopularWallpapers: List<PopularCategoryModel>? = null
 
     override suspend fun getCategoriesUnlimited(
         forceRefresh: Boolean
@@ -61,6 +63,17 @@ class WallpaperRepositoryImpl @Inject constructor(
 
         return repositoryRequest { apiService.getAllWallpapersUnlimited() }
             .onSuccess { cachedWallpapers = it }
+    }
+
+    override suspend fun getMostPopularWallpapers(
+        forceRefresh: Boolean
+    ): Result<List<PopularCategoryModel>> {
+        if (!forceRefresh) {
+            cachedMostPopularWallpapers?.let { return Result.success(it) }
+        }
+
+        return repositoryRequest { apiService.getMostPopularWallpapers() }
+            .onSuccess { cachedMostPopularWallpapers = it }
     }
 
     override suspend fun getWallpapersByCategory(
@@ -147,10 +160,8 @@ class WallpaperRepositoryImpl @Inject constructor(
             }
             .flowOn(ioDispatcher)
 
-    override fun canDownloadWallpaper(wallpaper: WallpaperModel): Boolean {
-        return wallpaper.isFree ||
-            sharedPref.isVip ||
-            sharedPref.isWallpaperUnlocked(wallpaper.id)
+    override fun checkUnlockWallpaper(wallpaper: WallpaperModel): Boolean {
+        return sharedPref.isVip || !wallpaper.isVip() || sharedPref.isWallpaperUnlocked(wallpaper.id)
     }
 
     override fun unlockWallpaper(wallpaper: WallpaperModel) {
@@ -191,10 +202,4 @@ class WallpaperRepositoryImpl @Inject constructor(
         return downloaded ?: error("Download produced no file for ${wallpaper.id}")
     }
 
-    private val WallpaperModel.isFree: Boolean
-        get() = premium == FREE_WALLPAPER
-
-    private companion object {
-        const val FREE_WALLPAPER = 0
-    }
 }

@@ -21,10 +21,12 @@ class ThemeBannerAdapter : RecyclerView.Adapter<ThemeBannerAdapter.BannerViewHol
         get() = categories.size
 
     @SuppressLint("NotifyDataSetChanged")
-    fun submit(items: List<ThemeCategoryModel>) {
+    fun submit(items: List<ThemeCategoryModel>): Boolean {
+        if (categories == items) return false
         categories.clear()
         categories.addAll(items)
         notifyDataSetChanged()
+        return true
     }
 
     fun realPosition(position: Int): Int {

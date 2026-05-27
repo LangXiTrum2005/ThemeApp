@@ -13,15 +13,25 @@
         android:layout_height="wrap_content"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/edSearch"
+        style="@style/CustomSearchView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:text="@string/search_icons"
+        app:layout_constraintTop_toBottomOf="@id/toolbar" />
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rcvIcons"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:orientation="vertical"
+        android:layout_marginTop="8dp"
         android:paddingHorizontal="16dp"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar"
+        app:layout_constraintTop_toBottomOf="@+id/edSearch"
         tools:listitem="@layout/item_icon" />
 
     <com.wavez.controllerwidget.ui.customview.ServerErrorView

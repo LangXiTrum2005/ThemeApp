@@ -22,7 +22,8 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.4" />
 
     <androidx.appcompat.widget.AppCompatTextView
         style="@style/NunitoBold.24"
@@ -43,7 +44,7 @@
         android:text="@string/this_action_may_show_ads"
         android:textAlignment="center"
         android:textColor="@color/text_high_em"
-        android:textSize="@dimen/_11sdp"
+        style="@style/NunitoMedium.14"
         app:layout_constraintBottom_toTopOf="@+id/progressSplash"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
@@ -57,12 +58,18 @@
         android:max="100"
         android:progress="5"
         app:indicatorColor="@color/primary_med_em"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/banner_ads"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:trackColor="@color/surface_3"
         app:trackCornerRadius="50dp"
         app:trackStopIndicatorSize="0dp"
         app:trackThickness="10dp" />
+
+    <com.ads.admob.banner_ads.BannerAdView
+        android:id="@+id/banner_ads"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -124,6 +124,30 @@
             android:value="ca-app-pub-3940256099942544~3347511713" />
 
         <activity
+            android:name=".ui.setting.feedback.FeedbackActivity"
+            android:exported="true"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".ui.premium.PremiumActivity"
+            android:exported="true"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".ui.language.activity.OnboardingLanguageActivity"
+            android:screenOrientation="portrait"
+            android:exported="true" />
+        <activity
+            android:name=".ui.language.activity.SettingLanguageActivity"
+            android:screenOrientation="portrait"
+            android:exported="true" />
+
+        <activity
+            android:name=".ui.onboarding.WalkthroughActivity"
+            android:screenOrientation="portrait"
+            android:exported="true" />
+
+        <activity
             android:name=".ui.theme.activities.PreviewThemeActivity"
             android:exported="false"
             android:screenOrientation="portrait" />

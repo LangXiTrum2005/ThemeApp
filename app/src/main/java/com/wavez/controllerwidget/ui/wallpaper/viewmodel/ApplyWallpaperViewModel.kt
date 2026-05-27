@@ -12,6 +12,7 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
+
 @HiltViewModel
 class ApplyWallpaperViewModel @Inject constructor(
     private val wallpaperRepository: WallpaperRepository
@@ -24,10 +25,10 @@ class ApplyWallpaperViewModel @Inject constructor(
 
     var currentWallpaper: WallpaperModel? = null
 
-    fun getWallpapersByCategory() {
+    fun getWallpapersByCategory(categoryId: String = currentWallpaper?.categoryId.orEmpty()) {
         viewModelScope.launch(Dispatchers.IO) {
             _wallpapersState.value = UiState.Loading
-            wallpaperRepository.getAllWallpapersUnlimited()
+            wallpaperRepository.getWallpapersByCategory(categoryId)
                 .onSuccess { wallpapers ->
 
                     val filtered = wallpapers.filter {

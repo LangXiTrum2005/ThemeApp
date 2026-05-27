@@ -14,18 +14,20 @@ import com.wavez.controllerwidget.core.extensions.collectWithLifecycle
 import com.wavez.controllerwidget.core.icons.IconShortcutInstaller
 import com.wavez.controllerwidget.data.model.AppInfo
 import com.wavez.controllerwidget.databinding.ActivitySetIconsBinding
+import com.wavez.controllerwidget.ui.dialog.PremiumThemeDialog
 import com.wavez.controllerwidget.ui.iconpack.adapter.SetIconAdapter
 import com.wavez.controllerwidget.ui.iconpack.dialog.SelectAppBottomSheetDialog
 import com.wavez.controllerwidget.ui.iconpack.model.IconPackItemUi
 import com.wavez.controllerwidget.ui.iconpack.model.SetIconState
 import com.wavez.controllerwidget.ui.iconpack.viewmodel.IconPackDetailViewModel
+import com.wavez.controllerwidget.ui.premium.PremiumActivity
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @AndroidEntryPoint
 class SetIconsActivity : BaseActivity<ActivitySetIconsBinding>(),
-    SelectAppBottomSheetDialog.OnAppSelectedListener {
+    SelectAppBottomSheetDialog.OnAppSelectedListener, PremiumThemeDialog.PremiumThemeListener {
 
     companion object {
         private const val EXTRA_PACK_ID = "extra_pack_id"
@@ -61,6 +63,13 @@ class SetIconsActivity : BaseActivity<ActivitySetIconsBinding>(),
         viewModel.load(packId)
     }
 
+    override fun onVipChangedState(isPremium: Boolean) {
+        super.onVipChangedState(isPremium)
+        if (isPremium) {
+            viewModel.refreshUnlockState()
+        }
+    }
+
     override fun initListener() {
         super.initListener()
         binding.btnBack.setOnClickListener { onHandleBackPressed() }
@@ -74,9 +83,10 @@ class SetIconsActivity : BaseActivity<ActivitySetIconsBinding>(),
         }
 
         adapter.onActionClick = { item, state ->
+            viewModel.itemIconPackItemUi = item
             when (state) {
                 SetIconState.APPLIED -> installShortcut(item)
-                SetIconState.UNLOCK -> unlockIcon(item)
+                SetIconState.UNLOCK -> unlockIcon()
                 SetIconState.INSTALL -> installShortcut(item)
                 SetIconState.CHOOSE -> showSelectApp(item)
             }
@@ -124,8 +134,9 @@ class SetIconsActivity : BaseActivity<ActivitySetIconsBinding>(),
         )
     }
 
-    private fun unlockIcon(item: IconPackItemUi) {
-        viewModel.unlockIcon(item)
+    private fun unlockIcon() {
+        PremiumThemeDialog.newInstance()
+            .show(supportFragmentManager, PremiumThemeDialog::class.java.simpleName)
     }
 
     private fun installShortcut(item: IconPackItemUi) {
@@ -175,5 +186,13 @@ class SetIconsActivity : BaseActivity<ActivitySetIconsBinding>(),
 
     override fun onAppSelected(appInfo: AppInfo) {
         viewModel.applySelectedApp(appInfo)
+    }
+
+    override fun onWatchAdsComplete() {
+        viewModel.unlockIcon()
+    }
+
+    override fun onGoPremiumClick() {
+        startActivity(PremiumActivity.newIntent(this))
     }
 }

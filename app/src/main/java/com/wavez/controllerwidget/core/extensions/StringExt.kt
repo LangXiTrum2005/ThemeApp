@@ -7,6 +7,8 @@ import java.text.Normalizer
 import java.util.Locale
 import java.util.regex.Pattern
 
+fun String.normalized(): String = lowercase().filter { it.isLetterOrDigit() }
+
 fun String.normalText(): String {
     val nfdNormalizedString: String = Normalizer.normalize(this, Normalizer.Form.NFD)
     val pattern: Pattern = Pattern.compile("\\p{InCombiningDiacriticalMarks}+")

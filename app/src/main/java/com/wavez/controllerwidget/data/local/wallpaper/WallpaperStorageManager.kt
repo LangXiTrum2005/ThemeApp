@@ -1,6 +1,6 @@
 package com.wavez.controllerwidget.data.local.wallpaper
 
-import com.wavez.controllerwidget.core.di.IoDispatcher
+import com.wavez.controllerwidget.di.IoDispatcher
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.withContext
 import java.io.File

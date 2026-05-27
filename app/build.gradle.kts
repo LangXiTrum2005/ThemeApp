@@ -74,6 +74,8 @@ base {
 }
 
 dependencies {
+    implementation(project(":billing_library"))
+    implementation(project(":ken_ads"))
     implementation(libs.androidx.activity.ktx)
     implementation(libs.androidx.fragment.ktx)
     implementation(libs.androidx.constraintlayout)

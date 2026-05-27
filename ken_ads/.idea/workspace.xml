@@ -1,0 +1,260 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="NONE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="04d80e45-90ef-4d46-8c17-b73621e23d83" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/../app/src/main/java/com/wavez/ardraw/ui/notification/MyFirebaseMessagingService.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/build.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/../app/build.gradle.kts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/google-services.json" beforeDir="false" afterPath="$PROJECT_DIR$/../app/google-services.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/proguard-rules.pro" beforeDir="false" afterPath="$PROJECT_DIR$/../app/proguard-rules.pro" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../app/src/main/AndroidManifest.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/java/com/wavez/ardraw/App.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../app/src/main/java/com/wavez/ardraw/App.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/java/com/wavez/ardraw/ads/AdsId.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../app/src/main/java/com/wavez/ardraw/ads/AdsId.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/java/com/wavez/ardraw/ads/AppRemoteConfig.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../app/src/main/java/com/wavez/ardraw/ads/AppRemoteConfig.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/java/com/wavez/ardraw/ads/AppRemoteConfigImpl.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../app/src/main/java/com/wavez/ardraw/ads/AppRemoteConfigImpl.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/java/com/wavez/ardraw/ads/FullScreenNativeAdFragment.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../app/src/main/java/com/wavez/ardraw/ads/FullScreenNativeAdFragment.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/java/com/wavez/ardraw/core/base/BaseActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../app/src/main/java/com/wavez/ardraw/core/base/BaseActivity.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/java/com/wavez/ardraw/core/utils/ShareUtils.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../app/src/main/java/com/wavez/ardraw/core/utils/ShareUtils.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/java/com/wavez/ardraw/data/pref/AdsSharePref.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../app/src/main/java/com/wavez/ardraw/data/pref/AdsSharePref.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/java/com/wavez/ardraw/data/pref/AdsSharePrefImpl.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../app/src/main/java/com/wavez/ardraw/data/pref/AdsSharePrefImpl.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/java/com/wavez/ardraw/data/pref/SharedPref.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../app/src/main/java/com/wavez/ardraw/data/pref/SharedPref.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/java/com/wavez/ardraw/data/pref/SharedPrefImpl.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../app/src/main/java/com/wavez/ardraw/data/pref/SharedPrefImpl.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/java/com/wavez/ardraw/data/repo/ArDrawRepository.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../app/src/main/java/com/wavez/ardraw/data/repo/ArDrawRepository.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/java/com/wavez/ardraw/data/repo/ArDrawRepositoryImpl.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../app/src/main/java/com/wavez/ardraw/data/repo/ArDrawRepositoryImpl.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/java/com/wavez/ardraw/data/repo/LanguageRepositoryImpl.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../app/src/main/java/com/wavez/ardraw/data/repo/LanguageRepositoryImpl.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/java/com/wavez/ardraw/data/repo/PremiumRepository.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../app/src/main/java/com/wavez/ardraw/data/repo/PremiumRepository.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/java/com/wavez/ardraw/di/UseCaseModule.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../app/src/main/java/com/wavez/ardraw/di/UseCaseModule.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/java/com/wavez/ardraw/domain/usecase/deleteFavourite/DeleteFavouriteUseCase.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../app/src/main/java/com/wavez/ardraw/data/service/deleteFavourite/DeleteFavouriteUseCase.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/java/com/wavez/ardraw/domain/usecase/deleteFavourite/DeleteFavouriteUseCaseImpl.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../app/src/main/java/com/wavez/ardraw/data/service/deleteFavourite/DeleteFavouriteUseCaseImpl.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/java/com/wavez/ardraw/domain/usecase/getLearnContents/GetLearnContentsUseCase.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../app/src/main/java/com/wavez/ardraw/data/service/getLearnContents/GetLearnContentsUseCase.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/java/com/wavez/ardraw/domain/usecase/getLearnContents/GetLearnContentsUseCaseImpl.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../app/src/main/java/com/wavez/ardraw/data/service/getLearnContents/GetLearnContentsUseCaseImpl.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/java/com/wavez/ardraw/domain/usecase/getLearnContents/GetLearnUnlockUseCase.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../app/src/main/java/com/wavez/ardraw/data/service/getLearnContents/GetLearnUnlockUseCase.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/java/com/wavez/ardraw/domain/usecase/getLearnContents/SetLearnUnlockUseCase.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../app/src/main/java/com/wavez/ardraw/data/service/getLearnContents/SetLearnUnlockUseCase.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/java/com/wavez/ardraw/domain/usecase/getTypoFonts/GetTypoFontUseCase.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../app/src/main/java/com/wavez/ardraw/data/service/getTypoFonts/GetTypoFontUseCase.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/java/com/wavez/ardraw/domain/usecase/getTypoFonts/GetTypoFontUseCaseImpl.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../app/src/main/java/com/wavez/ardraw/data/service/getTypoFonts/GetTypoFontUseCaseImpl.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/java/com/wavez/ardraw/domain/usecase/loadAlbumFiles/LoadAlbumFilesUseCase.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../app/src/main/java/com/wavez/ardraw/data/service/loadAlbumFiles/LoadAlbumFilesUseCase.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/java/com/wavez/ardraw/domain/usecase/loadAlbumFiles/LoadAlbumFilesUseCaseImpl.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../app/src/main/java/com/wavez/ardraw/data/service/loadAlbumFiles/LoadAlbumFilesUseCaseImpl.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/java/com/wavez/ardraw/domain/usecase/loadRecordFiles/LoadRecordFilesUseCase.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../app/src/main/java/com/wavez/ardraw/data/service/loadRecordFiles/LoadRecordFilesUseCase.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/java/com/wavez/ardraw/domain/usecase/loadRecordFiles/LoadRecordFilesUseCaseImpl.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../app/src/main/java/com/wavez/ardraw/data/service/loadRecordFiles/LoadRecordFilesUseCaseImpl.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/java/com/wavez/ardraw/domain/usecase/setFavouriteStatus/SetFavouriteStatusUseCase.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../app/src/main/java/com/wavez/ardraw/data/service/setFavouriteStatus/SetFavouriteStatusUseCase.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/java/com/wavez/ardraw/domain/usecase/setFavouriteStatus/SetFavouriteStatusUseCaseImpl.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../app/src/main/java/com/wavez/ardraw/data/service/setFavouriteStatus/SetFavouriteStatusUseCaseImpl.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/java/com/wavez/ardraw/domain/usecase/vipTypoFontUseCase/VipTypoFontUseCase.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../app/src/main/java/com/wavez/ardraw/data/service/vipTypoFontUseCase/VipTypoFontUseCase.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/java/com/wavez/ardraw/domain/usecase/vipTypoFontUseCase/VipTypoFontUseCaseImpl.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../app/src/main/java/com/wavez/ardraw/data/service/vipTypoFontUseCase/VipTypoFontUseCaseImpl.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/java/com/wavez/ardraw/domain/util/ApiHandler.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../app/src/main/java/com/wavez/ardraw/core/utils/ApiHandler.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/java/com/wavez/ardraw/domain/util/CustomSnackbar.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../app/src/main/java/com/wavez/ardraw/core/utils/CustomSnackbar.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/java/com/wavez/ardraw/domain/util/GrantPermission.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../app/src/main/java/com/wavez/ardraw/core/utils/GrantPermission.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/java/com/wavez/ardraw/domain/util/LanguageProvider.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../app/src/main/java/com/wavez/ardraw/data/provider/LanguageProvider.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/java/com/wavez/ardraw/domain/util/LocalImageProvider.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/java/com/wavez/ardraw/domain/util/NetworkUtil.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../app/src/main/java/com/wavez/ardraw/core/utils/NetworkUtil.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/java/com/wavez/ardraw/domain/util/ResponseStatus.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../app/src/main/java/com/wavez/ardraw/core/utils/ResponseStatus.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/java/com/wavez/ardraw/domain/util/ToastHelper.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../app/src/main/java/com/wavez/ardraw/core/utils/ToastHelper.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/java/com/wavez/ardraw/presentation/collection/CollectionViewModel.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../app/src/main/java/com/wavez/ardraw/ui/mygallery/MyGalleryViewModel.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/java/com/wavez/ardraw/presentation/collection/MyGalleryActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../app/src/main/java/com/wavez/ardraw/ui/mygallery/MyGalleryActivity.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/java/com/wavez/ardraw/presentation/collection/pages/MultiselectFragment.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../app/src/main/java/com/wavez/ardraw/ui/mygallery/pages/MultiselectFragment.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/java/com/wavez/ardraw/presentation/collection/pages/adapters/AlbumAdapter.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../app/src/main/java/com/wavez/ardraw/ui/mygallery/pages/adapters/AlbumAdapter.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/java/com/wavez/ardraw/presentation/collection/pages/adapters/CollectionViewPagerAdapter.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../app/src/main/java/com/wavez/ardraw/ui/mygallery/pages/adapters/CollectionViewPagerAdapter.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/java/com/wavez/ardraw/presentation/collection/pages/adapters/FavouriteDrawAdapter.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../app/src/main/java/com/wavez/ardraw/ui/mygallery/pages/adapters/FavouriteDrawAdapter.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/java/com/wavez/ardraw/presentation/collection/pages/adapters/MultiselectAdapter.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../app/src/main/java/com/wavez/ardraw/ui/mygallery/pages/adapters/MultiselectAdapter.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/java/com/wavez/ardraw/presentation/collection/pages/adapters/RecordAdapter.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../app/src/main/java/com/wavez/ardraw/ui/mygallery/pages/adapters/RecordAdapter.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/java/com/wavez/ardraw/presentation/collection/pages/album/AlbumFragment.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../app/src/main/java/com/wavez/ardraw/ui/mygallery/pages/album/AlbumFragment.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/java/com/wavez/ardraw/presentation/collection/pages/favourite/FavouriteFragment.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../app/src/main/java/com/wavez/ardraw/ui/mygallery/pages/favourite/FavouriteFragment.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/java/com/wavez/ardraw/presentation/collection/pages/records/RecordFragment.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../app/src/main/java/com/wavez/ardraw/ui/mygallery/pages/records/RecordFragment.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/java/com/wavez/ardraw/presentation/dialog/DeleteDialog.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../app/src/main/java/com/wavez/ardraw/ui/dialog/DeleteDialog.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/java/com/wavez/ardraw/presentation/dialog/ExitQuestionDialogFragment.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../app/src/main/java/com/wavez/ardraw/ui/dialog/ExitQuestionDialogFragment.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/java/com/wavez/ardraw/presentation/dialog/FinishDrawingDialog.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../app/src/main/java/com/wavez/ardraw/ui/dialog/FinishDrawingDialog.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/java/com/wavez/ardraw/presentation/dialog/FontPopup.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../app/src/main/java/com/wavez/ardraw/ui/dialog/FontPopup.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/java/com/wavez/ardraw/presentation/dialog/LostConnectionDialog.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../app/src/main/java/com/wavez/ardraw/ui/dialog/LostConnectionDialog.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/java/com/wavez/ardraw/presentation/dialog/NotificationPermissionDialog.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../app/src/main/java/com/wavez/ardraw/ui/dialog/NotificationPermissionDialog.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/java/com/wavez/ardraw/presentation/dialog/PremiumContentDialog.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../app/src/main/java/com/wavez/ardraw/ui/dialog/PremiumContentDialog.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/java/com/wavez/ardraw/presentation/dialog/RateDialogFragment.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../app/src/main/java/com/wavez/ardraw/ui/dialog/RateDialogFragment.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/java/com/wavez/ardraw/presentation/dialog/SaveQuestionDialogFragment.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../app/src/main/java/com/wavez/ardraw/ui/dialog/SaveQuestionDialogFragment.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/java/com/wavez/ardraw/presentation/dialog/StoragePermissionDialog.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../app/src/main/java/com/wavez/ardraw/ui/dialog/StoragePermissionDialog.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/java/com/wavez/ardraw/presentation/dialog/TutorialDrawDialog.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../app/src/main/java/com/wavez/ardraw/ui/dialog/TutorialDrawDialog.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/java/com/wavez/ardraw/presentation/dialog/UpdateDialog.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../app/src/main/java/com/wavez/ardraw/ui/dialog/UpdateDialog.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/java/com/wavez/ardraw/presentation/dialog/WelcomeBackActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../app/src/main/java/com/wavez/ardraw/ui/dialog/WelcomeBackActivity.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/java/com/wavez/ardraw/presentation/dialog/WelcomeBackDialog.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../app/src/main/java/com/wavez/ardraw/ui/dialog/WelcomeBackDialog.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/java/com/wavez/ardraw/presentation/language/LanguageAdapter.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../app/src/main/java/com/wavez/ardraw/ui/language/LanguageAdapter.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/java/com/wavez/ardraw/presentation/language/LanguageViewModel.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../app/src/main/java/com/wavez/ardraw/ui/language/LanguageViewModel.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/java/com/wavez/ardraw/presentation/language/activity/BaseLanguageActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../app/src/main/java/com/wavez/ardraw/ui/language/activity/BaseLanguageActivity.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/java/com/wavez/ardraw/presentation/language/activity/OnboardingLanguageActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../app/src/main/java/com/wavez/ardraw/ui/language/activity/OnboardingLanguageActivity.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/java/com/wavez/ardraw/presentation/language/activity/SettingLanguageActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../app/src/main/java/com/wavez/ardraw/ui/language/activity/SettingLanguageActivity.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/java/com/wavez/ardraw/presentation/launch/LaunchActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../app/src/main/java/com/wavez/ardraw/ui/launch/LaunchActivity.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/java/com/wavez/ardraw/presentation/launch/LaunchViewModel.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../app/src/main/java/com/wavez/ardraw/ui/launch/LaunchViewModel.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/java/com/wavez/ardraw/presentation/learn/LearnActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../app/src/main/java/com/wavez/ardraw/ui/learn/LearnActivity.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/java/com/wavez/ardraw/presentation/learn/LearnViewModel.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../app/src/main/java/com/wavez/ardraw/ui/learn/LearnViewModel.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/java/com/wavez/ardraw/presentation/learn/adapter/LearnAdapter.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../app/src/main/java/com/wavez/ardraw/ui/learn/adapter/LearnAdapter.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/java/com/wavez/ardraw/presentation/main/HomeActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../app/src/main/java/com/wavez/ardraw/ui/main/HomeActivity.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/java/com/wavez/ardraw/presentation/main/HomeViewModel.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../app/src/main/java/com/wavez/ardraw/ui/main/HomeViewModel.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/java/com/wavez/ardraw/presentation/onboarding/WalkthroughActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../app/src/main/java/com/wavez/ardraw/ui/onboarding/WalkthroughActivity.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/java/com/wavez/ardraw/presentation/onboarding/adapter/HabitsAdapter.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../app/src/main/java/com/wavez/ardraw/ui/onboarding/adapter/HabitsAdapter.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/java/com/wavez/ardraw/presentation/onboarding/adapter/OnboardingViewPagerAdapter.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../app/src/main/java/com/wavez/ardraw/ui/onboarding/adapter/OnboardingViewPagerAdapter.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/java/com/wavez/ardraw/presentation/onboarding/model/BoardingData.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../app/src/main/java/com/wavez/ardraw/ui/onboarding/model/BoardingData.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/java/com/wavez/ardraw/presentation/onboarding/model/Habits.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../app/src/main/java/com/wavez/ardraw/ui/onboarding/model/Habits.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/java/com/wavez/ardraw/presentation/onboarding/page/OnboardingDetailFragment.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../app/src/main/java/com/wavez/ardraw/ui/onboarding/page/OnboardingDetailFragment.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/java/com/wavez/ardraw/presentation/onboarding/provider/HabitsProvider.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../app/src/main/java/com/wavez/ardraw/ui/onboarding/provider/HabitsProvider.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/java/com/wavez/ardraw/presentation/onboarding/provider/OnboardingProvider.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../app/src/main/java/com/wavez/ardraw/ui/onboarding/provider/OnboardingProvider.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/java/com/wavez/ardraw/presentation/premium/BillingConstant.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../app/src/main/java/com/wavez/ardraw/ui/premium/BillingConstant.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/java/com/wavez/ardraw/presentation/premium/PremiumActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../app/src/main/java/com/wavez/ardraw/ui/premium/PremiumActivity.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/java/com/wavez/ardraw/presentation/premium/PremiumViewModel.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../app/src/main/java/com/wavez/ardraw/ui/premium/PremiumViewModel.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/java/com/wavez/ardraw/presentation/premium/dialog/DialogFailedPremium.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../app/src/main/java/com/wavez/ardraw/ui/premium/dialog/DialogFailedPremium.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/java/com/wavez/ardraw/presentation/premium/dialog/DialogSuccessPremium.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../app/src/main/java/com/wavez/ardraw/ui/premium/dialog/DialogSuccessPremium.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/java/com/wavez/ardraw/presentation/premium/model/PremiumPlan.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../app/src/main/java/com/wavez/ardraw/ui/premium/model/PremiumPlan.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/java/com/wavez/ardraw/presentation/premium/model/ResponseState.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../app/src/main/java/com/wavez/ardraw/ui/premium/model/ResponseState.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/java/com/wavez/ardraw/presentation/preview/PreviewActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../app/src/main/java/com/wavez/ardraw/ui/preview/PreviewActivity.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/java/com/wavez/ardraw/presentation/preview/PreviewViewModel.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../app/src/main/java/com/wavez/ardraw/ui/preview/PreviewViewModel.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/java/com/wavez/ardraw/presentation/result/ResultActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../app/src/main/java/com/wavez/ardraw/ui/result/ResultActivity.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/java/com/wavez/ardraw/presentation/setting/SettingActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../app/src/main/java/com/wavez/ardraw/ui/setting/SettingActivity.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/java/com/wavez/ardraw/presentation/setting/feedback/FeedbackActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../app/src/main/java/com/wavez/ardraw/ui/setting/feedback/FeedbackActivity.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/java/com/wavez/ardraw/presentation/setting/feedback/FeedbackViewModel.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../app/src/main/java/com/wavez/ardraw/ui/setting/feedback/FeedbackViewModel.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/java/com/wavez/ardraw/presentation/setting/feedback/adapter/FeedbackImageAdapter.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../app/src/main/java/com/wavez/ardraw/ui/setting/feedback/adapter/FeedbackImageAdapter.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/java/com/wavez/ardraw/presentation/sketch/SketchActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../app/src/main/java/com/wavez/ardraw/ui/sketch/SketchActivity.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/java/com/wavez/ardraw/presentation/sketch/SketchViewModel.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../app/src/main/java/com/wavez/ardraw/ui/sketch/SketchViewModel.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/java/com/wavez/ardraw/presentation/sketch/adapter/CategoryDrawAdapter.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../app/src/main/java/com/wavez/ardraw/ui/sketch/adapter/CategoryDrawAdapter.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/java/com/wavez/ardraw/presentation/template/CategoryDetailTemplateActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../app/src/main/java/com/wavez/ardraw/ui/template/CategoryDetailTemplateActivity.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/java/com/wavez/ardraw/presentation/template/adapters/DrawAdapter.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../app/src/main/java/com/wavez/ardraw/ui/template/adapters/DrawAdapter.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/java/com/wavez/ardraw/presentation/template/preview/AppDrawActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../app/src/main/java/com/wavez/ardraw/ui/template/preview/AppDrawActivity.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/java/com/wavez/ardraw/presentation/template/preview/dialog/CameraPermissionDialog.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../app/src/main/java/com/wavez/ardraw/ui/template/preview/dialog/CameraPermissionDialog.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/java/com/wavez/ardraw/presentation/template/preview/dialog/StartRecordDialog.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../app/src/main/java/com/wavez/ardraw/ui/template/preview/dialog/StartRecordDialog.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/java/com/wavez/ardraw/presentation/template/preview/template/ArDrawingActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../app/src/main/java/com/wavez/ardraw/ui/template/preview/template/ArDrawingActivity.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/java/com/wavez/ardraw/presentation/template/preview/tracing/TracingActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../app/src/main/java/com/wavez/ardraw/ui/template/preview/tracing/TracingActivity.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/java/com/wavez/ardraw/presentation/template/support/Constant.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../app/src/main/java/com/wavez/ardraw/ui/template/support/Constant.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/java/com/wavez/ardraw/presentation/template/support/customview/CustomSpinner.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../app/src/main/java/com/wavez/ardraw/ui/template/support/customview/CustomSpinner.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/java/com/wavez/ardraw/presentation/template/support/customview/RotateZoomImageView.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../app/src/main/java/com/wavez/ardraw/ui/template/support/customview/RotateZoomImageView.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/java/com/wavez/ardraw/presentation/template/support/customview/SketchImage.java" beforeDir="false" afterPath="$PROJECT_DIR$/../app/src/main/java/com/wavez/ardraw/ui/template/support/customview/SketchImage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/java/com/wavez/ardraw/presentation/template/support/customview/SystemUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/../app/src/main/java/com/wavez/ardraw/ui/template/support/customview/SystemUtil.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/java/com/wavez/ardraw/presentation/template/viewmodel/CategoryDetailTemplateViewModel.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../app/src/main/java/com/wavez/ardraw/ui/template/viewmodel/CategoryDetailTemplateViewModel.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/java/com/wavez/ardraw/presentation/template/viewmodel/TemplateViewModel.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../app/src/main/java/com/wavez/ardraw/ui/template/viewmodel/TemplateViewModel.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/java/com/wavez/ardraw/presentation/text_art/CreateTextActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../app/src/main/java/com/wavez/ardraw/ui/text_art/CreateTextActivity.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/java/com/wavez/ardraw/presentation/text_art/TypoActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../app/src/main/java/com/wavez/ardraw/ui/text_art/TypoActivity.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/java/com/wavez/ardraw/presentation/text_art/adapter/TypoFontAdapter.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../app/src/main/java/com/wavez/ardraw/ui/text_art/adapter/TypoFontAdapter.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/java/com/wavez/ardraw/presentation/text_art/custom/NonClippingTextView.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../app/src/main/java/com/wavez/ardraw/ui/text_art/custom/NonClippingTextView.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/java/com/wavez/ardraw/presentation/text_art/viewmodel/CreateTextViewModel.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../app/src/main/java/com/wavez/ardraw/ui/text_art/viewmodel/CreateTextViewModel.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/java/com/wavez/ardraw/presentation/text_art/viewmodel/TypoViewModel.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../app/src/main/java/com/wavez/ardraw/ui/text_art/viewmodel/TypoViewModel.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/java/com/wavez/ardraw/presentation/uninstall/UninstallActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../app/src/main/java/com/wavez/ardraw/ui/uninstall/UninstallActivity.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/java/com/wavez/ardraw/presentation/uninstall/UninstallViewModel.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../app/src/main/java/com/wavez/ardraw/ui/uninstall/UninstallViewModel.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/java/com/wavez/ardraw/presentation/uninstall/adapter/ReasonAdapter.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../app/src/main/java/com/wavez/ardraw/ui/uninstall/adapter/ReasonAdapter.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/java/com/wavez/ardraw/presentation/uninstall/adapter/UninstallViewPagerAdapter.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../app/src/main/java/com/wavez/ardraw/ui/uninstall/adapter/UninstallViewPagerAdapter.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/java/com/wavez/ardraw/presentation/uninstall/pages/ReasonFragment.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../app/src/main/java/com/wavez/ardraw/ui/uninstall/pages/ReasonFragment.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/java/com/wavez/ardraw/presentation/uninstall/pages/UninstallFragment.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../app/src/main/java/com/wavez/ardraw/ui/uninstall/pages/UninstallFragment.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/java/com/wavez/ardraw/presentation/viewmodel/PermissionViewModel.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../app/src/main/java/com/wavez/ardraw/ui/viewmodel/PermissionViewModel.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/java/com/wavez/ardraw/presentation/viewmodel/SupportViewModel.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../app/src/main/java/com/wavez/ardraw/ui/viewmodel/SupportViewModel.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/java/com/wavez/ardraw/utils/Constance.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../app/src/main/java/com/wavez/ardraw/utils/Constance.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/java/com/wavez/ardraw/utils/Utils.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../app/src/main/java/com/wavez/ardraw/utils/Utils.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/res/layout/activity_category_detail_template.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../app/src/main/res/layout/activity_category_detail_template.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/res/layout/activity_create_text.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../app/src/main/res/layout/activity_create_text.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/res/layout/activity_feedback.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../app/src/main/res/layout/activity_feedback.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/res/layout/activity_home.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../app/src/main/res/layout/activity_home.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/res/layout/activity_learn.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../app/src/main/res/layout/activity_learn.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/res/layout/activity_my_gallery.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../app/src/main/res/layout/activity_my_gallery.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/res/layout/activity_premium.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../app/src/main/res/layout/activity_premium.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/res/layout/activity_preview.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../app/src/main/res/layout/activity_preview.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/res/layout/activity_setting.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../app/src/main/res/layout/activity_setting.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/res/layout/activity_sketch.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../app/src/main/res/layout/activity_sketch.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/res/layout/activity_typo.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../app/src/main/res/layout/activity_typo.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/res/layout/activity_uninstall.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../app/src/main/res/layout/activity_uninstall.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/res/layout/activity_walkthrough.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../app/src/main/res/layout/activity_walkthrough.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/res/layout/dialog_welcome_back.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../app/src/main/res/layout/dialog_welcome_back.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/res/layout/fragment_album.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../app/src/main/res/layout/fragment_album.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/res/layout/fragment_dialog_exit_record.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../app/src/main/res/layout/fragment_dialog_exit_record.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/res/layout/fragment_draw_with_gallery.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../app/src/main/res/layout/fragment_draw_with_gallery.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/res/layout/fragment_favourite.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../app/src/main/res/layout/fragment_favourite.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/res/layout/fragment_habits.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../app/src/main/res/layout/fragment_habits.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/res/layout/fragment_multiselect.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../app/src/main/res/layout/fragment_multiselect.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/res/layout/fragment_onboarding_detail.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../app/src/main/res/layout/fragment_onboarding_detail.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/res/layout/fragment_reason.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../app/src/main/res/layout/fragment_reason.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/res/layout/fragment_record.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../app/src/main/res/layout/fragment_record.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/res/layout/fragment_template_draw.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../app/src/main/res/layout/fragment_template_draw.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/res/layout/template_activity.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../app/src/main/res/layout/template_activity.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/res/layout/tracing_activity.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../app/src/main/res/layout/tracing_activity.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/res/values-ar/strings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../app/src/main/res/values-ar/strings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/res/values-da/strings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../app/src/main/res/values-da/strings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/res/values-de/strings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../app/src/main/res/values-de/strings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/res/values-el/strings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../app/src/main/res/values-el/strings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/res/values-es-rES/strings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../app/src/main/res/values-es-rES/strings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/res/values-es-rUS/strings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../app/src/main/res/values-es-rUS/strings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/res/values-es/strings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../app/src/main/res/values-es/strings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/res/values-fi/strings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../app/src/main/res/values-fi/strings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/res/values-fr-rCA/strings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../app/src/main/res/values-fr-rCA/strings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/res/values-fr/strings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../app/src/main/res/values-fr/strings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/res/values-hi/strings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../app/src/main/res/values-hi/strings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/res/values-it/strings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../app/src/main/res/values-it/strings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/res/values-ja/strings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../app/src/main/res/values-ja/strings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/res/values-ko/strings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../app/src/main/res/values-ko/strings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/res/values-no/strings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../app/src/main/res/values-no/strings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/res/values-pl/strings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../app/src/main/res/values-pl/strings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/res/values-pt-rBR/strings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../app/src/main/res/values-pt-rBR/strings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/res/values-pt/strings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../app/src/main/res/values-pt/strings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/res/values-ru/strings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../app/src/main/res/values-ru/strings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/res/values-sv/strings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../app/src/main/res/values-sv/strings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/res/values-th/strings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../app/src/main/res/values-th/strings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/res/values-tl/strings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../app/src/main/res/values-tl/strings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/res/values-tr/strings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../app/src/main/res/values-tr/strings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/res/values-vi/strings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../app/src/main/res/values-vi/strings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/res/values-zh-rCN/strings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../app/src/main/res/values-zh-rCN/strings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/res/values-zh-rHK/strings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../app/src/main/res/values-zh-rHK/strings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/res/values-zh-rTW/strings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../app/src/main/res/values-zh-rTW/strings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/res/values-zh/strings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../app/src/main/res/values-zh/strings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/res/values/strings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../app/src/main/res/values/strings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/res/xml/shortcuts.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../app/src/main/res/xml/shortcuts.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../gradle/libs.versions.toml" beforeDir="false" afterPath="$PROJECT_DIR$/../gradle/libs.versions.toml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ads/admob/AdLoadingDialog.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ads/admob/AdLoadingDialog.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ads/admob/open_ads/OpenAdManager.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ads/admob/open_ads/OpenAdManager.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ads/admob/open_ads/OpenAdManagerImpl.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ads/admob/open_ads/OpenAdManagerImpl.kt" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ClangdSettings">
+    <option name="formatViaClangd" value="false" />
+  </component>
+  <component name="CopilotPersistence">
+    <persistenceIdMap>
+      <entry key="_D:/m66_ar_drawing/mobile_ads" value="3C6rMOzlIh2t0eBJayI8tK870Zj" />
+    </persistenceIdMap>
+  </component>
+  <component name="ProjectColorInfo"><![CDATA[{
+  "associatedIndex": 5
+}]]></component>
+  <component name="ProjectId" id="3C6rMOzlIh2t0eBJayI8tK870Zj" />
+  <component name="ProjectViewState">
+    <option name="autoscrollFromSource" value="true" />
+    <option name="autoscrollToSource" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.cidr.known.project.marker": "true",
+    "RunOnceActivity.readMode.enableVisualFormatting": "true",
+    "android.gradle.sync.needed": "true",
+    "cf.first.check.clang-format": "false",
+    "cidr.known.project.marker": "true",
+    "dart.analysis.tool.window.visible": "false",
+    "kotlin-language-version-configured": "true",
+    "show.migrate.to.gradle.popup": "false"
+  }
+}]]></component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="04d80e45-90ef-4d46-8c17-b73621e23d83" name="Changes" comment="" />
+      <created>1775716811311</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1775716811311</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="github-copilot-workspace">
+    <instructionFileLocations>
+      <option value=".github/instructions" />
+    </instructionFileLocations>
+    <promptFileLocations>
+      <option value=".github/prompts" />
+    </promptFileLocations>
+  </component>
+</project>

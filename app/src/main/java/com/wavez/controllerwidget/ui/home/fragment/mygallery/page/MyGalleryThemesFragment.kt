@@ -4,7 +4,7 @@ import android.os.Bundle
 import android.view.View
 import androidx.core.view.isVisible
 import androidx.fragment.app.activityViewModels
-import com.example.m65_gamemodefps.core.base.BaseFragment
+import com.wavez.controllerwidget.core.base.BaseFragment
 import com.wavez.controllerwidget.core.base.UiState
 import com.wavez.controllerwidget.core.extensions.collectWithLifecycle
 import com.wavez.controllerwidget.data.model.theme.ThemeModel

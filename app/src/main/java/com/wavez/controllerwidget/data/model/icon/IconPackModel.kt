@@ -12,10 +12,8 @@ typealias IconPackListResponse = ApiResponse<List<IconPackModel>>
 data class IconPackModel(
     @param:Json(name = "id") val id: String,
     @param:Json(name = "name") val name: String,
-    @param:Json(name = "description") val description: String? = null,
     @param:Json(name = "thumbnail_url") val thumb: String,
     @param:Json(name = "is_premium") val premium: Int,
-    @param:Json(name = "download_url") val url: String,
     @param:Json(name = "icons") val icons: List<IconItemModel>? = null,
 ) {
     fun isVip(): Boolean {

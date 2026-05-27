@@ -4,13 +4,13 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.wavez.controllerwidget.core.base.UiState
 import com.wavez.controllerwidget.core.download.DownloadState
-import com.wavez.controllerwidget.core.icons.IconShortcutInstaller
 import com.wavez.controllerwidget.core.wallpaper.model.WallpaperTarget
 import com.wavez.controllerwidget.data.local.InstalledAppProvider
 import com.wavez.controllerwidget.data.model.AppInfo
 import com.wavez.controllerwidget.data.model.theme.ThemeModel
 import com.wavez.controllerwidget.data.model.wallpaper.WallpaperModel
 import com.wavez.controllerwidget.data.repository.SharedPref
+import com.wavez.controllerwidget.data.repository.ThemeRepository
 import com.wavez.controllerwidget.data.repository.WallpaperRepository
 import com.wavez.controllerwidget.ui.iconpack.mapper.IconPackItemMapper
 import com.wavez.controllerwidget.ui.iconpack.mapper.IconPackItemMapper.Companion.normalizedAppName
@@ -33,7 +33,7 @@ class GetThemeViewModel @Inject constructor(
     private val sharedPref: SharedPref,
     private val iconPackItemMapper: IconPackItemMapper,
     private val wallpaperRepository: WallpaperRepository,
-    private val iconShortcutInstaller: IconShortcutInstaller,
+    private val themeRepository: ThemeRepository
 ) : ViewModel() {
 
     private val _iconsState = MutableStateFlow<UiState<List<IconPackItemUi>>>(UiState.Idle)
@@ -62,6 +62,8 @@ class GetThemeViewModel @Inject constructor(
     private val manualMappings = mutableMapOf<Long, AppInfo>()
     private val appliedIconIds = mutableSetOf<Long>()
     private var pendingIconId: Long? = null
+
+    var itemIconPackItemUi : IconPackItemUi? = null
 
     fun load(theme: ThemeModel) {
         currentTheme = theme
@@ -111,6 +113,15 @@ class GetThemeViewModel @Inject constructor(
         }
     }
 
+    fun canDownloadCurrentWallpaper(): Boolean {
+        val theme = currentTheme ?: return false
+        return themeRepository.checkUnlockWallpaper(theme)
+    }
+
+    fun unlockCurrentWallpaper() {
+        currentTheme?.let(themeRepository::unlockWallpaper)
+    }
+
     fun selectPage(page: GetThemePage) {
         _selectedPage.value = page
     }
@@ -132,9 +143,25 @@ class GetThemeViewModel @Inject constructor(
         }
     }
 
-    fun unlockIcon(item: IconPackItemUi) {
-        sharedPref.unlockIcon(item.id.toString())
-        updateSingleIcon(item.id)
+    fun unlockIcon() {
+        itemIconPackItemUi?.let { item ->
+            sharedPref.unlockIcon(item.id.toString())
+            updateSingleIcon(item.id)
+        }
+    }
+
+    fun refreshUnlockState() {
+        refreshIconState()
+    }
+
+    private fun refreshIconState() {
+        val currentState = iconsState.value as? UiState.Data ?: return
+        val iconsById = currentTheme?.icons.orEmpty().associateBy(iconPackItemMapper::stableId)
+        _iconsState.value = UiState.Data(
+            currentState.value.map { item ->
+                iconsById[item.id]?.let(::mapIcon) ?: item
+            }
+        )
     }
 
     fun markIconApplied(iconId: Long) {
@@ -183,8 +210,7 @@ class GetThemeViewModel @Inject constructor(
             manualMapping = manualMappings[iconId],
         )
         return item.copy(
-            isApplied = appliedIconIds.contains(iconId) ||
-                item.targetPackageName?.let(iconShortcutInstaller::isShortcutPinned) == true
+            isApplied = appliedIconIds.contains(iconId)
         )
     }
 
@@ -197,9 +223,8 @@ class GetThemeViewModel @Inject constructor(
     private fun ThemeModel.toWallpaperModel(): WallpaperModel {
         return WallpaperModel(
             id = wallpaper.id,
-            name = name,
             thumb = wallpaper.thumb,
-            premium = 0,
+            premium = premium,
             url = wallpaper.url,
             categoryId = categoryId,
         )

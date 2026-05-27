@@ -1,6 +1,6 @@
 package com.wavez.controllerwidget.data.local.controller
 
-import com.wavez.controllerwidget.core.di.IoDispatcher
+import com.wavez.controllerwidget.di.IoDispatcher
 import com.wavez.controllerwidget.data.local.ThemeStorageConfig
 import com.wavez.controllerwidget.data.local.unzipSafely
 import kotlinx.coroutines.CoroutineDispatcher

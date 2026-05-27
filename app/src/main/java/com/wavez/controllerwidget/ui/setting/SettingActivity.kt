@@ -9,6 +9,8 @@ import com.wavez.controllerwidget.R
 import com.wavez.controllerwidget.core.base.BaseActivity
 import com.wavez.controllerwidget.core.extensions.openUrl
 import com.wavez.controllerwidget.databinding.ActivitySettingBinding
+import com.wavez.controllerwidget.ui.language.activity.SettingLanguageActivity
+import com.wavez.controllerwidget.ui.setting.feedback.FeedbackActivity
 import com.wavez.controllerwidget.ui.utils.EMAIL
 import com.wavez.controllerwidget.ui.utils.PRIVACY_POLICY_URL
 import dagger.hilt.android.AndroidEntryPoint
@@ -42,33 +44,11 @@ class SettingActivity : BaseActivity<ActivitySettingBinding>() {
         }
 
         binding.btnFeedback.setOnClickListener {
-            sendFeedbackEmail(this)
+            startActivity(FeedbackActivity.newIntent(this))
+        }
+
+        binding.btnLanguage.setOnClickListener {
+            startActivity(SettingLanguageActivity.newIntent(this))
         }
     }
-
-
-    private fun sendFeedbackEmail(
-        context: Context,
-        email: String = EMAIL,
-        subject: String = getString(R.string.app_name)
-    ) {
-        val body = buildString {
-            appendLine()
-            appendLine()
-            appendLine("----- Device Info -----")
-            appendLine("App package: ${context.packageName}")
-            appendLine("Android: ${Build.VERSION.RELEASE}")
-            appendLine("SDK: ${Build.VERSION.SDK_INT}")
-            appendLine("Device: ${Build.MANUFACTURER} ${Build.MODEL}")
-        }
-
-        val intent = Intent(Intent.ACTION_SENDTO).apply {
-            data = "mailto:$email".toUri()
-            putExtra(Intent.EXTRA_SUBJECT, subject)
-            putExtra(Intent.EXTRA_TEXT, body)
-        }
-
-        context.startActivity(intent)
-    }
-
 }

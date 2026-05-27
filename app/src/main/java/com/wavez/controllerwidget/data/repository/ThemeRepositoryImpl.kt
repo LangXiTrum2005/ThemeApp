@@ -1,8 +1,9 @@
 package com.wavez.controllerwidget.data.repository
 
-import com.wavez.controllerwidget.core.di.IoDispatcher
+import com.wavez.controllerwidget.di.IoDispatcher
 import com.wavez.controllerwidget.data.local.dao.DownloadedThemeDao
 import com.wavez.controllerwidget.data.local.entity.DownloadedThemeEntity
+import com.wavez.controllerwidget.data.model.PopularCategoryModel
 import com.wavez.controllerwidget.data.model.theme.ThemeCategoryModel
 import com.wavez.controllerwidget.data.model.theme.ThemeModel
 import com.wavez.controllerwidget.data.model.theme.ThemeWallpaperModel
@@ -19,11 +20,13 @@ import javax.inject.Singleton
 class ThemeRepositoryImpl @Inject constructor(
     private val apiService: ControllerWidgetApiService,
     private val downloadedThemeDao: DownloadedThemeDao,
+    private val sharedPref: SharedPref,
     @param:IoDispatcher private val ioDispatcher: CoroutineDispatcher,
 ) : ThemeRepository {
 
     private var cachedCategories: List<ThemeCategoryModel>? = null
     private var cachedThemes: List<ThemeModel>? = null
+    private var cachedMostPopularThemes: List<PopularCategoryModel>? = null
 
     override suspend fun getThemeCategories(
         forceRefresh: Boolean,
@@ -41,6 +44,14 @@ class ThemeRepositoryImpl @Inject constructor(
         }
         return repositoryRequest { apiService.getThemes() }
             .onSuccess { cachedThemes = it }
+    }
+
+    override suspend fun getMostPopularThemes(forceRefresh: Boolean): Result<List<PopularCategoryModel>> {
+        if (!forceRefresh) {
+            cachedMostPopularThemes?.let { return Result.success(it) }
+        }
+        return repositoryRequest { apiService.getMostPopularThemes() }
+            .onSuccess { cachedMostPopularThemes = it }
     }
 
     override suspend fun getThemeById(
@@ -76,6 +87,16 @@ class ThemeRepositoryImpl @Inject constructor(
         downloadedThemeDao.getThemeAll()
             .map { entities -> entities.map { it.toThemeModel() } }
             .flowOn(ioDispatcher)
+
+    override fun checkUnlockWallpaper(theme: ThemeModel): Boolean {
+        return sharedPref.isVip ||
+            !theme.isVip() ||
+            sharedPref.isThemeWallpaperUnlocked(theme.wallpaper.id)
+    }
+
+    override fun unlockWallpaper(theme: ThemeModel) {
+        sharedPref.unlockThemeWallpaper(theme.wallpaper.id)
+    }
 
     private fun ThemeModel.toDownloadedEntity(): DownloadedThemeEntity {
         return DownloadedThemeEntity(

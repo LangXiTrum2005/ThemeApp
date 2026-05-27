@@ -4,8 +4,7 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.content.pm.ApplicationInfo
-import android.content.pm.PackageManager
-import com.wavez.controllerwidget.core.di.IoDispatcher
+import com.wavez.controllerwidget.di.IoDispatcher
 import com.wavez.controllerwidget.data.model.AppInfo
 import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.CoroutineDispatcher

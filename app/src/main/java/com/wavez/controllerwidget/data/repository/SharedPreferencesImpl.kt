@@ -217,6 +217,22 @@ class SharedPreferencesImpl(context: Context) : SharedPref {
             putBoolean(AppRemoteConfig.SHOULD_SHOW_NATIVE_AD_ON_WALKTHROUGH_1, value)
         }
 
+    override var shouldShowNativeObd2: Boolean
+        get() = sharedPref.getBoolean(AppRemoteConfig.SHOULD_SHOW_NATIVE_AD_ON_WALKTHROUGH_2, true)
+        set(value) {
+            sharedPref.edit {
+                putBoolean(AppRemoteConfig.SHOULD_SHOW_NATIVE_AD_ON_WALKTHROUGH_2, value)
+            }
+        }
+
+    override var shouldShowNativeObd3: Boolean
+        get() = sharedPref.getBoolean(AppRemoteConfig.SHOULD_SHOW_NATIVE_AD_ON_WALKTHROUGH_3, true)
+        set(value) {
+            sharedPref.edit {
+                putBoolean(AppRemoteConfig.SHOULD_SHOW_NATIVE_AD_ON_WALKTHROUGH_3, value)
+            }
+        }
+
     override var shouldShowNativeObd1Click: Boolean
         get() = sharedPref.getBoolean(
             AppRemoteConfig.SHOULD_SHOW_NATIVE_AD_ON_WALKTHROUGH_1_CLICK,

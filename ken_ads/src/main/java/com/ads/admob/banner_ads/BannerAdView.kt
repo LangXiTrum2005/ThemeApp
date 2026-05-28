@@ -117,6 +117,10 @@ class BannerAdView @JvmOverloads constructor(
         visibility = GONE
     }
 
+    fun showBannerView() {
+        visibility = VISIBLE
+    }
+
     private fun destroy() {
         if (!isDestroyed) {
             isDestroyed = true

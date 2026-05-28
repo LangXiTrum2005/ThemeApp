@@ -16,6 +16,8 @@ import com.wavez.controllerwidget.databinding.ActivityLaunchBinding
 import com.wavez.controllerwidget.ui.home.MainActivity
 import com.wavez.controllerwidget.ui.language.activity.OnboardingLanguageActivity
 import com.wavez.controllerwidget.ui.premium.PremiumActivity
+import com.wavez.controllerwidget.ui.utils.AppEvent
+import com.wavez.controllerwidget.ui.utils.FirebaseControlLogEvent
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.isActive
@@ -55,8 +57,22 @@ class LaunchActivity : BaseActivity<ActivityLaunchBinding>() {
 
     override fun initConfig(savedInstanceState: Bundle?) {
         super.initConfig(savedInstanceState)
+        logSplashViewEvent()
         viewModel.preloadData()
         getInstanceGdpr()
+    }
+
+    private fun logSplashViewEvent() {
+        val isReopen = sharedPref.hasLoggedSplashView
+        val event = if (isReopen) {
+            AppEvent.SPLASH_REOPEN_VIEW
+        } else {
+            AppEvent.SPLASH_1ST_VIEW
+        }
+        FirebaseControlLogEvent.logEvent(event)
+        if (!isReopen) {
+            sharedPref.hasLoggedSplashView = true
+        }
     }
 
     private fun getInstanceGdpr() {

@@ -33,6 +33,14 @@ object AdsId {
         }
     }
 
+    fun getBannerInAppAds(): String {
+        return if (BuildConfig.DEBUG) {
+            BANNER_TEST_ADS
+        } else {
+            "ca-app-pub-3438626400465865/8934867060"
+        }
+    }
+
     // --- Interstitial / Popup lists ---
     fun getListInterstitialAdsSplash(): List<String> {
         return if (BuildConfig.DEBUG) {
@@ -134,7 +142,7 @@ object AdsId {
         }
     }
 
-    fun getNativeBoostSuccessAds(): List<String> {
+    fun getNativeInAppAds(): List<String> {
         return if (BuildConfig.DEBUG) {
             listOf(NATIVE_AD_ID_TEST)
         } else {
@@ -144,57 +152,6 @@ object AdsId {
             )
         }
     }
-
-    fun getNativeConfig1(): List<String> {
-        return if (BuildConfig.DEBUG) {
-            listOf(NATIVE_AD_ID_TEST)
-        } else {
-            listOf(
-                "ca-app-pub-3438626400465865/6786150210",
-            )
-        }
-    }
-
-    fun getNativeConfig2(): List<String> {
-        return if (BuildConfig.DEBUG) {
-            listOf(NATIVE_AD_ID_TEST)
-        } else {
-            listOf(
-                "ca-app-pub-3438626400465865/2659202947",
-            )
-        }
-    }
-
-    fun getNativeConfig3(): List<String> {
-        return if (BuildConfig.DEBUG) {
-            listOf(NATIVE_AD_ID_TEST)
-        } else {
-            listOf(
-                "ca-app-pub-3438626400465865/1697475067",
-            )
-        }
-    }
-
-    fun getNativeConfig4(): List<String> {
-        return if (BuildConfig.DEBUG) {
-            listOf(NATIVE_AD_ID_TEST)
-        } else {
-            listOf(
-                "ca-app-pub-3438626400465865/7719957932",
-            )
-        }
-    }
-
-    fun getNativeSelectApp(): List<String> {
-        return if (BuildConfig.DEBUG) {
-            listOf(NATIVE_AD_ID_TEST)
-        } else {
-            listOf(
-                "ca-app-pub-3438626400465865/6368413471",
-            )
-        }
-    }
-
 
     // --- Rewarded ---
     fun getRewardedSelectAds(): List<String> {

@@ -49,6 +49,8 @@ interface SharedPref {
 
     var openAdsGap: Long
 
+    var nativeGap : Long
+
     var lastTimeShowOpenAdSplash : Long
 
     var shouldShowNativeLanguage1: Boolean
@@ -89,4 +91,7 @@ interface SharedPref {
     fun isIconUnlocked(iconId: String): Boolean
 
     fun unlockIcon(iconId: String)
+
+    var hasLoggedSplashView: Boolean
+    var hasLoggedHomeView: Boolean
 }

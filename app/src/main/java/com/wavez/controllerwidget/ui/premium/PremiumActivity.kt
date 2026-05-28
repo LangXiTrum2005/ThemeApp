@@ -183,11 +183,13 @@ class PremiumActivity : BaseActivity<ActivityPremiumBinding>(),
     }
 
     override fun onHandleBackPressed() {
-        if (!isMain) {
-            startActivity(MainActivity.newIntent(this))
-            finish()
-        } else {
-            super.onHandleBackPressed()
+        executeWithAds {
+            if (!isMain) {
+                startActivity(MainActivity.newIntent(this))
+                finish()
+            } else {
+                super.onHandleBackPressed()
+            }
         }
     }
 

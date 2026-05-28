@@ -3,7 +3,7 @@ package com.wavez.controllerwidget.data.repository
 import android.content.Context
 import android.content.SharedPreferences
 import androidx.core.content.edit
-import com.wavez.controllerwidget.BuildConfig
+import com.wavez.controllerwidget.Secrets
 import com.wavez.controllerwidget.ads.AppRemoteConfig
 
 class SharedPreferencesImpl(context: Context) : SharedPref {
@@ -55,6 +55,9 @@ class SharedPreferencesImpl(context: Context) : SharedPref {
         private const val IS_NEED_SHOW_LANGUAGE = "is_need_show_language"
 
         private const val IS_NEED_GOTO_WALKTHROUGH = "is_need_goto_walkthrough"
+
+        private const val HAS_LOGGED_SPLASH_VIEW = "has_logged_splash_view"
+        private const val HAS_LOGGED_HOME_VIEW = "has_logged_home_view"
     }
 
     override val sharedPref: SharedPreferences =
@@ -89,7 +92,7 @@ class SharedPreferencesImpl(context: Context) : SharedPref {
         }
 
     override var severRoot: String
-        get() = sharedPref.getString(SERVER_ROOT, BuildConfig.BASE_URL) ?: BuildConfig.BASE_URL
+        get() = sharedPref.getString(SERVER_ROOT, Secrets.INSTANCE.getBaseURL()) ?: Secrets.INSTANCE.getBaseURL()
         set(value) {
             editor.putString(SERVER_ROOT, value).apply()
         }
@@ -177,6 +180,11 @@ class SharedPreferencesImpl(context: Context) : SharedPref {
         set(value) {
             editor.putLong(AppRemoteConfig.OPEN_ADS_GAP_KEY, value).commit()
         }
+    override var nativeGap: Long
+        get() = sharedPref.getLong(AppRemoteConfig.NATIVE_GAP, 10_000L)
+        set(value) {
+            editor.putLong(AppRemoteConfig.NATIVE_GAP, value).commit()
+        }
 
 
     override var lastTimeShowOpenAdSplash: Long
@@ -248,6 +256,8 @@ class SharedPreferencesImpl(context: Context) : SharedPref {
         set(value) {
             sharedPref.edit { putBoolean(AppRemoteConfig.SHOULD_SHOW_BANNER_HOME, value) }
         }
+
+
     override var shouldShowNativeHome: Boolean
         get() = sharedPref.getBoolean(AppRemoteConfig.SHOULD_SHOW_NATIVE_HOME, true)
         set(value) {
@@ -347,5 +357,17 @@ class SharedPreferencesImpl(context: Context) : SharedPref {
         unlockedIds.add(iconId)
         sharedPref.edit { putStringSet(UNLOCKED_ICON_IDS, unlockedIds) }
     }
+
+    override var hasLoggedSplashView: Boolean
+        get() = sharedPref.getBoolean(HAS_LOGGED_SPLASH_VIEW, false)
+        set(value) {
+            editor.putBoolean(HAS_LOGGED_SPLASH_VIEW, value).apply()
+        }
+
+    override var hasLoggedHomeView: Boolean
+        get() = sharedPref.getBoolean(HAS_LOGGED_HOME_VIEW, false)
+        set(value) {
+            editor.putBoolean(HAS_LOGGED_HOME_VIEW, value).apply()
+        }
 
 }

@@ -40,6 +40,7 @@ class IconPackDetailViewModel @Inject constructor(
     private val manualMappings = mutableMapOf<Long, AppInfo>()
     private val appliedIconIds = mutableSetOf<Long>()
     private var pendingIconId: Long? = null
+    private var installingAllAfterUnlock = false
 
     var currentIconPackId: String? = null
     var itemIconPackItemUi : IconPackItemUi? = null
@@ -83,6 +84,23 @@ class IconPackDetailViewModel @Inject constructor(
         }
     }
 
+    fun unlockIcons(iconIds: Collection<Long>) {
+        iconIds.forEach { iconId ->
+            sharedPref.unlockIcon(iconId.toString())
+        }
+        refreshIconState()
+    }
+
+    fun setInstallingAllAfterUnlock(pending: Boolean) {
+        installingAllAfterUnlock = pending
+    }
+
+    fun consumeInstallingAllAfterUnlock(): Boolean {
+        return installingAllAfterUnlock.also {
+            installingAllAfterUnlock = false
+        }
+    }
+
     fun refreshUnlockState() {
         refreshIconState()
     }
@@ -114,6 +132,11 @@ class IconPackDetailViewModel @Inject constructor(
                 }
             )
         )
+    }
+
+    fun mappedIconsPendingInstall(): List<IconPackItemUi> {
+        val currentState = uiState.value as? UiState.Data ?: return emptyList()
+        return currentState.value.items.filter { it.isInstallable && !it.isApplied }
     }
 
     private fun loadInstalledAppsAndRemap() {

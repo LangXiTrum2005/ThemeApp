@@ -24,6 +24,19 @@ android {
         versionName = "1.0.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+
+        externalNativeBuild {
+            cmake {
+                cppFlags("-std=c++17")
+            }
+        }
+    }
+
+    externalNativeBuild {
+        cmake {
+            path = file("src/main/cpp/CMakeLists.txt")
+            version = "3.22.1"
+        }
     }
 
     buildTypes {
@@ -31,22 +44,22 @@ android {
             isMinifyEnabled = false
             isShrinkResources = false
 
-            buildConfigField(
-                "String",
-                "BASE_URL",
-                "\"http://192.168.1.40/server4/public/\""
-            )
+            externalNativeBuild {
+                cmake {
+                    arguments("-DBASE_URL=http://192.168.1.40/server4/public/")
+                }
+            }
         }
 
         release {
             isMinifyEnabled = true
             isShrinkResources = true
 
-            buildConfigField(
-                "String",
-                "BASE_URL",
-                "\"https://api.example.com/\""
-            )
+            externalNativeBuild {
+                cmake {
+                    arguments("-DBASE_URL=https://api.example.com/")
+                }
+            }
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"

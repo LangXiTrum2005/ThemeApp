@@ -48,7 +48,6 @@ class SetIconsActivity : BaseActivity<ActivitySetIconsBinding>(),
     lateinit var iconShortcutInstaller: IconShortcutInstaller
 
     private var adapter = SetIconAdapter()
-    private var latestItems: List<IconPackItemUi> = emptyList()
 
     override fun initView(savedInstanceState: Bundle?) {
         super.initView(savedInstanceState)
@@ -74,12 +73,17 @@ class SetIconsActivity : BaseActivity<ActivitySetIconsBinding>(),
         super.initListener()
         binding.btnBack.setOnClickListener { onHandleBackPressed() }
         binding.btnInstallAll.setOnClickListener {
-            val installableItems = latestItems.filter { it.canInstall && !it.isApplied }
-            if (installableItems.isEmpty()) {
+            val mappedItems = viewModel.mappedIconsPendingInstall()
+            if (mappedItems.isEmpty()) {
                 Toast.makeText(this, R.string.no_icons_to_install, Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
-            installAllShortcuts(installableItems)
+            if (mappedItems.any { !it.isUnlocked }) {
+                viewModel.setInstallingAllAfterUnlock(true)
+                showPremiumDialog()
+            } else {
+                installAllShortcuts(mappedItems)
+            }
         }
 
         adapter.onActionClick = { item, state ->
@@ -112,7 +116,6 @@ class SetIconsActivity : BaseActivity<ActivitySetIconsBinding>(),
                     val detail = state.value
                     val pack = detail.pack
                     binding.tvTitle.text = pack.name
-                    latestItems = detail.items
                     adapter.submitList(detail.items)
                 }
 
@@ -135,8 +138,13 @@ class SetIconsActivity : BaseActivity<ActivitySetIconsBinding>(),
     }
 
     private fun unlockIcon() {
-        PremiumThemeDialog.newInstance()
-            .show(supportFragmentManager, PremiumThemeDialog::class.java.simpleName)
+        viewModel.setInstallingAllAfterUnlock(false)
+        showPremiumDialog()
+    }
+
+    private fun showPremiumDialog() {
+        if (supportFragmentManager.findFragmentByTag(PremiumThemeDialog.TAG) != null) return
+        PremiumThemeDialog.newInstance().show(supportFragmentManager, PremiumThemeDialog.TAG)
     }
 
     private fun installShortcut(item: IconPackItemUi) {
@@ -189,10 +197,24 @@ class SetIconsActivity : BaseActivity<ActivitySetIconsBinding>(),
     }
 
     override fun onWatchAdsComplete() {
-        viewModel.unlockIcon()
+        if (viewModel.consumeInstallingAllAfterUnlock()) {
+            val mappedItems = viewModel.mappedIconsPendingInstall()
+            if (mappedItems.isNotEmpty()) {
+                viewModel.unlockIcons(mappedItems.map { it.id })
+                installAllShortcuts(mappedItems)
+            }
+        } else {
+            viewModel.unlockIcon()
+        }
     }
 
     override fun onGoPremiumClick() {
         startActivity(PremiumActivity.newIntent(this))
+    }
+
+    override fun onHandleBackPressed() {
+        executeWithAds {
+            super.onHandleBackPressed()
+        }
     }
 }

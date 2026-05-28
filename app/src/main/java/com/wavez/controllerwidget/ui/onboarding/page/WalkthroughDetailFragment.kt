@@ -78,7 +78,7 @@ class WalkthroughDetailFragment : BaseFragment<FragmentOnboardingDetailBinding>(
             }
 
             else -> {
-                FirebaseControlLogEvent.logEvent(AppEvent.WELCOME_VIEW)
+
             }
         }
     }

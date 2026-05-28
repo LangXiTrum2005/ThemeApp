@@ -13,6 +13,7 @@ import com.wavez.controllerwidget.BuildConfig
 import com.wavez.controllerwidget.ads.AppRemoteConfig.Companion.INTER_ADS_GAP_KEY
 import com.wavez.controllerwidget.ads.AppRemoteConfig.Companion.INTER_OPEN_ADS_GAP_KEY
 import com.wavez.controllerwidget.ads.AppRemoteConfig.Companion.NATIVE_AD_PRELOAD_COUNT_KEY
+import com.wavez.controllerwidget.ads.AppRemoteConfig.Companion.NATIVE_GAP
 import com.wavez.controllerwidget.ads.AppRemoteConfig.Companion.OPEN_ADS_GAP_KEY
 import com.wavez.controllerwidget.ads.AppRemoteConfig.Companion.SHOULD_SHOW_BANNER_HOME
 import com.wavez.controllerwidget.ads.AppRemoteConfig.Companion.SHOULD_SHOW_BANNER_INAPP
@@ -49,6 +50,7 @@ class AppRemoteConfigImpl(
         INTER_OPEN_ADS_GAP_KEY to 7_000L,
         OPEN_ADS_GAP_KEY to 7_000L,
         INTER_ADS_GAP_KEY to 30_000L,
+        NATIVE_GAP to 15_000L,
         NATIVE_AD_PRELOAD_COUNT_KEY to 3,
         SHOULD_SHOW_NATIVE_AD_ON_FIRST_SETTING_LANGUAGE to true,
         SHOULD_SHOW_NATIVE_AD_ON_FIRST_SETTING_LANGUAGE2 to true,
@@ -86,9 +88,10 @@ class AppRemoteConfigImpl(
                     sharedPref.interAdsGap = remoteConfig.getLong(INTER_ADS_GAP_KEY)
                     sharedPref.nativeAdPreloadCount =
                         remoteConfig.getLong(NATIVE_AD_PRELOAD_COUNT_KEY).toInt()
+                    sharedPref.nativeGap = remoteConfig.getLong(AppRemoteConfig.NATIVE_GAP)
                     Log.d(
                         "log_remote",
-                        "fetchRemoteConfig: ${remoteConfig.getBoolean(SHOULD_SHOW_OPEN_AD)}"
+                        "fetchRemoteConfig: ${remoteConfig.getBoolean(SHOULD_SHOW_BANNER_INAPP)}"
                     )
                     sharedPref.shouldShowNativeLanguage1 =
                         remoteConfig.getBoolean(SHOULD_SHOW_NATIVE_AD_ON_FIRST_SETTING_LANGUAGE)

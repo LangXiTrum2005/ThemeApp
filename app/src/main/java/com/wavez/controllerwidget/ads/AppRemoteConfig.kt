@@ -10,6 +10,8 @@ interface AppRemoteConfig {
 
         const val INTER_ADS_GAP_KEY = "ads_gap_inter"
 
+        const val NATIVE_GAP = "ads_gap_native"
+
         const val NATIVE_AD_PRELOAD_COUNT_KEY = "native_ad_preload_count"
         const val SHOULD_SHOW_NATIVE_AD_ON_FIRST_SETTING_LANGUAGE =
             "native_language_1_on_off"

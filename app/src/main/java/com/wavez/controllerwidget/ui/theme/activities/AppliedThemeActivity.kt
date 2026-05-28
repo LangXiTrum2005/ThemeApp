@@ -6,6 +6,8 @@ import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.core.view.isVisible
 import com.wavez.controllerwidget.R
+import com.wavez.controllerwidget.ads.AdsId
+import com.wavez.controllerwidget.ads.native_ad.NativeAdPlacement
 import com.wavez.controllerwidget.core.base.BaseActivity
 import com.wavez.controllerwidget.core.base.UiState
 import com.wavez.controllerwidget.core.extensions.collectWithLifecycle
@@ -60,6 +62,24 @@ class AppliedThemeActivity : BaseActivity<ActivityAppliedThemeBinding>() {
         binding.rcvRemainingIcons.adapter = remainingIconAdapter
         binding.rcvSuggestedThemes.adapter = suggestedThemeAdapter
         renderMode(intent.getStringExtra(EXTRA_MODE).orEmpty())
+        initNative()
+        loadBanner()
+    }
+
+    private fun loadBanner() {
+        binding.bannerAds.registerBanner(
+            this, adId = AdsId.getBannerInAppAds(),
+            shouldLoad = sharedPref.shouldShowBannerInApp && !sharedPref.isVip,
+        )
+    }
+
+    private fun initNative() {
+        setupNative(
+            NativeAdPlacement.NATIVE_THEME_APPLIED,
+            binding.nativeApply,
+            shouldShow = sharedPref.shouldShowNativeInApp,
+            autoLoad = true,
+        )
     }
 
     override fun initListener() {
@@ -68,7 +88,9 @@ class AppliedThemeActivity : BaseActivity<ActivityAppliedThemeBinding>() {
             onHandleBackPressed()
         }
         binding.btnHome.setOnClickListener {
-            startActivity(Intent(this, MainActivity::class.java))
+            navigateTo(MainActivity.newIntent(this).apply {
+                flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP
+            })
         }
         binding.btnViewMoreIcons.setOnClickListener {
             finish()

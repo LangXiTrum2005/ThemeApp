@@ -5,6 +5,8 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.core.view.isVisible
+import com.wavez.controllerwidget.ads.AdsId
+import com.wavez.controllerwidget.ads.native_ad.NativeAdPlacement
 import com.wavez.controllerwidget.core.base.BaseActivity
 import com.wavez.controllerwidget.core.base.UiState
 import com.wavez.controllerwidget.core.extensions.collectWithLifecycle
@@ -58,11 +60,31 @@ class DetailBannerActivity : BaseActivity<ActivityDetailBannerBinding>() {
     override fun initConfig(savedInstanceState: Bundle?) {
         super.initConfig(savedInstanceState)
         viewModel.getThemesByCategory(categoryId)
+        initNative()
+        loadBanner()
+    }
+
+    private fun loadBanner() {
+        binding.bannerAds.registerBanner(
+            this, adId = AdsId.getBannerInAppAds(),
+            shouldLoad = sharedPref.shouldShowBannerInApp && !sharedPref.isVip,
+        )
+    }
+
+    private fun initNative() {
+        setupNative(
+            NativeAdPlacement.NATIVE_BANNER_DETAIL,
+            binding.nativeBanner,
+            shouldShow = sharedPref.shouldShowNativeInApp,
+            autoLoad = true,
+        )
     }
 
     override fun initListener() {
         super.initListener()
-        binding.btnBack.setOnClickListener { finish() }
+        binding.btnBack.setOnClickListener {
+            onHandleBackPressed()
+        }
         themeAdapter.onClickItem = { theme ->
             startActivity(PreviewThemeActivity.newIntent(this, theme.id))
         }
@@ -96,6 +118,12 @@ class DetailBannerActivity : BaseActivity<ActivityDetailBannerBinding>() {
 
                 else -> Unit
             }
+        }
+    }
+
+    override fun onHandleBackPressed() {
+        executeWithAds {
+            super.onHandleBackPressed()
         }
     }
 

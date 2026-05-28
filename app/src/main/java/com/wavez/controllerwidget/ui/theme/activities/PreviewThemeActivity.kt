@@ -7,6 +7,7 @@ import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.core.view.isVisible
 import com.wavez.controllerwidget.R
+import com.wavez.controllerwidget.ads.AdsId
 import com.wavez.controllerwidget.core.base.BaseActivity
 import com.wavez.controllerwidget.core.base.UiState
 import com.wavez.controllerwidget.core.extensions.collectWithLifecycle
@@ -25,9 +26,12 @@ class PreviewThemeActivity : BaseActivity<ActivityPreviewThemeBinding>() {
     companion object {
         private const val ARG_THEME_ID = "arg_theme_id"
 
-        fun newIntent(context: Context, themeId: String): Intent {
+        private const val ARG_IS_HOME = "arg_is_home"
+
+        fun newIntent(context: Context, themeId: String, isHome: Boolean = false): Intent {
             return Intent(context, PreviewThemeActivity::class.java).apply {
                 putExtra(ARG_THEME_ID, themeId)
+                putExtra(ARG_IS_HOME, isHome)
             }
         }
     }
@@ -37,6 +41,14 @@ class PreviewThemeActivity : BaseActivity<ActivityPreviewThemeBinding>() {
     override fun initView(savedInstanceState: Bundle?) {
         super.initView(savedInstanceState)
         viewModel.loadTheme(intent.getStringExtra(ARG_THEME_ID).orEmpty())
+        loadBanner()
+    }
+
+    private fun loadBanner() {
+        binding.bannerAds.registerBanner(
+            this, adId = AdsId.getBannerInAppAds(),
+            shouldLoad = sharedPref.shouldShowBannerInApp && !sharedPref.isVip,
+        )
     }
 
     override fun initListener() {
@@ -98,5 +110,16 @@ class PreviewThemeActivity : BaseActivity<ActivityPreviewThemeBinding>() {
             theme.thumb,
             binding.viewThemeLoading.root,
         )
+    }
+
+    override fun onHandleBackPressed() {
+        val isHome = intent.getBooleanExtra(ARG_IS_HOME, false)
+        if (!isHome) {
+            super.onHandleBackPressed()
+        } else {
+            executeWithAds {
+                super.onHandleBackPressed()
+            }
+        }
     }
 }

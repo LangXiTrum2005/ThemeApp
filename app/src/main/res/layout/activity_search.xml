@@ -76,6 +76,14 @@
         tools:itemCount="4"
         tools:listitem="@layout/item_search_chip" />
 
+    <com.ads.admob.banner_ads.BannerAdView
+        android:id="@+id/banner_ads"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintTop_toBottomOf="@+id/rcvPopular" />
+
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/tvNewestTitle"
         style="@style/NunitoSemiBold.18"
@@ -85,8 +93,7 @@
         android:layout_marginTop="16dp"
         android:text="@string/newest_themes"
         android:textColor="@color/text_high_em"
-        app:layout_constraintStart_toStartOf="@id/rcvPopular"
-        app:layout_constraintTop_toBottomOf="@+id/rcvPopular" />
+        app:layout_constraintTop_toBottomOf="@+id/banner_ads" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rcvThemes"

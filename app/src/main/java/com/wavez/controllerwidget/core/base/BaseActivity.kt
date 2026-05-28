@@ -150,7 +150,7 @@ abstract class BaseActivity<T : ViewBinding> :
         nativeAdViewModel.getNativeFlowByPosition(position).observe(this) { state ->
             Log.d("Log_native_ad", "registerNativeAd: $state")
             val nativeAdPlaceholder = nativeAdViewModel.getNativeAdPlaceholder(position)
-            adViewHolder.shouldShowAd = shouldShow
+            adViewHolder.shouldShowAd = shouldShow && !sharedPref.isVip
             val nativeDisplay = NativeDisplayController(nativeAdPlaceholder, adViewHolder)
             nativeDisplay.setupAdDisplay(state)
             nativeDisplayControllers.remove(position)?.cleanupAdDisplay()

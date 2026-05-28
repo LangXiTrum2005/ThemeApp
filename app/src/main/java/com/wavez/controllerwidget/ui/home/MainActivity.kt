@@ -13,6 +13,8 @@ import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import androidx.viewpager2.widget.ViewPager2
+import com.wavez.controllerwidget.ads.AdsId
+import com.wavez.controllerwidget.ads.native_ad.NativeAdPlacement
 import com.wavez.controllerwidget.core.base.BaseActivity
 import com.wavez.controllerwidget.core.base.UiState
 import com.wavez.controllerwidget.core.controllercenter.PermissionHelper
@@ -20,11 +22,12 @@ import com.wavez.controllerwidget.core.controllercenter.RequiredPermission
 import com.wavez.controllerwidget.core.controllercenter.ThemeLoader
 import com.wavez.controllerwidget.core.controllercenter.service.ControlCenterService
 import com.wavez.controllerwidget.core.extensions.collectWithLifecycle
-import com.wavez.controllerwidget.data.model.wallpaper.WallpaperModel
 import com.wavez.controllerwidget.databinding.ActivityMainBinding
 import com.wavez.controllerwidget.ui.home.adapter.MainPagerAdapter
 import com.wavez.controllerwidget.ui.home.adapter.MainTab
 import com.wavez.controllerwidget.ui.home.viewmodel.MainViewModel
+import com.wavez.controllerwidget.ui.utils.AppEvent
+import com.wavez.controllerwidget.ui.utils.FirebaseControlLogEvent
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -66,7 +69,6 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
     override fun initView(savedInstanceState: Bundle?) {
         super.initView(savedInstanceState)
         binding.bottomNav.itemActiveIndicatorColor = null
-
         binding.bottomNav.setOnApplyWindowInsetsListener(null)
         binding.bottomNav.setPadding(0, 0, 0, 0)
 
@@ -74,23 +76,44 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
 
     override fun initConfig(savedInstanceState: Bundle?) {
         super.initConfig(savedInstanceState)
+        logHomeViewEvent()
         setupViewPager()
         setupBottomNavigation()
         viewModel.getWallpapers()
+        initNative()
+        loadBanner()
+        loadInterAds()
 //        binding.togglePanelButton.setOnClickListener { togglePanel() }
 //        requestPermissions.launch(runtimePermissions.toTypedArray())
-//        binding.testGifWallpaperButton.setOnClickListener {
-//            viewModel.applyWallpaper(
-//                WallpaperModel(
-//                    id = "test_gif_001",
-//                    name = "Test GIF",
-//                    thumb = "",
-//                    premium = 0,
-//                    url = "https://cdn.leansoft-ai.com/ls35-emoji-keyboard/thumbnails/00001_cbn_Dont_Touch_NInja_Gif/previews/type_4/theme_preview.gif",
-//                    categoryId = "test",
-//                )
-//            )
-//        }
+    }
+
+    private fun loadBanner() {
+        binding.bannerAds.registerBanner(
+            this, adId = AdsId.getBannerHomeAds(),
+            shouldLoad = sharedPref.shouldShowBannerHome && !sharedPref.isVip,
+        )
+    }
+
+    private fun initNative() {
+        setupNative(
+            NativeAdPlacement.NATIVE_HOME,
+            binding.nativeHome,
+            shouldShow = sharedPref.shouldShowNativeHome,
+            autoLoad = true,
+        )
+    }
+
+    private fun logHomeViewEvent() {
+        val isReopen = sharedPref.hasLoggedHomeView
+        val event = if (isReopen) {
+            AppEvent.HOME_REOPEN_VIEW
+        } else {
+            AppEvent.HOME_1ST_VIEW
+        }
+        FirebaseControlLogEvent.logEvent(event)
+        if (!isReopen) {
+            sharedPref.hasLoggedHomeView = true
+        }
     }
 
 

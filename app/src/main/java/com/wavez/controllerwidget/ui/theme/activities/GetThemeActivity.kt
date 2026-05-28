@@ -8,6 +8,7 @@ import androidx.activity.viewModels
 import androidx.core.view.isVisible
 import androidx.lifecycle.lifecycleScope
 import com.wavez.controllerwidget.R
+import com.wavez.controllerwidget.ads.AdsId
 import com.wavez.controllerwidget.core.base.BaseActivity
 import com.wavez.controllerwidget.core.base.UiState
 import com.wavez.controllerwidget.core.download.DownloadState
@@ -59,7 +60,6 @@ class GetThemeActivity : BaseActivity<ActivityGetThemesBinding>(),
     private val theme: ThemeModel? by lazy {
         intent.getParcel<ThemeModel>(ARG_THEME)
     }
-    private var latestIconItems: List<IconPackItemUi> = emptyList()
     private var downloadDialog: DownloadDialog? = null
     private var unlockingWallpaper = false
 
@@ -73,7 +73,9 @@ class GetThemeActivity : BaseActivity<ActivityGetThemesBinding>(),
             return
         }
         viewModel.load(currentTheme)
+        loadBanner()
     }
+
 
     override fun initView(savedInstanceState: Bundle?) {
         super.initView(savedInstanceState)
@@ -85,6 +87,13 @@ class GetThemeActivity : BaseActivity<ActivityGetThemesBinding>(),
             )
         }
         renderPage(viewModel.selectedPage.value)
+    }
+
+    private fun loadBanner() {
+        binding.bannerAds.registerBanner(
+            this, adId = AdsId.getBannerInAppAds(),
+            shouldLoad = sharedPref.shouldShowBannerInApp && !sharedPref.isVip,
+        )
     }
 
     override fun onVipChangedState(isPremium: Boolean) {
@@ -122,12 +131,16 @@ class GetThemeActivity : BaseActivity<ActivityGetThemesBinding>(),
         }
 
         binding.btnInstallAll.setOnClickListener {
-            val installableItems = latestIconItems.filter { it.canInstall }
-            if (installableItems.isEmpty()) {
+            val mappedItems = viewModel.mappedIconsPendingInstall()
+            if (mappedItems.isEmpty()) {
                 Toast.makeText(this, R.string.no_icons_to_install, Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
-            installAllShortcuts(installableItems)
+            if (mappedItems.any { !it.isUnlocked }) {
+                unlockAllIcons()
+            } else {
+                installAllShortcuts(mappedItems)
+            }
         }
 
         iconAdapter.onActionClick = { item, state ->
@@ -204,14 +217,12 @@ class GetThemeActivity : BaseActivity<ActivityGetThemesBinding>(),
                 is UiState.Data -> {
                     binding.viewIconsLoading.isVisible = false
                     binding.rcvIcons.isVisible = true
-                    latestIconItems = state.value
                     iconAdapter.submitList(state.value)
                 }
 
                 is UiState.Error -> {
                     binding.viewIconsLoading.isVisible = false
                     binding.rcvIcons.isVisible = true
-                    latestIconItems = emptyList()
                     iconAdapter.submitList(emptyList())
                 }
 
@@ -287,7 +298,7 @@ class GetThemeActivity : BaseActivity<ActivityGetThemesBinding>(),
             val success = requestInstallShortcut(item)
             if (success) {
                 viewModel.markIconApplied(item.id)
-                val remainingIcons = latestIconItems
+                val remainingIcons = viewModel.currentIconItems()
                     .filter { it.id != item.id }
                     .map { it.toIconItemModel() }
                 startActivity(
@@ -343,14 +354,25 @@ class GetThemeActivity : BaseActivity<ActivityGetThemesBinding>(),
 
     private fun unlockIcon() {
         unlockingWallpaper = false
-        PremiumThemeDialog.newInstance()
-            .show(supportFragmentManager, PremiumThemeDialog::class.java.simpleName)
+        viewModel.setInstallingAllAfterUnlock(false)
+        showPremiumDialog()
+    }
+
+    private fun unlockAllIcons() {
+        unlockingWallpaper = false
+        viewModel.setInstallingAllAfterUnlock(true)
+        showPremiumDialog()
     }
 
     private fun unlockWallpaper() {
         unlockingWallpaper = true
-        PremiumThemeDialog.newInstance()
-            .show(supportFragmentManager, PremiumThemeDialog::class.java.simpleName)
+        viewModel.setInstallingAllAfterUnlock(false)
+        showPremiumDialog()
+    }
+
+    private fun showPremiumDialog() {
+        if (supportFragmentManager.findFragmentByTag(PremiumThemeDialog.TAG) != null) return
+        PremiumThemeDialog.newInstance().show(supportFragmentManager, PremiumThemeDialog.TAG)
     }
 
 
@@ -368,6 +390,12 @@ class GetThemeActivity : BaseActivity<ActivityGetThemesBinding>(),
             updateWallpaperAction(downloaded = false)
             startWallpaperDownload()
             unlockingWallpaper = false
+        } else if (viewModel.consumeInstallingAllAfterUnlock()) {
+            val mappedItems = viewModel.mappedIconsPendingInstall()
+            if (mappedItems.isNotEmpty()) {
+                viewModel.unlockIcons(mappedItems.map { it.id })
+                installAllShortcuts(mappedItems)
+            }
         } else {
             viewModel.unlockIcon()
         }

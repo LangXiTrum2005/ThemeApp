@@ -62,6 +62,7 @@ class GetThemeViewModel @Inject constructor(
     private val manualMappings = mutableMapOf<Long, AppInfo>()
     private val appliedIconIds = mutableSetOf<Long>()
     private var pendingIconId: Long? = null
+    private var installingAllAfterUnlock = false
 
     var itemIconPackItemUi : IconPackItemUi? = null
 
@@ -150,6 +151,23 @@ class GetThemeViewModel @Inject constructor(
         }
     }
 
+    fun unlockIcons(iconIds: Collection<Long>) {
+        iconIds.forEach { iconId ->
+            sharedPref.unlockIcon(iconId.toString())
+        }
+        refreshIconState()
+    }
+
+    fun setInstallingAllAfterUnlock(pending: Boolean) {
+        installingAllAfterUnlock = pending
+    }
+
+    fun consumeInstallingAllAfterUnlock(): Boolean {
+        return installingAllAfterUnlock.also {
+            installingAllAfterUnlock = false
+        }
+    }
+
     fun refreshUnlockState() {
         refreshIconState()
     }
@@ -177,6 +195,15 @@ class GetThemeViewModel @Inject constructor(
                 if (item.id in iconIds) item.copy(isApplied = true) else item
             }
         )
+    }
+
+    fun mappedIconsPendingInstall(): List<IconPackItemUi> {
+        return currentIconItems().filter { it.isInstallable && !it.isApplied }
+    }
+
+    fun currentIconItems(): List<IconPackItemUi> {
+        val currentState = iconsState.value as? UiState.Data ?: return emptyList()
+        return currentState.value
     }
 
     fun setPendingIcon(icon: IconPackItemUi) {

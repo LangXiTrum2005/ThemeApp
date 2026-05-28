@@ -6,6 +6,8 @@ import android.os.Bundle
 import android.util.Log
 import androidx.activity.viewModels
 import androidx.lifecycle.lifecycleScope
+import com.wavez.controllerwidget.ads.AdsId
+import com.wavez.controllerwidget.ads.native_ad.NativeAdPlacement
 import com.wavez.controllerwidget.core.base.BaseActivity
 import com.wavez.controllerwidget.core.base.UiState
 import com.wavez.controllerwidget.databinding.ActivityApplyIconsBinding
@@ -43,7 +45,26 @@ class ApplyIconsActivity : BaseActivity<ActivityApplyIconsBinding>() {
         viewModel.currentIconsId = iconId
         viewModel.getIcons()
         binding.rcvIcons.adapter = iconAdapter
+        initNative()
+        loadBanner()
     }
+
+    private fun loadBanner() {
+        binding.bannerAds.registerBanner(
+            this, adId = AdsId.getBannerInAppAds(),
+            shouldLoad = sharedPref.shouldShowBannerInApp && !sharedPref.isVip,
+        )
+    }
+
+    private fun initNative() {
+        setupNative(
+            NativeAdPlacement.NATIVE_ICON_APPLIED,
+            binding.nativeIcon,
+            shouldShow = sharedPref.shouldShowNativeInApp,
+            autoLoad = true,
+        )
+    }
+
 
     override fun initView(savedInstanceState: Bundle?) {
         super.initView(savedInstanceState)

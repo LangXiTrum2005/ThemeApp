@@ -28,6 +28,8 @@ class LaunchViewModel @Inject constructor(
         show: Boolean
     ) = adIds to show
 
+    private fun entryNativeInApp(show: Boolean) = AdsId.getNativeInAppAds() to show
+
     fun initNativeAd(): Map<NativeAdPlacement, Pair<List<String>, Boolean>> = mapOf(
         NativeAdPlacement.LANGUAGE to entryWithAdPlacement(
             AdsId.getListAdNativeLanguageAds1(),
@@ -57,29 +59,17 @@ class LaunchViewModel @Inject constructor(
             AdsId.getNativeHomeAds(),
             sharedPref.shouldShowNativeHome
         ),
-        NativeAdPlacement.NATIVE_BOOST_SUCCESS to entryWithAdPlacement(
-            AdsId.getNativeBoostSuccessAds(),
-            sharedPref.shouldShowNativeBoostSuccess
+        NativeAdPlacement.NATIVE_BANNER_DETAIL to entryNativeInApp(
+            sharedPref.shouldShowNativeInApp
         ),
-        NativeAdPlacement.NATIVE_CONFIG_1 to entryWithAdPlacement(
-            AdsId.getNativeConfig1(),
-            sharedPref.shouldShowNativeConfig
+        NativeAdPlacement.NATIVE_THEME_APPLIED to entryNativeInApp(
+            sharedPref.shouldShowNativeInApp
         ),
-        NativeAdPlacement.NATIVE_CONFIG_2 to entryWithAdPlacement(
-            AdsId.getNativeConfig2(),
-            sharedPref.shouldShowNativeConfig
+        NativeAdPlacement.NATIVE_WALLPAPER_APPLIED to entryNativeInApp(
+            sharedPref.shouldShowNativeInApp
         ),
-        NativeAdPlacement.NATIVE_CONFIG_3 to entryWithAdPlacement(
-            AdsId.getNativeConfig3(),
-            sharedPref.shouldShowNativeConfig
-        ),
-        NativeAdPlacement.NATIVE_CONFIG_4 to entryWithAdPlacement(
-            AdsId.getNativeConfig4(),
-            sharedPref.shouldShowNativeConfig
-        ),
-        NativeAdPlacement.NATIVE_SELECT_APP to entryWithAdPlacement(
-            AdsId.getNativeSelectApp(),
-            sharedPref.shouldShowNativeSelectApp
+        NativeAdPlacement.NATIVE_ICON_APPLIED to entryNativeInApp(
+            sharedPref.shouldShowNativeInApp
         ),
     )
 

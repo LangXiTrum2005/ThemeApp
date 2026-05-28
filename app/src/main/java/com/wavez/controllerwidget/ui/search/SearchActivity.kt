@@ -5,11 +5,12 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.inputmethod.EditorInfo
 import androidx.activity.viewModels
-import androidx.core.view.updatePadding
 import androidx.core.view.isVisible
+import androidx.core.view.updatePadding
 import androidx.core.widget.doAfterTextChanged
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.wavez.controllerwidget.R
+import com.wavez.controllerwidget.ads.AdsId
 import com.wavez.controllerwidget.core.base.BaseActivity
 import com.wavez.controllerwidget.core.extensions.collectWithLifecycle
 import com.wavez.controllerwidget.core.extensions.hideKeyboard
@@ -18,11 +19,11 @@ import com.wavez.controllerwidget.databinding.ActivitySearchBinding
 import com.wavez.controllerwidget.ui.home.fragment.icons.adapter.IconAdapter
 import com.wavez.controllerwidget.ui.home.fragment.theme.adapter.ThemeAdapter
 import com.wavez.controllerwidget.ui.home.fragment.wallpaper.adapter.WallpaperAdapter
+import com.wavez.controllerwidget.ui.iconpack.SetIconsActivity
 import com.wavez.controllerwidget.ui.search.adapter.SearchChipAdapter
 import com.wavez.controllerwidget.ui.search.model.SearchMode
 import com.wavez.controllerwidget.ui.search.model.SearchUiState
 import com.wavez.controllerwidget.ui.search.viewmodel.SearchViewModel
-import com.wavez.controllerwidget.ui.iconpack.SetIconsActivity
 import com.wavez.controllerwidget.ui.theme.activities.PreviewThemeActivity
 import com.wavez.controllerwidget.ui.wallpaper.PreviewWallpaperActivity
 import dagger.hilt.android.AndroidEntryPoint
@@ -89,11 +90,20 @@ class SearchActivity : BaseActivity<ActivitySearchBinding>() {
     override fun initConfig(savedInstanceState: Bundle?) {
         super.initConfig(savedInstanceState)
         viewModel.load(searchMode)
+        loadBanner()
     }
+
+    private fun loadBanner() {
+        binding.bannerAds.registerBanner(
+            this, adId = AdsId.getBannerInAppAds(),
+            shouldLoad = sharedPref.shouldShowBannerInApp && !sharedPref.isVip,
+        )
+    }
+
 
     override fun initListener() {
         super.initListener()
-        binding.btnClose.setOnClickListener { finish() }
+        binding.btnClose.setOnClickListener { onHandleBackPressed() }
 
         binding.edSearch.doAfterTextChanged { text ->
             viewModel.search(text?.toString().orEmpty())
@@ -159,5 +169,11 @@ class SearchActivity : BaseActivity<ActivitySearchBinding>() {
             R.string.no_results_found_for,
             state.query,
         )
+    }
+
+    override fun onHandleBackPressed() {
+        executeWithAds {
+            super.onHandleBackPressed()
+        }
     }
 }

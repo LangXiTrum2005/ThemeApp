@@ -9,135 +9,143 @@
     android:fitsSystemWindows="true"
     tools:context=".ui.wallpaper.PreviewWallpaperActivity">
 
-    <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/ivImage"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:scaleType="centerCrop"
-        tools:src="@mipmap/ic_launcher" />
-
-    <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/btnBack"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="16dp"
-        android:src="@drawable/ic_back"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/tvPreview"
-        style="@style/NunitoExtraBold.24"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/preview"
-        android:textColor="@color/white"
-        android:visibility="gone"
-        app:layout_constraintBottom_toBottomOf="@+id/btnBack"
-        app:layout_constraintEnd_toStartOf="@+id/btnBackEnd"
-        app:layout_constraintStart_toEndOf="@+id/btnBack"
-        app:layout_constraintTop_toTopOf="@+id/btnBack" />
-
-    <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/btnBackEnd"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="16dp"
-        android:src="@drawable/ic_back"
-        android:visibility="invisible"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <com.wavez.controllerwidget.ui.customview.IconTextButton
-        android:id="@+id/btnDownload"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="16dp"
-        app:btnBackground="@drawable/bg_button_1"
-        app:btnIcon="@drawable/ic_download"
-        app:btnText="@string/download"
-        app:layout_constraintBottom_toBottomOf="parent"
-        />
-
-    <LinearLayout
-        android:id="@+id/viewApply"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="16dp"
-        android:gravity="center"
-        android:orientation="horizontal"
-        android:visibility="gone"
-        app:layout_constraintBottom_toBottomOf="parent">
-
-        <com.wavez.controllerwidget.ui.customview.IconTextButton
-            android:id="@+id/btnPreview"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:background="@drawable/bg_button_outline_1"
-            app:btnText="@string/preview"
-            app:btnTextColor="@color/primary_high_em" />
-
-        <Space
-            android:layout_width="8dp"
-            android:layout_height="wrap_content" />
-
-        <com.wavez.controllerwidget.ui.customview.IconTextButton
-            android:id="@+id/btnApply"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:background="@drawable/bg_button_1"
-            app:btnText="@string/apply"
-            app:btnTextColor="@color/white" />
-
-    </LinearLayout>
-
-    <include
-        android:id="@+id/viewLoading"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:visibility="gone"
-        layout="@layout/view_loading_setwallpaper"/>
-
-    <LinearLayout
-        android:id="@+id/viewLoadingImage"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:background="@color/white"
-        android:clickable="true"
-        android:focusable="true"
-        android:gravity="center"
-        android:orientation="vertical"
-        android:visibility="gone"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnBack">
+        app:layout_constraintBottom_toTopOf="@+id/banner_ads"
+        app:layout_constraintTop_toTopOf="parent">
 
-        <com.airbnb.lottie.LottieAnimationView
-            android:layout_width="80dp"
-            android:layout_height="80dp"
-            android:padding="8dp"
-            android:visibility="visible"
-            app:lottie_autoPlay="true"
-            app:lottie_loop="true"
-            app:lottie_rawRes="@raw/loader" />
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/ivImage"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop"
+            tools:src="@mipmap/ic_launcher" />
 
-        <TextView
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/btnBack"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
-            android:text="@string/loading_image"
-            android:textColor="@color/textHighEm" />
+            android:layout_margin="16dp"
+            android:src="@drawable/ic_back"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    </LinearLayout>
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/btnBackEnd"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:src="@drawable/ic_back"
+            android:visibility="invisible"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <com.wavez.controllerwidget.ui.customview.ServerErrorView
-        android:id="@+id/viewError"
+        <com.wavez.controllerwidget.ui.customview.IconTextButton
+            android:id="@+id/btnDownload"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            app:btnBackground="@drawable/bg_button_1"
+            app:btnIcon="@drawable/ic_download"
+            app:btnText="@string/download"
+            app:layout_constraintBottom_toBottomOf="parent" />
+
+        <LinearLayout
+            android:id="@+id/viewApply"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent">
+
+            <com.wavez.controllerwidget.ui.customview.IconTextButton
+                android:id="@+id/btnPreview"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/bg_button_outline_1"
+                app:btnText="@string/preview"
+                app:btnTextColor="@color/primary_high_em" />
+
+            <Space
+                android:layout_width="8dp"
+                android:layout_height="wrap_content" />
+
+            <com.wavez.controllerwidget.ui.customview.IconTextButton
+                android:id="@+id/btnApply"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/bg_button_1"
+                app:btnText="@string/apply"
+                app:btnTextColor="@color/white" />
+
+        </LinearLayout>
+
+        <include
+            android:id="@+id/viewLoading"
+            layout="@layout/view_loading_setwallpaper"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="gone" />
+
+        <LinearLayout
+            android:id="@+id/viewLoadingImage"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:background="@color/white"
+            android:clickable="true"
+            android:focusable="true"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/btnBack">
+
+            <com.airbnb.lottie.LottieAnimationView
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:padding="8dp"
+                android:visibility="visible"
+                app:lottie_autoPlay="true"
+                app:lottie_loop="true"
+                app:lottie_rawRes="@raw/loader" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:text="@string/loading_image"
+                android:textColor="@color/textHighEm" />
+
+        </LinearLayout>
+
+        <com.wavez.controllerwidget.ui.customview.ServerErrorView
+            android:id="@+id/viewError"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:background="@color/white"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/btnBack" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <com.ads.admob.banner_ads.BannerAdView
+        android:id="@+id/banner_ads"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent" />
+
+    <include
+        android:id="@+id/view_preview"
+        layout="@layout/view_preview_wallpaper"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:visibility="gone"
-        android:background="@color/white"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnBack" />
+        />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

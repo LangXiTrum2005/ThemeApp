@@ -87,7 +87,7 @@ class ThemeFragment : BaseFragment<FragmentThemeBinding>() {
         }
 
         bannerAdapter.onClickItem = { category ->
-            startActivity(
+            navigateTo(
                 DetailBannerActivity.newIntent(
                     context = requireContext(),
                     categoryId = category.id,

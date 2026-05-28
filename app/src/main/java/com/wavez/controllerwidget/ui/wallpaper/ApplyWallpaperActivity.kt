@@ -12,6 +12,8 @@ import com.bumptech.glide.load.engine.GlideException
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.bumptech.glide.request.RequestListener
 import com.bumptech.glide.request.target.Target
+import com.wavez.controllerwidget.ads.AdsId
+import com.wavez.controllerwidget.ads.native_ad.NativeAdPlacement
 import com.wavez.controllerwidget.core.base.BaseActivity
 import com.wavez.controllerwidget.core.base.UiState
 import com.wavez.controllerwidget.core.extensions.getParcel
@@ -51,6 +53,24 @@ class ApplyWallpaperActivity : BaseActivity<ActivityApplyWallpaperBinding>() {
         viewModel.currentWallpaper = wallpaperModel
         viewModel.getWallpapersByCategory()
         binding.rcvWallpaper.adapter = wallpaperAdapter
+        initNative()
+        loadBanner()
+    }
+
+    private fun loadBanner() {
+        binding.bannerAds.registerBanner(
+            this, adId = AdsId.getBannerInAppAds(),
+            shouldLoad = sharedPref.shouldShowBannerInApp && !sharedPref.isVip,
+        )
+    }
+
+    private fun initNative() {
+        setupNative(
+            NativeAdPlacement.NATIVE_WALLPAPER_APPLIED,
+            binding.nativeApply,
+            shouldShow = sharedPref.shouldShowNativeInApp,
+            autoLoad = true,
+        )
     }
 
     override fun initView(savedInstanceState: Bundle?) {

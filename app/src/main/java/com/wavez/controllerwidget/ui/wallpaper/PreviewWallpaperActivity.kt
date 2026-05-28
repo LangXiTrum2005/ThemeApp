@@ -8,6 +8,7 @@ import androidx.activity.viewModels
 import androidx.core.view.isVisible
 import androidx.lifecycle.lifecycleScope
 import com.wavez.controllerwidget.R
+import com.wavez.controllerwidget.ads.AdsId
 import com.wavez.controllerwidget.core.base.BaseActivity
 import com.wavez.controllerwidget.core.download.DownloadState
 import com.wavez.controllerwidget.core.extensions.getParcel
@@ -54,14 +55,26 @@ class PreviewWallpaperActivity : BaseActivity<ActivityPreviewWallpaperBinding>()
         viewModel.wallpaperModel?.let { wallpaper ->
             binding.viewLoadingImage.visible()
             binding.ivImage.loadWithLoading(
+                wallpaper.url, loadingView = binding.viewLoadingImage, errorView = binding.viewError
+            )
+            binding.viewPreview.ivImage.loadWithLoading(
                 wallpaper.url,
-                loadingView = binding.viewLoadingImage,
-                errorView = binding.viewError
+                loadingView = binding.viewPreview.viewLoadingImage,
+                errorView = binding.viewPreview.viewError
             )
             updateDownloadAction()
             updateUiWallpaperDownloaded(wallpaper)
         }
+        loadBanner()
     }
+
+    private fun loadBanner() {
+        binding.bannerAds.registerBanner(
+            this, adId = AdsId.getBannerInAppAds(),
+            shouldLoad = sharedPref.shouldShowBannerInApp && !sharedPref.isVip,
+        )
+    }
+
 
     override fun onVipChangedState(isPremium: Boolean) {
         super.onVipChangedState(isPremium)
@@ -75,13 +88,16 @@ class PreviewWallpaperActivity : BaseActivity<ActivityPreviewWallpaperBinding>()
             onHandleBackPressed()
         }
 
+        binding.viewPreview.btnBack.setOnClickListener {
+            onHandleBackPressed()
+        }
+
         binding.btnDownload.setOnClickListener {
             handleDownloadClick()
         }
 
         binding.btnPreview.setOnClickListener {
-            binding.viewApply.gone()
-            binding.tvPreview.visible()
+            binding.viewPreview.root.visible()
         }
 
         binding.btnApply.setOnClickListener {
@@ -136,7 +152,9 @@ class PreviewWallpaperActivity : BaseActivity<ActivityPreviewWallpaperBinding>()
 
     private fun handleDownloadClick() {
         if (viewModel.canDownloadCurrentWallpaper()) {
-            startDownload()
+            executeWithAds {
+                startDownload()
+            }
         } else {
             showPremiumDialog()
         }
@@ -172,11 +190,12 @@ class PreviewWallpaperActivity : BaseActivity<ActivityPreviewWallpaperBinding>()
     }
 
     override fun onHandleBackPressed() {
-        if (binding.tvPreview.isVisible) {
-            binding.viewApply.visible()
-            binding.tvPreview.gone()
+        if (binding.viewPreview.root.isVisible) {
+            binding.viewPreview.root.gone()
         } else {
-            super.onHandleBackPressed()
+            executeWithAds {
+                super.onHandleBackPressed()
+            }
         }
     }
 
@@ -184,15 +203,12 @@ class PreviewWallpaperActivity : BaseActivity<ActivityPreviewWallpaperBinding>()
         viewModel.wallpaperModel?.let {
             binding.viewLoading.root.visible()
             viewModel.applyWallpaper(
-                it,
-                wallpaperTarget,
-                onResult = { state ->
+                it, wallpaperTarget, onResult = { state ->
                     binding.viewLoading.root.gone()
                     if (state.isSuccess) {
                         startActivity(ApplyWallpaperActivity.newIntent(this, it))
                     }
-                }
-            )
+                })
         }
     }
 
@@ -205,4 +221,6 @@ class PreviewWallpaperActivity : BaseActivity<ActivityPreviewWallpaperBinding>()
     override fun onGoPremiumClick() {
         startActivity(PremiumActivity.newIntent(this))
     }
+
+
 }

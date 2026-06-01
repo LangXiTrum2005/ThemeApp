@@ -13,6 +13,7 @@ import com.wavez.controllerwidget.core.base.BaseActivity
 import com.wavez.controllerwidget.databinding.ActivityWalkthroughBinding
 import com.wavez.controllerwidget.ui.home.MainActivity
 import com.wavez.controllerwidget.ui.onboarding.adapter.OnboardingViewPagerAdapter
+import com.wavez.controllerwidget.ui.onboarding.page.Onboarding1Fragment
 import com.wavez.controllerwidget.ui.onboarding.page.WalkthroughDetailFragment
 import com.wavez.controllerwidget.ui.onboarding.provider.OnboardingProvider
 import com.wavez.controllerwidget.ui.premium.PremiumActivity
@@ -37,7 +38,7 @@ class WalkthroughActivity : BaseActivity<ActivityWalkthroughBinding>() {
     override fun initConfig(savedInstanceState: Bundle?) {
         super.initConfig(savedInstanceState)
         lifecycleScope.launch {
-            loadNativeWithPosition(NativeAdPlacement.ONBOARDING_FULL_1, reloadToClick = true)
+            loadNativeWithPosition(NativeAdPlacement.ONBOARDING2, reloadToClick = true)
         }
     }
 
@@ -58,6 +59,7 @@ class WalkthroughActivity : BaseActivity<ActivityWalkthroughBinding>() {
                     }
                 }
                 val isOnboardingDetail = currentFragment is WalkthroughDetailFragment
+                        || currentFragment is Onboarding1Fragment
                 binding.imageViewPager.isUserInputEnabled = !isOnboardingDetail
                 binding.ivClose.isVisible = !isOnboardingDetail
             }
@@ -89,29 +91,19 @@ class WalkthroughActivity : BaseActivity<ActivityWalkthroughBinding>() {
 
     private fun initPage() {
         if (binding.imageViewPager.adapter != null) return
-
+        fragments.add(
+            Onboarding1Fragment.newInstance(sharedPref.shouldShowNativeObd1)
+        )
         fragments.add(
             WalkthroughDetailFragment.newInstance(
-                OnboardingProvider.ONBOARD_01, sharedPref.shouldShowNativeObd1
+                OnboardingProvider.ONBOARD_02, sharedPref.shouldShowNativeObd2
             )
         )
         fragments.add(
             WalkthroughDetailFragment.newInstance(
-                OnboardingProvider.ONBOARD_02
+                OnboardingProvider.ONBOARD_03, sharedPref.shouldShowNativeObd3
             )
         )
-        if (sharedPref.shouldShowNativeAdFull1 && !sharedPref.isVip) {
-            fragments.add(FullScreenNativeAdFragment.newInstance(NativeAdPlacement.ONBOARDING_FULL_1))
-        }
-        fragments.add(
-            WalkthroughDetailFragment.newInstance(
-                OnboardingProvider.ONBOARD_03
-            )
-        )
-        if (sharedPref.shouldShowNativeAdFull2 && !sharedPref.isVip) {
-            fragments.add(FullScreenNativeAdFragment.newInstance(NativeAdPlacement.ONBOARDING_FULL_2))
-        }
-
         binding.imageViewPager.adapter =
             OnboardingViewPagerAdapter(supportFragmentManager, lifecycle, fragments)
         binding.imageViewPager.isSaveEnabled = true

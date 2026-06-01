@@ -25,6 +25,9 @@ interface AppRemoteConfig {
         const val SHOULD_SHOW_NATIVE_AD_FULL_1 = "native_full_1_on_off"
         const val SHOULD_SHOW_NATIVE_AD_FULL_2 = "native_full_2_on_off"
 
+        const val SHOULD_SHOW_NATIVE_AD_ON_WALKTHROUGH_2 = "native_language_2_on_off"
+        const val SHOULD_SHOW_NATIVE_AD_ON_WALKTHROUGH_3 = "native_language_3_on_off"
+
         const val SHOULD_SHOW_NATIVE_AD_ON_SETTING_LANGUAGE =
             "should_show_native_ad_on_setting_language"
         const val SHOULD_SHOW_BANNER_SPLASH = "banner_splash_on_off"

@@ -47,13 +47,13 @@ class LaunchViewModel @Inject constructor(
             AdsId.getListAdNativeOnboarding1Click(),
             sharedPref.shouldShowNativeObd1Click
         ),
-        NativeAdPlacement.ONBOARDING_FULL_1 to entryWithAdPlacement(
-            AdsId.getListAdNativeObdFull1(),
-            sharedPref.shouldShowNativeAdFull1
+        NativeAdPlacement.ONBOARDING2 to entryWithAdPlacement(
+            AdsId.getListAdNativeOnboarding2(),
+            sharedPref.shouldShowNativeObd2
         ),
-        NativeAdPlacement.ONBOARDING_FULL_2 to entryWithAdPlacement(
-            AdsId.getListAdNativeObdFull2(),
-            sharedPref.shouldShowNativeAdFull2
+        NativeAdPlacement.ONBOARDING3 to entryWithAdPlacement(
+            AdsId.getListAdNativeOnboarding3(),
+            sharedPref.shouldShowNativeObd3
         ),
         NativeAdPlacement.NATIVE_HOME to entryWithAdPlacement(
             AdsId.getNativeHomeAds(),

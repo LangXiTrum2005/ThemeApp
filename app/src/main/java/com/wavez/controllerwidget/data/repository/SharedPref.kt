@@ -58,6 +58,8 @@ interface SharedPref {
 
     var shouldShowNativeObd1Click : Boolean
     var shouldShowNativeObd1 : Boolean
+    var shouldShowNativeObd2 : Boolean
+    var shouldShowNativeObd3 : Boolean
     var shouldShowNativeAdFull1: Boolean
     var shouldShowNativeAdFull2: Boolean
     var shouldBannerSplash : Boolean

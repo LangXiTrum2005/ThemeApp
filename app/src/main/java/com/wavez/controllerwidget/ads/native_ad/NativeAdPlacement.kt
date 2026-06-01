@@ -2,6 +2,8 @@ package com.wavez.controllerwidget.ads.native_ad
 
 enum class NativeAdPlacement {
     ONBOARDING1, ONBOARDING1_CLICK,
+    ONBOARDING2,
+    ONBOARDING3,
     LANGUAGE, LANGUAGE_2,
     ONBOARDING_FULL_1,
     ONBOARDING_FULL_2,

@@ -45,4 +45,6 @@ dependencies {
     implementation(libs.androidx.recyclerview)
     implementation(libs.shimmer)
     implementation(libs.user.messaging.platform)
+    implementation(libs.androidx.lifecycle.runtime.ktx)
+
 }

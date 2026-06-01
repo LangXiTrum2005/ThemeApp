@@ -2,12 +2,8 @@ package com.wavez.controllerwidget.di
 
 import android.content.Context
 import androidx.room.Room
-import com.ads.admob.interstitial_ads.AdInterstitialManager
-import com.ads.admob.open_ads.OpenAdManager
 import com.src.billing_library.BillingLibrary
 import com.src.billing_library.GooglePlayBillingLibrary
-import com.wavez.controllerwidget.ads.AppRemoteConfig
-import com.wavez.controllerwidget.ads.AppRemoteConfigImpl
 import com.wavez.controllerwidget.core.wallpaper.WallpaperManagerCore
 import com.wavez.controllerwidget.data.local.ThemeStorageConfig
 import com.wavez.controllerwidget.data.local.dao.DownloadedControllerDao

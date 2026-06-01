@@ -21,7 +21,7 @@ object AdsId {
         return if (BuildConfig.DEBUG) {
             BANNER_TEST_ADS
         } else {
-            "ca-app-pub-3438626400465865/8934867060"
+            "ca-app-pub-5390451356176712/9922713350"
         }
     }
 
@@ -29,7 +29,7 @@ object AdsId {
         return if (BuildConfig.DEBUG) {
             BANNER_TEST_ADS
         } else {
-            "ca-app-pub-3438626400465865/5316470119"
+            "ca-app-pub-5390451356176712/5017871030"
         }
     }
 
@@ -37,7 +37,7 @@ object AdsId {
         return if (BuildConfig.DEBUG) {
             BANNER_TEST_ADS
         } else {
-            "ca-app-pub-3438626400465865/8934867060"
+            "ca-app-pub-5390451356176712/1770102611"
         }
     }
 
@@ -47,8 +47,8 @@ object AdsId {
             listOf(POPUP_TEST_ADS)
         } else {
             listOf(
-                "ca-app-pub-3438626400465865/9670648091",
-                "ca-app-pub-3438626400465865/3936095363"
+                "ca-app-pub-5390451356176712/1078626020",
+                "ca-app-pub-5390451356176712/2551489793"
             )
         }
     }
@@ -58,8 +58,8 @@ object AdsId {
             listOf(POPUP_TEST_ADS)
         } else {
             listOf(
-                "ca-app-pub-5390451356176712/5487111106",
-                "ca-app-pub-5390451356176712/8630382835"
+                "ca-app-pub-5390451356176712/3357305005",
+                "ca-app-pub-5390451356176712/4670386677"
             )
         }
     }
@@ -70,8 +70,8 @@ object AdsId {
             listOf(NATIVE_AD_ID_TEST)
         } else {
             listOf(
-                "ca-app-pub-3438626400465865/5033554610",
-                "ca-app-pub-3438626400465865/8854976017"
+                "ca-app-pub-5390451356176712/9579932574",
+                "ca-app-pub-5390451356176712/1893014245"
             )
         }
     }
@@ -81,8 +81,8 @@ object AdsId {
             listOf(NATIVE_AD_ID_TEST)
         } else {
             listOf(
-                "ca-app-pub-3438626400465865/6556115739",
-                "ca-app-pub-3438626400465865/7541894347"
+                "ca-app-pub-5390451356176712/2359918101",
+                "ca-app-pub-5390451356176712/2200136002"
             )
         }
     }
@@ -92,8 +92,8 @@ object AdsId {
             listOf(NATIVE_AD_ID_TEST)
         } else {
             listOf(
-                "ca-app-pub-3438626400465865/8990707380",
-                "ca-app-pub-3438626400465865/8984252384"
+                "ca-app-pub-5390451356176712/7229101409",
+                "ca-app-pub-5390451356176712/5947809320"
             )
         }
     }
@@ -103,30 +103,30 @@ object AdsId {
             listOf(NATIVE_AD_ID_TEST)
         } else {
             listOf(
-                "ca-app-pub-3438626400465865/1237624305",
-                "ca-app-pub-3438626400465865/9307686014"
+                "ca-app-pub-5390451356176712/1785203035",
+                "ca-app-pub-5390451356176712/7069319304"
             )
         }
     }
 
-    fun getListAdNativeObdFull1(): List<String> {
+    fun getListAdNativeOnboarding2(): List<String> {
         return if (BuildConfig.DEBUG) {
             listOf(NATIVE_AD_ID_TEST)
         } else {
             listOf(
-                "ca-app-pub-3438626400465865/7511388619",
-                "ca-app-pub-3438626400465865/6298379292"
+                "ca-app-pub-5390451356176712/4219794683",
+                "ca-app-pub-5390451356176712/4443155963"
             )
         }
     }
 
-    fun getListAdNativeObdFull2(): List<String> {
+    fun getListAdNativeOnboarding3(): List<String> {
         return if (BuildConfig.DEBUG) {
             listOf(NATIVE_AD_ID_TEST)
         } else {
             listOf(
-                "ca-app-pub-3438626400465865/7339998221",
-                "ca-app-pub-3438626400465865/4793725933"
+                "ca-app-pub-5390451356176712/7967468007",
+                "ca-app-pub-5390451356176712/2791162947"
             )
         }
     }
@@ -135,10 +135,7 @@ object AdsId {
         return if (BuildConfig.DEBUG) {
             listOf(NATIVE_AD_ID_TEST)
         } else {
-            listOf(
-                "ca-app-pub-3438626400465865/8994576815",
-                "ca-app-pub-3438626400465865/1307658482",
-            )
+            listOf("ca-app-pub-5390451356176712/7296550018")
         }
     }
 
@@ -147,9 +144,7 @@ object AdsId {
             listOf(NATIVE_AD_ID_TEST)
         } else {
             listOf(
-                "ca-app-pub-3438626400465865/6145270399",
-                "ca-app-pub-3438626400465865/1514926093",
-            )
+                "ca-app-pub-5390451356176712/1937623576")
         }
     }
 
@@ -159,19 +154,7 @@ object AdsId {
             listOf(REWARD_TEST_ADS)
         } else {
             listOf(
-                "ca-app-pub-3438626400465865/3360847469",
-                "ca-app-pub-3438626400465865/2239337487"
-            )
-        }
-    }
-
-    fun getRewardedAdsConfig(): List<String> {
-        return if (BuildConfig.DEBUG) {
-            listOf(REWARD_TEST_ADS)
-        } else {
-            listOf(
-                "ca-app-pub-3438626400465865/5696429821",
-                "ca-app-pub-3438626400465865/9220741865"
+                "ca-app-pub-5390451356176712/3335525213",
             )
         }
     }
@@ -181,7 +164,7 @@ object AdsId {
         return if (BuildConfig.DEBUG) {
             OPEN_UNIT_ID_TEST
         } else {
-            "ca-app-pub-3438626400465865/2259061939"
+            "ca-app-pub-5390451356176712/5262926385"
         }
     }
 }

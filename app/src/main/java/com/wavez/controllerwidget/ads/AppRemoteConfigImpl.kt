@@ -3,7 +3,6 @@ package com.wavez.controllerwidget.ads
 import android.util.Log
 import com.ads.admob.ShowCondition
 import com.ads.admob.interstitial_ads.AdInterstitialManager
-import com.ads.admob.native_ads.NativeAdRepository
 import com.ads.admob.open_ads.OpenAdManager
 import com.google.firebase.Firebase
 import com.google.firebase.remoteconfig.FirebaseRemoteConfig
@@ -28,6 +27,8 @@ import com.wavez.controllerwidget.ads.AppRemoteConfig.Companion.SHOULD_SHOW_NATI
 import com.wavez.controllerwidget.ads.AppRemoteConfig.Companion.SHOULD_SHOW_NATIVE_AD_ON_SETTING_LANGUAGE
 import com.wavez.controllerwidget.ads.AppRemoteConfig.Companion.SHOULD_SHOW_NATIVE_AD_ON_WALKTHROUGH_1
 import com.wavez.controllerwidget.ads.AppRemoteConfig.Companion.SHOULD_SHOW_NATIVE_AD_ON_WALKTHROUGH_1_CLICK
+import com.wavez.controllerwidget.ads.AppRemoteConfig.Companion.SHOULD_SHOW_NATIVE_AD_ON_WALKTHROUGH_2
+import com.wavez.controllerwidget.ads.AppRemoteConfig.Companion.SHOULD_SHOW_NATIVE_AD_ON_WALKTHROUGH_3
 import com.wavez.controllerwidget.ads.AppRemoteConfig.Companion.SHOULD_SHOW_NATIVE_CONFIG
 import com.wavez.controllerwidget.ads.AppRemoteConfig.Companion.SHOULD_SHOW_NATIVE_HOME
 import com.wavez.controllerwidget.ads.AppRemoteConfig.Companion.SHOULD_SHOW_NATIVE_INAPP
@@ -66,11 +67,11 @@ class AppRemoteConfigImpl(
         SHOULD_SHOW_INTER_INAPP to true,
         SHOULD_SHOW_NATIVE_HOME to true,
         SHOULD_SHOW_OPEN_AD to true,
-        SHOULD_SHOW_BOOST_SUCCESS to true,
-        SHOULD_SHOW_NATIVE_CONFIG to true,
         SHOULD_SHOW_REWARD_CONFIG to true,
         SHOULD_SHOW_REWARD_SELECT to true,
-        SHOULD_SHOW_NATIVE_SELECT_APP to true
+        SHOULD_SHOW_NATIVE_SELECT_APP to true,
+        SHOULD_SHOW_NATIVE_AD_ON_WALKTHROUGH_2 to true,
+        SHOULD_SHOW_NATIVE_AD_ON_WALKTHROUGH_3 to true,
     )
 
     override fun fetchRemoteConfig() {
@@ -109,6 +110,10 @@ class AppRemoteConfigImpl(
                         remoteConfig.getBoolean(SHOULD_SHOW_NATIVE_AD_ON_WALKTHROUGH_1)
                     sharedPref.shouldShowNativeObd1Click =
                         remoteConfig.getBoolean(SHOULD_SHOW_NATIVE_AD_ON_WALKTHROUGH_1_CLICK)
+                    sharedPref.shouldShowNativeObd2 =
+                        remoteConfig.getBoolean(SHOULD_SHOW_NATIVE_AD_ON_WALKTHROUGH_2)
+                    sharedPref.shouldShowNativeObd3 =
+                        remoteConfig.getBoolean(SHOULD_SHOW_NATIVE_AD_ON_WALKTHROUGH_3)
                     sharedPref.shouldShowBannerHome =
                         remoteConfig.getBoolean(SHOULD_SHOW_BANNER_HOME)
                     sharedPref.shouldShowNativeHome =

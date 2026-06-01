@@ -128,28 +128,28 @@ class ThemeFragment : BaseFragment<FragmentThemeBinding>() {
         viewModel.categoriesResult.collectWithLifecycle(this) { state ->
             when (state) {
                 is UiState.Data -> {
-                    binding.viewError.isVisible = false
-                    binding.viewLoading.isVisible = false
-                    binding.vpTheme.isVisible = true
+                    setViewState(showContent = true, showLoading = false, showError = false)
                     setupBanners(state.value)
                     setupTabs(state.value)
                 }
-
                 is UiState.Error -> {
                     Log.d("hgahsdgad", "initObserver: ${state.message}")
-                    binding.viewError.isVisible = true
-                    binding.viewLoading.isVisible = false
-                    binding.vpTheme.isVisible = false
+                    setViewState(showContent = false, showLoading = false, showError = true)
                 }
-
                 UiState.Loading -> {
-                    binding.viewError.isVisible = false
-                    binding.viewLoading.isVisible = true
+                    setViewState(showContent = false, showLoading = true, showError = false)
                 }
-
                 else -> Unit
             }
         }
+    }
+
+    private fun setViewState(showContent: Boolean, showLoading: Boolean, showError: Boolean) {
+        binding.vpTheme.isVisible = showContent
+        binding.viewLoading.isVisible = showLoading
+        binding.viewLoadingBanner.isVisible = showLoading
+        binding.viewError.isVisible = showError
+        binding.viewErrorBanner.isVisible = showError
     }
 
     private fun setupTabs(categories: List<ThemeCategoryModel>) {

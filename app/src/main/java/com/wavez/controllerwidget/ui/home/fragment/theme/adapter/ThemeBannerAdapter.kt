@@ -67,7 +67,6 @@ class ThemeBannerAdapter : RecyclerView.Adapter<ThemeBannerAdapter.BannerViewHol
 
         fun bind(category: ThemeCategoryModel) {
             binding.ivBanner.loadWithLoading(category.banner, binding.viewLoading.root)
-            binding.tvTitle.text = category.name
         }
     }
 

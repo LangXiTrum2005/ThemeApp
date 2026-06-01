@@ -2,7 +2,6 @@ package com.wavez.controllerwidget.ads.native_ad.view
 
 import android.content.Context
 import android.util.AttributeSet
-import android.util.Log
 import android.view.LayoutInflater
 import android.widget.FrameLayout
 import com.ads.admob.native_ads.adapter.NativeAdViewAd
@@ -29,7 +28,6 @@ class SmallNativeAdTemplate @JvmOverloads constructor(
     override fun bind(
         nativeAd: NativeAd,
     ) {
-        Log.d("log_native_addd", "bind: $nativeAd")
         binding.viewAd.visible()
         stopShimmerAd()
 

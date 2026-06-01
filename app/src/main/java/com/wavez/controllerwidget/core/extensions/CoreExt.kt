@@ -13,6 +13,7 @@ import android.os.Parcelable
 import android.util.DisplayMetrics
 import android.util.TypedValue
 import android.view.View
+import android.view.ViewGroup
 import android.view.Window
 import android.view.WindowInsets
 import android.view.WindowManager
@@ -158,6 +159,18 @@ fun Context.getIcon(packageName: String): Drawable? {
     } catch (e: Exception) {
         null
     }
+}
+
+inline fun <reified T : View> View.findFirstViewOfType(): T? =
+    findFirstViewOfType(T::class.java)
+
+fun <T : View> View.findFirstViewOfType(type: Class<T>): T? {
+    if (type.isInstance(this)) return type.cast(this)
+    if (this !is ViewGroup) return null
+    for (i in 0 until childCount) {
+        getChildAt(i).findFirstViewOfType(type)?.let { return it }
+    }
+    return null
 }
 
 fun <T> Flow<T>.collectWithLifecycle(

@@ -25,12 +25,9 @@ class BigNativeAdTemplate @JvmOverloads constructor(
 
     override var shouldShowAd = true
 
-    private var nativeAdViewIsBound = false
-
     override fun bind(
         nativeAd: NativeAd,
     ) {
-        nativeAdViewIsBound = true
         binding.viewAd.visible()
         stopShimmerAd()
 

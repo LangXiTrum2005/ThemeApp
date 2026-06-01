@@ -6,7 +6,6 @@ import android.content.Intent
 import android.content.res.Configuration
 import android.os.Bundle
 import android.os.LocaleList
-import android.util.Log
 import android.view.View
 import android.view.ViewGroup
 import androidx.activity.OnBackPressedCallback
@@ -26,18 +25,19 @@ import com.ads.admob.AdsManagerState
 import com.ads.admob.ShowCondition
 import com.ads.admob.banner_ads.BannerAdView
 import com.ads.admob.interstitial_ads.AdInterstitialManager
+import com.ads.admob.native_ads.NativeAdManager
+import com.ads.admob.native_ads.NativeAdRepository
 import com.ads.admob.native_ads.adapter.CollapsibleAd
 import com.ads.admob.native_ads.adapter.NativeAdViewAd
-import com.ads.admob.native_ads.adapter.NativeDisplayController
 import com.wavez.controllerwidget.R
 import com.wavez.controllerwidget.ads.native_ad.NativeAdPlacement
-import com.wavez.controllerwidget.ads.native_ad.NativeAdViewModel
-import com.wavez.controllerwidget.di.AppModuleEntry
 import com.wavez.controllerwidget.core.extensions.collectWithLifecycle
+import com.wavez.controllerwidget.core.extensions.findFirstViewOfType
 import com.wavez.controllerwidget.core.extensions.gone
 import com.wavez.controllerwidget.core.utils.NetworkTracker
 import com.wavez.controllerwidget.data.repository.LanguageRepository
 import com.wavez.controllerwidget.data.repository.SharedPref
+import com.wavez.controllerwidget.di.AppModuleEntry
 import com.wavez.controllerwidget.ui.dialog.NetworkDialog
 import com.wavez.controllerwidget.ui.premium.PremiumViewModel
 import dagger.hilt.android.EntryPointAccessors
@@ -45,10 +45,8 @@ import kotlinx.coroutines.launch
 import org.greenrobot.eventbus.EventBus
 import java.util.Locale
 import javax.inject.Inject
-import kotlin.getValue
 
-abstract class BaseActivity<T : ViewBinding> :
-    AppCompatActivity() {
+abstract class BaseActivity<T : ViewBinding> : AppCompatActivity() {
 
     companion object {
     }
@@ -66,15 +64,22 @@ abstract class BaseActivity<T : ViewBinding> :
     @Inject
     lateinit var showCondition: ShowCondition
 
+    @Inject
+    lateinit var nativeAdRepository: NativeAdRepository
+
     abstract fun bindingView(): T
+
+    protected val nativeAds by lazy {
+        NativeAdManager(
+            repository = nativeAdRepository,
+            lifecycleOwner = this,
+            scope = lifecycleScope,
+            isVip = { sharedPref.shouldShowInterSplash && !sharedPref.isVip  },
+        )
+    }
 
     private var networkTracker: NetworkTracker? = null
     private var networkDialog: NetworkDialog? = null
-
-    protected val nativeAdViewModel by viewModels<NativeAdViewModel>()
-    private val autoReloadPlacements = mutableSetOf<NativeAdPlacement>()
-
-    private val nativeDisplayControllers = mutableMapOf<NativeAdPlacement, NativeDisplayController>()
 
     private val premiumViewModel by viewModels<PremiumViewModel>()
 
@@ -99,14 +104,11 @@ abstract class BaseActivity<T : ViewBinding> :
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-        onBackPressedDispatcher.addCallback(
-            this,
-            object : OnBackPressedCallback(true) {
-                override fun handleOnBackPressed() {
-                    onHandleBackPressed()
-                }
-            },
-        )
+        onBackPressedDispatcher.addCallback(this, object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                onHandleBackPressed()
+            }
+        })
         networkTracker = NetworkTracker(this, lifecycle)
         if (registerEventBus) EventBus.getDefault().register(this)
         setContentView(binding.root)
@@ -129,41 +131,10 @@ abstract class BaseActivity<T : ViewBinding> :
         interstitialManager.loadAd()
     }
 
-
-    override fun onStart() {
-        super.onStart()
-        autoReloadPlacements.forEach { placement ->
-            if (sharedPref.isVip || !AdsManagerState.consumeBackScreen()) return
-            loadNativeWithPosition(placement)
-        }
-    }
-
     fun loadNativeWithPosition(position: NativeAdPlacement, reloadToClick: Boolean = false) {
-        nativeAdViewModel.loadAd(position, reloadToClick)
+        nativeAds.load(position.name, reloadToClick)
     }
 
-    fun registerNativeAd(
-        position: NativeAdPlacement,
-        adViewHolder: NativeAdViewAd,
-        shouldShow: Boolean,
-    ) {
-        nativeAdViewModel.getNativeFlowByPosition(position).observe(this) { state ->
-            Log.d("Log_native_ad", "registerNativeAd: $state")
-            val nativeAdPlaceholder = nativeAdViewModel.getNativeAdPlaceholder(position)
-            adViewHolder.shouldShowAd = shouldShow && !sharedPref.isVip
-            val nativeDisplay = NativeDisplayController(nativeAdPlaceholder, adViewHolder)
-            nativeDisplay.setupAdDisplay(state)
-            nativeDisplayControllers.remove(position)?.cleanupAdDisplay()
-            nativeDisplayControllers[position] = nativeDisplay
-        }
-    }
-
-    /**
-     * @param position
-     * @param view
-     * @param autoLoad
-     * @param shouldShow
-     * */
     fun setupNative(
         position: NativeAdPlacement,
         view: NativeAdViewAd,
@@ -172,37 +143,16 @@ abstract class BaseActivity<T : ViewBinding> :
         autoReloadOnStart: Boolean = false,
         shouldUseCollapseRate: Boolean = true,
     ) {
-        if (autoLoad) loadNativeWithPosition(position)
-        if (autoReloadOnStart) {
-            autoReloadPlacements.add(position)
-        }
-        if (view is CollapsibleAd) {
-            view.shouldCollapseRate = shouldUseCollapseRate
-        }
-        ensureObserved(position)
-        registerNativeAd(position, view, shouldShow)
-    }
-
-    private fun ensureObserved(position: NativeAdPlacement) {
-        nativeAdViewModel.ensureObserved(position)
-    }
-
-    private fun releaseNativeAds() {
-        nativeDisplayControllers.forEach {
-            it.value.cleanupAdDisplay()
-        }
-        nativeDisplayControllers.clear()
+        if (view is CollapsibleAd) view.shouldCollapseRate = shouldUseCollapseRate
+        nativeAds.setup(position.name, view, shouldShow, autoLoad, autoReloadOnStart)
     }
 
     protected fun hideBannerAdsIfNeed(bannerContainer: ViewGroup? = null): Boolean {
-         val adView: View =
-             bannerContainer ?: findViewById<BannerAdView>(R.id.banner_ads)
-             ?: return false
-         if (!showCondition.shouldShow()) {
-             Log.d("banner", "hideBannerAdsIfNeed: ")
-             adView.gone()
-             return true
-         }
+        val adView = bannerContainer ?: binding.root.findFirstViewOfType<BannerAdView>() ?: return false
+        if (!showCondition.shouldShow()) {
+            adView.gone()
+            return true
+        }
         return false
     }
 
@@ -222,45 +172,32 @@ abstract class BaseActivity<T : ViewBinding> :
         }
 
         networkTracker?.isConnectedFlow?.collectWithLifecycle(this) { isConnected ->
-            if (isConnected) {
-                dismissNetworkDialog()
-            } else {
-                showNetworkDialog()
-            }
+            if (isConnected) dismissNetworkDialog() else showNetworkDialog()
         }
     }
 
     protected open fun onVipChangedState(isPremium: Boolean) {
         hideBannerAdsIfNeed()
-
     }
 
     open fun release() {}
 
     open fun onHandleBackPressed() {
         AdsManagerState.onBackScreen()
-        if (supportFragmentManager.backStackEntryCount == 0) {
-            finish()
-            return
-        } else {
-            supportFragmentManager.popBackStack()
-        }
+        if (supportFragmentManager.backStackEntryCount == 0) finish()
+        else supportFragmentManager.popBackStack()
     }
 
     private fun updateLocaleFormat(c: Context, languageTag: String): ContextWrapper {
         var context = c
         val locale = Locale.forLanguageTag(languageTag)
         Locale.setDefault(locale)
-
         val resources = context.resources
         val configuration = Configuration(resources.configuration)
-
         val localeList = LocaleList(locale)
         LocaleList.setDefault(localeList)
         configuration.setLocales(localeList)
-
         configuration.setLayoutDirection(locale)
-
         context = context.createConfigurationContext(configuration)
         return ContextWrapper(context)
     }
@@ -284,10 +221,12 @@ abstract class BaseActivity<T : ViewBinding> :
             startAndFinishCurrentIfNeed(intent, shouldFinishCurrentActivity)
             return
         }
-
         val showAdAction: (() -> Unit) -> Unit = if (forceShowAd) {
             { onContinue ->
-                interstitialManager.forceShowAdFullScreen(this, onAdComplete = onContinue)
+                interstitialManager.forceShowAdFullScreen(
+                    this,
+                    onAdComplete = onContinue
+                )
             }
         } else {
             { onContinue -> interstitialManager.showAdFullScreen(this, onAdComplete = onContinue) }
@@ -297,20 +236,14 @@ abstract class BaseActivity<T : ViewBinding> :
 
     private fun startAndFinishCurrentIfNeed(intent: Intent, shouldFinishCurrentActivity: Boolean) {
         startActivity(intent)
-        if (shouldFinishCurrentActivity) {
-            finish()
-        }
+        if (shouldFinishCurrentActivity) finish()
     }
 
     fun executeWithAds(onBack: () -> Unit) {
-        val isSkipAd = sharedPref.isVip
-        if (isSkipAd) {
-            onBack()
-            return
+        if (sharedPref.isVip) {
+            onBack(); return
         }
-        interstitialManager.showAdFullScreen(this) {
-            onBack()
-        }
+        interstitialManager.showAdFullScreen(this) { onBack() }
     }
 
     private fun showNetworkDialog() {
@@ -335,8 +268,7 @@ abstract class BaseActivity<T : ViewBinding> :
     override fun onDestroy() {
         if (registerEventBus) EventBus.getDefault().unregister(this)
         release()
-        releaseNativeAds()
+        nativeAds.release()
         super.onDestroy()
     }
-
 }

@@ -3,7 +3,6 @@ package com.wavez.controllerwidget.ui.onboarding.page
 import android.os.Bundle
 import android.view.Gravity
 import android.view.View
-import androidx.lifecycle.lifecycleScope
 import com.wavez.controllerwidget.R
 import com.wavez.controllerwidget.ads.native_ad.NativeAdPlacement
 import com.wavez.controllerwidget.core.base.BaseFragment
@@ -91,9 +90,7 @@ class Onboarding1Fragment : BaseFragment<FragmentOnboarding1Binding>() {
     }
 
     private fun preloadPage3Ad() {
-        lifecycleScope.launch {
-            nativeAdViewModel.loadAd(NativeAdPlacement.ONBOARDING3, perLoadAfterClick = true)
-        }
+        loadNativeWithPosition(NativeAdPlacement.ONBOARDING3, reloadToClick = true)
     }
 
     private fun showSelectToast() {

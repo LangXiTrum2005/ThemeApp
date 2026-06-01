@@ -22,7 +22,11 @@
       "Bash(npm root *)",
       "Bash(node -e \"require\\('docx'\\)\" --require \"C:/Users/Admin/AppData/Roaming/npm/node_modules/docx/build/index.js\")",
       "Bash(ls \"C:/Users/Admin/AppData/Roaming/npm/node_modules/docx/\")",
-      "Bash(NODE_PATH=\"C:/Users/Admin/AppData/Roaming/npm/node_modules\" node gen_doc.js)"
+      "Bash(NODE_PATH=\"C:/Users/Admin/AppData/Roaming/npm/node_modules\" node gen_doc.js)",
+      "Bash(Get-ChildItem -Path \"D:\\\\p67-theme-wallpaper\" -Recurse -Directory -Name)",
+      "Bash(Select-Object -First 20)",
+      "Bash(Remove-Item \"D:\\\\p67-theme-wallpaper\\\\app\\\\src\\\\main\\\\java\\\\com\\\\wavez\\\\controllerwidget\\\\ads\\\\native_ad\\\\NativeAdViewModel.kt\")",
+      "PowerShell(Remove-Item \"D:\\\\p67-theme-wallpaper\\\\app\\\\src\\\\main\\\\java\\\\com\\\\wavez\\\\controllerwidget\\\\ads\\\\native_ad\\\\NativeAdViewModel.kt\" -Confirm:$false)"
     ]
   }
 }

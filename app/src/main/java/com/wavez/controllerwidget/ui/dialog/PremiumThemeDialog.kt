@@ -1,9 +1,15 @@
 package com.wavez.controllerwidget.ui.dialog
 
+import android.app.Dialog
 import android.content.Context
+import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.view.Window
+import android.view.WindowInsets
+import android.view.WindowInsetsController
+import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import com.ads.admob.reward.RewardAdShowState
 import com.wavez.controllerwidget.ads.reward.RewardAdViewModel
@@ -11,8 +17,10 @@ import com.wavez.controllerwidget.core.base.BaseDialogFragment
 import com.wavez.controllerwidget.core.extensions.gone
 import com.wavez.controllerwidget.core.extensions.invisible
 import com.wavez.controllerwidget.core.extensions.visible
+import com.wavez.controllerwidget.data.repository.SharedPref
 import com.wavez.controllerwidget.databinding.DialogPremiumThemeBinding
 import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class PremiumThemeDialog : BaseDialogFragment<DialogPremiumThemeBinding>() {
@@ -20,6 +28,8 @@ class PremiumThemeDialog : BaseDialogFragment<DialogPremiumThemeBinding>() {
         return DialogPremiumThemeBinding.inflate(layoutInflater)
     }
 
+    override val hideNavigationBar: Boolean
+        get() = true
 
     companion object {
         const val TAG = "PremiumThemeDialog"
@@ -33,6 +43,9 @@ class PremiumThemeDialog : BaseDialogFragment<DialogPremiumThemeBinding>() {
 
     private val rewardAdViewModel by viewModels<RewardAdViewModel>()
 
+    @Inject
+    lateinit var sharedPref: SharedPref
+
     override fun onAttach(context: Context) {
         super.onAttach(context)
         listener = context as? PremiumThemeListener ?: parentFragment as? PremiumThemeListener
@@ -40,6 +53,7 @@ class PremiumThemeDialog : BaseDialogFragment<DialogPremiumThemeBinding>() {
 
     override fun initConfig(view: View, savedInstanceState: Bundle?) {
         super.initConfig(view, savedInstanceState)
+        binding.btnWathAd.isVisible = sharedPref.shouldShowReward
     }
 
     override fun initListener() {

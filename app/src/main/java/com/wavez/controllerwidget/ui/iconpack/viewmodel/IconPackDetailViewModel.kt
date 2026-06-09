@@ -139,6 +139,11 @@ class IconPackDetailViewModel @Inject constructor(
         return currentState.value.items.filter { it.isInstallable && !it.isApplied }
     }
 
+    fun currentIconItems(): List<IconPackItemUi> {
+        val currentState = uiState.value as? UiState.Data ?: return emptyList()
+        return currentState.value.items
+    }
+
     private fun loadInstalledAppsAndRemap() {
         viewModelScope.launch {
             val apps = installedAppProvider.getInstalledApps()

@@ -9,9 +9,11 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
 import com.wavez.controllerwidget.core.base.BaseFragment
 import com.google.android.material.tabs.TabLayoutMediator
+import com.google.android.material.appbar.AppBarLayout
 import com.wavez.controllerwidget.R
 import com.wavez.controllerwidget.core.base.UiState
 import com.wavez.controllerwidget.core.extensions.collectWithLifecycle
@@ -31,6 +33,7 @@ import com.wavez.controllerwidget.ui.theme.activities.DetailBannerActivity
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import kotlin.math.abs
 
 @AndroidEntryPoint
 class ThemeFragment : BaseFragment<FragmentThemeBinding>() {
@@ -52,17 +55,32 @@ class ThemeFragment : BaseFragment<FragmentThemeBinding>() {
     private val bannerAdapter = ThemeBannerAdapter()
     private var tabMediator: TabLayoutMediator? = null
 
+    private val appBarOffsetChangedListener =
+        AppBarLayout.OnOffsetChangedListener { appBarLayout, verticalOffset ->
+            val scrollRange = appBarLayout.totalScrollRange
+            val collapseProgress = if (scrollRange == 0) {
+                0f
+            } else {
+                abs(verticalOffset).toFloat() / scrollRange
+            }
+            binding.bannerContainer.alpha = 1f - collapseProgress
+        }
+
     private val onPageChangeCallback = object : ViewPager2.OnPageChangeCallback() {
         override fun onPageSelected(position: Int) {
             updateTabState(position)
         }
     }
 
+    private var lastSetupCategories: List<ThemeCategoryModel>? = null
+
     override fun initView(view: View, savedInstanceState: Bundle?) {
         super.initView(view, savedInstanceState)
         binding.toolbar.tvTitle.setText(R.string.themes)
+        binding.appBar.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.white))
         binding.vpBanner.adapter = bannerAdapter
         setupBannerCarousel()
+        binding.appBar.addOnOffsetChangedListener(appBarOffsetChangedListener)
         binding.vpTheme.registerOnPageChangeCallback(onPageChangeCallback)
         startBannerAutoScroll()
     }
@@ -91,7 +109,6 @@ class ThemeFragment : BaseFragment<FragmentThemeBinding>() {
                 DetailBannerActivity.newIntent(
                     context = requireContext(),
                     categoryId = category.id,
-                    categoryName = category.name,
                     bannerUrl = category.banner.orEmpty(),
                 )
             )
@@ -119,6 +136,10 @@ class ThemeFragment : BaseFragment<FragmentThemeBinding>() {
                 val pos = categories.indexOfFirst { category -> category.id == selectedItem.id }
                 if (pos >= 0) binding.vpTheme.currentItem = pos
             }
+        }
+
+        binding.btnRetry.setOnClickListener {
+            viewModel.getCategories(forceRefresh = true)
         }
     }
 
@@ -153,6 +174,8 @@ class ThemeFragment : BaseFragment<FragmentThemeBinding>() {
     }
 
     private fun setupTabs(categories: List<ThemeCategoryModel>) {
+        if (categories == lastSetupCategories) return
+        lastSetupCategories = categories
         val savedPosition = binding.vpTheme.currentItem
         tabMediator?.detach()
         binding.vpTheme.adapter = ThemeCategoryPagerAdapter(this, categories)
@@ -201,11 +224,15 @@ class ThemeFragment : BaseFragment<FragmentThemeBinding>() {
     }
 
     private fun setupBannerCarousel() {
-        binding.root.clipChildren = false
-        binding.root.clipToPadding = false
         binding.vpBanner.clipChildren = false
         binding.vpBanner.clipToPadding = false
-        binding.vpBanner.getChildAt(0)?.overScrollMode = View.OVER_SCROLL_NEVER
+        (binding.vpBanner.getChildAt(0) as? RecyclerView)?.apply {
+            clipChildren = false
+            clipToPadding = false
+            overScrollMode = View.OVER_SCROLL_NEVER
+            val horizontalPadding = resources.getDimensionPixelSize(R.dimen._48sdp)
+            setPadding(horizontalPadding, paddingTop, horizontalPadding, paddingBottom)
+        }
         binding.vpBanner.offscreenPageLimit = 3
         binding.vpBanner.setPageTransformer(ThemeBannerPageTransformer())
     }
@@ -245,6 +272,8 @@ class ThemeFragment : BaseFragment<FragmentThemeBinding>() {
     }
 
     override fun release() {
+        lastSetupCategories = null
+        binding.appBar.removeOnOffsetChangedListener(appBarOffsetChangedListener)
         binding.vpTheme.unregisterOnPageChangeCallback(onPageChangeCallback)
         tabMediator?.detach()
         tabMediator = null

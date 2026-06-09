@@ -63,12 +63,12 @@ class PremiumActivity : BaseActivity<ActivityPremiumBinding>(),
             onHandleBackPressed()
         }
 
-        binding.btnBuyMonth.setOnClickListener {
+        binding.btnBuyWeek.setOnClickListener {
             syncUiSelect(PremiumPlan.WEEKLY)
         }
 
-        binding.btnBuyWeek.setOnClickListener {
-            syncUiSelect(PremiumPlan.WEEKLY)
+        binding.btnBuyMonth.setOnClickListener {
+            syncUiSelect(PremiumPlan.MONTHLY)
         }
 
         binding.btnBuyYear.setOnClickListener {

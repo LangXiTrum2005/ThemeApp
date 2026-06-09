@@ -63,6 +63,9 @@ class SetIconAdapter : ListAdapter<IconPackItemUi, SetIconAdapter.IconViewHolder
             val targetIcon = item.targetIcon
             binding.ivAppIcon.isVisible = targetIcon != null
             binding.tvPlus.visibility = if (targetIcon == null) View.VISIBLE else View.GONE
+            binding.tvPlus.setOnClickListener {
+                onEditClick?.invoke(item)
+            }
             binding.ivEdit.isVisible = item.isInstallable
             binding.ivEdit.setOnClickListener {
                 onEditClick?.invoke(item)

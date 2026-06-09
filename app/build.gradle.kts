@@ -83,12 +83,12 @@ base {
     val versionName = android.defaultConfig.versionName
 
     archivesName =
-        "P67-Controller Widget-v${versionName}(${versionCode})"
+        "P67-ThemeWallpaper-v${versionName}(${versionCode})"
 }
 
 dependencies {
     implementation(project(":billing_library"))
-    implementation(project(":ken_ads"))
+    implementation(project(":mmonetize_ads"))
     implementation(libs.androidx.activity.ktx)
     implementation(libs.androidx.fragment.ktx)
     implementation(libs.androidx.constraintlayout)

@@ -8,7 +8,7 @@
     android:gravity="center"
     android:orientation="vertical">
 
-    <TextView
+    <!--<TextView
         android:id="@+id/titleText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -55,7 +55,7 @@
         android:layout_marginTop="16dp"
         android:backgroundTint="#1976D2"
         android:text="Test GIF Wallpaper"
-        android:textColor="@android:color/white" />
+        android:textColor="@android:color/white" />-->
 
     <androidx.viewpager2.widget.ViewPager2
         android:id="@+id/vpMain"

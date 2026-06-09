@@ -3,11 +3,11 @@ package com.wavez.controllerwidget.ui.onboarding.page
 import android.os.Bundle
 import android.view.View
 import com.bumptech.glide.Glide
+import com.wavez.controllerwidget.R
 import com.wavez.controllerwidget.ads.native_ad.NativeAdPlacement
 import com.wavez.controllerwidget.core.base.BaseFragment
 import com.wavez.controllerwidget.core.extensions.getParcel
 import com.wavez.controllerwidget.core.extensions.gone
-import com.wavez.controllerwidget.core.extensions.visible
 import com.wavez.controllerwidget.databinding.FragmentOnboardingDetailBinding
 import com.wavez.controllerwidget.ui.onboarding.WalkthroughActivity
 import com.wavez.controllerwidget.ui.onboarding.model.BoardingData
@@ -55,16 +55,23 @@ class WalkthroughDetailFragment : BaseFragment<FragmentOnboardingDetailBinding>(
         Glide.with(this).load(data.imageID).placeholder(data.imageID).into(binding.imageIV)
         binding.tvHeader.text = getString(data.labelID)
         binding.tvDes.text = getString(data.desID)
+        binding.tvNext.text = getString(if (data.index == 3) R.string.get_start else R.string.next)
     }
 
     private fun initNativeAds() {
         val show = arguments?.getBoolean(SHOULD_SHOW_NATIVE_AD) ?: true
+        if (sharedPref.isVip || !show) {
+            binding.bigNative1.gone()
+            binding.bigNative2.gone()
+            binding.viewFake.gone()
+            return
+        }
         if (boardingData?.index == 2) {
             binding.bigNative2.gone()
-            setupNative(NativeAdPlacement.ONBOARDING2, binding.bigNative1, show)
+            setupNative(NativeAdPlacement.ONBOARDING2, binding.bigNative1, true, preloadOnClick = true)
         } else {
             binding.bigNative1.gone()
-            setupNative(NativeAdPlacement.ONBOARDING3, binding.bigNative2, show)
+            setupNative(NativeAdPlacement.ONBOARDING3, binding.bigNative2, true, preloadOnClick = true)
         }
     }
 

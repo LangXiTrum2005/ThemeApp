@@ -38,7 +38,7 @@ class WalkthroughActivity : BaseActivity<ActivityWalkthroughBinding>() {
     override fun initConfig(savedInstanceState: Bundle?) {
         super.initConfig(savedInstanceState)
         lifecycleScope.launch {
-            loadNativeWithPosition(NativeAdPlacement.ONBOARDING2, reloadToClick = true)
+            loadNativeWithPosition(NativeAdPlacement.ONBOARDING2)
         }
     }
 

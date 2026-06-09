@@ -29,13 +29,13 @@ class OnboardingLanguageActivity : BaseLanguageActivity() {
         FirebaseControlLogEvent.logEvent(AppEvent.LFO_VIEW)
         binding.btnNextLanguage.visible()
         binding.btnSave.gone()
-        loadNativeWithPosition(NativeAdPlacement.LANGUAGE_2, true)
+        loadNativeWithPosition(NativeAdPlacement.LANGUAGE_2)
         initNativeLanguage1()
     }
 
     private fun loadAds() {
-        loadNativeWithPosition(NativeAdPlacement.ONBOARDING1, reloadToClick = true)
-        loadNativeWithPosition(NativeAdPlacement.ONBOARDING1_CLICK, reloadToClick = true)
+        loadNativeWithPosition(NativeAdPlacement.ONBOARDING1)
+        loadNativeWithPosition(NativeAdPlacement.ONBOARDING1_CLICK)
     }
 
     override fun onSaveLanguage() {
@@ -66,6 +66,7 @@ class OnboardingLanguageActivity : BaseLanguageActivity() {
             NativeAdPlacement.LANGUAGE,
             binding.nativeLanguage1,
             sharedPref.shouldShowNativeLanguage1,
+            preloadOnClick = true
         )
     }
 
@@ -75,6 +76,7 @@ class OnboardingLanguageActivity : BaseLanguageActivity() {
             NativeAdPlacement.LANGUAGE_2,
             binding.nativeLanguage2,
             sharedPref.shouldShowNativeLanguage2,
+            preloadOnClick = true
         )
     }
 

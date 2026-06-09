@@ -6,11 +6,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
+import androidx.core.graphics.drawable.toDrawable
+import androidx.core.view.WindowCompat
+import androidx.core.view.WindowInsetsCompat
+import androidx.core.view.WindowInsetsControllerCompat
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.FragmentManager
 import androidx.viewbinding.ViewBinding
 import org.greenrobot.eventbus.EventBus
-import androidx.core.graphics.drawable.toDrawable
 
 abstract class BaseDialogFragment<T : ViewBinding> : DialogFragment() {
 
@@ -21,6 +24,8 @@ abstract class BaseDialogFragment<T : ViewBinding> : DialogFragment() {
     open val fullScreen = false
 
     open val isTransparentBackground: Boolean = true
+
+    open val hideNavigationBar: Boolean = false
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -59,6 +64,16 @@ abstract class BaseDialogFragment<T : ViewBinding> : DialogFragment() {
                     LinearLayout.LayoutParams.MATCH_PARENT,
                     LinearLayout.LayoutParams.MATCH_PARENT
                 )
+            }
+        }
+
+        if (hideNavigationBar) {
+            dialog?.window?.let { window ->
+                WindowCompat.setDecorFitsSystemWindows(window, false)
+                WindowInsetsControllerCompat(window, window.decorView).apply {
+                    hide(WindowInsetsCompat.Type.navigationBars())
+                    systemBarsBehavior = WindowInsetsControllerCompat.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE
+                }
             }
         }
     }

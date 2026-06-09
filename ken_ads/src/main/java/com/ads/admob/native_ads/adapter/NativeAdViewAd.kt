@@ -7,9 +7,7 @@ interface NativeAdViewAd {
 
     var shouldShowAd: Boolean
 
-    fun bind(
-        nativeAd: NativeAd,
-    )
+    fun bind(nativeAd: NativeAd)
 
     fun showPlaceholder()
 

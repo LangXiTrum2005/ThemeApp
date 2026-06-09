@@ -42,7 +42,7 @@
     <string name="loading_please_wait_a_moment">Loading, please wait a moment …</string>
     <string name="loading">Loading…</string>
     <string name="reload">Reload</string>
-    <string name="could_not_load_content">Couldn\'t load content</string>
+    <string name="could_not_load_content">Could\'t load content</string>
     <string name="server_error_message">Something went wrong. Please try again!</string>
     <string name="try_again">Try Again</string>
     <string name="suggested_wallpapers">Suggested wallpapers</string>
@@ -54,6 +54,7 @@
     <string name="this_action_may_show_ads">This action may contain ads</string>
     <string name="install">Install</string>
     <string name="install_all_icons">Install all icons</string>
+    <string name="unlock_all_icons">Unlock all icons</string>
     <string name="unlock">Unlock</string>
     <string name="choose">Choose</string>
     <string name="no_icons_to_install">No icons available to install</string>
@@ -125,5 +126,6 @@
     <string name="are_you_sure_you_want_to_discard_your_feedback">Are you sure you want to discard your feedback?</string>
     <string name="keep_editing">Keep editing</string>
     <string name="discard">Discard</string>
+    <string name="get_start">Get Started</string>
 
 </resources>

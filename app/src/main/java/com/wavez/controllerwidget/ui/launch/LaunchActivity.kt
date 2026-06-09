@@ -5,7 +5,8 @@ import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.lifecycle.lifecycleScope
 import com.ads.admob.GoogleMobileAdsConsentManager
-import com.ads.admob.interstitial_ads.SplashInterAdManager
+import com.ads.admob.MMonetize
+import com.ads.admob.interstitial_ads.InterSplashManager
 import com.wavez.controllerwidget.R
 import com.wavez.controllerwidget.ads.AdsId
 import com.wavez.controllerwidget.ads.native_ad.NativeAdPlacement
@@ -27,10 +28,10 @@ class LaunchActivity : BaseActivity<ActivityLaunchBinding>() {
     override fun bindingView() = ActivityLaunchBinding.inflate(layoutInflater)
 
     private val splashAd by lazy {
-        SplashInterAdManager(
+        InterSplashManager(
             context = this,
             adUnitIds = AdsId.getListInterstitialAdsSplash(),
-            shouldShow = { sharedPref.shouldShowInterSplash && !sharedPref.isVip },
+            shouldShow = { sharedPref.shouldShowInterSplash },
         )
     }
 
@@ -62,19 +63,23 @@ class LaunchActivity : BaseActivity<ActivityLaunchBinding>() {
         GoogleMobileAdsConsentManager.getInstance(this).gatherConsent(this) {
             loadBannerSplash()
             initNativeAd()
-            splashAd.loadInter()
+            splashAd.load()
             showInterSplash()
         }
     }
 
     private fun showInterSplash() {
-        splashAd.showInterAd(this, lifecycleScope) { goToNextActivity() }
+        lifecycleScope.launch {
+            splashAd.showOrTimeout(this@LaunchActivity) {
+                goToNextActivity()
+            }
+        }
     }
 
     private fun initNativeAd() {
         viewModel.initNativeAd().forEach { (position, pair) ->
             val (adIds, shouldLoad) = pair
-            if (shouldLoad) nativeAds.setIds(position.name, adIds)
+            if (shouldLoad) MMonetize.nativeAdRepository.setNativeAdIds(position.name, adIds)
         }
         if (sharedPref.isNeedShowLanguage) {
             loadNativeWithPosition(NativeAdPlacement.LANGUAGE)
@@ -113,7 +118,7 @@ class LaunchActivity : BaseActivity<ActivityLaunchBinding>() {
         binding.bannerAds.registerBanner(
             this,
             adId = AdsId.getBannerAdsSplash(),
-            shouldLoad = sharedPref.shouldBannerSplash && !sharedPref.isVip,
+            shouldLoad = sharedPref.shouldBannerSplash ,
         )
     }
 }

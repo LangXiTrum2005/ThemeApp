@@ -5,8 +5,8 @@ import android.view.View
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import com.ads.admob.MMonetize
 import com.ads.admob.native_ads.adapter.NativeAdLoadState
-import com.google.android.gms.ads.nativead.NativeAd
 import com.wavez.controllerwidget.ads.native_ad.NativeAdPlacement
 import com.wavez.controllerwidget.core.base.BaseFragment
 import com.wavez.controllerwidget.core.extensions.gone
@@ -37,7 +37,7 @@ class FullScreenNativeAdFragment : BaseFragment<ActivityFullScreenNativeAdBindin
     }
 
     private var hasTriggeredNextScreen = false
-    private var nativeAdReady: NativeAd? = null
+    private var isAdReady = false
 
     private val adType: NativeAdPlacement by lazy {
         val name = arguments?.getString(ARG_POSITION)
@@ -54,16 +54,15 @@ class FullScreenNativeAdFragment : BaseFragment<ActivityFullScreenNativeAdBindin
         super.initObserver()
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.lifecycle.repeatOnLifecycle(Lifecycle.State.STARTED) {
-                nativeAds.flowOf(adType.name).collectLatest { state ->
+                MMonetize.nativeAdRepository.getAdStateFlow(adType.name).collectLatest { state ->
                     when (state) {
-                        NativeAdLoadState.Loaded -> {
-                            nativeAdReady = nativeAds.consumeAd(adType.name)
-                            if (nativeAdReady != null) {
-                                binding.loadingLayout.gone()
-                                binding.fullScreenNativeAdView.bind(nativeAdReady!!)
-                            }
+                        is NativeAdLoadState.Loaded -> {
+                            isAdReady = true
+                            binding.loadingLayout.gone()
+                            binding.fullScreenNativeAdView.bind(state.ad)
                         }
-                        is NativeAdLoadState.Failed -> nativeAdReady = null
+
+                        is NativeAdLoadState.Failed -> isAdReady = false
                         else -> {}
                     }
                 }
@@ -71,14 +70,9 @@ class FullScreenNativeAdFragment : BaseFragment<ActivityFullScreenNativeAdBindin
         }
     }
 
-    override fun release() {
-        nativeAdReady?.destroy()
-        nativeAdReady = null
-    }
-
     fun onFragmentVisible() {
         if (hasTriggeredNextScreen) return
-        if (nativeAdReady == null) {
+        if (!isAdReady) {
             binding.root.postDelayed({
                 if (!hasTriggeredNextScreen) {
                     hasTriggeredNextScreen = true
@@ -95,5 +89,10 @@ class FullScreenNativeAdFragment : BaseFragment<ActivityFullScreenNativeAdBindin
                 action()
             }
         }
+    }
+
+    override fun onDestroyView() {
+        MMonetize.nativeAdRepository.releaseAd(adType.name)
+        super.onDestroyView()
     }
 }

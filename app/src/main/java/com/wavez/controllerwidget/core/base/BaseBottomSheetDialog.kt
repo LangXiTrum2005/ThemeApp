@@ -1,9 +1,14 @@
 package com.wavez.controllerwidget.core.base
 
+import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowCompat
+import androidx.core.view.WindowInsetsCompat
+import androidx.core.view.WindowInsetsControllerCompat
 import androidx.fragment.app.FragmentManager
 import androidx.viewbinding.ViewBinding
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
@@ -17,6 +22,8 @@ abstract class BaseBottomSheetDialog<T : ViewBinding> : BottomSheetDialogFragmen
     open var registerEventBus = false
 
     open val useDim: Boolean = false
+
+    open val hideNavigationBar: Boolean = false
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -37,6 +44,27 @@ abstract class BaseBottomSheetDialog<T : ViewBinding> : BottomSheetDialogFragmen
         super.onStart()
         if (!useDim) {
             dialog?.window?.setBackgroundDrawableResource(R.color.transparent)
+        }
+        if (hideNavigationBar) {
+            dialog?.window?.let { window ->
+                WindowCompat.setDecorFitsSystemWindows(window, false)
+                val decorView = window.decorView
+                ViewCompat.setOnApplyWindowInsetsListener(decorView) { view, insets ->
+                    if (insets.isVisible(WindowInsetsCompat.Type.navigationBars())) {
+                        WindowInsetsControllerCompat(window, view).apply {
+                            hide(WindowInsetsCompat.Type.navigationBars())
+                            systemBarsBehavior = WindowInsetsControllerCompat.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE
+                        }
+                    }
+                    ViewCompat.onApplyWindowInsets(view, insets)
+                }
+                decorView.post {
+                    WindowInsetsControllerCompat(window, decorView).apply {
+                        hide(WindowInsetsCompat.Type.navigationBars())
+                        systemBarsBehavior = WindowInsetsControllerCompat.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE
+                    }
+                }
+            }
         }
     }
 

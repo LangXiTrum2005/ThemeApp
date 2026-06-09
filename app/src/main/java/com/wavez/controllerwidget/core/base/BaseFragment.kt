@@ -6,9 +6,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.lifecycleScope
 import androidx.viewbinding.ViewBinding
-import com.ads.admob.native_ads.NativeAdManager
+import com.ads.admob.MMonetize
+import com.ads.admob.native_ads.NativeAdBinder
 import com.ads.admob.native_ads.NativeAdRepository
 import com.ads.admob.native_ads.adapter.NativeAdViewAd
 import com.wavez.controllerwidget.ads.native_ad.NativeAdPlacement
@@ -29,18 +29,8 @@ abstract class BaseFragment<T : ViewBinding> : Fragment() {
     @Inject
     lateinit var sharedPref: SharedPref
 
-    @Inject
-    lateinit var nativeAdRepository: NativeAdRepository
 
-    protected val nativeAds by lazy {
-        NativeAdManager(
-            repository = nativeAdRepository,
-            lifecycleOwner = this,
-            scope = lifecycleScope,
-            isVip = { sharedPref.isVip },
-        )
-    }
-
+    private val nativeAdBinder by lazy { NativeAdBinder() }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
@@ -63,12 +53,20 @@ abstract class BaseFragment<T : ViewBinding> : Fragment() {
         view: NativeAdViewAd,
         shouldShow: Boolean = true,
         autoLoad: Boolean = false,
+        preloadOnClick: Boolean = false,
     ) {
-        nativeAds.setup(position.name, view, shouldShow, autoLoad)
+        nativeAdBinder.attach(
+            lifecycleOwner = viewLifecycleOwner,
+            placement = position.name,
+            view = view,
+            shouldShow = shouldShow,
+            autoLoad = autoLoad,
+            preloadOnClick = preloadOnClick,
+        )
     }
 
-    fun loadNativeWithPosition(position: NativeAdPlacement, reloadToClick: Boolean = false) {
-        nativeAds.load(position.name, reloadToClick)
+    fun loadNativeWithPosition(position: NativeAdPlacement) {
+        MMonetize.nativeAdRepository.loadAd(position.name)
     }
 
     fun navigateTo(intent: Intent, forceShowAd: Boolean = false) {
@@ -84,7 +82,6 @@ abstract class BaseFragment<T : ViewBinding> : Fragment() {
     }
 
     override fun onDestroyView() {
-        nativeAds.release()
         release()
         if (registerEventBus) EventBus.getDefault().unregister(this)
         _binding = null

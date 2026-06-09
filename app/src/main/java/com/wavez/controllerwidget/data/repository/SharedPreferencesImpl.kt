@@ -5,6 +5,8 @@ import android.content.SharedPreferences
 import androidx.core.content.edit
 import com.wavez.controllerwidget.Secrets
 import com.wavez.controllerwidget.ads.AppRemoteConfig
+import kotlin.properties.ReadWriteProperty
+import kotlin.reflect.KProperty
 
 class SharedPreferencesImpl(context: Context) : SharedPref {
 
@@ -73,6 +75,20 @@ class SharedPreferencesImpl(context: Context) : SharedPref {
     override fun setConfigLanguage(language: String) {
         editor.putString(APP_LANGUAGE, language).apply()
     }
+
+    /**
+     * Delegate for ad-show flags.
+     * Getter: raw RC value AND !isVip — VIP users get false for every ad flag automatically.
+     * Setter: persists the raw RC value so it survives VIP state changes.
+     */
+    private fun adFlag(key: String, default: Boolean = true): ReadWriteProperty<SharedPreferencesImpl, Boolean> =
+        object : ReadWriteProperty<SharedPreferencesImpl, Boolean> {
+            override fun getValue(thisRef: SharedPreferencesImpl, property: KProperty<*>): Boolean =
+                sharedPref.getBoolean(key, default) && !thisRef.isVip
+
+            override fun setValue(thisRef: SharedPreferencesImpl, property: KProperty<*>, value: Boolean) =
+                sharedPref.edit { putBoolean(key, value) }
+        }
 
     override var isNeedShowLanguage: Boolean
         get() = sharedPref.getBoolean(IS_NEED_SHOW_LANGUAGE, true)
@@ -158,7 +174,7 @@ class SharedPreferencesImpl(context: Context) : SharedPref {
 
 
     override var interOpenAdsGap: Long
-        get() = sharedPref.getLong(AppRemoteConfig.INTER_OPEN_ADS_GAP_KEY, 5_000L)
+        get() = sharedPref.getLong(AppRemoteConfig.INTER_OPEN_ADS_GAP_KEY, 3_000L)
         set(value) {
             editor.putLong(AppRemoteConfig.INTER_OPEN_ADS_GAP_KEY, value).commit()
         }
@@ -176,12 +192,12 @@ class SharedPreferencesImpl(context: Context) : SharedPref {
         }
 
     override var openAdsGap: Long
-        get() = sharedPref.getLong(AppRemoteConfig.OPEN_ADS_GAP_KEY, 5_000L)
+        get() = sharedPref.getLong(AppRemoteConfig.OPEN_ADS_GAP_KEY, 3_000L)
         set(value) {
             editor.putLong(AppRemoteConfig.OPEN_ADS_GAP_KEY, value).commit()
         }
     override var nativeGap: Long
-        get() = sharedPref.getLong(AppRemoteConfig.NATIVE_GAP, 10_000L)
+        get() = sharedPref.getLong(AppRemoteConfig.NATIVE_GAP, 15_000L)
         set(value) {
             editor.putLong(AppRemoteConfig.NATIVE_GAP, value).commit()
         }
@@ -193,141 +209,74 @@ class SharedPreferencesImpl(context: Context) : SharedPref {
             editor.putLong(LAST_TIME_SHOW_OPEN_AD_SPLASH, value).apply()
         }
 
-    override var shouldShowNativeLanguage1: Boolean
-        get() = sharedPref.getBoolean(
-            AppRemoteConfig.SHOULD_SHOW_NATIVE_AD_ON_FIRST_SETTING_LANGUAGE, true
-        )
-        set(value) = sharedPref.edit {
-            putBoolean(AppRemoteConfig.SHOULD_SHOW_NATIVE_AD_ON_FIRST_SETTING_LANGUAGE, value)
-        }
+    override var shouldShowNativeLanguage1: Boolean by adFlag(AppRemoteConfig.SHOULD_SHOW_NATIVE_AD_ON_FIRST_SETTING_LANGUAGE, true)
 
     override var shouldShowNativeLanguage2: Boolean
-        get() = sharedPref.getBoolean(
+            by adFlag(
             AppRemoteConfig.SHOULD_SHOW_NATIVE_AD_ON_FIRST_SETTING_LANGUAGE2, true
         )
-        set(value) {
-            sharedPref.edit {
-                putBoolean(AppRemoteConfig.SHOULD_SHOW_NATIVE_AD_ON_FIRST_SETTING_LANGUAGE2, value)
-            }
-        }
 
     override var shouldShowNativeObd1: Boolean
-        get() = sharedPref.getBoolean(AppRemoteConfig.SHOULD_SHOW_NATIVE_AD_ON_WALKTHROUGH_1, true)
-        set(value) = sharedPref.edit {
-            putBoolean(AppRemoteConfig.SHOULD_SHOW_NATIVE_AD_ON_WALKTHROUGH_1, value)
-        }
+            by adFlag(AppRemoteConfig.SHOULD_SHOW_NATIVE_AD_ON_WALKTHROUGH_1, true)
+
 
     override var shouldShowNativeObd2: Boolean
-        get() = sharedPref.getBoolean(AppRemoteConfig.SHOULD_SHOW_NATIVE_AD_ON_WALKTHROUGH_2, true)
-        set(value) {
-            sharedPref.edit {
-                putBoolean(AppRemoteConfig.SHOULD_SHOW_NATIVE_AD_ON_WALKTHROUGH_2, value)
-            }
-        }
+            by adFlag(AppRemoteConfig.SHOULD_SHOW_NATIVE_AD_ON_WALKTHROUGH_2, true)
 
     override var shouldShowNativeObd3: Boolean
-        get() = sharedPref.getBoolean(AppRemoteConfig.SHOULD_SHOW_NATIVE_AD_ON_WALKTHROUGH_3, true)
-        set(value) {
-            sharedPref.edit {
-                putBoolean(AppRemoteConfig.SHOULD_SHOW_NATIVE_AD_ON_WALKTHROUGH_3, value)
-            }
-        }
+         by adFlag(AppRemoteConfig.SHOULD_SHOW_NATIVE_AD_ON_WALKTHROUGH_3, true)
 
     override var shouldShowNativeObd1Click: Boolean
-        get() = sharedPref.getBoolean(
+         by adFlag(
             AppRemoteConfig.SHOULD_SHOW_NATIVE_AD_ON_WALKTHROUGH_1_CLICK,
             true
         )
-        set(value) {
-            sharedPref.edit {
-                putBoolean(AppRemoteConfig.SHOULD_SHOW_NATIVE_AD_ON_WALKTHROUGH_1_CLICK, value)
-            }
-        }
+
 
     override var shouldShowNativeAdFull1: Boolean
-        get() = sharedPref.getBoolean(AppRemoteConfig.SHOULD_SHOW_NATIVE_AD_FULL_1, true)
-        set(value) {
-            sharedPref.edit { putBoolean(AppRemoteConfig.SHOULD_SHOW_NATIVE_AD_FULL_1, value) }
-        }
+         by adFlag(AppRemoteConfig.SHOULD_SHOW_NATIVE_AD_FULL_1, true)
 
     override var shouldShowNativeAdFull2: Boolean
-        get() = sharedPref.getBoolean(AppRemoteConfig.SHOULD_SHOW_NATIVE_AD_FULL_2, true)
-        set(value) {
-            sharedPref.edit { putBoolean(AppRemoteConfig.SHOULD_SHOW_NATIVE_AD_FULL_2, value) }
-        }
+         by adFlag(AppRemoteConfig.SHOULD_SHOW_NATIVE_AD_FULL_2, true)
 
     override var shouldBannerSplash: Boolean
-        get() = sharedPref.getBoolean(AppRemoteConfig.SHOULD_SHOW_BANNER_SPLASH, true)
-        set(value) {
-            sharedPref.edit { putBoolean(AppRemoteConfig.SHOULD_SHOW_BANNER_SPLASH, value) }
-        }
+         by adFlag(AppRemoteConfig.SHOULD_SHOW_BANNER_SPLASH, true)
+
 
     override var shouldShowInterSplash: Boolean
-        get() = sharedPref.getBoolean(AppRemoteConfig.SHOULD_SHOW_INTER_SPLASH, true)
-        set(value) {
-            sharedPref.edit { putBoolean(AppRemoteConfig.SHOULD_SHOW_INTER_SPLASH, value) }
-        }
+         by adFlag(AppRemoteConfig.SHOULD_SHOW_INTER_SPLASH, true)
+
     override var shouldShowBannerHome: Boolean
-        get() = sharedPref.getBoolean(AppRemoteConfig.SHOULD_SHOW_BANNER_HOME, true)
-        set(value) {
-            sharedPref.edit { putBoolean(AppRemoteConfig.SHOULD_SHOW_BANNER_HOME, value) }
-        }
+         by adFlag(AppRemoteConfig.SHOULD_SHOW_BANNER_HOME, true)
+
 
 
     override var shouldShowNativeHome: Boolean
-        get() = sharedPref.getBoolean(AppRemoteConfig.SHOULD_SHOW_NATIVE_HOME, true)
-        set(value) {
-            sharedPref.edit { putBoolean(AppRemoteConfig.SHOULD_SHOW_NATIVE_HOME, value) }
-        }
+         by adFlag(AppRemoteConfig.SHOULD_SHOW_NATIVE_HOME, true)
+
     override var shouldShowNativeBoostSuccess: Boolean
-        get() = sharedPref.getBoolean(AppRemoteConfig.SHOULD_SHOW_BOOST_SUCCESS, true)
-        set(value) {
-            sharedPref.edit { putBoolean(AppRemoteConfig.SHOULD_SHOW_BOOST_SUCCESS, value) }
-        }
+         by adFlag(AppRemoteConfig.SHOULD_SHOW_BOOST_SUCCESS, true)
+
     override var shouldShowNativeConfig: Boolean
-        get() = sharedPref.getBoolean(AppRemoteConfig.SHOULD_SHOW_NATIVE_CONFIG, true)
-        set(value) {
-            sharedPref.edit { putBoolean(AppRemoteConfig.SHOULD_SHOW_NATIVE_CONFIG, value) }
-        }
+         by adFlag(AppRemoteConfig.SHOULD_SHOW_NATIVE_CONFIG, true)
+
     override var shouldShowNativeSelectApp: Boolean
-        get() = sharedPref.getBoolean(AppRemoteConfig.SHOULD_SHOW_NATIVE_SELECT_APP, true)
-        set(value) {
-            sharedPref.edit { putBoolean(AppRemoteConfig.SHOULD_SHOW_NATIVE_SELECT_APP, value) }
-        }
+         by adFlag(AppRemoteConfig.SHOULD_SHOW_NATIVE_SELECT_APP, true)
 
-
-    override var shouldShowRewardSelect: Boolean
-        get() = sharedPref.getBoolean(AppRemoteConfig.SHOULD_SHOW_REWARD_SELECT, true)
-        set(value) {
-            sharedPref.edit { putBoolean(AppRemoteConfig.SHOULD_SHOW_REWARD_SELECT, value) }
-        }
-
-    override var shouldShowRewardConfig: Boolean
-        get() = sharedPref.getBoolean(AppRemoteConfig.SHOULD_SHOW_REWARD_CONFIG, true)
-        set(value) {
-            sharedPref.edit { putBoolean(AppRemoteConfig.SHOULD_SHOW_REWARD_CONFIG, value) }
-        }
+    override var shouldShowReward: Boolean
+         by adFlag(AppRemoteConfig.SHOULD_SHOW_REWARD, true)
 
     override var shouldShowBannerInApp: Boolean
-        get() = sharedPref.getBoolean(AppRemoteConfig.SHOULD_SHOW_BANNER_INAPP, true)
-        set(value) {
-            sharedPref.edit { putBoolean(AppRemoteConfig.SHOULD_SHOW_BANNER_INAPP, value) }
-        }
+         by adFlag(AppRemoteConfig.SHOULD_SHOW_BANNER_INAPP, true)
+
     override var shouldShowNativeInApp: Boolean
-        get() = sharedPref.getBoolean(AppRemoteConfig.SHOULD_SHOW_NATIVE_INAPP, true)
-        set(value) {
-            sharedPref.edit { putBoolean(AppRemoteConfig.SHOULD_SHOW_NATIVE_INAPP, value) }
-        }
+         by adFlag(AppRemoteConfig.SHOULD_SHOW_NATIVE_INAPP, true)
+
     override var shouldShowInterInApp: Boolean
-        get() = sharedPref.getBoolean(AppRemoteConfig.SHOULD_SHOW_INTER_INAPP, true)
-        set(value) {
-            sharedPref.edit { putBoolean(AppRemoteConfig.SHOULD_SHOW_INTER_INAPP, value) }
-        }
+         by adFlag(AppRemoteConfig.SHOULD_SHOW_INTER_INAPP, true)
+
     override var shouldShowOpenAd: Boolean
-        get() = sharedPref.getBoolean(AppRemoteConfig.SHOULD_SHOW_OPEN_AD, true)
-        set(value) {
-            sharedPref.edit { putBoolean(AppRemoteConfig.SHOULD_SHOW_OPEN_AD, value) }
-        }
+         by adFlag(AppRemoteConfig.SHOULD_SHOW_OPEN_AD, true)
 
     override var activeThemeId: String?
         get() = sharedPref.getString(ACTIVE_THEME_ID, null)

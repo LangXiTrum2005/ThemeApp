@@ -47,6 +47,7 @@ class Onboarding1Fragment : BaseFragment<FragmentOnboarding1Binding>() {
             NativeAdPlacement.ONBOARDING1,
             binding.bigNativeAdView,
             arguments?.getBoolean(SHOULD_SHOW_NATIVE_AD) ?: true,
+            preloadOnClick = true
         )
         FirebaseControlLogEvent.logEvent(AppEvent.ONBOARDING_1_VIEW)
     }
@@ -86,11 +87,12 @@ class Onboarding1Fragment : BaseFragment<FragmentOnboarding1Binding>() {
             NativeAdPlacement.ONBOARDING1_CLICK,
             binding.bigNativeClick,
             sharedPref.shouldShowNativeObd1Click,
+            preloadOnClick = true
         )
     }
 
     private fun preloadPage3Ad() {
-        loadNativeWithPosition(NativeAdPlacement.ONBOARDING3, reloadToClick = true)
+        loadNativeWithPosition(NativeAdPlacement.ONBOARDING3)
     }
 
     private fun showSelectToast() {

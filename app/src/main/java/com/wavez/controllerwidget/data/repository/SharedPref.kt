@@ -71,8 +71,7 @@ interface SharedPref {
     var shouldShowNativeBoostSuccess : Boolean
     var shouldShowNativeConfig : Boolean
 
-    var shouldShowRewardSelect : Boolean
-    var shouldShowRewardConfig : Boolean
+    var shouldShowReward : Boolean
 
     var shouldShowBannerInApp : Boolean
     var shouldShowNativeInApp : Boolean

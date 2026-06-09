@@ -25,18 +25,15 @@ class DetailBannerActivity : BaseActivity<ActivityDetailBannerBinding>() {
 
     companion object {
         private const val EXTRA_CATEGORY_ID = "extra_category_id"
-        private const val EXTRA_CATEGORY_NAME = "extra_category_name"
         private const val EXTRA_BANNER_URL = "extra_banner_url"
 
         fun newIntent(
             context: Context,
             categoryId: String,
-            categoryName: String,
             bannerUrl: String,
         ): Intent {
             return Intent(context, DetailBannerActivity::class.java).apply {
                 putExtra(EXTRA_CATEGORY_ID, categoryId)
-                putExtra(EXTRA_CATEGORY_NAME, categoryName)
                 putExtra(EXTRA_BANNER_URL, bannerUrl)
             }
         }
@@ -45,14 +42,10 @@ class DetailBannerActivity : BaseActivity<ActivityDetailBannerBinding>() {
     private val viewModel by viewModels<ThemePageViewModel>()
     private val themeAdapter = ThemeAdapter()
     private val categoryId: String by lazy { intent.getStringExtra(EXTRA_CATEGORY_ID).orEmpty() }
-    private val categoryName: String by lazy {
-        intent.getStringExtra(EXTRA_CATEGORY_NAME).orEmpty()
-    }
     private val bannerUrl: String by lazy { intent.getStringExtra(EXTRA_BANNER_URL).orEmpty() }
 
     override fun initView(savedInstanceState: Bundle?) {
         super.initView(savedInstanceState)
-        binding.tvTitle.text = categoryName
         binding.ivBanner.loadWithLoading(bannerUrl, binding.viewBannerLoading.root)
         binding.rcvTheme.adapter = themeAdapter
     }
@@ -67,7 +60,7 @@ class DetailBannerActivity : BaseActivity<ActivityDetailBannerBinding>() {
     private fun loadBanner() {
         binding.bannerAds.registerBanner(
             this, adId = AdsId.getBannerInAppAds(),
-            shouldLoad = sharedPref.shouldShowBannerInApp && !sharedPref.isVip,
+            shouldLoad = sharedPref.shouldShowBannerInApp ,
         )
     }
 

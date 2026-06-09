@@ -96,7 +96,7 @@ class SearchActivity : BaseActivity<ActivitySearchBinding>() {
     private fun loadBanner() {
         binding.bannerAds.registerBanner(
             this, adId = AdsId.getBannerInAppAds(),
-            shouldLoad = sharedPref.shouldShowBannerInApp && !sharedPref.isVip,
+            shouldLoad = sharedPref.shouldShowBannerInApp ,
         )
     }
 

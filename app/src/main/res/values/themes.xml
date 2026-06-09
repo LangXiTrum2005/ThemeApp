@@ -23,6 +23,9 @@
 
     <style name="TransparentBottomSheetDialog" parent="Theme.Material3.Light.BottomSheetDialog">
         <item name="bottomSheetStyle">@style/TransparentBottomSheet</item>
+        <item name="enableEdgeToEdge">true</item>
+        <item name="android:navigationBarColor">@android:color/transparent</item>
+        <item name="android:windowLightNavigationBar">false</item>
     </style>
 
     <style name="TransparentBottomSheet" parent="Widget.Material3.BottomSheet.Modal">

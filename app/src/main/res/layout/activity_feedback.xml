@@ -65,10 +65,10 @@
             android:gravity="start|top"
             android:hint="@string/enter_your_feedback_here"
             android:inputType="textMultiLine"
+            style="@style/NunitoMedium.16"
             android:padding="16dp"
             android:textColor="@color/textHighEm"
             android:textColorHint="@color/textLowEm"
-            android:textSize="12sp"
             app:layout_constraintTop_toTopOf="parent" />
 
         <LinearLayout

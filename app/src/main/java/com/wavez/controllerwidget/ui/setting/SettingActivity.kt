@@ -1,8 +1,10 @@
 package com.wavez.controllerwidget.ui.setting
 
+import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import androidx.activity.result.contract.ActivityResultContracts
 import com.wavez.controllerwidget.core.base.BaseActivity
 import com.wavez.controllerwidget.core.extensions.openUrl
 import com.wavez.controllerwidget.databinding.ActivitySettingBinding
@@ -24,6 +26,17 @@ class SettingActivity : BaseActivity<ActivitySettingBinding>() {
         }
     }
 
+
+    private val languageLauncher = registerForActivityResult(
+        ActivityResultContracts.StartActivityForResult()
+    ) { result ->
+        if (result.resultCode == Activity.RESULT_OK) {
+            window.setWindowAnimations(0)
+            recreate()
+        }
+    }
+
+
     override fun initView(savedInstanceState: Bundle?) {
         super.initView(savedInstanceState)
     }
@@ -44,7 +57,7 @@ class SettingActivity : BaseActivity<ActivitySettingBinding>() {
         }
 
         binding.btnLanguage.setOnClickListener {
-            startActivity(SettingLanguageActivity.newIntent(this))
+            languageLauncher.launch(SettingLanguageActivity.newIntent(this))
         }
     }
 

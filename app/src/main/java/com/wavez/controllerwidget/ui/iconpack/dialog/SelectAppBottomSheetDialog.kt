@@ -24,6 +24,8 @@ class SelectAppBottomSheetDialog : BaseBottomSheetDialog<BottomSheetSelectAppBin
         fun newInstance() = SelectAppBottomSheetDialog()
     }
 
+    override val hideNavigationBar: Boolean
+        get() = true
 
     private val viewModel by viewModels<SelectAppViewModel>()
     private val adapter = SelectAppAdapter()

@@ -13,6 +13,7 @@ import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import androidx.viewpager2.widget.ViewPager2
+import com.ads.admob.MMonetize
 import com.wavez.controllerwidget.ads.AdsId
 import com.wavez.controllerwidget.ads.native_ad.NativeAdPlacement
 import com.wavez.controllerwidget.core.base.BaseActivity
@@ -69,6 +70,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
     override fun initView(savedInstanceState: Bundle?) {
         super.initView(savedInstanceState)
         binding.bottomNav.itemActiveIndicatorColor = null
+        binding.bottomNav.itemIconTintList = null
         binding.bottomNav.setOnApplyWindowInsetsListener(null)
         binding.bottomNav.setPadding(0, 0, 0, 0)
 
@@ -83,6 +85,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
         initNative()
         loadBanner()
         loadInterAds()
+        MMonetize.openAdManager.loadAd()
 //        binding.togglePanelButton.setOnClickListener { togglePanel() }
 //        requestPermissions.launch(runtimePermissions.toTypedArray())
     }
@@ -90,7 +93,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
     private fun loadBanner() {
         binding.bannerAds.registerBanner(
             this, adId = AdsId.getBannerHomeAds(),
-            shouldLoad = sharedPref.shouldShowBannerHome && !sharedPref.isVip,
+            shouldLoad = sharedPref.shouldShowBannerHome ,
         )
     }
 
@@ -99,6 +102,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
             NativeAdPlacement.NATIVE_HOME,
             binding.nativeHome,
             shouldShow = sharedPref.shouldShowNativeHome,
+            autoReloadOnStart = true,
             autoLoad = true,
         )
     }
@@ -205,7 +209,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
         val themeReady = ThemeLoader.isReady(this)
         val missingCount = ThemeLoader.missingAssets(this).size
 
-        binding.accessibilityStatusText.apply {
+     /*   binding.accessibilityStatusText.apply {
             text = if (accessibilityReady) {
                 setTextColor(Color.rgb(56, 142, 60))
                 "Accessibility: ENABLED"
@@ -229,7 +233,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
         binding.permissionButtonsContainer.removeAllViews()
         missingSpecial.forEach { permission ->
             binding.permissionButtonsContainer.addView(createPermissionButton(permission))
-        }
+        }*/
     }
 
     private fun togglePanel() {
@@ -239,7 +243,9 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
                 ControlCenterService.Companion.EXTRA_SHOW, panelActive
             )
         )
+/*
         binding.togglePanelButton.text = if (panelActive) "Hide Panel" else "Show Panel"
+*/
     }
 
     private fun createPermissionButton(permission: RequiredPermission): Button {

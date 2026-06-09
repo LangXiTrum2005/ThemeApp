@@ -6,7 +6,6 @@ import android.content.Intent
 import android.content.res.Configuration
 import android.os.Bundle
 import android.os.LocaleList
-import android.view.View
 import android.view.ViewGroup
 import androidx.activity.OnBackPressedCallback
 import androidx.activity.enableEdgeToEdge
@@ -21,13 +20,9 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.viewbinding.ViewBinding
-import com.ads.admob.AdsManagerState
-import com.ads.admob.ShowCondition
+import com.ads.admob.MMonetize
 import com.ads.admob.banner_ads.BannerAdView
-import com.ads.admob.interstitial_ads.AdInterstitialManager
-import com.ads.admob.native_ads.NativeAdManager
-import com.ads.admob.native_ads.NativeAdRepository
-import com.ads.admob.native_ads.adapter.CollapsibleAd
+import com.ads.admob.native_ads.NativeAdBinder
 import com.ads.admob.native_ads.adapter.NativeAdViewAd
 import com.wavez.controllerwidget.R
 import com.wavez.controllerwidget.ads.native_ad.NativeAdPlacement
@@ -58,25 +53,9 @@ abstract class BaseActivity<T : ViewBinding> : AppCompatActivity() {
     @Inject
     lateinit var sharedPref: SharedPref
 
-    @Inject
-    lateinit var interstitialManager: AdInterstitialManager
-
-    @Inject
-    lateinit var showCondition: ShowCondition
-
-    @Inject
-    lateinit var nativeAdRepository: NativeAdRepository
-
     abstract fun bindingView(): T
 
-    protected val nativeAds by lazy {
-        NativeAdManager(
-            repository = nativeAdRepository,
-            lifecycleOwner = this,
-            scope = lifecycleScope,
-            isVip = { sharedPref.shouldShowInterSplash && !sharedPref.isVip  },
-        )
-    }
+    private val nativeAdBinder by lazy { NativeAdBinder() }
 
     private var networkTracker: NetworkTracker? = null
     private var networkDialog: NetworkDialog? = null
@@ -128,11 +107,11 @@ abstract class BaseActivity<T : ViewBinding> : AppCompatActivity() {
     }
 
     fun loadInterAds() {
-        interstitialManager.loadAd()
+        MMonetize.interstitialManager.loadAd()
     }
 
-    fun loadNativeWithPosition(position: NativeAdPlacement, reloadToClick: Boolean = false) {
-        nativeAds.load(position.name, reloadToClick)
+    fun loadNativeWithPosition(position: NativeAdPlacement) {
+        MMonetize.nativeAdRepository.loadAd(position.name)
     }
 
     fun setupNative(
@@ -141,15 +120,23 @@ abstract class BaseActivity<T : ViewBinding> : AppCompatActivity() {
         shouldShow: Boolean = true,
         autoLoad: Boolean = false,
         autoReloadOnStart: Boolean = false,
-        shouldUseCollapseRate: Boolean = true,
+        preloadOnClick: Boolean = false,
     ) {
-        if (view is CollapsibleAd) view.shouldCollapseRate = shouldUseCollapseRate
-        nativeAds.setup(position.name, view, shouldShow, autoLoad, autoReloadOnStart)
+        nativeAdBinder.attach(
+            lifecycleOwner = this,
+            placement = position.name,
+            view = view,
+            shouldShow = shouldShow,
+            autoLoad = autoLoad,
+            autoReloadOnStart = autoReloadOnStart,
+            preloadOnClick = preloadOnClick,
+        )
     }
 
     protected fun hideBannerAdsIfNeed(bannerContainer: ViewGroup? = null): Boolean {
-        val adView = bannerContainer ?: binding.root.findFirstViewOfType<BannerAdView>() ?: return false
-        if (!showCondition.shouldShow()) {
+        val adView =
+            bannerContainer ?: binding.root.findFirstViewOfType<BannerAdView>() ?: return false
+        if (sharedPref.isVip) {
             adView.gone()
             return true
         }
@@ -177,13 +164,15 @@ abstract class BaseActivity<T : ViewBinding> : AppCompatActivity() {
     }
 
     protected open fun onVipChangedState(isPremium: Boolean) {
-        hideBannerAdsIfNeed()
+        if (isPremium) {
+            hideBannerAdsIfNeed()
+            nativeAdBinder.releaseAllPlacements()
+        }
     }
 
     open fun release() {}
 
     open fun onHandleBackPressed() {
-        AdsManagerState.onBackScreen()
         if (supportFragmentManager.backStackEntryCount == 0) finish()
         else supportFragmentManager.popBackStack()
     }
@@ -216,20 +205,25 @@ abstract class BaseActivity<T : ViewBinding> : AppCompatActivity() {
         forceShowAd: Boolean = false,
         shouldFinishCurrentActivity: Boolean = false,
     ) {
-        val isSkipAd = !showCondition.shouldShow()
+        val isSkipAd = sharedPref.isVip
         if (isSkipAd) {
             startAndFinishCurrentIfNeed(intent, shouldFinishCurrentActivity)
             return
         }
         val showAdAction: (() -> Unit) -> Unit = if (forceShowAd) {
             { onContinue ->
-                interstitialManager.forceShowAdFullScreen(
+                MMonetize.interstitialManager.forceShowAdFullScreen(
                     this,
                     onAdComplete = onContinue
                 )
             }
         } else {
-            { onContinue -> interstitialManager.showAdFullScreen(this, onAdComplete = onContinue) }
+            { onContinue ->
+                MMonetize.interstitialManager.showAdFullScreen(
+                    this,
+                    onAdComplete = onContinue
+                )
+            }
         }
         showAdAction { startAndFinishCurrentIfNeed(intent, shouldFinishCurrentActivity) }
     }
@@ -243,7 +237,7 @@ abstract class BaseActivity<T : ViewBinding> : AppCompatActivity() {
         if (sharedPref.isVip) {
             onBack(); return
         }
-        interstitialManager.showAdFullScreen(this) { onBack() }
+        MMonetize.interstitialManager.showAdFullScreen(this) { onBack() }
     }
 
     private fun showNetworkDialog() {
@@ -268,7 +262,6 @@ abstract class BaseActivity<T : ViewBinding> : AppCompatActivity() {
     override fun onDestroy() {
         if (registerEventBus) EventBus.getDefault().unregister(this)
         release()
-        nativeAds.release()
         super.onDestroy()
     }
 }

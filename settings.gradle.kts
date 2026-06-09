@@ -25,4 +25,4 @@ dependencyResolutionManagement {
 rootProject.name = "P67-ThemeWallpaper"
 include(":app")
 include(":billing_library")
-include(":ken_ads")
+include(":mmonetize_ads")

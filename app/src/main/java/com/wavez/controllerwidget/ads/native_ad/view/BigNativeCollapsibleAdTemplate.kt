@@ -4,7 +4,6 @@ import android.content.Context
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.widget.FrameLayout
-import com.ads.admob.native_ads.adapter.CollapsibleAd
 import com.ads.admob.native_ads.adapter.NativeAdViewAd
 import com.google.android.gms.ads.nativead.NativeAd
 import com.wavez.controllerwidget.core.extensions.gone
@@ -15,7 +14,7 @@ class BigNativeCollapsibleAdTemplate @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,
 ) : FrameLayout(context, attrs),
-    NativeAdViewAd, CollapsibleAd {
+    NativeAdViewAd {
 
     private val binding: LayoutBigCollpasibleTemplateViewBinding =
         LayoutBigCollpasibleTemplateViewBinding.inflate(
@@ -23,8 +22,6 @@ class BigNativeCollapsibleAdTemplate @JvmOverloads constructor(
             this,
             true,
         )
-
-    override var shouldCollapseRate: Boolean = true
 
     override var shouldShowAd = true
     override fun bind(

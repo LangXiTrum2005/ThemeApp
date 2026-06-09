@@ -16,6 +16,7 @@ import com.wavez.controllerwidget.data.model.icon.IconItemModel
 import com.wavez.controllerwidget.databinding.ActivityAppliedThemeBinding
 import com.wavez.controllerwidget.ui.home.MainActivity
 import com.wavez.controllerwidget.ui.home.fragment.theme.adapter.ThemeAdapter
+import com.wavez.controllerwidget.ui.premium.PremiumActivity
 import com.wavez.controllerwidget.ui.theme.adapter.AppliedThemeIconAdapter
 import com.wavez.controllerwidget.ui.theme.viewmodel.AppliedThemeViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -69,7 +70,7 @@ class AppliedThemeActivity : BaseActivity<ActivityAppliedThemeBinding>() {
     private fun loadBanner() {
         binding.bannerAds.registerBanner(
             this, adId = AdsId.getBannerInAppAds(),
-            shouldLoad = sharedPref.shouldShowBannerInApp && !sharedPref.isVip,
+            shouldLoad = sharedPref.shouldShowBannerInApp ,
         )
     }
 
@@ -94,6 +95,10 @@ class AppliedThemeActivity : BaseActivity<ActivityAppliedThemeBinding>() {
         }
         binding.btnViewMoreIcons.setOnClickListener {
             finish()
+        }
+
+        binding.btnPremium.setOnClickListener {
+            startActivity(PremiumActivity.newIntent(this))
         }
     }
 

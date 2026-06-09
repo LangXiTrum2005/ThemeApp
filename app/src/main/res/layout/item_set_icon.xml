@@ -49,14 +49,15 @@
             tools:src="@mipmap/ic_launcher"
             tools:visibility="visible" />
 
-        <androidx.appcompat.widget.AppCompatTextView
+        <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/tvPlus"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@drawable/bg_plus_circle"
             android:gravity="center"
-            android:text="+"
-            android:textColor="@color/text_low_em"
+            android:padding="8dp"
+            android:src="@drawable/ic_add"
+            android:textColor="@color/text_med_em"
             android:textSize="20sp"
             android:visibility="visible" />
 

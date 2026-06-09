@@ -8,8 +8,8 @@ import android.os.Bundle
 import androidx.lifecycle.DefaultLifecycleObserver
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.ProcessLifecycleOwner
-import com.ads.admob.AdsInitializer
 import com.ads.admob.AdsManagerState
+import com.ads.admob.MMonetize
 import com.ads.admob.open_ads.OpenAdManager
 import com.google.android.gms.ads.AdActivity
 import com.wavez.controllerwidget.ads.AppRemoteConfig
@@ -49,9 +49,6 @@ class MyApplication : Application(), Application.ActivityLifecycleCallbacks,
     lateinit var sharedPref: SharedPref
 
     @Inject
-    lateinit var openManager: OpenAdManager
-
-    @Inject
     lateinit var appRemoteConfig: AppRemoteConfig
 
     private var currentActivity: Activity? = null
@@ -73,7 +70,7 @@ class MyApplication : Application(), Application.ActivityLifecycleCallbacks,
         registerActivityLifecycleCallbacks(this)
         ProcessLifecycleOwner.get().lifecycle.addObserver(this)
         premiumRepository.startConnection()
-        AdsInitializer.initializeAds(this) {}
+        MMonetize.initializeAds(this) {}
     }
 
     override fun onStart(owner: LifecycleOwner) {
@@ -97,7 +94,7 @@ class MyApplication : Application(), Application.ActivityLifecycleCallbacks,
 
     private fun showOpenAd() {
         val activity = currentActivity ?: return
-        openManager.show(activity)
+        MMonetize.openAdManager.show(activity)
     }
 
     override fun onDestroy(owner: LifecycleOwner) {

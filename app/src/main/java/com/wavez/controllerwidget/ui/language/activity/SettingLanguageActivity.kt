@@ -1,8 +1,10 @@
 package com.wavez.controllerwidget.ui.language.activity
 
+import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import androidx.activity.result.contract.ActivityResultContracts
 import com.wavez.controllerwidget.core.extensions.gone
 import com.wavez.controllerwidget.core.extensions.visible
 import com.wavez.controllerwidget.data.model.LanguageModel
@@ -33,10 +35,7 @@ class SettingLanguageActivity : BaseLanguageActivity() {
     }
 
     override fun onSaveLanguage() {
-        startActivity(
-            MainActivity.newIntent(this).apply {
-                flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
-            },
-        )
+        setResult(RESULT_OK)
+        finish()
     }
 }

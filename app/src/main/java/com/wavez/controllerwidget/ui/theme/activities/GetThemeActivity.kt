@@ -5,6 +5,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
 import androidx.activity.viewModels
+import androidx.core.view.isInvisible
 import androidx.core.view.isVisible
 import androidx.lifecycle.lifecycleScope
 import com.wavez.controllerwidget.R
@@ -25,6 +26,7 @@ import com.wavez.controllerwidget.data.model.theme.ThemeModel
 import com.wavez.controllerwidget.databinding.ActivityGetThemesBinding
 import com.wavez.controllerwidget.ui.dialog.DownloadDialog
 import com.wavez.controllerwidget.ui.dialog.PremiumThemeDialog
+import com.wavez.controllerwidget.ui.home.MainActivity
 import com.wavez.controllerwidget.ui.iconpack.adapter.SetIconAdapter
 import com.wavez.controllerwidget.ui.iconpack.dialog.SelectAppBottomSheetDialog
 import com.wavez.controllerwidget.ui.iconpack.model.IconPackItemUi
@@ -92,7 +94,7 @@ class GetThemeActivity : BaseActivity<ActivityGetThemesBinding>(),
     private fun loadBanner() {
         binding.bannerAds.registerBanner(
             this, adId = AdsId.getBannerInAppAds(),
-            shouldLoad = sharedPref.shouldShowBannerInApp && !sharedPref.isVip,
+            shouldLoad = sharedPref.shouldShowBannerInApp ,
         )
     }
 
@@ -141,6 +143,12 @@ class GetThemeActivity : BaseActivity<ActivityGetThemesBinding>(),
             } else {
                 installAllShortcuts(mappedItems)
             }
+        }
+
+        binding.btnGoToHome.setOnClickListener {
+            startActivity(MainActivity.newIntent(this).apply {
+                flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP
+            })
         }
 
         iconAdapter.onActionClick = { item, state ->
@@ -196,6 +204,7 @@ class GetThemeActivity : BaseActivity<ActivityGetThemesBinding>(),
                 is UiState.Data -> {
                     binding.viewApplyLoading.root.isVisible = false
                     binding.viewApplied.isVisible = true
+                    binding.btnGoToHome.isInvisible = false
                     binding.btnApplyWallpaper.isVisible = false
                 }
 
@@ -218,6 +227,7 @@ class GetThemeActivity : BaseActivity<ActivityGetThemesBinding>(),
                     binding.viewIconsLoading.isVisible = false
                     binding.rcvIcons.isVisible = true
                     iconAdapter.submitList(state.value)
+                    updateIconsAction(state.value)
                 }
 
                 is UiState.Error -> {
@@ -260,6 +270,27 @@ class GetThemeActivity : BaseActivity<ActivityGetThemesBinding>(),
             binding.btnApplyWallpaper.setIcon(R.drawable.ic_lock_1)
             binding.btnApplyWallpaper.setText(getString(R.string.unlock))
         }
+    }
+
+    private fun updateIconsAction(items: List<IconPackItemUi>) {
+        val pendingItems = items.filter { it.isInstallable && !it.isApplied }
+        val hasLockedIcons = pendingItems.any { !it.isUnlocked }
+        binding.btnInstallAll.setText(
+            getString(
+                if (hasLockedIcons) {
+                    R.string.unlock_all_icons
+                } else {
+                    R.string.install_all_icons
+                }
+            )
+        )
+        binding.btnInstallAll.setIcon(
+            if (hasLockedIcons) {
+                R.drawable.ic_lock_1
+            } else {
+                0
+            }
+        )
     }
 
     private fun startWallpaperDownload() {
@@ -394,7 +425,6 @@ class GetThemeActivity : BaseActivity<ActivityGetThemesBinding>(),
             val mappedItems = viewModel.mappedIconsPendingInstall()
             if (mappedItems.isNotEmpty()) {
                 viewModel.unlockIcons(mappedItems.map { it.id })
-                installAllShortcuts(mappedItems)
             }
         } else {
             viewModel.unlockIcon()

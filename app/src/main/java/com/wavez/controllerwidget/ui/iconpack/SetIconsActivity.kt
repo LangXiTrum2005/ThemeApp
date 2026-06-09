@@ -8,6 +8,7 @@ import androidx.activity.viewModels
 import androidx.core.view.isVisible
 import androidx.lifecycle.lifecycleScope
 import com.wavez.controllerwidget.R
+import com.wavez.controllerwidget.ads.AdsId
 import com.wavez.controllerwidget.core.base.BaseActivity
 import com.wavez.controllerwidget.core.base.UiState
 import com.wavez.controllerwidget.core.extensions.collectWithLifecycle
@@ -51,7 +52,6 @@ class SetIconsActivity : BaseActivity<ActivitySetIconsBinding>(),
 
     override fun initView(savedInstanceState: Bundle?) {
         super.initView(savedInstanceState)
-        binding.tvTitle.text = intent.getStringExtra(EXTRA_PACK_NAME).orEmpty()
         binding.rcvIcons.adapter = adapter
     }
 
@@ -60,6 +60,14 @@ class SetIconsActivity : BaseActivity<ActivitySetIconsBinding>(),
         val packId = intent.getStringExtra(EXTRA_PACK_ID) ?: return finish()
         viewModel.currentIconPackId = packId
         viewModel.load(packId)
+        loadBaner()
+    }
+
+    private fun loadBaner() {
+        binding.bannerAds.registerBanner(
+            this, adId = AdsId.getBannerInAppAds(),
+            shouldLoad = sharedPref.shouldShowBannerInApp,
+        )
     }
 
     override fun onVipChangedState(isPremium: Boolean) {
@@ -114,9 +122,8 @@ class SetIconsActivity : BaseActivity<ActivitySetIconsBinding>(),
                     binding.rcvIcons.isVisible = true
                     binding.btnInstallAll.isVisible = true
                     val detail = state.value
-                    val pack = detail.pack
-                    binding.tvTitle.text = pack.name
                     adapter.submitList(detail.items)
+                    updateIconsAction(detail.items)
                 }
 
                 is UiState.Error -> {
@@ -137,6 +144,27 @@ class SetIconsActivity : BaseActivity<ActivitySetIconsBinding>(),
         )
     }
 
+    private fun updateIconsAction(items: List<IconPackItemUi>) {
+        val pendingItems = items.filter { it.isInstallable && !it.isApplied }
+        val hasLockedIcons = pendingItems.any { !it.isUnlocked }
+        binding.btnInstallAll.setText(
+            getString(
+                if (hasLockedIcons) {
+                    R.string.unlock_all_icons
+                } else {
+                    R.string.install_all_icons
+                }
+            )
+        )
+        binding.btnInstallAll.setIcon(
+            if (hasLockedIcons) {
+                R.drawable.ic_lock_1
+            } else {
+                0
+            }
+        )
+    }
+
     private fun unlockIcon() {
         viewModel.setInstallingAllAfterUnlock(false)
         showPremiumDialog()
@@ -153,7 +181,15 @@ class SetIconsActivity : BaseActivity<ActivitySetIconsBinding>(),
             val success = requestInstallShortcut(item)
             if (success) {
                 viewModel.markIconApplied(item.id)
-                openApplyIcons()
+                val remainingIcons = viewModel.currentIconItems()
+                    .filter { it.id != item.id }
+                    .map { it.toIconItemModel() }
+                startActivity(
+                    ApplyIconsActivity.singleIconIntent(
+                        this@SetIconsActivity,
+                        remainingIcons,
+                    )
+                )
             } else {
                 Toast.makeText(
                     this@SetIconsActivity, R.string.shortcut_install_failed, Toast.LENGTH_SHORT
@@ -169,7 +205,9 @@ class SetIconsActivity : BaseActivity<ActivitySetIconsBinding>(),
             }
             if (appliedIds.isNotEmpty()) {
                 viewModel.markIconsApplied(appliedIds)
-                openApplyIcons()
+                startActivity(ApplyIconsActivity.allIconsIntent(this@SetIconsActivity,
+                    viewModel.currentIconPackId.toString()
+                ))
             } else {
                 Toast.makeText(
                     this@SetIconsActivity, R.string.shortcut_install_failed, Toast.LENGTH_SHORT
@@ -187,10 +225,12 @@ class SetIconsActivity : BaseActivity<ActivitySetIconsBinding>(),
         ).isSuccess
     }
 
-    private fun openApplyIcons() {
-        val packId = viewModel.currentIconPackId ?: return
-        startActivity(ApplyIconsActivity.newIntent(this, packId))
-    }
+    private fun IconPackItemUi.toIconItemModel() =
+        com.wavez.controllerwidget.data.model.icon.IconItemModel(
+            packageName = targetPackageName.orEmpty(),
+            appName = targetLabel,
+            iconUrl = iconUrl,
+        )
 
     override fun onAppSelected(appInfo: AppInfo) {
         viewModel.applySelectedApp(appInfo)
@@ -201,7 +241,6 @@ class SetIconsActivity : BaseActivity<ActivitySetIconsBinding>(),
             val mappedItems = viewModel.mappedIconsPendingInstall()
             if (mappedItems.isNotEmpty()) {
                 viewModel.unlockIcons(mappedItems.map { it.id })
-                installAllShortcuts(mappedItems)
             }
         } else {
             viewModel.unlockIcon()

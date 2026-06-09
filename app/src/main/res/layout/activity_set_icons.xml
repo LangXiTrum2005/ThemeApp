@@ -35,8 +35,9 @@
             android:layout_weight="1"
             android:ellipsize="end"
             android:maxLines="1"
+            android:text="@string/install"
             android:textColor="@color/primary_high_em"
-            tools:text="Pastel" />
+             />
 
     </LinearLayout>
 
@@ -61,19 +62,18 @@
         app:layout_constraintTop_toBottomOf="@id/divider"
         tools:listitem="@layout/item_set_icon" />
 
-    <androidx.appcompat.widget.AppCompatButton
+    <com.wavez.controllerwidget.ui.customview.IconTextButton
         android:id="@+id/btnInstallAll"
         style="@style/NunitoMedium.16"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="16dp"
         android:layout_marginBottom="24dp"
-        android:background="@drawable/bg_button_1"
-        android:paddingVertical="14dp"
-        android:text="@string/install_all_icons"
         android:textAllCaps="false"
-        android:textColor="@color/white"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:btnBackground="@drawable/bg_button_1"
+        app:btnText="@string/install_all_icons"
+        app:btnTextColor="@color/white"
+        app:layout_constraintBottom_toTopOf="@+id/banner_ads"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
@@ -87,5 +87,12 @@
         app:layout_constraintEnd_toEndOf="@+id/rcvIcons"
         app:layout_constraintStart_toStartOf="@+id/rcvIcons"
         app:layout_constraintTop_toTopOf="@+id/rcvIcons" />
+
+    <com.ads.admob.banner_ads.BannerAdView
+        android:id="@+id/banner_ads"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

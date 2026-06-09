@@ -9,7 +9,6 @@
     android:clickable="true"
     android:focusable="true">
 
-
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rcvHabits"
         android:layout_width="match_parent"
@@ -21,6 +20,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvTextToolbar"
         app:spanCount="2"
+        tools:itemCount="4"
         tools:listitem="@layout/item_habits" />
 
     <androidx.appcompat.widget.AppCompatTextView

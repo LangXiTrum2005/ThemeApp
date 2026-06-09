@@ -5,6 +5,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.ads.admob.MMonetize
 import com.ads.admob.reward.RewardAdManager
 import com.ads.admob.reward.RewardAdShowState
 import com.wavez.controllerwidget.ads.AdsId
@@ -14,8 +15,9 @@ import javax.inject.Inject
 
 @HiltViewModel
 class RewardAdViewModel @Inject constructor(
-    private val rewardAdManager: RewardAdManager
 ) : ViewModel() {
+
+    private val rewardAdManager: RewardAdManager = MMonetize.rewardAdManager
 
     private val _rewardAdState = MutableLiveData<RewardAdShowState>(RewardAdShowState.Initial)
     val rewardAdState: LiveData<RewardAdShowState> = _rewardAdState

@@ -293,6 +293,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="12dp"
+                    style="@style/NunitoMedium.14"
                     android:text="@string/tv_des_failed_buy"
                     android:textColor="@color/text_high_em" />
 

@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
+    android:clipChildren="true"
     tools:context=".ui.home.fragment.theme.ThemeFragment">
 
     <include
@@ -14,100 +15,169 @@
         android:layout_height="wrap_content"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <androidx.viewpager2.widget.ViewPager2
-        android:id="@+id/vpBanner"
-        android:layout_width="match_parent"
-        android:layout_height="145dp"
-        android:clipChildren="false"
-        android:clipToPadding="false"
-        android:paddingStart="48dp"
-        android:paddingEnd="48dp"
-        app:layout_constraintTop_toBottomOf="@id/toolbar" />
-
-    <com.wavez.controllerwidget.ui.customview.ServerLoadingView
-        android:id="@+id/viewLoadingBanner"
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:id="@+id/coordinator"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:background="@color/white"
-        android:visibility="gone"
-        app:layout_constraintBottom_toBottomOf="@+id/vpBanner"
-        app:layout_constraintTop_toTopOf="@id/vpBanner" />
+        android:clipChildren="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/toolbar">
 
-
-    <com.wavez.controllerwidget.ui.customview.ServerErrorView
-        android:id="@+id/viewErrorBanner"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:background="@color/white"
-        android:visibility="gone"
-        app:layout_constraintBottom_toBottomOf="@+id/vpBanner"
-        app:layout_constraintTop_toTopOf="@id/vpBanner" />
-
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/edSearch"
-        style="@style/CustomSearchView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="16dp"
-        android:text="@string/search_themes"
-        app:layout_constraintTop_toBottomOf="@id/vpBanner" />
-
-    <LinearLayout
-        android:id="@+id/viewTab"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="16dp"
-        android:layout_marginTop="16dp"
-        android:gravity="center"
-        android:orientation="horizontal"
-        app:layout_constraintTop_toBottomOf="@id/edSearch">
-
-        <com.google.android.material.tabs.TabLayout
-            android:id="@+id/tabCategory"
-            android:layout_width="0dp"
+        <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/appBar"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:background="@color/transparent"
-            app:tabIndicatorHeight="0dp"
-            app:tabMode="scrollable"
-            app:tabPaddingBottom="0dp"
-            app:tabPaddingEnd="8dp"
-            app:tabPaddingStart="0dp"
-            app:tabPaddingTop="0dp"
-            app:tabRippleColor="@null" />
+            android:background="@color/white"
+            android:clipChildren="true"
+            android:elevation="0dp"
+            android:stateListAnimator="@null"
+            app:backgroundTint="@color/white"
+            app:liftOnScroll="false"
+            app:liftOnScrollColor="@color/white">
 
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/btnMoreCategory"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="?selectableItemBackground"
-            android:src="@drawable/ic_more_category" />
+            <FrameLayout
+                android:id="@+id/bannerContainer"
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:clipChildren="true"
+                app:layout_scrollFlags="scroll|exitUntilCollapsed|snap"
+                app:layout_scrollInterpolator="@android:interpolator/fast_out_slow_in">
 
-    </LinearLayout>
+                <androidx.viewpager2.widget.ViewPager2
+                    android:id="@+id/vpBanner"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:clipChildren="false"
+                    android:clipToPadding="false" />
 
-    <androidx.viewpager2.widget.ViewPager2
-        android:id="@+id/vpTheme"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/viewTab" />
+                <com.wavez.controllerwidget.ui.customview.ServerLoadingView
+                    android:id="@+id/viewLoadingBanner"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@color/white"
+                    android:visibility="gone" />
 
-    <com.wavez.controllerwidget.ui.customview.ServerErrorView
-        android:id="@+id/viewError"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:background="@color/white"
-        android:visibility="gone"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toTopOf="@id/viewTab" />
+                <LinearLayout
+                    android:id="@+id/viewErrorBanner"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@color/white"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:visibility="gone">
 
-    <com.wavez.controllerwidget.ui.customview.ServerLoadingView
-        android:id="@+id/viewLoading"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:background="@color/white"
-        android:visibility="gone"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toTopOf="@id/viewTab" />
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/ivIcon"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:src="@drawable/ic_server_error" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tvTitle"
+                        style="@style/NunitoBold.14"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:gravity="center"
+                        android:text="@string/could_not_load_content"
+                        android:textColor="@color/text_high_em" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tvMessage"
+                        style="@style/NunitoMedium.12"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:gravity="center"
+                        android:text="@string/server_error_message"
+                        android:textColor="@color/text_med_em" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/btnRetry"
+                        style="@style/NunitoBold.14"
+                        android:layout_width="wrap_content"
+                        android:layout_height="32dp"
+                        android:layout_marginHorizontal="34dp"
+                        android:layout_marginTop="14dp"
+                        android:background="@drawable/bg_button_1"
+                        android:gravity="center"
+                        android:paddingHorizontal="16dp"
+                        android:text="@string/try_again"
+                        android:textColor="@color/white" />
+                </LinearLayout>
+
+            </FrameLayout>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/edSearch"
+                style="@style/CustomSearchView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="16dp"
+                android:text="@string/search_themes" />
+
+            <LinearLayout
+                android:id="@+id/viewTab"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginTop="16dp"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <com.google.android.material.tabs.TabLayout
+                    android:id="@+id/tabCategory"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="8dp"
+                    android:layout_weight="1"
+                    android:background="@color/transparent"
+                    app:tabIndicatorHeight="0dp"
+                    app:tabMode="scrollable"
+                    app:tabPaddingBottom="0dp"
+                    app:tabPaddingEnd="8dp"
+                    app:tabPaddingStart="0dp"
+                    app:tabPaddingTop="0dp"
+                    app:tabRippleColor="@null" />
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/btnMoreCategory"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="?selectableItemBackground"
+                    android:src="@drawable/ic_more_category" />
+
+            </LinearLayout>
+
+        </com.google.android.material.appbar.AppBarLayout>
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+            <androidx.viewpager2.widget.ViewPager2
+                android:id="@+id/vpTheme"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+            <com.wavez.controllerwidget.ui.customview.ServerErrorView
+                android:id="@+id/viewError"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/white"
+                android:visibility="gone" />
+
+            <com.wavez.controllerwidget.ui.customview.ServerLoadingView
+                android:id="@+id/viewLoading"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/white"
+                android:visibility="gone" />
+
+        </FrameLayout>
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

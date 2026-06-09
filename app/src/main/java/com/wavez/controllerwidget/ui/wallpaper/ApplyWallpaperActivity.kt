@@ -19,6 +19,7 @@ import com.wavez.controllerwidget.core.base.UiState
 import com.wavez.controllerwidget.core.extensions.getParcel
 import com.wavez.controllerwidget.data.model.wallpaper.WallpaperModel
 import com.wavez.controllerwidget.databinding.ActivityApplyWallpaperBinding
+import com.wavez.controllerwidget.ui.home.MainActivity
 import com.wavez.controllerwidget.ui.home.fragment.wallpaper.adapter.WallpaperAdapter
 import com.wavez.controllerwidget.ui.wallpaper.viewmodel.ApplyWallpaperViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -60,7 +61,7 @@ class ApplyWallpaperActivity : BaseActivity<ActivityApplyWallpaperBinding>() {
     private fun loadBanner() {
         binding.bannerAds.registerBanner(
             this, adId = AdsId.getBannerInAppAds(),
-            shouldLoad = sharedPref.shouldShowBannerInApp && !sharedPref.isVip,
+            shouldLoad = sharedPref.shouldShowBannerInApp ,
         )
     }
 
@@ -107,6 +108,12 @@ class ApplyWallpaperActivity : BaseActivity<ActivityApplyWallpaperBinding>() {
 
         wallpaperAdapter.onClickItem = { wallpaper ->
             startActivity(PreviewWallpaperActivity.newIntent(this, wallpaper))
+        }
+
+        binding.btnHome.setOnClickListener {
+            navigateTo(MainActivity.newIntent(this).apply {
+                flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP
+            })
         }
     }
 

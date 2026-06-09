@@ -12,6 +12,8 @@ interface AppRemoteConfig {
 
         const val NATIVE_GAP = "ads_gap_native"
 
+        const val SERVER_ROOT = "server_root"
+
         const val NATIVE_AD_PRELOAD_COUNT_KEY = "native_ad_preload_count"
         const val SHOULD_SHOW_NATIVE_AD_ON_FIRST_SETTING_LANGUAGE =
             "native_language_1_on_off"
@@ -39,8 +41,7 @@ interface AppRemoteConfig {
         const val SHOULD_SHOW_BOOST_SUCCESS = "native_boost_success_on_off"
         const val SHOULD_SHOW_NATIVE_CONFIG = "native_config_on_off"
         const val SHOULD_SHOW_NATIVE_SELECT_APP = "native_icon_select_app_on_off"
-        const val SHOULD_SHOW_REWARD_SELECT = "reward_select_on_off"
-        const val SHOULD_SHOW_REWARD_CONFIG = "reward_config_on_off"
+        const val SHOULD_SHOW_REWARD = "ad_reward_on_off"
         const val SHOULD_SHOW_BANNER_INAPP = "banner_inapp_on_off"
         const val SHOULD_SHOW_NATIVE_INAPP = "native_inapp_on_off"
         const val SHOULD_SHOW_INTER_INAPP = "inter_inapp_on_off"

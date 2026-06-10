@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Themie: وال پيپرز ۽ ايپ آئڪن</string>
+    <string name="cc_accessibility_description">ڪنٽرول سينٽر اوور لے — سسٽم وائڊ پل ڈاون پينل تيز ٹاگل لاء تازو ڪري ٿو</string>
+    <string name="screen_recording_channel">اسڪرين ريڪارڈنگ</string>
+    <string name="screen_recording_title">اسڪرين ريڪارڊ ڪرڻ</string>
+    <string name="screen_recording_message">ريڪارڊنگ ختم ڪرڻ لاء روڪو کي تپو ڪريو</string>
+    <string name="screen_recording_stop">روڪيو</string>
+    <string name="screen_recording_saved">وڊيو محفوظ ڪيو ويو</string>
+    <string name="screen_recording_notification_required">اسڪرين ريڪارڊ ڪرڻ شروع ڪرڻ لاءِ مهربانيءَ اطلاع جي اجازت ڏيو</string>
+    <string name="themes">ٿيمس</string>
+    <string name="wallpapers">وال پيپرز</string>
+    <string name="icons">آئيڪن</string>
+    <string name="hello_blank_fragment">سلام خالي ٽڪڙو</string>
+    <string name="search_themes">ٿيمس ڳولو</string>
+    <string name="search_wallpapers">وال پيپر ڳولو</string>
+    <string name="search_icons">آئڪن ڳولو</string>
+    <string name="most_popular">سڀ کان وڌيڪ مشهور</string>
+    <string name="newest_themes">نون ٿيمس</string>
+    <string name="newest_wallpapers">نويان ويل پيپر</string>
+    <string name="newest_icons">نويان آئيڪن</string>
+    <string name="no_results_found_for">\n\"%1$s\" لاءِ ڪوئي نتيجو نہ ملیا</string>
+    <string name="categories">زمرا</string>
+    <string name="first_fragment_label" translatable="false">First Fragment</string>
+    
+    <string name="second_fragment_label" translatable="false">Second Fragment</string>
+    
+    <string name="next">اگلو</string>
+    <string name="previous">اڳوڻو</string>
+    <string name="download">ڊائون لوڊ ڪريو</string>
+    <string name="premium_theme">پريميم ٿيم</string>
+    <string name="watch_a_short_ad_for_free_access_upgrade_to_premium_for_unlimited_use">● مفت رسائي لاء هڪ مختصر اشتهار ڏسو. \n● لامحدود استعمال لاء پريميم ۾ اپ گريڊ ڪريو.</string>
+    <string name="watch_ad">اشتهار ڏسو</string>
+    <string name="go_premium">پريميم ڪريو</string>
+    <string name="downloading_please_wait_a_moment">ڈائون لوڊ ٿي رهيو آهي، مهرباني سان اندازي انتظار ڪريو …</string>
+    <string name="apply">لاڳو ڪريو</string>
+    <string name="preview">پريويو</string>
+    <string name="set_wallpaper_as">وال پيپر کي انجام ڏيو</string>
+    <string name="home_screen">هوم اسڪرين</string>
+    <string name="lock_screen">لاک اسڪرين</string>
+    <string name="both_home_lock_screen">گهر ۽ لاڪ اسڪرين ٻنهي</string>
+    <string name="loading_please_wait_a_moment">لوڊ ٿي رهيو آهي، مهربانيءَ ذرا انتظار ڪريو …</string>
+    <string name="loading">لوڊ ٿي رهيو آهي…</string>
+    <string name="reload">دوبارہ لوڊ ڪريو</string>
+    <string name="could_not_load_content">مواد لوڊ نه ٿي سڪيو</string>
+    <string name="server_error_message">ڪجهه غلط ٿيو. براہ ڪرم دوبارہ ڪوشش ڪريو!</string>
+    <string name="try_again">دوبارہ ڪوشش ڪريو</string>
+    <string name="suggested_wallpapers">تجويز ڪيل وال پيپرز</string>
+    <string name="applied">لاڳو ٿيل</string>
+    <string name="loading_image">تصوير لوڊ ٿي رهي آهي…</string>
+    <string name="download_failed">ڊائونلوڊ ناڪام</string>
+    <string name="my_gallery">منهنجي گيلري</string>
+    <string name="view_all">سڀ ڏسو</string>
+    <string name="this_action_may_show_ads">هي عمل اشتهار ظاهر ڪري سگهي ٿو</string>
+    <string name="install">انسٽال ڪريو</string>
+    <string name="install_all_icons">سڀ آئيڪن انسٽال ڪريو</string>
+    <string name="unlock_all_icons">سڀ آئڪن انلاڪ ڪريو</string>
+    <string name="unlock">کولڻ</string>
+    <string name="choose">منتخب ڪريو</string>
+    <string name="no_icons_to_install">انسٽال ڪرڻ لاء ڪوئي آئيڪن دستياب نه آهي</string>
+    <string name="shortcut_install_requested">شارٽ ڪٽ انسٽال جي درخواست</string>
+    <string name="shortcut_install_failed">شارٽ ڪٽ انسٽال نٿو ٿي سگو</string>
+    <string name="select_app">ايپ منتخب ڪريو</string>
+    <string name="cannot_open_target_app">ھدف ايپ کي کولڻ نٿو سگو</string>
+    <string name="shortcut_applied_successfully">شارٽ ڪٽ ڪامياب طريقي سان لاگو ٿيو!</string>
+    <string name="suggested_icons">تجويز ڪيل آئڪن</string>
+    <string name="empty_gallery_title">توهانجو زمرو خالي آهي.</string>
+    <string name="empty_gallery_message">پنهنجي مثالي سيٽ اپ ٺاهڻ لاءِ ويل پيپر، ڪنٽرول ۽ آئيڪن پيڪ ڊائونلوڊ ڪرڻ شروع ڪريو.</string>
+    <string name="setting">ترتيب</string>
+    <string name="language">ٻولي</string>
+    <string name="feedback">موٽ پابندي</string>
+    <string name="privacy_policy">رازداري جي پاليسي</string>
+    <string name="feedback_email" translatable="false">support@wavez.com</string>
+    
+    <string name="privacy_policy_url" translatable="false">https://wavez.com/privacy-policy</string>
+    
+    <string name="collection">مجموعہ</string>
+    <string name="get_themes">ٿيم حاصل ڪريو</string>
+    <string name="theme_saved">ٿيم محفوظ ٿيل</string>
+    <string name="theme_save_failed">ٿيم محفوظ نه ٿي سڪيو</string>
+    <string name="successfully">ڪامياب طريقي سان</string>
+    <string name="s_applied_successfully">%s ڪامياب طريقي سان لاگو ٿيو!</string>
+    <string name="suggested_themes">تجويز ڪيل ٿيمس</string>
+    <string name="view_more_icon">وڌيڪ آئيڪن ڏسو</string>
+    <string name="shortcut">شارٽ ڪٽ</string>
+    <string name="no_internet_connection">ڪوئي انٽرنيٽ ڪنڪشن نه</string>
+    <string name="please_check_your_internet">براہ مهرباني پنهنجي ڊوائيس تي انٽرنيٽ ڪنڪشن چيڪ ڪريو</string>
+    <string name="go_to_settings">سيٽنگز تي وڃو</string>
+    <string name="please_select_your_language">مهربانيءَ پنهنجي ٻولي چونڊ ڪريو</string>
+    <string name="what_s_your_vibe">توهانجو موڊ ڇا آهي؟</string>
+    <string name="select_option">مهربانيءَ گهٽ ۾ گهٽ هڪ آپشن چونڊ ڪريو</string>
+    <string name="anime">Anime</string>
+    <string name="aesthetics">حسن و خوبصورتي</string>
+    <string name="cute">پيارو</string>
+    <string name="kpop" translatable="false">K-pop</string>
+    
+    <string name="obd_1_1_title">" خوبصورت ٿيمز ۽ وال پيپرز"</string>
+    <string name="obd_1_2_title">پنهنجي فون کو منتخب شدہ جماليات جمعن سان صاف ۽ اسٽائل والو نئون رنگ ڏيو۔</string>
+    <string name="obd_2_1_title">هر تفصيل کي ڪسٽمائز ڪريو</string>
+    <string name="obd_2_2_title">وال پيپر، ڪسٽم اپ آئيڪن، ۽ شانداراڻي ڪنٽرول سينٽر لے آؤٽ صرف ڪجھ تپو ۾ لاگو ڪريو.</string>
+    <string name="payment_failed">ادائيگي ناڪام</string>
+    <string name="a_small_issue_stopped">هڪ ننڍو مسئلو ادائيگي کي روڪ ڏيو. براہ مهرباني دوبارہ ڪوشش ڪريو</string>
+    <string name="payment_success">ادائيگي ڪامياب</string>
+    <string name="your_premium_version">توهان جو پريميم ورژن اب فعال آهي۔ ايپ استعمال ڪرڻ سے لطف اندوز ٿو!</string>
+    <string name="got_it">سمجهيو</string>
+    <string name="s_continue">جاري رکيو</string>
+    <string name="start_free_trial">مفت ٽرائل شروع ڪريو</string>
+    <string name="unlock_premium">پريميم کولو</string>
+    <string name="_100_no_ads">100٪ بغير اشتہارات</string>
+    <string name="premium_themes">پريميم ٿيمز</string>
+    <string name="unlimited_wallpapers">لامحدود وال پيپرز</string>
+    <string name="weekly">هفتہ وار</string>
+    <string name="monthly">ماهوار</string>
+    <string name="s_month">%s / مهينو</string>
+    <string name="yearly">سالياني</string>
+    <string name="_3_day_free_trial">3 ڏينهن جو مفت ٽرائل</string>
+    <string name="something_went_wrong">ڪجھ غلط ٿيو</string>
+    <string name="tv_des_failed_buy">مهربانيءَ هن قدم تي پيروي ڪريو ۽ ٻيهر ڪوشش ڪريو: \n 1. پنهنجي نيٽ ورڪ ڪানيڪشن چيڪ ڪريو \n 2. يقيني بڻايو ته توهان پنهنجي گوگل اڪائونٽ ۾ لاگ ان ڪيل آهيو \n 3. يقيني بڻايو ته توهان گوگل پلے ايپليڪيشن چلا سگهو ٿا</string>
+    <string name="cancel_anytime">ڪنهن به وقت منسوخ ڪريو</string>
+    <string name="terms_of_use">استعمال جي شرطون</string>
+    <string name="we_d_love_to_hear_your">اسان توهان جي اپ جي باري ۾ توهان جي موٽ پابندي ٻڌڻ سان خوش ٿينداسين! توهان جي رايو انتهائي قيمتي آهي ۽ اسان کي اپ کو توهان لاء بهتر بنائڻ ۾ مدد ڪري ٿو.</string>
+    <string name="enter_your_feedback_here">هتي پنهنجي رايو درج ڪريو</string>
+    <string name="feed_back_empty">رايو خالي</string>
+    <string name="loading_reward_ads">انعام اشتهار لوڊ ٿي رهيا آهن</string>
+    <string name="loading_reward_ads_failed">انعام اشتہارات لوڊ ڪرڻ ناڪام</string>
+    <string name="tv_des_failed_reward">معافي! انعام واري اشتهار لوڊ ڪرڻ ۾ ڪجهه غلطي آئي. مهربانيءَ ٻيهر ڪوشش ڪريو</string>
+    <string name="close">بند ڪريو</string>
+    <string name="discard_changes">تبديليون ختم ڪريو</string>
+    <string name="are_you_sure_you_want_to_discard_your_feedback">ڇا توهان يقيني طور تي پنهنجي رائے کي رد ڪرڻ چاهيو ٿا؟</string>
+    <string name="keep_editing">ترميم جاري رکو</string>
+    <string name="discard">رد ڪريو</string>
+    <string name="get_start">شروع ڪريو</string>
+</resources>

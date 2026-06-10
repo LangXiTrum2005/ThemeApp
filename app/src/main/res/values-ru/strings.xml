@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Темы: Обои и Иконки</string>
+    <string name="cc_accessibility_description">Панель Control Center — включает системную выдвижную панель с быстрыми переключателями</string>
+    <string name="screen_recording_channel">Запись экрана</string>
+    <string name="screen_recording_title">Запись экрана</string>
+    <string name="screen_recording_message">Нажми "Остановить", чтобы завершить запись</string>
+    <string name="screen_recording_stop">Остановить</string>
+    <string name="screen_recording_saved">Видео сохранено</string>
+    <string name="screen_recording_notification_required">Пожалуйста, разрешите уведомления для начала записи</string>
+    <string name="themes">Темы</string>
+    <string name="wallpapers">Обои</string>
+    <string name="icons">Значки</string>
+    <string name="hello_blank_fragment">Привет, пустой фрагмент</string>
+    <string name="search_themes">Поиск тем</string>
+    <string name="search_wallpapers">Поиск обоев</string>
+    <string name="search_icons">Поиск иконок</string>
+    <string name="most_popular">Самые популярные</string>
+    <string name="newest_themes">Новые темы</string>
+    <string name="newest_wallpapers">Новые обои</string>
+    <string name="newest_icons">Новые иконки</string>
+    <string name="no_results_found_for">По запросу\n\"%1$s\" ничего не найдено</string>
+    <string name="categories">Категории</string>
+    <string name="first_fragment_label" translatable="false">First Fragment</string>
+    
+    <string name="second_fragment_label" translatable="false">Second Fragment</string>
+    
+    <string name="next">Далее</string>
+    <string name="previous">Назад</string>
+    <string name="download">Загрузить</string>
+    <string name="premium_theme">Премиум тема</string>
+    <string name="watch_a_short_ad_for_free_access_upgrade_to_premium_for_unlimited_use">● Посмотри короткую рекламу для бесплатного доступа. \n● Переходи на Premium для неограниченного использования.</string>
+    <string name="watch_ad">Смотреть объявление</string>
+    <string name="go_premium">Перейти на Premium</string>
+    <string name="downloading_please_wait_a_moment">Загрузка, подождите…</string>
+    <string name="apply">Применить</string>
+    <string name="preview">Предпросмотр</string>
+    <string name="set_wallpaper_as">Установить обои как</string>
+    <string name="home_screen">Главный экран</string>
+    <string name="lock_screen">Экран блокировки</string>
+    <string name="both_home_lock_screen">Главный и экран блокировки</string>
+    <string name="loading_please_wait_a_moment">Загрузка, пожалуйста подождите…</string>
+    <string name="loading">Загрузка…</string>
+    <string name="reload">Перезагрузить</string>
+    <string name="could_not_load_content">Не удалось загрузить контент</string>
+    <string name="server_error_message">Что-то пошло не так. Пожалуйста, попробуйте снова!</string>
+    <string name="try_again">Попробовать снова</string>
+    <string name="suggested_wallpapers">Рекомендуемые обои</string>
+    <string name="applied">Применено</string>
+    <string name="loading_image">Загрузка изображения…</string>
+    <string name="download_failed">Загрузка не удалась</string>
+    <string name="my_gallery">Мы галерея</string>
+    <string name="view_all">Показать всё</string>
+    <string name="this_action_may_show_ads">Это действие может содержать объявления</string>
+    <string name="install">Установить</string>
+    <string name="install_all_icons">Установить все значки</string>
+    <string name="unlock_all_icons">Разблокировать все иконки</string>
+    <string name="unlock">Разблокировать</string>
+    <string name="choose">Выбрать</string>
+    <string name="no_icons_to_install">Нет доступных значков для установки</string>
+    <string name="shortcut_install_requested">Запрос на установку ярлыка</string>
+    <string name="shortcut_install_failed">Не удалось установить ярлык</string>
+    <string name="select_app">Выберите приложение</string>
+    <string name="cannot_open_target_app">Не удалось открыть приложение</string>
+    <string name="shortcut_applied_successfully">Ярлык применён успешно!</string>
+    <string name="suggested_icons">Рекомендуемые иконки</string>
+    <string name="empty_gallery_title">Ваша категория пуста.</string>
+    <string name="empty_gallery_message">Начните загружать обои, наборы управления и иконок, чтобы создать идеальный вид вашего телефона.</string>
+    <string name="setting">Настройка</string>
+    <string name="language">Язык</string>
+    <string name="feedback">Обратная связь</string>
+    <string name="privacy_policy">Политика конфиденциальности</string>
+    <string name="feedback_email" translatable="false">support@wavez.com</string>
+    
+    <string name="privacy_policy_url" translatable="false">https://wavez.com/privacy-policy</string>
+    
+    <string name="collection">Коллекция</string>
+    <string name="get_themes">Получить темы</string>
+    <string name="theme_saved">Тема сохранена</string>
+    <string name="theme_save_failed">Не удалось сохранить тему</string>
+    <string name="successfully">Успешно</string>
+    <string name="s_applied_successfully">%s применена успешно!</string>
+    <string name="suggested_themes">Рекомендуемые темы</string>
+    <string name="view_more_icon">Посмотреть больше иконок</string>
+    <string name="shortcut">Ярлык</string>
+    <string name="no_internet_connection">Нет подключения к Интернету</string>
+    <string name="please_check_your_internet">Проверь подключение к интернету на своём устройстве</string>
+    <string name="go_to_settings">Перейти в настройки</string>
+    <string name="please_select_your_language">Пожалуйста, выберите ваш язык</string>
+    <string name="what_s_your_vibe">Какой у тебя стиль?</string>
+    <string name="select_option">Пожалуйста, выберите хотя бы один вариант</string>
+    <string name="anime">Аниме</string>
+    <string name="aesthetics">Эстетика</string>
+    <string name="cute">Милые</string>
+    <string name="kpop" translatable="false">K-pop</string>
+    
+    <string name="obd_1_1_title">" Красивые темы и обои"</string>
+    <string name="obd_1_2_title">Дайте вашему телефону свежий и стильный вид с помощью подобранных эстетических коллекций.</string>
+    <string name="obd_2_1_title">Настройте каждую деталь</string>
+    <string name="obd_2_2_title">Применяй обои, пользовательские значки приложений и стильные макеты Control Center буквально в несколько касаний.</string>
+    <string name="payment_failed">Платёж не выполнен</string>
+    <string name="a_small_issue_stopped">Небольшая проблема остановила платёж. Пожалуйста, попробуйте снова</string>
+    <string name="payment_success">Платёж выполнен</string>
+    <string name="your_premium_version">Ваша премиум-версия активирована. Наслаждайтесь приложением!</string>
+    <string name="got_it">Понятно</string>
+    <string name="s_continue">Продолжить</string>
+    <string name="start_free_trial">Начать бесплатный период</string>
+    <string name="unlock_premium">"Разблокировать Premium "</string>
+    <string name="_100_no_ads">100% Без рекламы</string>
+    <string name="premium_themes">Премиум темы</string>
+    <string name="unlimited_wallpapers">Неограниченные обои</string>
+    <string name="weekly">Еженедельно</string>
+    <string name="monthly">Ежемесячно</string>
+    <string name="s_month">%s / месяц</string>
+    <string name="yearly">Ежегодно</string>
+    <string name="_3_day_free_trial">Бесплатный период на 3 дня</string>
+    <string name="something_went_wrong">Что-то пошло не так</string>
+    <string name="tv_des_failed_buy">Пожалуйста, выполните следующие шаги и попробуйте снова: \n 1. Проверьте подключение к интернету \n 2. Убедитесь, что вы вошли в аккаунт Google \n 3. Убедитесь, что приложение Google Play работает корректно</string>
+    <string name="cancel_anytime">Отмена в любой момент</string>
+    <string name="terms_of_use">Условия использования</string>
+    <string name="we_d_love_to_hear_your">Нам очень интересно узнать твоё мнение о нашем приложении! Твой отзыв невероценен и помогает нам сделать приложение ещё лучше для тебя.</string>
+    <string name="enter_your_feedback_here">Напишите здесь ваш отзыв</string>
+    <string name="feed_back_empty">Отзыв пуст</string>
+    <string name="loading_reward_ads">Загрузка рекламы с вознаграждением</string>
+    <string name="loading_reward_ads_failed">Не удалось загрузить рекламу с вознаграждением</string>
+    <string name="tv_des_failed_reward">Извините! Произошла ошибка при загрузке вознаграждающего объявления. Пожалуйста, попробуйте снова</string>
+    <string name="close">Закрыть</string>
+    <string name="discard_changes">Отменить изменения</string>
+    <string name="are_you_sure_you_want_to_discard_your_feedback">Вы уверены, что хотите отменить отзыв?</string>
+    <string name="keep_editing">Продолжить редактирование</string>
+    <string name="discard">Отменить</string>
+    <string name="get_start">Начать</string>
+</resources>

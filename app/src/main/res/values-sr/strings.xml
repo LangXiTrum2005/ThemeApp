@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Теме: Позадине и икони апликација</string>
+    <string name="cc_accessibility_description">Overlay Control Center-a — omogućava povlačenje odozgo za brze opcije</string>
+    <string name="screen_recording_channel">Снимање екрана</string>
+    <string name="screen_recording_title">Снимање екрана</string>
+    <string name="screen_recording_message">Dodirni Zaustavi da završiš snimanje</string>
+    <string name="screen_recording_stop">Стоп</string>
+    <string name="screen_recording_saved">Video je sačuvan</string>
+    <string name="screen_recording_notification_required">Молимо дозволите дозволу за обавештењима да бисте почели снимање</string>
+    <string name="themes">Teme</string>
+    <string name="wallpapers">Позадине</string>
+    <string name="icons">Ikone</string>
+    <string name="hello_blank_fragment">Здраво празна фрагмента</string>
+    <string name="search_themes">Pretraži teme</string>
+    <string name="search_wallpapers">Pretraži pozadine</string>
+    <string name="search_icons">Претражи иконе</string>
+    <string name="most_popular">Najpopularnije</string>
+    <string name="newest_themes">Najnovije teme</string>
+    <string name="newest_wallpapers">Најновије позадине</string>
+    <string name="newest_icons">Најновије икне</string>
+    <string name="no_results_found_for">Нема резултата за\n\"%1$s\"</string>
+    <string name="categories">Категорије</string>
+    <string name="first_fragment_label" translatable="false">First Fragment</string>
+    
+    <string name="second_fragment_label" translatable="false">Second Fragment</string>
+    
+    <string name="next">Dalje</string>
+    <string name="previous">Претходно</string>
+    <string name="download">Преузми</string>
+    <string name="premium_theme">Premium тема</string>
+    <string name="watch_a_short_ad_for_free_access_upgrade_to_premium_for_unlimited_use">● Pogledaj kratki oglas za besplatan pristup. \n● Unapredite se na Premium za neograničenu upotrebu.</string>
+    <string name="watch_ad">Гледај оглас</string>
+    <string name="go_premium">Idi na Premium</string>
+    <string name="downloading_please_wait_a_moment">Преузимање, сачекајте тренутак…</string>
+    <string name="apply">Примени</string>
+    <string name="preview">Преглед</string>
+    <string name="set_wallpaper_as">Postavi pozadinu kao</string>
+    <string name="home_screen">Почетни екран</string>
+    <string name="lock_screen">Екран закључавања</string>
+    <string name="both_home_lock_screen">Oba početni ekran i zaključani ekran</string>
+    <string name="loading_please_wait_a_moment">Учитавање, молимо сачекајте тренутак …</string>
+    <string name="loading">Učitavanje…</string>
+    <string name="reload">Поново учитај</string>
+    <string name="could_not_load_content">Није могуће учитати садржај</string>
+    <string name="server_error_message">Нешто је пошло наопако. Покушајте поново!</string>
+    <string name="try_again">Покушајте поново</string>
+    <string name="suggested_wallpapers">Препоручене позадине</string>
+    <string name="applied">Примењено</string>
+    <string name="loading_image">Učitavanje slike…</string>
+    <string name="download_failed">Preuzimanje nije uspelo</string>
+    <string name="my_gallery">Моја галерија</string>
+    <string name="view_all">Прикажи све</string>
+    <string name="this_action_may_show_ads">Ова акција може садржати огласе</string>
+    <string name="install">Инсталирај</string>
+    <string name="install_all_icons">Instaliraj sve ikone</string>
+    <string name="unlock_all_icons">Откључајте све иконе</string>
+    <string name="unlock">Откључај</string>
+    <string name="choose">Одаберите</string>
+    <string name="no_icons_to_install">Nema dostupnih ikona za instalaciju</string>
+    <string name="shortcut_install_requested">Instalacija prečice je tražena</string>
+    <string name="shortcut_install_failed">Не могу да инсталирам пречицу</string>
+    <string name="select_app">Одаберите апликацију</string>
+    <string name="cannot_open_target_app">Не могу отворити целну апликацију</string>
+    <string name="shortcut_applied_successfully">Prečica uspešno primenjena!</string>
+    <string name="suggested_icons">Препоручене иконе</string>
+    <string name="empty_gallery_title">Твоја категорија је празна.</string>
+    <string name="empty_gallery_message">Почните да преузимате позадине, контроле и пакете икона да бисте направили савршену поставку.</string>
+    <string name="setting">Postavljanje</string>
+    <string name="language">Језик</string>
+    <string name="feedback">Povratna informacija</string>
+    <string name="privacy_policy">Politika privatnosti</string>
+    <string name="feedback_email" translatable="false">support@wavez.com</string>
+    
+    <string name="privacy_policy_url" translatable="false">https://wavez.com/privacy-policy</string>
+    
+    <string name="collection">Колекција</string>
+    <string name="get_themes">Преузми теме</string>
+    <string name="theme_saved">Тема је сачувана</string>
+    <string name="theme_save_failed">Није могуће сачувати тему</string>
+    <string name="successfully">Uspešno</string>
+    <string name="s_applied_successfully">%s uspešno primenjen/a!</string>
+    <string name="suggested_themes">Preporučene teme</string>
+    <string name="view_more_icon">Прикажи више икона</string>
+    <string name="shortcut">Пречица</string>
+    <string name="no_internet_connection">Нема интернет конекције</string>
+    <string name="please_check_your_internet">Molimo te da proveris internetsku konekciju na svom uređaju</string>
+    <string name="go_to_settings">Идите на подешавања</string>
+    <string name="please_select_your_language">Молимо одаберите свој језик</string>
+    <string name="what_s_your_vibe">Која је твоја вибрација?</string>
+    <string name="select_option">Молимо одаберите најмање једну опцију</string>
+    <string name="anime">Аниме</string>
+    <string name="aesthetics">Estetika</string>
+    <string name="cute">Ljubazno</string>
+    <string name="kpop" translatable="false">K-pop</string>
+    
+    <string name="obd_1_1_title">" Лепе теме и позадине"</string>
+    <string name="obd_1_2_title">Дајте своме телефону чист и стилан нов изглед са куриозним естетским колекцијама.</string>
+    <string name="obd_2_1_title">Прилагодите сваки детаљ</string>
+    <string name="obd_2_2_title">Primeni pozadine, prilagođene ikone aplikacija i stilske raspored Control Center-a samo sa nekoliko dodira.</string>
+    <string name="payment_failed">Плаћање није успело</string>
+    <string name="a_small_issue_stopped">Mali problem je zaustavio plaćanje. Pokušaj ponovo</string>
+    <string name="payment_success">Плаћање је успело</string>
+    <string name="your_premium_version">Ваша Премиум верзија је сада активна. Уживајте у коришћењу апликације!</string>
+    <string name="got_it">Razumeću</string>
+    <string name="s_continue">Наставите</string>
+    <string name="start_free_trial">Почни бесплатну пробну верзију</string>
+    <string name="unlock_premium">"Otključaj Premium"</string>
+    <string name="_100_no_ads">100% Без реклама</string>
+    <string name="premium_themes">Премиум теме</string>
+    <string name="unlimited_wallpapers">Неограничене позадине</string>
+    <string name="weekly">Недељно</string>
+    <string name="monthly">Месечно</string>
+    <string name="s_month">%s / месец</string>
+    <string name="yearly">Godišnje</string>
+    <string name="_3_day_free_trial">3-дневна бесплатна пробна верзија</string>
+    <string name="something_went_wrong">Nešto je pošlo naopako</string>
+    <string name="tv_des_failed_buy">Пратите ове кораке и покушајте поново: \n 1. Проверите вашу интернет конекцију \n 2. Уверите се да сте пријављени на вашу Google налик \n 3. Уверите се да можете да покренете Google Play апликацију</string>
+    <string name="cancel_anytime">Otkaži u bilo kojem trenutku</string>
+    <string name="terms_of_use">Услови коришћења</string>
+    <string name="we_d_love_to_hear_your">Voleli bismo da čujemo tvoje povratne informacije o našoj aplikaciji! Tvoj unos je neverovatno dragocen i pomaže nam da aplikaciju učinimo još boljom za tebe.</string>
+    <string name="enter_your_feedback_here">Унесите своју повратну информацију овде</string>
+    <string name="feed_back_empty">Повратна информација је празна</string>
+    <string name="loading_reward_ads">Učitavanje nagradnih oglasa</string>
+    <string name="loading_reward_ads_failed">Учитавање наградних реклама није успело</string>
+    <string name="tv_des_failed_reward">Извините! Дошло је до грешке приликом учитавања награде за огласе. Молимо покушајте поново</string>
+    <string name="close">Затвори</string>
+    <string name="discard_changes">Odbaci izmene</string>
+    <string name="are_you_sure_you_want_to_discard_your_feedback">Да ли сте сигурни да желите да одбаците вашу повратну информацију?</string>
+    <string name="keep_editing">Настави са уређивањем</string>
+    <string name="discard">Одбаци</string>
+    <string name="get_start">Почните</string>
+</resources>

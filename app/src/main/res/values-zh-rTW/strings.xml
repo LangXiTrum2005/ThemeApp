@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Themie: 桌布與應用圖示</string>
+    <string name="cc_accessibility_description">控制中心浮層 — 啟用系統全域下拉面板以快速切換</string>
+    <string name="screen_recording_channel">螢幕錄製</string>
+    <string name="screen_recording_title">正在錄製螢幕</string>
+    <string name="screen_recording_message">點擊「停止」以完成錄製</string>
+    <string name="screen_recording_stop">停止</string>
+    <string name="screen_recording_saved">影片已保存</string>
+    <string name="screen_recording_notification_required">請允許通知權限以開始錄製</string>
+    <string name="themes">主題</string>
+    <string name="wallpapers">桌布</string>
+    <string name="icons">圖示</string>
+    <string name="hello_blank_fragment">嗨！空白片段</string>
+    <string name="search_themes">搜尋主題</string>
+    <string name="search_wallpapers">搜尋桌布</string>
+    <string name="search_icons">搜尋圖示</string>
+    <string name="most_popular">最受歡迎</string>
+    <string name="newest_themes">最新主題</string>
+    <string name="newest_wallpapers">最新桌布</string>
+    <string name="newest_icons">最新圖示</string>
+    <string name="no_results_found_for">找不到\n\"%1$s\"的結果</string>
+    <string name="categories">分類</string>
+    <string name="first_fragment_label" translatable="false">First Fragment</string>
+    
+    <string name="second_fragment_label" translatable="false">Second Fragment</string>
+    
+    <string name="next">下一步</string>
+    <string name="previous">上一個</string>
+    <string name="download">下載</string>
+    <string name="premium_theme">高級主題</string>
+    <string name="watch_a_short_ad_for_free_access_upgrade_to_premium_for_unlimited_use">● 觀看短廣告免費使用。\n● 升級至 Premium 享受無限使用。</string>
+    <string name="watch_ad">觀看廣告</string>
+    <string name="go_premium">升級 Premium</string>
+    <string name="downloading_please_wait_a_moment">下載中，請稍候…</string>
+    <string name="apply">套用</string>
+    <string name="preview">預覽</string>
+    <string name="set_wallpaper_as">設定桌布為</string>
+    <string name="home_screen">主螢幕</string>
+    <string name="lock_screen">鎖定螢幕</string>
+    <string name="both_home_lock_screen">首頁及鎖定畫面</string>
+    <string name="loading_please_wait_a_moment">載入中，請稍候…</string>
+    <string name="loading">載入中…</string>
+    <string name="reload">重新載入</string>
+    <string name="could_not_load_content">無法載入內容</string>
+    <string name="server_error_message">出錯了。請重試！</string>
+    <string name="try_again">重試</string>
+    <string name="suggested_wallpapers">推薦桌布</string>
+    <string name="applied">已套用</string>
+    <string name="loading_image">正在載入圖片…</string>
+    <string name="download_failed">下載失敗</string>
+    <string name="my_gallery">我的圖庫</string>
+    <string name="view_all">查看全部</string>
+    <string name="this_action_may_show_ads">此操作可能包含廣告</string>
+    <string name="install">安裝</string>
+    <string name="install_all_icons">安裝全部圖示</string>
+    <string name="unlock_all_icons">解鎖全部圖示</string>
+    <string name="unlock">解鎖</string>
+    <string name="choose">選擇</string>
+    <string name="no_icons_to_install">沒有可安裝的圖示</string>
+    <string name="shortcut_install_requested">快捷方式安裝已請求</string>
+    <string name="shortcut_install_failed">無法安裝快捷方式</string>
+    <string name="select_app">選擇應用程式</string>
+    <string name="cannot_open_target_app">無法開啟目標應用程式</string>
+    <string name="shortcut_applied_successfully">快捷方式已成功套用！</string>
+    <string name="suggested_icons">推薦圖示</string>
+    <string name="empty_gallery_title">您的分類是空的。</string>
+    <string name="empty_gallery_message">開始下載桌布、控制中心和圖示包，打造您的完美設置吧！</string>
+    <string name="setting">設定</string>
+    <string name="language">語言</string>
+    <string name="feedback">意見反饋</string>
+    <string name="privacy_policy">隱私權政策</string>
+    <string name="feedback_email" translatable="false">support@wavez.com</string>
+    
+    <string name="privacy_policy_url" translatable="false">https://wavez.com/privacy-policy</string>
+    
+    <string name="collection">收藏</string>
+    <string name="get_themes">取得主題</string>
+    <string name="theme_saved">主題已保存</string>
+    <string name="theme_save_failed">無法儲存主題</string>
+    <string name="successfully">成功</string>
+    <string name="s_applied_successfully">%s 已成功套用！</string>
+    <string name="suggested_themes">推薦主題</string>
+    <string name="view_more_icon">查看更多圖示</string>
+    <string name="shortcut">快捷方式</string>
+    <string name="no_internet_connection">無網際網路連線</string>
+    <string name="please_check_your_internet">請檢查你裝置上的網際網路連線</string>
+    <string name="go_to_settings">前往設定</string>
+    <string name="please_select_your_language">請選擇您的語言</string>
+    <string name="what_s_your_vibe">您的風格是什麼？</string>
+    <string name="select_option">請至少選擇一個選項</string>
+    <string name="anime">動漫</string>
+    <string name="aesthetics">美學</string>
+    <string name="cute">可愛</string>
+    <string name="kpop" translatable="false">K-pop</string>
+    
+    <string name="obd_1_1_title">" 超讚主題與桌布"</string>
+    <string name="obd_1_2_title">用精選的美感集合讓你的手機煥然一新！</string>
+    <string name="obd_2_1_title">自訂每個細節</string>
+    <string name="obd_2_2_title">只需點擊幾次，即可套用桌布、自訂應用程式圖示和時尚的控制中心配置。</string>
+    <string name="payment_failed">付款失敗</string>
+    <string name="a_small_issue_stopped">付款時出現問題。請重試</string>
+    <string name="payment_success">付款成功</string>
+    <string name="your_premium_version">你的 Premium 版本已啟用。盡情享受本應用！</string>
+    <string name="got_it">知道了</string>
+    <string name="s_continue">繼續</string>
+    <string name="start_free_trial">開始免費試用</string>
+    <string name="unlock_premium">「解鎖 Premium」</string>
+    <string name="_100_no_ads">100% 無廣告</string>
+    <string name="premium_themes">Premium 主題</string>
+    <string name="unlimited_wallpapers">無限桌布</string>
+    <string name="weekly">每週</string>
+    <string name="monthly">每月</string>
+    <string name="s_month">%s / 月</string>
+    <string name="yearly">年度</string>
+    <string name="_3_day_free_trial">3 天免費試用</string>
+    <string name="something_went_wrong">出錯了</string>
+    <string name="tv_des_failed_buy">請按照以下步驟重試：\n 1. 檢查您的網路連線 \n 2. 確保您已登入 Google 帳戶 \n 3. 確保您可以執行 Google Play 應用程式</string>
+    <string name="cancel_anytime">隨時取消</string>
+    <string name="terms_of_use">使用條款</string>
+    <string name="we_d_love_to_hear_your">我們很樂意聽聽你對我們應用程式的看法！你的意見非常寶貴，能幫助我們為你打造更棒的應用程式。</string>
+    <string name="enter_your_feedback_here">在此輸入您的意見反應</string>
+    <string name="feed_back_empty">意見反應為空</string>
+    <string name="loading_reward_ads">正在載入獎勵廣告</string>
+    <string name="loading_reward_ads_failed">載入獎勵廣告失敗</string>
+    <string name="tv_des_failed_reward">抱歉！載入獎勵廣告時發生錯誤。請重試</string>
+    <string name="close">關閉</string>
+    <string name="discard_changes">捨棄變更</string>
+    <string name="are_you_sure_you_want_to_discard_your_feedback">確定要捨棄你的意見回饋嗎？</string>
+    <string name="keep_editing">繼續編輯</string>
+    <string name="discard">捨棄</string>
+    <string name="get_start">開始使用</string>
+</resources>

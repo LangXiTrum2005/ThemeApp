@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Àwọn Àpẹrẹ: Àwọn ìwé ilé &amp; Àwọn aríyànjúé</string>
+    <string name="cc_accessibility_description">Control Center overlay — jẹ́ rìn yíyan ìṣẹ̀ jọjọ láti ní sẹ̀tù ìnípò</string>
+    <string name="screen_recording_channel">Ipalọ iṣẹ</string>
+    <string name="screen_recording_title">Ipalọ iṣẹ</string>
+    <string name="screen_recording_message">Tẹ Dáwọ láti parí ìgbówó</string>
+    <string name="screen_recording_stop">Dúró</string>
+    <string name="screen_recording_saved">Ifihan tí a ríndírán</string>
+    <string name="screen_recording_notification_required">Jọwọ fun aniyelederede fun gbigba irogbalẹ lati bẹrẹ ipalọ</string>
+    <string name="themes">Àwọn Àtẹ̀mú</string>
+    <string name="wallpapers">Àwọn ìwé ilé</string>
+    <string name="icons">Àwọn aṣọ</string>
+    <string name="hello_blank_fragment">Pẹlẹ o blank fragment</string>
+    <string name="search_themes">Wá àwọn àtẹ̀mú</string>
+    <string name="search_wallpapers">Wá ẹwà ìdojúkọ</string>
+    <string name="search_icons">Wa àwọn aríyànjúé</string>
+    <string name="most_popular">Ohun tó gbajúmọ̀ jù</string>
+    <string name="newest_themes">Àwọn àtẹ̀mú tuntun</string>
+    <string name="newest_wallpapers">Awọn wallpaper tuntun</string>
+    <string name="newest_icons">Awọn aṣo tuntun</string>
+    <string name="no_results_found_for">Awọn iṣoro ko ri fun\n\"%1$s\"</string>
+    <string name="categories">Awọn ẹka</string>
+    <string name="first_fragment_label" translatable="false">First Fragment</string>
+    
+    <string name="second_fragment_label" translatable="false">Second Fragment</string>
+    
+    <string name="next">Atẹ́le</string>
+    <string name="previous">Ìṣáájú</string>
+    <string name="download">Lo gba lẹ́hìn</string>
+    <string name="premium_theme">Tema Ẹkọ</string>
+    <string name="watch_a_short_ad_for_free_access_upgrade_to_premium_for_unlimited_use">● Wò ọkọ́ tẹ̀lẹ̀ láti gbà àmúfara tíìwa. \n● Ṣe àbùwọ̀n sí Premium fún ilo tó kò ní òpin.</string>
+    <string name="watch_ad">Wo irogbalẹ</string>
+    <string name="go_premium">Lọ Premium ✨</string>
+    <string name="downloading_please_wait_a_moment">N lo gba lẹ́hìn, jọ̀wọ́ dúró ìkoko kan …</string>
+    <string name="apply">Lo sé</string>
+    <string name="preview">Ríran</string>
+    <string name="set_wallpaper_as">Ṣe àpilíkó Ẹwà Ìdojúkọ Gẹ́gẹ́ bi</string>
+    <string name="home_screen">Iṣẹ Ile</string>
+    <string name="lock_screen">Iṣẹ Titiipa</string>
+    <string name="both_home_lock_screen">Ilé àti Ìlà Líìlò</string>
+    <string name="loading_please_wait_a_moment">Ina se lọ, jọwọ duro iwọ akoko …</string>
+    <string name="loading">Ń ilo…</string>
+    <string name="reload">Tun lo</string>
+    <string name="could_not_load_content">Ò lè lo gba àkọsílẹ̀</string>
+    <string name="server_error_message">Nǹkan kò tọ́. Jọ̀wọ́ gbìyànjú lẹ́ẹ̀kan!</string>
+    <string name="try_again">Gbìyànjú Lẹ́ẹ̀kan</string>
+    <string name="suggested_wallpapers">Àwọn ìwé ilé tí a ṣèduro</string>
+    <string name="applied">Lóṣe</string>
+    <string name="loading_image">Ń ilo àwòrán…</string>
+    <string name="download_failed">Ìgbàsílẹ̀ ṣofo</string>
+    <string name="my_gallery">Inu Akojọ Mi</string>
+    <string name="view_all">Wo gbogbo</string>
+    <string name="this_action_may_show_ads">Iṣẹ yii le ṣafihan awọn irogbalẹ</string>
+    <string name="install">Fìdì</string>
+    <string name="install_all_icons">Ṣe àgbékalẹ̀ gbogbo àwọn aṣọ</string>
+    <string name="unlock_all_icons">Ṣí gbogbo àwọn aríyànjúé</string>
+    <string name="unlock">Ṣi</string>
+    <string name="choose">Yan</string>
+    <string name="no_icons_to_install">Àwọn aṣọ kò wà láti ṣe àgbékalẹ̀</string>
+    <string name="shortcut_install_requested">Ibeèru gíga ti beèru</string>
+    <string name="shortcut_install_failed">Ko ṣe le fi ọna kekere sẹ</string>
+    <string name="select_app">Yan àpò</string>
+    <string name="cannot_open_target_app">Ko le ṣi ohun elo ibi-afẹde</string>
+    <string name="shortcut_applied_successfully">Ibeèru ti ṣe àpilíkó ni iṣẹ́! ✨</string>
+    <string name="suggested_icons">Àwọn aríyànjúé tí a ṣèduro</string>
+    <string name="empty_gallery_title">Eka rẹ jẹ tutu.</string>
+    <string name="empty_gallery_message">Bẹrẹ sisọ awọn wallpaper, ibaramu, ati awọn ibadandun aṣo icon lati kọ eto rẹ to dara julọ.</string>
+    <string name="setting">Ṣíṣe atọ́kụ</string>
+    <string name="language">Ede</string>
+    <string name="feedback">Ẹ̀kó</string>
+    <string name="privacy_policy">Ètò àṣírò</string>
+    <string name="feedback_email" translatable="false">support@wavez.com</string>
+    
+    <string name="privacy_policy_url" translatable="false">https://wavez.com/privacy-policy</string>
+    
+    <string name="collection">Akojọ</string>
+    <string name="get_themes">Gba awọn tema</string>
+    <string name="theme_saved">Tema ti pajade</string>
+    <string name="theme_save_failed">Ò lè gba ìkọ àpẹrẹ lé</string>
+    <string name="successfully">Níṣẹ́</string>
+    <string name="s_applied_successfully">%s ti ṣe àpilíkó ni iṣẹ́! ✨</string>
+    <string name="suggested_themes">Àwọn àtẹ̀mú tí a ṣe àkíyèsí</string>
+    <string name="view_more_icon">Wo diẹ sii aṣo</string>
+    <string name="shortcut">Ọna kekere</string>
+    <string name="no_internet_connection">Ò sí àsopọ̀ Íntànẹ́ọ̀</string>
+    <string name="please_check_your_internet">Jọ̀wọ́ ṣàyẹ̀wò àsopọ̀ Íntánẹ́ẹ̀tì rẹ lórí ẹ̀rọ̀yin</string>
+    <string name="go_to_settings">Lọ sí àwọn ìṣeto</string>
+    <string name="please_select_your_language">Jọwọ yan ede rẹ</string>
+    <string name="what_s_your_vibe">Kini iyalẹnu rẹ?</string>
+    <string name="select_option">Jọwọ yan okunrin inu ti o kere ju</string>
+    <string name="anime">Anime</string>
+    <string name="aesthetics">Ẹwà</string>
+    <string name="cute">Láìrẹ̀pẹ́ 💕</string>
+    <string name="kpop" translatable="false">K-pop</string>
+    
+    <string name="obd_1_1_title">" Àwọn Àpẹrẹ &amp; Àwọn ìwé ilé Dáadaa"</string>
+    <string name="obd_1_2_title">Fún fónì rẹ ní àpẹrẹ tuntun tó dáadaa tó sì rẹ̀ láti inú àwọn alárinidógba tó ní ìṣẹ̀dọ̀ aesthetic.</string>
+    <string name="obd_2_1_title">Ṣe ẹkọ Àkójọpọ̀ Kọ̀ọ̀kan</string>
+    <string name="obd_2_2_title">Ṣe àpilíkó ẹwà ìdojúkọ, àwọn aṣọ àpp aláìlàkotán, ati àwọn ìpilẹ̀ Iyikọ̀ Àwọ ní àìsì diẹ̀ kan. ✨</string>
+    <string name="payment_failed">Ìsanwo kù sánra</string>
+    <string name="a_small_issue_stopped">Àràbà kékeré kan dè ìṣòwò náà. Jọ̀wọ́ gbìyànjú lẹ́ẹ̀kan si</string>
+    <string name="payment_success">Ìṣanidá Ìsanwo</string>
+    <string name="your_premium_version">Ẹ̀kọ́ Ọlọ́kìkí rẹ wà níwájú. Gbádùn lilo àpò!</string>
+    <string name="got_it">Mo ní</string>
+    <string name="s_continue">Tẹ̀síwájú</string>
+    <string name="start_free_trial">Bẹrẹ Idanwo Ọfẹ</string>
+    <string name="unlock_premium">"Lásí Premium "</string>
+    <string name="_100_no_ads">100% Láìsí Ìkógbékè</string>
+    <string name="premium_themes">Àwọn Àpẹrẹ Ọlọ́kìkí</string>
+    <string name="unlimited_wallpapers">Àwọn ìwé ilé Aìnídìí</string>
+    <string name="weekly">Ní ọ̀sẹ̀</string>
+    <string name="monthly">Oṣu kọọkan</string>
+    <string name="s_month">%s / osù</string>
+    <string name="yearly">Àjọ</string>
+    <string name="_3_day_free_trial">Idanwo ọfẹ ọjọ 3</string>
+    <string name="something_went_wrong">Ohun kan ṣẹ̀ṣẹ̀</string>
+    <string name="tv_des_failed_buy">Jọwọ tẹle igbesẹ yii ki o si gbiyanju lẹẹkansi: \n 1. Ṣayẹwo asopọ nẹtiwọki rẹ \n 2. Rii daju wipe o ti wọlọ si akọọnt Google rẹ \n 3. Rii daju wipe o le ṣiṣẹ ohun elo Google Play</string>
+    <string name="cancel_anytime">Fagile ni igba eyikeyi</string>
+    <string name="terms_of_use">Ofin lilo</string>
+    <string name="we_d_love_to_hear_your">A máa fẹ́ràn láti gbọ́ ẹ̀kó rẹ nípa àpp wa! Àwọn ìmọ̀ rẹ jẹ́ nǹkan tó ní iye púpọ̀ ati ó ṣe èrò fun wa láti ṣe àpp náà dá tó lọ́wọ́ fún yin.</string>
+    <string name="enter_your_feedback_here">Tẹ ọrọ itẹjumọ rẹ sinni</string>
+    <string name="feed_back_empty">Itẹjumọ Tutu</string>
+    <string name="loading_reward_ads">Ń ilo gba ẹ̀bùn ọkọ́</string>
+    <string name="loading_reward_ads_failed">Ìgbaletọ́ ìkógbékè glàrìn tí kò ní àrájọ́</string>
+    <string name="tv_des_failed_reward">Ba mi danu! Awọn aṣiṣe kan wa nigba ti irokuro awọn irogbalẹ gbe. Jọwọ gbiyanju lẹẹkansi</string>
+    <string name="close">Tì síẹ̀</string>
+    <string name="discard_changes">Ẹ kọ awọ àwọn ìyípadà</string>
+    <string name="are_you_sure_you_want_to_discard_your_feedback">Njẹ́ ẹ̀ rí dájú pé ẹ fẹ́ yọ ìgbésẹ̀ rẹ sílẹ̀?</string>
+    <string name="keep_editing">Tẹsiwaju ṣiṣe atunṣe</string>
+    <string name="discard">Tu silẹ</string>
+    <string name="get_start">Lọ síbẹ̀</string>
+</resources>

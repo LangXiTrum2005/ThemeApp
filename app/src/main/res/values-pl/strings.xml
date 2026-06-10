@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Themie: Tapety i ikony aplikacji</string>
+    <string name="cc_accessibility_description">Nakładka Control Center — umożliwia panel pull-down na poziomie systemu do szybkich przełączników</string>
+    <string name="screen_recording_channel">Nagrywanie ekranu</string>
+    <string name="screen_recording_title">Nagrywanie ekranu</string>
+    <string name="screen_recording_message">Naciśnij Zatrzymaj, aby zakończyć nagrywanie</string>
+    <string name="screen_recording_stop">Zatrzymaj</string>
+    <string name="screen_recording_saved">Wideo zapisane</string>
+    <string name="screen_recording_notification_required">Proszę zezwolić na uprawnienia powiadomień, aby rozpocząć nagrywanie</string>
+    <string name="themes">Motywy</string>
+    <string name="wallpapers">Tapety</string>
+    <string name="icons">Ikony</string>
+    <string name="hello_blank_fragment">Cześć pusty fragment</string>
+    <string name="search_themes">Szukaj motywów</string>
+    <string name="search_wallpapers">Szukaj tapet</string>
+    <string name="search_icons">Szukaj ikon</string>
+    <string name="most_popular">Najpopularniejsze</string>
+    <string name="newest_themes">Najnowsze motywy</string>
+    <string name="newest_wallpapers">Najnowsze tapety</string>
+    <string name="newest_icons">Najnowsze ikony</string>
+    <string name="no_results_found_for">Nie znaleziono wyników dla\n\"%1$s\"</string>
+    <string name="categories">Kategorie</string>
+    <string name="first_fragment_label" translatable="false">First Fragment</string>
+    
+    <string name="second_fragment_label" translatable="false">Second Fragment</string>
+    
+    <string name="next">Dalej</string>
+    <string name="previous">Wstecz</string>
+    <string name="download">Pobierz</string>
+    <string name="premium_theme">Motyw Premium</string>
+    <string name="watch_a_short_ad_for_free_access_upgrade_to_premium_for_unlimited_use">● Obejrzyj krótką reklamę, aby uzyskać bezpłatny dostęp. \n● Przejdź na Premium, aby uzyskać nieograniczony dostęp.</string>
+    <string name="watch_ad">Obejrzyj reklamę</string>
+    <string name="go_premium">Przejdź na Premium</string>
+    <string name="downloading_please_wait_a_moment">Pobieranie, czekaj chwileczkę …</string>
+    <string name="apply">Zastosuj</string>
+    <string name="preview">Podgląd</string>
+    <string name="set_wallpaper_as">Ustaw tapetę jako</string>
+    <string name="home_screen">Ekran główny</string>
+    <string name="lock_screen">Ekran blokady</string>
+    <string name="both_home_lock_screen">Ekran główny i ekran blokady</string>
+    <string name="loading_please_wait_a_moment">Ładowanie, proszę czekać chwilę…</string>
+    <string name="loading">Ładowanie…</string>
+    <string name="reload">Przeładuj</string>
+    <string name="could_not_load_content">Nie można załadować zawartości</string>
+    <string name="server_error_message">Coś poszło nie tak. Spróbuj ponownie!</string>
+    <string name="try_again">Spróbuj ponownie</string>
+    <string name="suggested_wallpapers">Sugerowane tapety</string>
+    <string name="applied">Zastosowane</string>
+    <string name="loading_image">Ładowanie obrazu…</string>
+    <string name="download_failed">Pobieranie nie powiodło się</string>
+    <string name="my_gallery">Moja galeria</string>
+    <string name="view_all">Wyświetl wszystko</string>
+    <string name="this_action_may_show_ads">Ta akcja może zawierać reklamy</string>
+    <string name="install">Instaluj</string>
+    <string name="install_all_icons">Zainstaluj wszystkie ikony</string>
+    <string name="unlock_all_icons">Odblokuj wszystkie ikony</string>
+    <string name="unlock">Odblokuj</string>
+    <string name="choose">Wybierz</string>
+    <string name="no_icons_to_install">Brak ikon dostępnych do zainstalowania</string>
+    <string name="shortcut_install_requested">Żądanie instalacji skrótu</string>
+    <string name="shortcut_install_failed">Nie udało się zainstalować skrótu</string>
+    <string name="select_app">Wybierz aplikację</string>
+    <string name="cannot_open_target_app">Nie można otworzyć aplikacji docelowej</string>
+    <string name="shortcut_applied_successfully">Skrót zastosowany pomyślnie!</string>
+    <string name="suggested_icons">Sugerowane ikony</string>
+    <string name="empty_gallery_title">Twoja kategoria jest pusta.</string>
+    <string name="empty_gallery_message">Zacznij pobierać tapety, panele sterowania i pakiety ikon, aby stworzyć swoją idealną konfigurację.</string>
+    <string name="setting">Ustawianie</string>
+    <string name="language">Język</string>
+    <string name="feedback">Opinia</string>
+    <string name="privacy_policy">Polityka prywatności</string>
+    <string name="feedback_email" translatable="false">support@wavez.com</string>
+    
+    <string name="privacy_policy_url" translatable="false">https://wavez.com/privacy-policy</string>
+    
+    <string name="collection">Kolekcja</string>
+    <string name="get_themes">Pobierz motywy</string>
+    <string name="theme_saved">Motyw zapisany</string>
+    <string name="theme_save_failed">Nie można zapisać motywu</string>
+    <string name="successfully">Pomyślnie</string>
+    <string name="s_applied_successfully">%s został/a zastosowany/a pomyślnie!</string>
+    <string name="suggested_themes">Sugerowane motywy</string>
+    <string name="view_more_icon">Wyświetl więcej ikon</string>
+    <string name="shortcut">Skrót</string>
+    <string name="no_internet_connection">Brak połączenia internetowego</string>
+    <string name="please_check_your_internet">Sprawdź połączenie internetowe na swoim urządzeniu</string>
+    <string name="go_to_settings">Przejdź do ustawień</string>
+    <string name="please_select_your_language">Proszę wybrać swój język</string>
+    <string name="what_s_your_vibe">Jaki masz styl?</string>
+    <string name="select_option">Proszę wybrać co najmniej jedną opcję</string>
+    <string name="anime">Anime</string>
+    <string name="aesthetics">Estetyka</string>
+    <string name="cute">Słodkie</string>
+    <string name="kpop" translatable="false">K-pop</string>
+    
+    <string name="obd_1_1_title">"Ładne motywy i tapety"</string>
+    <string name="obd_1_2_title">Daj swojemu telefonowi czysty i stylowy nowy wygląd dzięki wyselekcjonowanym kolekcjom estetycznym.</string>
+    <string name="obd_2_1_title">Dostosuj każdy szczegół</string>
+    <string name="obd_2_2_title">Zastosuj tapety, niestandardowe ikony aplikacji i stylowe układy Control Center w zaledwie kilka dotknięć.</string>
+    <string name="payment_failed">Płatność nie powiodła się</string>
+    <string name="a_small_issue_stopped">Mały problem przerwał płatność. Spróbuj ponownie</string>
+    <string name="payment_success">Płatność przebiegła pomyślnie</string>
+    <string name="your_premium_version">Twoja wersja Premium jest teraz aktywna. Ciesz się korzystaniem z aplikacji!</string>
+    <string name="got_it">Rozumiem</string>
+    <string name="s_continue">Kontynuuj</string>
+    <string name="start_free_trial">Rozpocznij bezpłatny okres próbny</string>
+    <string name="unlock_premium">"Odblokuj Premium "</string>
+    <string name="_100_no_ads">100% Bez reklam</string>
+    <string name="premium_themes">Motywy Premium</string>
+    <string name="unlimited_wallpapers">Nieograniczone tapety</string>
+    <string name="weekly">Tygodniowo</string>
+    <string name="monthly">Miesięcznie</string>
+    <string name="s_month">%s / miesiąc</string>
+    <string name="yearly">Rocznie</string>
+    <string name="_3_day_free_trial">3-dniowy bezpłatny okres próbny</string>
+    <string name="something_went_wrong">Coś poszło nie tak</string>
+    <string name="tv_des_failed_buy">Proszę wykonać następujące kroki i spróbować ponownie: \n 1. Sprawdź połączenie sieciowe \n 2. Upewnij się, że jesteś zalogowany na swoje konto Google \n 3. Upewnij się, że możesz uruchomić aplikację Google Play</string>
+    <string name="cancel_anytime">Anuluj w dowolnym momencie</string>
+    <string name="terms_of_use">Warunki użytkowania</string>
+    <string name="we_d_love_to_hear_your">Chętnie poznamy Twoją opinię na temat naszej aplikacji! Twoje zdanie jest dla nas niezwykle ważne i pomaga nam ulepszać aplikację.</string>
+    <string name="enter_your_feedback_here">Wpisz tutaj swoją opinię</string>
+    <string name="feed_back_empty">Opinia pusta</string>
+    <string name="loading_reward_ads">Ładowanie reklam nagrodzonych</string>
+    <string name="loading_reward_ads_failed">Załadowanie reklam nagrodzonych nie powiodło się</string>
+    <string name="tv_des_failed_reward">Przepraszamy! Podczas ładowania reklam z nagrodą wystąpił błąd. Spróbuj ponownie</string>
+    <string name="close">Zamknij</string>
+    <string name="discard_changes">Odrzuć zmiany</string>
+    <string name="are_you_sure_you_want_to_discard_your_feedback">Czy na pewno chcesz odrzucić swoją opinię?</string>
+    <string name="keep_editing">Kontynuuj edycję</string>
+    <string name="discard">Odrzuć</string>
+    <string name="get_start">Zaczynamy</string>
+</resources>

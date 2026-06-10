@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Themie: 배경화면 &amp; 앱 아이콘</string>
+    <string name="cc_accessibility_description">컨트롤 센터 오버레이 — 빠른 토글을 위한 시스템 전체 풀다운 패널 활성화</string>
+    <string name="screen_recording_channel">화면 녹화</string>
+    <string name="screen_recording_title">화면 녹화 중</string>
+    <string name="screen_recording_message">중지를 눌러 녹화를 완료하세요</string>
+    <string name="screen_recording_stop">중지</string>
+    <string name="screen_recording_saved">비디오 저장됨</string>
+    <string name="screen_recording_notification_required">녹화를 시작하려면 알림 권한을 허용해주세요</string>
+    <string name="themes">테마</string>
+    <string name="wallpapers">배경화면</string>
+    <string name="icons">아이콘</string>
+    <string name="hello_blank_fragment">안녕하세요 빈 프래그먼트</string>
+    <string name="search_themes">테마 검색</string>
+    <string name="search_wallpapers">배경화면 검색</string>
+    <string name="search_icons">아이콘 검색</string>
+    <string name="most_popular">가장 인기있는</string>
+    <string name="newest_themes">최신 테마</string>
+    <string name="newest_wallpapers">최신 배경화면</string>
+    <string name="newest_icons">최신 아이콘</string>
+    <string name="no_results_found_for">\n\"%1$s\"에 대한 결과를 찾을 수 없습니다</string>
+    <string name="categories">카테고리</string>
+    <string name="first_fragment_label" translatable="false">First Fragment</string>
+    
+    <string name="second_fragment_label" translatable="false">Second Fragment</string>
+    
+    <string name="next">다음</string>
+    <string name="previous">이전</string>
+    <string name="download">다운로드</string>
+    <string name="premium_theme">프리미엄 테마</string>
+    <string name="watch_a_short_ad_for_free_access_upgrade_to_premium_for_unlimited_use">● 짧은 광고를 보고 무료로 이용하세요. \n● 프리미엄으로 업그레이드하면 무제한으로 이용할 수 있어요.</string>
+    <string name="watch_ad">광고 보기</string>
+    <string name="go_premium">프리미엄으로 업그레이드</string>
+    <string name="downloading_please_wait_a_moment">다운로드 중이에요, 잠깐만 기다려주세요…</string>
+    <string name="apply">적용</string>
+    <string name="preview">미리보기</string>
+    <string name="set_wallpaper_as">배경화면 설정</string>
+    <string name="home_screen">홈 화면</string>
+    <string name="lock_screen">잠금 화면</string>
+    <string name="both_home_lock_screen">홈 화면 &amp; 잠금 화면</string>
+    <string name="loading_please_wait_a_moment">로드 중입니다. 잠시만 기다려주세요 …</string>
+    <string name="loading">로딩 중…</string>
+    <string name="reload">다시 로드</string>
+    <string name="could_not_load_content">콘텐츠를 로드할 수 없습니다</string>
+    <string name="server_error_message">문제가 발생했습니다. 다시 시도해주세요!</string>
+    <string name="try_again">다시 시도</string>
+    <string name="suggested_wallpapers">추천 배경화면</string>
+    <string name="applied">적용됨</string>
+    <string name="loading_image">이미지 로딩 중…</string>
+    <string name="download_failed">다운로드 실패</string>
+    <string name="my_gallery">내 갤러리</string>
+    <string name="view_all">모두 보기</string>
+    <string name="this_action_may_show_ads">이 작업에는 광고가 포함될 수 있습니다</string>
+    <string name="install">설치</string>
+    <string name="install_all_icons">모든 아이콘 설치</string>
+    <string name="unlock_all_icons">모든 아이콘 잠금 해제</string>
+    <string name="unlock">잠금 해제</string>
+    <string name="choose">선택</string>
+    <string name="no_icons_to_install">설치할 아이콘이 없어요</string>
+    <string name="shortcut_install_requested">바로가기 설치 요청됨</string>
+    <string name="shortcut_install_failed">바로가기를 설치할 수 없습니다</string>
+    <string name="select_app">앱 선택</string>
+    <string name="cannot_open_target_app">대상 앱을 열 수 없습니다</string>
+    <string name="shortcut_applied_successfully">바로가기 적용 완료!</string>
+    <string name="suggested_icons">추천 아이콘</string>
+    <string name="empty_gallery_title">카테고리가 비어있습니다.</string>
+    <string name="empty_gallery_message">배경화면, 컨트롤, 아이콘 팩을 다운로드하여 완벽한 셋업을 만들어보세요.</string>
+    <string name="setting">설정</string>
+    <string name="language">언어</string>
+    <string name="feedback">피드백</string>
+    <string name="privacy_policy">개인정보보호정책</string>
+    <string name="feedback_email" translatable="false">support@wavez.com</string>
+    
+    <string name="privacy_policy_url" translatable="false">https://wavez.com/privacy-policy</string>
+    
+    <string name="collection">컬렉션</string>
+    <string name="get_themes">테마 받기</string>
+    <string name="theme_saved">테마가 저장되었습니다</string>
+    <string name="theme_save_failed">테마를 저장할 수 없습니다</string>
+    <string name="successfully">완료됐어요</string>
+    <string name="s_applied_successfully">%s 적용 완료!</string>
+    <string name="suggested_themes">추천 테마</string>
+    <string name="view_more_icon">더 많은 아이콘 보기</string>
+    <string name="shortcut">바로가기</string>
+    <string name="no_internet_connection">인터넷 연결 없음</string>
+    <string name="please_check_your_internet">기기의 인터넷 연결을 확인해 주세요</string>
+    <string name="go_to_settings">설정으로 이동</string>
+    <string name="please_select_your_language">언어를 선택해주세요</string>
+    <string name="what_s_your_vibe">당신의 스타일은?</string>
+    <string name="select_option">최소 하나의 옵션을 선택해주세요</string>
+    <string name="anime">애니메이션</string>
+    <string name="aesthetics">미학</string>
+    <string name="cute">귀여운</string>
+    <string name="kpop" translatable="false">K-pop</string>
+    
+    <string name="obd_1_1_title">" 멋진 테마 &amp; 배경화면"</string>
+    <string name="obd_1_2_title">큐레이션된 감성 컬렉션으로 당신의 휴대폰을 깨끗하고 세련되게 만들어보세요.</string>
+    <string name="obd_2_1_title">모든 디테일을 커스터마이징하세요</string>
+    <string name="obd_2_2_title">배경화면, 커스텀 앱 아이콘, 스타일리시한 컨트롤 센터 레이아웃을 몇 번의 탭으로 적용하세요.</string>
+    <string name="payment_failed">결제 실패</string>
+    <string name="a_small_issue_stopped">결제 중 문제가 발생했어요. 다시 시도해 주세요</string>
+    <string name="payment_success">결제 완료</string>
+    <string name="your_premium_version">프리미엄 버전이 활성화되었습니다. 앱을 즐겨보세요!</string>
+    <string name="got_it">알겠어요</string>
+    <string name="s_continue">계속</string>
+    <string name="start_free_trial">무료 체험 시작</string>
+    <string name="unlock_premium">"프리미엄 잠금 해제"</string>
+    <string name="_100_no_ads">100% 광고 없음</string>
+    <string name="premium_themes">프리미엄 테마</string>
+    <string name="unlimited_wallpapers">무제한 배경화면</string>
+    <string name="weekly">주간</string>
+    <string name="monthly">월간</string>
+    <string name="s_month">%s / 월</string>
+    <string name="yearly">연간</string>
+    <string name="_3_day_free_trial">3일 무료 체험</string>
+    <string name="something_went_wrong">문제가 발생했어요</string>
+    <string name="tv_des_failed_buy">다음 단계를 따라 다시 시도해주세요: \n 1. 네트워크 연결 확인 \n 2. Google 계정으로 로그인되어 있는지 확인 \n 3. Google Play 애플리케이션을 실행할 수 있는지 확인</string>
+    <string name="cancel_anytime">언제든지 취소 가능</string>
+    <string name="terms_of_use">이용약관</string>
+    <string name="we_d_love_to_hear_your">우리 앱에 대한 피드백을 들려주세요! 여러분의 의견은 정말 소중하며 앱을 더 좋게 만드는 데 큰 도움이 돼요.</string>
+    <string name="enter_your_feedback_here">피드백을 입력해주세요</string>
+    <string name="feed_back_empty">피드백이 없습니다</string>
+    <string name="loading_reward_ads">보상 광고 로딩 중</string>
+    <string name="loading_reward_ads_failed">보상 광고 로딩 실패</string>
+    <string name="tv_des_failed_reward">죄송합니다! 리워드 광고를 로드하는 중 오류가 발생했습니다. 다시 시도해주세요</string>
+    <string name="close">닫기</string>
+    <string name="discard_changes">변경사항 삭제</string>
+    <string name="are_you_sure_you_want_to_discard_your_feedback">피드백을 정말 버릴까요?</string>
+    <string name="keep_editing">계속 편집하기</string>
+    <string name="discard">취소</string>
+    <string name="get_start">시작하기</string>
+</resources>

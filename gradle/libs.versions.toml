@@ -4,7 +4,7 @@ fragmentKtx = "1.8.9"
 glide = "5.0.7"
 kotlinxSerializationJson = "1.11.0"
 kotlinxCoroutines = "1.11.0"
-adjustAndroid = "5.6.1"
+adjustAndroid = "5.7.0"
 amplituda = "v2.3.1"
 applovinqualityservicegradleplugin = "5.9.5"
 desugar_jdk_libs = "2.1.5"
@@ -19,8 +19,8 @@ hiltAndroid = "2.59.2"
 ksp = "2.3.6"
 appcompat = "1.7.1"
 lottie = "6.7.1"
-playServicesAds = "25.2.0"
-firebaseBom = "34.13.0"
+playServicesAds = "25.3.0"
+firebaseBom = "34.14.1"
 installreferrer = "2.2"
 playServicesAppset = "16.1.0"
 playServicesAdsIdentifier = "18.3.0"
@@ -41,10 +41,10 @@ cardview = "1.0.0"
 sspAndroid = "1.1.1"
 lifecycleProcess = "2.10.0"
 applovin = "13.6.2.0"
-mintegral = "17.1.51.0"
+mintegral = "17.1.61.0"
 facebookAdapter = "6.21.0.0"
 mintegralAdapter = "17.1.61.0"
-googleAdapter = "25.2.0.0"
+googleAdapter = "25.3.0.0"
 userMessagingPlatform = "4.0.0"
 billing = "8.3.0"
 installreferrerVersion = "2.2"
@@ -57,6 +57,7 @@ moshi = "1.15.2"
 navigationFragmentKtx = "2.9.8"
 navigationUiKtx = "2.9.8"
 koin = "4.2.1"
+pangle = "8.0.0.5.0"
 
 [libraries]
 
@@ -70,6 +71,7 @@ lottie = { module = "com.airbnb.android:lottie", version.ref = "lottie" }
 play-services-ads-identifier = { module = "com.google.android.gms:play-services-ads-identifier", version.ref = "playServicesAdsIdentifier" }
 material = { group = "com.google.android.material", name = "material", version.ref = "material" }
 eventbus = { module = "org.greenrobot:eventbus", version.ref = "eventbus" }
+pangle = { module = "com.google.ads.mediation:pangle", version.ref = "pangle" }
 
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
 junit = { group = "junit", name = "junit", version.ref = "junit" }

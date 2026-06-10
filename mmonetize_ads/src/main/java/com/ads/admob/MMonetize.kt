@@ -83,7 +83,7 @@ object MMonetize {
     }
 
     private fun initializeAdjustSdk(context: Context) {
-        val appToken = "avatowvhwnwg"
+        val appToken = "q4jxgl46ieio"
         val environment = if (BuildConfig.DEBUG) {
             AdjustConfig.ENVIRONMENT_SANDBOX
         } else {

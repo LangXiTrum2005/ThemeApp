@@ -147,5 +147,10 @@ dependencies {
     implementation(libs.kotlinx.coroutines.android)
     implementation(libs.billing)
 
+    //mediation
+    implementation(libs.facebook)
+    implementation(libs.mintegral)
+    implementation(libs.pangle)
+
 
 }

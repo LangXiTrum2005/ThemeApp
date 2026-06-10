@@ -85,7 +85,7 @@
 
  -keep class com.github.anrwatchdog.** { *; }
 
- -keep class com.wavez.controllerwidget.ui.premium.BillingConstant {
+ -keep class com.wavez.themewallpaper.ui.premium.BillingConstant {
      public static final *;
  }
 

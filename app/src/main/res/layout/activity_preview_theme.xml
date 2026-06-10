@@ -105,7 +105,7 @@
 
     </FrameLayout>
 
-    <com.wavez.controllerwidget.ui.customview.IconTextButton
+    <com.wavez.themewallpaper.ui.customview.IconTextButton
         android:id="@+id/btnGetThemes"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

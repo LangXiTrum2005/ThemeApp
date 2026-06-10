@@ -110,7 +110,7 @@
                     tools:itemCount="8"
                     tools:listitem="@layout/item_icon_preview" />
 
-                <com.wavez.controllerwidget.ui.customview.IconTextButton
+                <com.wavez.themewallpaper.ui.customview.IconTextButton
                     android:id="@+id/btnViewMoreIcons"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -161,7 +161,7 @@
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent" />
 
-    <com.wavez.controllerwidget.ads.native_ad.view.BigNativeCollapsibleAdTemplate
+    <com.wavez.themewallpaper.ads.native_ad.view.BigNativeCollapsibleAdTemplate
         android:id="@+id/native_apply"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

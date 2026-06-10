@@ -107,7 +107,7 @@
     <uses-permission android:name="com.samsung.android.mapsagent.permission.READ_APP_INFO" />
 
     <application
-        android:name=".MyApplication"
+        android:name="com.wavez.themewallpaper.MyApplication"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"

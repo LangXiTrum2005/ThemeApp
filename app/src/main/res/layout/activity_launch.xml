@@ -27,10 +27,12 @@
 
     <androidx.appcompat.widget.AppCompatTextView
         style="@style/NunitoBold.24"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginHorizontal="36dp"
         android:layout_marginTop="8dp"
         android:text="@string/app_name"
+        android:textAlignment="center"
         android:textColor="@color/primary_high_em"
         app:layout_constraintEnd_toEndOf="@+id/ivIcon"
         app:layout_constraintStart_toStartOf="@+id/ivIcon"
@@ -38,13 +40,13 @@
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/tvAds"
+        style="@style/NunitoMedium.14"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/_10sdp"
         android:text="@string/this_action_may_show_ads"
         android:textAlignment="center"
         android:textColor="@color/text_high_em"
-        style="@style/NunitoMedium.14"
         app:layout_constraintBottom_toTopOf="@+id/progressSplash"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />

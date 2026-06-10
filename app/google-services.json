@@ -1,21 +1,21 @@
 {
   "project_info": {
-    "project_number": "349817847956",
-    "project_id": "m52---reverse-audio-2",
-    "storage_bucket": "m52---reverse-audio-2.firebasestorage.app"
+    "project_number": "634447880579",
+    "project_id": "p67---themes-wallpapers",
+    "storage_bucket": "p67---themes-wallpapers.firebasestorage.app"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:349817847956:android:f8650fba123ffedfb43481",
+        "mobilesdk_app_id": "1:634447880579:android:7251919fd0fe61806c16b6",
         "android_client_info": {
-          "package_name": "com.wavez.themewallpaper"
+          "package_name": "com.themes.wallpaper.icon.widget"
         }
       },
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyA_0ZphsrQcmtk09k66s84GFyWG6k_zzyI"
+          "current_key": "AIzaSyCLq__IOQT0m9GhUM0roTSA7WcIp5126ks"
         }
       ],
       "services": {

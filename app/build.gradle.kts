@@ -9,7 +9,7 @@ plugins {
 }
 
 android {
-    namespace = "com.wavez.controllerwidget"
+    namespace = "com.wavez.themewallpaper"
     compileSdk {
         version = release(36) {
             minorApiLevel = 1
@@ -17,7 +17,7 @@ android {
     }
 
     defaultConfig {
-        applicationId = "com.wavez.themewallpaper"
+        applicationId = "com.themes.wallpaper.icon.widget"
         minSdk = 28
         targetSdk = 36
         versionCode = 1
@@ -57,7 +57,7 @@ android {
 
             externalNativeBuild {
                 cmake {
-                    arguments("-DBASE_URL=https://api.example.com/")
+                    arguments("-DBASE_URL=https://themesmobiletechnologyvn.xyz/")
                 }
             }
             proguardFiles(

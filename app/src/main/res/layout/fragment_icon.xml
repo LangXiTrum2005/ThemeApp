@@ -34,7 +34,7 @@
         app:layout_constraintTop_toBottomOf="@+id/edSearch"
         tools:listitem="@layout/item_icon" />
 
-    <com.wavez.controllerwidget.ui.customview.ServerErrorView
+    <com.wavez.themewallpaper.ui.customview.ServerErrorView
         android:id="@+id/viewError"
         android:layout_width="match_parent"
         android:layout_height="0dp"
@@ -43,7 +43,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/toolbar" />
 
-    <com.wavez.controllerwidget.ui.customview.ServerLoadingView
+    <com.wavez.themewallpaper.ui.customview.ServerLoadingView
         android:id="@+id/viewLoading"
         android:layout_width="match_parent"
         android:layout_height="0dp"

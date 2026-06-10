@@ -83,7 +83,7 @@
 
         </LinearLayout>
 
-        <com.wavez.controllerwidget.ui.customview.ServerErrorView
+        <com.wavez.themewallpaper.ui.customview.ServerErrorView
             android:id="@+id/viewError"
             android:layout_width="match_parent"
             android:layout_height="0dp"

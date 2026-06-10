@@ -62,7 +62,7 @@
         app:layout_constraintTop_toBottomOf="@id/divider"
         tools:listitem="@layout/item_set_icon" />
 
-    <com.wavez.controllerwidget.ui.customview.IconTextButton
+    <com.wavez.themewallpaper.ui.customview.IconTextButton
         android:id="@+id/btnInstallAll"
         style="@style/NunitoMedium.16"
         android:layout_width="0dp"
@@ -77,7 +77,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
-    <com.wavez.controllerwidget.ui.customview.ServerLoadingView
+    <com.wavez.themewallpaper.ui.customview.ServerLoadingView
         android:id="@+id/viewLoading"
         android:layout_width="0dp"
         android:layout_height="0dp"

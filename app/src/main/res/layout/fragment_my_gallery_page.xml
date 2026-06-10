@@ -16,7 +16,7 @@
         app:spanCount="2"
         tools:listitem="@layout/item_wallpaper" />
 
-    <com.wavez.controllerwidget.ui.customview.ServerLoadingView
+    <com.wavez.themewallpaper.ui.customview.ServerLoadingView
         android:id="@+id/viewLoading"
         android:layout_width="match_parent"
         android:layout_height="match_parent"

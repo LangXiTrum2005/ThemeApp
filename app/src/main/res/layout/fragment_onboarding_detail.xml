@@ -89,19 +89,19 @@
             android:layout_height="wrap_content"
             app:layout_constraintBottom_toBottomOf="parent">
 
-            <com.wavez.controllerwidget.ads.native_ad.view.BigNativeAdTemplate
+            <com.wavez.themewallpaper.ads.native_ad.view.BigNativeAdTemplate
                 android:id="@+id/bigNative1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="bottom" />
 
-            <com.wavez.controllerwidget.ads.native_ad.view.BigNativeAdTemplate
+            <com.wavez.themewallpaper.ads.native_ad.view.BigNativeAdTemplate
                 android:id="@+id/bigNative2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="bottom" />
 
-            <com.wavez.controllerwidget.ads.native_ad.view.BigNativeAdTemplate
+            <com.wavez.themewallpaper.ads.native_ad.view.BigNativeAdTemplate
                 android:id="@+id/viewFake"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

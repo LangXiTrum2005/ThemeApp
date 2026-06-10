@@ -79,7 +79,7 @@
         android:layout_height="wrap_content"
         android:layout_weight="1" />
 
-    <com.wavez.controllerwidget.ui.customview.IconTextButton
+    <com.wavez.themewallpaper.ui.customview.IconTextButton
         android:id="@+id/btnAction"
         style="@style/NunitoMedium.14"
         android:layout_width="wrap_content"

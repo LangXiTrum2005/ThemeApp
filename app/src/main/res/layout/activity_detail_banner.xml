@@ -50,7 +50,7 @@
         app:spanCount="2"
         tools:listitem="@layout/item_theme" />
 
-    <com.wavez.controllerwidget.ui.customview.ServerErrorView
+    <com.wavez.themewallpaper.ui.customview.ServerErrorView
         android:id="@+id/viewError"
         android:layout_width="match_parent"
         android:layout_height="0dp"
@@ -59,7 +59,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@id/ivBanner" />
 
-    <com.wavez.controllerwidget.ui.customview.ServerLoadingView
+    <com.wavez.themewallpaper.ui.customview.ServerLoadingView
         android:id="@+id/viewLoading"
         android:layout_width="match_parent"
         android:layout_height="0dp"
@@ -75,7 +75,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         />
 
-    <com.wavez.controllerwidget.ads.native_ad.view.BigNativeCollapsibleAdTemplate
+    <com.wavez.themewallpaper.ads.native_ad.view.BigNativeCollapsibleAdTemplate
         android:id="@+id/native_banner"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

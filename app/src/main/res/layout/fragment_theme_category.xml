@@ -15,10 +15,17 @@
         app:spanCount="2"
         tools:listitem="@layout/item_wallpaper" />
 
-    <com.wavez.controllerwidget.ui.customview.ServerErrorView
+    <com.wavez.themewallpaper.ui.customview.ServerErrorView
         android:id="@+id/viewError"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:visibility="gone" />
+
+    <com.wavez.themewallpaper.ui.customview.ServerLoadingView
+        android:id="@+id/viewLoading"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone" />
+
 
 </FrameLayout>

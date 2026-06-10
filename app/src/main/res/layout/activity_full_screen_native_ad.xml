@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@color/white">
 
-    <com.wavez.controllerwidget.ads.native_ad.view.FullScreenNativeAdView
+    <com.wavez.themewallpaper.ads.native_ad.view.FullScreenNativeAdView
         android:id="@+id/fullScreenNativeAdView"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />

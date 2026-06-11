@@ -21,6 +21,7 @@ interface AdInterstitialManager {
         activity: Activity,
         showLoading: Boolean = true,
         loadingView: View? = null,
+        preloadOnShow: Boolean = true,
         onAdComplete: () -> Unit
     )
 
@@ -28,6 +29,7 @@ interface AdInterstitialManager {
         activity: Activity,
         showLoading: Boolean = true,
         loadingView: View? = null,
+        preloadOnShow: Boolean = true,
         onAdComplete: () -> Unit
     )
 

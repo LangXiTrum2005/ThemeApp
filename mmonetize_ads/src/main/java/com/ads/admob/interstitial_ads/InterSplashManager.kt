@@ -74,7 +74,7 @@ class InterSplashManager(
         while (currentCoroutineContext().isActive) {
             val elapsed = System.currentTimeMillis() - loadStartedAt
             if (manager.isAdReady() || elapsed >= maxWaitMs) {
-                manager.showAdFullScreen(activity, showLoading = false) { onComplete() }
+                manager.showAdFullScreen(activity, showLoading = false, preloadOnShow = false) { onComplete() }
                 return
             }
             delay(pollMs)

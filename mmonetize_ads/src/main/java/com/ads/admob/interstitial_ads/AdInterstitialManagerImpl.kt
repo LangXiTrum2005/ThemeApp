@@ -115,6 +115,7 @@ class AdInterstitialManagerImpl(
         activity: Activity,
         showLoading: Boolean,
         loadingView: View?,
+        preloadOnShow: Boolean,
         onAdComplete: () -> Unit
     ) {
         if (!isAdEligibleToShow()) {
@@ -123,9 +124,9 @@ class AdInterstitialManagerImpl(
         }
 
         if (showLoading) {
-            showWithLoading(activity, loadingView, onAdComplete)
+            showWithLoading(activity, loadingView, preloadOnShow, onAdComplete)
         } else {
-            showNow(activity, onAdComplete)
+            showNow(activity, preloadOnShow, onAdComplete)
         }
     }
 
@@ -133,6 +134,7 @@ class AdInterstitialManagerImpl(
         activity: Activity,
         showLoading: Boolean,
         loadingView: View?,
+        preloadOnShow: Boolean,
         onAdComplete: () -> Unit
     ) {
         if (interstitialAd == null) {
@@ -141,20 +143,20 @@ class AdInterstitialManagerImpl(
         }
 
         if (showLoading) {
-            showWithLoading(activity, loadingView, onAdComplete)
+            showWithLoading(activity, loadingView, preloadOnShow, onAdComplete)
         } else {
-            showNow(activity, onAdComplete)
+            showNow(activity, preloadOnShow, onAdComplete)
         }
     }
 
-    private fun showNow(activity: Activity, onAdComplete: () -> Unit) {
+    private fun showNow(activity: Activity, preloadOnShow: Boolean, onAdComplete: () -> Unit) {
         if (!isActivityValid(activity)) {
             onAdComplete()
             return
         }
         interstitialAd?.let { ad ->
             interstitialAd = null
-            loadAd()
+            if (preloadOnShow) loadAd()
             setFullScreenContentCallback(ad, onAdComplete)
             ad.show(activity)
         } ?: onAdComplete()
@@ -163,6 +165,7 @@ class AdInterstitialManagerImpl(
     private fun showWithLoading(
         activity: Activity,
         loadingView: View?,
+        preloadOnShow: Boolean,
         onAdComplete: () -> Unit
     ) {
         if (!isActivityValid(activity)) {
@@ -189,7 +192,7 @@ class AdInterstitialManagerImpl(
 
             interstitialAd?.let { ad ->
                 interstitialAd = null
-                loadAd()
+                if (preloadOnShow) loadAd()
                 setFullScreenContentCallback(ad) {
                     dismissLoadingDialog()
                     onAdComplete()

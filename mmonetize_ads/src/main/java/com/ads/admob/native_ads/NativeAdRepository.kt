@@ -1,6 +1,5 @@
 package com.ads.admob.native_ads
 
-import com.ads.admob.LoadCondition
 import com.ads.admob.native_ads.adapter.NativeAdLoadState
 import kotlinx.coroutines.flow.StateFlow
 
@@ -8,7 +7,7 @@ interface NativeAdRepository {
 
     fun setNativeAdIds(adPlacement: String, ids: List<String>)
 
-    fun setLoadCondition(condition: LoadCondition?)
+    fun setLoadCondition(condition: NativeLoadCondition?)
 
     fun setPreloadOnClick(adPlacement: String, enabled: Boolean)
 
@@ -20,5 +19,5 @@ interface NativeAdRepository {
 
     fun clearAds(adPlacement: String)
 
-    fun getLastLoadTime(): Long
+    fun getLastLoadTime(adPlacement: String): Long
 }

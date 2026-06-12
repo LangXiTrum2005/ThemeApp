@@ -169,6 +169,10 @@ class PremiumActivity : BaseActivity<ActivityPremiumBinding>(),
     }
 
     private fun initView() {
+        binding.scrollContent.post {
+            binding.scrollContent.fullScroll(android.view.View.FOCUS_DOWN)
+        }
+
         binding.tvTermsOfUse.makeLinkOpenUrl(
             getString(R.string.terms_of_use),
             TERMS_OF_SERVICE,

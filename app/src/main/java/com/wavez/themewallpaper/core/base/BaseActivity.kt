@@ -237,7 +237,7 @@ abstract class BaseActivity<T : ViewBinding> : AppCompatActivity() {
         if (sharedPref.isVip) {
             onBack(); return
         }
-        MMonetize.interstitialManager.showAdFullScreen(this) { onBack() }
+        MMonetize.interstitialManager.showAdFullScreen(this, showLoading = false) { onBack() }
     }
 
     private fun showNetworkDialog() {

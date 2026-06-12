@@ -8,6 +8,7 @@ import com.wavez.themewallpaper.ads.native_ad.NativeAdPlacement
 import com.wavez.themewallpaper.core.base.BaseFragment
 import com.wavez.themewallpaper.core.extensions.getParcel
 import com.wavez.themewallpaper.core.extensions.gone
+import com.wavez.themewallpaper.core.extensions.invisible
 import com.wavez.themewallpaper.databinding.FragmentOnboardingDetailBinding
 import com.wavez.themewallpaper.ui.onboarding.WalkthroughActivity
 import com.wavez.themewallpaper.ui.onboarding.model.BoardingData
@@ -63,15 +64,25 @@ class WalkthroughDetailFragment : BaseFragment<FragmentOnboardingDetailBinding>(
         if (sharedPref.isVip || !show) {
             binding.bigNative1.gone()
             binding.bigNative2.gone()
-            binding.viewFake.gone()
+            binding.viewFake.invisible()
             return
         }
         if (boardingData?.index == 2) {
             binding.bigNative2.gone()
-            setupNative(NativeAdPlacement.ONBOARDING2, binding.bigNative1, true, preloadOnClick = true)
+            setupNative(
+                NativeAdPlacement.ONBOARDING2,
+                binding.bigNative1,
+                true,
+                preloadOnClick = true
+            )
         } else {
             binding.bigNative1.gone()
-            setupNative(NativeAdPlacement.ONBOARDING3, binding.bigNative2, true, preloadOnClick = true)
+            setupNative(
+                NativeAdPlacement.ONBOARDING3,
+                binding.bigNative2,
+                true,
+                preloadOnClick = true
+            )
         }
     }
 

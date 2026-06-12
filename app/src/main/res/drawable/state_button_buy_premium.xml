@@ -11,7 +11,7 @@
             <item android:bottom="2dp" android:end="2dp" android:start="2dp" android:top="2dp">
                 <shape>
                     <solid android:color="@color/surfacePrimaryBaseEm" />
-                    <corners android:bottomLeftRadius="12dp" android:bottomRightRadius="12dp" android:topRightRadius="12dp" />
+                    <corners android:radius="12dp" />
                 </shape>
             </item>
         </layer-list>

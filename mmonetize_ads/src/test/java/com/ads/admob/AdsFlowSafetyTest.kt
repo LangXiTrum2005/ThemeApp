@@ -2,6 +2,7 @@ package com.ads.admob
 
 import android.app.Application
 import com.ads.admob.native_ads.NativeAdRepository
+import com.ads.admob.native_ads.NativeLoadCondition
 import io.mockk.mockk
 import org.junit.After
 import org.junit.Assert.*
@@ -45,7 +46,7 @@ class AdsFlowSafetyTest {
         // Simulates: LoadCondition set in GameModeApp
         MMonetize.interstitialManager.setLoadCondition(LoadCondition { true })
         MMonetize.openAdManager.setLoadCondition(LoadCondition { true })
-        MMonetize.nativeAdRepository.setLoadCondition(LoadCondition { true })
+        MMonetize.nativeAdRepository.setLoadCondition(NativeLoadCondition { true })
     }
 
     @Test
@@ -56,7 +57,7 @@ class AdsFlowSafetyTest {
         }
 
         val vip = LoadCondition { false }
-        MMonetize.nativeAdRepository.setLoadCondition(vip)
+        MMonetize.nativeAdRepository.setLoadCondition(NativeLoadCondition { false })
         MMonetize.interstitialManager.setLoadCondition(vip)
         MMonetize.openAdManager.setLoadCondition(vip)
 
@@ -91,7 +92,7 @@ class AdsFlowSafetyTest {
         MMonetize.interstitialManager.setLoadCondition(load)
         MMonetize.openAdManager.setShowCondition(show)
         MMonetize.openAdManager.setLoadCondition(load)
-        MMonetize.nativeAdRepository.setLoadCondition(load)
+        MMonetize.nativeAdRepository.setLoadCondition(NativeLoadCondition { true })
     }
 
     // ─── Repository state isolation ───────────────────────────────────────────

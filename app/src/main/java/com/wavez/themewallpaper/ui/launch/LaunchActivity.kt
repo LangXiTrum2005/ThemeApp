@@ -3,6 +3,7 @@ package com.wavez.themewallpaper.ui.launch
 import android.annotation.SuppressLint
 import android.os.Bundle
 import androidx.activity.viewModels
+import androidx.core.view.isVisible
 import androidx.lifecycle.lifecycleScope
 import com.ads.admob.GoogleMobileAdsConsentManager
 import com.ads.admob.MMonetize
@@ -56,6 +57,11 @@ class LaunchActivity : BaseActivity<ActivityLaunchBinding>() {
             if (isReopen) AppEvent.SPLASH_REOPEN_VIEW else AppEvent.SPLASH_1ST_VIEW
         )
         if (!isReopen) sharedPref.hasLoggedSplashView = true
+    }
+
+    override fun onVipChangedState(isPremium: Boolean) {
+        super.onVipChangedState(isPremium)
+        binding.tvAds.isVisible = !isPremium
     }
 
     private fun getInstanceGdpr() {

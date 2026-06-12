@@ -27,7 +27,13 @@
       "Bash(Select-Object -First 20)",
       "Bash(Remove-Item \"D:\\\\p67-theme-wallpaper\\\\app\\\\src\\\\main\\\\java\\\\com\\\\wavez\\\\controllerwidget\\\\ads\\\\native_ad\\\\NativeAdViewModel.kt\")",
       "PowerShell(Remove-Item \"D:\\\\p67-theme-wallpaper\\\\app\\\\src\\\\main\\\\java\\\\com\\\\wavez\\\\controllerwidget\\\\ads\\\\native_ad\\\\NativeAdViewModel.kt\" -Confirm:$false)",
-      "Bash(xargs grep -l \"loadNative\\\\|NativeAd\\\\|nativeAd\\\\|reload\\\\|reLoad\")"
+      "Bash(xargs grep -l \"loadNative\\\\|NativeAd\\\\|nativeAd\\\\|reload\\\\|reLoad\")",
+      "Bash(./gradlew :mmonetize_ads:compileDebugKotlin :app:compileDebugKotlin -q)",
+      "Bash(./gradlew :mmonetize_ads:compileDebugKotlin :app:compileDebugKotlin)",
+      "Bash(./gradlew :mmonetize_ads:testDebugUnitTest --tests \"com.ads.admob.native_ads.*\" --tests \"com.ads.admob.AdsFlowSafetyTest\")",
+      "Bash(git stash *)",
+      "Bash(./gradlew :mmonetize_ads:compileDebugUnitTestKotlin)",
+      "Bash(./gradlew :app:compileDebugKotlin)"
     ]
   }
 }

@@ -33,6 +33,7 @@ import com.wavez.themewallpaper.ads.AppRemoteConfig.Companion.SHOULD_SHOW_NATIVE
 import com.wavez.themewallpaper.ads.AppRemoteConfig.Companion.SHOULD_SHOW_NATIVE_SELECT_APP
 import com.wavez.themewallpaper.ads.AppRemoteConfig.Companion.SHOULD_SHOW_OPEN_AD
 import com.wavez.themewallpaper.ads.AppRemoteConfig.Companion.SHOULD_SHOW_REWARD
+import com.wavez.themewallpaper.ads.native_ad.NativeAdPlacement
 import com.wavez.themewallpaper.data.repository.SharedPref
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -135,10 +136,17 @@ class AppRemoteConfigImpl(
     }
 
     private fun setUpNativeAdRepository() {
-        MMonetize.nativeAdRepository.setLoadCondition {
-            val isOverGap = System.currentTimeMillis() -
-                    MMonetize.nativeAdRepository.getLastLoadTime() >= sharedPref.nativeGap
-            isOverGap
+        val gapPlacements = setOf(
+            NativeAdPlacement.NATIVE_BANNER_DETAIL.name,
+            NativeAdPlacement.NATIVE_THEME_APPLIED.name,
+            NativeAdPlacement.NATIVE_WALLPAPER_APPLIED.name,
+            NativeAdPlacement.NATIVE_ICON_APPLIED.name,
+            NativeAdPlacement.NATIVE_HOME.name
+        )
+        MMonetize.nativeAdRepository.setLoadCondition { adPlacement ->
+            if (adPlacement !in gapPlacements) return@setLoadCondition true
+            val now = System.currentTimeMillis()
+            gapPlacements.all { now - MMonetize.nativeAdRepository.getLastLoadTime(it) >= sharedPref.nativeGap }
         }
     }
 

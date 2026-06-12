@@ -1,7 +1,6 @@
 package com.ads.admob.native_ads
 
 import app.cash.turbine.test
-import com.ads.admob.LoadCondition
 import com.ads.admob.native_ads.adapter.NativeAdLoadState
 import io.mockk.mockk
 import kotlinx.coroutines.test.runTest
@@ -63,7 +62,7 @@ class NativeAdRepositoryImplTest {
 
     @Test
     fun `loadAd with LoadCondition returning false - stays Idle`() = runTest {
-        repo.setLoadCondition(LoadCondition { false })
+        repo.setLoadCondition(NativeLoadCondition { false })
         repo.setNativeAdIds(PLACEMENT, FAKE_IDS)
 
         repo.getAdStateFlow(PLACEMENT).test {
@@ -127,7 +126,7 @@ class NativeAdRepositoryImplTest {
     @Test
     fun `LoadCondition blocks all - multiple placements each stay Idle`() = runTest {
         val p2 = "placement_2"
-        repo.setLoadCondition(LoadCondition { false })
+        repo.setLoadCondition(NativeLoadCondition { false })
         repo.setNativeAdIds(PLACEMENT, FAKE_IDS)
         repo.setNativeAdIds(p2, FAKE_IDS)
 

@@ -4,7 +4,6 @@ import android.content.Context
 import android.util.Log
 import com.ads.admob.AdRevenueTracker
 import com.ads.admob.GoogleMobileAdsConsentManager
-import com.ads.admob.LoadCondition
 import com.ads.admob.native_ads.adapter.NativeAdLoadState
 import com.google.android.gms.ads.AdListener
 import com.google.android.gms.ads.AdLoader
@@ -27,8 +26,8 @@ class NativeAdRepositoryImpl(
         private const val TAG = "Log_Native_High_floor"
     }
 
-    private var loadCondition: LoadCondition? = null
-    private var lastTimeLoadNative = 0L
+    private var loadCondition: NativeLoadCondition? = null
+    private val lastLoadTimeMap = ConcurrentHashMap<String, Long>()
 
     private val adUnitMap     = ConcurrentHashMap<String, List<String>>()
     private val adIdIndexMap  = ConcurrentHashMap<String, AtomicInteger>()
@@ -47,7 +46,7 @@ class NativeAdRepositoryImpl(
         Log.d(TAG, "🧩 [$adPlacement] Registered ${ids.size} ID(s).")
     }
 
-    override fun setLoadCondition(condition: LoadCondition?) { loadCondition = condition }
+    override fun setLoadCondition(condition: NativeLoadCondition?) { loadCondition = condition }
 
     override fun setPreloadOnClick(adPlacement: String, enabled: Boolean) {
         preloadOnClickMap[adPlacement] = enabled
@@ -66,7 +65,7 @@ class NativeAdRepositoryImpl(
         Log.d(TAG, "🚀 [$adPlacement] Loading ID[$index/${ids.lastIndex}]: ${ids[index]}")
         emitState(adPlacement, NativeAdLoadState.Loading)
         setLoading(adPlacement, true)
-        lastTimeLoadNative = System.currentTimeMillis()
+        lastLoadTimeMap[adPlacement] = System.currentTimeMillis()
 
         AdLoader.Builder(context, ids[index])
             .forNativeAd { ad ->
@@ -138,7 +137,7 @@ class NativeAdRepositoryImpl(
             Log.d(TAG, "✅ [$adPlacement] Skip: ad already ready.")
             return false
         }
-        if (loadCondition?.shouldLoad() == false) {
+        if (loadCondition?.shouldLoad(adPlacement) == false) {
             Log.d(TAG, "🚫 [$adPlacement] Skip: load condition blocked.")
             return false
         }
@@ -164,7 +163,7 @@ class NativeAdRepositoryImpl(
         stateFlow(adPlacement).value = state
     }
 
-    override fun getLastLoadTime(): Long {
-        return lastTimeLoadNative
+    override fun getLastLoadTime(adPlacement: String): Long {
+        return lastLoadTimeMap[adPlacement] ?: 0L
     }
 }

@@ -42,6 +42,7 @@
         app:layout_constraintBottom_toBottomOf="@+id/background" />
 
     <ScrollView
+        android:id="@+id/scrollContent"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:scrollbars="vertical"
@@ -132,6 +133,7 @@
                 app:layout_constraintBottom_toTopOf="@+id/viewButton">
 
                 <LinearLayout
+                    android:id="@+id/btnBuyWeek"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
@@ -151,7 +153,6 @@
                         android:textStyle="bold" />
 
                     <LinearLayout
-                        android:id="@+id/btnBuyWeek"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="@drawable/state_button_buy_premium_2"

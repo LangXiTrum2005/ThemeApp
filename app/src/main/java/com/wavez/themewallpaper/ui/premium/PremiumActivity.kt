@@ -51,7 +51,7 @@ class PremiumActivity : BaseActivity<ActivityPremiumBinding>(),
     override fun initConfig(savedInstanceState: Bundle?) {
         super.initConfig(savedInstanceState)
         hideBottomNavigation()
-        syncUiSelect(PremiumPlan.YEARLY)
+        syncUiSelect(PremiumPlan.WEEKLY)
         initView()
         isMain = intent?.getBooleanExtra(ARG_IS_MAIN, false) ?: false
     }

@@ -12,94 +12,107 @@ import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
 import com.wavez.themewallpaper.R
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.SupervisorJob
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import java.io.IOException
 import java.net.HttpURLConnection
 import java.net.URL
 
-@AndroidEntryPoint
 class FMMessagingService : FirebaseMessagingService() {
 
     companion object {
-        private const val CHANEL_NAME = "M52 Gps Camera"
-        private const val CHANGE_ID = "default_channel_m52"
+        const val CHANNEL_ID = "default_channel_m71"
+        private const val CHANNEL_NAME = "M71_Notify"
     }
 
     override fun onNewToken(token: String) {
         super.onNewToken(token)
-        // token
     }
 
     override fun onMessageReceived(remoteMessage: RemoteMessage) {
         super.onMessageReceived(remoteMessage)
-        remoteMessage.notification?.let {
-            val title = it.title ?: getString(R.string.app_name)
-            val body = it.body ?: getString(R.string.app_name)
-            val imageUrl = it.imageUrl?.toString()
-            showNotification(title, body, imageUrl)
+
+        val title = remoteMessage.notification?.title
+            ?: remoteMessage.data["title"]
+            ?: getString(R.string.app_name)
+
+        val body = remoteMessage.notification?.body
+            ?: remoteMessage.data["body"]
+            ?: ""
+
+        val imageUrl = remoteMessage.notification?.imageUrl?.toString()
+            ?: remoteMessage.data["image"]
+
+        val data = remoteMessage.data
+
+        CoroutineScope(Dispatchers.IO + SupervisorJob()).launch {
+            val bitmap = imageUrl?.let { fetchBitmap(it) }
+            withContext(Dispatchers.Main) {
+                showNotification(title, body, bitmap, data)
+            }
         }
     }
 
-    private fun showNotification(title: String, body: String, imageUrl: String?) {
+    private fun showNotification(
+        title: String,
+        body: String,
+        bitmap: Bitmap?,
+        data: Map<String, String>
+    ) {
         val manager = getSystemService(NOTIFICATION_SERVICE) as NotificationManager
 
-        val channel = NotificationChannel(
-            CHANGE_ID,
-            CHANEL_NAME,
-            NotificationManager.IMPORTANCE_HIGH,
-        )
-        manager.createNotificationChannel(channel)
+        if (manager.getNotificationChannel(CHANNEL_ID) == null) {
+            manager.createNotificationChannel(
+                NotificationChannel(CHANNEL_ID, CHANNEL_NAME, NotificationManager.IMPORTANCE_HIGH)
+            )
+        }
 
         val intent = packageManager.getLaunchIntentForPackage(packageName)?.apply {
-            addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+            addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP)
+            data.forEach { (key, value) -> putExtra(key, value) }
         }
 
         val pendingIntent = PendingIntent.getActivity(
             this,
-            0,
+            System.currentTimeMillis().toInt(),
             intent,
             PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE,
         )
 
-        val builder =
-            NotificationCompat.Builder(this, CHANGE_ID).setSmallIcon(R.drawable.ic_notification)
-                .setContentTitle(title).setContentText(body).setAutoCancel(true)
-                .setContentIntent(pendingIntent)
-                .setSound(RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION))
-                .setVibrate(longArrayOf(1000, 1000, 1000, 1000, 1000))
-                .setPriority(NotificationCompat.PRIORITY_HIGH)
-
-        if (!imageUrl.isNullOrEmpty()) {
-            try {
-                val bitmap = fetchBitmap(imageUrl)
-
-                bitmap?.let {
-                    builder.setStyle(
-                        NotificationCompat.BigPictureStyle().bigPicture(it),
-                    )
-                }
-            } catch (e: Exception) {
-                e.printStackTrace()
-            }
-        }
+        val builder = NotificationCompat.Builder(this, CHANNEL_ID)
+            .setSmallIcon(R.drawable.ic_notification)
+            .setContentTitle(title)
+            .setContentText(body)
+            .setAutoCancel(true)
+            .setContentIntent(pendingIntent)
+            .setSound(RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION))
+            .setPriority(NotificationCompat.PRIORITY_HIGH)
+            .setStyle(
+                if (bitmap != null)
+                    NotificationCompat.BigPictureStyle().bigPicture(bitmap)
+                else
+                    NotificationCompat.BigTextStyle().bigText(body)
+            )
 
         manager.notify(System.currentTimeMillis().toInt(), builder.build())
     }
 
-    private fun fetchBitmap(src: String?): Bitmap? {
-        try {
-            if (src != null) {
-                val url = URL(src)
-                val connection = url.openConnection() as HttpURLConnection
-                connection.setDoInput(true)
-                connection.connectTimeout = 50_000
-                connection.readTimeout = 50_000
-                connection.connect()
-                val input = connection.getInputStream()
-                return BitmapFactory.decodeStream(input)
+    private fun fetchBitmap(src: String): Bitmap? {
+        return try {
+            val connection = (URL(src).openConnection() as HttpURLConnection).apply {
+                doInput = true
+                connectTimeout = 10_000 // ✅ 50s quá lâu, 10s là đủ
+                readTimeout = 10_000
+                connect()
             }
-        } catch (ex: IOException) {
-            ex.printStackTrace()
+            BitmapFactory.decodeStream(connection.inputStream)
+        } catch (e: Exception) {
+            e.printStackTrace()
+            null
         }
-        return null
     }
 }
+

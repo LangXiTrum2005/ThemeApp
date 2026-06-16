@@ -145,10 +145,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/border_28"
-        android:backgroundTint="@color/surfaceBg"
+        android:layout_marginHorizontal="24dp"
         android:gravity="center_horizontal"
         android:orientation="vertical"
         android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -157,7 +158,6 @@
         <androidx.appcompat.widget.AppCompatImageView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/surfaceDangerLowEm"
             android:padding="40dp"
             android:src="@drawable/ic_failed" />
 

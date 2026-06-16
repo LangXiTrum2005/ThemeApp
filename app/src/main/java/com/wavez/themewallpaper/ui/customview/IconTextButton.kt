@@ -26,21 +26,28 @@ class IconTextButton @JvmOverloads constructor(
         iconRightView = findViewById(R.id.btnIconRight)
         textView = findViewById(R.id.btnText)
 
-        context.obtainStyledAttributes(attrs, R.styleable.IconTextButton).use {
-            val iconRes = it.getResourceId(R.styleable.IconTextButton_btnIcon, 0)
+        val ta = context.obtainStyledAttributes(attrs, R.styleable.IconTextButton)
+        try {
+            val iconRes = ta.getResourceId(R.styleable.IconTextButton_btnIcon, 0)
             setIcon(iconRes)
 
-            val iconRightRes = it.getResourceId(R.styleable.IconTextButton_btnIconRight, 0)
+            val iconRightRes = ta.getResourceId(R.styleable.IconTextButton_btnIconRight, 0)
             setIconRight(iconRightRes)
 
-            textView.text = it.getString(R.styleable.IconTextButton_btnText)
+            textView.text = ta.getString(R.styleable.IconTextButton_btnText)
 
-            val textColor = it.getColor(R.styleable.IconTextButton_btnTextColor, Color.WHITE)
+            val textColor = ta.getColor(
+                R.styleable.IconTextButton_btnTextColor,
+                Color.WHITE
+            )
             textView.setTextColor(textColor)
 
-            it.getResourceId(R.styleable.IconTextButton_btnBackground, 0)
-                .takeIf { res -> res != 0 }
-                ?.let { res -> setBackgroundResource(res) }
+            ta.getResourceId(R.styleable.IconTextButton_btnBackground, 0)
+                .takeIf { it != 0 }
+                ?.let { setBackgroundResource(it) }
+
+        } finally {
+            ta.recycle()
         }
     }
 

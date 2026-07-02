@@ -50,7 +50,7 @@ class OpenAdManagerImpl(private val context: Context) : OpenAdManager {
     }
 
     override fun loadAd() {
-        val adUnitId = _adUnitId ?: throw Exception("Ad unit ID must be set")
+        val adUnitId = _adUnitId ?: return
         if (!isAdEligibleToLoad()) return
         isLoading = true
         val adRequest = AdRequest.Builder().build()
@@ -113,7 +113,7 @@ class OpenAdManagerImpl(private val context: Context) : OpenAdManager {
         val showCondition = additionalShowCondition
 
         Log.d(TAG, "show: showCondition=${showCondition?.shouldShow()}")
-        
+
         if (showCondition != null && !showCondition.shouldShow()) {
             onContinueTask?.invoke()
             return

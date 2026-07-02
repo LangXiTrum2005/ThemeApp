@@ -151,7 +151,6 @@ class AppRemoteConfigImpl(
     }
 
     private fun setupOpenAdManager() {
-        MMonetize.openAdManager.setAdUnitId(AdsId.getOpenAds())
         MMonetize.openAdManager.setShowCondition {
             val isOverGap = System.currentTimeMillis() -
                     MMonetize.openAdManager.dismissFullScreenLastTime >= sharedPref.openAdsGap

@@ -20,8 +20,8 @@ android {
         applicationId = "com.themes.wallpaper.icon.widget"
         minSdk = 28
         targetSdk = 36
-        versionCode = 5
-        versionName = "1.0.4"
+        versionCode = 6
+        versionName = "1.0.5"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
 
@@ -42,11 +42,10 @@ android {
     buildTypes {
         debug {
             isMinifyEnabled = false
-            isShrinkResources = false
 
             externalNativeBuild {
                 cmake {
-                    arguments("-DBASE_URL=http://192.168.1.40/server4/public/")
+                    arguments("-DBASE_URL=http://192.168.1.50/server4/public/")
                 }
             }
         }

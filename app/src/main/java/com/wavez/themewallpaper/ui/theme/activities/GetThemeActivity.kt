@@ -100,7 +100,7 @@ class GetThemeActivity : BaseActivity<ActivityGetThemesBinding>(),
 
     override fun onVipChangedState(isPremium: Boolean) {
         super.onVipChangedState(isPremium)
-        updateWallpaperAction(viewModel.wallpaperDownloaded.value)
+        if (!viewModel.wallpaperApplied.value) updateWallpaperAction(viewModel.wallpaperDownloaded.value)
         if (isPremium) {
             viewModel.refreshUnlockState()
         }
@@ -173,7 +173,11 @@ class GetThemeActivity : BaseActivity<ActivityGetThemesBinding>(),
         }
 
         viewModel.wallpaperDownloaded.collectWithLifecycle(this) { downloaded ->
-            updateWallpaperAction(downloaded)
+            if (!viewModel.wallpaperApplied.value) updateWallpaperAction(downloaded)
+        }
+
+        viewModel.wallpaperApplied.collectWithLifecycle(this) { applied ->
+            if (applied) showAppliedState()
         }
 
         viewModel.wallpaperDownloadState.collectWithLifecycle(this) { state ->
@@ -201,12 +205,7 @@ class GetThemeActivity : BaseActivity<ActivityGetThemesBinding>(),
 
         viewModel.applyWallpaperState.collectWithLifecycle(this) { state ->
             when (state) {
-                is UiState.Data -> {
-                    binding.viewApplyLoading.root.isVisible = false
-                    binding.viewApplied.isVisible = true
-                    binding.btnGoToHome.isInvisible = false
-                    binding.btnApplyWallpaper.isVisible = false
-                }
+                is UiState.Data -> showAppliedState()
 
                 is UiState.Error -> {
                     binding.viewApplyLoading.root.isVisible = false
@@ -257,6 +256,13 @@ class GetThemeActivity : BaseActivity<ActivityGetThemesBinding>(),
         binding.tabIcons.animateSegmentSelected(!isWallpaper)
         binding.tabWallpapers.isSelected = isWallpaper
         binding.tabIcons.isSelected = !isWallpaper
+    }
+
+    private fun showAppliedState() {
+        binding.viewApplyLoading.root.isVisible = false
+        binding.viewApplied.isVisible = true
+        binding.btnGoToHome.isInvisible = false
+        binding.btnApplyWallpaper.isVisible = false
     }
 
     private fun updateWallpaperAction(downloaded: Boolean) {

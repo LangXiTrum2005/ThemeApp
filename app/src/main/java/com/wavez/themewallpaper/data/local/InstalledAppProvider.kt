@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.content.pm.ApplicationInfo
+import android.content.pm.PackageManager
 import com.wavez.themewallpaper.di.IoDispatcher
 import com.wavez.themewallpaper.data.model.AppInfo
 import dagger.hilt.android.qualifiers.ApplicationContext
@@ -49,12 +50,18 @@ class InstalledAppProvider @Inject constructor(
 
     private fun buildAppList(): List<AppInfo> =
         getLaunchableApps()
-            .map { info ->
-                AppInfo(
-                    packageName = info.packageName,
-                    appName = pm.getApplicationLabel(info).toString(),
-                    icon = pm.getApplicationIcon(info.packageName),
-                )
+            .mapNotNull { info ->
+                // Một app có thể bị gỡ/disable giữa lúc query và lúc lấy icon,
+                // getApplicationIcon sẽ ném NameNotFoundException -> bỏ qua app đó.
+                try {
+                    AppInfo(
+                        packageName = info.packageName,
+                        appName = pm.getApplicationLabel(info).toString(),
+                        icon = pm.getApplicationIcon(info),
+                    )
+                } catch (e: PackageManager.NameNotFoundException) {
+                    null
+                }
             }
             .sortedBy { it.appName.lowercase() }
 

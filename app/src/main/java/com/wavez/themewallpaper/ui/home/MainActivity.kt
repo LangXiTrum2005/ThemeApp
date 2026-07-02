@@ -85,9 +85,14 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
         initNative()
         loadBanner()
         loadInterAds()
-        MMonetize.openAdManager.loadAd()
+        loadOpenAds()
 //        binding.togglePanelButton.setOnClickListener { togglePanel() }
 //        requestPermissions.launch(runtimePermissions.toTypedArray())
+    }
+
+    private fun loadOpenAds() {
+        MMonetize.openAdManager.setAdUnitId(AdsId.getOpenAds())
+        MMonetize.openAdManager.loadAd()
     }
 
     private fun loadBanner() {

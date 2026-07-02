@@ -39,6 +39,9 @@ fun ImageView.loadWithLoading(
 
         Glide.with(this)
             .load(model)
+            // Tránh hardware bitmap (Config.HARDWARE): là nguyên nhân native SIGABRT
+            // trên RenderThread của libhwui khi upload bitmap lên GPU.
+            .disallowHardwareConfig()
             .listener(object : RequestListener<Drawable> {
                 override fun onLoadFailed(
                     e: GlideException?,
@@ -94,6 +97,9 @@ fun ImageView.loadWithLoading(
 
         Glide.with(this)
             .load(model)
+            // Tránh hardware bitmap (Config.HARDWARE): là nguyên nhân native SIGABRT
+            // trên RenderThread của libhwui khi upload bitmap lên GPU.
+            .disallowHardwareConfig()
             .listener(object : RequestListener<Drawable> {
                 override fun onLoadFailed(
                     e: GlideException?,

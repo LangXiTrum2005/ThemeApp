@@ -54,6 +54,11 @@ class GetThemeViewModel @Inject constructor(
     private val _applyWallpaperState = MutableSharedFlow<UiState<Unit>>()
     val applyWallpaperState: SharedFlow<UiState<Unit>> = _applyWallpaperState.asSharedFlow()
 
+    // Persistent (StateFlow) nên khi activity re-STARTED thì UI applied được khôi phục,
+    // không bị wallpaperDownloaded (cũng là StateFlow) replay đè lên.
+    private val _wallpaperApplied = MutableStateFlow(false)
+    val wallpaperApplied: StateFlow<Boolean> = _wallpaperApplied.asStateFlow()
+
     var currentTheme: ThemeModel? = null
     private var currentWallpaperDownloadState: DownloadState<File> = DownloadState.Idle
 
@@ -132,7 +137,10 @@ class GetThemeViewModel @Inject constructor(
         viewModelScope.launch {
             _applyWallpaperState.emit(UiState.Loading)
             wallpaperRepository.applyWallpaper(wallpaper, target)
-                .onSuccess { _applyWallpaperState.emit(UiState.Data(Unit)) }
+                .onSuccess {
+                    _wallpaperApplied.value = true
+                    _applyWallpaperState.emit(UiState.Data(Unit))
+                }
                 .onFailure { throwable ->
                     _applyWallpaperState.emit(
                         UiState.Error(

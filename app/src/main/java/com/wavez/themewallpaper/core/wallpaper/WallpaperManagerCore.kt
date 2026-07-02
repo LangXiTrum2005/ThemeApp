@@ -19,6 +19,7 @@ import com.wavez.themewallpaper.core.wallpaper.setter.WallpaperSetter
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
 class WallpaperManagerCore(context: Context) {
@@ -92,7 +93,11 @@ class WallpaperManagerCore(context: Context) {
 
     private suspend fun applyOnline(url: String, options: WallpaperOptions) {
         val (w, h) = BitmapUtils.screenSize(ctx)
-        val raw = withContext(Dispatchers.IO) { Glide.with(ctx).asBitmap().load(url).submit(w, h).get() }
+        val raw = withContext(Dispatchers.IO) {
+            // disallowHardwareConfig: pipeline xử lý (Canvas.drawBitmap, getPixels...) chạy
+            // trên software canvas -> hardware bitmap (Config.HARDWARE) sẽ abort native (SIGABRT).
+            Glide.with(ctx).asBitmap().disallowHardwareConfig().load(url).submit(w, h).get()
+        }
         val processed = WallpaperProcessor.process(raw, options, w, h)
             .also { if (it !== raw) raw.safeRecycle() }
         setter.set(processed, options.target.flag)

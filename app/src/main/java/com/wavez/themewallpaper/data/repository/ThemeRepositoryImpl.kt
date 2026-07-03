@@ -3,6 +3,7 @@ package com.wavez.themewallpaper.data.repository
 import com.wavez.themewallpaper.di.IoDispatcher
 import com.wavez.themewallpaper.data.local.dao.DownloadedThemeDao
 import com.wavez.themewallpaper.data.local.entity.DownloadedThemeEntity
+import com.wavez.themewallpaper.data.model.DownloadedResInfo
 import com.wavez.themewallpaper.data.model.PopularCategoryModel
 import com.wavez.themewallpaper.data.model.theme.ThemeCategoryModel
 import com.wavez.themewallpaper.data.model.theme.ThemeModel
@@ -76,6 +77,10 @@ class ThemeRepositoryImpl @Inject constructor(
     override suspend fun saveTheme(theme: ThemeModel): Result<Unit> = withContext(ioDispatcher) {
         runCatching {
             downloadedThemeDao.upsert(theme.toDownloadedEntity())
+            runCatching {
+                apiService.updateWallpaperDownloadAmount(DownloadedResInfo.fromTheme(theme))
+            }
+            Unit
         }
     }
 

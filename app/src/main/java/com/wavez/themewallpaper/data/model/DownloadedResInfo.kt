@@ -2,6 +2,7 @@ package com.wavez.themewallpaper.data.model
 
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
+import com.wavez.themewallpaper.data.model.theme.ThemeModel
 import com.wavez.themewallpaper.data.model.wallpaper.WallpaperModel
 
 @JsonClass(generateAdapter = true)
@@ -15,6 +16,8 @@ data class DownloadedResInfo(
     companion object {
         private const val TYPE_WALLPAPER = "wallpaper"
         private const val TYPE_CONTROLLER = "controller"
+        private const val TYPE_THEME = "theme"
+
 
         fun fromResource(res: ThemeRemoteItem): DownloadedResInfo? {
             val resType = when (res) {
@@ -24,6 +27,9 @@ data class DownloadedResInfo(
             }
             return DownloadedResInfo(resType, res.id)
         }
+
+        fun fromTheme(theme: ThemeModel): DownloadedResInfo =
+            DownloadedResInfo(TYPE_THEME, theme.id)
     }
 
 }

@@ -19,8 +19,8 @@ hiltAndroid = "2.59.2"
 ksp = "2.3.6"
 appcompat = "1.7.1"
 lottie = "6.7.1"
-playServicesAds = "25.3.0"
-firebaseBom = "34.14.1"
+playServicesAds = "25.4.0"
+firebaseBom = "34.15.0"
 installreferrer = "2.2"
 playServicesAppset = "16.1.0"
 playServicesAdsIdentifier = "18.3.0"
@@ -58,6 +58,7 @@ navigationFragmentKtx = "2.9.8"
 navigationUiKtx = "2.9.8"
 koin = "4.2.2"
 pangle = "8.1.0.4.0"
+pagSdk = "8.1.0.4"
 
 [libraries]
 
@@ -128,6 +129,7 @@ moshi-kotlin-codegen = { module = "com.squareup.moshi:moshi-kotlin-codegen", ver
 androidx-navigation-fragment-ktx = { group = "androidx.navigation", name = "navigation-fragment-ktx", version.ref = "navigationFragmentKtx" }
 androidx-navigation-ui-ktx = { group = "androidx.navigation", name = "navigation-ui-ktx", version.ref = "navigationUiKtx" }
 koin-android = { group = "io.insert-koin", name = "koin-android", version.ref = "koin" }
+pag-sdk = { module = "com.pangle.global:pag-sdk", version.ref = "pagSdk" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

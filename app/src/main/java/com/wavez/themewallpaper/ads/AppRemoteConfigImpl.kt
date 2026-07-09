@@ -94,7 +94,7 @@ class AppRemoteConfigImpl(
                     sharedPref.nativeGap = remoteConfig.getLong(NATIVE_GAP)
                     Log.d(
                         "log_remote",
-                        "fetchRemoteConfig: ${remoteConfig.getBoolean(SHOULD_SHOW_BANNER_INAPP)}"
+                        "fetchRemoteConfig: ${remoteConfig.getString(SERVER_ROOT)}"
                     )
                     sharedPref.shouldShowNativeLanguage1 =
                         remoteAdEnabled(SHOULD_SHOW_NATIVE_AD_ON_FIRST_SETTING_LANGUAGE)

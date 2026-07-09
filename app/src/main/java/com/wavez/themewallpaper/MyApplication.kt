@@ -5,11 +5,14 @@ import android.app.Activity
 import android.app.Application
 import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import androidx.lifecycle.DefaultLifecycleObserver
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.ProcessLifecycleOwner
 import com.ads.admob.AdsManagerState
 import com.ads.admob.MMonetize
+import com.bytedance.sdk.openadsdk.api.init.PAGConfig
+import com.bytedance.sdk.openadsdk.api.init.PAGSdk
 import com.google.android.gms.ads.AdActivity
 import com.wavez.themewallpaper.ads.AppRemoteConfig
 import com.wavez.themewallpaper.data.repository.PremiumRepository
@@ -69,7 +72,29 @@ class MyApplication : Application(), Application.ActivityLifecycleCallbacks,
         registerActivityLifecycleCallbacks(this)
         ProcessLifecycleOwner.get().lifecycle.addObserver(this)
         premiumRepository.startConnection()
+        initPangleSdk()
         MMonetize.initializeAds(this) {}
+    }
+
+    private fun initPangleSdk() {
+        Log.d("LOG_TAG", "initializeMobileAdsSdk: "+packageName)
+        val pangleConfig = PAGConfig.Builder()
+            .appId("8845554")
+            .appIcon(R.mipmap.ic_launcher)
+            .supportMultiProcess(false)
+            .setPackageName(BuildConfig.APPLICATION_ID)
+            .debugLog(BuildConfig.DEBUG)
+            .build()
+
+        PAGSdk.init(applicationContext, pangleConfig, object : PAGSdk.PAGInitCallback {
+            override fun success() {
+                Log.i("LOG_TAG", "Pangle init success")
+            }
+
+            override fun fail(code: Int, msg: String?) {
+                Log.e("LOG_TAG", "Pangle init fail: code=$code msg=$msg")
+            }
+        })
     }
 
     override fun onStart(owner: LifecycleOwner) {

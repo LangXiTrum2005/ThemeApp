@@ -20,8 +20,8 @@ android {
         applicationId = "com.themes.wallpaper.icon.widget"
         minSdk = 28
         targetSdk = 36
-        versionCode = 6
-        versionName = "1.0.5"
+        versionCode = 7
+        versionName = "1.0.6"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
 
@@ -45,7 +45,7 @@ android {
 
             externalNativeBuild {
                 cmake {
-                    arguments("-DBASE_URL=http://192.168.1.50/server4/public/")
+                    arguments("-DBASE_URL=http://192.168.1.30/server4/public/")
                 }
             }
         }
@@ -157,6 +157,7 @@ dependencies {
     implementation(libs.facebook)
     implementation(libs.mintegral)
     implementation(libs.pangle)
+    implementation(libs.pag.sdk)
 
 
 }

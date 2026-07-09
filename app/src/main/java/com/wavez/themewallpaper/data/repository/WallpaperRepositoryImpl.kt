@@ -1,6 +1,7 @@
 package com.wavez.themewallpaper.data.repository
 
 import android.net.Uri
+import android.util.Log
 import com.wavez.themewallpaper.core.download.DownloadState
 import com.wavez.themewallpaper.core.download.WallpaperDownloader
 import com.wavez.themewallpaper.core.wallpaper.WallpaperManagerCore
@@ -112,6 +113,8 @@ class WallpaperRepositoryImpl @Inject constructor(
                         runCatching {
                             DownloadedResInfo.fromResource(wallpaper)
                                 ?.let { apiService.updateWallpaperDownloadAmount(it) }
+                        }.onFailure {
+                            Log.e("WallpaperRepository", "updateWallpaperDownloadAmount failed", it)
                         }
                         send(DownloadState.Success(localFile))
                     }

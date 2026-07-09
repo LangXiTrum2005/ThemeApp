@@ -2,6 +2,7 @@ package com.wavez.themewallpaper.data.repository
 
 import android.content.Context
 import android.content.Intent
+import android.util.Log
 import com.wavez.themewallpaper.core.controllercenter.ThemeLoader
 import com.wavez.themewallpaper.core.controllercenter.model.ControllerConfigModel
 import com.wavez.themewallpaper.core.controllercenter.service.ControlCenterService
@@ -142,7 +143,10 @@ class ThemeControllerRepositoryImpl @Inject constructor(
                     runCatching {
                         DownloadedResInfo.fromResource(theme)
                             ?.let { apiService.updateWallpaperDownloadAmount(it) }
+                    }.onFailure {
+                        Log.e("WallpaperRepository", "updateWallpaperDownloadAmount failed", it)
                     }
+
                     emit(DownloadState.Success(zipFile))
                 }
                 else -> emit(state)

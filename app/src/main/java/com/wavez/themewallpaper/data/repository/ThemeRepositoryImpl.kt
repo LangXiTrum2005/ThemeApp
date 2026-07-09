@@ -1,5 +1,6 @@
 package com.wavez.themewallpaper.data.repository
 
+import android.util.Log
 import com.wavez.themewallpaper.di.IoDispatcher
 import com.wavez.themewallpaper.data.local.dao.DownloadedThemeDao
 import com.wavez.themewallpaper.data.local.entity.DownloadedThemeEntity
@@ -79,6 +80,8 @@ class ThemeRepositoryImpl @Inject constructor(
             downloadedThemeDao.upsert(theme.toDownloadedEntity())
             runCatching {
                 apiService.updateWallpaperDownloadAmount(DownloadedResInfo.fromTheme(theme))
+            }.onFailure {
+                Log.e("WallpaperRepository", "updateWallpaperDownloadAmount failed", it)
             }
             Unit
         }

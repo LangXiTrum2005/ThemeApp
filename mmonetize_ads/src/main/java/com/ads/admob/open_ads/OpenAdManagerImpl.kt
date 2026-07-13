@@ -66,7 +66,7 @@ class OpenAdManagerImpl(private val context: Context) : OpenAdManager {
             override fun onAdFailedToLoad(loadAdError: LoadAdError) {
                 Log.d(TAG, "onAdFailedToLoad cause: ${loadAdError.cause}")
                 Log.d(TAG, "onAdFailedToLoad message: ${loadAdError.message}")
-                loadFailureDelay.recordFailedLoad()
+//                loadFailureDelay.recordFailedLoad()
                 finishLoading()
             }
         })

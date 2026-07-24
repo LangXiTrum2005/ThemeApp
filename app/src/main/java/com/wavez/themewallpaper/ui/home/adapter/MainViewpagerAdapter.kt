@@ -8,6 +8,7 @@ import com.wavez.themewallpaper.ui.home.fragment.icons.IconFragment
 import com.wavez.themewallpaper.ui.home.fragment.theme.ThemeFragment
 import com.wavez.themewallpaper.ui.home.fragment.mygallery.MyGalleryFragment
 import com.wavez.themewallpaper.ui.home.fragment.wallpaper.WallpaperFragment
+import com.wavez.themewallpaper.ui.home.fragment.widget.WidgetsFragment
 
 class MainPagerAdapter(
     fragmentManager: FragmentManager,
@@ -21,5 +22,6 @@ class MainPagerAdapter(
             MainTab.WALLPAPERS -> WallpaperFragment.newInstance()
             MainTab.ICONS -> IconFragment.newInstance()
             MainTab.MY_GALLERY -> MyGalleryFragment.newInstance()
+            MainTab.WIDGETS -> WidgetsFragment.newInstance()
         }
 }

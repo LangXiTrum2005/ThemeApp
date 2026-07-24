@@ -16,6 +16,7 @@ import com.wavez.themewallpaper.databinding.ActivityLaunchBinding
 import com.wavez.themewallpaper.ui.home.MainActivity
 import com.wavez.themewallpaper.ui.language.activity.OnboardingLanguageActivity
 import com.wavez.themewallpaper.ui.premium.PremiumActivity
+import com.wavez.themewallpaper.ui.setting.dialog.RatePromptManager
 import com.wavez.themewallpaper.ui.utils.AppEvent
 import com.wavez.themewallpaper.ui.utils.FirebaseControlLogEvent
 import dagger.hilt.android.AndroidEntryPoint
@@ -33,6 +34,7 @@ class LaunchActivity : BaseActivity<ActivityLaunchBinding>() {
             context = this,
             adUnitIds = AdsId.getListInterstitialAdsSplash(),
             shouldShow = { sharedPref.shouldShowInterSplash },
+            maxWaitMs = 15_000
         )
     }
 
@@ -46,9 +48,16 @@ class LaunchActivity : BaseActivity<ActivityLaunchBinding>() {
 
     override fun initConfig(savedInstanceState: Bundle?) {
         super.initConfig(savedInstanceState)
+        prepareRatePrompt(savedInstanceState)
         logSplashViewEvent()
         viewModel.preloadData()
         getInstanceGdpr()
+    }
+
+    private fun prepareRatePrompt(savedInstanceState: Bundle?) {
+        if (savedInstanceState == null) {
+            RatePromptManager.prepareMainPromptAfterSplash(sharedPref)
+        }
     }
 
     private fun logSplashViewEvent() {
@@ -68,8 +77,8 @@ class LaunchActivity : BaseActivity<ActivityLaunchBinding>() {
         startLoading()
         GoogleMobileAdsConsentManager.getInstance(this).gatherConsent(this) {
             loadBannerSplash()
-            initNativeAd()
             splashAd.load()
+            initNativeAd()
             showInterSplash()
         }
     }

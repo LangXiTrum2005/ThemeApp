@@ -18,6 +18,7 @@ import com.wavez.themewallpaper.ui.home.MainActivity
 import com.wavez.themewallpaper.ui.home.fragment.icons.adapter.IconAdapter
 import com.wavez.themewallpaper.ui.iconpack.viewmodel.ApplyIconsViewModel
 import com.wavez.themewallpaper.ui.premium.PremiumActivity
+import com.wavez.themewallpaper.ui.setting.dialog.RatePromptManager
 import com.wavez.themewallpaper.ui.theme.adapter.AppliedThemeIconAdapter
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -66,6 +67,9 @@ class ApplyIconsActivity : BaseActivity<ActivityApplyIconsBinding>() {
         binding.rcvRemainingIcons.adapter = remainingIconAdapter
         binding.rcvSuggestedThemes.adapter = suggestedIcon
         renderMode(intent.getStringExtra(EXTRA_MODE).orEmpty())
+        if (savedInstanceState == null) {
+            RatePromptManager.showAfterSuccessfulSetup(supportFragmentManager, sharedPref)
+        }
         initNative()
         loadBanner()
     }

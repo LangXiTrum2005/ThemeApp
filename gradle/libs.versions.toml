@@ -59,6 +59,7 @@ navigationUiKtx = "2.9.8"
 koin = "4.2.2"
 pangle = "8.1.0.4.0"
 pagSdk = "8.1.0.4"
+simpleratingbar = "1.5.1"
 
 [libraries]
 
@@ -114,6 +115,8 @@ facebook-adapter = { module = "com.applovin.mediation:facebook-adapter", version
 ssp-android = { module = "com.intuit.ssp:ssp-android", version.ref = "sspAndroid" }
 user-messaging-platform = { module = "com.google.android.ump:user-messaging-platform", version.ref = "userMessagingPlatform" }
 billing = { module = "com.android.billingclient:billing", version.ref = "billing" }
+simpleratingbar = { module = "com.github.ome450901:SimpleRatingBar", version.ref = "simpleratingbar" }
+
 #noinspection SimilarGradleDependency
 android-installreferrer = { module = "com.android.installreferrer:installreferrer", version.ref = "installreferrerVersion" }
 androidx-recyclerview = { module = "androidx.recyclerview:recyclerview", version.ref = "recyclerview" }

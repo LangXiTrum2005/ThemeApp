@@ -27,6 +27,7 @@ import com.wavez.themewallpaper.databinding.ActivityMainBinding
 import com.wavez.themewallpaper.ui.home.adapter.MainPagerAdapter
 import com.wavez.themewallpaper.ui.home.adapter.MainTab
 import com.wavez.themewallpaper.ui.home.viewmodel.MainViewModel
+import com.wavez.themewallpaper.ui.setting.dialog.RatePromptManager
 import com.wavez.themewallpaper.ui.utils.AppEvent
 import com.wavez.themewallpaper.ui.utils.FirebaseControlLogEvent
 import dagger.hilt.android.AndroidEntryPoint
@@ -86,6 +87,9 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
         loadBanner()
         loadInterAds()
         loadOpenAds()
+        if (savedInstanceState == null) {
+            RatePromptManager.showOnMainFromSplash(supportFragmentManager, sharedPref)
+        }
 //        binding.togglePanelButton.setOnClickListener { togglePanel() }
 //        requestPermissions.launch(runtimePermissions.toTypedArray())
     }

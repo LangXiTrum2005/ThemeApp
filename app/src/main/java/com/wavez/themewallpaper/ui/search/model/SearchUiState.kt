@@ -3,6 +3,7 @@ package com.wavez.themewallpaper.ui.search.model
 import com.wavez.themewallpaper.data.model.icon.IconPackModel
 import com.wavez.themewallpaper.data.model.theme.ThemeModel
 import com.wavez.themewallpaper.data.model.wallpaper.WallpaperModel
+import com.wavez.themewallpaper.data.model.widget.WidgetsModel
 
 data class SearchUiState(
     val isLoading: Boolean = false,
@@ -12,6 +13,7 @@ data class SearchUiState(
     val themes: List<ThemeModel> = emptyList(),
     val wallpapers: List<WallpaperModel> = emptyList(),
     val iconPacks: List<IconPackModel> = emptyList(),
+    val widgets: List<WidgetsModel> = emptyList(),
     val message: String? = null,
 ) {
     val isSearching: Boolean get() = query.isNotBlank()
@@ -20,6 +22,7 @@ data class SearchUiState(
             SearchMode.THEMES -> themes.isNotEmpty()
             SearchMode.WALLPAPERS -> wallpapers.isNotEmpty()
             SearchMode.ICONS -> iconPacks.isNotEmpty()
+            SearchMode.WIDGETS -> widgets.isNotEmpty()
         }
     val isEmpty: Boolean get() = !isLoading && message == null && isSearching && !hasResults
 }

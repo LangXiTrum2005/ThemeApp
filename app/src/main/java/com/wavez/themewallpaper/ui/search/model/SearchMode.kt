@@ -4,4 +4,5 @@ enum class SearchMode {
     THEMES,
     WALLPAPERS,
     ICONS,
+    WIDGETS,
 }

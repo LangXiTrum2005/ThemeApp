@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.SET_WALLPAPER" />
     <uses-permission android:name="android.permission.SET_WALLPAPER_HINTS" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
@@ -10,41 +10,43 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" /> <!-- Control Center permissions -->
-<!--    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />-->
-<!--    <uses-permission android:name="android.permission.WRITE_SETTINGS" />-->
-<!--    <uses-permission android:name="android.permission.ACCESS_NOTIFICATION_POLICY" />-->
+    <!-- <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" /> -->
+    <!-- <uses-permission android:name="android.permission.WRITE_SETTINGS" /> -->
+    <!-- <uses-permission android:name="android.permission.ACCESS_NOTIFICATION_POLICY" /> -->
     <uses-permission
         android:name="android.permission.FOREGROUND_SERVICE"
         tools:ignore="ForegroundServicesPolicy" />
-<!--    <uses-permission-->
-<!--        android:name="android.permission.FOREGROUND_SERVICE_MEDIA_PROJECTION"-->
-<!--        android:minSdkVersion="34" />-->
-<!--    <uses-permission-->
-<!--        android:name="android.permission.FOREGROUND_SERVICE_SPECIAL_USE"-->
-<!--        android:minSdkVersion="34" />-->
+    <!-- <uses-permission -->
+    <!-- android:name="android.permission.FOREGROUND_SERVICE_MEDIA_PROJECTION" -->
+    <!-- android:minSdkVersion="34" /> -->
+    <!-- <uses-permission -->
+    <!-- android:name="android.permission.FOREGROUND_SERVICE_SPECIAL_USE" -->
+    <!-- android:minSdkVersion="34" /> -->
     <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
     <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />
 
     <uses-feature
         android:name="android.software.wallpaper"
         android:required="false" />
-<!--    <uses-permission android:name="android.permission.CAMERA" />-->
+    <!-- <uses-permission android:name="android.permission.CAMERA" /> -->
 
-    <!--    <uses-feature-->
-<!--        android:name="android.hardware.camera"-->
-<!--        android:required="false" />-->
 
-<!--    <uses-permission-->
-<!--        android:name="android.permission.BLUETOOTH_CONNECT"-->
-<!--        android:minSdkVersion="31" />-->
-<!--    -->
-<!--    <uses-permission-->
-<!--        android:name="android.permission.BLUETOOTH"-->
-<!--        android:maxSdkVersion="30" />-->
-<!--    <uses-permission-->
-<!--        android:name="android.permission.BLUETOOTH_ADMIN"-->
-<!--        android:maxSdkVersion="30" />-->
-<!--    <uses-permission android:name="android.permission.VIBRATE" />-->
+    <!-- <uses-feature -->
+    <!-- android:name="android.hardware.camera" -->
+    <!-- android:required="false" /> -->
+
+
+    <!-- <uses-permission -->
+    <!-- android:name="android.permission.BLUETOOTH_CONNECT" -->
+    <!-- android:minSdkVersion="31" /> -->
+    <!--  -->
+    <!-- <uses-permission -->
+    <!-- android:name="android.permission.BLUETOOTH" -->
+    <!-- android:maxSdkVersion="30" /> -->
+    <!-- <uses-permission -->
+    <!-- android:name="android.permission.BLUETOOTH_ADMIN" -->
+    <!-- android:maxSdkVersion="30" /> -->
+    <!-- <uses-permission android:name="android.permission.VIBRATE" /> -->
 
     <queries>
         <package android:name="com.facebook.katana" />
@@ -107,7 +109,7 @@
     <uses-permission android:name="com.samsung.android.mapsagent.permission.READ_APP_INFO" />
 
     <application
-        android:name="com.wavez.themewallpaper.MyApplication"
+        android:name=".MyApplication"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
@@ -120,6 +122,7 @@
         <activity
             android:name=".ui.theme.activities.AppliedThemeActivity"
             android:exported="false" />
+
         <meta-data
             android:name="com.google.android.gms.ads.APPLICATION_ID"
             android:value="ca-app-pub-5390451356176712~5053530056" />
@@ -128,26 +131,22 @@
             android:name=".ui.setting.feedback.FeedbackActivity"
             android:exported="true"
             android:screenOrientation="portrait" />
-
         <activity
             android:name=".ui.premium.PremiumActivity"
             android:exported="true"
             android:screenOrientation="portrait" />
-
         <activity
             android:name=".ui.language.activity.OnboardingLanguageActivity"
-            android:screenOrientation="portrait"
-            android:exported="true" />
+            android:exported="true"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".ui.language.activity.SettingLanguageActivity"
-            android:screenOrientation="portrait"
-            android:exported="true" />
-
+            android:exported="true"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".ui.onboarding.WalkthroughActivity"
-            android:screenOrientation="portrait"
-            android:exported="true" />
-
+            android:exported="true"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".ui.theme.activities.PreviewThemeActivity"
             android:exported="false"
@@ -250,39 +249,77 @@
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
         </service>
-<!--        <service-->
-<!--            android:name=".core.controllercenter.service.record.ScreenRecordService"-->
-<!--            android:exported="false"-->
-<!--            android:foregroundServiceType="mediaProjection" /> &lt;!&ndash; Accessibility Service (Control Center backbone) &ndash;&gt;-->
-<!--        <service-->
-<!--            android:name=".core.controllercenter.service.ControlCenterService"-->
-<!--            android:enabled="true"-->
-<!--            android:exported="true"-->
-<!--            android:permission="android.permission.BIND_ACCESSIBILITY_SERVICE"-->
-<!--            tools:ignore="AccessibilityPolicy">-->
-<!--            <intent-filter>-->
-<!--                <action android:name="android.accessibilityservice.AccessibilityService" />-->
-<!--            </intent-filter>-->
+        <!-- <service -->
+        <!-- android:name=".core.controllercenter.service.record.ScreenRecordService" -->
+        <!-- android:exported="false" -->
+        <!-- android:foregroundServiceType="mediaProjection" /> &lt;!&ndash; Accessibility Service (Control Center backbone) &ndash;&gt; -->
+        <!-- <service -->
+        <!-- android:name=".core.controllercenter.service.ControlCenterService" -->
+        <!-- android:enabled="true" -->
+        <!-- android:exported="true" -->
+        <!-- android:permission="android.permission.BIND_ACCESSIBILITY_SERVICE" -->
+        <!-- tools:ignore="AccessibilityPolicy"> -->
+        <!-- <intent-filter> -->
+        <!-- <action android:name="android.accessibilityservice.AccessibilityService" /> -->
+        <!-- </intent-filter> -->
 
-<!--            <meta-data-->
-<!--                android:name="android.accessibilityservice"-->
-<!--                android:resource="@xml/cc_accessibility_config" />-->
-<!--        </service> &lt;!&ndash; Notification Listener &ndash;&gt;-->
-<!--        <service-->
-<!--            android:name=".core.controllercenter.service.ControlNotificationListener"-->
-<!--            android:exported="true"-->
-<!--            android:permission="android.permission.BIND_NOTIFICATION_LISTENER_SERVICE">-->
-<!--            <intent-filter>-->
-<!--                <action android:name="android.service.notification.NotificationListenerService" />-->
-<!--            </intent-filter>-->
-<!--        </service> &lt;!&ndash; Boot Receiver &ndash;&gt;-->
-<!--        <receiver-->
-<!--            android:name=".core.controllercenter.BootReceiver"-->
-<!--            android:exported="true">-->
-<!--            <intent-filter>-->
-<!--                <action android:name="android.intent.action.BOOT_COMPLETED" />-->
-<!--            </intent-filter>-->
-<!--        </receiver>-->
+
+        <!-- <meta-data -->
+        <!-- android:name="android.accessibilityservice" -->
+        <!-- android:resource="@xml/cc_accessibility_config" /> -->
+        <!-- </service> &lt;!&ndash; Notification Listener &ndash;&gt; -->
+        <!-- <service -->
+        <!-- android:name=".core.controllercenter.service.ControlNotificationListener" -->
+        <!-- android:exported="true" -->
+        <!-- android:permission="android.permission.BIND_NOTIFICATION_LISTENER_SERVICE"> -->
+        <!-- <intent-filter> -->
+        <!-- <action android:name="android.service.notification.NotificationListenerService" /> -->
+        <!-- </intent-filter> -->
+        <!-- </service> &lt;!&ndash; Boot Receiver &ndash;&gt; -->
+        <!-- <receiver -->
+        <!-- android:name=".core.controllercenter.BootReceiver" -->
+        <!-- android:exported="true"> -->
+        <!-- <intent-filter> -->
+        <!-- <action android:name="android.intent.action.BOOT_COMPLETED" /> -->
+        <!-- </intent-filter> -->
+        <!-- </receiver> -->
+
+        <receiver
+            android:name=".core.widget.WidgetProviderSmall"
+            android:exported="false"
+            android:label="@string/widgets">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/widget_info_small" />
+        </receiver>
+        <receiver
+            android:name=".core.widget.WidgetProviderMedium"
+            android:exported="false"
+            android:label="@string/widgets">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/widget_info_medium" />
+        </receiver>
+        <receiver
+            android:name=".core.widget.WidgetProviderLarge"
+            android:exported="false"
+            android:label="@string/widgets">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/widget_info_large" />
+        </receiver>
 
         <provider
             android:name="androidx.core.content.FileProvider"
@@ -293,6 +330,11 @@
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/provider_paths" />
         </provider>
+
+        <activity
+            android:name=".ui.widgets.WidgetsSuccessActivity"
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize" />
     </application>
 
 </manifest>

@@ -18,7 +18,7 @@ import com.wavez.themewallpaper.data.model.WallpaperCategoryModel
 import com.wavez.themewallpaper.data.model.wallpaper.WallpaperModel
 import com.wavez.themewallpaper.data.model.wallpaper.WallpaperType
 import com.wavez.themewallpaper.data.model.wallpaper.wallpaperType
-import com.wavez.themewallpaper.data.network.api.ControllerWidgetApiService
+import com.wavez.themewallpaper.data.network.api.ApiService
 import com.wavez.themewallpaper.di.IoDispatcher
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.Flow
@@ -31,7 +31,7 @@ import java.io.IOException
 import javax.inject.Inject
 
 class WallpaperRepositoryImpl @Inject constructor(
-    private val apiService: ControllerWidgetApiService,
+    private val apiService: ApiService,
     private val wallpaperDownloader: WallpaperDownloader,
     private val wallpaperStorageManager: WallpaperStorageManager,
     private val downloadedWallpaperDao: DownloadedWallpaperDao,

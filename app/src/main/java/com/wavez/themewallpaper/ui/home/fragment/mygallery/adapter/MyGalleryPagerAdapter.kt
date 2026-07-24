@@ -4,6 +4,7 @@ import androidx.fragment.app.Fragment
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.wavez.themewallpaper.ui.home.fragment.mygallery.page.MyGalleryThemesFragment
 import com.wavez.themewallpaper.ui.home.fragment.mygallery.page.MyGalleryWallpapersFragment
+import com.wavez.themewallpaper.ui.home.fragment.mygallery.page.MyGalleryWidgetsFragment
 
 class MyGalleryPagerAdapter(fragment: Fragment) : FragmentStateAdapter(fragment) {
 
@@ -13,6 +14,7 @@ class MyGalleryPagerAdapter(fragment: Fragment) : FragmentStateAdapter(fragment)
         return when (position) {
             PAGE_THEMES -> MyGalleryThemesFragment.newInstance()
             PAGE_WALLPAPERS -> MyGalleryWallpapersFragment.newInstance()
+            PAGE_WIDGETS -> MyGalleryWidgetsFragment.newInstance()
             else -> error("Unsupported My Gallery page: $position")
         }
     }
@@ -20,6 +22,7 @@ class MyGalleryPagerAdapter(fragment: Fragment) : FragmentStateAdapter(fragment)
     companion object {
         const val PAGE_THEMES = 0
         const val PAGE_WALLPAPERS = 1
-        const val PAGE_COUNT = 2
+        const val PAGE_WIDGETS = 2
+        const val PAGE_COUNT = 3
     }
 }

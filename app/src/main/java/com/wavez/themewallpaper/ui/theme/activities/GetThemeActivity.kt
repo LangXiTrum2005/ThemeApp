@@ -3,13 +3,19 @@ package com.wavez.themewallpaper.ui.theme.activities
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
+import android.view.ViewGroup
+import android.widget.FrameLayout
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.core.view.isInvisible
 import androidx.core.view.isVisible
 import androidx.lifecycle.lifecycleScope
+import androidx.recyclerview.widget.RecyclerView
+import androidx.viewpager2.widget.ViewPager2
 import com.wavez.themewallpaper.R
 import com.wavez.themewallpaper.ads.AdsId
+import com.wavez.themewallpaper.ads.native_ad.NativeAdPlacement
 import com.wavez.themewallpaper.core.base.BaseActivity
 import com.wavez.themewallpaper.core.base.UiState
 import com.wavez.themewallpaper.core.download.DownloadState
@@ -17,7 +23,6 @@ import com.wavez.themewallpaper.core.extensions.animateSegmentSelected
 import com.wavez.themewallpaper.core.extensions.collectWithLifecycle
 import com.wavez.themewallpaper.core.extensions.getParcel
 import com.wavez.themewallpaper.core.extensions.loadWithLoading
-import com.wavez.themewallpaper.core.extensions.switchVisibleWithSlideFade
 import com.wavez.themewallpaper.core.icons.IconShortcutInstaller
 import com.wavez.themewallpaper.core.wallpaper.model.WallpaperTarget
 import com.wavez.themewallpaper.data.model.AppInfo
@@ -27,11 +32,14 @@ import com.wavez.themewallpaper.databinding.ActivityGetThemesBinding
 import com.wavez.themewallpaper.ui.dialog.DownloadDialog
 import com.wavez.themewallpaper.ui.dialog.PremiumThemeDialog
 import com.wavez.themewallpaper.ui.home.MainActivity
+import com.wavez.themewallpaper.ui.home.fragment.widget.adapter.WidgetSize
+import com.wavez.themewallpaper.ui.home.fragment.widget.dialog.AddWidgetsBottomSheetDialog
 import com.wavez.themewallpaper.ui.iconpack.adapter.SetIconAdapter
 import com.wavez.themewallpaper.ui.iconpack.dialog.SelectAppBottomSheetDialog
 import com.wavez.themewallpaper.ui.iconpack.model.IconPackItemUi
 import com.wavez.themewallpaper.ui.iconpack.model.SetIconState
 import com.wavez.themewallpaper.ui.premium.PremiumActivity
+import com.wavez.themewallpaper.ui.theme.adapter.ThemePageAdapter
 import com.wavez.themewallpaper.ui.theme.model.GetThemePage
 import com.wavez.themewallpaper.ui.theme.viewmodel.GetThemeViewModel
 import com.wavez.themewallpaper.ui.wallpaper.dialog.SetWallpaperDialog
@@ -64,6 +72,12 @@ class GetThemeActivity : BaseActivity<ActivityGetThemesBinding>(),
     }
     private var downloadDialog: DownloadDialog? = null
     private var unlockingWallpaper = false
+    private var availablePages = emptyList<GetThemePage>()
+    private val pageChangeCallback = object : ViewPager2.OnPageChangeCallback() {
+        override fun onPageSelected(position: Int) {
+            availablePages.getOrNull(position)?.let(viewModel::selectPage)
+        }
+    }
 
     @Inject
     lateinit var iconShortcutInstaller: IconShortcutInstaller
@@ -75,9 +89,18 @@ class GetThemeActivity : BaseActivity<ActivityGetThemesBinding>(),
             return
         }
         viewModel.load(currentTheme)
+        initNative()
         loadBanner()
     }
 
+    private fun initNative() {
+        setupNative(
+            NativeAdPlacement.NATIVE_GET_THEM,
+            binding.nativeGetTheme,
+            shouldShow = sharedPref.shouldShowNativeInApp,
+            autoLoad = true,
+        )
+    }
 
     override fun initView(savedInstanceState: Bundle?) {
         super.initView(savedInstanceState)
@@ -88,7 +111,33 @@ class GetThemeActivity : BaseActivity<ActivityGetThemesBinding>(),
                 binding.viewWallpaperLoading.root,
             )
         }
+        val themeWidget = theme?.widget
+        binding.tabWidgets.isVisible = themeWidget != null
+        themeWidget?.let { widget ->
+            binding.ivWidgetMedium.loadWithLoading(widget.contentM, binding.viewWidgetMediumLoading.root)
+            binding.ivWidgetSmall.loadWithLoading(widget.contentS, binding.viewWidgetSmallLoading.root)
+            binding.ivWidgetLarge.loadWithLoading(widget.contentL, binding.viewWidgetLargeLoading.root)
+        }
+        setupThemePager(hasWidget = themeWidget != null)
         renderPage(viewModel.selectedPage.value)
+    }
+
+    private fun setupThemePager(hasWidget: Boolean) {
+        val pages = buildList {
+            add(GetThemePage.WALLPAPERS to binding.pageWallpaper)
+            add(GetThemePage.ICONS to binding.pageIcons)
+            if (hasWidget) add(GetThemePage.WIDGETS to binding.pageWidgets)
+        }
+        availablePages = pages.map { it.first }
+        pages.forEach { (_, view) ->
+            (view.parent as? ViewGroup)?.removeView(view)
+            view.isVisible = true
+        }
+        binding.themePager.apply {
+            adapter = ThemePageAdapter(pages.map { it.second })
+            offscreenPageLimit = pages.size
+            registerOnPageChangeCallback(pageChangeCallback)
+        }
     }
 
     private fun loadBanner() {
@@ -120,6 +169,14 @@ class GetThemeActivity : BaseActivity<ActivityGetThemesBinding>(),
         binding.tabIcons.setOnClickListener {
             viewModel.selectPage(GetThemePage.ICONS)
         }
+
+        binding.tabWidgets.setOnClickListener {
+            viewModel.selectPage(GetThemePage.WIDGETS)
+        }
+
+        binding.frameWidgetSmall.setOnClickListener { openThemeWidgetDialog(WidgetSize.SMALL) }
+        binding.frameWidgetMedium.setOnClickListener { openThemeWidgetDialog(WidgetSize.MEDIUM) }
+        binding.frameWidgetLarge.setOnClickListener { openThemeWidgetDialog(WidgetSize.LARGE) }
 
         binding.btnApplyWallpaper.setOnClickListener {
             if (viewModel.wallpaperDownloaded.value) {
@@ -246,16 +303,24 @@ class GetThemeActivity : BaseActivity<ActivityGetThemesBinding>(),
     }
 
     private fun renderPage(page: GetThemePage) {
-        val isWallpaper = page == GetThemePage.WALLPAPERS
-        switchVisibleWithSlideFade(
-            showView = if (isWallpaper) binding.pageWallpaper else binding.pageIcons,
-            hideView = if (isWallpaper) binding.pageIcons else binding.pageWallpaper,
-            slideFromRight = isWallpaper,
-        )
-        binding.tabWallpapers.animateSegmentSelected(isWallpaper)
-        binding.tabIcons.animateSegmentSelected(!isWallpaper)
-        binding.tabWallpapers.isSelected = isWallpaper
-        binding.tabIcons.isSelected = !isWallpaper
+        val selectedPage = page.takeIf(availablePages::contains) ?: GetThemePage.WALLPAPERS
+        val pageIndex = availablePages.indexOf(selectedPage)
+        if (pageIndex >= 0 && binding.themePager.currentItem != pageIndex) {
+            binding.themePager.setCurrentItem(pageIndex, true)
+        }
+
+        binding.tabWallpapers.animateSegmentSelected(selectedPage == GetThemePage.WALLPAPERS)
+        binding.tabIcons.animateSegmentSelected(selectedPage == GetThemePage.ICONS)
+        binding.tabWidgets.animateSegmentSelected(selectedPage == GetThemePage.WIDGETS)
+        binding.tabWallpapers.isSelected = selectedPage == GetThemePage.WALLPAPERS
+        binding.tabIcons.isSelected = selectedPage == GetThemePage.ICONS
+        binding.tabWidgets.isSelected = selectedPage == GetThemePage.WIDGETS
+    }
+
+    override fun onDestroy() {
+        binding.themePager.unregisterOnPageChangeCallback(pageChangeCallback)
+        binding.themePager.adapter = null
+        super.onDestroy()
     }
 
     private fun showAppliedState() {
@@ -319,8 +384,11 @@ class GetThemeActivity : BaseActivity<ActivityGetThemesBinding>(),
     }
 
     private fun dismissDownloadDialog() {
-        downloadDialog?.dismiss()
+        val dialog = downloadDialog
         downloadDialog = null
+        if (dialog?.isAdded == true) {
+            dialog.dismissAllowingStateLoss()
+        }
     }
 
     private fun showSelectApp(item: IconPackItemUi) {
@@ -410,6 +478,15 @@ class GetThemeActivity : BaseActivity<ActivityGetThemesBinding>(),
     private fun showPremiumDialog() {
         if (supportFragmentManager.findFragmentByTag(PremiumThemeDialog.TAG) != null) return
         PremiumThemeDialog.newInstance().show(supportFragmentManager, PremiumThemeDialog.TAG)
+    }
+
+    private fun openThemeWidgetDialog(size: WidgetSize) {
+        val widgetModel = theme?.toWidgetsModel() ?: return
+        AddWidgetsBottomSheetDialog.newInstance(
+            widget = widgetModel,
+            initialSize = size,
+            isThemeWidget = true,
+        ).show(supportFragmentManager, AddWidgetsBottomSheetDialog.TAG)
     }
 
 

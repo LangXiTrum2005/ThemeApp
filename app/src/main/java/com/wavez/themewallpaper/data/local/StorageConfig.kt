@@ -19,3 +19,7 @@ object WallpaperStorageConfig {
     const val WALLPAPER_TEMP_SUFFIX = ".tmp"
     const val DEFAULT_WALLPAPER_EXTENSION = "png"
 }
+
+object WidgetStorageConfig {
+    const val DOWNLOADED_WIDGET_TABLE = "downloaded_widget"
+}

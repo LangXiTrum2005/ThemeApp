@@ -131,5 +131,6 @@
 
     <color name="color1">#095a93</color>
     <color name="color2">#2C2C2C</color>
+    <color name="surfaceDisabledHighEm">#B4AFBB</color>
 
 </resources>

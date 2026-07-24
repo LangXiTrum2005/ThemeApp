@@ -2,13 +2,13 @@ package com.wavez.themewallpaper.data.repository
 
 import com.wavez.themewallpaper.data.model.PopularCategoryModel
 import com.wavez.themewallpaper.data.model.icon.IconPackModel
-import com.wavez.themewallpaper.data.network.api.ControllerWidgetApiService
+import com.wavez.themewallpaper.data.network.api.ApiService
 import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
 class IconPackRepositoryImpl @Inject constructor(
-    private val apiService: ControllerWidgetApiService,
+    private val apiService: ApiService,
 ) : IconPackRepository {
 
     private var cachedIconPacks: List<IconPackModel>? = null

@@ -64,21 +64,25 @@ class WallpaperCategoryFragment : BaseFragment<FragmentWallpaperCategoryBinding>
             when (it) {
                 is UiState.Error -> {
                     Log.d("log_error", "initObserver: ${it.throwable}")
-                    binding.viewError.isVisible = true
-                    binding.rcvWallpaper.isVisible = false
+                    setViewState(showContent = false, showLoading = false, showError = true)
                 }
 
                 UiState.Loading -> {
-                    binding.viewError.isVisible = false
+                    setViewState(showContent = false, showLoading = true, showError = false)
                 }
 
                 is UiState.Data -> {
-                    binding.viewError.isVisible = false
-                    binding.rcvWallpaper.isVisible = true
+                    setViewState(showContent = true, showLoading = false, showError = false)
                     wallpaperAdapter.set(it.value)
                 }
                 else -> {}
             }
         }
+    }
+
+    private fun setViewState(showContent: Boolean, showLoading: Boolean, showError: Boolean) {
+        binding.rcvWallpaper.isVisible = showContent
+        binding.viewLoading.isVisible = showLoading
+        binding.viewError.isVisible = showError
     }
 }

@@ -4,6 +4,7 @@ import android.os.Parcelable
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
 import com.wavez.themewallpaper.data.model.icon.IconItemModel
+import com.wavez.themewallpaper.data.model.widget.WidgetsModel
 import com.wavez.themewallpaper.data.network.model.ApiResponse
 import kotlinx.parcelize.Parcelize
 
@@ -28,9 +29,26 @@ data class ThemeModel(
     val icons: List<IconItemModel>,
     @param:Json(name = "tags")
     val tags: List<String> = emptyList(),
+    @param:Json(name = "widget")
+    val widget: ThemeWidgetModel? = null,
 ) : Parcelable {
     fun isVip(): Boolean {
         return premium == 1
+    }
+
+    /** Builds a [WidgetsModel] from this theme's widget, or null when the theme has none. */
+    fun toWidgetsModel(): WidgetsModel? {
+        val widget = widget ?: return null
+        return WidgetsModel(
+            id = id,
+            name = name,
+            thumb = widget.contentM,
+            contentS = widget.contentS,
+            contentM = widget.contentM,
+            contentL = widget.contentL,
+            premium = premium,
+            categoryId = categoryId,
+        )
     }
 }
 
@@ -41,5 +59,14 @@ data class ThemeWallpaperModel(
     @param:Json(name = "id") val id: String,
     @param:Json(name = "thumb") val thumb: String,
     @param:Json(name = "url") val url: String,
+) : Parcelable
+
+
+@JsonClass(generateAdapter = true)
+@Parcelize
+data class ThemeWidgetModel(
+    @param:Json(name = "content_s") val contentS: String,
+    @param:Json(name = "content_m") val contentM: String,
+    @param:Json(name = "content_l") val contentL: String,
 ) : Parcelable
 

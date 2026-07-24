@@ -9,6 +9,7 @@ import com.wavez.themewallpaper.core.base.BaseActivity
 import com.wavez.themewallpaper.core.extensions.openUrl
 import com.wavez.themewallpaper.databinding.ActivitySettingBinding
 import com.wavez.themewallpaper.ui.language.activity.SettingLanguageActivity
+import com.wavez.themewallpaper.ui.setting.dialog.RateDialogFragment
 import com.wavez.themewallpaper.ui.setting.feedback.FeedbackActivity
 import com.wavez.themewallpaper.ui.utils.PRIVACY_POLICY_URL
 import dagger.hilt.android.AndroidEntryPoint
@@ -54,6 +55,13 @@ class SettingActivity : BaseActivity<ActivitySettingBinding>() {
 
         binding.btnFeedback.setOnClickListener {
             startActivity(FeedbackActivity.newIntent(this))
+        }
+
+        binding.btnRate.setOnClickListener {
+            RateDialogFragment.newInstance(
+                preSelectedStars = if (sharedPref.isRate) sharedPref.ratedStars else 0
+            )
+                .show(supportFragmentManager, RateDialogFragment.TAG)
         }
 
         binding.btnLanguage.setOnClickListener {

@@ -121,4 +121,11 @@
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
         />
+
+    <com.wavez.themewallpaper.ads.native_ad.view.BigNativeCollapsibleAdTemplate
+        android:id="@+id/nativePremiumTheme"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:elevation="10dp"
+        app:layout_constraintBottom_toBottomOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

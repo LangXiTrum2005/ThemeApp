@@ -21,6 +21,7 @@ import com.wavez.themewallpaper.data.model.wallpaper.WallpaperModel
 import com.wavez.themewallpaper.databinding.ActivityApplyWallpaperBinding
 import com.wavez.themewallpaper.ui.home.MainActivity
 import com.wavez.themewallpaper.ui.home.fragment.wallpaper.adapter.WallpaperAdapter
+import com.wavez.themewallpaper.ui.setting.dialog.RatePromptManager
 import com.wavez.themewallpaper.ui.wallpaper.viewmodel.ApplyWallpaperViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
@@ -56,6 +57,9 @@ class ApplyWallpaperActivity : BaseActivity<ActivityApplyWallpaperBinding>() {
         binding.rcvWallpaper.adapter = wallpaperAdapter
         initNative()
         loadBanner()
+        if (savedInstanceState == null) {
+            RatePromptManager.showAfterSuccessfulSetup(supportFragmentManager, sharedPref)
+        }
     }
 
     private fun loadBanner() {

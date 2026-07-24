@@ -20,8 +20,8 @@ android {
         applicationId = "com.themes.wallpaper.icon.widget"
         minSdk = 28
         targetSdk = 36
-        versionCode = 8
-        versionName = "1.0.7"
+        versionCode = 9
+        versionName = "1.0.8"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
 
@@ -45,7 +45,7 @@ android {
 
             externalNativeBuild {
                 cmake {
-                    arguments("-DBASE_URL=http://192.168.1.30/server4/public/")
+                    arguments("-DBASE_URL=http://192.168.1.10/server4/public/")
                 }
             }
         }
@@ -152,6 +152,8 @@ dependencies {
     implementation(libs.kotlinx.serialization.json)
     implementation(libs.kotlinx.coroutines.android)
     implementation(libs.billing)
+    implementation(libs.simpleratingbar)
+
 
     //mediation
     implementation(libs.facebook)

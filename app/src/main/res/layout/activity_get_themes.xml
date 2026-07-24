@@ -84,6 +84,19 @@
             android:text="@string/icons"
             android:textColor="@color/text_tab_theme" />
 
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tabWidgets"
+            style="@style/NunitoSemiBold.14"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/bg_segment_selected"
+            android:gravity="center"
+            android:paddingVertical="8dp"
+            android:text="@string/widgets"
+            android:textColor="@color/text_tab_theme" />
+
+
     </LinearLayout>
 
     <FrameLayout
@@ -227,6 +240,109 @@
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/pageWidgets"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="gone">
+
+            <FrameLayout
+                android:id="@+id/frameWidgetMedium"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginTop="22dp"
+                app:layout_constraintDimensionRatio="2:1"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <com.google.android.material.imageview.ShapeableImageView
+                    android:id="@+id/ivWidgetMedium"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scaleType="fitCenter"
+                    app:shapeAppearance="@style/round_img_12" />
+
+                <include
+                    android:id="@+id/viewWidgetMediumLoading"
+                    layout="@layout/view_image_loading"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:visibility="gone" />
+
+            </FrameLayout>
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guidelineWidgetCenter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.5" />
+
+            <FrameLayout
+                android:id="@+id/frameWidgetSmall"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="8dp"
+                app:layout_constraintDimensionRatio="1:1"
+                app:layout_constraintEnd_toStartOf="@id/guidelineWidgetCenter"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/frameWidgetMedium">
+
+                <com.google.android.material.imageview.ShapeableImageView
+                    android:id="@+id/ivWidgetSmall"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scaleType="fitCenter"
+                    app:shapeAppearance="@style/round_img_12" />
+
+                <include
+                    android:id="@+id/viewWidgetSmallLoading"
+                    layout="@layout/view_image_loading"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:visibility="gone" />
+
+            </FrameLayout>
+
+            <FrameLayout
+                android:id="@+id/frameWidgetLarge"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
+                app:layout_constraintDimensionRatio="1:1"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/guidelineWidgetCenter"
+                app:layout_constraintTop_toBottomOf="@id/frameWidgetMedium">
+
+                <com.google.android.material.imageview.ShapeableImageView
+                    android:id="@+id/ivWidgetLarge"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scaleType="fitCenter"
+                    app:shapeAppearance="@style/round_img_12" />
+
+                <include
+                    android:id="@+id/viewWidgetLargeLoading"
+                    layout="@layout/view_image_loading"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:visibility="gone" />
+
+            </FrameLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.viewpager2.widget.ViewPager2
+            android:id="@+id/themePager"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
     </FrameLayout>
 
     <include
@@ -240,6 +356,13 @@
         android:id="@+id/banner_ads"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent" />
+
+    <com.wavez.themewallpaper.ads.native_ad.view.BigNativeCollapsibleAdTemplate
+        android:id="@+id/nativeGetTheme"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:elevation="10dp"
         app:layout_constraintBottom_toBottomOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

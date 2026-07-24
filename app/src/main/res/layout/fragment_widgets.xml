@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    tools:context=".ui.home.fragment.widget.WidgetsFragment">
+
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/view_tool_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/edSearch"
+        style="@style/CustomSearchView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:text="@string/search_widgets"
+        app:layout_constraintTop_toBottomOf="@id/toolbar" />
+
+    <LinearLayout
+        android:id="@+id/viewTab"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginTop="16dp"
+        android:gravity="center"
+        android:orientation="horizontal"
+        app:layout_constraintTop_toBottomOf="@id/edSearch">
+
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/tabCategory"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@color/transparent"
+            app:tabIndicatorHeight="0dp"
+            app:tabMode="auto"
+            app:tabPaddingBottom="0dp"
+            app:tabPaddingEnd="8dp"
+            app:tabPaddingStart="0dp"
+            app:tabPaddingTop="0dp"
+            app:tabRippleColor="@null" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/btnMoreCategory"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="?selectableItemBackground"
+            android:src="@drawable/ic_more_category" />
+    </LinearLayout>
+
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/vpTheme"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/viewTab" />
+
+    <com.wavez.themewallpaper.ui.customview.ServerErrorView
+        android:id="@+id/viewError"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:background="@color/white"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="@id/viewTab" />
+
+    <com.wavez.themewallpaper.ui.customview.ServerLoadingView
+        android:id="@+id/viewLoading"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:background="@color/white"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="@id/viewTab" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

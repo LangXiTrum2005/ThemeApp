@@ -9,9 +9,12 @@ import com.wavez.themewallpaper.data.model.icon.IconPackModel
 import com.wavez.themewallpaper.data.model.theme.ThemeCategoryModel
 import com.wavez.themewallpaper.data.model.theme.ThemeModel
 import com.wavez.themewallpaper.data.model.wallpaper.WallpaperModel
+import com.wavez.themewallpaper.data.model.widget.WidgetCategoryModel
+import com.wavez.themewallpaper.data.model.widget.WidgetsModel
 import com.wavez.themewallpaper.data.repository.IconPackRepository
 import com.wavez.themewallpaper.data.repository.ThemeRepository
 import com.wavez.themewallpaper.data.repository.WallpaperRepository
+import com.wavez.themewallpaper.data.repository.WidgetRepository
 import com.wavez.themewallpaper.ui.search.model.SearchCategoryUi
 import com.wavez.themewallpaper.ui.search.model.SearchMode
 import com.wavez.themewallpaper.ui.search.model.SearchUiState
@@ -27,6 +30,7 @@ class SearchViewModel @Inject constructor(
     private val themeRepository: ThemeRepository,
     private val wallpaperRepository: WallpaperRepository,
     private val iconPackRepository: IconPackRepository,
+    private val widgetRepository: WidgetRepository,
 ) : ViewModel() {
 
     private val _uiState = MutableStateFlow(SearchUiState())
@@ -40,6 +44,8 @@ class SearchViewModel @Inject constructor(
     private var mostPopularWallpaperCategories: List<PopularCategoryModel> = emptyList()
     private var iconPacks: List<IconPackModel> = emptyList()
     private var mostPopularIconCategories: List<PopularCategoryModel> = emptyList()
+    private var widgetCategories: List<WidgetCategoryModel> = emptyList()
+    private var widgets: List<WidgetsModel> = emptyList()
     private var mode: SearchMode = SearchMode.THEMES
 
     fun load(mode: SearchMode = this.mode, forceRefresh: Boolean = false) {
@@ -50,6 +56,7 @@ class SearchViewModel @Inject constructor(
                 SearchMode.THEMES -> loadThemes(forceRefresh)
                 SearchMode.WALLPAPERS -> loadWallpapers(forceRefresh)
                 SearchMode.ICONS -> loadIcons(forceRefresh)
+                SearchMode.WIDGETS -> loadWidgets(forceRefresh)
             }
         }
     }
@@ -119,6 +126,25 @@ class SearchViewModel @Inject constructor(
         publish(query = _uiState.value.query, isLoading = false)
     }
 
+    private suspend fun loadWidgets(forceRefresh: Boolean) {
+        val categoriesResult = widgetRepository.getCategories(forceRefresh)
+        val widgetsResult = widgetRepository.getAllWidgets(forceRefresh)
+
+        categoriesResult.onSuccess { widgetCategories = it }
+        widgetsResult.onSuccess { widgets = it }
+
+        val failure = categoriesResult.exceptionOrNull() ?: widgetsResult.exceptionOrNull()
+        if (failure != null && widgets.isEmpty()) {
+            _uiState.value = _uiState.value.copy(
+                isLoading = false,
+                message = failure.message.orEmpty().ifBlank { "Could not load content" },
+            )
+            return
+        }
+
+        publish(query = _uiState.value.query, isLoading = false)
+    }
+
     private fun publish(query: String, isLoading: Boolean) {
         val cleanQuery = query.trim()
         val normalizedQuery = cleanQuery.normalized()
@@ -126,6 +152,7 @@ class SearchViewModel @Inject constructor(
             SearchMode.THEMES -> buildThemeState(cleanQuery, normalizedQuery, isLoading)
             SearchMode.WALLPAPERS -> buildWallpaperState(cleanQuery, normalizedQuery, isLoading)
             SearchMode.ICONS -> buildIconState(cleanQuery, normalizedQuery, isLoading)
+            SearchMode.WIDGETS -> buildWidgetState(cleanQuery, normalizedQuery, isLoading)
         }
         _uiState.value = state
     }
@@ -184,6 +211,23 @@ class SearchViewModel @Inject constructor(
         )
     }
 
+    private fun buildWidgetState(
+        cleanQuery: String,
+        normalizedQuery: String,
+        isLoading: Boolean,
+    ): SearchUiState {
+        val categoryNamesById = widgetCategories.associate { it.id to it.name }
+        return SearchUiState(
+            isLoading = isLoading,
+            mode = SearchMode.WIDGETS,
+            query = cleanQuery,
+            popularCategories = widgetCategories
+                .map { SearchCategoryUi(id = it.id, name = it.name) }
+                .take(MAX_POPULAR_CATEGORY_COUNT),
+            widgets = widgets.filterWidgetsByQuery(normalizedQuery, categoryNamesById),
+        )
+    }
+
     private fun List<ThemeModel>.filterThemesByQuery(
         normalizedQuery: String,
         categoryNamesById: Map<String, String>,
@@ -213,6 +257,19 @@ class SearchViewModel @Inject constructor(
     private fun List<IconPackModel>.filterIconPacksByName(normalizedQuery: String): List<IconPackModel> {
         if (normalizedQuery.isBlank()) return this
         return filter { item -> item.name.normalized().contains(normalizedQuery) }
+    }
+
+    private fun List<WidgetsModel>.filterWidgetsByQuery(
+        normalizedQuery: String,
+        categoryNamesById: Map<String, String>,
+    ): List<WidgetsModel> {
+        if (normalizedQuery.isBlank()) return this
+        return filter { item ->
+            item.name.normalized().contains(normalizedQuery) ||
+                    categoryNamesById[item.categoryId].orEmpty().normalized()
+                        .contains(normalizedQuery) ||
+                    item.tags.any { tag -> tag.normalized().contains(normalizedQuery) }
+        }
     }
 
 

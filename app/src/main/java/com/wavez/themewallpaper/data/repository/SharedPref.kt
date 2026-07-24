@@ -22,6 +22,12 @@ interface SharedPref {
 
     var isRate: Boolean
 
+    var ratedStars: Int
+
+    var rateDialogShowCount: Int
+
+    var isRateDialogPendingFromSplash: Boolean
+
     var isRateOpenFirstApp: Boolean
 
     var isAutoRemove: Boolean
@@ -92,6 +98,18 @@ interface SharedPref {
     fun isIconUnlocked(iconId: String): Boolean
 
     fun unlockIcon(iconId: String)
+
+    fun isWidgetUnlocked(widgetId: String): Boolean
+
+    fun unlockWidget(widgetId: String)
+
+    fun isThemeWidgetUnlocked(themeId: String): Boolean
+
+    fun unlockThemeWidget(themeId: String)
+
+    fun markThemeWidgetSizeAdded(themeId: String, size: String)
+
+    fun getAddedThemeWidgetSizes(themeId: String): Set<String>
 
     var hasLoggedSplashView: Boolean
     var hasLoggedHomeView: Boolean

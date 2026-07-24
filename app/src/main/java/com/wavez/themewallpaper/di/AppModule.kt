@@ -9,6 +9,7 @@ import com.wavez.themewallpaper.data.local.ThemeStorageConfig
 import com.wavez.themewallpaper.data.local.dao.DownloadedControllerDao
 import com.wavez.themewallpaper.data.local.dao.DownloadedThemeDao
 import com.wavez.themewallpaper.data.local.dao.DownloadedWallpaperDao
+import com.wavez.themewallpaper.data.local.dao.DownloadedWidgetDao
 import com.wavez.themewallpaper.data.local.database.AppDatabase
 import com.wavez.themewallpaper.data.repository.IconPackRepository
 import com.wavez.themewallpaper.data.repository.IconPackRepositoryImpl
@@ -23,6 +24,8 @@ import com.wavez.themewallpaper.data.repository.ThemeRepository
 import com.wavez.themewallpaper.data.repository.ThemeRepositoryImpl
 import com.wavez.themewallpaper.data.repository.WallpaperRepository
 import com.wavez.themewallpaper.data.repository.WallpaperRepositoryImpl
+import com.wavez.themewallpaper.data.repository.WidgetRepository
+import com.wavez.themewallpaper.data.repository.WidgetRepositoryImpl
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -54,6 +57,12 @@ class AppModule {
 
     @Provides
     @Singleton
+    fun provideWidgetRepository(
+        impl: WidgetRepositoryImpl,
+    ): WidgetRepository = impl
+
+    @Provides
+    @Singleton
     fun provideThemeControllerRepository(
         impl: ThemeControllerRepositoryImpl,
     ): ThemeControllerRepository = impl
@@ -76,6 +85,7 @@ class AppModule {
         ).addMigrations(
             AppDatabase.MIGRATION_2_3,
             AppDatabase.MIGRATION_3_4,
+            AppDatabase.MIGRATION_4_5,
         ).build()
     }
 
@@ -96,6 +106,12 @@ class AppModule {
     fun provideDownloadedWallpaperDao(
         database: AppDatabase,
     ): DownloadedWallpaperDao = database.downloadedWallpaperDao()
+
+    @Provides
+    @Singleton
+    fun provideDownloadedWidgetDao(
+        database: AppDatabase,
+    ): DownloadedWidgetDao = database.downloadedWidgetDao()
 
     @Provides
     @Singleton

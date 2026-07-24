@@ -185,8 +185,11 @@ class PreviewWallpaperActivity : BaseActivity<ActivityPreviewWallpaperBinding>()
     }
 
     private fun dismissDownloadDialog() {
-        downloadDialog?.dismiss()
+        val dialog = downloadDialog
         downloadDialog = null
+        if (dialog?.isAdded == true) {
+            dialog.dismissAllowingStateLoss()
+        }
     }
 
     override fun onHandleBackPressed() {

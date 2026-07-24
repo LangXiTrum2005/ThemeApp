@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <dimen name="widget_indicator_size">6dp</dimen>
+    <dimen name="widget_indicator_margin">2dp</dimen>
     <dimen name="_100sdp">100dp</dimen>
     <dimen name="_100ssp">100sp</dimen>
     <dimen name="_101sdp">101dp</dimen>

@@ -19,6 +19,8 @@ import com.wavez.themewallpaper.databinding.ActivitySearchBinding
 import com.wavez.themewallpaper.ui.home.fragment.icons.adapter.IconAdapter
 import com.wavez.themewallpaper.ui.home.fragment.theme.adapter.ThemeAdapter
 import com.wavez.themewallpaper.ui.home.fragment.wallpaper.adapter.WallpaperAdapter
+import com.wavez.themewallpaper.ui.home.fragment.widget.adapter.WidgetAdapter
+import com.wavez.themewallpaper.ui.home.fragment.widget.dialog.AddWidgetsBottomSheetDialog
 import com.wavez.themewallpaper.ui.iconpack.SetIconsActivity
 import com.wavez.themewallpaper.ui.search.adapter.SearchChipAdapter
 import com.wavez.themewallpaper.ui.search.model.SearchMode
@@ -48,6 +50,7 @@ class SearchActivity : BaseActivity<ActivitySearchBinding>() {
     private val themeAdapter = ThemeAdapter()
     private val wallpaperAdapter = WallpaperAdapter()
     private val iconAdapter = IconAdapter()
+    private val widgetAdapter = WidgetAdapter()
     private val popularAdapter = SearchChipAdapter()
     private val searchMode by lazy {
         runCatching {
@@ -68,6 +71,7 @@ class SearchActivity : BaseActivity<ActivitySearchBinding>() {
                     right = horizontalPadding,
                 )
             }
+            SearchMode.WIDGETS -> widgetAdapter
         }
         binding.rcvPopular.adapter = popularAdapter
         binding.edSearch.setHint(
@@ -75,6 +79,7 @@ class SearchActivity : BaseActivity<ActivitySearchBinding>() {
                 SearchMode.THEMES -> R.string.search_themes
                 SearchMode.WALLPAPERS -> R.string.search_wallpapers
                 SearchMode.ICONS -> R.string.search_icons
+                SearchMode.WIDGETS -> R.string.search_widgets
             }
         )
         binding.tvNewestTitle.setText(
@@ -82,6 +87,7 @@ class SearchActivity : BaseActivity<ActivitySearchBinding>() {
                 SearchMode.THEMES -> R.string.newest_themes
                 SearchMode.WALLPAPERS -> R.string.newest_wallpapers
                 SearchMode.ICONS -> R.string.newest_icons
+                SearchMode.WIDGETS -> R.string.newest_widgets
             }
         )
         binding.edSearch.showKeyboard()
@@ -135,6 +141,10 @@ class SearchActivity : BaseActivity<ActivitySearchBinding>() {
         iconAdapter.onClickItem = { pack ->
             startActivity(SetIconsActivity.newIntent(this, pack.id, pack.name))
         }
+        widgetAdapter.onClickItem = { widget ->
+            AddWidgetsBottomSheetDialog.newInstance(widget)
+                .show(supportFragmentManager, AddWidgetsBottomSheetDialog.TAG)
+        }
     }
 
     override fun initObserver() {
@@ -164,6 +174,7 @@ class SearchActivity : BaseActivity<ActivitySearchBinding>() {
             SearchMode.THEMES -> themeAdapter.set(state.themes)
             SearchMode.WALLPAPERS -> wallpaperAdapter.set(state.wallpapers)
             SearchMode.ICONS -> iconAdapter.set(state.iconPacks)
+            SearchMode.WIDGETS -> widgetAdapter.set(state.widgets)
         }
         binding.tvEmpty.text = getString(
             R.string.no_results_found_for,

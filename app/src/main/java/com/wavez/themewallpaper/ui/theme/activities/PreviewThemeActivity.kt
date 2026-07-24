@@ -8,6 +8,7 @@ import androidx.activity.viewModels
 import androidx.core.view.isVisible
 import com.wavez.themewallpaper.R
 import com.wavez.themewallpaper.ads.AdsId
+import com.wavez.themewallpaper.ads.native_ad.NativeAdPlacement
 import com.wavez.themewallpaper.core.base.BaseActivity
 import com.wavez.themewallpaper.core.base.UiState
 import com.wavez.themewallpaper.core.extensions.collectWithLifecycle
@@ -41,6 +42,7 @@ class PreviewThemeActivity : BaseActivity<ActivityPreviewThemeBinding>() {
     override fun initView(savedInstanceState: Bundle?) {
         super.initView(savedInstanceState)
         viewModel.loadTheme(intent.getStringExtra(ARG_THEME_ID).orEmpty())
+        initNative()
         loadBanner()
     }
 
@@ -48,6 +50,15 @@ class PreviewThemeActivity : BaseActivity<ActivityPreviewThemeBinding>() {
         binding.bannerAds.registerBanner(
             this, adId = AdsId.getBannerInAppAds(),
             shouldLoad = sharedPref.shouldShowBannerInApp ,
+        )
+    }
+
+    private fun initNative() {
+        setupNative(
+            NativeAdPlacement.PREVIEW_THEME,
+            binding.nativePremiumTheme,
+            shouldShow = sharedPref.shouldShowNativeInApp,
+            autoLoad = true,
         )
     }
 

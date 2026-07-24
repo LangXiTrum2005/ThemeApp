@@ -9,7 +9,7 @@ import com.wavez.themewallpaper.data.model.PopularCategoryModel
 import com.wavez.themewallpaper.data.model.theme.ThemeCategoryModel
 import com.wavez.themewallpaper.data.model.theme.ThemeModel
 import com.wavez.themewallpaper.data.model.theme.ThemeWallpaperModel
-import com.wavez.themewallpaper.data.network.api.ControllerWidgetApiService
+import com.wavez.themewallpaper.data.network.api.ApiService
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flowOn
@@ -20,7 +20,7 @@ import javax.inject.Singleton
 
 @Singleton
 class ThemeRepositoryImpl @Inject constructor(
-    private val apiService: ControllerWidgetApiService,
+    private val apiService: ApiService,
     private val downloadedThemeDao: DownloadedThemeDao,
     private val sharedPref: SharedPref,
     @param:IoDispatcher private val ioDispatcher: CoroutineDispatcher,

@@ -70,11 +70,13 @@ class MyGalleryFragment : BaseFragment<FragmentMyGalleryBinding>() {
         val title = when (position) {
             MyGalleryPagerAdapter.PAGE_THEMES -> getString(R.string.themes)
             MyGalleryPagerAdapter.PAGE_WALLPAPERS -> getString(R.string.wallpapers)
+            MyGalleryPagerAdapter.PAGE_WIDGETS -> getString(R.string.widgets)
             else -> ""
         }
         val iconRes = when (position) {
             MyGalleryPagerAdapter.PAGE_THEMES -> R.drawable.ic_tab_theme_mygallery_selector
             MyGalleryPagerAdapter.PAGE_WALLPAPERS -> R.drawable.ic_tab_wallpaper_mygallery_selector
+            MyGalleryPagerAdapter.PAGE_WIDGETS -> R.drawable.ic_tab_widget_selector_2
             else -> 0
         }
         return ThemeTabIcon(requireContext()).apply {

@@ -71,7 +71,16 @@ class LaunchViewModel @Inject constructor(
         NativeAdPlacement.NATIVE_ICON_APPLIED to entryNativeInApp(
             sharedPref.shouldShowNativeInApp
         ),
-    )
+        NativeAdPlacement.NATIVE_GET_THEM to entryNativeInApp(
+            sharedPref.shouldShowNativeInApp
+        ),
+        NativeAdPlacement.NATIVE_WIDGET_SUCCESS to entryNativeInApp(
+            sharedPref.shouldShowNativeInApp
+        ),
+        NativeAdPlacement.PREVIEW_THEME to entryNativeInApp(
+            sharedPref.shouldShowNativeInApp
+        ),
+        )
 
 
     fun preloadData() {

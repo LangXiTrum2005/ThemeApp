@@ -43,7 +43,9 @@ class PremiumThemeDialog : BaseDialogFragment<DialogPremiumThemeBinding>() {
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        listener = context as? PremiumThemeListener ?: parentFragment as? PremiumThemeListener
+        // Prefer the hosting fragment (e.g. AddWidgetsBottomSheetDialog) so it wins over an
+        // activity that also implements the listener; falls back to the activity when shown directly.
+        listener = parentFragment as? PremiumThemeListener ?: context as? PremiumThemeListener
     }
 
     override fun initConfig(view: View, savedInstanceState: Bundle?) {
@@ -95,9 +97,9 @@ class PremiumThemeDialog : BaseDialogFragment<DialogPremiumThemeBinding>() {
                 is RewardAdShowState.Failed -> {
                     isCancelable = true
                     Log.d("log_error", "initObservers: ${it.error}")
-                    binding.viewLoading.gone()
-                    binding.viewFailed.visible()
-                    binding.viewReward.invisible()
+                    // Ad không hiển thị được thì vẫn cho dùng chức năng luôn.
+                    listener?.onWatchAdsComplete()
+                    dismiss()
                 }
 
                 RewardAdShowState.Impression -> {}

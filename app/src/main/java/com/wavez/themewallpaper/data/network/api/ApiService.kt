@@ -9,13 +9,14 @@ import com.wavez.themewallpaper.data.model.icon.IconPackListResponse
 import com.wavez.themewallpaper.data.model.theme.ThemeCategoryListResponse
 import com.wavez.themewallpaper.data.model.theme.ThemeListResponse
 import com.wavez.themewallpaper.data.model.wallpaper.WallpaperListResponse
-import okhttp3.ResponseBody
+import com.wavez.themewallpaper.data.model.widget.WidgetCategoryListResponse
+import com.wavez.themewallpaper.data.model.widget.WidgetsListResponse
 import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.POST
 
-interface ControllerWidgetApiService {
+interface ApiService {
 
     //theme
 
@@ -54,5 +55,12 @@ interface ControllerWidgetApiService {
 
     @GET("p67mostpopularicons")
     suspend fun getMostPopularIcons(): PopularCategoryListResponse
+
+    //widget
+    @GET("p67widgetcategory")
+    suspend fun getWidgetCategories(): WidgetCategoryListResponse
+
+    @GET("p67getallwidgets")
+    suspend fun getAllWidgets(): WidgetsListResponse
 
 }

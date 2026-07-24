@@ -15,7 +15,7 @@ import com.wavez.themewallpaper.data.local.controller.ControllerStorageManager
 import com.wavez.themewallpaper.data.model.ControllerCategoryModel
 import com.wavez.themewallpaper.data.model.ControllerModel
 import com.wavez.themewallpaper.data.model.DownloadedResInfo
-import com.wavez.themewallpaper.data.network.api.ControllerWidgetApiService
+import com.wavez.themewallpaper.data.network.api.ApiService
 import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.Flow
@@ -28,7 +28,7 @@ import javax.inject.Inject
 
 class ThemeControllerRepositoryImpl @Inject constructor(
     @ApplicationContext private val context: Context,
-    private val apiService: ControllerWidgetApiService,
+    private val apiService: ApiService,
     private val downloadedThemeDao: DownloadedControllerDao,
     private val themeStorageManager: ControllerStorageManager,
     private val themeDownloader: ThemeDownloader,

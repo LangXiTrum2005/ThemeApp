@@ -35,7 +35,10 @@
       "Bash(./gradlew :mmonetize_ads:compileDebugUnitTestKotlin)",
       "Bash(./gradlew :app:compileDebugKotlin)",
       "Bash(f=\"C:\\\\Users\\\\Admin\\\\Downloads\\\\com.themes.wallpaper.icon.widget_issue_85c581edcdb39b941df627e7b1324a71_crash_session_6a45ffa902ed00013ba47fbcb999af0e_DNE_0_v2_stacktrace.txt\" *)",
-      "PowerShell(.\\\\gradlew.bat :app:compileReleaseKotlin -q 2>&1)"
+      "PowerShell(.\\\\gradlew.bat :app:compileReleaseKotlin -q 2>&1)",
+      "PowerShell(.\\\\gradlew.bat :app:compileDebugKotlin -q 2>&1)",
+      "PowerShell(.\\\\gradlew.bat :app:processDebugMainManifest :app:mergeDebugResources 2>&1)",
+      "PowerShell(.\\\\gradlew.bat :app:compileDebugKotlin 2>&1)"
     ]
   }
 }

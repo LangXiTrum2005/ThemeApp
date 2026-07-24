@@ -3,7 +3,7 @@ package com.wavez.themewallpaper.di
 import com.squareup.moshi.Moshi
 import com.wavez.themewallpaper.BuildConfig
 import com.wavez.themewallpaper.data.network.NetworkConstants
-import com.wavez.themewallpaper.data.network.api.ControllerWidgetApiService
+import com.wavez.themewallpaper.data.network.api.ApiService
 import com.wavez.themewallpaper.data.repository.SharedPref
 import dagger.Module
 import dagger.Provides
@@ -72,7 +72,7 @@ object NetworkModule {
     @Singleton
     fun provideThemeWallpaperApiService(
         retrofit: Retrofit,
-    ): ControllerWidgetApiService = retrofit.create(ControllerWidgetApiService::class.java)
+    ): ApiService = retrofit.create(ApiService::class.java)
 
     @Provides
     @Singleton

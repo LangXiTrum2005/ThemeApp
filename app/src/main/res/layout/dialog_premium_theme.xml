@@ -132,9 +132,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_24sdp"
-            android:text="@string/loading_reward_ads"
+            android:text="@string/loading_please_wait_a_moment"
             android:textAlignment="center"
-            android:textColor="@color/primary_high_em"
+            android:textColor="@color/text_high_em"
             android:textSize="@dimen/_14ssp" />
 
 

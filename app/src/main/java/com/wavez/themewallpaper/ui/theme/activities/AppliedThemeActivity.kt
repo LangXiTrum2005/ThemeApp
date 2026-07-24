@@ -17,6 +17,7 @@ import com.wavez.themewallpaper.databinding.ActivityAppliedThemeBinding
 import com.wavez.themewallpaper.ui.home.MainActivity
 import com.wavez.themewallpaper.ui.home.fragment.theme.adapter.ThemeAdapter
 import com.wavez.themewallpaper.ui.premium.PremiumActivity
+import com.wavez.themewallpaper.ui.setting.dialog.RatePromptManager
 import com.wavez.themewallpaper.ui.theme.adapter.AppliedThemeIconAdapter
 import com.wavez.themewallpaper.ui.theme.viewmodel.AppliedThemeViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -65,6 +66,9 @@ class AppliedThemeActivity : BaseActivity<ActivityAppliedThemeBinding>() {
         renderMode(intent.getStringExtra(EXTRA_MODE).orEmpty())
         initNative()
         loadBanner()
+        if (savedInstanceState == null) {
+            RatePromptManager.showAfterSuccessfulSetup(supportFragmentManager, sharedPref)
+        }
     }
 
     private fun loadBanner() {

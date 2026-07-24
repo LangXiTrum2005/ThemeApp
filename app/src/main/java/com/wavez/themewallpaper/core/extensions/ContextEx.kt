@@ -189,3 +189,13 @@ fun Context.sendFeedback(feedback: Feedback) {
                 .apply { flags = Intent.FLAG_ACTIVITY_NEW_TASK })
     }
 }
+
+fun Context.rateApp() {
+    val marketUri = "market://details?id=$packageName".toUri()
+    val webUri = "https://play.google.com/store/apps/details?id=$packageName".toUri()
+    try {
+        startActivity(Intent(Intent.ACTION_VIEW, marketUri))
+    } catch (_: Exception) {
+        openUrl(webUri.toString())
+    }
+}

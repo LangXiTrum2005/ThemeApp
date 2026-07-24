@@ -26,6 +26,12 @@ class SharedPreferencesImpl(context: Context) : SharedPref {
 
         private const val IS_RATE = "is_rate"
 
+        private const val RATED_STARS = "rated_stars"
+
+        private const val RATE_DIALOG_SHOW_COUNT = "rate_dialog_show_count"
+
+        private const val IS_RATE_DIALOG_PENDING_FROM_SPLASH = "is_rate_dialog_pending_from_splash"
+
         private const val IS_AUTO_REMOVE = "is_auto_remove"
 
         private const val IS_VIP = "is_vip"
@@ -53,6 +59,12 @@ class SharedPreferencesImpl(context: Context) : SharedPref {
         private const val UNLOCKED_THEME_WALLPAPER_IDS = "unlocked_theme_wallpaper_ids"
 
         private const val UNLOCKED_ICON_IDS = "unlocked_icon_ids"
+
+        private const val UNLOCKED_WIDGET_IDS = "unlocked_widget_ids"
+
+        private const val UNLOCKED_THEME_WIDGET_IDS = "unlocked_theme_widget_ids"
+
+        private const val ADDED_THEME_WIDGET_SIZES_PREFIX = "added_theme_widget_sizes_"
 
         private const val IS_NEED_SHOW_LANGUAGE = "is_need_show_language"
 
@@ -117,6 +129,24 @@ class SharedPreferencesImpl(context: Context) : SharedPref {
         get() = sharedPref.getBoolean(IS_RATE, false)
         set(value) {
             editor.putBoolean(IS_RATE, value).apply()
+        }
+
+    override var ratedStars: Int
+        get() = sharedPref.getInt(RATED_STARS, 0)
+        set(value) {
+            editor.putInt(RATED_STARS, value.coerceIn(0, 5)).apply()
+        }
+
+    override var rateDialogShowCount: Int
+        get() = sharedPref.getInt(RATE_DIALOG_SHOW_COUNT, 0)
+        set(value) {
+            editor.putInt(RATE_DIALOG_SHOW_COUNT, value).apply()
+        }
+
+    override var isRateDialogPendingFromSplash: Boolean
+        get() = sharedPref.getBoolean(IS_RATE_DIALOG_PENDING_FROM_SPLASH, false)
+        set(value) {
+            editor.putBoolean(IS_RATE_DIALOG_PENDING_FROM_SPLASH, value).apply()
         }
 
     override var isRateOpenFirstApp: Boolean
@@ -321,6 +351,44 @@ class SharedPreferencesImpl(context: Context) : SharedPref {
             ?: mutableSetOf()
         unlockedIds.add(iconId)
         sharedPref.edit { putStringSet(UNLOCKED_ICON_IDS, unlockedIds) }
+    }
+
+    override fun isWidgetUnlocked(widgetId: String): Boolean {
+        return sharedPref.getStringSet(UNLOCKED_WIDGET_IDS, emptySet())
+            ?.contains(widgetId) == true
+    }
+
+    override fun unlockWidget(widgetId: String) {
+        val unlockedIds = sharedPref.getStringSet(UNLOCKED_WIDGET_IDS, emptySet())
+            ?.toMutableSet()
+            ?: mutableSetOf()
+        unlockedIds.add(widgetId)
+        sharedPref.edit { putStringSet(UNLOCKED_WIDGET_IDS, unlockedIds) }
+    }
+
+    override fun isThemeWidgetUnlocked(themeId: String): Boolean {
+        return sharedPref.getStringSet(UNLOCKED_THEME_WIDGET_IDS, emptySet())
+            ?.contains(themeId) == true
+    }
+
+    override fun unlockThemeWidget(themeId: String) {
+        val unlockedIds = sharedPref.getStringSet(UNLOCKED_THEME_WIDGET_IDS, emptySet())
+            ?.toMutableSet()
+            ?: mutableSetOf()
+        unlockedIds.add(themeId)
+        sharedPref.edit { putStringSet(UNLOCKED_THEME_WIDGET_IDS, unlockedIds) }
+    }
+
+    override fun markThemeWidgetSizeAdded(themeId: String, size: String) {
+        val key = ADDED_THEME_WIDGET_SIZES_PREFIX + themeId
+        val sizes = sharedPref.getStringSet(key, emptySet())?.toMutableSet() ?: mutableSetOf()
+        sizes.add(size)
+        sharedPref.edit { putStringSet(key, sizes) }
+    }
+
+    override fun getAddedThemeWidgetSizes(themeId: String): Set<String> {
+        return sharedPref.getStringSet(ADDED_THEME_WIDGET_SIZES_PREFIX + themeId, emptySet())
+            ?: emptySet()
     }
 
     override var hasLoggedSplashView: Boolean

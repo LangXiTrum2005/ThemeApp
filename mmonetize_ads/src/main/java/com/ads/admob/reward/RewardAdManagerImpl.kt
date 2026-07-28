@@ -48,11 +48,7 @@ class RewardAdManagerImpl(private val context: Context) : RewardAdManager {
         if (rewardedAd != null) return
         if (adLoadState.value != RewardLoadState.Initial) return
 
-        if (currentAdIndex >= adUnitIds.size) {
-            currentAdIndex = 0
-            return
-        }
-
+        currentAdIndex = 0
         val adUnitId = adUnitIds[currentAdIndex]
 
         adLoadState.tryEmit(RewardLoadState.Loading)
@@ -60,10 +56,14 @@ class RewardAdManagerImpl(private val context: Context) : RewardAdManager {
         RewardedAd.load(context, adUnitId, adRequest, object : RewardedAdLoadCallback() {
             override fun onAdFailedToLoad(adError: LoadAdError) {
                 Log.d("Log_reward", "onAdFailedToLoad: ${adError.message}")
-                adLoadState.tryEmit(RewardLoadState.Failed)
                 currentAdIndex++
                 if (currentAdIndex < adUnitIds.size) {
-                    loadRewardAd()
+                    val nextAdUnitId = adUnitIds[currentAdIndex]
+                    Log.d(TAG, "onAdFailedToLoad: try next id $nextAdUnitId")
+                    RewardedAd.load(context, nextAdUnitId, AdRequest.Builder().build(), this)
+                } else {
+                    currentAdIndex = 0
+                    adLoadState.tryEmit(RewardLoadState.Failed)
                 }
             }
 

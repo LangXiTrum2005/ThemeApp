@@ -45,7 +45,7 @@ android {
 
             externalNativeBuild {
                 cmake {
-                    arguments("-DBASE_URL=http://192.168.1.10/server4/public/")
+                    arguments("-DBASE_URL=http://192.168.1.22/server4/public/")
                 }
             }
         }

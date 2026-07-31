@@ -30,11 +30,11 @@ class OnboardingLanguageActivity : BaseLanguageActivity() {
         binding.btnNextLanguage.visible()
         binding.btnSave.gone()
         loadNativeWithPosition(NativeAdPlacement.LANGUAGE_2)
+        loadNativeWithPosition(NativeAdPlacement.ONBOARDING1)
         initNativeLanguage1()
     }
 
     private fun loadAds() {
-        loadNativeWithPosition(NativeAdPlacement.ONBOARDING1)
         loadNativeWithPosition(NativeAdPlacement.ONBOARDING1_CLICK)
     }
 

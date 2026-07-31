@@ -34,7 +34,8 @@ class LaunchActivity : BaseActivity<ActivityLaunchBinding>() {
             context = this,
             adUnitIds = AdsId.getListInterstitialAdsSplash(),
             shouldShow = { sharedPref.shouldShowInterSplash },
-            maxWaitMs = 15_000
+            maxWaitMs = 15_000,
+            minDelayMs = 5_000
         )
     }
 

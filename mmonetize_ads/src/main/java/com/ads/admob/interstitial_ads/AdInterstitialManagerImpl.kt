@@ -63,7 +63,6 @@ class AdInterstitialManagerImpl(
         if (!googleMobileAdsConsentManager.canRequestAds) return false
         if (isAdReady()) return false
         if (isLoading) return false
-//        if (loadFailureDelay.shouldDelayRetry()) return false
         additionalLoadCondition?.let { return it.shouldLoad() }
         return true
     }
@@ -97,7 +96,6 @@ class AdInterstitialManagerImpl(
                     super.onAdFailedToLoad(error)
                     Log.d("AdInterstitialManager", "onAdFailedToLoad ($adUnitId): ${error.message}")
                     isLoading = false
-//                    loadFailureDelay.recordFailedLoad()
                     currentAdIndex++
                     loadAd()
                 }

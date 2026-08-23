@@ -1,0 +1,37 @@
+# Files NOT pulled from the upstream template (gitignore syntax).
+#
+# Everything not listed here IS overwritten by each sync, so the default
+# posture is: infrastructure syncs, project-specific content does not.
+#
+# WITHOUT this file actions-template-sync replaces the entire working tree,
+# including your app source and applicationId, on every run.
+
+# --- Project identity -------------------------------------------------------
+settings.gradle.kts
+app/build.gradle.kts
+app/google-services.json
+
+# --- Application code and resources ----------------------------------------
+app/src/**
+
+# --- Project-specific config ------------------------------------------------
+.distribution/**
+local.properties
+gradle.properties
+
+# --- Docs describing THIS project, not the template -------------------------
+README.md
+
+# --- Local tooling ----------------------------------------------------------
+.idea/**
+.claude/**
+
+
+# Deliberately NOT ignored, i.e. these DO sync from the template:
+#   .github/workflows/**      CI/CD pipeline updates
+#   .github/release-drafter.yml
+#   .github/ISSUE_TEMPLATE/**
+#   gradle/wrapper/**         wrapper version bumps
+#   .gitignore
+#   renovate.json
+#   CI_CD_SETUP.md, GITHUB_WORKFLOWS_README.md, github_workflow.md

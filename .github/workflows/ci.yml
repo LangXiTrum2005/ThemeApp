@@ -1,0 +1,174 @@
+
+name: CI
+
+run-name: CI ${{ inputs.version_name }}
+
+on:
+  workflow_dispatch:
+    inputs:
+      version_name:
+        description: 'Build version name'
+        required: true
+        type: string
+      git_ref:
+        description: 'Git ref to build (commit hash, tag, or branch)'
+        required: true
+        type: string
+      version_code:
+        description: 'Optional version code override'
+        required: false
+        type: string
+      source_pr_number:
+        description: 'Optional source PR number for post-CI automation'
+        required: false
+        type: string
+      auto_merge_after_ci:
+        description: 'Whether release-tag.yml should merge the source PR after CI succeeds'
+        required: false
+        default: 'false'
+        type: string
+
+permissions:
+  contents: read
+  actions: read
+
+jobs:
+  prepare:
+    name: Prepare Build Inputs
+    runs-on: ubuntu-latest
+    outputs:
+      version_code: ${{ steps.prepare.outputs.version_code }}
+      has_drive_secrets: ${{ steps.prepare.outputs.has_drive_secrets }}
+      has_firebase_secret: ${{ steps.prepare.outputs.has_firebase_secret }}
+      release_notes: ${{ steps.release.outputs.notes }}
+      release_url: ${{ steps.release.outputs.url }}
+    steps:
+      - name: Prepare Inputs
+        id: prepare
+        env:
+          VERSION_CODE_INPUT: ${{ inputs.version_code }}
+          VERSION_CODE_OFFSET: ${{ vars.VERSION_CODE_OFFSET || 0 }}
+          DRIVE_CLIENT_ID: ${{ secrets.GG_DRIVE_CLIENT_ID }}
+          DRIVE_CLIENT_SECRET: ${{ secrets.GG_DRIVE_CLIENT_SECRET }}
+          DRIVE_REFRESH_TOKEN: ${{ secrets.GG_DRIVE_REFRESH_TOKEN }}
+          DRIVE_FOLDER_ID: ${{ secrets.GG_DRIVE_FOLDER_ID }}
+          FIREBASE_CREDENTIAL: ${{ secrets.FIREBASE_DISTRIBUTION_CREDENTIAL_JSON }}
+        run: |
+          if [[ -n "$VERSION_CODE_INPUT" ]]; then
+            VERSION_CODE="$VERSION_CODE_INPUT"
+          else
+            VERSION_CODE=$((${{ github.run_number }} + VERSION_CODE_OFFSET))
+          fi
+
+          if ! [[ "$VERSION_CODE" =~ ^[0-9]+$ ]]; then
+            echo "❌ version_code must be numeric: $VERSION_CODE"
+            exit 1
+          fi
+
+          [[ -n "$DRIVE_CLIENT_ID" && -n "$DRIVE_CLIENT_SECRET" && -n "$DRIVE_REFRESH_TOKEN" && -n "$DRIVE_FOLDER_ID" ]] && HAS_DRIVE=true || HAS_DRIVE=false
+          [[ -n "$(printf '%s' "$FIREBASE_CREDENTIAL" | tr -d '\n\r')" ]] && HAS_FIREBASE=true || HAS_FIREBASE=false
+
+          echo "version_code=$VERSION_CODE" >> "$GITHUB_OUTPUT"
+          echo "has_drive_secrets=$HAS_DRIVE" >> "$GITHUB_OUTPUT"
+          echo "has_firebase_secret=$HAS_FIREBASE" >> "$GITHUB_OUTPUT"
+
+      - name: Fetch Release Context
+        id: release
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          VERSION_NAME: ${{ inputs.version_name }}
+        run: |
+          body=$(gh api "repos/${{ github.repository }}/releases/tags/$VERSION_NAME" --jq '.body // ""' 2>/dev/null || true)
+          url=$(gh api "repos/${{ github.repository }}/releases/tags/$VERSION_NAME" --jq '.html_url // ""' 2>/dev/null || true)
+
+          notes=$(printf '%s' "$body" \
+            | perl -pe 's|(https?://github\.com/[^/]+/[^/]+/pull/(\d+))|#$2|g' \
+            | perl -pe 's/\[(.*?)\]\(([^)]+)\)/[$1](<$2>)/g')
+
+          if [[ ${#notes} -gt 1000 ]]; then
+            notes="${notes:0:1000}..."
+          fi
+
+          echo "url=$url" >> "$GITHUB_OUTPUT"
+          echo "notes<<EOF" >> "$GITHUB_OUTPUT"
+          printf '%s\n' "$notes" >> "$GITHUB_OUTPUT"
+          echo "EOF" >> "$GITHUB_OUTPUT"
+
+  build:
+    name: Build Artifacts
+    needs: prepare
+    uses: ./.github/workflows/job-build.yml
+    with:
+      git_ref: ${{ inputs.git_ref }}
+      tag_name: ${{ inputs.version_name }}
+      version_code: ${{ needs.prepare.outputs.version_code }}
+    secrets:
+      SIGNING_KEY_STORE_BASE64: ${{ secrets.SIGNING_KEY_STORE_BASE64 }}
+      SIGNING_KEY_ALIAS: ${{ secrets.SIGNING_KEY_ALIAS }}
+      SIGNING_STORE_PASSWORD: ${{ secrets.SIGNING_STORE_PASSWORD }}
+      SIGNING_KEY_PASSWORD: ${{ secrets.SIGNING_KEY_PASSWORD }}
+      GOOGLE_SERVICES_JSON: ${{ secrets.GOOGLE_SERVICES_JSON }}
+
+  upload_firebase:
+    name: Upload Firebase
+    needs: [prepare, build]
+    if: needs.prepare.outputs.has_firebase_secret == 'true'
+    uses: ./.github/workflows/job-firebase.yml
+    with:
+      tag_name: ${{ inputs.version_name }}
+      release_notes: ${{ needs.prepare.outputs.release_notes }}
+    secrets:
+      FIREBASE_DISTRIBUTION_CREDENTIAL_JSON: ${{ secrets.FIREBASE_DISTRIBUTION_CREDENTIAL_JSON }}
+
+  upload_drive:
+    name: Upload Google Drive
+    needs: [prepare, build]
+    if: needs.prepare.outputs.has_drive_secrets == 'true'
+    uses: ./.github/workflows/job-drive.yml
+    with:
+      tag_name: ${{ inputs.version_name }}
+    secrets:
+      GG_DRIVE_CLIENT_ID: ${{ secrets.GG_DRIVE_CLIENT_ID }}
+      GG_DRIVE_CLIENT_SECRET: ${{ secrets.GG_DRIVE_CLIENT_SECRET }}
+      GG_DRIVE_REFRESH_TOKEN: ${{ secrets.GG_DRIVE_REFRESH_TOKEN }}
+      GG_DRIVE_FOLDER_ID: ${{ secrets.GG_DRIVE_FOLDER_ID }}
+
+  publish_metadata:
+    name: Publish CI Metadata
+    needs: [prepare, build, upload_firebase, upload_drive]
+    if: always()
+    runs-on: ubuntu-latest
+    steps:
+      - name: Write Metadata
+        env:
+          VERSION_CODE: ${{ needs.prepare.outputs.version_code }}
+          BUILD_RESULT: ${{ needs.build.result }}
+          UPLOAD_FIREBASE_RESULT: ${{ needs.upload_firebase.result }}
+          UPLOAD_DRIVE_RESULT: ${{ needs.upload_drive.result }}
+          FIREBASE_LINKS: ${{ needs.upload_firebase.outputs.firebase_links }}
+          RELEASE_NOTES: ${{ needs.prepare.outputs.release_notes }}
+          RELEASE_URL: ${{ needs.prepare.outputs.release_url }}
+        run: |
+          mkdir -p ci-release-metadata
+
+          cat > ci-release-metadata/release_metadata.env <<EOF
+          VERSION_NAME=${{ inputs.version_name }}
+          GIT_REF=${{ inputs.git_ref }}
+          VERSION_CODE=$VERSION_CODE
+          SOURCE_PR_NUMBER=${{ inputs.source_pr_number }}
+          AUTO_MERGE_AFTER_CI=${{ inputs.auto_merge_after_ci }}
+          BUILD_RESULT=$BUILD_RESULT
+          UPLOAD_FIREBASE_RESULT=$UPLOAD_FIREBASE_RESULT
+          UPLOAD_DRIVE_RESULT=$UPLOAD_DRIVE_RESULT
+          RELEASE_URL=$RELEASE_URL
+          EOF
+
+          printf '%s\n' "$FIREBASE_LINKS" > ci-release-metadata/firebase_links.md
+          printf '%s\n' "$RELEASE_NOTES" > ci-release-metadata/release_notes.md
+
+      - name: Upload Metadata
+        uses: actions/upload-artifact@v6
+        with:
+          name: ci-release-metadata-${{ inputs.version_name }}
+          path: ci-release-metadata/
+          retention-days: 1

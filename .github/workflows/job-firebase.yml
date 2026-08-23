@@ -1,0 +1,161 @@
+
+
+name: Job Firebase
+
+on:
+  workflow_call:
+    inputs:
+      tag_name:
+        description: 'Tag name'
+        required: true
+        type: string
+      release_notes:
+        description: 'Release notes'
+        required: false
+        type: string
+    outputs:
+      firebase_links:
+        description: 'Firebase links'
+        value: ${{ jobs.collect_links.outputs.firebase_links }}
+    secrets:
+      FIREBASE_DISTRIBUTION_CREDENTIAL_JSON:
+        required: true
+
+jobs:
+  prepare:
+    name: Prepare Files
+    runs-on: ubuntu-latest
+    outputs:
+      file_list: ${{ steps.find_files.outputs.file_list }}
+    steps:
+      - name: Download Artifacts
+        uses: actions/download-artifact@v7
+        with:
+          pattern: "{apk,aab}-${{ inputs.tag_name }}"
+          path: artifacts
+          merge-multiple: true
+
+      - name: List Artifacts
+        run: ls -R artifacts/
+
+      - name: Find APK and AAB files
+        id: find_files
+        run: |
+          # Find all APK and AAB files and create JSON array
+          FILES=$(find artifacts -type f \( -name "*.apk" -o -name "*.aab" \) | jq -R -s -c 'split("\n")[:-1]')
+          echo "file_list=$FILES" >> $GITHUB_OUTPUT
+          echo "Found files: $FILES"
+
+  upload_firebase:
+    name: Upload to Firebase Distribution
+    needs: prepare
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        file: ${{ fromJSON(needs.prepare.outputs.file_list) }}
+      fail-fast: false
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v6
+        with:
+          sparse-checkout: |
+            .distribution
+            app/google-services.json
+
+      - name: Download Artifacts
+        uses: actions/download-artifact@v7
+        with:
+          pattern: "{apk,aab}-${{ inputs.tag_name }}"
+          path: artifacts
+          merge-multiple: true
+
+      - name: Extract Firebase Metadata
+        id: firebase_meta
+        run: |
+          # CI chỉ build/upload bản release (package chính), nên bỏ qua client ".dev"
+          APP_ID=$(jq -r '[.client[] | select(.client_info.android_client_info.package_name | endswith(".dev") | not)][0].client_info.mobilesdk_app_id' app/google-services.json)
+          PROJECT_ID=$(jq -r '.project_info.project_id' app/google-services.json)
+          echo "app_id=$APP_ID" >> $GITHUB_OUTPUT
+          echo "project_id=$PROJECT_ID" >> $GITHUB_OUTPUT
+
+      - name: Prepare Release Notes
+        run: |
+          cat > release_note.txt << 'EOF'
+          ${{ inputs.release_notes }}
+          EOF
+
+      - name: Setup Firebase CLI
+        run: npm install -g firebase-tools
+
+      - name: Upload to Firebase Distribution
+        id: upload_file
+        continue-on-error: true
+        env:
+          GOOGLE_APPLICATION_CREDENTIALS: ${{ github.workspace }}/firebase_credential.json
+          FIREBASE_CREDENTIAL: ${{ secrets.FIREBASE_DISTRIBUTION_CREDENTIAL_JSON }}
+        run: |
+          # Write the credential JSON using printf to preserve formatting
+          printf '%s' "$FIREBASE_CREDENTIAL" > firebase_credential.json
+          
+          # Upload the file
+          firebase appdistribution:distribute "${{ matrix.file }}" \
+            --app ${{ steps.firebase_meta.outputs.app_id }} \
+            --release-notes-file release_note.txt \
+            --testers-file .distribution/testers.txt \
+            --groups-file .distribution/tester_groups.txt | tee upload_output.txt
+          
+          SHARE_LINK=$(grep "Share this release with testers who have access:" upload_output.txt | sed 's/.*Share this release with testers who have access: //')
+          echo "link=$SHARE_LINK" >> $GITHUB_OUTPUT
+
+      - name: Save Link Output
+        if: steps.upload_file.outputs.link != ''
+        run: |
+          mkdir -p link_outputs
+          FILENAME=$(basename "${{ matrix.file }}")
+          echo "${{ steps.upload_file.outputs.link }}" > "link_outputs/${FILENAME}.link"
+
+      - name: Upload Link Artifact
+        uses: actions/upload-artifact@v6
+        with:
+          name: firebase-link-${{ strategy.job-index }}
+          path: link_outputs/
+          if-no-files-found: ignore
+
+  collect_links:
+    name: Collect Firebase Links
+    needs: upload_firebase
+    runs-on: ubuntu-latest
+    outputs:
+      firebase_links: ${{ steps.links.outputs.text }}
+    steps:
+      - name: Download All Link Artifacts
+        uses: actions/download-artifact@v7
+        with:
+          pattern: 'firebase-link-*'
+          path: link_outputs
+          merge-multiple: true
+
+      - name: Prepare Links
+        id: links
+        run: |
+          TEXT="📱 **Firebase Distribution:**\n"
+          
+          # Process each link file
+          if [ -d "link_outputs" ]; then
+            for link_file in link_outputs/*.link; do
+              if [ -f "$link_file" ]; then
+                LINK=$(cat "$link_file")
+                FILENAME=$(basename "$link_file" .link)
+                TEXT+="- [$FILENAME](<$LINK>)\n"
+              fi
+            done
+          fi
+          
+          # Fallback if no links found
+          if [[ "$TEXT" == "📱 **Firebase Distribution:**\n" ]]; then
+            TEXT+="- No share links available\n"
+          fi
+          
+          echo "text<<EOF" >> $GITHUB_OUTPUT
+          echo -e "$TEXT" >> $GITHUB_OUTPUT
+          echo "EOF" >> $GITHUB_OUTPUT

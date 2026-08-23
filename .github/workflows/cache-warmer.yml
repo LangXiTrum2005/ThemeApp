@@ -1,0 +1,47 @@
+name: Cache Warmer
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch: # Allows manual triggering if needed
+
+jobs:
+  warm_cache:
+    name: Warm Gradle Cache
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v6
+
+      - name: Set Up JDK 21
+        uses: actions/setup-java@v5
+        with:
+          distribution: temurin
+          java-version: 21
+
+      - name: Setup Gradle
+        uses: gradle/actions/setup-gradle@v5
+
+      - name: Set Up Android SDK Tools
+        uses: amyu/setup-android@v5
+
+      - name: Cache Android Build Cache
+        uses: actions/cache@v5
+        with:
+          path: |
+            ~/.android/build-cache
+            ~/.gradle/caches
+            .gradle/configuration-cache
+          key: android-build-${{ runner.os }}-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties', 'gradle.properties') }}
+          restore-keys: |
+            android-build-${{ runner.os }}-
+
+      - name: Build Project
+        run: |
+          chmod +x ./gradlew
+          # Running build to populate the cache for both tests and assembly
+          ./gradlew assembleDebug -x test \
+            --parallel \
+            --build-cache \
+            -Dorg.gradle.jvmargs="-Xmx4g"

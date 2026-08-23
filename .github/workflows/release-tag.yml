@@ -1,0 +1,269 @@
+
+name: Release Tag
+
+on:
+  push:
+    tags: ['*']
+  workflow_run:
+    workflows: ['CI']
+    types: [completed]
+
+permissions:
+  contents: write
+  actions: write
+  pull-requests: write
+  issues: write
+
+env:
+  DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
+  GH_REPO: ${{ github.repository }}
+
+jobs:
+  tag_created:
+    name: Create Release and Dispatch CI
+    if: github.event_name == 'push'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Tag
+        uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+
+      - name: Read Tag Metadata
+        id: tag
+        env:
+          TAG: ${{ github.ref_name }}
+        run: |
+          git fetch --force --tags
+          TAG_BODY=$(git for-each-ref "refs/tags/$TAG" --format='%(contents)' || true)
+
+          meta() {
+            printf '%s\n' "$TAG_BODY" | awk -F': ' -v k="$1" '$1 == k { print substr($0, index($0, ":") + 2); exit }'
+          }
+
+          echo "name=$TAG" >> "$GITHUB_OUTPUT"
+          echo "source_pr=$(meta Source-PR)" >> "$GITHUB_OUTPUT"
+          echo "auto_merge=$(meta Auto-Merge-After-CI || echo false)" >> "$GITHUB_OUTPUT"
+
+      - name: Create or Update GitHub Release
+        id: release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{ steps.tag.outputs.name }}
+          name: ${{ steps.tag.outputs.name }}
+          generate_release_notes: true
+          draft: false
+          prerelease: ${{ contains(steps.tag.outputs.name, '-') }}
+
+      - name: Discord Notification - Start Build
+        if: env.DISCORD_WEBHOOK != ''
+        uses: sarisia/actions-status-discord@v1
+        with:
+          webhook: ${{ secrets.DISCORD_WEBHOOK }}
+          noprefix: true
+          title: "🔨 Building ${{ steps.tag.outputs.name }}"
+          color: 0xffd966
+          description: |
+            🚧 This may take a few minutes.
+
+            [View Release](<${{ steps.release.outputs.url }}>)
+
+      - name: Dispatch CI
+        id: dispatch_ci
+        continue-on-error: true
+        env:
+          # PAT is required so the dispatched CI run can emit workflow_run on completion.
+          GH_TOKEN: ${{ secrets.PAT_TAG_ON_PR_COMMENT_TOKEN }}
+          TAG: ${{ steps.tag.outputs.name }}
+          SOURCE_PR: ${{ steps.tag.outputs.source_pr }}
+          AUTO_MERGE: ${{ steps.tag.outputs.auto_merge || 'false' }}
+        run: |
+          REF="refs/tags/$TAG"
+
+          gh workflow run ci.yml \
+            --ref "$REF" \
+            -f version_name="$TAG" \
+            -f git_ref="$REF" \
+            -f source_pr_number="$SOURCE_PR" \
+            -f auto_merge_after_ci="$AUTO_MERGE"
+
+      - name: Discord Notification - CI Dispatch Failed
+        if: steps.dispatch_ci.outcome == 'failure' && env.DISCORD_WEBHOOK != ''
+        uses: sarisia/actions-status-discord@v1
+        with:
+          webhook: ${{ secrets.DISCORD_WEBHOOK }}
+          status: 'failure'
+          title: "❌ Release ${{ steps.tag.outputs.name }} Failed to Start CI"
+          description: |
+            CI dispatch failed before the build could start.
+
+            Please check the [workflow logs](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}) for details.
+
+            [View Release](<${{ steps.release.outputs.url }}>)
+          noprefix: true
+          nodetail: true
+          content: "@Android"
+          color: "0xe74c3c"
+
+      - name: Fail When CI Dispatch Failed
+        if: steps.dispatch_ci.outcome == 'failure'
+        run: exit 1
+
+  ci_completed:
+    name: Finalize Release from CI
+    if: github.event_name == 'workflow_run'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download CI Artifacts
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          RUN_ID: ${{ github.event.workflow_run.id }}
+        run: |
+          mkdir -p ci-artifacts
+          gh run download "$RUN_ID" --dir ci-artifacts || true
+
+      - name: Read Release Context
+        id: ctx
+        env:
+          CI_CONCLUSION: ${{ github.event.workflow_run.conclusion }}
+          DISPLAY_TITLE: ${{ github.event.workflow_run.display_title }}
+        run: |
+          META=$(find ci-artifacts -name release_metadata.env -type f -print -quit)
+          VERSION_NAME="${DISPLAY_TITLE#CI }"
+          SOURCE_PR_NUMBER=""
+          AUTO_MERGE_AFTER_CI="false"
+          UPLOAD_DRIVE_RESULT=""
+          RELEASE_URL=""
+
+          if [[ -n "$META" ]]; then
+            set -a
+            # shellcheck disable=SC1090
+            . "$META"
+            set +a
+          fi
+
+          NOTES=$(find ci-artifacts -name release_notes.md -type f -print -quit)
+          FIREBASE=$(find ci-artifacts -name firebase_links.md -type f -print -quit)
+
+          {
+            echo "version_name=$VERSION_NAME"
+            echo "source_pr=$SOURCE_PR_NUMBER"
+            echo "auto_merge=$AUTO_MERGE_AFTER_CI"
+            echo "drive_result=$UPLOAD_DRIVE_RESULT"
+            echo "release_url=$RELEASE_URL"
+            echo "ci_result=$CI_CONCLUSION"
+            echo "release_notes<<EOF"
+            [[ -f "$NOTES" ]] && cat "$NOTES"
+            echo "EOF"
+            echo "firebase_links<<EOF"
+            [[ -f "$FIREBASE" ]] && cat "$FIREBASE"
+            echo "EOF"
+          } >> "$GITHUB_OUTPUT"
+
+      - name: Upload CI Artifacts to GitHub Release
+        id: upload
+        if: steps.ctx.outputs.ci_result == 'success'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          VERSION: ${{ steps.ctx.outputs.version_name }}
+        run: |
+          mapfile -d '' files < <(
+            find ci-artifacts -type f \
+              \( -name '*.apk' -o -name '*.aab' -o -name 'mapping.txt' \
+              -o -name 'resources.txt' \) -print0
+          )
+
+          if [[ ${#files[@]} -eq 0 ]]; then
+            echo "result=failure" >> "$GITHUB_OUTPUT"
+            echo "No release assets found."
+            exit 0
+          fi
+
+          if gh release upload "$VERSION" "${files[@]}" --clobber; then
+            echo "result=success" >> "$GITHUB_OUTPUT"
+          else
+            echo "result=failure" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Merge PR after Successful Production CI
+        id: merge
+        if: steps.ctx.outputs.ci_result == 'success' && steps.upload.outputs.result == 'success' && steps.ctx.outputs.auto_merge == 'true' && steps.ctx.outputs.source_pr != ''
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PR: ${{ steps.ctx.outputs.source_pr }}
+          VERSION: ${{ steps.ctx.outputs.version_name }}
+        run: |
+          gh pr comment "$PR" --body "🎉 **Production Release CI Complete!**
+
+          Tag \`$VERSION\` built successfully, release assets were uploaded, and this PR is now being automatically merged." || true
+
+          if gh pr merge "$PR" --merge --subject "Production Release $VERSION" --body "CI passed and release assets were uploaded for $VERSION."; then
+            echo "result=success" >> "$GITHUB_OUTPUT"
+          else
+            echo "result=failure" >> "$GITHUB_OUTPUT"
+            gh pr comment "$PR" --body "⚠️ **Production Release CI Passed but Auto-Merge Failed**
+
+            Tag \`$VERSION\` built successfully, but the PR could not be automatically merged.
+
+            Please manually merge this PR to complete the release process." || true
+          fi
+
+      - name: Prepare Discord Content
+        id: discord
+        env:
+          VERSION: ${{ steps.ctx.outputs.version_name }}
+          CI_RESULT: ${{ steps.ctx.outputs.ci_result }}
+          RELEASE_UPLOAD: ${{ steps.upload.outputs.result }}
+          DRIVE_RESULT: ${{ steps.ctx.outputs.drive_result }}
+          DRIVE_FOLDER_ID: ${{ secrets.GG_DRIVE_FOLDER_ID }}
+          RELEASE_URL: ${{ steps.ctx.outputs.release_url }}
+          MERGE_RESULT: ${{ steps.merge.outputs.result }}
+        run: |
+          [[ "$VERSION" == *"-"* ]] && echo "warning=# ** ⚠️ DO NOT USE THIS BUILD TO PUBLISH PLAY STORE ⚠️ **" >> "$GITHUB_OUTPUT" || echo "warning=" >> "$GITHUB_OUTPUT"
+          [[ "$DRIVE_RESULT" == "success" && -n "$DRIVE_FOLDER_ID" ]] && echo "drive=📁 **[Google Drive](<https://drive.google.com/drive/folders/$DRIVE_FOLDER_ID>)**" >> "$GITHUB_OUTPUT" || echo "drive=" >> "$GITHUB_OUTPUT"
+          [[ -n "$RELEASE_URL" ]] && echo "release=[View Release](<$RELEASE_URL>)" >> "$GITHUB_OUTPUT" || echo "release=" >> "$GITHUB_OUTPUT"
+
+          if [[ "$CI_RESULT" == "success" && "$RELEASE_UPLOAD" == "success" && "$MERGE_RESULT" != "failure" ]]; then
+            echo "result=success" >> "$GITHUB_OUTPUT"
+          else
+            echo "result=failure" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Discord Notification - Release Complete
+        if: env.DISCORD_WEBHOOK != '' && steps.discord.outputs.result == 'success'
+        uses: sarisia/actions-status-discord@v1
+        with:
+          webhook: ${{ secrets.DISCORD_WEBHOOK }}
+          status: 'success'
+          title: "🚀 Release ${{ steps.ctx.outputs.version_name }} Complete"
+          description: |
+            ${{ steps.ctx.outputs.firebase_links }}
+
+            ${{ steps.discord.outputs.drive }}
+
+            ${{ steps.discord.outputs.warning }}
+
+            ${{ steps.ctx.outputs.release_notes }}
+
+            ${{ steps.discord.outputs.release }}
+          noprefix: true
+          nodetail: true
+          content: "@Android"
+          color: "0x2ecc71"
+
+      - name: Discord Notification - Build Failed
+        if: env.DISCORD_WEBHOOK != '' && steps.discord.outputs.result == 'failure'
+        uses: sarisia/actions-status-discord@v1
+        with:
+          webhook: ${{ secrets.DISCORD_WEBHOOK }}
+          status: 'failure'
+          title: "❌ Release ${{ steps.ctx.outputs.version_name }} Failed!"
+          description: "🔍 Please check the [workflow logs](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}) for details."
+          noprefix: true
+          nodetail: true
+          content: "@Android"
+          color: "0xe74c3c"
+
+      - name: Fail Finalization on Release Failure
+        if: steps.discord.outputs.result == 'failure'
+        run: exit 1

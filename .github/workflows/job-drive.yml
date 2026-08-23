@@ -1,0 +1,99 @@
+
+name: Job Drive
+
+# Upload toàn bộ APK + AAB lên Google Drive (PO lấy AAB đẩy Play Console).
+# Dùng OAuth refresh token của tài khoản Google thật — KHÔNG dùng service account
+# (service account không có quota Drive, xem SECRETS_SETUP.md mục 6).
+# Đổi tài khoản (VD: lên Workspace) chỉ cần thay giá trị secret, không sửa file này.
+
+on:
+  workflow_call:
+    inputs:
+      tag_name:
+        description: 'Tag name'
+        required: true
+        type: string
+    secrets:
+      GG_DRIVE_CLIENT_ID:
+        required: true
+      GG_DRIVE_CLIENT_SECRET:
+        required: true
+      GG_DRIVE_REFRESH_TOKEN:
+        required: true
+      GG_DRIVE_FOLDER_ID:
+        required: true
+
+jobs:
+  upload_drive:
+    name: Upload to Google Drive
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download Artifacts
+        uses: actions/download-artifact@v7
+        with:
+          pattern: '{apk,aab}-${{ inputs.tag_name }}'
+          path: artifacts
+          merge-multiple: true
+
+      - name: Upload to Google Drive
+        env:
+          CLIENT_ID: ${{ secrets.GG_DRIVE_CLIENT_ID }}
+          CLIENT_SECRET: ${{ secrets.GG_DRIVE_CLIENT_SECRET }}
+          REFRESH_TOKEN: ${{ secrets.GG_DRIVE_REFRESH_TOKEN }}
+          FOLDER_ID: ${{ secrets.GG_DRIVE_FOLDER_ID }}
+          TAG: ${{ inputs.tag_name }}
+        run: |
+          ACCESS_TOKEN=$(curl -sf https://oauth2.googleapis.com/token \
+            -d client_id="$CLIENT_ID" \
+            -d client_secret="$CLIENT_SECRET" \
+            -d refresh_token="$REFRESH_TOKEN" \
+            -d grant_type=refresh_token | jq -r '.access_token // empty')
+
+          if [[ -z "$ACCESS_TOKEN" ]]; then
+            echo "::error::Không lấy được access token. Kiểm tra 3 secret GG_DRIVE_CLIENT_ID/CLIENT_SECRET/REFRESH_TOKEN. Lưu ý: refresh token chết sau 7 ngày nếu OAuth app còn ở chế độ Testing (phải PUBLISH APP — xem SECRETS_SETUP.md mục 6.3)."
+            exit 1
+          fi
+
+          FOUND=0
+          FAILED=0
+          while IFS= read -r -d '' FILE; do
+            FOUND=1
+            NAME="${TAG}-$(basename "$FILE")"
+            echo "Uploading $NAME ..."
+
+            # Resumable upload: bước 1 tạo session, bước 2 PUT nội dung file.
+            # supportsAllDrives=true để sau này trỏ FOLDER_ID vào Shared Drive vẫn chạy.
+            LOCATION=$(curl -sf -X POST \
+              "https://www.googleapis.com/upload/drive/v3/files?uploadType=resumable&supportsAllDrives=true" \
+              -H "Authorization: Bearer $ACCESS_TOKEN" \
+              -H "Content-Type: application/json; charset=UTF-8" \
+              -d "{\"name\": \"$NAME\", \"parents\": [\"$FOLDER_ID\"]}" \
+              -D - -o /dev/null | tr -d '\r' | awk 'tolower($1) == "location:" { print $2 }')
+
+            if [[ -z "$LOCATION" ]]; then
+              echo "::error::Không tạo được upload session cho $NAME (kiểm tra GG_DRIVE_FOLDER_ID và quyền của tài khoản trên thư mục đó)"
+              FAILED=1
+              continue
+            fi
+
+            RESPONSE=$(curl -sf -H "Content-Type: application/octet-stream" -T "$FILE" "$LOCATION") || {
+              echo "::error::Upload thất bại: $NAME"
+              FAILED=1
+              continue
+            }
+
+            FILE_ID=$(printf '%s' "$RESPONSE" | jq -r '.id // empty')
+            if [[ -n "$FILE_ID" ]]; then
+              echo "✅ $NAME → https://drive.google.com/file/d/$FILE_ID"
+            else
+              echo "::error::Upload $NAME không trả về file id. Response: $RESPONSE"
+              FAILED=1
+            fi
+          done < <(find artifacts -type f \( -name '*.apk' -o -name '*.aab' \) -print0)
+
+          if [[ "$FOUND" == "0" ]]; then
+            echo "::error::Không tìm thấy file APK/AAB nào trong artifact của tag $TAG"
+            exit 1
+          fi
+
+          exit "$FAILED"

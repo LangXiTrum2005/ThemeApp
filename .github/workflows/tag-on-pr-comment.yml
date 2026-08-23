@@ -1,0 +1,519 @@
+
+name: Enhanced Tag Creation from PR Comments
+
+on:
+  issue_comment:
+    types: [ created ]
+
+jobs:
+  create-tag:
+    if: github.event.issue.pull_request && (startsWith(github.event.comment.body, '/build') || startsWith(github.event.comment.body, '/tag'))
+    runs-on: ubuntu-latest
+    outputs:
+      final_tag_version: ${{ steps.final-version.outputs.final_tag_version }}
+      target_sha: ${{ steps.create-tag.outputs.target_sha }}
+      command_type: ${{ steps.parse-command.outputs.command_type }}
+      branch_valid: ${{ steps.validate-branch.outputs.branch_valid }}
+
+    steps:
+      - name: Check commenter permissions
+        id: check-permissions
+        env:
+          COMMENTER: ${{ github.event.comment.user.login }}
+        run: |
+          # Get commenter's permission level
+          PERMISSION_DATA=$(curl -s -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
+            "https://api.github.com/repos/${{ github.repository }}/collaborators/$COMMENTER/permission")
+          
+          PERMISSION=$(echo "$PERMISSION_DATA" | jq -r '.permission')
+          echo "Commenter: $COMMENTER, Permission: $PERMISSION"
+          
+          # Check if user has write access (admin, write, or maintain)
+          if [[ "$PERMISSION" == "admin" || "$PERMISSION" == "write" || "$PERMISSION" == "maintain" ]]; then
+            echo "has_write_permission=true" >> $GITHUB_OUTPUT
+            echo "✅ User has sufficient permissions"
+          else
+            echo "has_write_permission=false" >> $GITHUB_OUTPUT
+            echo "❌ User does not have write permissions"
+          fi
+
+      - name: Parse Command
+        if: steps.check-permissions.outputs.has_write_permission == 'true'
+        id: parse-command
+        env:
+          COMMENT: ${{ github.event.comment.body }}
+        run: |
+          # Extract the comment body
+          echo "Comment: $COMMENT"
+          
+          # Initialize variables
+          COMMAND_TYPE=""
+          TAG_VERSION=""
+          
+          # Check for different command patterns
+          if [[ $COMMENT =~ ^/build[[:space:]]+rc[[:space:]]*$ ]]; then
+            COMMAND_TYPE="smart_rc"
+            echo "Found smart RC command"
+          elif [[ $COMMENT =~ ^/build[[:space:]]+release[[:space:]]*$ ]]; then
+            COMMAND_TYPE="production"
+            echo "Found production release command"
+          elif [[ $COMMENT =~ ^/tag[[:space:]]+([0-9]+\.[0-9]+\.[0-9]+(-[a-zA-Z0-9]+)?)$ ]]; then
+            COMMAND_TYPE="legacy_tag"
+            TAG_VERSION="${BASH_REMATCH[1]}"
+            echo "Found legacy tag command with version: $TAG_VERSION"
+          else
+            COMMAND_TYPE="none"
+            echo "No valid command found"
+          fi
+          
+          echo "command_type=$COMMAND_TYPE" >> $GITHUB_OUTPUT
+          echo "tag_version=$TAG_VERSION" >> $GITHUB_OUTPUT
+
+      - name: Get PR Information
+        if: steps.parse-command.outputs.command_type != 'none'
+        id: pr-info
+        env:
+          PR_NUMBER: ${{ github.event.issue.number }}
+        run: |
+          # Get PR details using GitHub API
+          PR_DATA=$(curl -s -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
+            "https://api.github.com/repos/${{ github.repository }}/pulls/$PR_NUMBER")
+          
+          # Extract PR information
+          HEAD_SHA=$(echo "$PR_DATA" | jq -r '.head.sha')
+          PR_TITLE=$(echo "$PR_DATA" | jq -r '.title')
+          BASE_BRANCH=$(echo "$PR_DATA" | jq -r '.base.ref')
+          HEAD_BRANCH=$(echo "$PR_DATA" | jq -r '.head.ref')
+          
+          echo "head_sha=$HEAD_SHA" >> $GITHUB_OUTPUT
+          echo "pr_title=$PR_TITLE" >> $GITHUB_OUTPUT
+          echo "base_branch=$BASE_BRANCH" >> $GITHUB_OUTPUT
+          echo "head_branch=$HEAD_BRANCH" >> $GITHUB_OUTPUT
+          echo "PR #$PR_NUMBER: $PR_TITLE"
+          echo "Branch: $HEAD_BRANCH -> $BASE_BRANCH"
+          echo "Head SHA: $HEAD_SHA"
+
+      - name: Validate Target Branch
+        if: steps.parse-command.outputs.command_type != 'none'
+        id: validate-branch
+        env:
+          HEAD_BRANCH: ${{ steps.pr-info.outputs.head_branch }}
+        run: |
+          echo "Validating source branch: $HEAD_BRANCH"
+          
+          # Check if source branch is main or release/X.Y.Z
+          if [[ "$HEAD_BRANCH" == "main" ]]; then
+            echo "✅ Source branch 'main' is authorized for tag creation"
+            echo "branch_valid=true" >> $GITHUB_OUTPUT
+          elif [[ $HEAD_BRANCH =~ ^release/[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
+            echo "✅ Source branch '$HEAD_BRANCH' is authorized release branch"
+            echo "branch_valid=true" >> $GITHUB_OUTPUT
+          else
+            echo "❌ Source branch '$HEAD_BRANCH' is not authorized for tag creation"
+            echo "❌ Only 'main' and 'release/X.Y.Z' branches are allowed"
+            echo "branch_valid=false" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Determine Tag Version for Smart Commands
+        if: steps.validate-branch.outputs.branch_valid == 'true' && (steps.parse-command.outputs.command_type == 'smart_rc' || steps.parse-command.outputs.command_type == 'production')
+        id: determine-version
+        env:
+          HEAD_BRANCH: ${{ steps.pr-info.outputs.head_branch }}
+          COMMAND_TYPE: ${{ steps.parse-command.outputs.command_type }}
+        run: |
+          if [[ "$HEAD_BRANCH" == "main" ]]; then
+            echo "❌ Smart commands (/build rc, /build release) cannot be used on main branch"
+            echo "❌ Use legacy /tag command with explicit version on main branch"
+            echo "version_determined=false" >> $GITHUB_OUTPUT
+            echo "error_reason=main_branch_not_supported" >> $GITHUB_OUTPUT
+          else
+            # Extract version from release branch name (release/X.Y.Z -> X.Y.Z)
+            if [[ $HEAD_BRANCH =~ ^release/([0-9]+\.[0-9]+\.[0-9]+)$ ]]; then
+              BASE_VERSION="${BASH_REMATCH[1]}"
+              echo "Base version from branch: $BASE_VERSION"
+          
+              if [[ "$COMMAND_TYPE" == "smart_rc" ]]; then
+                # Find the next RC number
+                echo "🔍 Finding next RC number for version $BASE_VERSION..."
+          
+                # Get all tags for this version
+                ALL_TAGS=$(curl -s -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
+                  "https://api.github.com/repos/${{ github.repository }}/tags" | \
+                  jq -r '.[].name' | grep "^${BASE_VERSION}-rc" | sort -V || true)
+          
+                if [[ -z "$ALL_TAGS" ]]; then
+                  NEXT_RC="01"
+                  echo "No existing RC tags found, starting with rc01"
+                else
+                  # Find the highest RC number
+                  HIGHEST_RC=$(echo "$ALL_TAGS" | sed "s/${BASE_VERSION}-rc//" | sort -n | tail -1)
+                  NEXT_RC_NUM=$((10#$HIGHEST_RC + 1))
+                  NEXT_RC=$(printf "%02d" $NEXT_RC_NUM)
+                  echo "Highest existing RC: $HIGHEST_RC, next will be: $NEXT_RC"
+                fi
+          
+                FINAL_VERSION="${BASE_VERSION}-rc${NEXT_RC}"
+                echo "Final RC version: $FINAL_VERSION"
+          
+              elif [[ "$COMMAND_TYPE" == "production" ]]; then
+                FINAL_VERSION="$BASE_VERSION"
+                echo "Final production version: $FINAL_VERSION"
+              fi
+          
+              echo "final_version=$FINAL_VERSION" >> $GITHUB_OUTPUT
+              echo "version_determined=true" >> $GITHUB_OUTPUT
+            else
+              echo "❌ Could not extract version from branch name: $HEAD_BRANCH"
+              echo "version_determined=false" >> $GITHUB_OUTPUT
+              echo "error_reason=invalid_branch_format" >> $GITHUB_OUTPUT
+            fi
+          fi
+
+      - name: Set Final Tag Version
+        if: steps.validate-branch.outputs.branch_valid == 'true' && (steps.parse-command.outputs.command_type == 'legacy_tag' || steps.determine-version.outputs.version_determined == 'true')
+        id: final-version
+        env:
+          COMMAND_TYPE: ${{ steps.parse-command.outputs.command_type }}
+          VERSION_DETERMINED: ${{ steps.determine-version.outputs.version_determined }}
+          FINAL_VERSION_FROM_DETERMINE: ${{ steps.determine-version.outputs.final_version }}
+          TAG_VERSION_FROM_PARSE: ${{ steps.parse-command.outputs.tag_version }}
+        run: |
+          if [[ "$COMMAND_TYPE" == "legacy_tag" ]]; then
+            FINAL_VERSION="$TAG_VERSION_FROM_PARSE"
+            echo "Using legacy tag version: $FINAL_VERSION"
+            echo "final_tag_version=$FINAL_VERSION" >> $GITHUB_OUTPUT
+          elif [[ "$COMMAND_TYPE" == "smart_rc" || "$COMMAND_TYPE" == "production" ]]; then
+            if [[ "$VERSION_DETERMINED" == "true" ]]; then
+              FINAL_VERSION="$FINAL_VERSION_FROM_DETERMINE"
+              echo "Using smart command version: $FINAL_VERSION"
+              echo "final_tag_version=$FINAL_VERSION" >> $GITHUB_OUTPUT
+            else
+              echo "❌ Version determination failed, cannot set final version"
+              echo "final_tag_version=" >> $GITHUB_OUTPUT
+            fi
+          else
+            echo "❌ Unknown command type: $COMMAND_TYPE"
+            echo "final_tag_version=" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Validate Production Release Against RC Tags
+        if: steps.validate-branch.outputs.branch_valid == 'true' && steps.final-version.outputs.final_tag_version != ''
+        id: validate-production-commit
+        env:
+          TAG_VERSION: ${{ steps.final-version.outputs.final_tag_version }}
+          HEAD_SHA: ${{ steps.pr-info.outputs.head_sha }}
+          COMMAND_TYPE: ${{ steps.parse-command.outputs.command_type }}
+        run: |
+          # Check if this is a production release (no hyphen in version)
+          if [[ ! "$TAG_VERSION" =~ - ]]; then
+            echo "🔍 Validating production release tag $TAG_VERSION..."
+
+            # Check if production tag already exists - if it does, we'll delete and recreate it
+            EXISTING_PRODUCTION_TAG=$(curl -s -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
+              "https://api.github.com/repos/${{ github.repository }}/tags" | \
+              jq -r --arg version "$TAG_VERSION" '.[] | select(.name == $version) | .name')
+
+            if [[ -n "$EXISTING_PRODUCTION_TAG" ]]; then
+              echo "ℹ️ Production tag $TAG_VERSION already exists - will be deleted and recreated"
+              echo "ℹ️ Skipping RC validation since we're recreating the tag"
+            fi
+
+            # RC tag validation is now optional - production releases can be created without RC tags
+            echo "✅ Production release validation passed"
+            echo "production_commit_valid=true" >> $GITHUB_OUTPUT
+          else
+            echo "ℹ️ This is not a production release (contains hyphen), skipping RC commit validation"
+            echo "production_commit_valid=true" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Checkout repository
+        if: steps.validate-branch.outputs.branch_valid == 'true'
+        uses: actions/checkout@v6
+        with:
+          token: ${{ secrets.PAT_TAG_ON_PR_COMMENT_TOKEN }}
+          fetch-depth: 0
+
+
+      - name: Create and push tag
+        if: steps.validate-branch.outputs.branch_valid == 'true' && steps.final-version.outputs.final_tag_version != '' && steps.validate-production-commit.outputs.production_commit_valid == 'true'
+        id: create-tag
+        env:
+          TAG_VERSION: ${{ steps.final-version.outputs.final_tag_version }}
+          HEAD_SHA: ${{ steps.pr-info.outputs.head_sha }}
+          PR_TITLE: ${{ steps.pr-info.outputs.pr_title }}
+          COMMENTER: ${{ github.event.comment.user.login }}
+          COMMAND_TYPE: ${{ steps.parse-command.outputs.command_type }}
+          HEAD_BRANCH: ${{ steps.pr-info.outputs.head_branch }}
+          PR_NUMBER: ${{ github.event.issue.number }}
+          GITHUB_TOKEN: ${{ secrets.PAT_TAG_ON_PR_COMMENT_TOKEN }}
+        run: |
+          # Use the original head SHA for tagging
+          TARGET_SHA="$HEAD_SHA"
+          echo "Using head SHA: $TARGET_SHA"
+          
+          # Configure git
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          
+          # Fetch the specific commit to ensure it exists locally
+          git fetch origin "$TARGET_SHA"
+          
+          # Verify the commit exists
+          if ! git cat-file -e "$TARGET_SHA"; then
+            echo "❌ Commit $TARGET_SHA not found"
+            echo "tag_created=false" >> $GITHUB_OUTPUT
+            echo "error_reason=commit_not_found" >> $GITHUB_OUTPUT
+            exit 0
+          fi
+          
+          # Check if tag already exists
+          TAG_EXISTS=false
+          TAG_RECREATED=false
+          if git tag -l | grep -q "^${TAG_VERSION}$"; then
+            TAG_EXISTS=true
+            echo "ℹ️ Tag $TAG_VERSION already exists"
+          
+            # For production releases, automatically delete and recreate the tag
+            if [[ "$COMMAND_TYPE" == "production" && ! "$TAG_VERSION" =~ - ]]; then
+              echo "🔄 Production release detected - will delete existing tag and recreate at latest commit"
+          
+              # Delete the existing tag locally and remotely
+              echo "Deleting existing tag $TAG_VERSION..."
+              git tag -d "$TAG_VERSION" || true
+              git push origin ":refs/tags/$TAG_VERSION" || true
+              echo "✅ Existing tag deleted"
+              TAG_RECREATED=true
+            else
+              echo "❌ Tag $TAG_VERSION already exists"
+              echo "tag_created=false" >> $GITHUB_OUTPUT
+              echo "error_reason=tag_exists" >> $GITHUB_OUTPUT
+              exit 0
+            fi
+          fi
+          
+          # Create appropriate tag message based on command type
+          AUTO_MERGE_AFTER_CI="false"
+          if [[ "$COMMAND_TYPE" == "production" && ! "$TAG_VERSION" =~ - ]]; then
+            AUTO_MERGE_AFTER_CI="true"
+          fi
+
+          if [[ "$COMMAND_TYPE" == "smart_rc" ]]; then
+            printf 'Release Candidate %s\n\nCreated from PR #%s: %s\nSource: %s branch\nRequested by: @%s\n\nThis is a release candidate for testing purposes.\n' \
+              "$TAG_VERSION" "$PR_NUMBER" "$PR_TITLE" "$HEAD_BRANCH" "$COMMENTER" > tag_message.txt
+          elif [[ "$COMMAND_TYPE" == "production" ]]; then
+            if [[ "$TAG_RECREATED" == "true" ]]; then
+              printf 'Production Release %s (Recreated)\n\nRecreated from PR #%s: %s\nSource: %s branch (latest commit)\nRequested by: @%s\n\nThis production release tag was recreated at the latest commit.\n' \
+                "$TAG_VERSION" "$PR_NUMBER" "$PR_TITLE" "$HEAD_BRANCH" "$COMMENTER" > tag_message.txt
+            else
+              printf 'Production Release %s\n\nCreated from PR #%s: %s\nSource: %s branch\nRequested by: @%s\n\nThis is a production release.\n' \
+                "$TAG_VERSION" "$PR_NUMBER" "$PR_TITLE" "$HEAD_BRANCH" "$COMMENTER" > tag_message.txt
+            fi
+          else
+            printf 'Release %s\n\nCreated from PR #%s: %s\nSource: %s branch\nRequested by: @%s\n' \
+              "$TAG_VERSION" "$PR_NUMBER" "$PR_TITLE" "$HEAD_BRANCH" "$COMMENTER" > tag_message.txt
+          fi
+
+          cat >> tag_message.txt << EOF
+          
+          Release-Metadata:
+          Source-PR: $PR_NUMBER
+          Source-Branch: $HEAD_BRANCH
+          Command-Type: $COMMAND_TYPE
+          Auto-Merge-After-CI: $AUTO_MERGE_AFTER_CI
+          Requested-By: $COMMENTER
+          EOF
+
+          # Create tag pointing to the target commit
+          git tag -a "$TAG_VERSION" "$TARGET_SHA" -F tag_message.txt
+          
+          # Push the tag
+          git push origin "$TAG_VERSION"
+          
+          echo "✅ Created and pushed tag $TAG_VERSION pointing to commit $TARGET_SHA"
+          echo "tag_created=true" >> $GITHUB_OUTPUT
+          echo "target_sha=$TARGET_SHA" >> $GITHUB_OUTPUT
+          echo "tag_recreated=$TAG_RECREATED" >> $GITHUB_OUTPUT
+
+      - name: Comment on PR with success
+        if: steps.create-tag.outputs.tag_created == 'true'
+        uses: actions/github-script@v8
+        env:
+          COMMENT_BODY: ${{ github.event.comment.body }}
+        with:
+          script: |
+            const tagVersion = '${{ steps.final-version.outputs.final_tag_version }}';
+            const targetSha = '${{ steps.create-tag.outputs.target_sha }}';
+            const commandType = '${{ steps.parse-command.outputs.command_type }}';
+            const headBranch = '${{ steps.pr-info.outputs.head_branch }}';
+            const tagRecreated = '${{ steps.create-tag.outputs.tag_recreated }}' === 'true';
+            const commentBody = process.env.COMMENT_BODY;
+
+            let tagTypeLabel;
+            if (commandType === 'smart_rc') {
+              tagTypeLabel = 'Release Candidate';
+            } else if (commandType === 'production') {
+              tagTypeLabel = tagRecreated ? 'Recreated Production Release' : 'Production Release';
+            } else {
+              tagTypeLabel = 'Custom Tag';
+            }
+
+            let message = `✅ Successfully ${tagRecreated ? 'recreated' : 'created'} tag \`${tagVersion}\` pointing to commit \`${targetSha}\`
+
+            **Command:** \`${commentBody}\`
+            **Source Branch:** \`${headBranch}\`
+            **Tag Type:** ${tagTypeLabel}
+
+            [View Tag](${{ github.server_url }}/${{ github.repository }}/releases/tag/${tagVersion})`;
+
+            if (commandType === 'smart_rc') {
+              message += `
+
+            🧪 **This is a Release Candidate for testing**
+            - Distribute to testers for validation
+            - Use \`/build release\` when ready for production`;
+            } else if (commandType === 'production') {
+              if (tagRecreated) {
+                message += `
+
+            🔄 **Production Release Tag Recreated**
+            - Previous tag was deleted and recreated at latest commit
+            - Ready for distribution to all channels
+            - Consider merging this release branch to main`;
+              } else {
+                message += `
+
+            🚀 **This is a Production Release**
+            - Ready for distribution to all channels
+            - Consider merging this release branch to main`;
+              }
+            }
+
+            await github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: message
+            });
+
+      - name: Comment on PR with tag creation error
+        if: steps.create-tag.outputs.tag_created == 'false'
+        uses: actions/github-script@v8
+        with:
+          script: |
+            const errorReason = '${{ steps.create-tag.outputs.error_reason }}';
+            let message;
+            
+            if (errorReason === 'commit_not_found') {
+              message = [
+                '❌ Failed to create tag because the requested commit could not be found.',
+                '',
+                'Please verify the commit SHA exists and try again.',
+                `[ View Workflow Logs ](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }})`
+              ].join('\n');
+            } else if (errorReason === 'tag_exists') {
+              message = [
+                '❌ Tag already exists for this version.',
+                '',
+                'Please use a new version or remove the existing tag if appropriate.',
+                '',
+                `[ View Tag ](${{ github.server_url }}/${{ github.repository }}/releases/tag/${{ steps.final-version.outputs.final_tag_version }})`
+              ].join('\n');
+            } else {
+              message = [
+                '❌ Failed to create tag. Please check the workflow logs for details.',
+                '',
+                `[ View Workflow Logs ](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }})`
+              ].join('\n');
+            }
+            
+            await github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: message
+            });
+
+      - name: Comment on PR with permission error
+        if: steps.check-permissions.outputs.has_write_permission == 'false'
+        uses: actions/github-script@v8
+        with:
+          script: |
+            await github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: `❌ You don't have sufficient permissions to create tags. Only users with write access can create tags.`
+            });
+
+      - name: Comment on PR with branch validation error
+        if: steps.validate-branch.outputs.branch_valid == 'false'
+        uses: actions/github-script@v8
+        with:
+          script: |
+            const headBranch = '${{ steps.pr-info.outputs.head_branch }}';
+            
+            await github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: `❌ Tags can only be created from authorized source branches.
+
+            **Current source branch:** \`${headBranch}\`
+            **Authorized branches:** \`main\`, \`release/X.Y.Z\`
+
+            Please create your PR from an authorized branch to use tag creation commands.`
+            });
+
+      - name: Comment on PR with command error
+        if: steps.parse-command.outputs.command_type == 'none' && steps.check-permissions.outputs.has_write_permission == 'true'
+        uses: actions/github-script@v8
+        with:
+          script: |
+            await github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: `❓ **No valid tag command found**
+
+            **Available commands:**
+            - \`/build rc\` - Create next release candidate (release/X.Y.Z branches only)
+            - \`/build release\` - Create production release (release/X.Y.Z branches only)  
+            - \`/tag X.Y.Z-rcN\` - Create specific tag (any authorized branch)
+
+            **Examples:**
+            - \`/build rc\` → Creates \`1.0.0-rc01\`, \`1.0.0-rc02\`, etc.
+            - \`/build release\` → Creates \`1.0.0\` production tag (recreates if exists)
+            - \`/tag 1.0.0-beta1\` → Creates specific \`1.0.0-beta1\` tag
+
+            **Note:** Production releases (\`/build release\`) will automatically delete and recreate existing tags at the latest commit.`
+            });
+
+      - name: Fail job if no valid command found
+        if: steps.parse-command.outputs.command_type == 'none'
+        run: |
+          echo "❌ No valid command found. Stopping workflow."
+          exit 1
+
+      - name: Comment on PR with general error
+        if: failure() && steps.check-permissions.outputs.has_write_permission == 'true' && steps.validate-branch.outputs.branch_valid == 'true'
+        uses: actions/github-script@v8
+        with:
+          script: |
+            const tagVersion = '${{ steps.final-version.outputs.final_tag_version }}' || 'unknown';
+
+            await github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner, 
+              repo: context.repo.repo,
+              body: [
+                `❌ Failed to create tag \`${tagVersion}\`. Please check the workflow logs for details.`,
+                '',
+                '**Common issues:**',
+                '- Tag might already exist',
+                '- Commit not found or invalid',
+                '- Network issues during git operations',
+                '- Version determination failed',
+                '',
+                `[ View Workflow Logs ](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }})`
+              ].join('\n')
+            });

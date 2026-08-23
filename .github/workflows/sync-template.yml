@@ -1,0 +1,75 @@
+name: Sync Upstream Template
+
+# Pulls changes from an upstream template repository and opens a PR with them.
+# Setup (GitHub App, secrets, variables): see TEMPLATE_SYNC_SETUP.md
+# What does / does not get overwritten: see .templatesyncignore
+
+on:
+  schedule:
+    - cron: '0 2 * * *'  # Run at 2 AM UTC daily
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  sync:
+    # Without this guard the job fails every night on a repo with no upstream.
+    if: vars.TEMPLATE_SOURCE_REPO != ''
+    runs-on: ubuntu-latest
+    steps:
+      # GITHUB_TOKEN cannot be used here: the job needs read access to a *different*
+      # repository (the template), which the built-in token never has.
+      #
+      # The App must be installed on BOTH this repo and the template repo. Leaving
+      # `repositories` unset scopes the token to every repo the installation covers.
+      #
+      # Simpler alternative — delete this step and pass `secrets.TEMPLATE_SYNC_TOKEN`
+      # (a classic PAT with `repo` scope) wherever the token is referenced below.
+      - name: Generate token to read from source repo
+        id: generate_token
+        uses: actions/create-github-app-token@v3
+        with:
+          app-id: ${{ secrets.TEMPLATE_SYNC_APP_ID }}
+          private-key: ${{ secrets.TEMPLATE_SYNC_PRIVATE_KEY }}
+          owner: ${{ github.repository_owner }}
+
+      - name: Checkout
+        uses: actions/checkout@v6
+        with:
+          token: ${{ steps.generate_token.outputs.token }}
+          fetch-depth: 0
+
+      - name: Fetch upstream changes
+        uses: AndreasAugustin/actions-template-sync@v2
+        id: pre-check
+        with:
+          source_gh_token: ${{ steps.generate_token.outputs.token }}
+          source_repo_path: ${{ vars.TEMPLATE_SOURCE_REPO }}
+          upstream_branch: ${{ vars.TEMPLATE_SOURCE_BRANCH || 'main' }}
+          pr_labels: template_sync
+          steps: "prechecks,pull"
+
+      # The pull step leaves a staged merge; resetting to FETCH_HEAD makes the sync
+      # branch match upstream exactly instead of carrying a merge commit.
+      - name: Reset to fetched upstream state
+        run: |
+          echo "branch: ${{ steps.pre-check.outputs.pr_branch }}"
+          git reset --hard FETCH_HEAD
+
+      # continue-on-error: "nothing to sync" exits non-zero, which is the normal
+      # outcome on most days and should not surface as a failed workflow.
+      - name: Push sync branch and open PR
+        uses: AndreasAugustin/actions-template-sync@v2
+        continue-on-error: true
+        with:
+          source_gh_token: ${{ steps.generate_token.outputs.token }}
+          source_repo_path: ${{ vars.TEMPLATE_SOURCE_REPO }}
+          upstream_branch: ${{ vars.TEMPLATE_SOURCE_BRANCH || 'main' }}
+          pr_labels: template_sync
+          steps: "push,pr"

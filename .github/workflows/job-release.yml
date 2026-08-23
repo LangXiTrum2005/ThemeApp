@@ -1,0 +1,72 @@
+
+name: Job Release
+
+on:
+  workflow_call:
+    inputs:
+      tag_name:
+        description: 'Tag name'
+        required: true
+        type: string
+      tag_sha:
+        description: 'Tag SHA'
+        required: true
+        type: string
+    outputs:
+      release_url:
+        description: 'Release URL'
+        value: ${{ jobs.update_release.outputs.release_url }}
+      release_notes:
+        description: 'Release notes'
+        value: ${{ jobs.update_release.outputs.release_notes }}
+
+jobs:
+  update_release:
+    name: Update GitHub Release
+    runs-on: ubuntu-latest
+    outputs:
+      release_url: ${{ steps.release.outputs.url }}
+      release_notes: ${{ steps.notes.outputs.body }}
+    steps:
+      - name: Download Artifacts
+        uses: actions/download-artifact@v7
+        with:
+          pattern: "*${{ inputs.tag_name }}*"
+          path: artifacts
+          merge-multiple: true
+
+      - name: Update GitHub Release
+        id: release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{ inputs.tag_name }}
+          name: ${{ inputs.tag_name }}
+          target_commitish: ${{ inputs.tag_sha }}
+          generate_release_notes: true
+          draft: false
+          prerelease: ${{ contains(inputs.tag_name, '-') }}
+          files: |
+            artifacts/**/*.apk
+            artifacts/**/*.aab
+            artifacts/mapping.txt
+            artifacts/resources.txt
+
+      - name: Get Release Notes
+        id: notes
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          BODY=$(curl -s -H "Authorization: token $GITHUB_TOKEN" \
+            "https://api.github.com/repos/${{ github.repository }}/releases/tags/${{ inputs.tag_name }}" | jq -r '.body')
+          
+          # Clean up notes for Discord
+          CLEAN_BODY=$(echo "$BODY" | perl -pe 's|(https?://github\.com/[^/]+/[^/]+/pull/(\d+))|\#$2|g' | perl -pe 's/\[(.*?)\]\(([^)]+)\)/[$1](<$2>)/g')
+          
+          if [ ${#CLEAN_BODY} -gt 1000 ]; then
+            CLEAN_BODY="${CLEAN_BODY:0:1000}..."
+          fi
+          
+          # Output body to GITHUB_OUTPUT using heredoc for multiline
+          echo "body<<EOF" >> $GITHUB_OUTPUT
+          echo "$CLEAN_BODY" >> $GITHUB_OUTPUT
+          echo "EOF" >> $GITHUB_OUTPUT

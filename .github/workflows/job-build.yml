@@ -1,0 +1,122 @@
+
+
+name: Job Build
+
+on:
+  workflow_call:
+    inputs:
+      git_ref:
+        description: 'Git ref to build (commit hash, tag, or branch)'
+        required: true
+        type: string
+      tag_name:
+        description: 'Version/tag name'
+        required: true
+        type: string
+      version_code:
+        description: 'Version code'
+        required: true
+        type: string
+    outputs:
+      apk_artifact:
+        description: 'APK artifacts name (contains both adTest and adsReal APKs)'
+        value: ${{ jobs.build.outputs.apk_artifact }}
+      aab_artifact:
+        description: 'AAB artifact name'
+        value: ${{ jobs.build.outputs.aab_artifact }}
+    secrets:
+      SIGNING_KEY_STORE_BASE64:
+        required: true
+      SIGNING_KEY_ALIAS:
+        required: true
+      SIGNING_STORE_PASSWORD:
+        required: true
+      SIGNING_KEY_PASSWORD:
+        required: true
+      GOOGLE_SERVICES_JSON:
+        required: false
+
+jobs:
+  build:
+    name: Build Artifacts
+    runs-on: ubuntu-latest
+    outputs:
+      apk_artifact: apk-${{ inputs.tag_name }}
+      aab_artifact: aab-${{ inputs.tag_name }}
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v6
+        with:
+          ref: ${{ inputs.git_ref }}
+
+      - name: Set Up JDK 21
+        uses: actions/setup-java@v5
+        with:
+          distribution: temurin
+          java-version: 21
+
+      - name: Setup Gradle
+        uses: gradle/actions/setup-gradle@v5
+
+      - name: Set Up Android SDK Tools
+        uses: amyu/setup-android@v5
+
+      - name: Decode Keystore
+        id: decode_keystore
+        run: |
+          base64 -d <<< "${{ secrets.SIGNING_KEY_STORE_BASE64 }}" > keystore
+          echo "keystore_path=$PWD/keystore" >> "$GITHUB_OUTPUT"
+
+      - name: Save google-services.json
+        env:
+          GOOGLE_SERVICES_JSON: ${{ secrets.GOOGLE_SERVICES_JSON }}
+        run: |
+          if [[ -n "$GOOGLE_SERVICES_JSON" ]]; then
+            echo "$GOOGLE_SERVICES_JSON" > app/google-services.json
+          fi
+
+      - name: Build Artifacts
+        env:
+          CI_VERSION_CODE: ${{ inputs.version_code }}
+          CI_VERSION_NAME: ${{ inputs.tag_name }}
+          SIGNING_KEY_ALIAS: ${{ secrets.SIGNING_KEY_ALIAS }}
+          SIGNING_KEY_STORE_PATH: ${{ steps.decode_keystore.outputs.keystore_path }}
+          SIGNING_STORE_PASSWORD: ${{ secrets.SIGNING_STORE_PASSWORD }}
+          SIGNING_KEY_PASSWORD: ${{ secrets.SIGNING_KEY_PASSWORD }}
+        run: |
+          chmod +x ./gradlew
+          # Build both adsTest and adsReal APKs, but only adsReal AAB
+          ./gradlew :app:assembleAdsTestRelease :app:assembleAdsRealRelease :app:bundleAdsRealRelease \
+            --parallel --build-cache \
+            -Dorg.gradle.jvmargs="-Xmx4g" \
+            -PciVersionCode="$CI_VERSION_CODE" \
+            -PciVersionName="$CI_VERSION_NAME" \
+            -PSIGNING_KEY_ALIAS="$SIGNING_KEY_ALIAS" \
+            -PSIGNING_KEY_STORE_PATH="$SIGNING_KEY_STORE_PATH" \
+            -PSIGNING_STORE_PASSWORD="$SIGNING_STORE_PASSWORD" \
+            -PSIGNING_KEY_PASSWORD="$SIGNING_KEY_PASSWORD"
+
+      - name: Upload APKs
+        uses: actions/upload-artifact@v6
+        with:
+          name: apk-${{ inputs.tag_name }}
+          path: |
+            app/build/outputs/apk/adsTest/release/*.apk
+            app/build/outputs/apk/adsReal/release/*.apk
+          retention-days: 1
+
+      - name: Upload AAB
+        uses: actions/upload-artifact@v6
+        with:
+          name: aab-${{ inputs.tag_name }}
+          path: app/build/outputs/bundle/adsRealRelease/*.aab
+          retention-days: 1
+
+      - name: Upload Mapping
+        uses: actions/upload-artifact@v6
+        with:
+          name: mapping-${{ inputs.tag_name }}
+          path: |
+            app/build/outputs/mapping/adsRealRelease/mapping.txt
+            app/build/outputs/mapping/adsRealRelease/resources.txt
+          retention-days: 1

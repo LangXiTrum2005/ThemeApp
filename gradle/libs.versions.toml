@@ -1,0 +1,42 @@
+[versions]
+agp = "9.2.1"
+coreKtx = "1.19.0"
+junit = "4.13.2"
+junitVersion = "1.3.0"
+espressoCore = "3.7.0"
+appcompat = "1.7.1"
+material = "1.14.0"
+activityKtx = "1.13.0"
+constraintlayout = "2.2.1"
+firebaseBom = "34.16.0"
+googleFirebaseCrashlytics = "3.0.7"
+googleFirebaseDisibution = "5.3.0"
+googleFirebaseFirebasePerf = "2.0.2"
+googleGmsGoogleServices = "4.5.0"
+spotless = "8.8.0"
+
+[libraries]
+androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
+junit = { group = "junit", name = "junit", version.ref = "junit" }
+androidx-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junitVersion" }
+androidx-espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espressoCore" }
+androidx-appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "appcompat" }
+material = { group = "com.google.android.material", name = "material", version.ref = "material" }
+androidx-activity-ktx = { group = "androidx.activity", name = "activity-ktx", version.ref = "activityKtx" }
+androidx-constraintlayout = { group = "androidx.constraintlayout", name = "constraintlayout", version.ref = "constraintlayout" }
+firebase-analytics = { module = "com.google.firebase:firebase-analytics" }
+firebase-bom = { module = "com.google.firebase:firebase-bom", version.ref = "firebaseBom" }
+firebase-crashlytics = { module = "com.google.firebase:firebase-crashlytics" }
+firebase-perf = { group = "com.google.firebase", name = "firebase-perf" }
+ktlint = { group = "com.pinterest.ktlint", name = "ktlint-cli", version = "1.8.0" }
+ktlint-composeRules = { group = "io.nlopez.compose.rules", name = "ktlint", version = "0.5.3" }
+
+[plugins]
+android-application = { id = "com.android.application", version.ref = "agp" }
+google-firebase-crashlytics = { id = "com.google.firebase.crashlytics", version.ref = "googleFirebaseCrashlytics" }
+google-firebase-distribution = { id = "com.google.firebase.appdistribution", version.ref = "googleFirebaseDisibution" }
+google-firebase-firebase-perf = { id = "com.google.firebase.firebase-perf", version.ref = "googleFirebaseFirebasePerf" }
+google-gms-google-services = { id = "com.google.gms.google-services", version.ref = "googleGmsGoogleServices" }
+spotless = { id = "com.diffplug.spotless", version.ref = "spotless" }
+tabb-android-application = { id = "com.1tabb.app.android.application", version = "0.0.3" }
+

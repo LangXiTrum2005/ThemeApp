@@ -25,13 +25,13 @@ on:
         description: 'AAB artifact name'
         value: ${{ jobs.build.outputs.aab_artifact }}
     secrets:
-      SIGNING_KEY_STORE_BASE64:
+      ANDROID_KEYSTORE_BASE64:
         required: true
-      SIGNING_KEY_ALIAS:
+      ANDROID_KEY_ALIAS:
         required: true
-      SIGNING_STORE_PASSWORD:
+      ANDROID_KEYSTORE_PASSWORD:
         required: true
-      SIGNING_KEY_PASSWORD:
+      ANDROID_KEY_PASSWORD:
         required: true
       GOOGLE_SERVICES_JSON:
         required: false
@@ -64,7 +64,7 @@ jobs:
       - name: Decode Keystore
         id: decode_keystore
         run: |
-          base64 -d <<< "${{ secrets.SIGNING_KEY_STORE_BASE64 }}" > keystore
+          base64 -d <<< "${{ secrets.ANDROID_KEYSTORE_BASE64 }}" > keystore
           echo "keystore_path=$PWD/keystore" >> "$GITHUB_OUTPUT"
 
       - name: Save google-services.json
@@ -79,10 +79,10 @@ jobs:
         env:
           CI_VERSION_CODE: ${{ inputs.version_code }}
           CI_VERSION_NAME: ${{ inputs.tag_name }}
-          SIGNING_KEY_ALIAS: ${{ secrets.SIGNING_KEY_ALIAS }}
+          ANDROID_KEY_ALIAS: ${{ secrets.ANDROID_KEY_ALIAS }}
           SIGNING_KEY_STORE_PATH: ${{ steps.decode_keystore.outputs.keystore_path }}
-          SIGNING_STORE_PASSWORD: ${{ secrets.SIGNING_STORE_PASSWORD }}
-          SIGNING_KEY_PASSWORD: ${{ secrets.SIGNING_KEY_PASSWORD }}
+          ANDROID_KEYSTORE_PASSWORD: ${{ secrets.ANDROID_KEYSTORE_PASSWORD }}
+          ANDROID_KEY_PASSWORD: ${{ secrets.ANDROID_KEY_PASSWORD }}
         run: |
           chmod +x ./gradlew
           # Build both adsTest and adsReal APKs, but only adsReal AAB
@@ -91,10 +91,10 @@ jobs:
             -Dorg.gradle.jvmargs="-Xmx4g" \
             -PciVersionCode="$CI_VERSION_CODE" \
             -PciVersionName="$CI_VERSION_NAME" \
-            -PSIGNING_KEY_ALIAS="$SIGNING_KEY_ALIAS" \
+            -PANDROID_KEY_ALIAS="$ANDROID_KEY_ALIAS" \
             -PSIGNING_KEY_STORE_PATH="$SIGNING_KEY_STORE_PATH" \
-            -PSIGNING_STORE_PASSWORD="$SIGNING_STORE_PASSWORD" \
-            -PSIGNING_KEY_PASSWORD="$SIGNING_KEY_PASSWORD"
+            -PANDROID_KEYSTORE_PASSWORD="$ANDROID_KEYSTORE_PASSWORD" \
+            -PANDROID_KEY_PASSWORD="$ANDROID_KEY_PASSWORD"
 
       - name: Upload APKs
         uses: actions/upload-artifact@v6

@@ -73,7 +73,7 @@ jobs:
         continue-on-error: true
         env:
           # PAT is required so the dispatched CI run can emit workflow_run on completion.
-          GH_TOKEN: ${{ secrets.PAT_TAG_ON_PR_COMMENT_TOKEN }}
+          GH_TOKEN: ${{ secrets.GH_PAT }}
           TAG: ${{ steps.tag.outputs.name }}
           SOURCE_PR: ${{ steps.tag.outputs.source_pr }}
           AUTO_MERGE: ${{ steps.tag.outputs.auto_merge || 'false' }}

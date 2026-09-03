@@ -38,5 +38,5 @@ google-firebase-distribution = { id = "com.google.firebase.appdistribution", ver
 google-firebase-firebase-perf = { id = "com.google.firebase.firebase-perf", version.ref = "googleFirebaseFirebasePerf" }
 google-gms-google-services = { id = "com.google.gms.google-services", version.ref = "googleGmsGoogleServices" }
 spotless = { id = "com.diffplug.spotless", version.ref = "spotless" }
-tabb-android-application = { id = "com.1tabb.app.android.application", version = "0.0.3" }
+tabb-android-application = { id = "com.1tabb.app.android.application", version = "0.0.5" }
 

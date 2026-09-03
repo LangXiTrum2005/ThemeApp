@@ -393,7 +393,7 @@ Renaming any of these keys breaks the `awk` parser in `release-tag.yml`.
 **Security:**
 
 - Verifies commenter permissions via the GitHub API before doing any work
-- Requires `PAT_TAG_ON_PR_COMMENT_TOKEN` — a tag pushed with the built-in `GITHUB_TOKEN`
+- Requires `GH_PAT` — a tag pushed with the built-in `GITHUB_TOKEN`
   would not trigger `release-tag.yml`
 
 ### 4. Release Tag (`release-tag.yml`)
@@ -501,9 +501,9 @@ so asset upload and auto-merge do not apply.
 
 ### Required Secrets
 
-- `SIGNING_KEY_STORE_BASE64`: Android keystore for app signing
-- `SIGNING_KEY_ALIAS`, `SIGNING_STORE_PASSWORD`, `SIGNING_KEY_PASSWORD`: keystore credentials
-- `PAT_TAG_ON_PR_COMMENT_TOKEN`: PAT (`repo` + `workflow`) for tag pushes and CI dispatch
+- `ANDROID_KEYSTORE_BASE64`: Android keystore for app signing
+- `ANDROID_KEY_ALIAS`, `ANDROID_KEYSTORE_PASSWORD`, `ANDROID_KEY_PASSWORD`: keystore credentials
+- `GH_PAT`: PAT (`repo` + `workflow`) for tag pushes and CI dispatch
 
 ### Optional Secrets
 

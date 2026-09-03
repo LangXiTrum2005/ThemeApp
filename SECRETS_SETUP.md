@@ -7,11 +7,11 @@ thiếu secret thì job tự skip chứ không làm đỏ pipeline.
 
 | Nhóm | Tên | Bắt buộc | Đặt ở |
 |---|---|---|---|
-| 1 | `SIGNING_KEY_STORE_BASE64` | ✅ | repo |
-| 1 | `SIGNING_KEY_ALIAS` | ✅ | repo |
-| 1 | `SIGNING_STORE_PASSWORD` | ✅ | repo |
-| 1 | `SIGNING_KEY_PASSWORD` | ✅ | repo |
-| 2 | `PAT_TAG_ON_PR_COMMENT_TOKEN` | ✅ | repo |
+| 1 | `ANDROID_KEYSTORE_BASE64` | ✅ | repo |
+| 1 | `ANDROID_KEY_ALIAS` | ✅ | repo |
+| 1 | `ANDROID_KEYSTORE_PASSWORD` | ✅ | repo |
+| 1 | `ANDROID_KEY_PASSWORD` | ✅ | repo |
+| 2 | `GH_PAT` | ✅ | repo |
 | 3 | 3 label `release` / `tracking` / `release-drafter` | ✅ | repo |
 | 4 | `FIREBASE_DISTRIBUTION_CREDENTIAL_JSON` | ⬜ | repo |
 | 4 | `GOOGLE_SERVICES_JSON` | ⬜ | repo |
@@ -70,7 +70,7 @@ keytool -genkeypair -v -keystore release.jks -storetype PKCS12 -alias upload -ke
 Trả lời các câu hỏi; nhớ **ghi lại mật khẩu**.
 
 PKCS12 không hỗ trợ mật khẩu store và key khác nhau, nên
-`SIGNING_STORE_PASSWORD` và `SIGNING_KEY_PASSWORD` sẽ là **cùng một giá trị**.
+`ANDROID_KEYSTORE_PASSWORD` và `ANDROID_KEY_PASSWORD` sẽ là **cùng một giá trị**.
 
 `-validity 10000` ≈ 27 năm, đúng khuyến nghị của Google. Key hết hạn thì không update
 app trên Play Store được nữa.
@@ -90,10 +90,10 @@ base64 -w0 release.jks | clip
 
 | Name | Value |
 |---|---|
-| `SIGNING_KEY_STORE_BASE64` | Ctrl+V chuỗi base64 (một dòng dài) |
-| `SIGNING_KEY_ALIAS` | `upload` |
-| `SIGNING_STORE_PASSWORD` | mật khẩu keystore |
-| `SIGNING_KEY_PASSWORD` | cùng mật khẩu |
+| `ANDROID_KEYSTORE_BASE64` | Ctrl+V chuỗi base64 (một dòng dài) |
+| `ANDROID_KEY_ALIAS` | `upload` |
+| `ANDROID_KEYSTORE_PASSWORD` | mật khẩu keystore |
+| `ANDROID_KEY_PASSWORD` | cùng mật khẩu |
 
 Bốn cái này **luôn để ở repo**, kể cả sau này lên gói Team — mỗi app một keystore riêng.
 
@@ -101,7 +101,7 @@ Bốn cái này **luôn để ở repo**, kể cả sau này lên gói Team — 
 
 # Nhóm 2 — PAT (bắt buộc)
 
-`PAT_TAG_ON_PR_COMMENT_TOKEN` dùng cho hai việc mà `GITHUB_TOKEN` mặc định không làm
+`GH_PAT` dùng cho hai việc mà `GITHUB_TOKEN` mặc định không làm
 được: push tag sao cho tag đó kích hoạt được workflow khác, và dispatch `ci.yml` sao cho
 run đó phát ra sự kiện `workflow_run`.
 
@@ -135,7 +135,7 @@ Bỏ qua bước này thì token trông hợp lệ nhưng mọi thao tác lên r
 
 ## 2.3 Lưu secret
 
-| Name | `PAT_TAG_ON_PR_COMMENT_TOKEN` |
+| Name | `GH_PAT` |
 |---|---|
 | Secret | chuỗi `ghp_...` |
 
@@ -430,7 +430,7 @@ Tối thiểu để chạy `/build rc`:
 
 - [ ] Workflow permissions = Read and write (kiểm cả cấp org nếu bị xám)
 - [ ] 4 secret `SIGNING_*`
-- [ ] `PAT_TAG_ON_PR_COMMENT_TOKEN`
+- [ ] `GH_PAT`
 - [ ] 3 label `release` / `tracking` / `release-drafter`
 
 Thêm cho đầy đủ:
@@ -448,7 +448,7 @@ GitHub Free không share được secret cấp org, nên repo mới phải **dá
 
 | Secret / việc | Repo app mới |
 |---|---|
-| `PAT_TAG_ON_PR_COMMENT_TOKEN` | Dán lại giá trị cũ |
+| `GH_PAT` | Dán lại giá trị cũ |
 | `DISCORD_WEBHOOK` | Dán lại nếu báo chung kênh; app riêng kênh thì tạo webhook mới |
 | `GG_DRIVE_CLIENT_ID` / `_CLIENT_SECRET` / `_REFRESH_TOKEN` | Dán lại giá trị cũ — phần OAuth (nhóm 6) chỉ làm **một lần trong đời** |
 | `GG_DRIVE_FOLDER_ID` | **Mới** — tạo folder Drive cho app, lấy ID sau `/folders/` |
@@ -467,7 +467,7 @@ GitHub Free không share được secret cấp org, nên repo mới phải **dá
 
 | Key | Thời hạn | Chết vì / triệu chứng |
 |---|---|---|
-| `PAT_TAG_ON_PR_COMMENT_TOKEN` | ⏰ theo lựa chọn lúc tạo | Duy nhất chết theo lịch. Triệu chứng lặng lẽ: "tag tạo ra nhưng không gì chạy tiếp" — đặt lịch nhắc gia hạn |
+| `GH_PAT` | ⏰ theo lựa chọn lúc tạo | Duy nhất chết theo lịch. Triệu chứng lặng lẽ: "tag tạo ra nhưng không gì chạy tiếp" — đặt lịch nhắc gia hạn |
 | `GG_DRIVE_REFRESH_TOKEN` | ♾️ có điều kiện | App còn ở chế độ Testing (chết sau 7 ngày); không được dùng suốt 6 tháng; tự revoke trong tài khoản Google |
 | Client ID/Secret, service account key, webhook, folder ID | ♾️ | Chỉ chết khi tự tay xóa |
 | Keystore | ~27 năm | Hết hạn là hết đường update app trên Play (chuyện của ~2053) |
@@ -477,7 +477,7 @@ GitHub Free không share được secret cấp org, nên repo mới phải **dá
 # Lỗi thường gặp
 
 **`Input required and not supplied: token`**
-`PAT_TAG_ON_PR_COMMENT_TOKEN` rỗng. Khả năng cao nhất: secret đang để ở **cấp org** mà
+`GH_PAT` rỗng. Khả năng cao nhất: secret đang để ở **cấp org** mà
 repo là private trên gói Free. Tạo lại ở cấp repo.
 
 **`404 Not Found` khi thao tác repo của org**

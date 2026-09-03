@@ -230,7 +230,7 @@ jobs:
         if: steps.validate-branch.outputs.branch_valid == 'true'
         uses: actions/checkout@v6
         with:
-          token: ${{ secrets.PAT_TAG_ON_PR_COMMENT_TOKEN }}
+          token: ${{ secrets.GH_PAT }}
           fetch-depth: 0
 
 
@@ -245,7 +245,7 @@ jobs:
           COMMAND_TYPE: ${{ steps.parse-command.outputs.command_type }}
           HEAD_BRANCH: ${{ steps.pr-info.outputs.head_branch }}
           PR_NUMBER: ${{ github.event.issue.number }}
-          GITHUB_TOKEN: ${{ secrets.PAT_TAG_ON_PR_COMMENT_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GH_PAT }}
         run: |
           # Use the original head SHA for tagging
           TARGET_SHA="$HEAD_SHA"

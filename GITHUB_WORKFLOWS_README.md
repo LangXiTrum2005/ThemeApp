@@ -253,7 +253,7 @@ Each channel is skipped automatically when its secrets are missing:
 - Verify the PR *source* branch is `main` or `release/X.Y.Z`
 - For `/build rc`/`/build release`, the source branch cannot be `main`
 - Ensure an RC tag with that name doesn't already exist
-- Verify `PAT_TAG_ON_PR_COMMENT_TOKEN` is set and unexpired
+- Verify `GH_PAT` is set and unexpired
 
 **Tag created but nothing else happens:**
 

@@ -34,7 +34,7 @@ Release builds fall back to the debug signing key when no signing properties are
 supplied. CI passes them explicitly:
 
 ```bash
-./gradlew :app:assembleRelease :app:bundleRelease -PciVersionCode=42 -PciVersionName=1.2.0-rc01 -PSIGNING_KEY_ALIAS=... -PSIGNING_KEY_STORE_PATH=... -PSIGNING_STORE_PASSWORD=... -PSIGNING_KEY_PASSWORD=...
+./gradlew :app:assembleRelease :app:bundleRelease -PciVersionCode=42 -PciVersionName=1.2.0-rc01 -PANDROID_KEY_ALIAS=... -PSIGNING_KEY_STORE_PATH=... -PANDROID_KEYSTORE_PASSWORD=... -PANDROID_KEY_PASSWORD=...
 ```
 
 `ciVersionCode` / `ciVersionName` override `versionCode` / `versionName` in

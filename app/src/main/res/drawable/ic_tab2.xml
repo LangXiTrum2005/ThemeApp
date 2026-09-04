@@ -1,0 +1,18 @@
+<!--
+  ~ Copyright (c) 2026 1Tabb. All rights reserved.
+  ~ https://1tabb.com
+  ~
+  ~ SPDX-License-Identifier: LicenseRef-1Tabb-Proprietary
+  ~
+  ~ Proprietary and confidential. Contains trade secrets of 1Tabb.
+  ~ Unauthorized copying, modification, distribution, reverse engineering,
+  ~ decompilation or disassembly of this file, via any medium, is strictly
+  ~ prohibited except with prior written permission of 1Tabb.
+  -->
+
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="24dp" android:height="24dp" android:viewportWidth="24" android:viewportHeight="24">
+    <path android:fillColor="@android:color/transparent" android:strokeColor="#FFFFFFFF"
+        android:strokeWidth="1.8" android:strokeLineCap="round" android:strokeLineJoin="round"
+        android:pathData="M4,4h16v6H4zM4,14h16v6H4zM8,7h0.01M8,17h0.01M12,7h5M12,17h5"/>
+</vector>

@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+  ~ Copyright (c) 2026 1Tabb. All rights reserved.
+  ~ https://1tabb.com
+  ~
+  ~ SPDX-License-Identifier: LicenseRef-1Tabb-Proprietary
+  ~
+  ~ Proprietary and confidential. Contains trade secrets of 1Tabb.
+  ~ Unauthorized copying, modification, distribution, reverse engineering,
+  ~ decompilation or disassembly of this file, via any medium, is strictly
+  ~ prohibited except with prior written permission of 1Tabb.
+  -->
+
+<!--
+  Khung dialog xin quyền, dùng chung cho mọi quyền. Icon và chữ do PermissionDialogArgs bơm vào
+  lúc chạy nên layout này KHÔNG khai text mặc định (trừ tools: để xem trước).
+
+  Lớp ngoài match_parent + padding ngang tạo lề với mép màn hình; cửa sổ dialog được set
+  MATCH_PARENT trong BaseDialogFragment nên thẻ tự giãn theo bề ngang máy.
+-->
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingStart="16dp"
+    android:paddingEnd="16dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/dialogContent"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_dialog_card"
+        android:paddingHorizontal="24dp"
+        android:paddingTop="28dp"
+        android:paddingBottom="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintWidth_max="480dp">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/ivIcon"
+            android:layout_width="72dp"
+            android:layout_height="72dp"
+            android:background="@drawable/bg_icon_soft"
+            android:contentDescription="@null"
+            android:padding="16dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:tint="@color/accent"
+            tools:src="@drawable/ic_permission_notification" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvTitle"
+            style="@style/NunitoBold.20"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:gravity="center"
+            android:textColor="@color/text_primary"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/ivIcon"
+            tools:text="@string/permission_notification_title" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvDescription"
+            style="@style/NunitoMedium.14"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:gravity="center"
+            android:lineSpacingExtra="3dp"
+            android:textColor="@color/text_secondary"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvTitle"
+            tools:text="@string/permission_notification_description" />
+
+        <com.onetabb.template.android.core.widget.AppButton
+            android:id="@+id/btnPositive"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            app:abStyle="primary"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvDescription"
+            tools:abText="@string/permission_allow" />
+
+        <!-- Ẩn hẳn (gone) khi quyền là bắt buộc — xem PermissionDialogArgs.negativeText. -->
+        <com.onetabb.template.android.core.widget.AppButton
+            android:id="@+id/btnNegative"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            app:abStyle="text"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/btnPositive"
+            tools:abText="@string/permission_not_now" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

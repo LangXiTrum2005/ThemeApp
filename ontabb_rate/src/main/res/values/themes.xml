@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--
+      Theme của bottom sheet đánh giá. Nền cửa sổ VÀ nền sheet đều trong suốt vì thẻ tự vẽ nền
+      bo góc trên, còn Lottie thì tràn lên phía trên mép thẻ — để nền mặc định của Material thì
+      phần tràn đó bị cắt và lộ ra một khối chữ nhật sáng sau lưng thẻ.
+    -->
+    <style name="Ontabb_Rate_BottomSheetDialog" parent="Theme.Design.Light.BottomSheetDialog">
+        <item name="android:windowIsFloating">false</item>
+        <item name="android:backgroundDimAmount">0.6</item>
+        <item name="bottomSheetStyle">@style/Ontabb_Rate_BottomSheet</item>
+    </style>
+
+    <style name="Ontabb_Rate_BottomSheet" parent="Widget.Design.BottomSheet.Modal">
+        <item name="android:background">@android:color/transparent</item>
+        <item name="backgroundTint">@android:color/transparent</item>
+        <item name="behavior_peekHeight">auto</item>
+    </style>
+</resources>

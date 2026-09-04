@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Màn feedback cho user chấm 1-3 sao. Khung thẻ / nút / ô nhập dùng chung bộ drawable với
+  dialog_rate_app để hai bước của cùng một luồng trông liền mạch; chỉ nền màn hình là lấy
+  theo theme app (app_bg tự đổi sáng/tối).
+-->
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="?android:attr/colorBackground"
+    tools:context=".FeedbackActivity">
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/btnBack"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:background="?selectableItemBackgroundBorderless"
+        android:contentDescription="@string/ontabb_rate_back"
+        android:padding="12dp"
+        android:src="@drawable/ontabb_rate_ic_back"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:tint="?android:attr/textColorPrimary" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:layout_width="0dp"
+        android:layout_height="48dp"
+        android:gravity="center"
+        android:id="@+id/tvFeedbackHeader"
+        android:text="@string/ontabb_rate_feedback"
+        android:textColor="?android:attr/textColorPrimary"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="20dp"
+        android:background="@drawable/bg_rate_dialog"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        android:padding="20dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/btnBack"
+        app:layout_constraintVertical_bias="0.24">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:id="@+id/tvFeedbackTitle"
+            android:text="@string/ontabb_rate_help_us_improve"
+            android:textColor="@color/ontabb_rate_title"
+            android:textSize="18sp" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvSelectedRating"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:textColor="@color/ontabb_rate_accent"
+            android:textSize="14sp"
+            tools:text="You rated us 3 stars" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:gravity="center"
+            android:id="@+id/tvFeedbackDescription"
+            android:text="@string/ontabb_rate_feedback_description"
+            android:textColor="@color/ontabb_rate_desc"
+            android:textSize="12sp" />
+
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/edtFeedback"
+            android:layout_width="match_parent"
+            android:layout_height="140dp"
+            android:layout_marginTop="18dp"
+            android:background="@drawable/bg_feedback_input"
+            android:gravity="top|start"
+            android:hint="@string/ontabb_rate_feedback_hint"
+            android:inputType="textCapSentences|textMultiLine"
+            android:maxLength="1000"
+            android:textColor="@color/ontabb_rate_title"
+            android:textColorHint="@color/ontabb_rate_input_hint"
+            android:textSize="14sp" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btnSendFeedback"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginTop="18dp"
+            android:background="@drawable/bg_rate_button"
+            android:elevation="0dp"
+            android:stateListAnimator="@null"
+            android:text="@string/ontabb_rate_send_feedback"
+            android:textAllCaps="false"
+            android:textColor="@color/ontabb_rate_cta_text"
+            android:textSize="16sp" />
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

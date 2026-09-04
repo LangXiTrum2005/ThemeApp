@@ -9,7 +9,7 @@
       "client_info": {
         "mobilesdk_app_id": "1:1082447263017:android:4ba9be489a3220fa2f7338",
         "android_client_info": {
-          "package_name": "com.example.template.android"
+          "package_name": "com.onetabb.template.android"
         }
       },
       "oauth_client": [],
@@ -28,7 +28,7 @@
       "client_info": {
         "mobilesdk_app_id": "1:1082447263017:android:832977354e5665112f7338",
         "android_client_info": {
-          "package_name": "com.example.template.android.dev"
+          "package_name": "com.onetabb.template.android.dev"
         }
       },
       "oauth_client": [],

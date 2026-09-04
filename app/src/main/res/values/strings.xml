@@ -1,3 +1,96 @@
+<!--
+  ~ Copyright (c) 2026 1Tabb. All rights reserved.
+  ~ https://1tabb.com
+  ~
+  ~ SPDX-License-Identifier: LicenseRef-1Tabb-Proprietary
+  ~
+  ~ Proprietary and confidential. Contains trade secrets of 1Tabb.
+  ~ Unauthorized copying, modification, distribution, reverse engineering,
+  ~ decompilation or disassembly of this file, via any medium, is strictly
+  ~ prohibited except with prior written permission of 1Tabb.
+  -->
+
 <resources>
+    <!-- app_name do resValue trong app/build.gradle.kts sinh (debug có prefix "Dev "). -->
     <string name="app_name">Template Android</string>
+    <string name="app_button_ad_icon_description">This action may show ads</string>
+
+    <!-- Splash -->
+    <string name="this_action_may_show_ads">This action may show ads</string>
+
+    <!-- Language (dùng cho cả màn first-open lẫn màn đổi ngôn ngữ trong Settings) -->
+    <string name="language">Language</string>
+    <string name="save">Save</string>
+    <string name="back">Back</string>
+    <string name="onboarding_next">Next</string>
+    <string name="onboarding_get_started">Get started</string>
+
+    <!-- Onboarding -->
+    <string name="survey_title">Select a...?</string>
+    <string name="survey_option_1">Entertainment</string>
+    <string name="survey_option_2">Privacy</string>
+    <string name="survey_option_3">Productivity</string>
+    <string name="survey_option_4">Other</string>
+    <string name="onboarding_title_1">Onboarding title 1</string>
+    <string name="onboarding_title_2">Onboarding title 2</string>
+    <string name="welcome_title">Welcome to\nthe app</string>
+
+    <!-- Welcome back (resume) -->
+    <string name="welcome_back">Welcome Back</string>
+    <string name="welcome_back_des">Welcome back to the app. Continue where you left off.</string>
+    <string name="s_continue">Continue</string>
+
+    <!-- Main tabs -->
+    <string name="tab_home">Home</string>
+    <string name="tab_2">Tab 2</string>
+    <string name="tab_3">Tab 3</string>
+    <string name="tab_settings">Settings</string>
+    <string name="tab_placeholder_hint">Replace this fragment with the real screen.</string>
+    <string name="rate_us">Rate us</string>
+
+    <!-- Permission dialog: chữ dùng chung + một bộ mẫu cho quyền thông báo -->
+    <string name="permission_allow">Allow</string>
+    <string name="permission_not_now">Not now</string>
+    <string name="permission_notification_title">Turn on notifications</string>
+    <string name="permission_notification_description">Get notified about important updates. You can turn this off any time in Settings.</string>
+    <!-- Dùng khi hệ thống không hiện hộp thoại quyền nữa, phải đưa user sang Settings -->
+    <string name="permission_open_settings">Open settings</string>
+    <string name="permission_notification_settings_title">Notifications are off</string>
+    <string name="permission_notification_settings_description">Turn notifications on in Settings so we can let you know about important updates.</string>
+
+    <!-- No internet dialog -->
+    <string name="text_no_internet_title">No Internet</string>
+    <string name="text_no_internet_message">Please check your connection and try again.</string>
+    <string name="text_try_again">Try again</string>
+
+    <!-- Tên ngôn ngữ ở màn Language: LUÔN hiển thị bằng chính ngôn ngữ đó, không dịch. -->
+    <string name="lang_hindi" translatable="false">हिन्दी</string>
+    <string name="lang_bangla" translatable="false">বাংলা</string>
+    <string name="lang_portuguese_br" translatable="false">Português (Brasil)</string>
+    <string name="lang_english_us" translatable="false">English (US)</string>
+    <string name="lang_english_uk" translatable="false">English (UK)</string>
+    <string name="lang_arabic_sa" translatable="false">العربية (السعودية)</string>
+    <string name="lang_arabic_tn" translatable="false">العربية (تونس)</string>
+    <string name="lang_arabic_om" translatable="false">العربية (عُمان)</string>
+    <string name="lang_indonesian" translatable="false">Bahasa Indonesia</string>
+    <string name="lang_portuguese" translatable="false">Português</string>
+    <string name="lang_spanish" translatable="false">Español</string>
+    <string name="lang_marathi" translatable="false">मराठी</string>
+    <string name="lang_telugu" translatable="false">తెలుగు</string>
+    <string name="lang_tamil" translatable="false">தமிழ்</string>
+    <string name="lang_russian" translatable="false">Русский</string>
+    <string name="lang_french" translatable="false">Français</string>
+    <string name="lang_vietnamese" translatable="false">Tiếng Việt</string>
+    <string name="lang_german" translatable="false">Deutsch</string>
+    <string name="lang_korean" translatable="false">한국어</string>
+    <string name="lang_japanese" translatable="false">日本語</string>
+    <string name="lang_turkish" translatable="false">Türkçe</string>
+    <string name="lang_chinese" translatable="false">中文</string>
+    <string name="lang_italian" translatable="false">Italiano</string>
+    <string name="lang_thai" translatable="false">ภาษาไทย</string>
+    <string name="lang_dutch" translatable="false">Nederlands</string>
+    <string name="lang_danish" translatable="false">Dansk</string>
+    <string name="lang_irish" translatable="false">Gaeilge</string>
+    <string name="lang_polish" translatable="false">Polski</string>
+    <string name="lang_zulu" translatable="false">isiZulu</string>
 </resources>

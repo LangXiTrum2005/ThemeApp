@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Như bg_rate_dialog nhưng chỉ bo góc TRÊN: thẻ bám mép dưới màn hình. -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
+    <gradient
+        android:angle="135"
+        android:endColor="#0C1A25"
+        android:startColor="#182447"
+        android:type="linear" />
+    <corners
+        android:topLeftRadius="24dp"
+        android:topRightRadius="24dp" />
+    <stroke
+        android:width="1dp"
+        android:color="#314569" />
+</shape>

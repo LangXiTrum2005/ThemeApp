@@ -3,7 +3,7 @@
 A guide to the GitHub workflow system in this project: parallel release branch
 management, PR-comment-driven tagging, and tag-dispatched CI.
 
-For secrets/variables setup see [CI_CD_SETUP.md](CI_CD_SETUP.md). For branch
+For secrets/variables setup see [SECRETS_SETUP.md](SECRETS_SETUP.md); for template sync see [TEMPLATE_SYNC_SETUP.md](TEMPLATE_SYNC_SETUP.md). For branch
 strategy and diagrams see [github_workflow.md](github_workflow.md).
 
 ## 🚀 Quick Start
@@ -275,7 +275,7 @@ built-in token do not trigger other workflows. Check the PAT secret.
 
 **Build failures:**
 
-- Check all four `SIGNING_*` secrets are set
+- Check all four signing secrets are set: `ANDROID_KEYSTORE_BASE64`, `ANDROID_KEY_ALIAS`, `ANDROID_KEYSTORE_PASSWORD`, `ANDROID_KEY_PASSWORD`
 - Verify the keystore base64 decodes cleanly (`base64 -w0`, no line wrapping)
 - Review dependency conflicts in the job log
 
@@ -293,8 +293,8 @@ sync. Add the path, then revert the offending sync PR.
 **Distribution issues:**
 
 - Firebase: verify the service account has the *Firebase App Distribution Admin* role
-- Firebase: an app id is needed — commit `app/google-services.json`, set the
-  `GOOGLE_SERVICES_JSON` secret, or set the `FIREBASE_APP_ID` variable
+- Firebase: the app id comes from `app/google-services.json` committed in the repo — the job
+  checks that file out directly, so the `GOOGLE_SERVICES_JSON` secret alone is not enough
 - Drive: both Drive secrets must be present or the job is skipped entirely
 - Check the tester group name in `.distribution/tester_groups.txt` exists in Firebase
 

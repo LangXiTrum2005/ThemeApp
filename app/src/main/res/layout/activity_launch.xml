@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+  ~ Copyright (c) 2026 1Tabb. All rights reserved.
+  ~ https://1tabb.com
+  ~
+  ~ SPDX-License-Identifier: LicenseRef-1Tabb-Proprietary
+  ~
+  ~ Proprietary and confidential. Contains trade secrets of 1Tabb.
+  ~ Unauthorized copying, modification, distribution, reverse engineering,
+  ~ decompilation or disassembly of this file, via any medium, is strictly
+  ~ prohibited except with prior written permission of 1Tabb.
+  -->
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg_main"
+    android:orientation="vertical">
+
+    <!-- AdsHub: slot neo cứng NGOÀI vùng scroll, không bao giờ đè nội dung -->
+    <FrameLayout
+        android:id="@+id/splashSlotTop"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:tag="ads_slot:splash_slot_top" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="@drawable/bg_screen">
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/imgLogo"
+            android:layout_width="140dp"
+            android:layout_height="140dp"
+            android:contentDescription="@string/app_name"
+            android:src="@mipmap/ic_launcher"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.42"
+            app:shapeAppearance="@style/round_img_16" />
+
+        <TextView
+            android:id="@+id/tvAppName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="@string/app_name"
+            android:textColor="@color/text_primary"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/imgLogo" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvThisAction"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="36dp"
+            android:layout_marginBottom="24dp"
+            android:text="@string/this_action_may_show_ads"
+            android:textAlignment="center"
+            android:textColor="@color/text_secondary"
+            app:layout_constraintBottom_toTopOf="@+id/progressSplash" />
+
+        <com.google.android.material.progressindicator.LinearProgressIndicator
+            android:id="@+id/progressSplash"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="40dp"
+            android:layout_marginBottom="30dp"
+            android:max="100"
+            android:progress="20"
+            app:indicatorColor="@color/accent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:trackColor="@color/card_bg_alt"
+            app:trackCornerRadius="50dp"
+            app:trackStopIndicatorSize="0dp"
+            app:trackThickness="10dp" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <FrameLayout
+        android:id="@+id/splashSlotBottom"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:tag="ads_slot:splash_slot_bottom" />
+</LinearLayout>

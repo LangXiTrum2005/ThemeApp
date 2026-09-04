@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+  ~ Copyright (c) 2026 1Tabb. All rights reserved.
+  ~ https://1tabb.com
+  ~
+  ~ SPDX-License-Identifier: LicenseRef-1Tabb-Proprietary
+  ~
+  ~ Proprietary and confidential. Contains trade secrets of 1Tabb.
+  ~ Unauthorized copying, modification, distribution, reverse engineering,
+  ~ decompilation or disassembly of this file, via any medium, is strictly
+  ~ prohibited except with prior written permission of 1Tabb.
+  -->
+
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg_main">
+
+    <!-- AdsHub: slot neo cứng NGOÀI vùng scroll, không bao giờ đè nội dung -->
+    <FrameLayout
+        android:id="@+id/welcomeSlotTop"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:tag="ads_slot:welcome_slot_top"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:background="@drawable/bg_screen"
+        app:layout_constraintBottom_toTopOf="@+id/welcomeSlotBottom"
+        app:layout_constraintTop_toBottomOf="@+id/welcomeSlotTop">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/ivImage"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:paddingHorizontal="16dp"
+            android:src="@drawable/ic_placeholder_illustration"
+            app:layout_constraintBottom_toTopOf="@+id/tvTitle"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvTitle"
+            style="@style/NunitoBold.28"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="24dp"
+            android:layout_marginTop="32dp"
+            android:layout_marginBottom="24dp"
+            android:text="@string/welcome_title"
+            android:textAlignment="center"
+            android:textColor="@color/text_primary"
+            app:layout_constraintBottom_toTopOf="@+id/btnNext" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/btnNext"
+            style="@style/NunitoBold.16"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:gravity="center"
+            android:text="@string/onboarding_get_started"
+            android:textAllCaps="false"
+            android:textColor="@color/accent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <FrameLayout
+        android:id="@+id/welcomeSlotBottom"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:tag="ads_slot:welcome_slot_bottom"
+        app:layout_constraintBottom_toBottomOf="parent" />
+</androidx.constraintlayout.widget.ConstraintLayout>

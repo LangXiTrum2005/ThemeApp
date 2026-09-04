@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Bản bottom sheet của khối đánh giá. Cùng bộ id với dialog_rate_app.xml để RatePanel dùng
+  chung được; khác ở khung chứa: thẻ bám đáy, bo góc TRÊN, tràn hết bề ngang.
+
+  Khoảng trống 52dp phía trên thẻ là chỗ cho Lottie đè lên mép — cửa sổ sheet để nền trong suốt
+  (xem style Ontabb_Rate_BottomSheetDialog) nên phần tràn ra không bị cắt.
+-->
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:id="@+id/rateCard"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="52dp"
+        android:background="@drawable/bg_rate_bottom_sheet"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        android:paddingHorizontal="20dp"
+        android:paddingTop="56dp"
+        android:paddingBottom="28dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvRateTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:gravity="center"
+            android:text="@string/ontabb_rate_initial_title"
+            android:textColor="@color/ontabb_rate_title"
+            android:textSize="18sp" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvRateDescription"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            android:gravity="center"
+            android:lineSpacingExtra="2dp"
+            android:lines="2"
+            android:maxLines="2"
+            android:text="@string/ontabb_rate_initial_description"
+            android:textColor="@color/ontabb_rate_desc"
+            android:textSize="12sp" />
+
+        <LinearLayout
+            android:id="@+id/starRow"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="14dp"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/star1"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:background="?selectableItemBackgroundBorderless"
+                android:contentDescription="@string/ontabb_rate_one_star"
+                android:padding="5dp"
+                android:src="@drawable/ic_rate_unchecked" />
+
+            <Space
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/star2"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:background="?selectableItemBackgroundBorderless"
+                android:contentDescription="@string/ontabb_rate_two_stars"
+                android:padding="5dp"
+                android:src="@drawable/ic_rate_unchecked" />
+
+            <Space
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/star3"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:background="?selectableItemBackgroundBorderless"
+                android:contentDescription="@string/ontabb_rate_three_stars"
+                android:padding="5dp"
+                android:src="@drawable/ic_rate_unchecked" />
+
+            <Space
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/star4"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:background="?selectableItemBackgroundBorderless"
+                android:contentDescription="@string/ontabb_rate_four_stars"
+                android:padding="5dp"
+                android:src="@drawable/ic_rate_unchecked" />
+
+            <Space
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/star5"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:background="?selectableItemBackgroundBorderless"
+                android:contentDescription="@string/ontabb_rate_five_stars"
+                android:padding="5dp"
+                android:src="@drawable/ic_rate_unchecked" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/rateHint"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:layout_marginTop="12dp"
+            android:layout_marginEnd="20dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvRateHint"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/ontabb_rate_best_hint"
+                android:textColor="@color/ontabb_rate_hint"
+                android:textSize="10sp" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:layout_width="42dp"
+                android:layout_height="22dp"
+                android:layout_marginStart="4dp"
+                android:layout_marginBottom="6dp"
+                android:contentDescription="@null"
+                android:src="@drawable/ic_rate_hint_arrow" />
+        </LinearLayout>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btnRate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="18dp"
+            android:background="@drawable/bg_rate_button"
+            android:elevation="0dp"
+            android:stateListAnimator="@null"
+            android:text="@string/ontabb_rate_cta"
+            android:textAllCaps="false"
+            android:textColor="@color/ontabb_rate_cta_text"
+            android:textSize="14sp" />
+    </LinearLayout>
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/btnClose"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:background="?selectableItemBackgroundBorderless"
+        android:contentDescription="@string/ontabb_rate_close"
+        android:padding="8dp"
+        android:src="@drawable/ic_rate_close"
+        app:layout_constraintEnd_toEndOf="@id/rateCard"
+        app:layout_constraintTop_toTopOf="@id/rateCard" />
+
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/rateAnimation"
+        android:layout_width="104dp"
+        android:layout_height="104dp"
+        android:elevation="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:lottie_autoPlay="true"
+        app:lottie_loop="true"
+        app:lottie_rawRes="@raw/smiling_1"
+        tools:ignore="UnusedAttribute" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

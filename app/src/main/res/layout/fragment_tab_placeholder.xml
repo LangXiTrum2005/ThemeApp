@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+  ~ Copyright (c) 2026 1Tabb. All rights reserved.
+  ~ https://1tabb.com
+  ~
+  ~ SPDX-License-Identifier: LicenseRef-1Tabb-Proprietary
+  ~
+  ~ Proprietary and confidential. Contains trade secrets of 1Tabb.
+  ~ Unauthorized copying, modification, distribution, reverse engineering,
+  ~ decompilation or disassembly of this file, via any medium, is strictly
+  ~ prohibited except with prior written permission of 1Tabb.
+  -->
+
+<!-- Tab placeholder của MainActivity. Project con thay bằng fragment thật nhưng GIỮ 2 slot top/bottom
+     (tag gán động trong TabPlaceholderFragment.onPrepareAdsSlots vì 1 layout dùng cho 4 tab). -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg_main"
+    android:orientation="vertical">
+
+    <FrameLayout
+        android:id="@+id/tabSlotTop"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="@drawable/bg_screen"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:padding="24dp">
+
+        <TextView
+            android:id="@+id/tvTitle"
+            style="@style/NunitoExtraBold.24"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/text_primary" />
+
+        <TextView
+            style="@style/NunitoMedium.14"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="@string/tab_placeholder_hint"
+            android:textColor="@color/text_secondary" />
+
+        <!-- Hai lối vào của tab Settings. Chỉ hiện ở tab đó — xem TabPlaceholderFragment. -->
+        <TextView
+            android:id="@+id/btnLanguage"
+            style="@style/NunitoBold.16"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="28dp"
+            android:background="@drawable/bg_list_item"
+            android:drawableEnd="@drawable/ic_arrow_right"
+            android:gravity="center_vertical"
+            android:paddingHorizontal="20dp"
+            android:paddingVertical="18dp"
+            android:text="@string/language"
+            android:textColor="@color/text_primary"
+            android:visibility="gone" />
+
+        <TextView
+            android:id="@+id/btnRateUs"
+            style="@style/NunitoBold.16"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:background="@drawable/bg_list_item"
+            android:drawableEnd="@drawable/ic_arrow_right"
+            android:gravity="center_vertical"
+            android:paddingHorizontal="20dp"
+            android:paddingVertical="18dp"
+            android:text="@string/rate_us"
+            android:textColor="@color/text_primary"
+            android:visibility="gone" />
+    </LinearLayout>
+
+    <FrameLayout
+        android:id="@+id/tabSlotBottom"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+</LinearLayout>

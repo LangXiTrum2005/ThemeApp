@@ -1,0 +1,343 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+  ~ Copyright (c) 2026 1Tabb. All rights reserved.
+  ~ https://1tabb.com
+  ~
+  ~ SPDX-License-Identifier: LicenseRef-1Tabb-Proprietary
+  ~
+  ~ Proprietary and confidential. Contains trade secrets of 1Tabb.
+  ~ Unauthorized copying, modification, distribution, reverse engineering,
+  ~ decompilation or disassembly of this file, via any medium, is strictly
+  ~ prohibited except with prior written permission of 1Tabb.
+  -->
+
+<resources>
+
+    <!-- Base Font Styles -->
+    <style name="NunitoBase">
+        <item name="android:fontFamily">@font/nunito</item>
+    </style>
+
+    <!-- Weight Specific Styles (Using direct font files for best compatibility on API 26+) -->
+    <style name="NunitoMedium" parent="NunitoBase">
+        <item name="android:fontFamily">@font/nunito_medium</item>
+    </style>
+
+    <style name="NunitoSemiBold" parent="NunitoBase">
+        <item name="android:fontFamily">@font/nunito_semibold</item>
+    </style>
+
+    <style name="NunitoBold" parent="NunitoBase">
+        <item name="android:fontFamily">@font/nunito_bold</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="NunitoExtraBold" parent="NunitoBase">
+        <item name="android:fontFamily">@font/nunito_extra_bold</item>
+    </style>
+
+    <!-- Nunito Medium Variants -->
+    <style name="NunitoMedium.10" parent="NunitoMedium">
+        <item name="android:textSize">10sp</item>
+    </style>
+
+    <style name="NunitoMedium.12" parent="NunitoMedium">
+        <item name="android:textSize">12sp</item>
+    </style>
+
+    <style name="NunitoMedium.14" parent="NunitoMedium">
+        <item name="android:textSize">14sp</item>
+    </style>
+
+    <style name="NunitoMedium.15" parent="NunitoMedium">
+        <item name="android:textSize">15sp</item>
+    </style>
+
+    <style name="NunitoMedium.16" parent="NunitoMedium">
+        <item name="android:textSize">16sp</item>
+    </style>
+
+    <style name="NunitoMedium.18" parent="NunitoMedium">
+        <item name="android:textSize">18sp</item>
+    </style>
+
+    <style name="NunitoMedium.20" parent="NunitoMedium">
+        <item name="android:textSize">20sp</item>
+    </style>
+
+    <style name="NunitoMedium.24" parent="NunitoMedium">
+        <item name="android:textSize">24sp</item>
+    </style>
+
+    <!-- Nunito SemiBold Variants -->
+    <style name="NunitoSemiBold.12" parent="NunitoSemiBold">
+        <item name="android:textSize">12sp</item>
+    </style>
+
+    <style name="NunitoSemiBold.14" parent="NunitoSemiBold">
+        <item name="android:textSize">14sp</item>
+    </style>
+
+    <style name="NunitoSemiBold.16" parent="NunitoSemiBold">
+        <item name="android:textSize">16sp</item>
+    </style>
+
+    <style name="NunitoSemiBold.18" parent="NunitoSemiBold">
+        <item name="android:textSize">18sp</item>
+    </style>
+
+    <style name="NunitoSemiBold.20" parent="NunitoSemiBold">
+        <item name="android:textSize">20sp</item>
+    </style>
+
+    <style name="NunitoSemiBold.22" parent="NunitoSemiBold">
+        <item name="android:textSize">22sp</item>
+    </style>
+
+    <style name="NunitoSemiBold.24" parent="NunitoSemiBold">
+        <item name="android:textSize">24sp</item>
+    </style>
+
+    <style name="NunitoSemiBold.26" parent="NunitoSemiBold">
+        <item name="android:textSize">26sp</item>
+    </style>
+
+    <style name="NunitoSemiBold.28" parent="NunitoSemiBold">
+        <item name="android:textSize">28sp</item>
+    </style>
+
+    <style name="NunitoSemiBold.36" parent="NunitoSemiBold">
+        <item name="android:textSize">36sp</item>
+    </style>
+
+    <!-- Nunito Bold Variants -->
+    <style name="NunitoBold.12" parent="NunitoBold">
+        <item name="android:textSize">12sp</item>
+    </style>
+
+    <style name="NunitoBold.14" parent="NunitoBold">
+        <item name="android:textSize">14sp</item>
+    </style>
+
+    <style name="NunitoBold.16" parent="NunitoBold">
+        <item name="android:textSize">16sp</item>
+    </style>
+
+    <style name="NunitoBold.18" parent="NunitoBold">
+        <item name="android:textSize">18sp</item>
+    </style>
+
+    <style name="NunitoBold.20" parent="NunitoBold">
+        <item name="android:textSize">20sp</item>
+    </style>
+
+    <style name="NunitoBold.22" parent="NunitoBold">
+        <item name="android:textSize">22sp</item>
+    </style>
+
+    <style name="NunitoBold.24" parent="NunitoBold">
+        <item name="android:textSize">24sp</item>
+    </style>
+
+    <style name="NunitoBold.26" parent="NunitoBold">
+        <item name="android:textSize">26sp</item>
+    </style>
+
+    <style name="NunitoBold.28" parent="NunitoBold">
+        <item name="android:textSize">28sp</item>
+    </style>
+
+    <style name="NunitoBold.32" parent="NunitoBold">
+        <item name="android:textSize">32sp</item>
+    </style>
+
+    <style name="NunitoBold.36" parent="NunitoBold">
+        <item name="android:textSize">36sp</item>
+    </style>
+
+    <!-- Nunito ExtraBold Variants -->
+    <style name="NunitoExtraBold.18" parent="NunitoExtraBold">
+        <item name="android:textSize">18sp</item>
+    </style>
+
+    <style name="NunitoExtraBold.20" parent="NunitoExtraBold">
+        <item name="android:textSize">20sp</item>
+    </style>
+
+    <style name="NunitoExtraBold.24" parent="NunitoExtraBold">
+        <item name="android:textSize">24sp</item>
+    </style>
+
+    <style name="NunitoExtraBold.32" parent="NunitoExtraBold">
+        <item name="android:textSize">32sp</item>
+    </style>
+
+    <style name="NunitoExtraBold.40" parent="NunitoExtraBold">
+        <item name="android:textSize">40sp</item>
+    </style>
+
+    <style name="NunitoExtraBold.52" parent="NunitoExtraBold">
+        <item name="android:textSize">52sp</item>
+    </style>
+
+    <!-- Existing App Styles updated to Nunito -->
+    <style name="text_primary">
+        <item name="android:textColor">@color/white</item>
+        <item name="android:fontFamily">@font/nunito</item>
+    </style>
+
+    <style name="text_primary_header" parent="text_primary">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:ellipsize">end</item>
+        <item name="maxLines">1</item>
+    </style>
+
+    <style name="text_primary_header_26" parent="text_primary_header">
+        <item name="android:textSize">26sp</item>
+    </style>
+
+    <style name="text_primary_header_52" parent="text_primary_header">
+        <item name="android:textSize">52sp</item>
+    </style>
+
+    <style name="text_primary_header_20" parent="text_primary_header">
+        <item name="android:textSize">20sp</item>
+    </style>
+
+    <style name="text_primary_header_22" parent="text_primary_header">
+        <item name="android:textSize">22sp</item>
+    </style>
+
+    <style name="text_primary_header_18" parent="text_primary_header">
+        <item name="android:textSize">18sp</item>
+    </style>
+
+    <style name="text_primary_header_16" parent="text_primary_header">
+        <item name="android:textSize">16sp</item>
+    </style>
+
+    <style name="text_primary_header_14" parent="text_primary_header">
+        <item name="android:textSize">14sp</item>
+    </style>
+
+    <style name="text_primary_header_12" parent="text_primary_header">
+        <item name="android:textSize">12sp</item>
+    </style>
+
+    <style name="text_primary_18" parent="text_primary">
+        <item name="android:textSize">18sp</item>
+    </style>
+
+    <style name="text_primary_16" parent="text_primary">
+        <item name="android:textSize">16sp</item>
+    </style>
+
+    <style name="text_primary_15" parent="text_primary">
+        <item name="android:textSize">15sp</item>
+    </style>
+
+    <style name="text_primary_14" parent="text_primary">
+        <item name="android:textSize">14sp</item>
+    </style>
+
+    <style name="text_primary_12" parent="text_primary">
+        <item name="android:textSize">12sp</item>
+    </style>
+
+    <style name="text_primary_10" parent="text_primary">
+        <item name="android:textSize">10sp</item>
+    </style>
+
+    <style name="text_primary_6" parent="text_primary">
+        <item name="android:textSize">6sp</item>
+    </style>
+
+    <style name="text_secondary">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:fontFamily">@font/nunito</item>
+    </style>
+
+    <style name="text_secondary_32" parent="text_secondary">
+        <item name="android:textSize">32sp</item>
+    </style>
+
+    <style name="text_secondary_22" parent="text_secondary">
+        <item name="android:textSize">22sp</item>
+    </style>
+
+    <style name="text_secondary_20" parent="text_secondary">
+        <item name="android:textSize">20sp</item>
+    </style>
+
+    <style name="text_secondary_18" parent="text_secondary">
+        <item name="android:textSize">18sp</item>
+    </style>
+
+    <style name="text_secondary_16" parent="text_secondary">
+        <item name="android:textSize">16sp</item>
+    </style>
+
+    <style name="text_secondary_14" parent="text_secondary">
+        <item name="android:textSize">14sp</item>
+    </style>
+
+    <style name="text_secondary_12" parent="text_secondary">
+        <item name="android:textSize">12sp</item>
+    </style>
+
+    <style name="text_secondary_13" parent="text_secondary">
+        <item name="android:textSize">13sp</item>
+    </style>
+
+    <style name="text_secondary_10" parent="text_secondary">
+        <item name="android:textSize">10sp</item>
+    </style>
+
+    <style name="image_button_style">
+        <item name="android:layout_width">48dp</item>
+        <item name="android:layout_height">48dp</item>
+        <item name="android:padding">12dp</item>
+        <item name="android:background">?selectableItemBackground</item>
+    </style>
+
+    <style name="btnIconCommon">
+        <item name="android:layout_width">56dp</item>
+        <item name="android:layout_height">56dp</item>
+        <item name="android:background">?selectableItemBackground</item>
+        <item name="android:gravity">center</item>
+    </style>
+
+    <style name="iconOnBtnIconCommon">
+        <item name="android:layout_width">24dp</item>
+        <item name="android:layout_height">24dp</item>
+        <item name="android:scaleType">centerCrop</item>
+        <item name="android:layout_gravity">center</item>
+    </style>
+
+    <style name="round_img_4">
+        <item name="cornerSize">4dp</item>
+    </style>
+    <style name="round_img_12">
+        <item name="cornerSize">12dp</item>
+    </style>
+
+    <style name="round_img_16">
+        <item name="cornerSize">16dp</item>
+    </style>
+
+    <style name="round_img_22">
+        <item name="cornerSize">22dp</item>
+    </style>
+
+    <style name="round_img_24">
+        <item name="cornerSize">24dp</item>
+    </style>
+
+    <style name="circle_image">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">50%</item>
+    </style>
+
+</resources>

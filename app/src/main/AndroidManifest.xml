@@ -1,8 +1,46 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?><!--
+  ~ Copyright (c) 2026 1Tabb. All rights reserved.
+  ~ https://1tabb.com
+  ~
+  ~ SPDX-License-Identifier: LicenseRef-1Tabb-Proprietary
+  ~
+  ~ Proprietary and confidential. Contains trade secrets of 1Tabb.
+  ~ Unauthorized copying, modification, distribution, reverse engineering,
+  ~ decompilation or disassembly of this file, via any medium, is strictly
+  ~ prohibited except with prior written permission of 1Tabb.
+  -->
+
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+    <!-- AdsHub: thiếu AD_ID là mất attribution AppsFlyer + targeting AdMob -->
+    <uses-permission
+        android:name="com.google.android.gms.permission.AD_ID"
+        tools:ignore="AdvertisingIdPolicy" />
+
+    <!-- AdsHub: API 30+ cần queries để AppsFlyer phân giải install-referrer, UMP mở Custom Tabs -->
+    <queries>
+        <intent>
+            <action android:name="com.appsflyer.referrer.INSTALL_PROVIDER" />
+        </intent>
+        <intent>
+            <action android:name="com.attribution.REFERRAL_PROVIDER" />
+        </intent>
+        <intent>
+            <action android:name="android.support.customtabs.action.CustomTabsService" />
+        </intent>
+        <intent>
+            <action android:name="android.intent.action.VIEW" />
+            <category android:name="android.intent.category.BROWSABLE" />
+            <data android:scheme="https" />
+        </intent>
+    </queries>
+
     <application
+        android:name=".App"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
@@ -10,10 +48,11 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:name="com.example.template.MyApp"
         android:theme="@style/Theme.TemplateAndroid"
-        tools:replace="android:dataExtractionRules,android:fullBackupContent"
-        >
+        tools:replace="android:dataExtractionRules,android:fullBackupContent">
+
+        <!-- AAR AdsHub khai sẵn App ID TEST → tools:replace bắt buộc, thiếu là Manifest Merger fail.
+             TODO(project): thay bằng AdMob App ID thật (đồng bộ với global.admob_app_id trong assets/ads_config.json). -->
         <meta-data
             android:name="com.google.android.gms.ads.APPLICATION_ID"
             android:value="ca-app-pub-3940256099942544~3347511713"
@@ -24,16 +63,75 @@
         <meta-data
             android:name="com.google.android.gms.ads.flag.OPTIMIZE_AD_LOADING"
             android:value="true" />
+
+        <meta-data
+            android:name="com.facebook.sdk.ApplicationId"
+            android:value="@string/facebook_app_id"
+            tools:replace="android:value" />
+        <meta-data
+            android:name="com.facebook.sdk.ClientToken"
+            android:value="@string/facebook_client_token"
+            tools:replace="android:value" />
+
+        <!-- Chặn AdActivity restart khi xoay màn / đổi theme -->
         <activity
-            android:name="com.example.template.android.MainActivity"
+            android:name="com.google.android.gms.ads.AdActivity"
+            android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|screenSize|smallestScreenSize|uiMode"
+            android:exported="false"
+            android:theme="@android:style/Theme.NoTitleBar.Fullscreen"
+            tools:replace="android:configChanges, android:theme" />
+
+        <activity
+            android:name=".presentation.launch.LaunchActivity"
             android:exported="true"
-            android:windowSoftInputMode="adjustResize">
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity
+            android:name=".presentation.language.LanguageActivity"
+            android:configChanges="locale|layoutDirection"
+            android:exported="false"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize" />
+
+        <activity
+            android:name=".presentation.language.SettingLanguageActivity"
+            android:configChanges="locale|layoutDirection"
+            android:exported="false"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize" />
+
+        <activity
+            android:name=".presentation.onboarding.OnboardingActivity"
+            android:exported="false"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize" />
+
+        <activity
+            android:name=".presentation.main.MainActivity"
+            android:exported="false"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize" />
+
+        <activity
+            android:name=".presentation.welcomeback.WelcomeBackActivity"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+
+        <!-- Lưu locale app do AppCompatDelegate.setApplicationLocales() chọn (màn Language) -->
+        <service
+            android:name="androidx.appcompat.app.AppLocalesMetadataHolderService"
+            android:enabled="false"
+            android:exported="false">
+            <meta-data
+                android:name="autoStoreLocales"
+                android:value="true" />
+        </service>
+
     </application>
 
 </manifest>

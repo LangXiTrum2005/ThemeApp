@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+  ~ Copyright (c) 2026 1Tabb. All rights reserved.
+  ~ https://1tabb.com
+  ~
+  ~ SPDX-License-Identifier: LicenseRef-1Tabb-Proprietary
+  ~
+  ~ Proprietary and confidential. Contains trade secrets of 1Tabb.
+  ~ Unauthorized copying, modification, distribution, reverse engineering,
+  ~ decompilation or disassembly of this file, via any medium, is strictly
+  ~ prohibited except with prior written permission of 1Tabb.
+  -->
+
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="136dp"
+    android:height="112dp"
+    android:viewportWidth="136"
+    android:viewportHeight="112">
+    <path
+        android:fillColor="#143A86FF"
+        android:pathData="M68,6a50,50 0,1 0,0 100a50,50 0,1 0,0 -100" />
+    <path
+        android:fillColor="#233A86FF"
+        android:pathData="M68,13a43,43 0,1 0,0 86a43,43 0,1 0,0 -86" />
+    <path
+        android:fillColor="@color/primary"
+        android:pathData="M68,18a3,3 0,1 0,0 6a3,3 0,1 0,0 -6" />
+    <path
+        android:fillColor="@android:color/transparent"
+        android:pathData="M60,18C60,13.6 63.6,10 68,10C72.4,10 76,13.6 76,18M55,18C55,10.8 60.8,5 68,5C75.2,5 81,10.8 81,18"
+        android:strokeColor="@color/primary"
+        android:strokeLineCap="round"
+        android:strokeWidth="2.4" />
+    <path
+        android:fillColor="@android:color/transparent"
+        android:pathData="M68,25L44,99M68,25L92,99M51,77L85,77M47,89L89,89M55,64L81,64M59,52L77,52M45,99L91,99M52,76L84,89M84,76L52,89M56,63L80,76M80,63L56,76M60,51L76,64M76,51L60,64"
+        android:strokeColor="#79A9FF"
+        android:strokeLineCap="round"
+        android:strokeLineJoin="round"
+        android:strokeWidth="2.2" />
+    <path
+        android:fillColor="#BCD8FF"
+        android:pathData="M17,58C19,52 24,49 30,50C33,43 42,42 47,48C51,48 55,52 55,57L55,60L17,60Z" />
+    <path
+        android:fillColor="#BCD8FF"
+        android:pathData="M87,47C89,42 94,39 99,40C102,33 111,33 115,39C121,39 125,43 125,48L125,51L87,51Z" />
+    <path
+        android:fillColor="#8BB9FF"
+        android:pathData="M103,68C105,64 109,62 113,63C116,58 123,58 126,63C131,63 134,66 134,70L134,72L103,72Z" />
+    <path
+        android:fillColor="#79A9FF"
+        android:pathData="M28,30L32,34M32,30L28,34M104,25L108,29M108,25L104,29M20,78L24,82M24,78L20,82"
+        android:strokeColor="#79A9FF"
+        android:strokeLineCap="round"
+        android:strokeWidth="1.5" />
+</vector>

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+  ~ Copyright (c) 2026 1Tabb. All rights reserved.
+  ~ https://1tabb.com
+  ~
+  ~ SPDX-License-Identifier: LicenseRef-1Tabb-Proprietary
+  ~
+  ~ Proprietary and confidential. Contains trade secrets of 1Tabb.
+  ~ Unauthorized copying, modification, distribution, reverse engineering,
+  ~ decompilation or disassembly of this file, via any medium, is strictly
+  ~ prohibited except with prior written permission of 1Tabb.
+  -->
+
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:state_pressed="true">
+        <shape android:shape="rectangle">
+            <gradient
+                android:angle="0"
+                android:startColor="@color/accent_dark"
+                android:endColor="@color/accent_gradient_end" />
+            <corners android:radius="26dp" />
+        </shape>
+    </item>
+    <item>
+        <layer-list>
+            <!-- glow halo -->
+            <item android:bottom="2dp">
+                <shape android:shape="rectangle">
+                    <solid android:color="@color/accent_glow" />
+                    <corners android:radius="28dp" />
+                </shape>
+            </item>
+            <item android:left="2dp" android:right="2dp">
+                <shape android:shape="rectangle">
+                    <gradient
+                        android:angle="0"
+                        android:startColor="@color/accent_gradient_start"
+                        android:endColor="@color/accent_gradient_end" />
+                    <corners android:radius="26dp" />
+                </shape>
+            </item>
+        </layer-list>
+    </item>
+</selector>

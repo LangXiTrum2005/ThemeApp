@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+  ~ Copyright (c) 2026 1Tabb. All rights reserved.
+  ~ https://1tabb.com
+  ~
+  ~ SPDX-License-Identifier: LicenseRef-1Tabb-Proprietary
+  ~
+  ~ Proprietary and confidential. Contains trade secrets of 1Tabb.
+  ~ Unauthorized copying, modification, distribution, reverse engineering,
+  ~ decompilation or disassembly of this file, via any medium, is strictly
+  ~ prohibited except with prior written permission of 1Tabb.
+  -->
+
+<!-- AdsHub: SDK tra resource bằng getIdentifier theo TÊN, shrinkResources không được xoá. -->
+<resources xmlns:tools="http://schemas.android.com/tools"
+    tools:keep="@layout/tt_*, @anim/tt_*, @drawable/tt_*, @string/tt_*, @color/tt_*,
+    @dimen/tt_*, @integer/tt_*, @style/tt_*, @attr/tt_*,
+    @layout/kickads_*, @color/kickads_*, @id/ad_*, @id/btn_get_started,
+    @layout/layout_native_resume" />

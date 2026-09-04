@@ -1,9 +1,34 @@
-<resources xmlns:tools="http://schemas.android.com/tools">
-    <!-- Base application theme. -->
-    <style name="Base.Theme.TemplateAndroid" parent="Theme.Material3.DayNight.NoActionBar">
-        <!-- Customize your light theme here. -->
-        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+<?xml version="1.0" encoding="utf-8"?><!--
+  ~ Copyright (c) 2026 1Tabb. All rights reserved.
+  ~ https://1tabb.com
+  ~
+  ~ SPDX-License-Identifier: LicenseRef-1Tabb-Proprietary
+  ~
+  ~ Proprietary and confidential. Contains trade secrets of 1Tabb.
+  ~ Unauthorized copying, modification, distribution, reverse engineering,
+  ~ decompilation or disassembly of this file, via any medium, is strictly
+  ~ prohibited except with prior written permission of 1Tabb.
+  -->
+
+<resources>
+    <style name="Theme.TemplateAndroid" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="colorPrimary">@color/accent</item>
+        <item name="colorPrimaryDark">@color/accent_dark</item>
+        <item name="colorAccent">@color/accent</item>
+        <item name="android:colorControlHighlight">@color/accent_soft</item>
+        <item name="android:windowBackground">@color/bg_main</item>
+        <item name="android:statusBarColor">@color/bg_main</item>
+        <item name="android:navigationBarColor">@color/bg_main</item>
+        <item name="android:windowLightStatusBar">true</item>
     </style>
 
-    <style name="Theme.TemplateAndroid" parent="Base.Theme.TemplateAndroid" />
+    <style name="TransparentBottomSheetDialog" parent="Theme.Material3.Light.BottomSheetDialog">
+        <item name="bottomSheetStyle">@style/TransparentBottomSheet</item>
+    </style>
+
+    <style name="TransparentBottomSheet" parent="Widget.Material3.BottomSheet.Modal">
+        <item name="android:background">@android:color/transparent</item>
+        <item name="backgroundTint">@android:color/transparent</item>
+        <item name="android:backgroundTint">@android:color/transparent</item>
+    </style>
 </resources>

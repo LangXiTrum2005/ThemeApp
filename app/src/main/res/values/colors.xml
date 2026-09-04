@@ -1,5 +1,60 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?><!--
+  ~ Copyright (c) 2026 1Tabb. All rights reserved.
+  ~ https://1tabb.com
+  ~
+  ~ SPDX-License-Identifier: LicenseRef-1Tabb-Proprietary
+  ~
+  ~ Proprietary and confidential. Contains trade secrets of 1Tabb.
+  ~ Unauthorized copying, modification, distribution, reverse engineering,
+  ~ decompilation or disassembly of this file, via any medium, is strictly
+  ~ prohibited except with prior written permission of 1Tabb.
+  -->
+
 <resources>
-    <color name="black">#FF000000</color>
+    <!--
+      Palette nền SÁNG của luồng launch → main. Đây là điểm đổi màu duy nhất của app: layout chỉ
+      tham chiếu token, không hardcode mã màu, nên đổi bảng này là cả luồng đổi theo.
+
+      Đổi sang chủ đề tối thì phải đổi CẢ CỤM: bg_*, text_*, card_stroke và `on_accent`, kèm
+      `windowLightStatusBar` trong themes.xml và SystemBarStyle trong BaseActivity — sửa mỗi
+      bg_main là chữ cùng màu nền, mất chữ.
+    -->
+    <color name="bg_main">#FFFFFFFF</color>
+    <color name="bg_surface">#FFFFFFFF</color>
+    <color name="card_bg">#F4F6F8</color>
+    <color name="card_bg_alt">#E9EDF2</color>
+    <color name="card_stroke">#14101418</color>
+    <color name="divider">#1F101418</color>
+
+    <color name="text_primary">#101418</color>
+    <color name="text_secondary">#5A6673</color>
+    <color name="text_muted">#8B96A3</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="black">#FF000000</color>
+
+    <!-- Teal đủ đậm để chữ trắng đặt lên còn đọc được; nhạt hơn nữa là nút mất tương phản. -->
+    <color name="accent">#0E9384</color>
+    <color name="accent_dark">#0B7A6E</color>
+    <color name="accent_soft">#1F0E9384</color>
+    <color name="accent_gradient_start">#12A594</color>
+    <color name="accent_gradient_end">#0B7A6E</color>
+    <color name="accent_glow">#330E9384</color>
+
+    <!-- Màu chữ/icon đặt TRÊN nền accent (nút chính). -->
+    <color name="on_accent">#FFFFFFFF</color>
+
+    <color name="list_item_selected_bg">#E6F5F2</color>
+    <color name="transparent_white_24">#3DFFFFFF</color>
+
+    <!-- Alias dùng trong dialog no-internet -->
+    <color name="sub_text">@color/text_secondary</color>
+    <color name="primary">@color/accent</color>
+
+    <!-- AdsHub: token màu cho Native ads (giữ khớp native_styles trong assets/ads_config.json) -->
+    <color name="ad_native_bg">#F4F6F8</color>
+    <color name="ad_native_border">#14101418</color>
+    <color name="ad_native_text_primary">#101418</color>
+    <color name="ad_native_text_secondary">#5A6673</color>
+    <color name="ad_native_button_bg">#0E9384</color>
+    <color name="ad_native_button_text">#FFFFFF</color>
 </resources>

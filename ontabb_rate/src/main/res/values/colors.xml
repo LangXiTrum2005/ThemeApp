@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--
+      Màu của thẻ đánh giá cố định theo bộ nhận diện, KHÔNG lấy theo theme app: thẻ này là một
+      khối tối tự đứng, đổi màu theo app sáng/tối sẽ vỡ tương phản với ảnh Lottie đè lên nó.
+      Ngược lại nền + chữ của màn Feedback dùng theme attr (?android:colorBackground,
+      ?android:textColorPrimary) nên tự bám theo app nhúng module.
+    -->
+    <color name="ontabb_rate_title">#FFFFFF</color>
+    <color name="ontabb_rate_desc">#95A3BA</color>
+    <color name="ontabb_rate_hint">#A8B4C8</color>
+    <color name="ontabb_rate_accent">#4AD9ED</color>
+    <color name="ontabb_rate_cta_text">#06212A</color>
+    <color name="ontabb_rate_input_hint">#5C6B85</color>
+    <color name="ontabb_rate_input_stroke">#314569</color>
+</resources>

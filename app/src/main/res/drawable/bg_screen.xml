@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+  ~ Copyright (c) 2026 1Tabb. All rights reserved.
+  ~ https://1tabb.com
+  ~
+  ~ SPDX-License-Identifier: LicenseRef-1Tabb-Proprietary
+  ~
+  ~ Proprietary and confidential. Contains trade secrets of 1Tabb.
+  ~ Unauthorized copying, modification, distribution, reverse engineering,
+  ~ decompilation or disassembly of this file, via any medium, is strictly
+  ~ prohibited except with prior written permission of 1Tabb.
+  -->
+
+<!--
+  Nền chung của các màn trong luồng: nền sáng + một vệt accent rất nhạt toả từ phía trên để màn
+  không phẳng lì. Đổi chủ đề thì sửa đúng file này, layout không phải đụng tới.
+-->
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item>
+        <color android:color="@color/bg_main" />
+    </item>
+    <item>
+        <shape android:shape="rectangle">
+            <gradient
+                android:centerColor="#0A0E9384"
+                android:centerX="0.5"
+                android:centerY="0.16"
+                android:endColor="@android:color/transparent"
+                android:gradientRadius="520dp"
+                android:startColor="#1A0E9384"
+                android:type="radial" />
+        </shape>
+    </item>
+</layer-list>

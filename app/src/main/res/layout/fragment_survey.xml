@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+  ~ Copyright (c) 2026 1Tabb. All rights reserved.
+  ~ https://1tabb.com
+  ~
+  ~ SPDX-License-Identifier: LicenseRef-1Tabb-Proprietary
+  ~
+  ~ Proprietary and confidential. Contains trade secrets of 1Tabb.
+  ~ Unauthorized copying, modification, distribution, reverse engineering,
+  ~ decompilation or disassembly of this file, via any medium, is strictly
+  ~ prohibited except with prior written permission of 1Tabb.
+  -->
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg_main"
+    android:orientation="vertical">
+
+    <!-- AdsHub: slot neo cứng NGOÀI vùng scroll, không bao giờ đè nội dung -->
+    <FrameLayout
+        android:id="@+id/onb1SlotTop"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:tag="ads_slot:onb1_slot_top" />
+
+    <LinearLayout xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        android:paddingTop="16dp">
+
+        <TextView
+            style="@style/NunitoBold.24"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="22dp"
+            android:layout_marginTop="8dp"
+            android:text="@string/survey_title"
+            android:textColor="@color/text_primary" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvOptions"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_weight="1"
+            android:nestedScrollingEnabled="false"
+            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+            app:spanCount="2"
+            tools:itemCount="4"
+            tools:listitem="@layout/item_survey_option" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/btnNext"
+            style="@style/NunitoBold.16"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_button_next"
+            android:gravity="center"
+            android:paddingHorizontal="12dp"
+            android:paddingVertical="6dp"
+            android:layout_gravity="end"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginVertical="16dp"
+            android:text="@string/onboarding_next"
+            android:textAllCaps="false"
+            android:textColor="@color/accent"
+            android:visibility="invisible" />
+
+        <!-- AdsHub: vị trí CUỐI content. adsSlotOnb1ClickEnd cố ý KHÔNG gắn tag —
+             trạng thái sau khi user chọn option đầu tiên render tay. -->
+        <FrameLayout
+            android:id="@+id/adsSlotOnb1End"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:tag="ads_slot:onb1_slot_end" />
+
+        <FrameLayout
+            android:id="@+id/adsSlotOnb1ClickEnd"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
+
+    <FrameLayout
+        android:id="@+id/onb1SlotBottom"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:tag="ads_slot:onb1_slot_bottom" />
+</LinearLayout>

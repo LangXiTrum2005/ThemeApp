@@ -1,0 +1,8 @@
+<component name="CopyrightManager">
+  <settings default="1tabb">
+    <module2copyright>
+      <element module="Project Source Files" copyright="1tabb" />
+      <element module="All Changed Files" copyright="1tabb" />
+    </module2copyright>
+  </settings>
+</component>

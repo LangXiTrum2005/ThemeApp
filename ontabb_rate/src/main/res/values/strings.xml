@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--
+      Tên đều mang tiền tố ontabb_rate_ vì đây là thư viện: tên trần như "feedback" hay "close"
+      sẽ đè lên string cùng tên của app nhúng nó (resource merger ưu tiên app, nên lỗi biểu hiện
+      ra là chữ trong hộp thoại tự nhiên đổi thành chữ của app).
+    -->
+    <string name="ontabb_rate_close">Close</string>
+    <string name="ontabb_rate_back">Back</string>
+    <string name="ontabb_rate_cta">Rate us</string>
+    <string name="ontabb_rate_best_hint">The best we can get</string>
+
+    <string name="ontabb_rate_one_star">1 star</string>
+    <string name="ontabb_rate_two_stars">2 stars</string>
+    <string name="ontabb_rate_three_stars">3 stars</string>
+    <string name="ontabb_rate_four_stars">4 stars</string>
+    <string name="ontabb_rate_five_stars">5 stars</string>
+
+    <string name="ontabb_rate_initial_title">Enjoy the app?</string>
+    <string name="ontabb_rate_initial_description">Tell us what you think! Your rating makes a big difference.</string>
+    <string name="ontabb_rate_low_title">We can do better…</string>
+    <string name="ontabb_rate_low_description">Tell us what went wrong. We’re ready to improve!</string>
+    <string name="ontabb_rate_four_title">So close to perfect!</string>
+    <string name="ontabb_rate_four_description">Thanks for your rating. We’re always working to improve.</string>
+    <string name="ontabb_rate_amazing_title">Amazing!</string>
+    <string name="ontabb_rate_amazing_description">We’re thrilled that you love the app!</string>
+
+    <string name="ontabb_rate_feedback">Feedback</string>
+    <string name="ontabb_rate_help_us_improve">Help us improve</string>
+    <string name="ontabb_rate_feedback_description">Tell us what went wrong so we can make your experience better.</string>
+    <string name="ontabb_rate_feedback_hint">Write your feedback here…</string>
+    <string name="ontabb_rate_send_feedback">Send feedback</string>
+    <string name="ontabb_rate_please_enter_feedback">Please enter your feedback</string>
+    <string name="ontabb_rate_no_email_app">No email app found</string>
+    <string name="ontabb_rate_email_subject">App feedback</string>
+    <string name="ontabb_rate_email_body">Rating: %1$d/5\n\nFeedback:\n%2$s</string>
+
+    <plurals name="ontabb_rate_selected_rating">
+        <item quantity="one">You rated us %d star</item>
+        <item quantity="other">You rated us %d stars</item>
+    </plurals>
+</resources>

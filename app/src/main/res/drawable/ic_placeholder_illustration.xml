@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+  ~ Copyright (c) 2026 1Tabb. All rights reserved.
+  ~ https://1tabb.com
+  ~
+  ~ SPDX-License-Identifier: LicenseRef-1Tabb-Proprietary
+  ~
+  ~ Proprietary and confidential. Contains trade secrets of 1Tabb.
+  ~ Unauthorized copying, modification, distribution, reverse engineering,
+  ~ decompilation or disassembly of this file, via any medium, is strictly
+  ~ prohibited except with prior written permission of 1Tabb.
+  -->
+
+<!-- Ảnh minh hoạ placeholder cho onboarding / welcome. Project con thay bằng ảnh thật. -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="280dp"
+    android:height="280dp"
+    android:viewportWidth="280"
+    android:viewportHeight="280">
+    <path
+        android:fillColor="@color/card_bg"
+        android:pathData="M40,40 L240,40 A24,24 0 0 1 264,64 L264,216 A24,24 0 0 1 240,240 L40,240 A24,24 0 0 1 16,216 L16,64 A24,24 0 0 1 40,40 Z" />
+    <path
+        android:fillColor="@android:color/transparent"
+        android:pathData="M40,40 L240,40 A24,24 0 0 1 264,64 L264,216 A24,24 0 0 1 240,240 L40,240 A24,24 0 0 1 16,216 L16,64 A24,24 0 0 1 40,40 Z"
+        android:strokeColor="@color/card_stroke"
+        android:strokeWidth="2" />
+    <path
+        android:fillColor="@color/accent_soft"
+        android:pathData="M140,88 m-44,0 a44,44 0 1,0 88,0 a44,44 0 1,0 -88,0" />
+    <path
+        android:fillColor="@color/accent"
+        android:pathData="M140,88 m-22,0 a22,22 0 1,0 44,0 a22,22 0 1,0 -44,0" />
+    <path
+        android:fillColor="@color/accent_soft"
+        android:pathData="M56,160 L224,160 A8,8 0 0 1 232,168 L232,176 A8,8 0 0 1 224,184 L56,184 A8,8 0 0 1 48,176 L48,168 A8,8 0 0 1 56,160 Z" />
+    <path
+        android:fillColor="@color/accent_soft"
+        android:pathData="M84,200 L196,200 A8,8 0 0 1 204,208 L204,212 A8,8 0 0 1 196,220 L84,220 A8,8 0 0 1 76,212 L76,208 A8,8 0 0 1 84,200 Z" />
+</vector>

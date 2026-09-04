@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+  ~ Copyright (c) 2026 1Tabb. All rights reserved.
+  ~ https://1tabb.com
+  ~
+  ~ SPDX-License-Identifier: LicenseRef-1Tabb-Proprietary
+  ~
+  ~ Proprietary and confidential. Contains trade secrets of 1Tabb.
+  ~ Unauthorized copying, modification, distribution, reverse engineering,
+  ~ decompilation or disassembly of this file, via any medium, is strictly
+  ~ prohibited except with prior written permission of 1Tabb.
+  -->
+
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="10dp"
+    android:background="@drawable/bg_list_item"
+    android:clickable="true"
+    android:focusable="true"
+    android:foreground="?attr/selectableItemBackground">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingHorizontal="16dp"
+        android:paddingVertical="8dp">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/ivFlag"
+            android:layout_width="46dp"
+            android:layout_height="46dp"
+            android:background="@drawable/bg_flag"
+            android:contentDescription="@null"
+            android:padding="9dp"
+            android:scaleType="fitCenter" />
+
+        <!-- textDirection="ltr": ép mọi tên ngôn ngữ (kể cả RTL) bắt đầu từ mép trái cho thẳng hàng. -->
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvName"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="14dp"
+            android:layout_weight="1"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:textAlignment="textStart"
+            android:textColor="@color/text_primary"
+            android:textDirection="ltr"
+            android:textSize="15sp"
+            android:textStyle="bold" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/ivCheck"
+            android:layout_width="22dp"
+            android:layout_height="22dp"
+            android:layout_marginStart="12dp"
+            android:contentDescription="@null"
+            android:src="@drawable/ic_check_circle"
+            android:visibility="invisible" />
+    </LinearLayout>
+
+</FrameLayout>

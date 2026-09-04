@@ -437,8 +437,8 @@ Two entry points in one file:
   write `google-services.json` if supplied, run `:app:testDebugUnitTest`, then
   `:app:assembleRelease :app:bundleRelease` with the version and signing properties.
   Uploads `apk-<tag>`, `aab-<tag>`, `mapping-<tag>` (1-day retention).
-- **`job-firebase.yml`** — resolves the Firebase app id from `google-services.json` or the
-  `FIREBASE_APP_ID` variable, distributes every APK/AAB via a matrix, scrapes the tester
+- **`job-firebase.yml`** — reads the Firebase app id from the committed `app/google-services.json`
+  (skipping the `.dev` client), distributes every APK/AAB via a matrix, scrapes the tester
   share links and merges them into Markdown.
 - **`job-drive.yml`** — matrix-uploads every APK/AAB to the configured Drive folder.
 
@@ -452,9 +452,9 @@ Two entry points in one file:
   the `TEMPLATE_SOURCE_REPO` variable and opens a PR labelled `template_sync`. The job
   skips itself entirely while that variable is unset. It runs `actions-template-sync`
   twice — `prechecks,pull`, then a hard reset to `FETCH_HEAD`, then `push,pr` — so the
-  sync branch matches upstream exactly rather than carrying a merge commit.
+  sync branch matches upstream exactly rather than carrying a merge commit. Because of that reset the PR is a plain git merge of the upstream branch into `main`, so the app repo must share history with the template (created by cloning, not by *Use this template*); `.templatesyncignore` only takes effect if the reset step is removed and the action runs its default copy flow.
 
-  **`.templatesyncignore` decides what is protected.** Every path *not* listed there is
+  **`.templatesyncignore` decides what is protected in the copy flow.** Every path *not* listed there is
   overwritten on each sync. The shipped file protects `settings.gradle.kts`,
   `app/build.gradle.kts`, `app/src/**`, `.distribution/**` and `README.md`, while letting
   workflows, the Gradle wrapper and CI docs flow down from the template.
@@ -516,9 +516,8 @@ so asset upload and auto-merge do not apply.
 
 - `VERSION_CODE_OFFSET`: offset added to `run_number` for the version code
 - `DISCORD_MENTION`: role/user mention prefixed to Discord notifications
-- `FIREBASE_APP_ID`: Firebase app id when `google-services.json` is not available
 
-Full setup instructions are in [CI_CD_SETUP.md](CI_CD_SETUP.md).
+Full setup instructions are in [SECRETS_SETUP.md](SECRETS_SETUP.md) and [TEMPLATE_SYNC_SETUP.md](TEMPLATE_SYNC_SETUP.md).
 
 ## Key Features
 

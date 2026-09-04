@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+  ~ Copyright (c) 2026 1Tabb. All rights reserved.
+  ~ https://1tabb.com
+  ~
+  ~ SPDX-License-Identifier: LicenseRef-1Tabb-Proprietary
+  ~
+  ~ Proprietary and confidential. Contains trade secrets of 1Tabb.
+  ~ Unauthorized copying, modification, distribution, reverse engineering,
+  ~ decompilation or disassembly of this file, via any medium, is strictly
+  ~ prohibited except with prior written permission of 1Tabb.
+  -->
+
+<!--
+  Màn đổi ngôn ngữ đi từ Settings. KHÁC activity_language.xml của luồng first-open: có nút Back
+  và nút Save (LFO chặn back, bắt buộc chọn rồi mới đi tiếp), và không có khối native thứ hai
+  cho trạng thái "đã chọn".
+-->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg_main"
+    android:orientation="vertical">
+
+    <!-- AdsHub: slot neo cứng NGOÀI vùng scroll, không bao giờ đè nội dung -->
+    <FrameLayout
+        android:id="@+id/settingLanSlotTop"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:tag="ads_slot:setting_lan_slot_top" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="@drawable/bg_screen">
+
+        <LinearLayout
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingHorizontal="16dp"
+            android:paddingVertical="16dp"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/btnBack"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_icon_soft"
+                android:contentDescription="@string/back"
+                android:padding="8dp"
+                android:src="@drawable/ic_back"
+                app:tint="@color/accent" />
+
+            <TextView
+                style="@style/NunitoExtraBold.24"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="12dp"
+                android:layout_weight="1"
+                android:text="@string/language"
+                android:textColor="@color/text_primary"
+                android:textStyle="bold" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/btnSave"
+                style="@style/NunitoBold.16"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:background="@drawable/bg_icon_soft"
+                android:padding="8dp"
+                android:text="@string/save"
+                android:textColor="@color/accent" />
+
+        </LinearLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvLanguages"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="8dp"
+            android:nestedScrollingEnabled="false"
+            android:orientation="vertical"
+            android:paddingHorizontal="16dp"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintBottom_toTopOf="@+id/adsSlotSettingLanEnd"
+            app:layout_constraintTop_toBottomOf="@+id/toolbar"
+            tools:listitem="@layout/item_language" />
+
+        <!-- AdsHub: vị trí CUỐI content. Màn này không chạy ads — slot khai sẵn, config tắt. -->
+        <FrameLayout
+            android:id="@+id/adsSlotSettingLanEnd"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:tag="ads_slot:setting_lan_slot_end"
+            app:layout_constraintBottom_toBottomOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <FrameLayout
+        android:id="@+id/settingLanSlotBottom"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:tag="ads_slot:setting_lan_slot_bottom" />
+</LinearLayout>

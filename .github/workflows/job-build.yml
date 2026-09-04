@@ -1,4 +1,14 @@
-
+#
+# Copyright (c) 2026 1Tabb. All rights reserved.
+# https://1tabb.com
+#
+# SPDX-License-Identifier: LicenseRef-1Tabb-Proprietary
+#
+# Proprietary and confidential. Contains trade secrets of 1Tabb.
+# Unauthorized copying, modification, distribution, reverse engineering,
+# decompilation or disassembly of this file, via any medium, is strictly
+# prohibited except with prior written permission of 1Tabb.
+#
 
 name: Job Build
 
@@ -19,7 +29,7 @@ on:
         type: string
     outputs:
       apk_artifact:
-        description: 'APK artifacts name (contains both adTest and adsReal APKs)'
+        description: 'APK artifact name'
         value: ${{ jobs.build.outputs.apk_artifact }}
       aab_artifact:
         description: 'AAB artifact name'
@@ -85,8 +95,8 @@ jobs:
           ANDROID_KEY_PASSWORD: ${{ secrets.ANDROID_KEY_PASSWORD }}
         run: |
           chmod +x ./gradlew
-          # Build both adsTest and adsReal APKs, but only adsReal AAB
-          ./gradlew :app:assembleAdsTestRelease :app:assembleAdsRealRelease :app:bundleAdsRealRelease \
+          # Build release APK + AAB. Ads test/real do use_test_ads trong ads_config (Remote Config) quyet dinh, khong tach flavor.
+          ./gradlew :app:assembleRelease :app:bundleRelease \
             --parallel --build-cache \
             -Dorg.gradle.jvmargs="-Xmx4g" \
             -PciVersionCode="$CI_VERSION_CODE" \
@@ -100,16 +110,14 @@ jobs:
         uses: actions/upload-artifact@v6
         with:
           name: apk-${{ inputs.tag_name }}
-          path: |
-            app/build/outputs/apk/adsTest/release/*.apk
-            app/build/outputs/apk/adsReal/release/*.apk
+          path: app/build/outputs/apk/release/*.apk
           retention-days: 1
 
       - name: Upload AAB
         uses: actions/upload-artifact@v6
         with:
           name: aab-${{ inputs.tag_name }}
-          path: app/build/outputs/bundle/adsRealRelease/*.aab
+          path: app/build/outputs/bundle/release/*.aab
           retention-days: 1
 
       - name: Upload Mapping
@@ -117,6 +125,6 @@ jobs:
         with:
           name: mapping-${{ inputs.tag_name }}
           path: |
-            app/build/outputs/mapping/adsRealRelease/mapping.txt
-            app/build/outputs/mapping/adsRealRelease/resources.txt
+            app/build/outputs/mapping/release/mapping.txt
+            app/build/outputs/mapping/release/resources.txt
           retention-days: 1

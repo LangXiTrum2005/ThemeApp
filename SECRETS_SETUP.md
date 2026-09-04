@@ -429,7 +429,7 @@ sync — xem [TEMPLATE_SYNC_SETUP.md](TEMPLATE_SYNC_SETUP.md).
 Tối thiểu để chạy `/build rc`:
 
 - [ ] Workflow permissions = Read and write (kiểm cả cấp org nếu bị xám)
-- [ ] 4 secret `SIGNING_*`
+- [ ] 4 secret ký (nhóm 1): `ANDROID_KEYSTORE_BASE64`, `ANDROID_KEY_ALIAS`, `ANDROID_KEYSTORE_PASSWORD`, `ANDROID_KEY_PASSWORD`
 - [ ] `GH_PAT`
 - [ ] 3 label `release` / `tracking` / `release-drafter`
 
@@ -452,7 +452,7 @@ GitHub Free không share được secret cấp org, nên repo mới phải **dá
 | `DISCORD_WEBHOOK` | Dán lại nếu báo chung kênh; app riêng kênh thì tạo webhook mới |
 | `GG_DRIVE_CLIENT_ID` / `_CLIENT_SECRET` / `_REFRESH_TOKEN` | Dán lại giá trị cũ — phần OAuth (nhóm 6) chỉ làm **một lần trong đời** |
 | `GG_DRIVE_FOLDER_ID` | **Mới** — tạo folder Drive cho app, lấy ID sau `/folders/` |
-| 4 secret `SIGNING_*` | **Mới** — mỗi app một keystore riêng (nhóm 1) |
+| `ANDROID_KEYSTORE_BASE64` / `ANDROID_KEY_ALIAS` / `ANDROID_KEYSTORE_PASSWORD` / `ANDROID_KEY_PASSWORD` | **Mới** — mỗi app một keystore riêng (nhóm 1) |
 | `FIREBASE_DISTRIBUTION_CREDENTIAL_JSON` | **Mới** — mỗi app một Firebase project → service account mới (nhóm 4) |
 | Variable `VERSION_CODE_OFFSET` | **Mới** — theo versionCode app đang có trên Play |
 | 3 label + Workflow permissions | Làm lại theo nhóm 0 và 3 |

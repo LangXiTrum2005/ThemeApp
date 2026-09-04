@@ -34,4 +34,4 @@ README.md
 #   gradle/wrapper/**         wrapper version bumps
 #   .gitignore
 #   renovate.json
-#   CI_CD_SETUP.md, GITHUB_WORKFLOWS_README.md, github_workflow.md
+#   SECRETS_SETUP.md, TEMPLATE_SYNC_SETUP.md, GITHUB_WORKFLOWS_README.md, github_workflow.md

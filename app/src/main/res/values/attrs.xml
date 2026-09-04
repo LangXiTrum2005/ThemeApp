@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+  ~ Copyright (c) 2026 1Tabb. All rights reserved.
+  ~ https://1tabb.com
+  ~
+  ~ SPDX-License-Identifier: LicenseRef-1Tabb-Proprietary
+  ~
+  ~ Proprietary and confidential. Contains trade secrets of 1Tabb.
+  ~ Unauthorized copying, modification, distribution, reverse engineering,
+  ~ decompilation or disassembly of this file, via any medium, is strictly
+  ~ prohibited except with prior written permission of 1Tabb.
+  -->
+
+<resources>
+    <!--
+      Thuộc tính của AppButton. Tiền tố `ab` để không đụng tên với attr của Material/AppCompat.
+    -->
+    <declare-styleable name="AppButton">
+        <attr name="abText" format="string" />
+        <!-- Icon riêng của hành động, đặt trước chữ. Bỏ trống thì không chiếm chỗ. -->
+        <attr name="abIcon" format="reference" />
+        <!--
+          Icon quảng cáo, đặt sau chữ. Bật ở MỌI nút mà bấm vào sẽ mở quảng cáo (reward, inter,
+          native full-screen) để user biết trước — bấm xong mới thấy ads là trải nghiệm tệ và
+          dễ bị Play soi.
+        -->
+        <attr name="abShowAdIcon" format="boolean" />
+        <attr name="abStyle" format="enum">
+            <!-- Nút chính: nền gradient accent, chữ trắng. -->
+            <enum name="primary" value="0" />
+            <!-- Nút phụ: viền accent, nền trong suốt. -->
+            <enum name="outline" value="1" />
+            <!-- Chỉ chữ, không nền — dùng cho hành động phụ như "Next", "Skip". -->
+            <enum name="text" value="2" />
+        </attr>
+    </declare-styleable>
+</resources>

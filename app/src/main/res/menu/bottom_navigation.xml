@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+  ~ Copyright (c) 2026 1Tabb. All rights reserved.
+  ~ https://1tabb.com
+  ~
+  ~ SPDX-License-Identifier: LicenseRef-1Tabb-Proprietary
+  ~
+  ~ Proprietary and confidential. Contains trade secrets of 1Tabb.
+  ~ Unauthorized copying, modification, distribution, reverse engineering,
+  ~ decompilation or disassembly of this file, via any medium, is strictly
+  ~ prohibited except with prior written permission of 1Tabb.
+  -->
+
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/navHome" android:icon="@drawable/ic_home" android:title="@string/tab_home" />
+    <item android:id="@+id/navTab2" android:icon="@drawable/ic_tab2" android:title="@string/tab_2" />
+    <item android:id="@+id/navTab3" android:icon="@drawable/ic_tab3" android:title="@string/tab_3" />
+    <item android:id="@+id/navSettings" android:icon="@drawable/ic_settings" android:title="@string/tab_settings" />
+</menu>

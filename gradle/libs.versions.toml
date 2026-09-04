@@ -30,6 +30,7 @@ coroutines = "1.11.0"
 coilNetworkOkhttp = "3.6.0"
 glide = "5.0.9"
 lottie = "6.7.1"
+playServicesAdsIdentifier = "18.3.0"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -53,6 +54,7 @@ firebase-perf = { group = "com.google.firebase", name = "firebase-perf" }
 ktlint = { group = "com.pinterest.ktlint", name = "ktlint-cli", version = "1.8.0" }
 ktlint-composeRules = { group = "io.nlopez.compose.rules", name = "ktlint", version = "0.5.3" }
 facebook-android-sdk = { module = "com.facebook.android:facebook-android-sdk", version.ref = "facebookAndroidSdk" }
+play-services-ads-identifier = { module = "com.google.android.gms:play-services-ads-identifier", version.ref = "playServicesAdsIdentifier" }
 adshub = { module = "com.onetabb:adshub", version.ref = "adshub" }
 androidx-lifecycle-viewmodel = { group = "androidx.lifecycle", name = "lifecycle-viewmodel-ktx", version.ref = "lifecycle" }
 androidx-lifecycle-livedata = { group = "androidx.lifecycle", name = "lifecycle-livedata-ktx", version.ref = "lifecycle" }

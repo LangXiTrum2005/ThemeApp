@@ -17,6 +17,9 @@
 -keepattributes InnerClasses,EnclosingMethod
 -keepattributes Exceptions
 
+# Keep Google AdvertisingIdClient classes
+-keep class com.google.android.gms.ads.identifier.** { *; }
+
 # Parcelable models need CREATOR fields for Android framework unparceling.
 -keepclassmembers class * implements android.os.Parcelable {
     public static final android.os.Parcelable$Creator CREATOR;

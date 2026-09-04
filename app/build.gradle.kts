@@ -126,6 +126,7 @@ dependencies {
     // ads
     implementation(libs.play.services.ads.api)
     implementation(libs.facebook.android.sdk)
+    implementation(libs.play.services.ads.identifier)
     implementation(libs.adshub)
     implementation("com.google.ads.mediation:facebook:6.22.0.0")
     implementation("com.google.ads.mediation:pangle:8.2.0.4.0")

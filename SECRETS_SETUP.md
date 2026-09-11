@@ -419,8 +419,8 @@ chối bản upload có versionCode nhỏ hơn hoặc bằng bản đã có.
 
 Không tạo variable này cũng chạy, `ci.yml` mặc định về `0`.
 
-Hai variable `TEMPLATE_SOURCE_REPO` và `TEMPLATE_SOURCE_BRANCH` chỉ cần khi dùng template
-sync — xem [TEMPLATE_SYNC_SETUP.md](TEMPLATE_SYNC_SETUP.md).
+Template sync **không cần** secret hay variable nào ở repo app: token lấy từ action dùng
+chung của org, xem [TEMPLATE_SYNC_SETUP.md](TEMPLATE_SYNC_SETUP.md).
 
 ---
 
@@ -458,6 +458,7 @@ GitHub Free không share được secret cấp org, nên repo mới phải **dá
 | 3 label + Workflow permissions | Làm lại theo nhóm 0 và 3 |
 | `.distribution/*.txt`, `google-services.json`, `applicationId` | Sửa theo app |
 | Firebase Console: Get started + tạo group | Làm lại theo mục 4.6 |
+| Template sync | **Không cần gì** — token lấy từ action dùng chung của org, xem [TEMPLATE_SYNC_SETUP.md](TEMPLATE_SYNC_SETUP.md) |
 
 > ⚠️ GitHub **không cho xem lại** giá trị secret đã lưu. Các giá trị dùng lại
 > (PAT, bộ 3 Drive OAuth) phải cất vào password manager ngay từ lần tạo đầu,

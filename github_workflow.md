@@ -448,9 +448,12 @@ Two entry points in one file:
   and Android build caches so tag builds start warm.
 - **`remove-old-artifacts.yml`** — daily at 01:00 UTC, deletes artifacts older than 1 day
   while keeping the 5 most recent.
-- **`sync-template.yml`** — daily at 02:00 UTC, pulls changes from the repository named by
-  the `TEMPLATE_SOURCE_REPO` variable and opens a PR labelled `template_sync`. The job
-  skips itself entirely while that variable is unset. It runs `actions-template-sync`
+- **`sync-template.yml`** — daily at 02:00 UTC, pulls changes from the upstream template
+  (`nitrox-tech/core-template-android`, hardcoded in the workflow `env`) and opens a PR
+  labelled `template_sync`. No secret or variable is needed in the app repo: the token is
+  minted by the org-shared action `nitrox-tech/github-app-token`, which holds the
+  *Template Sync Bot* GitHub App key — see [TEMPLATE_SYNC_SETUP.md](TEMPLATE_SYNC_SETUP.md).
+  The job skips itself on the template repo. It runs `actions-template-sync`
   twice — `prechecks,pull`, then a hard reset to `FETCH_HEAD`, then `push,pr` — so the
   sync branch matches upstream exactly rather than carrying a merge commit. Because of that reset the PR is a plain git merge of the upstream branch into `main`, so the app repo must share history with the template (created by cloning, not by *Use this template*); `.templatesyncignore` only takes effect if the reset step is removed and the action runs its default copy flow.
 

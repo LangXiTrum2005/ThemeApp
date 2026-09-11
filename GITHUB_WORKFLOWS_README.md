@@ -281,8 +281,8 @@ built-in token do not trigger other workflows. Check the PAT secret.
 
 **Template sync does nothing:**
 
-- The `TEMPLATE_SOURCE_REPO` variable is unset — the job skips itself by design
-- `TEMPLATE_SYNC_TOKEN` must be able to *read* the template repo and *push* to this one
+- On the template repo itself (`nitrox-tech/core-template-android`) the job skips by design
+- The token is minted by the org-shared action `nitrox-tech/github-app-token`; if that step fails, the *Template Sync Bot* GitHub App is not installed on this repo or the action repo is not shared with the org — see [TEMPLATE_SYNC_SETUP.md](TEMPLATE_SYNC_SETUP.md)
 - A run that reports "no changes" is normal; the push step is `continue-on-error`
 
 **Template sync overwrote my app code:**

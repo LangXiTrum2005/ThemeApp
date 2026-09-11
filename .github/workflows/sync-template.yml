@@ -12,13 +12,19 @@
 
 name: Sync Upstream Template
 
-# Pulls changes from an upstream template repository and opens a PR with them.
-# Setup (GitHub App, secrets, variables): see TEMPLATE_SYNC_SETUP.md
-# What does / does not get overwritten: see .templatesyncignore
+# Runs in every app repository created from the template: pulls the template's
+# latest commits and opens a PR with them.
+#
+# Nothing to configure in the app repo. The token is minted by the org-shared
+# action nitrox-tech/github-app-token, which holds the "Template Sync Bot"
+# GitHub App key. One-time org setup: see TEMPLATE_SYNC_SETUP.md
+#
+# The sync PR is a plain git merge of the template branch, so the app repo must
+# share history with the template (created by cloning, not "Use this template").
 
 on:
   schedule:
-    - cron: '0 2 * * *'  # Run at 2 AM UTC daily
+    - cron: '0 2 * * *'  # 02:00 UTC daily
   workflow_dispatch:
 
 concurrency:
@@ -29,27 +35,23 @@ permissions:
   contents: write
   pull-requests: write
 
+env:
+  TEMPLATE_SOURCE_REPO: nitrox-tech/core-template-android
+  TEMPLATE_SOURCE_BRANCH: main
+
 jobs:
   sync:
-    # Without this guard the job fails every night on a repo with no upstream.
-    if: vars.TEMPLATE_SOURCE_REPO != ''
+    # The template must never sync from itself. Keep this in step with `env`
+    # above: a job-level `if` cannot read the env context.
+    if: github.repository != 'nitrox-tech/core-template-android'
     runs-on: ubuntu-latest
     steps:
-      # GITHUB_TOKEN cannot be used here: the job needs read access to a *different*
-      # repository (the template), which the built-in token never has.
-      #
-      # The App must be installed on BOTH this repo and the template repo. Leaving
-      # `repositories` unset scopes the token to every repo the installation covers.
-      #
-      # Simpler alternative — delete this step and pass `secrets.TEMPLATE_SYNC_TOKEN`
-      # (a classic PAT with `repo` scope) wherever the token is referenced below.
+      # GITHUB_TOKEN cannot be used here: it has no access to the template repo,
+      # it can never get the `workflows` permission needed to push changes under
+      # .github/workflows, and a PR it opens would not trigger CI.
       - name: Generate token to read from source repo
         id: generate_token
-        uses: actions/create-github-app-token@v3
-        with:
-          app-id: ${{ secrets.TEMPLATE_SYNC_APP_ID }}
-          private-key: ${{ secrets.TEMPLATE_SYNC_PRIVATE_KEY }}
-          owner: ${{ github.repository_owner }}
+        uses: nitrox-tech/github-app-token@v1
 
       - name: Checkout
         uses: actions/checkout@v6
@@ -57,13 +59,17 @@ jobs:
           token: ${{ steps.generate_token.outputs.token }}
           fetch-depth: 0
 
+      # source_gh_token reads the template; target_gh_token pushes the sync branch
+      # and opens the PR here. Both must be the App token (target_gh_token defaults
+      # to GITHUB_TOKEN, whose PRs do not trigger workflows).
       - name: Fetch upstream changes
         uses: AndreasAugustin/actions-template-sync@v2
         id: pre-check
         with:
           source_gh_token: ${{ steps.generate_token.outputs.token }}
-          source_repo_path: ${{ vars.TEMPLATE_SOURCE_REPO }}
-          upstream_branch: ${{ vars.TEMPLATE_SOURCE_BRANCH || 'main' }}
+          target_gh_token: ${{ steps.generate_token.outputs.token }}
+          source_repo_path: ${{ env.TEMPLATE_SOURCE_REPO }}
+          upstream_branch: ${{ env.TEMPLATE_SOURCE_BRANCH }}
           pr_labels: template_sync
           steps: "prechecks,pull"
 
@@ -81,7 +87,8 @@ jobs:
         continue-on-error: true
         with:
           source_gh_token: ${{ steps.generate_token.outputs.token }}
-          source_repo_path: ${{ vars.TEMPLATE_SOURCE_REPO }}
-          upstream_branch: ${{ vars.TEMPLATE_SOURCE_BRANCH || 'main' }}
+          target_gh_token: ${{ steps.generate_token.outputs.token }}
+          source_repo_path: ${{ env.TEMPLATE_SOURCE_REPO }}
+          upstream_branch: ${{ env.TEMPLATE_SOURCE_BRANCH }}
           pr_labels: template_sync
           steps: "push,pr"

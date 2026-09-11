@@ -21,7 +21,7 @@ on:
 jobs:
   warm_cache:
     name: Warm Gradle Cache
-    runs-on: ubuntu-latest
+    runs-on: blacksmith-4vcpu-ubuntu-2404
     steps:
       - name: Checkout Code
         uses: actions/checkout@v6

@@ -49,7 +49,7 @@ on:
 jobs:
   build:
     name: Build Artifacts
-    runs-on: ubuntu-latest
+    runs-on: blacksmith-4vcpu-ubuntu-2404
     outputs:
       apk_artifact: apk-${{ inputs.tag_name }}
       aab_artifact: aab-${{ inputs.tag_name }}

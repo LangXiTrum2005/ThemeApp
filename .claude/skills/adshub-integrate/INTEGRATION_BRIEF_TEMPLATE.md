@@ -50,7 +50,7 @@ Chỉ ghi những gì cột Mô tả chưa nói rõ, ví dụ:
 ```
 - Luồng màn: Splash → LFO1 → LFO2 → ONB1 → Home (app mới) / Splash → Home (app cũ)
 - Resume app: dùng native fullscreen "welcome back" / không dùng
-- Màn cấm fullscreen: payment, subscription
-- Capping đặc biệt: cooldown fullscreen 30s, max/ngày…
+- Màn cấm fullscreen: payment/subscription (nếu có) + onboarding trang 2 trở đi và welcome (mặc định nếu không ghi)
+- Capping đặc biệt: chỉ ghi nếu muốn KHÁC mặc định (mặc định global/safety mở hết: cooldown 0, max/ngày 999 — tần suất do show_rules từng inventory quyết)
 - App multi-Activity hay single-Activity, XML Views hay Compose (AI tự phát hiện được, chỉ ghi nếu đặc biệt)
 ```

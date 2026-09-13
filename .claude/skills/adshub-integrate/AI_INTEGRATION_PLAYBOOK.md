@@ -188,8 +188,9 @@ Kèm theo:
    - "ở các màn: A / B / C" → nhiều slot (mỗi màn một slot) cùng trỏ 1 inventory.
    - "tần suất 1,3,5,7…" → show_rule `action_pattern: "odd"`; "2,4,6,8…" → `"even"`.
    - "Lần đầu vào màn X … / lần thứ 2 trở đi …" → 2 inventory dùng CHUNG 1 waterfall, mỗi inventory một show_rule (odd/even), trigger routing bằng `rules[]` + `user_property` (xem cặp `inv_inter_splash`/`inv_inter_splash_2nd` trong template).
-   - "welcome back"/"resume"/"màn hình chờ mở lại app" → nối vào trigger cứng `app_open_on_resume` (`native_full_screen`, style `welcome_back`, `refresh_policy: "on_resume"`).
+   - "welcome back"/"resume"/"màn hình chờ mở lại app" → nối vào trigger cứng `app_open_on_resume` (`native_full_screen`, style `welcome_back`, `refresh_policy: "on_resume"`). **MẶC ĐỊNH BẮT BUỘC:** trigger này luôn kèm `"trigger": { "type": "not_on_screens", "not_on_screens": [...] }` liệt kê ĐỦ screen id của luồng đầu — splash, language, onboarding (mọi trang), welcome — để resume ad không bao giờ nổ khi user chưa qua phễu (điều kiện này chỉ chặn resume, không đụng inter/native-full có plan trong onboarding). Ghi screen id đầy đủ (`lan_view`, `onb1_view`…), KHÔNG ghi prefix ngắn (`lan`, `onb`) vì SDK so `contains` dễ dính nhầm màn khác. Danh sách được đồng bộ lại ở Phase 4.6 khi `AdsScreen` chốt đủ màn.
 7. Sheet không nói gì về luồng splash/onboarding → dùng khung PLAN CHUẨN của template cho phần thiếu, hoặc hỏi người dùng 1 câu duy nhất về luồng màn.
+8. **Dựng block `screens` NGAY TRONG BƯỚC NÀY (không để trống, không để sau):** với mỗi screen id đã xuất hiện (từ Mô tả sheet + luồng màn), tạo `"<screen_id>": { "triggers": [...], "slots": [...] }` theo thuật toán cơ học: `triggers` = mọi trigger có `"screen": "<screen_id>"`; `slots` = mọi slot có prefix `<màn>_slot_*` mà `<màn>_view` == screen_id, cộng slot dùng chung (vd `splash_slot_bottom` liệt kê ở cả `splash_view_1` lẫn `splash_view_2`; `other_slot_bottom` ở mọi màn phụ có gắn nó). Màn không ads → `{ "triggers": [], "slots": [] }`. Trigger cấp app (`"screen": "app"`) KHÔNG đưa vào. Block này sẽ được ĐỒNG BỘ LẠI ở Phase 4.6 khi `AdsScreen` chốt đủ mọi màn — nhưng ngay Phase 3 đã phải có nội dung thật, `"screens": {}` là SAI.
 
 ### 3.1. Các bước dựng file
 
@@ -207,10 +208,13 @@ Kèm theo:
    - `app_open_on_resume` là **trigger ID CỨNG** SDK tự bắn khi app quay lại foreground — không đổi tên. Resume ad kiểu nhà = `native_full_screen` + style `welcome_back` + `refresh_policy: "on_resume"`. Trigger `app_open` (cold start) thường `enabled: false` vì Splash đã có inter.
    - Điều kiện theo user property: `{ "type": "user_property", "variable_name": "...", "variable_operator": "==", "variable_value": ... }` — dùng trong `load_conditions` (inventory) hoặc `rules[].conditions` (trigger/slot routing).
    - `preload_triggers` rỗng = KHÔNG tự preload; phối hợp `preload_after_show` trên trigger fullscreen trước đó + fallback `preloadAndAwait()` phía app.
-   - Block `variables`/`screens` chỉ là tài liệu cho AdOps (SDK `ignoreUnknownKeys`).
+   - **Block `screens` là BẮT BUỘC PHẢI CÓ** (dù SDK không parse — `ignoreUnknownKeys`): mục lục dạng `"<screen_id>": { "triggers": [...], "slots": [...] }` cho **TẤT CẢ màn của app, kể cả màn không có ads** (2 mảng rỗng). Đây là bản đồ AdOps đọc trên Remote Config và là bản đối chiếu 1-1 với `AdsScreen` cho checklist Phase 7. Trigger cấp app (`app_open`, `app_open_on_resume`) KHÔNG nằm trong screens. Block `variables` cũng là tài liệu AdOps tương tự.
+   - **Mặc định chuẩn `global` + `safety_rules` + `tracking` (dùng đúng số của template, KHÔNG tự chế):** `global`: `global_fullscreen_cooldown_sec` = `0`, `max_fullscreen_per_day` = `999`, `max_concurrent_ad_requests` = `999`, `ump_timeout_ms` = `15000`. `safety_rules`: 3 interval (`min_interstitial_interval_sec`, `min_app_open_interval_sec`, `back_to_back_interval_sec`) = `0`, `max_fullscreen_per_session_hard_limit` = `99`. Nghĩa là mọi giãn cách/capping cấp global và safety đều MỞ — tần suất thực tế điều khiển hoàn toàn bằng `show_rules` gắn vào từng inventory; AI không được "sửa giúp" các số global/safety này để tự thêm giãn cách.
+   - **Mặc định chuẩn cho MỌI `show_rule` mới = mở hết:** `max_per_session: 999`, `max_per_day: 999`, `interval_sec: 0`, `show_only_after_background_sec: 0`; KHÔNG ghi `first_show_delay_sec`, `action_count_required`, `max_per_screen`, `action_pattern` (bỏ trống = không delay / không đếm / không giới hạn / tất cả các lần). Chỉ thêm ràng buộc khi cột Mô tả của sheet yêu cầu rõ (vd "tần suất 1,3,5,7" → `action_pattern: "odd"`). AdOps siết thêm sau qua Remote Config. `tracking`: bật đủ 5 cờ `enabled`/`send_trigger_event`/`send_waterfall_event`/`send_show_event`/`send_revenue_event`, `hash_ad_unit_id: false`. `block_fullscreen_on_screens`: CHỈ giữ từ khoá kiểu tên Activity `payment`, `subscription` (nếu app có) — SDK so khớp `activity.javaClass.simpleName` (tên class Activity, contains, lowercase), KHÔNG phải screen id, nên ghi `onb2_view`/`welcome_view` vào đây là vô tác dụng, và nó chặn MỌI fullscreen trên màn đó (kể cả inter/native-full có plan). Chặn theo màn luồng đầu (onboarding/language/welcome) làm ở cấp trigger bằng `not_on_screens` — xem luật resume ở 3.0 và bẫy #15.
    - **Trigger "đếm ngầm"**: mọi điểm điều hướng nên khai trigger và app luôn gọi `triggerAds()`, kể cả chỗ chưa muốn hiện ads → để `enabled: false, inventory_id: ""`. ActionTracker vẫn cộng lượt; sau này AdOps bật ads chỉ bằng Remote Config, không cần build lại app.
-5. Dev để `use_test_ads: true`; nhắc người dùng chuyển `false` khi release (qua RC hoặc file assets).
-6. Validate JSON bằng cách parse thử (python/jq) trước khi kết thúc.
+5. **Kiểm block `screens` trước khi rời Phase 3:** `screens` phải tồn tại và có entry cho MỌI màn đã biết đến lúc này; chạy đoạn kiểm cơ học ở Phase 7 mục 2 ngay bây giờ. `screens` thiếu hoặc `{}` → chưa xong Phase 3.
+6. Dev để `use_test_ads: true`; nhắc người dùng chuyển `false` khi release (qua RC hoặc file assets).
+7. Validate JSON bằng cách parse thử (python/jq) trước khi kết thúc.
 
 ---
 
@@ -455,6 +459,17 @@ Quy tắc khung:
 | **Native trong RecyclerView / list** | Màn có list item → chuẩn hoá 2 slot: **`<màn>_slot_1st_item`** = 1 ad ở ĐẦU danh sách (adapter chèn ad item ở vị trí 0, trước item thật đầu tiên) và **`<màn>_slot_3rd_item`** = ad chèn giữa, SAU item thật thứ 3 (list hiển thị: ad → item1 → item2 → item3 → ad → item4…). Item layout dùng tag `list_ads_slot:<slot_id>` (KHÔNG phải `ads_slot:`); adapter `onBind` gọi `AdsSlotScanner.processSingleSlot(screenId, slotId, container)`, `onViewRecycled` gọi `removeSlotFromRegistry(slotId)`. Không gọi `AdsController.processInlineSlot` trực tiếp. |
 | **Compose** (app Compose) | Slot: composable `AdsHubSlot` (tag `compose_ads_slot:` + `AdsSlotScanner.processSingleSlot`) và nút trigger `AdsHubClickableBox` — code mẫu trong `ADSHUB_DEV_GUIDE.md` (kit) mục 3 bước 3 và mục 4.3. **Quy tắc log đủ full các màn ở Compose:** mỗi destination gọi `AdsBootstrap.notifyScreenEnter(screenId)` trong `LaunchedEffect(Unit)` (đã kèm logScreenView + kích preload) — kể cả destination không có ads. Single-Activity Compose có thể giữ `useZeroFlashNavigation = true` (xem chú thích Zero-Flash trong `AdsBootstrap.template.kt`). |
 
+### 4.6. Đồng bộ lại block `screens` sau khi chốt `AdsScreen` (BẮT BUỘC — bước cuối của Phase 4)
+
+Phase 3 dựng `screens` khi mới biết màn từ sheet; đến đây `AdsScreen` (4.1) + bảng map (4.0) + audit "log đủ full màn" mới cho danh sách màn ĐẦY ĐỦ (kể cả màn không ads). Vì vậy bước này bắt buộc, không được bỏ:
+
+1. Mở lại `assets/ads_config.json`: với MỖI hằng số trong `AdsScreen` phải có đúng 1 key trong `screens`. Màn mới phát hiện trong Phase 4 (settings, payment, detail…) → thêm entry `{ "triggers": [], "slots": [] }` hoặc điền trigger/slot vừa gắn ở màn đó.
+2. Đối chiếu ngược: mọi trigger `<màn>_click_<nút>` vừa khai (kể cả `enabled:false` đếm ngầm) phải nằm trong `screens["<màn>_view"].triggers`; mọi slot vừa gắn tag trong layout phải nằm trong `screens["<màn>_view"].slots`.
+3. Chạy đoạn kiểm cơ học ở Phase 7 mục 2. Số key của `screens` == số màn trong `AdsScreen`; lệch một là chưa xong.
+4. **Đồng bộ `not_on_screens` của `app_open_on_resume`:** sau khi biết đủ màn, danh sách phải chứa ĐỦ mọi screen id thuộc luồng đầu (splash, language, mọi trang onboarding, welcome) — màn luồng đầu mới phát hiện ở Phase 4 phải được thêm vào; mọi entry phải là key có thật trong `screens`.
+
+Lý do phải làm 2 lần (Phase 3 + 4.6): lỗi thực tế đã gặp — AI sinh config trước khi biết đủ màn rồi không quay lại, kết quả `screens` thiếu hoặc rỗng.
+
 ---
 
 ## Phase 5 — ProGuard / shrinkResources / ResChiper
@@ -538,6 +553,24 @@ Hướng dẫn người dùng sau khi tích hợp: Firebase Console → Remote C
    - [ ] **Log đủ FULL tất cả các màn:** liệt kê mọi Activity/Fragment/destination của app rồi đối chiếu — màn nào cũng có hằng số trong `AdsScreen` và có `adsScreenId`/`bindScreen` (hoặc `notifyScreenEnter` với trạng thái render tay), KỂ CẢ màn không có ads. Không màn nào bị bỏ sót
    - [ ] **Bảng map 4.0 đầy đủ:** mỗi màn logic của plan đã chỉ đích danh Activity/Fragment/trạng thái thật + pattern gắn; màn chưa tồn tại được đánh dấu TODO, không màn logic nào bị gắn nhầm chỗ
    - [ ] **Giải phẫu màn chuẩn:** mọi màn có `slot_top` + `slot_bottom` neo cứng ngoài vùng scroll (không overlay đè content); màn có content cuộn có `slot_start`/`slot_end`; màn có list có `slot_1st_item`/`slot_3rd_item`; TẤT CẢ đều khai trong config (chưa dùng thì `enabled:false`)
+   - [ ] **Block `screens` đầy đủ (điều kiện FAIL cứng):** `screens` thiếu, `{}`, hoặc số key ≠ số màn trong `AdsScreen` → CHƯA ĐƯỢC BÁO XONG. Kiểm cơ học bằng đoạn python sau (chạy thật, dán kết quả vào báo cáo cuối):
+     ```python
+     import json; d = json.load(open('app/src/main/assets/ads_config.json', encoding='utf-8'))
+     sc = d.get('screens') or {}; assert sc, 'screens THIEU hoac RONG'
+     for t, v in d['triggers'].items():
+         s = v.get('screen'); assert s == 'app' or (s in sc and t in sc[s]['triggers']), f'trigger {t} chua nam trong screens[{s}]'
+     used = {x for v in sc.values() for x in v['slots']}
+     miss = [s for s in d['slots'] if s not in used]; assert not miss, f'slot chua gan vao man nao: {miss}'
+     for k, v in sc.items():
+         for x in v['triggers']: assert x in d['triggers'], f'{k}: trigger la {x}'
+         for x in v['slots']: assert x in d['slots'], f'{k}: slot la {x}'
+     r = d['triggers'].get('app_open_on_resume')
+     if r and r.get('enabled'):
+         cond = r.get('trigger') or {}; nos = cond.get('not_on_screens') or []
+         assert cond.get('type') == 'not_on_screens' and nos, 'app_open_on_resume THIEU not_on_screens luong dau'
+         bad = [x for x in nos if x not in sc]; assert not bad, f'not_on_screens chua screen id khong co trong screens: {bad}'
+     print('screens OK:', len(sc), 'man')
+     ```
    - [ ] **Phủ trigger toàn bộ nút:** liệt kê mọi nút bấm/điểm click trong app rồi đối chiếu — nút nào cũng đi qua `triggerAds` với trigger có trong config (kể cả `enabled:false` đếm ngầm), không nút nào gọi thẳng hành động
    - [ ] Manifest có APPLICATION_ID + `tools:replace`
    - [ ] `use_test_ads: true` (dev) + TODO list các ID còn thiếu
@@ -564,3 +597,4 @@ Hướng dẫn người dùng sau khi tích hợp: Firebase Console → Remote C
 | 12 | `initBilling` không tồn tại | API đã bị vô hiệu trong SDK → dùng `AdsController.setPurchasedUserStatus(boolean)` |
 | 13 | Resume ad không show dù config đúng | `AppOpenManager` có các cửa chặn tự nhiên: chỉ nổ ở HOT resume (cold/warm start bỏ qua), vừa đóng fullscreen khác <2s, user vừa click ad quay lại (`skip_resume_ad_after_click`), đang có fullscreen khác showing/pending, chưa đủ giây background, hoặc cache rỗng vì inventory không preload từ `app_start`. → Lọc Logcat `AppOpenManager` — SDK in rõ lý do "Bỏ qua App Open On Resume vì…" từng lần. Lưu ý field `preload_on_app_start` KHÔNG tồn tại trong schema trigger (bị nuốt im lặng) — preload do `load_strategy` của inventory quyết |
 | 14 | Màn nhiều trạng thái: slot trạng thái 1 đã ẩn vẫn nạp ad mỗi lần resume; show rate tụt, log có `show_request` mà không có `show_success` | `releaseSlot()` CHỈ xoá `slotRegistry`, KHÔNG gỡ slot khỏi danh sách quét của màn; view `gone()` vẫn `isAttachedToWindow == true` nên lọt qua chốt lọc trong `AdsSlotScanner.onResume` → slot có `refresh_policy` (`on_resume`/`on_click`, kể cả bật sau bằng Remote Config) nạp native vào khung đã ẩn: đốt fill, chiếm suất ad density, không bao giờ có impression. → Khi chuyển trạng thái phải gỡ hẳn container: `(container.parent as? ViewGroup)?.removeView(container)`, không chỉ `gone()` (mục 4.5) |
+| 15 | Chip "Block Fullscreen On Screens" theo screen id trên web admin vô tác dụng; resume ad vẫn nổ giữa onboarding | `safety_rules.block_fullscreen_on_screens` so khớp `activity.javaClass.simpleName` (tên class Activity, contains, lowercase) — KHÔNG phải screen id; app single-Activity thì vô dụng theo màn. Muốn chặn theo screen id (từ `bindScreen`/`currentScreenId`) → dùng điều kiện `"trigger": {"type": "not_on_screens", "not_on_screens": [...]}` trên từng trigger; mặc định bắt buộc cho `app_open_on_resume` với đủ màn luồng đầu. Safety list chỉ giữ từ khoá kiểu tên Activity (`payment`, `subscription`) |

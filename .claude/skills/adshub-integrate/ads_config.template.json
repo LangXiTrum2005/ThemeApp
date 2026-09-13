@@ -7,9 +7,9 @@
     "admob_app_id": "__ADMOB_APP_ID__",
     "ads_enabled": true,
     "use_test_ads": true,
-    "global_fullscreen_cooldown_sec": 30,
-    "max_fullscreen_per_day": -1,
-    "max_concurrent_ad_requests": 2,
+    "global_fullscreen_cooldown_sec": 0,
+    "max_fullscreen_per_day": 999,
+    "max_concurrent_ad_requests": 999,
     "skip_for_purchased_user": true,
     "skip_for_apk_install": false,
     "skip_resume_ad_after_click": true,
@@ -29,16 +29,16 @@
 
   "show_rules": {
     "sr_inter_home": {
-      "interval_sec": 30,
+      "interval_sec": 0,
       "max_per_session": 999,
       "max_per_day": 999,
       "action_pattern": "odd"
     },
     "sr_resume": {
-      "interval_sec": 30,
+      "interval_sec": 0,
       "max_per_session": 999,
       "max_per_day": 999,
-      "show_only_after_background_sec": 5
+      "show_only_after_background_sec": 0
     }
   },
 
@@ -48,10 +48,10 @@
 
   "safety_rules": {
     "block_fullscreen_on_screens": ["payment", "subscription"],
-    "min_interstitial_interval_sec": 15,
-    "min_app_open_interval_sec": 15,
+    "min_interstitial_interval_sec": 0,
+    "min_app_open_interval_sec": 0,
     "max_fullscreen_per_session_hard_limit": 99,
-    "back_to_back_interval_sec": 5
+    "back_to_back_interval_sec": 0
   },
 
   "tracking": {
@@ -61,6 +61,17 @@
     "send_show_event": true,
     "send_revenue_event": true,
     "hash_ad_unit_id": false
+  },
+
+  "screens": {
+    "splash_view_1": { "triggers": ["splash_leave_1"], "slots": ["splash_slot_bottom"] },
+    "splash_view_2": { "triggers": ["splash_leave_2"], "slots": ["splash_slot_bottom"] },
+    "lan_view": { "triggers": [], "slots": ["lan_slot_end"] },
+    "lan2_view": { "triggers": [], "slots": ["lan2_slot_end"] },
+    "onb1_view": { "triggers": ["onb1_click_next"], "slots": ["onb1_slot_end"] },
+    "home_view": { "triggers": ["home_click_content", "home_click_settings"], "slots": ["home_slot_top", "home_slot_start", "home_slot_end", "home_slot_bottom"] },
+    "feature_view": { "triggers": ["feature_click_reward"], "slots": ["other_slot_bottom"] },
+    "settings_view": { "triggers": [], "slots": [] }
   },
 
   "slots": {
@@ -118,7 +129,11 @@
       "screen": "app",
       "ad_type": "native_full_screen",
       "inventory_id": "inv_native_resume",
-      "refresh_policy": "on_resume"
+      "refresh_policy": "on_resume",
+      "trigger": {
+        "type": "not_on_screens",
+        "not_on_screens": ["splash_view_1", "splash_view_2", "lan_view", "lan2_view", "onb1_view"]
+      }
     },
     "feature_click_reward": {
       "enabled": true,

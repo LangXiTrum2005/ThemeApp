@@ -379,10 +379,10 @@ class LaunchActivity : BaseAdsActivity() { // hoặc base có sẵn của projec
             minSplash.await()                                     // 4. đủ 2s tối thiểu
 
             val trigger = if (isFirstSession) AdsTrigger.SPLASH_LEAVE_1 else AdsTrigger.SPLASH_LEAVE_2
-            withTimeoutOrNull(12_000L) { AdsBootstrap.awaitAdReadyFor(trigger) }  // 5. đợi đạn Inter
+            AdsBootstrap.awaitAdReadyFor(trigger)  // 5. đợi đạn Inter
 
             if (needsLanguageScreen) {                            // 6. màn kế cần native → chờ sẵn
-                withTimeoutOrNull(5_000L) { AdsBootstrap.preloadAndAwait(AdsInventory.NATIVE_LFO) }
+                AdsBootstrap.preloadAndAwait(AdsInventory.NATIVE_LFO) 
             }
 
             triggerAds(trigger) { goToNext() }                    // 7. bắn Inter rồi mới điều hướng

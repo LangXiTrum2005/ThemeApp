@@ -29,13 +29,13 @@ import com.onetabb.template.android.databinding.ActivityLaunchBinding
 import com.onetabb.template.android.presentation.dialog.PermissionDialog
 import com.onetabb.template.android.presentation.dialog.PermissionDialogArgs
 import com.onetabb.template.android.presentation.language.LanguageActivity
+import com.onetabb.template.android.presentation.launch.LaunchActivity.Companion.MIN_SPLASH_MS
 import com.onetabb.template.android.presentation.main.MainActivity
 import com.onetabb.template.android.util.remoteconfig.RatingRemoteConfig
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.async
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withTimeoutOrNull
 import javax.inject.Inject
 import kotlin.time.Duration.Companion.milliseconds
 
@@ -50,8 +50,6 @@ class LaunchActivity : BaseActivity<ActivityLaunchBinding>() {
 
     private companion object {
         const val MIN_SPLASH_MS = 2_000L
-        const val INTER_WAIT_MS = 12_000L
-        const val NATIVE_LFO_WAIT_MS = 5_000L
     }
 
     private val viewModel: LaunchViewModel by viewModels()
@@ -149,16 +147,12 @@ class LaunchActivity : BaseActivity<ActivityLaunchBinding>() {
             val trigger =
                 if (isFirstSession) AdsTrigger.SPLASH_LEAVE_1 else AdsTrigger.SPLASH_LEAVE_2
             // Không chờ thì trigger() thấy cache rỗng và bỏ qua quảng cáo luôn.
-            val hasSplashInter = withTimeoutOrNull(INTER_WAIT_MS.milliseconds) {
-                AdsBootstrap.awaitAdReadyFor(trigger)
-            } == true
+            val hasSplashInter = AdsBootstrap.awaitAdReadyFor(trigger)
 
             // Fallback: Inter không có đạn thì chủ động nạp Native của màn Language ngay, để slot
             // đầu tiên của luồng onboarding không rơi vào cache rỗng.
-            if (!hasSplashInter && sharedPref.isNeedShowLanguage) {
-                withTimeoutOrNull(NATIVE_LFO_WAIT_MS.milliseconds) {
-                    AdsBootstrap.preloadAndAwait(AdsInventory.NATIVE_LFO1)
-                }
+            if (sharedPref.isNeedShowLanguage) {
+                AdsBootstrap.preloadAndAwait(AdsInventory.NATIVE_LFO1)
             }
 
             triggerAds(trigger) { runWhenResumed { goToNextScreen() } }

@@ -64,6 +64,7 @@ Nơi định nghĩa các biến trạng thái tùy chỉnh của App để phụ
 | `trigger.from_screen` | `String` | `null` | Kèm với `screen_enter_from`: Tên màn hình trước đó. |
 | `trigger.max_wait_ms` | `Long` | `null` | Thời gian đợi mạng tối đa trước khi bỏ cuộc (Timeout). **Đặc biệt quan trọng với màn Splash/App_Open**: Đặt `10000` (10s) để buộc App đứng chờ Ads load xong mới cho qua màn hình tiếp theo, tránh bị trượt luồng (skip) vì Load mạng chậm! |
 | `trigger.show_loading_ui` | `Boolean` | `null` | Có hiện màn hình "Đang tải quảng cáo..." không. |
+| `reward_bypass_on_failure` | `Boolean` | `false` | **Chỉ có tác dụng với Rewarded.** Khi không lấy được ad (load fail / timeout / bị gate chặn), có phát thưởng "chữa cháy" không. `true` → SDK gọi `onRewardEarned` với đúng mảng `rewards` của inventory rồi mới `onFinished`. `false` (mặc định) → chỉ `onFinished`, user bấm nút mà không nhận được gì. Rewarded chạy `load_on_demand` (không preload) hay fail ngay lúc click hơn, nên cân nhắc bật nếu phần thưởng không phải hàng giá trị cao. |
 
 ---
 
@@ -112,6 +113,12 @@ Nơi định nghĩa các biến trạng thái tùy chỉnh của App để phụ
 | `reload_after_show`| `Boolean`| `false` | (Dành cho Fullscreen). Bắn xong (Show) có tự động nạp đạn lại (Reload) cho phát sau không. |
 | `reload_delay_sec` | `Int` | `0` | Chờ bao nhiêu giây trước khi nạp lại nếu `reload_after_show` = true. Giúp trì hoãn lệnh Load để Ads nằm trên cache tươi hơn cho đến tận lúc hết Interval. |
 | `reload_after_render`| `Boolean`| `false` | (Dành cho Inline Native/Banner). Render xong có tự động nạp tiếp vào Cache hay không. |
+
+> **MẶC ĐỊNH CHO REWARDED — KHÔNG PRELOAD.** Rewarded luôn do user chủ động bấm "xem quảng cáo nhận thưởng", nên nạp sẵn chỉ đốt request cho những user không bao giờ bấm. Cấu hình chuẩn: `{ "mode": "load_on_demand", "preload_triggers": [], "cache_ttl_sec": 3600, "reload_after_show": false }`.
+> Khi trigger nổ mà cache rỗng, SDK tự load rồi show ngay (load đến đâu show đến đó): hiện `AdLoadingDialog` — tắt bằng `trigger.show_loading_ui: false` — rồi chờ tối đa `timeout_ms` **của inventory**; hết giờ vẫn chưa có ad thì chỉ chạy `onFinished` nên user không bao giờ kẹt, nhưng **KHÔNG được thưởng** trừ khi trigger bật `reward_bypass_on_failure: true`.
+> Vì thế `timeout_ms` của inventory rewarded phải **≥ `total_timeout_ms` của waterfall** (template để `16000` khớp waterfall `16000`). Để `10000` như inventory preload là SAI: SDK bỏ cuộc trước khi thác đổ chạy xong, user bấm nút mà gần như không bao giờ thấy ads.
+> `reload_after_show: true` chỉ dành cho fullscreen bắn liên tục (inter home, resume ad) — bật cho rewarded là nạp sẵn lại quả không ai chắc sẽ dùng.
+
 
 ---
 

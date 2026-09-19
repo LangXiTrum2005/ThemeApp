@@ -285,11 +285,11 @@
       "inventory_id": "inv_reward_video",
       "enabled": true,
       "ad_type": "rewarded",
-      "timeout_ms": 10000,
+      "timeout_ms": 16000,
       "waterfall_id": "reward_video",
       "priority": 55,
       "rewards": [{ "type": "reward", "amount": 1, "grant_on": "reward_earned" }],
-      "load_strategy": { "mode": "preload", "preload_triggers": [{ "type": "screen_enter", "screen": "feature_view" }], "cache_ttl_sec": 3600, "reload_after_show": true }
+      "load_strategy": { "mode": "load_on_demand", "preload_triggers": [], "cache_ttl_sec": 3600, "reload_after_show": false }
     }
   },
 

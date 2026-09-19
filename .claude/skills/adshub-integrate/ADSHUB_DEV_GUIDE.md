@@ -488,6 +488,16 @@ binding.btnNextPage.setOnClickListener {
 ### 4.2. Rewarded Ads (Quảng cáo có thưởng)
 Sử dụng khi User chủ động click xem quảng cáo để đổi lấy vật phẩm/tính năng.
 
+> **Config mặc định: rewarded KHÔNG preload — load đến đâu show đến đó.**
+> ```json
+> "load_strategy": { "mode": "load_on_demand", "preload_triggers": [], "cache_ttl_sec": 3600, "reload_after_show": false }
+> ```
+> User phải tự bấm mới có rewarded, nạp sẵn từ `app_start`/`screen_enter` chỉ đốt request cho đám user không bao giờ bấm. Với `load_on_demand`, lúc `trigger()` nổ mà cache rỗng SDK tự gọi load rồi show ngay, che thời gian chờ bằng `AdLoadingDialog` (tắt bằng `"show_loading_ui": false` trong `trigger`).
+> 3 điểm phải nhớ khi đi theo kiểu này:
+> * `timeout_ms` của **inventory** chính là trần chờ load — phải ≥ `total_timeout_ms` của waterfall (template để `16000`). Để `10000` là SDK bỏ cuộc trước khi thác đổ chạy xong.
+> * Load fail/timeout → SDK chỉ chạy `onFinished`, **không** gọi `onRewardEarned`. Muốn user vẫn có quà thì bật `"reward_bypass_on_failure": true` trên trigger (mặc định `false`) — lúc đó SDK bắn `onRewardEarned` với đúng mảng `rewards` của inventory. Vì vậy UI đừng coi `onFinished` là "đã nhận thưởng"; chỉ `onRewardEarned` mới được phát quà.
+> * `reload_after_show: false` — xem xong không nạp lại quả tiếp theo; lần bấm sau lại load mới.
+
 ```kotlin
 // 1. Khai báo một Object/File quản lý quà tặng chung cho Toàn App
 object AppRewardManager {

@@ -18,6 +18,7 @@ thiếu secret thì job tự skip chứ không làm đỏ pipeline.
 | 5 | `DISCORD_WEBHOOK` | ⬜ | repo |
 | 6 | `GG_DRIVE_CLIENT_ID` / `_CLIENT_SECRET` / `_REFRESH_TOKEN` / `_FOLDER_ID` | ⬜ | repo |
 | — | `VERSION_CODE_OFFSET` | ⬜ | repo (Variables) |
+| — | `ANDROID_SIGNING_SHA1` | ⬜ | repo (Variables) |
 
 ---
 
@@ -413,6 +414,19 @@ https://github.com/<org>/<repo>/settings/variables/actions
 | Name | Value | Ghi chú |
 |---|---|---|
 | `VERSION_CODE_OFFSET` | `0` | Công thức: `versionCode = github.run_number + offset` |
+| `ANDROID_SIGNING_SHA1` | `A1:B2:…` | SHA-1 của keystore đúng. CI đọc SHA-1 từ keystore trong secret, so với giá trị này rồi báo lên Discord trước khi build; lệch thì chặn luôn |
+
+Lấy giá trị `ANDROID_SIGNING_SHA1`:
+
+```bash
+keytool -list -v -keystore release.jks -alias upload | grep SHA1
+```
+
+Viết hoa hay thường, có hay không dấu `:` đều được. Bỏ trống thì CI chỉ in SHA-1 lên
+Discord chứ không chặn.
+
+> Đặt ở tab **Variables**, không phải Secrets. Để ở Secrets thì GitHub che thành `***` và
+> Discord nhận được `***` thay vì fingerprint.
 
 Nếu app đã có trên Play Store với versionCode ví dụ 47, đặt offset ≥ 47 — Play Store từ
 chối bản upload có versionCode nhỏ hơn hoặc bằng bản đã có.

@@ -66,8 +66,17 @@ jobs:
           draft: false
           prerelease: ${{ contains(steps.tag.outputs.name, '-') }}
 
+      - name: Verify Signing Key
+        id: signing
+        uses: ./.github/actions/verify-signing-key
+        with:
+          keystore-base64: ${{ secrets.ANDROID_KEYSTORE_BASE64 }}
+          key-alias: ${{ secrets.ANDROID_KEY_ALIAS }}
+          keystore-password: ${{ secrets.ANDROID_KEYSTORE_PASSWORD }}
+          expected-sha1: ${{ vars.ANDROID_SIGNING_SHA1 }}
+
       - name: Discord Notification - Start Build
-        if: env.DISCORD_WEBHOOK != ''
+        if: env.DISCORD_WEBHOOK != '' && steps.signing.outputs.ok == 'true'
         uses: sarisia/actions-status-discord@v1
         with:
           webhook: ${{ secrets.DISCORD_WEBHOOK }}
@@ -75,9 +84,33 @@ jobs:
           title: "🔨 Building ${{ steps.tag.outputs.name }}"
           color: 0xffd966
           description: |
+            ${{ steps.signing.outputs.summary }}
+
             🚧 This may take a few minutes.
 
             [View Release](<${{ steps.release.outputs.url }}>)
+
+      - name: Discord Notification - Signing Key Invalid
+        if: steps.signing.outputs.ok != 'true' && env.DISCORD_WEBHOOK != ''
+        uses: sarisia/actions-status-discord@v1
+        with:
+          webhook: ${{ secrets.DISCORD_WEBHOOK }}
+          status: 'failure'
+          title: "❌ Release ${{ steps.tag.outputs.name }} Failed — Wrong Signing Key"
+          description: |
+            ${{ steps.signing.outputs.summary }}
+
+            Please check the [workflow logs](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}) for details.
+
+            [View Release](<${{ steps.release.outputs.url }}>)
+          noprefix: true
+          nodetail: true
+          content: "@Android"
+          color: "0xe74c3c"
+
+      - name: Fail When Signing Key Invalid
+        if: steps.signing.outputs.ok != 'true'
+        run: exit 1
 
       - name: Dispatch CI
         id: dispatch_ci

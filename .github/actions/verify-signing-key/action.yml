@@ -1,0 +1,89 @@
+#
+# Copyright (c) 2026 1Tabb. All rights reserved.
+# https://1tabb.com
+#
+# SPDX-License-Identifier: LicenseRef-1Tabb-Proprietary
+#
+# Proprietary and confidential. Contains trade secrets of 1Tabb.
+# Unauthorized copying, modification, distribution, reverse engineering,
+# decompilation or disassembly of this file, via any medium, is strictly
+# prohibited except with prior written permission of 1Tabb.
+#
+
+name: Verify Signing Key
+description: Read the keystore SHA-1 from the signing secrets and compare it with the expected fingerprint.
+
+inputs:
+  keystore-base64:
+    description: 'Secret ANDROID_KEYSTORE_BASE64'
+    required: true
+  key-alias:
+    description: 'Secret ANDROID_KEY_ALIAS'
+    required: true
+  keystore-password:
+    description: 'Secret ANDROID_KEYSTORE_PASSWORD'
+    required: true
+  expected-sha1:
+    description: 'Variable ANDROID_SIGNING_SHA1. Leave empty to report the SHA-1 without comparing.'
+    required: false
+    default: ''
+
+outputs:
+  ok:
+    description: "'true' when the keystore opens and the SHA-1 matches"
+    value: ${{ steps.verify.outputs.ok }}
+  sha1:
+    description: 'SHA-1 read from the keystore, empty when it cannot be opened'
+    value: ${{ steps.verify.outputs.sha1 }}
+  summary:
+    description: 'One-line Markdown summary for notifications'
+    value: ${{ steps.verify.outputs.summary }}
+
+runs:
+  using: composite
+  steps:
+    # Never fails on its own: the caller reports the result first, then decides whether to stop.
+    - id: verify
+      shell: bash
+      env:
+        KEYSTORE_BASE64: ${{ inputs.keystore-base64 }}
+        KEY_ALIAS: ${{ inputs.key-alias }}
+        KEYSTORE_PASSWORD: ${{ inputs.keystore-password }}
+        EXPECTED_SHA1: ${{ inputs.expected-sha1 }}
+      run: |
+        set -uo pipefail
+
+        report() {  # report <ok> <sha1> <summary>
+          {
+            echo "ok=$1"
+            echo "sha1=$2"
+            echo "summary=$3"
+          } >> "$GITHUB_OUTPUT"
+          printf '%s\n' "$3" | tee -a "$GITHUB_STEP_SUMMARY"
+          exit 0
+        }
+
+        norm() { tr -d ': ' <<< "$1" | tr '[:lower:]' '[:upper:]'; }
+
+        keystore="$RUNNER_TEMP/signing.jks"
+        base64 -d <<< "$KEYSTORE_BASE64" > "$keystore" 2>/dev/null
+
+        # One command covers all three secrets: a broken decode, a wrong store password
+        # or a wrong alias all leave the fingerprint empty.
+        sha1=$(keytool -list -v -keystore "$keystore" -alias "$KEY_ALIAS" \
+                 -storepass "$KEYSTORE_PASSWORD" 2>/dev/null \
+               | sed -n 's/.*SHA1: //p' | head -1)
+
+        if [[ -z "$sha1" ]]; then
+          report false '' "🔑 ❌ Cannot open keystore — check \`ANDROID_KEYSTORE_BASE64\`, \`ANDROID_KEY_ALIAS\`, \`ANDROID_KEYSTORE_PASSWORD\`"
+        fi
+
+        if [[ -z "${EXPECTED_SHA1//[[:space:]]/}" ]]; then
+          report true "$sha1" "🔑 SHA-1 \`$sha1\` — \`ANDROID_SIGNING_SHA1\` not set, comparison skipped"
+        fi
+
+        if [[ "$(norm "$sha1")" == "$(norm "$EXPECTED_SHA1")" ]]; then
+          report true "$sha1" "🔑 SHA-1 \`$sha1\` ✅"
+        fi
+
+        report false "$sha1" "🔑 ❌ SHA-1 mismatch — keystore \`$sha1\`, expected \`$EXPECTED_SHA1\`"

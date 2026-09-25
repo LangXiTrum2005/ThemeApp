@@ -81,3 +81,21 @@
 
 # GAID — AppsFlyer/AdMob gọi qua reflection
 -keep class com.google.android.gms.ads.identifier.** { *; }
+
+# ===== ironSource (LevelPlay) =====
+-keepclassmembers class * implements android.os.Parcelable {
+    public static final android.os.Parcelable$Creator *;
+}
+-keep class com.google.android.gms.appset.** { *; }
+-keep class com.google.android.gms.tasks.** { *; }
+-keep class com.ironsource.adapters.** { *; }
+-dontwarn com.ironsource.**
+-dontwarn com.ironsource.adapters.**
+-keepclassmembers class com.ironsource.** { public *; }
+-keep public class com.ironsource.**
+-dontwarn com.iab.omid.**
+-keep class com.iab.omid.** { *; }
+-keepattributes JavascriptInterface
+-keepclassmembers class * {
+    @android.webkit.JavascriptInterface <methods>;
+}

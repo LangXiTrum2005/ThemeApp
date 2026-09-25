@@ -36,6 +36,7 @@ import kotlinx.coroutines.sync.withLock
 import kotlinx.coroutines.tasks.await
 import kotlinx.coroutines.withContext
 import kotlinx.coroutines.withTimeoutOrNull
+import kotlin.apply
 import kotlin.time.Duration.Companion.milliseconds
 
 /**
@@ -125,7 +126,9 @@ object AdsBootstrap {
                 AdsController.updateRemoteConfig(json)
             }
 
-            withContext(Dispatchers.IO) { AdNetworkInitializer.initNetworks(activity.applicationContext) }
+            withContext(Dispatchers.IO) {
+                AdsPrivacyUs.apply(activity.applicationContext)
+                AdNetworkInitializer.initNetworks(activity.applicationContext) }
             delay(300L.milliseconds) // nhường một nhịp cho I/O ghi config an toàn
             PreloadEngine.onAppStartOrConsentReady()
             isColdStartDone = true

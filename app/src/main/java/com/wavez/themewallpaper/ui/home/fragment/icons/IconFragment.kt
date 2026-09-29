@@ -13,6 +13,7 @@ import com.wavez.themewallpaper.databinding.FragmentIconBinding
 import com.wavez.themewallpaper.ui.home.fragment.icons.adapter.IconAdapter
 import com.wavez.themewallpaper.ui.home.fragment.icons.viewmodel.IconsViewModel
 import com.wavez.themewallpaper.ui.iconpack.SetIconsActivity
+import com.wavez.themewallpaper.ui.home.MainActivity
 import com.wavez.themewallpaper.ui.search.SearchActivity
 import com.wavez.themewallpaper.ui.search.model.SearchMode
 import com.wavez.themewallpaper.ui.setting.SettingActivity
@@ -47,6 +48,9 @@ class IconFragment : BaseFragment<FragmentIconBinding>() {
         super.initListener()
         binding.toolbar.btnSetting.setOnClickListener {
             startActivity(SettingActivity.newIntent(requireContext()))
+        }
+        binding.toolbar.btnMyGallery.setOnClickListener {
+            (activity as? MainActivity)?.showMyGallery()
         }
 
         binding.edSearch.setOnClickListener {

@@ -18,6 +18,7 @@ import com.wavez.themewallpaper.ui.customview.ThemeTabIcon
 import com.wavez.themewallpaper.ui.home.dialog.FilterPopupHelper
 import com.wavez.themewallpaper.ui.home.fragment.widget.adapter.WidgetCategoryPagerAdapter
 import com.wavez.themewallpaper.ui.home.fragment.widget.viewmodel.WidgetViewModel
+import com.wavez.themewallpaper.ui.home.MainActivity
 import com.wavez.themewallpaper.ui.search.SearchActivity
 import com.wavez.themewallpaper.ui.search.model.SearchMode
 import com.wavez.themewallpaper.ui.setting.SettingActivity
@@ -57,6 +58,9 @@ class WidgetsFragment : BaseFragment<FragmentWidgetsBinding>() {
         super.initListener()
         binding.toolbar.btnSetting.setOnClickListener {
             startActivity(SettingActivity.newIntent(requireContext()))
+        }
+        binding.toolbar.btnMyGallery.setOnClickListener {
+            (activity as? MainActivity)?.showMyGallery()
         }
         binding.edSearch.setOnClickListener {
             startActivity(SearchActivity.newIntent(requireContext(), SearchMode.WIDGETS))

@@ -19,6 +19,14 @@
         android:textColor="@color/primary_high_em" />
 
     <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/btnMyGallery"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="?selectableItemBackground"
+        android:contentDescription="@string/my_gallery"
+        android:src="@drawable/ic_tab_gralley" />
+
+    <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/btnSetting"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

@@ -19,6 +19,7 @@ import com.wavez.themewallpaper.core.controllercenter.ControllerTheme
 import com.wavez.themewallpaper.core.controllercenter.ThemeLoader
 import com.wavez.themewallpaper.core.controllercenter.service.ControlCenterService
 import com.wavez.themewallpaper.databinding.FragmentControllerBinding
+import com.wavez.themewallpaper.ui.home.MainActivity
 import com.wavez.themewallpaper.ui.setting.SettingActivity
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
@@ -112,6 +113,9 @@ class ControllerFragment : BaseFragment<FragmentControllerBinding>() {
         binding.toolbar.btnSetting.setOnClickListener {
             startActivity(SettingActivity.newIntent(requireContext()))
         }
+        binding.toolbar.btnMyGallery.setOnClickListener {
+            (activity as? MainActivity)?.showMyGallery()
+        }
 
         binding.btnTogglePanel.setOnClickListener {
             togglePanel()
@@ -187,6 +191,8 @@ class ControllerFragment : BaseFragment<FragmentControllerBinding>() {
             accessibilityReady && writeSettingsReady && notificationReady && runtimeGranted
         binding.tvPermissionsTitle.isVisible = !allControllerPermissionsGranted
         binding.cardPermissions.isVisible = !allControllerPermissionsGranted
+        binding.tvControllerThemesTitle.isVisible = allControllerPermissionsGranted
+        binding.rvControllerThemes.isVisible = allControllerPermissionsGranted
 
         // 5. Theme Status
         val selectedTheme = sharedPref.activeThemeId?.let { themeId ->

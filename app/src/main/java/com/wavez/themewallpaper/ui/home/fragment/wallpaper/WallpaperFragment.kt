@@ -19,6 +19,7 @@ import com.wavez.themewallpaper.ui.customview.ThemeTabIcon
 import com.wavez.themewallpaper.ui.home.dialog.FilterPopupHelper
 import com.wavez.themewallpaper.ui.home.fragment.wallpaper.adapter.CategoryPagerAdapter
 import com.wavez.themewallpaper.ui.home.fragment.wallpaper.viewmodel.WallpaperViewModel
+import com.wavez.themewallpaper.ui.home.MainActivity
 import com.wavez.themewallpaper.ui.search.SearchActivity
 import com.wavez.themewallpaper.ui.search.model.SearchMode
 import com.wavez.themewallpaper.ui.setting.SettingActivity
@@ -119,6 +120,9 @@ class WallpaperFragment : BaseFragment<FragmentWallpaperBinding>() {
         binding.toolbar.apply {
             btnSetting.setOnClickListener {
                 startActivity(SettingActivity.newIntent(requireContext()))
+            }
+            btnMyGallery.setOnClickListener {
+                (activity as? MainActivity)?.showMyGallery()
             }
 
         }

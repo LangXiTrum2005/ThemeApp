@@ -85,6 +85,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
                     if (isSyncingPage) return
 
                     val tab = MainTab.fromPosition(position)
+                    if (tab == MainTab.MY_GALLERY) return
 
                     if (binding.bottomNav.selectedItemId != tab.menuId) {
                         isSyncingPage = true
@@ -109,6 +110,14 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
             }
 
             true
+        }
+    }
+
+    fun showMyGallery() {
+        if (binding.vpMain.currentItem != MainTab.MY_GALLERY.position) {
+            isSyncingPage = true
+            binding.vpMain.setCurrentItem(MainTab.MY_GALLERY.position, false)
+            isSyncingPage = false
         }
     }
 

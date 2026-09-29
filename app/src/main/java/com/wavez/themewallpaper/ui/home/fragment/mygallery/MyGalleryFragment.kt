@@ -9,6 +9,7 @@ import com.wavez.themewallpaper.core.base.BaseFragment
 import com.google.android.material.tabs.TabLayoutMediator
 import com.wavez.themewallpaper.R
 import com.wavez.themewallpaper.databinding.FragmentMyGalleryBinding
+import com.wavez.themewallpaper.ui.home.MainActivity
 import com.wavez.themewallpaper.ui.customview.ThemeTabIcon
 import com.wavez.themewallpaper.ui.home.fragment.mygallery.adapter.MyGalleryPagerAdapter
 import com.wavez.themewallpaper.ui.setting.SettingActivity
@@ -45,6 +46,9 @@ class MyGalleryFragment : BaseFragment<FragmentMyGalleryBinding>() {
         super.initListener()
         binding.toolbar.btnSetting.setOnClickListener {
             startActivity(SettingActivity.newIntent(requireContext()))
+        }
+        binding.toolbar.btnMyGallery.setOnClickListener {
+            (activity as? MainActivity)?.showMyGallery()
         }
 
     }

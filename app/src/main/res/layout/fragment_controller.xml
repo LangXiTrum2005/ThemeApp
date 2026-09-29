@@ -130,6 +130,7 @@
 
             <!-- Permissions Section Title -->
             <TextView
+                android:id="@+id/tvPermissionsTitle"
                 style="@style/NunitoBold.16"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -140,6 +141,7 @@
 
             <!-- Permissions Card -->
             <LinearLayout
+                android:id="@+id/cardPermissions"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/bg_card_controller"
@@ -393,6 +395,21 @@
                         android:visibility="gone" />
                 </LinearLayout>
             </LinearLayout>
+
+            <TextView
+                style="@style/NunitoBold.16"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="6dp"
+                android:text="@string/controller_themes"
+                android:textColor="@color/textHighEm" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvControllerThemes"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:nestedScrollingEnabled="false" />
 
             <!-- Guide Card -->
             <LinearLayout

@@ -50,6 +50,7 @@ class SeekBarControlView @JvmOverloads constructor(
     private var iconNormalFile: String? = null
 
     private var progressBitmap: Bitmap? = null
+    private var themeRequestId = 0
 
     private var progressRunnable: Runnable? = null
     private var dragStartProgress: Int? = null
@@ -149,7 +150,7 @@ class SeekBarControlView @JvmOverloads constructor(
         progress: Int,
         maxProgress: Int
     ) {
-
+        val requestId = ++themeRequestId
         this.iconActiveFile = iconActive
         this.iconNormalFile = iconNormal
 
@@ -166,7 +167,7 @@ class SeekBarControlView @JvmOverloads constructor(
                     resource: Bitmap,
                     transition: Transition<in Bitmap>?
                 ) {
-
+                    if (requestId != themeRequestId) return
                     progressBitmap = resource
 
                     updateProgress(

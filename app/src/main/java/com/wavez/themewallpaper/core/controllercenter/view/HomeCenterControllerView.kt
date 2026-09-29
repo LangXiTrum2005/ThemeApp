@@ -7,8 +7,8 @@ import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
 import android.database.ContentObserver
-import android.graphics.BitmapFactory
 import android.graphics.Color
+import android.graphics.drawable.Drawable
 import android.net.Uri
 import android.os.Handler
 import android.os.Looper
@@ -21,7 +21,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.widget.ImageView
 import androidx.constraintlayout.widget.ConstraintLayout
-import androidx.core.graphics.drawable.toDrawable
 import androidx.core.graphics.toColorInt
 import com.wavez.themewallpaper.core.controllercenter.PermissionHelper
 import com.wavez.themewallpaper.core.controllercenter.controllers.BluetoothController
@@ -40,6 +39,9 @@ import com.wavez.themewallpaper.core.extensions.onAvoidDoubleClick
 import com.wavez.themewallpaper.core.extensions.openCalculatorApp
 import com.wavez.themewallpaper.core.extensions.openStopwatchApp
 import com.wavez.themewallpaper.databinding.LayoutControllerCenterBinding
+import com.bumptech.glide.Glide
+import com.bumptech.glide.request.target.CustomTarget
+import com.bumptech.glide.request.transition.Transition
 
 class HomeCenterControllerView @JvmOverloads constructor(
     context: Context,
@@ -59,6 +61,7 @@ class HomeCenterControllerView @JvmOverloads constructor(
     private var onDismiss: () -> Unit = {}
     private var boundMedia: MediaController? = null
     private var boundBrightness: BrightnessController? = null
+    private var boundVolume: VolumeController? = null
     private var suppressNextAutoRotateObserver = false
     private var writeSettingsRequestOpening = false
 
@@ -93,6 +96,8 @@ class HomeCenterControllerView @JvmOverloads constructor(
     fun initData(model: ControllerConfigModel) {
         config = model
         applyTheme()
+        boundBrightness?.let(::bindBrightness)
+        boundVolume?.let(::bindVolume)
     }
 
     private fun applyTheme() {
@@ -100,6 +105,7 @@ class HomeCenterControllerView @JvmOverloads constructor(
         // --- Card backgrounds ---
         binding.networkLayout.loadBackgroundFromPath(m.homeControlBackground)
         binding.musicLayout.loadBackgroundFromPath(m.homeMusicBackground)
+        UtilsKt.loadImageOptimizeRam(binding.bottomDiy, m.bottomDiyBackground)
 
         // --- Network icons (off state by default) ---
         UtilsKt.loadImageOptimizeRam(binding.wifi, m.wifiIcon)
@@ -367,6 +373,7 @@ class HomeCenterControllerView @JvmOverloads constructor(
     }
 
     private fun bindVolume(volume: VolumeController) {
+        boundVolume = volume
         binding.volume.initData(
             iconActive = config.soundBigIcon,
             iconNormal = config.soundMuteIcon,
@@ -465,11 +472,18 @@ class HomeCenterControllerView @JvmOverloads constructor(
 
     private fun View.loadBackgroundFromPath(path: String) {
         if (path.isEmpty()) return
-        try {
-            val bmp = BitmapFactory.decodeFile(path) ?: return
-            background = bmp.toDrawable(resources).apply { gravity = Gravity.FILL }
-        } catch (_: Exception) {
-        }
+        Glide.with(this)
+            .load(path)
+            .into(object : CustomTarget<Drawable>() {
+                override fun onResourceReady(
+                    resource: Drawable,
+                    transition: Transition<in Drawable>?,
+                ) {
+                    background = resource
+                }
+
+                override fun onLoadCleared(placeholder: Drawable?) = Unit
+            })
     }
 
     private fun parseColor(hex: String, fallback: Int): Int = try {

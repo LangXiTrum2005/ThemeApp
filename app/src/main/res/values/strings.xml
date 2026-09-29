@@ -167,5 +167,7 @@
     <string name="swipe_down_hint">Swipe down from the pull bar at top of screen to open Control Center anywhere.</string>
     <string name="service_status_active">Service is active &amp; ready</string>
     <string name="service_status_inactive">Service is inactive</string>
+    <string name="controller_themes">Choose a Controller theme</string>
+    <string name="controller_theme_applied">%s applied</string>
 
 </resources>

@@ -35,7 +35,12 @@ class BluetoothController @Inject constructor(
 
     init {
         try {
-            context.registerReceiver(receiver, IntentFilter(BluetoothAdapter.ACTION_STATE_CHANGED))
+            ContextCompat.registerReceiver(
+                context,
+                receiver,
+                IntentFilter(BluetoothAdapter.ACTION_STATE_CHANGED),
+                ContextCompat.RECEIVER_NOT_EXPORTED,
+            )
         } catch (e: Exception) {
             Log.e("ControlCenter", "BluetoothController: init failed", e)
         }

@@ -9,14 +9,20 @@ import android.view.View
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
+import androidx.lifecycle.lifecycleScope
+import androidx.recyclerview.widget.GridLayoutManager
 import com.wavez.themewallpaper.R
 import com.wavez.themewallpaper.core.base.BaseFragment
 import com.wavez.themewallpaper.core.controllercenter.PermissionHelper
+import com.wavez.themewallpaper.core.controllercenter.ControllerThemeCatalog
 import com.wavez.themewallpaper.core.controllercenter.ThemeLoader
 import com.wavez.themewallpaper.core.controllercenter.service.ControlCenterService
 import com.wavez.themewallpaper.databinding.FragmentControllerBinding
 import com.wavez.themewallpaper.ui.setting.SettingActivity
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 @AndroidEntryPoint
 class ControllerFragment : BaseFragment<FragmentControllerBinding>() {
@@ -29,6 +35,19 @@ class ControllerFragment : BaseFragment<FragmentControllerBinding>() {
     }
 
     private var panelActive = false
+
+    private val themeAdapter: ControllerThemeAdapter = ControllerThemeAdapter { theme ->
+        sharedPref.activeThemeId = theme.id
+        themeAdapter.select(theme)
+        requireContext().sendBroadcast(
+            Intent(ControlCenterService.ACTION_RELOAD_THEME).setPackage(requireContext().packageName),
+        )
+        android.widget.Toast.makeText(
+            requireContext(),
+            getString(R.string.controller_theme_applied, theme.name),
+            android.widget.Toast.LENGTH_SHORT,
+        ).show()
+    }
 
     private val runtimePermissions = buildList {
         add(Manifest.permission.CAMERA)
@@ -48,6 +67,21 @@ class ControllerFragment : BaseFragment<FragmentControllerBinding>() {
     override fun initView(view: View, savedInstanceState: Bundle?) {
         super.initView(view, savedInstanceState)
         binding.toolbar.tvTitle.setText(R.string.controller)
+        binding.rvControllerThemes.apply {
+            layoutManager = GridLayoutManager(requireContext(), 3)
+            adapter = themeAdapter
+        }
+    }
+
+    override fun initConfig(view: View, savedInstanceState: Bundle?) {
+        super.initConfig(view, savedInstanceState)
+        val appContext = requireContext().applicationContext
+        viewLifecycleOwner.lifecycleScope.launch {
+            val themes = withContext(Dispatchers.IO) {
+                ControllerThemeCatalog.themes(appContext)
+            }
+            themeAdapter.submit(themes, sharedPref.activeThemeId)
+        }
     }
 
     override fun initListener() {
@@ -121,10 +155,21 @@ class ControllerFragment : BaseFragment<FragmentControllerBinding>() {
         binding.btnGrantRuntime.isVisible = !runtimeGranted
         binding.tvRuntimeGranted.isVisible = runtimeGranted
 
+        val allControllerPermissionsGranted =
+            accessibilityReady && writeSettingsReady && notificationReady && runtimeGranted
+        binding.tvPermissionsTitle.isVisible = !allControllerPermissionsGranted
+        binding.cardPermissions.isVisible = !allControllerPermissionsGranted
+
         // 5. Theme Status
-        val themeReady = ThemeLoader.isReady(context)
+        val selectedTheme = sharedPref.activeThemeId?.let { themeId ->
+            ControllerThemeCatalog.theme(context, themeId)
+        }
+        val themeReady = selectedTheme != null || ThemeLoader.isReady(context)
         val missingCount = ThemeLoader.missingAssets(context).size
-        if (themeReady) {
+        if (selectedTheme != null) {
+            binding.tvThemeStatus.text = getString(R.string.controller_theme_applied, selectedTheme.name)
+            binding.tvThemeStatus.setTextColor(ContextCompat.getColor(context, R.color.textSuccessHighEm))
+        } else if (themeReady) {
             binding.tvThemeStatus.text = "Theme Assets: Ready"
             binding.tvThemeStatus.setTextColor(ContextCompat.getColor(context, R.color.textSuccessHighEm))
         } else {

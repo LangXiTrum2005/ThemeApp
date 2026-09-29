@@ -7,6 +7,8 @@ import android.content.Intent
 import android.content.IntentFilter
 import android.util.Log
 import android.view.accessibility.AccessibilityEvent
+import androidx.core.content.ContextCompat
+import com.wavez.themewallpaper.core.controllercenter.ControllerThemeCatalog
 import com.wavez.themewallpaper.core.controllercenter.ThemeLoader
 import com.wavez.themewallpaper.core.controllercenter.controllers.BluetoothController
 import com.wavez.themewallpaper.core.controllercenter.controllers.BrightnessController
@@ -77,7 +79,12 @@ class ControlCenterService : AccessibilityService() {
                 addAction(ACTION_ACTIVE_CONTROL_PANEL)
                 addAction(ACTION_RELOAD_THEME)
             }
-            registerReceiver(controlReceiver, filter, RECEIVER_NOT_EXPORTED)
+            ContextCompat.registerReceiver(
+                this,
+                controlReceiver,
+                filter,
+                ContextCompat.RECEIVER_NOT_EXPORTED,
+            )
         } catch (_: Exception) {
             Log.e(TAG, "Failed to register receiver")
         }
@@ -116,6 +123,7 @@ class ControlCenterService : AccessibilityService() {
     private fun loadActiveTheme(): ControllerConfigModel {
         val themeId = sharedPref.activeThemeId
         if (themeId != null) {
+            ControllerThemeCatalog.config(this, themeId)?.let { return it }
             val dir = themeFilePathProvider.getExtractedThemeDir(themeId)
             if (dir.isDirectory && dir.listFiles()?.isNotEmpty() == true) {
                 return ThemeLoader.loadFromDirectory(dir, themeId)

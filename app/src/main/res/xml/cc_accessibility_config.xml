@@ -6,5 +6,5 @@
     android:canPerformGestures="true"
     android:canRequestTouchExplorationMode="true"
     android:canRetrieveWindowContent="true"
-    android:settingsActivity="com.wavez.themewallpaper.ui.MainActivity"
+    android:settingsActivity="com.wavez.themewallpaper.ui.home.MainActivity"
     android:summary="@string/cc_accessibility_description" />

@@ -1,24 +1,14 @@
 package com.wavez.themewallpaper.ui.home
 
-import android.Manifest
 import android.app.Activity
 import android.content.Intent
-import android.graphics.Color
-import android.os.Build
 import android.os.Bundle
 import android.util.Log
-import android.view.ViewGroup
-import android.widget.Button
 import android.widget.Toast
-import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import androidx.viewpager2.widget.ViewPager2
 import com.wavez.themewallpaper.core.base.BaseActivity
 import com.wavez.themewallpaper.core.base.UiState
-import com.wavez.themewallpaper.core.controllercenter.PermissionHelper
-import com.wavez.themewallpaper.core.controllercenter.RequiredPermission
-import com.wavez.themewallpaper.core.controllercenter.ThemeLoader
-import com.wavez.themewallpaper.core.controllercenter.service.ControlCenterService
 import com.wavez.themewallpaper.core.extensions.collectWithLifecycle
 import com.wavez.themewallpaper.databinding.ActivityMainBinding
 import com.wavez.themewallpaper.ui.home.adapter.MainPagerAdapter
@@ -50,28 +40,12 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
 
     private val viewModel by viewModels<MainViewModel>()
 
-    private var panelActive = false
-
-    private val runtimePermissions = buildList {
-        add(Manifest.permission.CAMERA)
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
-            add(Manifest.permission.BLUETOOTH_CONNECT)
-        }
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-            add(Manifest.permission.POST_NOTIFICATIONS)
-        }
-    }
-
-    private val requestPermissions =
-        registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) { /* no-op */ }
-
     override fun initView(savedInstanceState: Bundle?) {
         super.initView(savedInstanceState)
         binding.bottomNav.itemActiveIndicatorColor = null
         binding.bottomNav.itemIconTintList = null
         binding.bottomNav.setOnApplyWindowInsetsListener(null)
         binding.bottomNav.setPadding(0, 0, 0, 0)
-
     }
 
     override fun initConfig(savedInstanceState: Bundle?) {
@@ -83,8 +57,6 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
         if (savedInstanceState == null) {
             RatePromptManager.showOnMainFromSplash(supportFragmentManager, sharedPref)
         }
-//        binding.togglePanelButton.setOnClickListener { togglePanel() }
-//        requestPermissions.launch(runtimePermissions.toTypedArray())
     }
 
     private fun logHomeViewEvent() {
@@ -99,7 +71,6 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
             sharedPref.hasLoggedHomeView = true
         }
     }
-
 
     private fun setupViewPager() {
         binding.vpMain.apply {
@@ -124,7 +95,6 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
             }
         )
     }
-
 
     private fun setupBottomNavigation() {
         binding.bottomNav.setOnItemSelectedListener { item ->
@@ -177,91 +147,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
         }
     }
 
-
-    override fun onResume() {
-        super.onResume()
-//        renderHomeState()
-    }
-
-    private fun renderHomeState() {
-        val missingSpecial = PermissionHelper.getMissingPermissions(this)
-        val accessibilityReady = missingSpecial.none { it == RequiredPermission.ACCESSIBILITY }
-        val themeReady = ThemeLoader.isReady(this)
-        val missingCount = ThemeLoader.missingAssets(this).size
-
-     /*   binding.accessibilityStatusText.apply {
-            text = if (accessibilityReady) {
-                setTextColor(Color.rgb(56, 142, 60))
-                "Accessibility: ENABLED"
-            } else {
-                setTextColor(Color.rgb(176, 0, 32))
-                "Accessibility: NOT ENABLED"
-            }
-        }
-
-        binding.themeStatusText.apply {
-            text = if (themeReady) {
-                setTextColor(Color.rgb(56, 142, 60))
-                "Theme: READY"
-            } else {
-                setTextColor(Color.rgb(230, 81, 0))
-                "Theme: $missingCount/${ThemeLoader.REQUIRED_ASSETS.size} files missing - copy assets to filesDir/theme/theme_1/"
-            }
-        }
-
-        binding.togglePanelButton.isEnabled = accessibilityReady
-        binding.permissionButtonsContainer.removeAllViews()
-        missingSpecial.forEach { permission ->
-            binding.permissionButtonsContainer.addView(createPermissionButton(permission))
-        }*/
-    }
-
-    private fun togglePanel() {
-        panelActive = !panelActive
-        sendBroadcast(
-            Intent(ControlCenterService.Companion.ACTION_ACTIVE_CONTROL_PANEL).putExtra(
-                ControlCenterService.Companion.EXTRA_SHOW, panelActive
-            )
-        )
-/*
-        binding.togglePanelButton.text = if (panelActive) "Hide Panel" else "Show Panel"
-*/
-    }
-
-    private fun createPermissionButton(permission: RequiredPermission): Button {
-        return Button(this).apply {
-            text = when (permission) {
-                RequiredPermission.ACCESSIBILITY -> "Enable Accessibility Service"
-                RequiredPermission.WRITE_SETTINGS -> "Grant Write Settings"
-                RequiredPermission.NOTIFICATION_ACCESS -> "Grant Notification Access"
-            }
-            setTextColor(Color.WHITE)
-            setBackgroundColor(Color.rgb(230, 81, 0))
-            setOnClickListener {
-                when (permission) {
-                    RequiredPermission.ACCESSIBILITY -> PermissionHelper.openAccessibilitySettings(
-                        this@MainActivity
-                    )
-
-                    RequiredPermission.WRITE_SETTINGS -> PermissionHelper.openWriteSettingsPage(this@MainActivity)
-                    RequiredPermission.NOTIFICATION_ACCESS -> PermissionHelper.openNotificationAccessSettings(
-                        this@MainActivity
-                    )
-                }
-            }
-            layoutParams = ViewGroup.MarginLayoutParams(
-                ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT
-            ).apply {
-                topMargin = 4.dp
-                bottomMargin = 4.dp
-            }
-        }
-    }
-
     override fun onHandleBackPressed() {
         finish()
     }
-
-    private val Int.dp: Int
-        get() = (this * resources.displayMetrics.density).toInt()
 }

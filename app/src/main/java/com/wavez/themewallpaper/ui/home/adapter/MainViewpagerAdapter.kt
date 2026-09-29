@@ -4,6 +4,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.Lifecycle
 import androidx.viewpager2.adapter.FragmentStateAdapter
+import com.wavez.themewallpaper.ui.home.fragment.controller.ControllerFragment
 import com.wavez.themewallpaper.ui.home.fragment.icons.IconFragment
 import com.wavez.themewallpaper.ui.home.fragment.theme.ThemeFragment
 import com.wavez.themewallpaper.ui.home.fragment.mygallery.MyGalleryFragment
@@ -20,8 +21,9 @@ class MainPagerAdapter(
         when (MainTab.fromPosition(position)) {
             MainTab.THEMES -> ThemeFragment.newInstance()
             MainTab.WALLPAPERS -> WallpaperFragment.newInstance()
+            MainTab.WIDGETS -> WidgetsFragment.newInstance()
+            MainTab.CONTROLLER -> ControllerFragment.newInstance()
             MainTab.ICONS -> IconFragment.newInstance()
             MainTab.MY_GALLERY -> MyGalleryFragment.newInstance()
-            MainTab.WIDGETS -> WidgetsFragment.newInstance()
         }
 }

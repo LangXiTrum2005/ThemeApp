@@ -130,4 +130,22 @@
     <string name="keep_editing">Tiếp tục chỉnh sửa</string>
     <string name="discard">Loại bỏ</string>
     <string name="get_start">Bắt đầu</string>
+    <string name="controller">Controller</string>
+    <string name="control_center">Trung tâm điều khiển</string>
+    <string name="control_center_desc">Quản lý và kích hoạt bảng điều khiển nhanh tiện ích</string>
+    <string name="accessibility_service">Dịch vụ Hỗ trợ tiếp cận (Accessibility)</string>
+    <string name="accessibility_service_desc">Cần thiết để hiển thị bảng điều khiển và thao tác kéo vuốt</string>
+    <string name="write_settings_permission">Quyền sửa đổi cài đặt hệ thống</string>
+    <string name="write_settings_permission_desc">Cần thiết để điều chỉnh độ sáng màn hình</string>
+    <string name="notification_access">Quyền truy cập thông báo</string>
+    <string name="notification_access_desc">Cần thiết để điều khiển trình phát nhạc và âm lượng</string>
+    <string name="permission_granted">Đã cấp</string>
+    <string name="permission_required">Cần cấp quyền</string>
+    <string name="grant_permission">Cấp quyền</string>
+    <string name="enable_service">Kích hoạt</string>
+    <string name="test_control_panel">Xem trước Control Center</string>
+    <string name="hide_control_panel">Ẩn Control Center</string>
+    <string name="swipe_down_hint">Vuốt xuống từ thanh kéo ở cạnh trên màn hình để mở Control Center bất kỳ lúc nào.</string>
+    <string name="service_status_active">Dịch vụ đang hoạt động &amp; sẵn sàng</string>
+    <string name="service_status_inactive">Dịch vụ chưa được kích hoạt</string>
 </resources>

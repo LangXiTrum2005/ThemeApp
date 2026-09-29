@@ -2,6 +2,7 @@ package com.wavez.themewallpaper.di
 
 import com.squareup.moshi.Moshi
 import com.wavez.themewallpaper.BuildConfig
+import com.wavez.themewallpaper.Secrets
 import com.wavez.themewallpaper.data.network.NetworkConstants
 import com.wavez.themewallpaper.data.network.api.ApiService
 import com.wavez.themewallpaper.data.repository.SharedPref
@@ -62,7 +63,7 @@ object NetworkModule {
         sharedPref: SharedPref
     ): Retrofit {
         return Retrofit.Builder()
-            .baseUrl(sharedPref.severRoot)
+            .baseUrl(Secrets.INSTANCE.getBaseURL())
             .client(okHttpClient)
             .addConverterFactory(MoshiConverterFactory.create(moshi))
             .build()

@@ -10,8 +10,7 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" /> <!-- Control Center permissions -->
-    <!-- <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" /> -->
-    <!-- <uses-permission android:name="android.permission.WRITE_SETTINGS" /> -->
+    <uses-permission android:name="android.permission.WRITE_SETTINGS" />
     <!-- <uses-permission android:name="android.permission.ACCESS_NOTIFICATION_POLICY" /> -->
     <uses-permission
         android:name="android.permission.FOREGROUND_SERVICE"
@@ -28,7 +27,7 @@
     <uses-feature
         android:name="android.software.wallpaper"
         android:required="false" />
-    <!-- <uses-permission android:name="android.permission.CAMERA" /> -->
+    <uses-permission android:name="android.permission.CAMERA" />
 
 
     <!-- <uses-feature -->
@@ -36,16 +35,14 @@
     <!-- android:required="false" /> -->
 
 
-    <!-- <uses-permission -->
-    <!-- android:name="android.permission.BLUETOOTH_CONNECT" -->
-    <!-- android:minSdkVersion="31" /> -->
-    <!--  -->
-    <!-- <uses-permission -->
-    <!-- android:name="android.permission.BLUETOOTH" -->
-    <!-- android:maxSdkVersion="30" /> -->
-    <!-- <uses-permission -->
-    <!-- android:name="android.permission.BLUETOOTH_ADMIN" -->
-    <!-- android:maxSdkVersion="30" /> -->
+    <uses-permission
+        android:name="android.permission.BLUETOOTH_CONNECT" />
+    <uses-permission
+        android:name="android.permission.BLUETOOTH"
+        android:maxSdkVersion="30" />
+    <uses-permission
+        android:name="android.permission.BLUETOOTH_ADMIN"
+        android:maxSdkVersion="30" />
     <!-- <uses-permission android:name="android.permission.VIBRATE" /> -->
 
     <queries>
@@ -232,33 +229,29 @@
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
         </service>
-        <!-- <service -->
-        <!-- android:name=".core.controllercenter.service.record.ScreenRecordService" -->
-        <!-- android:exported="false" -->
-        <!-- android:foregroundServiceType="mediaProjection" /> &lt;!&ndash; Accessibility Service (Control Center backbone) &ndash;&gt; -->
-        <!-- <service -->
-        <!-- android:name=".core.controllercenter.service.ControlCenterService" -->
-        <!-- android:enabled="true" -->
-        <!-- android:exported="true" -->
-        <!-- android:permission="android.permission.BIND_ACCESSIBILITY_SERVICE" -->
-        <!-- tools:ignore="AccessibilityPolicy"> -->
-        <!-- <intent-filter> -->
-        <!-- <action android:name="android.accessibilityservice.AccessibilityService" /> -->
-        <!-- </intent-filter> -->
+        <service
+            android:name=".core.controllercenter.service.ControlCenterService"
+            android:enabled="true"
+            android:exported="true"
+            android:permission="android.permission.BIND_ACCESSIBILITY_SERVICE"
+            tools:ignore="AccessibilityPolicy">
+            <intent-filter>
+                <action android:name="android.accessibilityservice.AccessibilityService" />
+            </intent-filter>
 
-
-        <!-- <meta-data -->
-        <!-- android:name="android.accessibilityservice" -->
-        <!-- android:resource="@xml/cc_accessibility_config" /> -->
-        <!-- </service> &lt;!&ndash; Notification Listener &ndash;&gt; -->
-        <!-- <service -->
-        <!-- android:name=".core.controllercenter.service.ControlNotificationListener" -->
-        <!-- android:exported="true" -->
-        <!-- android:permission="android.permission.BIND_NOTIFICATION_LISTENER_SERVICE"> -->
-        <!-- <intent-filter> -->
-        <!-- <action android:name="android.service.notification.NotificationListenerService" /> -->
-        <!-- </intent-filter> -->
-        <!-- </service> &lt;!&ndash; Boot Receiver &ndash;&gt; -->
+            <meta-data
+                android:name="android.accessibilityservice"
+                android:resource="@xml/cc_accessibility_config" />
+        </service>
+        <service
+            android:name=".core.controllercenter.service.ControlNotificationListener"
+            android:exported="true"
+            android:permission="android.permission.BIND_NOTIFICATION_LISTENER_SERVICE">
+            <intent-filter>
+                <action android:name="android.service.notification.NotificationListenerService" />
+            </intent-filter>
+        </service>
+        <!-- Boot Receiver is deliberately left disabled: Android binds accessibility services itself. -->
         <!-- <receiver -->
         <!-- android:name=".core.controllercenter.BootReceiver" -->
         <!-- android:exported="true"> -->

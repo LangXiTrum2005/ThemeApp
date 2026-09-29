@@ -15,12 +15,15 @@ import com.wavez.themewallpaper.R
 import com.wavez.themewallpaper.core.base.BaseFragment
 import com.wavez.themewallpaper.core.controllercenter.PermissionHelper
 import com.wavez.themewallpaper.core.controllercenter.ControllerThemeCatalog
+import com.wavez.themewallpaper.core.controllercenter.ControllerTheme
 import com.wavez.themewallpaper.core.controllercenter.ThemeLoader
 import com.wavez.themewallpaper.core.controllercenter.service.ControlCenterService
 import com.wavez.themewallpaper.databinding.FragmentControllerBinding
 import com.wavez.themewallpaper.ui.setting.SettingActivity
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
@@ -31,14 +34,32 @@ class ControllerFragment : BaseFragment<FragmentControllerBinding>() {
         FragmentControllerBinding.inflate(layoutInflater)
 
     companion object {
+        private const val THEME_UNLOCK_DELAY_MS = 1_500L
+
         fun newInstance(): ControllerFragment = ControllerFragment()
     }
 
     private var panelActive = false
+    private var themeDownloadJob: Job? = null
 
-    private val themeAdapter: ControllerThemeAdapter = ControllerThemeAdapter { theme ->
+    private val themeAdapter: ControllerThemeAdapter = ControllerThemeAdapter { theme, action ->
+        themeDownloadJob?.cancel()
+        when (action) {
+            ControllerThemeAction.SELECT -> themeAdapter.showDownload(theme)
+            ControllerThemeAction.DOWNLOAD -> {
+                themeAdapter.showLoading(theme)
+                themeDownloadJob = viewLifecycleOwner.lifecycleScope.launch {
+                    delay(THEME_UNLOCK_DELAY_MS)
+                    themeAdapter.showUnlock(theme)
+                }
+            }
+            ControllerThemeAction.UNLOCK -> applyTheme(theme)
+        }
+    }
+
+    private fun applyTheme(theme: ControllerTheme) {
         sharedPref.activeThemeId = theme.id
-        themeAdapter.select(theme)
+        themeAdapter.markApplied(theme)
         requireContext().sendBroadcast(
             Intent(ControlCenterService.ACTION_RELOAD_THEME).setPackage(requireContext().packageName),
         )
@@ -47,6 +68,8 @@ class ControllerFragment : BaseFragment<FragmentControllerBinding>() {
             getString(R.string.controller_theme_applied, theme.name),
             android.widget.Toast.LENGTH_SHORT,
         ).show()
+        refreshState()
+        binding.controllerScroll.post { binding.controllerScroll.smoothScrollTo(0, 0) }
     }
 
     private val runtimePermissions = buildList {
@@ -114,6 +137,11 @@ class ControllerFragment : BaseFragment<FragmentControllerBinding>() {
     override fun onResume() {
         super.onResume()
         refreshState()
+    }
+
+    override fun release() {
+        themeDownloadJob?.cancel()
+        super.release()
     }
 
     private fun refreshState() {
@@ -198,4 +226,5 @@ class ControllerFragment : BaseFragment<FragmentControllerBinding>() {
             getString(R.string.test_control_panel)
         }
     }
+
 }

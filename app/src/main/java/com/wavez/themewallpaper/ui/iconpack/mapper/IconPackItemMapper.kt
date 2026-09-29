@@ -2,13 +2,10 @@ package com.wavez.themewallpaper.ui.iconpack.mapper
 
 import com.wavez.themewallpaper.data.model.AppInfo
 import com.wavez.themewallpaper.data.model.icon.IconItemModel
-import com.wavez.themewallpaper.data.repository.SharedPref
 import com.wavez.themewallpaper.ui.iconpack.model.IconPackItemUi
 import javax.inject.Inject
 
-class IconPackItemMapper @Inject constructor(
-    private val sharedPref: SharedPref,
-) {
+class IconPackItemMapper @Inject constructor() {
 
     fun map(
         icon: IconItemModel,
@@ -37,7 +34,6 @@ class IconPackItemMapper @Inject constructor(
             selectedAppName = manualMapping?.appName,
             selectedAppIcon = manualMapping?.icon,
             isManualMappingRequired = packageName == null,
-            isUnlocked = sharedPref.isVip || sharedPref.isIconUnlocked(iconId.toString()),
             isApplied = isApplied,
         )
     }

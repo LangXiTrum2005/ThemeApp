@@ -18,7 +18,6 @@ import com.wavez.themewallpaper.ui.customview.ThemeTabIcon
 import com.wavez.themewallpaper.ui.home.dialog.FilterPopupHelper
 import com.wavez.themewallpaper.ui.home.fragment.widget.adapter.WidgetCategoryPagerAdapter
 import com.wavez.themewallpaper.ui.home.fragment.widget.viewmodel.WidgetViewModel
-import com.wavez.themewallpaper.ui.premium.PremiumActivity
 import com.wavez.themewallpaper.ui.search.SearchActivity
 import com.wavez.themewallpaper.ui.search.model.SearchMode
 import com.wavez.themewallpaper.ui.setting.SettingActivity
@@ -53,18 +52,11 @@ class WidgetsFragment : BaseFragment<FragmentWidgetsBinding>() {
         binding.vpTheme.registerOnPageChangeCallback(onPageChangeCallback)
     }
 
-    override fun onResume() {
-        super.onResume()
-        binding.toolbar.btnPremium.isVisible = !sharedPref.isVip
-    }
 
     override fun initListener() {
         super.initListener()
         binding.toolbar.btnSetting.setOnClickListener {
             startActivity(SettingActivity.newIntent(requireContext()))
-        }
-        binding.toolbar.btnPremium.setOnClickListener {
-            startActivity(PremiumActivity.newIntent(requireContext()))
         }
         binding.edSearch.setOnClickListener {
             startActivity(SearchActivity.newIntent(requireContext(), SearchMode.WIDGETS))

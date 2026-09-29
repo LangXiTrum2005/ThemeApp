@@ -29,9 +29,5 @@ data class WidgetsModel(
     val categoryId: String,
     @param:Json(name = "tags")
     val tags: List<String> = emptyList(),
-) : Parcelable {
-    fun isVip(): Boolean {
-        return premium == 1
-    }
-}
+) : Parcelable
 

@@ -2,8 +2,6 @@ package com.wavez.themewallpaper.di
 
 import android.content.Context
 import androidx.room.Room
-import com.src.billing_library.BillingLibrary
-import com.src.billing_library.GooglePlayBillingLibrary
 import com.wavez.themewallpaper.core.wallpaper.WallpaperManagerCore
 import com.wavez.themewallpaper.data.local.ThemeStorageConfig
 import com.wavez.themewallpaper.data.local.dao.DownloadedControllerDao
@@ -15,7 +13,6 @@ import com.wavez.themewallpaper.data.repository.IconPackRepository
 import com.wavez.themewallpaper.data.repository.IconPackRepositoryImpl
 import com.wavez.themewallpaper.data.repository.LanguageRepository
 import com.wavez.themewallpaper.data.repository.LanguageRepositoryImpl
-import com.wavez.themewallpaper.data.repository.PremiumRepository
 import com.wavez.themewallpaper.data.repository.SharedPref
 import com.wavez.themewallpaper.data.repository.SharedPreferencesImpl
 import com.wavez.themewallpaper.data.repository.ThemeControllerRepository
@@ -125,23 +122,5 @@ class AppModule {
         @ApplicationContext context: Context,
     ): WallpaperManagerCore = WallpaperManagerCore(context)
 
-
-    @Provides
-    @Singleton
-    fun providerBillingManager(
-        @ApplicationContext context: Context,
-    ): BillingLibrary {
-        return GooglePlayBillingLibrary(context)
-    }
-
-
-    @Provides
-    @Singleton
-    fun providerPremiumRepository(
-        billingLibrary: BillingLibrary,
-        sharedPref: SharedPref
-    ): PremiumRepository {
-        return PremiumRepository(billingLibrary, sharedPref)
-    }
 
 }

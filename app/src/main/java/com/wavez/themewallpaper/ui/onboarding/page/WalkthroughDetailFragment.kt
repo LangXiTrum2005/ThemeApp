@@ -4,11 +4,8 @@ import android.os.Bundle
 import android.view.View
 import com.bumptech.glide.Glide
 import com.wavez.themewallpaper.R
-import com.wavez.themewallpaper.ads.native_ad.NativeAdPlacement
 import com.wavez.themewallpaper.core.base.BaseFragment
 import com.wavez.themewallpaper.core.extensions.getParcel
-import com.wavez.themewallpaper.core.extensions.gone
-import com.wavez.themewallpaper.core.extensions.invisible
 import com.wavez.themewallpaper.databinding.FragmentOnboardingDetailBinding
 import com.wavez.themewallpaper.ui.onboarding.WalkthroughActivity
 import com.wavez.themewallpaper.ui.onboarding.model.BoardingData
@@ -23,13 +20,11 @@ class WalkthroughDetailFragment : BaseFragment<FragmentOnboardingDetailBinding>(
 
     companion object {
         private const val ARG_DATA = "arg_data"
-        private const val SHOULD_SHOW_NATIVE_AD = "should_show_native_ad"
 
-        fun newInstance(boardingData: BoardingData? = null, shouldShowNativeAd: Boolean = false) =
+        fun newInstance(boardingData: BoardingData? = null) =
             WalkthroughDetailFragment().apply {
                 arguments = Bundle().apply {
                     putParcelable(ARG_DATA, boardingData)
-                    putBoolean(SHOULD_SHOW_NATIVE_AD, shouldShowNativeAd)
                 }
             }
     }
@@ -40,7 +35,6 @@ class WalkthroughDetailFragment : BaseFragment<FragmentOnboardingDetailBinding>(
         super.initConfig(view, savedInstanceState)
         boardingData = arguments?.getParcel(ARG_DATA)
         boardingData?.let { initView(it) }
-        initNativeAds()
         logViewEvent()
     }
 
@@ -57,33 +51,6 @@ class WalkthroughDetailFragment : BaseFragment<FragmentOnboardingDetailBinding>(
         binding.tvHeader.text = getString(data.labelID)
         binding.tvDes.text = getString(data.desID)
         binding.tvNext.text = getString(if (data.index == 3) R.string.get_start else R.string.next)
-    }
-
-    private fun initNativeAds() {
-        val show = arguments?.getBoolean(SHOULD_SHOW_NATIVE_AD) ?: true
-        if (sharedPref.isVip || !show) {
-            binding.bigNative1.gone()
-            binding.bigNative2.gone()
-            binding.viewFake.invisible()
-            return
-        }
-        if (boardingData?.index == 2) {
-            binding.bigNative2.gone()
-            setupNative(
-                NativeAdPlacement.ONBOARDING2,
-                binding.bigNative1,
-                true,
-                preloadOnClick = true
-            )
-        } else {
-            binding.bigNative1.gone()
-            setupNative(
-                NativeAdPlacement.ONBOARDING3,
-                binding.bigNative2,
-                true,
-                preloadOnClick = true
-            )
-        }
     }
 
     private fun logViewEvent() {

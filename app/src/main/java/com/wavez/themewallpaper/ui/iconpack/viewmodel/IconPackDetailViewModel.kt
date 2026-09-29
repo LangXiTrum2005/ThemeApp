@@ -40,8 +40,6 @@ class IconPackDetailViewModel @Inject constructor(
     private val manualMappings = mutableMapOf<Long, AppInfo>()
     private val appliedIconIds = mutableSetOf<Long>()
     private var pendingIconId: Long? = null
-    private var installingAllAfterUnlock = false
-
     var currentIconPackId: String? = null
     var itemIconPackItemUi : IconPackItemUi? = null
 
@@ -75,34 +73,6 @@ class IconPackDetailViewModel @Inject constructor(
 
         // Do not reorder after user selection. Only the selected row should change.
         updateSingleIcon(iconId)
-    }
-
-    fun unlockIcon() {
-        itemIconPackItemUi?.let {item->
-            sharedPref.unlockIcon(item.id.toString())
-            updateSingleIcon(item.id)
-        }
-    }
-
-    fun unlockIcons(iconIds: Collection<Long>) {
-        iconIds.forEach { iconId ->
-            sharedPref.unlockIcon(iconId.toString())
-        }
-        refreshIconState()
-    }
-
-    fun setInstallingAllAfterUnlock(pending: Boolean) {
-        installingAllAfterUnlock = pending
-    }
-
-    fun consumeInstallingAllAfterUnlock(): Boolean {
-        return installingAllAfterUnlock.also {
-            installingAllAfterUnlock = false
-        }
-    }
-
-    fun refreshUnlockState() {
-        refreshIconState()
     }
 
     private fun refreshIconState() {

@@ -6,37 +6,23 @@ import android.content.Intent
 import android.content.res.Configuration
 import android.os.Bundle
 import android.os.LocaleList
-import android.view.ViewGroup
 import androidx.activity.OnBackPressedCallback
 import androidx.activity.enableEdgeToEdge
-import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.WindowInsetsControllerCompat
-import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.lifecycleScope
-import androidx.lifecycle.repeatOnLifecycle
 import androidx.viewbinding.ViewBinding
-import com.ads.admob.MMonetize
-import com.ads.admob.banner_ads.BannerAdView
-import com.ads.admob.native_ads.NativeAdBinder
-import com.ads.admob.native_ads.adapter.NativeAdViewAd
 import com.wavez.themewallpaper.R
-import com.wavez.themewallpaper.ads.native_ad.NativeAdPlacement
 import com.wavez.themewallpaper.core.extensions.collectWithLifecycle
-import com.wavez.themewallpaper.core.extensions.findFirstViewOfType
-import com.wavez.themewallpaper.core.extensions.gone
 import com.wavez.themewallpaper.core.utils.NetworkTracker
 import com.wavez.themewallpaper.data.repository.LanguageRepository
 import com.wavez.themewallpaper.data.repository.SharedPref
 import com.wavez.themewallpaper.di.AppModuleEntry
 import com.wavez.themewallpaper.ui.dialog.NetworkDialog
-import com.wavez.themewallpaper.ui.premium.PremiumViewModel
 import dagger.hilt.android.EntryPointAccessors
-import kotlinx.coroutines.launch
 import org.greenrobot.eventbus.EventBus
 import java.util.Locale
 import javax.inject.Inject
@@ -55,12 +41,8 @@ abstract class BaseActivity<T : ViewBinding> : AppCompatActivity() {
 
     abstract fun bindingView(): T
 
-    private val nativeAdBinder by lazy { NativeAdBinder() }
-
     private var networkTracker: NetworkTracker? = null
     private var networkDialog: NetworkDialog? = null
-
-    private val premiumViewModel by viewModels<PremiumViewModel>()
 
     override fun onResume() {
         super.onResume()
@@ -106,43 +88,6 @@ abstract class BaseActivity<T : ViewBinding> : AppCompatActivity() {
         initObserver()
     }
 
-    fun loadInterAds() {
-        MMonetize.interstitialManager.loadAd()
-    }
-
-    fun loadNativeWithPosition(position: NativeAdPlacement) {
-        MMonetize.nativeAdRepository.loadAd(position.name)
-    }
-
-    fun setupNative(
-        position: NativeAdPlacement,
-        view: NativeAdViewAd,
-        shouldShow: Boolean = true,
-        autoLoad: Boolean = false,
-        autoReloadOnStart: Boolean = false,
-        preloadOnClick: Boolean = false,
-    ) {
-        nativeAdBinder.attach(
-            lifecycleOwner = this,
-            placement = position.name,
-            view = view,
-            shouldShow = shouldShow,
-            autoLoad = autoLoad,
-            autoReloadOnStart = autoReloadOnStart,
-            preloadOnClick = preloadOnClick,
-        )
-    }
-
-    protected fun hideBannerAdsIfNeed(bannerContainer: ViewGroup? = null): Boolean {
-        val adView =
-            bannerContainer ?: binding.root.findFirstViewOfType<BannerAdView>() ?: return false
-        if (sharedPref.isVip) {
-            adView.gone()
-            return true
-        }
-        return false
-    }
-
     open fun initView(savedInstanceState: Bundle?) {}
 
     open fun initListener() {}
@@ -150,23 +95,8 @@ abstract class BaseActivity<T : ViewBinding> : AppCompatActivity() {
     open fun initConfig(savedInstanceState: Bundle?) {}
 
     open fun initObserver() {
-        lifecycleScope.launch {
-            repeatOnLifecycle(Lifecycle.State.STARTED) {
-                premiumViewModel.isPremium.collect {
-                    onVipChangedState(it)
-                }
-            }
-        }
-
         networkTracker?.isConnectedFlow?.collectWithLifecycle(this) { isConnected ->
             if (isConnected) dismissNetworkDialog() else showNetworkDialog()
-        }
-    }
-
-    protected open fun onVipChangedState(isPremium: Boolean) {
-        if (isPremium) {
-            hideBannerAdsIfNeed()
-            nativeAdBinder.releaseAllPlacements()
         }
     }
 
@@ -202,42 +132,10 @@ abstract class BaseActivity<T : ViewBinding> : AppCompatActivity() {
 
     fun navigateTo(
         intent: Intent,
-        forceShowAd: Boolean = false,
         shouldFinishCurrentActivity: Boolean = false,
     ) {
-        val isSkipAd = sharedPref.isVip
-        if (isSkipAd) {
-            startAndFinishCurrentIfNeed(intent, shouldFinishCurrentActivity)
-            return
-        }
-        val showAdAction: (() -> Unit) -> Unit = if (forceShowAd) {
-            { onContinue ->
-                MMonetize.interstitialManager.forceShowAdFullScreen(
-                    this,
-                    onAdComplete = onContinue
-                )
-            }
-        } else {
-            { onContinue ->
-                MMonetize.interstitialManager.showAdFullScreen(
-                    this,
-                    onAdComplete = onContinue
-                )
-            }
-        }
-        showAdAction { startAndFinishCurrentIfNeed(intent, shouldFinishCurrentActivity) }
-    }
-
-    private fun startAndFinishCurrentIfNeed(intent: Intent, shouldFinishCurrentActivity: Boolean) {
         startActivity(intent)
         if (shouldFinishCurrentActivity) finish()
-    }
-
-    fun executeWithAds(onBack: () -> Unit) {
-        if (sharedPref.isVip) {
-            onBack(); return
-        }
-        MMonetize.interstitialManager.showAdFullScreen(this, showLoading = false) { onBack() }
     }
 
     private fun showNetworkDialog() {

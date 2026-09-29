@@ -10,7 +10,6 @@ import androidx.core.view.updatePadding
 import androidx.core.widget.doAfterTextChanged
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.wavez.themewallpaper.R
-import com.wavez.themewallpaper.ads.AdsId
 import com.wavez.themewallpaper.core.base.BaseActivity
 import com.wavez.themewallpaper.core.extensions.collectWithLifecycle
 import com.wavez.themewallpaper.core.extensions.hideKeyboard
@@ -96,15 +95,8 @@ class SearchActivity : BaseActivity<ActivitySearchBinding>() {
     override fun initConfig(savedInstanceState: Bundle?) {
         super.initConfig(savedInstanceState)
         viewModel.load(searchMode)
-        loadBanner()
     }
 
-    private fun loadBanner() {
-        binding.bannerAds.registerBanner(
-            this, adId = AdsId.getBannerInAppAds(),
-            shouldLoad = sharedPref.shouldShowBannerInApp ,
-        )
-    }
 
 
     override fun initListener() {
@@ -180,11 +172,5 @@ class SearchActivity : BaseActivity<ActivitySearchBinding>() {
             R.string.no_results_found_for,
             state.query,
         )
-    }
-
-    override fun onHandleBackPressed() {
-        executeWithAds {
-            super.onHandleBackPressed()
-        }
     }
 }

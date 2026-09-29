@@ -68,10 +68,4 @@ class SettingActivity : BaseActivity<ActivitySettingBinding>() {
             languageLauncher.launch(SettingLanguageActivity.newIntent(this))
         }
     }
-
-    override fun onHandleBackPressed() {
-        executeWithAds {
-            super.onHandleBackPressed()
-        }
-    }
 }

@@ -97,47 +97,11 @@
  }
  -keep public class com.android.installreferrer.** { *; }
  #end of adjust sdk
- -keep class com.bytedance.sdk.** { *; }
-
-
- #Mintergral-Pangel
- # For Mintergral integration
- -keep public interface com.mbridge.msdk.out** {*; }
- -keep public interface com.mbridge.msdk.videocommon.listener** {*; }
- -keep public interface com.mbridge.msdk.interstitialvideo.out** {*; }
- -keep public interface com.mintegral.msdk.out** {*; }
- -keep public interface com.mintegral.msdk.videocommon.listener** {*; }
- -keep public interface com.mintegral.msdk.interstitialvideo.out** {*; }
 
  -keep class androidx.media3.** { *; }
  -keep interface androidx.media3.** { *; }
 
  -keep class com.github.anrwatchdog.** { *; }
 
- -keep class com.wavez.themewallpaper.ui.premium.BillingConstant {
-     public static final *;
- }
-
  -dontwarn com.facebook.infer.annotation.Nullsafe$Mode
  -dontwarn com.facebook.infer.annotation.Nullsafe
-
-# Pangle (Bytedance) SDK — required for mediation adapter to load runtime
-# classes. Thiếu rules này, R8 obfuscate hết → adapter trả "no fill" silently
-# và AdMob bỏ qua Pangle network.
--keep class com.bytedance.** { *; }
--keep class sg.bigo.ads.** { *; }
--keep class com.bytedance.sdk.openadsdk.R$* { *; }
--keepclassmembers class com.bytedance.sdk.openadsdk.R$* { *; }
--keep class com.bytedance.sdk.** { *; }
--keep interface com.bytedance.sdk.** { *; }
--keep class com.bytedance.embedapplog.** { *; }
--keep class com.bytedance.android.** { *; }
--keep class com.bykv.** { *; }
--keep class com.byted.** { *; }
--keep class com.pangle.** { *; }
--keep class com.tt.** { *; }
--dontwarn com.bytedance.**
--dontwarn com.bykv.**
--dontwarn com.byted.**
--dontwarn com.pangle.**
-

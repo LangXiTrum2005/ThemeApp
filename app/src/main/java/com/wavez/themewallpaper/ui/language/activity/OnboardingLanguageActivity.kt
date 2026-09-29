@@ -5,7 +5,6 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.Gravity
 import com.wavez.themewallpaper.R
-import com.wavez.themewallpaper.ads.native_ad.NativeAdPlacement
 import com.wavez.themewallpaper.core.extensions.gone
 import com.wavez.themewallpaper.core.extensions.visible
 import com.wavez.themewallpaper.core.utils.CustomToast
@@ -29,13 +28,6 @@ class OnboardingLanguageActivity : BaseLanguageActivity() {
         FirebaseControlLogEvent.logEvent(AppEvent.LFO_VIEW)
         binding.btnNextLanguage.visible()
         binding.btnSave.gone()
-        loadNativeWithPosition(NativeAdPlacement.LANGUAGE_2)
-        loadNativeWithPosition(NativeAdPlacement.ONBOARDING1)
-        initNativeLanguage1()
-    }
-
-    private fun loadAds() {
-        loadNativeWithPosition(NativeAdPlacement.ONBOARDING1_CLICK)
     }
 
     override fun onSaveLanguage() {
@@ -54,30 +46,9 @@ class OnboardingLanguageActivity : BaseLanguageActivity() {
     override fun updateStateLanguageSelected(isEnabled: Boolean) {
         if (!isSelectedLanguage) {
             FirebaseControlLogEvent.logEvent(AppEvent.LFO_CLICK_LANGUAGE)
-            initNativeLanguage2()
-            loadAds()
             isSelectedLanguage = true
         }
         binding.btnNextLanguage.isSelected = true
-    }
-
-    private fun initNativeLanguage1() {
-        setupNative(
-            NativeAdPlacement.LANGUAGE,
-            binding.nativeLanguage1,
-            sharedPref.shouldShowNativeLanguage1,
-            preloadOnClick = true
-        )
-    }
-
-    private fun initNativeLanguage2() {
-        binding.nativeLanguage2.visible()
-        setupNative(
-            NativeAdPlacement.LANGUAGE_2,
-            binding.nativeLanguage2,
-            sharedPref.shouldShowNativeLanguage2,
-            preloadOnClick = true
-        )
     }
 
     private fun showToastFirstChoose() {

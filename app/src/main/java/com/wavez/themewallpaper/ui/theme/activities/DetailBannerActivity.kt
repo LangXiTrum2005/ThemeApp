@@ -5,8 +5,6 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.core.view.isVisible
-import com.wavez.themewallpaper.ads.AdsId
-import com.wavez.themewallpaper.ads.native_ad.NativeAdPlacement
 import com.wavez.themewallpaper.core.base.BaseActivity
 import com.wavez.themewallpaper.core.base.UiState
 import com.wavez.themewallpaper.core.extensions.collectWithLifecycle
@@ -53,25 +51,9 @@ class DetailBannerActivity : BaseActivity<ActivityDetailBannerBinding>() {
     override fun initConfig(savedInstanceState: Bundle?) {
         super.initConfig(savedInstanceState)
         viewModel.getThemesByCategory(categoryId)
-        initNative()
-        loadBanner()
     }
 
-    private fun loadBanner() {
-        binding.bannerAds.registerBanner(
-            this, adId = AdsId.getBannerInAppAds(),
-            shouldLoad = sharedPref.shouldShowBannerInApp ,
-        )
-    }
 
-    private fun initNative() {
-        setupNative(
-            NativeAdPlacement.NATIVE_BANNER_DETAIL,
-            binding.nativeBanner,
-            shouldShow = sharedPref.shouldShowNativeInApp,
-            autoLoad = true,
-        )
-    }
 
     override fun initListener() {
         super.initListener()
@@ -111,12 +93,6 @@ class DetailBannerActivity : BaseActivity<ActivityDetailBannerBinding>() {
 
                 else -> Unit
             }
-        }
-    }
-
-    override fun onHandleBackPressed() {
-        executeWithAds {
-            super.onHandleBackPressed()
         }
     }
 

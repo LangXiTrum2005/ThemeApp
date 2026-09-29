@@ -26,7 +26,4 @@ interface ThemeRepository {
 
     fun observeDownloadedThemes(): Flow<List<ThemeModel>>
 
-    fun checkUnlockWallpaper(theme: ThemeModel): Boolean
-
-    fun unlockWallpaper(theme: ThemeModel)
 }

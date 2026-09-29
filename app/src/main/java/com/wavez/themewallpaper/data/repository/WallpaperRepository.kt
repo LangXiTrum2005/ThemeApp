@@ -26,9 +26,5 @@ interface WallpaperRepository {
 
     fun observeDownloadedWallpapers(): Flow<List<WallpaperModel>>
 
-    fun checkUnlockWallpaper(wallpaper: WallpaperModel): Boolean
-
-    fun unlockWallpaper(wallpaper: WallpaperModel)
-
     suspend fun applyWallpaper(wallpaper: WallpaperModel, wallpaperTarget: WallpaperTarget): Result<Unit>
 }

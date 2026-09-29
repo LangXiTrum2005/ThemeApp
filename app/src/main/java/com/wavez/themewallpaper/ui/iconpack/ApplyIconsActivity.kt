@@ -6,8 +6,6 @@ import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.core.view.isVisible
 import com.wavez.themewallpaper.R
-import com.wavez.themewallpaper.ads.AdsId
-import com.wavez.themewallpaper.ads.native_ad.NativeAdPlacement
 import com.wavez.themewallpaper.core.base.BaseActivity
 import com.wavez.themewallpaper.core.base.UiState
 import com.wavez.themewallpaper.core.extensions.collectWithLifecycle
@@ -17,7 +15,6 @@ import com.wavez.themewallpaper.databinding.ActivityApplyIconsBinding
 import com.wavez.themewallpaper.ui.home.MainActivity
 import com.wavez.themewallpaper.ui.home.fragment.icons.adapter.IconAdapter
 import com.wavez.themewallpaper.ui.iconpack.viewmodel.ApplyIconsViewModel
-import com.wavez.themewallpaper.ui.premium.PremiumActivity
 import com.wavez.themewallpaper.ui.setting.dialog.RatePromptManager
 import com.wavez.themewallpaper.ui.theme.adapter.AppliedThemeIconAdapter
 import dagger.hilt.android.AndroidEntryPoint
@@ -70,8 +67,6 @@ class ApplyIconsActivity : BaseActivity<ActivityApplyIconsBinding>() {
         if (savedInstanceState == null) {
             RatePromptManager.showAfterSuccessfulSetup(supportFragmentManager, sharedPref)
         }
-        initNative()
-        loadBanner()
     }
 
     override fun initListener() {
@@ -86,11 +81,7 @@ class ApplyIconsActivity : BaseActivity<ActivityApplyIconsBinding>() {
         }
         binding.btnViewMoreIcons.setOnClickListener {
             finish()
-        }
-        binding.btnPremium.setOnClickListener {
-            startActivity(PremiumActivity.newIntent(this))
-        }
-    }
+        }    }
 
     override fun initObserver() {
         super.initObserver()
@@ -119,20 +110,5 @@ class ApplyIconsActivity : BaseActivity<ActivityApplyIconsBinding>() {
         }
     }
 
-    private fun loadBanner() {
-        binding.bannerAds.registerBanner(
-            this,
-            adId = AdsId.getBannerInAppAds(),
-            shouldLoad = sharedPref.shouldShowBannerInApp ,
-        )
-    }
 
-    private fun initNative() {
-        setupNative(
-            NativeAdPlacement.NATIVE_ICON_APPLIED,
-            binding.nativeApply,
-            shouldShow = sharedPref.shouldShowNativeInApp,
-            autoLoad = true,
-        )
-    }
 }

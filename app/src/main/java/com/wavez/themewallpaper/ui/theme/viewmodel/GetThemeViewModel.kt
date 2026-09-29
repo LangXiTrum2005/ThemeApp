@@ -67,7 +67,6 @@ class GetThemeViewModel @Inject constructor(
     private val manualMappings = mutableMapOf<Long, AppInfo>()
     private val appliedIconIds = mutableSetOf<Long>()
     private var pendingIconId: Long? = null
-    private var installingAllAfterUnlock = false
 
     var itemIconPackItemUi : IconPackItemUi? = null
 
@@ -119,15 +118,6 @@ class GetThemeViewModel @Inject constructor(
         }
     }
 
-    fun canDownloadCurrentWallpaper(): Boolean {
-        val theme = currentTheme ?: return false
-        return themeRepository.checkUnlockWallpaper(theme)
-    }
-
-    fun unlockCurrentWallpaper() {
-        currentTheme?.let(themeRepository::unlockWallpaper)
-    }
-
     fun selectPage(page: GetThemePage) {
         _selectedPage.value = page
     }
@@ -150,34 +140,6 @@ class GetThemeViewModel @Inject constructor(
                     )
                 }
         }
-    }
-
-    fun unlockIcon() {
-        itemIconPackItemUi?.let { item ->
-            sharedPref.unlockIcon(item.id.toString())
-            updateSingleIcon(item.id)
-        }
-    }
-
-    fun unlockIcons(iconIds: Collection<Long>) {
-        iconIds.forEach { iconId ->
-            sharedPref.unlockIcon(iconId.toString())
-        }
-        refreshIconState()
-    }
-
-    fun setInstallingAllAfterUnlock(pending: Boolean) {
-        installingAllAfterUnlock = pending
-    }
-
-    fun consumeInstallingAllAfterUnlock(): Boolean {
-        return installingAllAfterUnlock.also {
-            installingAllAfterUnlock = false
-        }
-    }
-
-    fun refreshUnlockState() {
-        refreshIconState()
     }
 
     private fun refreshIconState() {

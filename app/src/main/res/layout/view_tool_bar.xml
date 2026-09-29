@@ -19,13 +19,6 @@
         android:textColor="@color/primary_high_em" />
 
     <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/btnPremium"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="?selectableItemBackground"
-        android:src="@drawable/ic_premium" />
-
-    <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/btnSetting"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

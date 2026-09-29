@@ -19,7 +19,6 @@ import com.wavez.themewallpaper.ui.customview.ThemeTabIcon
 import com.wavez.themewallpaper.ui.home.dialog.FilterPopupHelper
 import com.wavez.themewallpaper.ui.home.fragment.wallpaper.adapter.CategoryPagerAdapter
 import com.wavez.themewallpaper.ui.home.fragment.wallpaper.viewmodel.WallpaperViewModel
-import com.wavez.themewallpaper.ui.premium.PremiumActivity
 import com.wavez.themewallpaper.ui.search.SearchActivity
 import com.wavez.themewallpaper.ui.search.model.SearchMode
 import com.wavez.themewallpaper.ui.setting.SettingActivity
@@ -66,10 +65,6 @@ class WallpaperFragment : BaseFragment<FragmentWallpaperBinding>() {
         binding.vpTheme.registerOnPageChangeCallback(onPageChangeCallback)
     }
 
-    override fun onResume() {
-        super.onResume()
-        binding.toolbar.btnPremium.isVisible = !sharedPref.isVip
-    }
 
 
     private fun setupTabs(
@@ -126,9 +121,6 @@ class WallpaperFragment : BaseFragment<FragmentWallpaperBinding>() {
                 startActivity(SettingActivity.newIntent(requireContext()))
             }
 
-            btnPremium.setOnClickListener {
-                startActivity(PremiumActivity.newIntent(requireContext()))
-            }
         }
 
         binding.edSearch.setOnClickListener {

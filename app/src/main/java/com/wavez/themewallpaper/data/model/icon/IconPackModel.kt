@@ -15,11 +15,7 @@ data class IconPackModel(
     @param:Json(name = "thumbnail_url") val thumb: String,
     @param:Json(name = "is_premium") val premium: Int,
     @param:Json(name = "icons") val icons: List<IconItemModel>? = null,
-) {
-    fun isVip(): Boolean {
-        return premium == 1
-    }
-}
+)
 
 @JsonClass(generateAdapter = true)
 @Parcelize

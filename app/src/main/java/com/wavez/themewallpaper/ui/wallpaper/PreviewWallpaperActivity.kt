@@ -8,7 +8,6 @@ import androidx.activity.viewModels
 import androidx.core.view.isVisible
 import androidx.lifecycle.lifecycleScope
 import com.wavez.themewallpaper.R
-import com.wavez.themewallpaper.ads.AdsId
 import com.wavez.themewallpaper.core.base.BaseActivity
 import com.wavez.themewallpaper.core.download.DownloadState
 import com.wavez.themewallpaper.core.extensions.getParcel
@@ -19,8 +18,6 @@ import com.wavez.themewallpaper.core.wallpaper.model.WallpaperTarget
 import com.wavez.themewallpaper.data.model.wallpaper.WallpaperModel
 import com.wavez.themewallpaper.databinding.ActivityPreviewWallpaperBinding
 import com.wavez.themewallpaper.ui.dialog.DownloadDialog
-import com.wavez.themewallpaper.ui.dialog.PremiumThemeDialog
-import com.wavez.themewallpaper.ui.premium.PremiumActivity
 import com.wavez.themewallpaper.ui.wallpaper.dialog.SetWallpaperDialog
 import com.wavez.themewallpaper.ui.wallpaper.viewmodel.PreviewViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -28,7 +25,7 @@ import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class PreviewWallpaperActivity : BaseActivity<ActivityPreviewWallpaperBinding>(),
-    SetWallpaperDialog.SetWallpaperListener, PremiumThemeDialog.PremiumThemeListener {
+    SetWallpaperDialog.SetWallpaperListener {
     override fun bindingView(): ActivityPreviewWallpaperBinding {
         return ActivityPreviewWallpaperBinding.inflate(layoutInflater)
     }
@@ -62,23 +59,8 @@ class PreviewWallpaperActivity : BaseActivity<ActivityPreviewWallpaperBinding>()
                 loadingView = binding.viewPreview.viewLoadingImage,
                 errorView = binding.viewPreview.viewError
             )
-            updateDownloadAction()
             updateUiWallpaperDownloaded(wallpaper)
         }
-        loadBanner()
-    }
-
-    private fun loadBanner() {
-        binding.bannerAds.registerBanner(
-            this, adId = AdsId.getBannerInAppAds(),
-            shouldLoad = sharedPref.shouldShowBannerInApp ,
-        )
-    }
-
-
-    override fun onVipChangedState(isPremium: Boolean) {
-        super.onVipChangedState(isPremium)
-        updateDownloadAction()
     }
 
     override fun initListener() {
@@ -93,7 +75,7 @@ class PreviewWallpaperActivity : BaseActivity<ActivityPreviewWallpaperBinding>()
         }
 
         binding.btnDownload.setOnClickListener {
-            handleDownloadClick()
+            startDownload()
         }
 
         binding.btnPreview.setOnClickListener {
@@ -144,30 +126,9 @@ class PreviewWallpaperActivity : BaseActivity<ActivityPreviewWallpaperBinding>()
         })
     }
 
-    private fun updateDownloadAction() {
-        val canDownload = viewModel.canDownloadCurrentWallpaper()
-        binding.btnDownload.setText(getString(if (canDownload) R.string.download else R.string.unlock))
-        binding.btnDownload.setIcon(if (canDownload) R.drawable.ic_download else R.drawable.ic_lock_1)
-    }
-
-    private fun handleDownloadClick() {
-        if (viewModel.canDownloadCurrentWallpaper()) {
-            executeWithAds {
-                startDownload()
-            }
-        } else {
-            showPremiumDialog()
-        }
-    }
-
     private fun startDownload() {
         showDownloadDialog().updateProgress(1)
         viewModel.downloadWallpaper()
-    }
-
-    private fun showPremiumDialog() {
-        if (supportFragmentManager.findFragmentByTag(PremiumThemeDialog.TAG) != null) return
-        PremiumThemeDialog.newInstance().show(supportFragmentManager, PremiumThemeDialog.TAG)
     }
 
     private fun showDownloadDialog(): DownloadDialog {
@@ -196,9 +157,7 @@ class PreviewWallpaperActivity : BaseActivity<ActivityPreviewWallpaperBinding>()
         if (binding.viewPreview.root.isVisible) {
             binding.viewPreview.root.gone()
         } else {
-            executeWithAds {
-                super.onHandleBackPressed()
-            }
+            super.onHandleBackPressed()
         }
     }
 
@@ -214,16 +173,5 @@ class PreviewWallpaperActivity : BaseActivity<ActivityPreviewWallpaperBinding>()
                 })
         }
     }
-
-    override fun onWatchAdsComplete() {
-        viewModel.unlockCurrentWallpaper()
-        startDownload()
-    }
-
-
-    override fun onGoPremiumClick() {
-        startActivity(PremiumActivity.newIntent(this))
-    }
-
 
 }

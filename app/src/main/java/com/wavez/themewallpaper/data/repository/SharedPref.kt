@@ -32,10 +32,7 @@ interface SharedPref {
 
     var isAutoRemove: Boolean
 
-    var isVip: Boolean
-
     var isFirstTimeOpenMainApp: Boolean
-    var canRequestAds: Boolean
 
     fun setLevelPlayerGuess(level: Int)
 
@@ -45,67 +42,8 @@ interface SharedPref {
 
     fun onPermissionDenied()
 
-    ///ads
-
-    var interOpenAdsGap: Long
-
-    var nativeAdPreloadCount: Int
-
-    var interAdsGap: Long
-
-    var openAdsGap: Long
-
-    var nativeGap : Long
-
-    var lastTimeShowOpenAdSplash : Long
-
-    var shouldShowNativeLanguage1: Boolean
-    var shouldShowNativeLanguage2: Boolean
-
-    var shouldShowNativeObd1Click : Boolean
-    var shouldShowNativeObd1 : Boolean
-    var shouldShowNativeObd2 : Boolean
-    var shouldShowNativeObd3 : Boolean
-    var shouldShowNativeAdFull1: Boolean
-    var shouldShowNativeAdFull2: Boolean
-    var shouldBannerSplash : Boolean
-    var shouldShowInterSplash : Boolean
-
-    var shouldShowBannerHome : Boolean
-    var shouldShowNativeHome : Boolean
-    var shouldShowNativeSelectApp : Boolean
-    var shouldShowNativeBoostSuccess : Boolean
-    var shouldShowNativeConfig : Boolean
-
-    var shouldShowReward : Boolean
-
-    var shouldShowBannerInApp : Boolean
-    var shouldShowNativeInApp : Boolean
-    var shouldShowInterInApp : Boolean
-    var shouldShowOpenAd : Boolean
-
     // ID of the controller theme currently applied by the user. Null = use built-in default.
     var activeThemeId: String?
-
-    fun isWallpaperUnlocked(wallpaperId: String): Boolean
-
-    fun unlockWallpaper(wallpaperId: String)
-
-    fun isThemeWallpaperUnlocked(wallpaperId: String): Boolean
-
-    fun unlockThemeWallpaper(wallpaperId: String)
-
-    fun isIconUnlocked(iconId: String): Boolean
-
-    fun unlockIcon(iconId: String)
-
-    fun isWidgetUnlocked(widgetId: String): Boolean
-
-    fun unlockWidget(widgetId: String)
-
-    fun isThemeWidgetUnlocked(themeId: String): Boolean
-
-    fun unlockThemeWidget(themeId: String)
 
     fun markThemeWidgetSizeAdded(themeId: String, size: String)
 

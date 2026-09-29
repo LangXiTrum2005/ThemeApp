@@ -39,13 +39,6 @@
             android:textColor="@color/primary_high_em" />
 
         <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/btnPremium"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="?selectableItemBackground"
-            android:src="@drawable/ic_premium" />
-
-        <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/btnHome"
             android:layout_width="44dp"
             android:layout_height="44dp"
@@ -59,7 +52,7 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:clipToPadding="false"
-        app:layout_constraintBottom_toTopOf="@+id/banner_ads"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@id/toolbar">
 
         <LinearLayout
@@ -154,18 +147,4 @@
         </LinearLayout>
 
     </androidx.core.widget.NestedScrollView>
-
-    <com.ads.admob.banner_ads.BannerAdView
-        android:id="@+id/banner_ads"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="parent" />
-
-    <com.wavez.themewallpaper.ads.native_ad.view.BigNativeCollapsibleAdTemplate
-        android:id="@+id/native_apply"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="parent"
-        />
-
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -4,10 +4,7 @@ import android.os.Bundle
 import android.view.Gravity
 import android.view.View
 import com.wavez.themewallpaper.R
-import com.wavez.themewallpaper.ads.native_ad.NativeAdPlacement
 import com.wavez.themewallpaper.core.base.BaseFragment
-import com.wavez.themewallpaper.core.extensions.invisible
-import com.wavez.themewallpaper.core.extensions.visible
 import com.wavez.themewallpaper.core.utils.CustomToast
 import com.wavez.themewallpaper.databinding.FragmentOnboarding1Binding
 import com.wavez.themewallpaper.ui.onboarding.WalkthroughActivity
@@ -23,14 +20,7 @@ class Onboarding1Fragment : BaseFragment<FragmentOnboarding1Binding>() {
     override fun bindingView() = FragmentOnboarding1Binding.inflate(layoutInflater)
 
     companion object {
-        private const val SHOULD_SHOW_NATIVE_AD = "should_show_native_ad"
-
-        fun newInstance(shouldShowNativeAd: Boolean = false) =
-            Onboarding1Fragment().apply {
-                arguments = Bundle().apply {
-                    putBoolean(SHOULD_SHOW_NATIVE_AD, shouldShowNativeAd)
-                }
-            }
+        fun newInstance() = Onboarding1Fragment()
     }
 
     private var isClickedFirst = false
@@ -39,14 +29,7 @@ class Onboarding1Fragment : BaseFragment<FragmentOnboarding1Binding>() {
 
     override fun initConfig(view: View, savedInstanceState: Bundle?) {
         super.initConfig(view, savedInstanceState)
-        binding.viewFake.invisible()
         initHabits()
-        setupNative(
-            NativeAdPlacement.ONBOARDING1,
-            binding.bigNativeAdView,
-            arguments?.getBoolean(SHOULD_SHOW_NATIVE_AD) ?: true,
-            preloadOnClick = true
-        )
         FirebaseControlLogEvent.logEvent(AppEvent.ONBOARDING_1_VIEW)
     }
 
@@ -70,27 +53,11 @@ class Onboarding1Fragment : BaseFragment<FragmentOnboarding1Binding>() {
             habitsAdapter.onItemSelected = {
                 if (!isClickedFirst) {
                     FirebaseControlLogEvent.logEvent(AppEvent.ONBOARDING_1_CLICK)
-                    showClickNative()
-                    preloadPage3Ad()
                     isClickedFirst = true
                 }
                 binding.btnNext.isSelected = habitsAdapter.getSelectedItems().isNotEmpty()
             }
         }
-    }
-
-    private fun showClickNative() {
-        binding.bigNativeClick.visible()
-        setupNative(
-            NativeAdPlacement.ONBOARDING1_CLICK,
-            binding.bigNativeClick,
-            sharedPref.shouldShowNativeObd1Click,
-            preloadOnClick = true
-        )
-    }
-
-    private fun preloadPage3Ad() {
-        loadNativeWithPosition(NativeAdPlacement.ONBOARDING3)
     }
 
     private fun showSelectToast() {

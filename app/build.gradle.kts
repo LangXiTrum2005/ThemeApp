@@ -93,8 +93,6 @@ base {
 }
 
 dependencies {
-    implementation(project(":billing_library"))
-    implementation(project(":mmonetize_ads"))
     implementation(libs.androidx.activity.ktx)
     implementation(libs.androidx.fragment.ktx)
     implementation(libs.androidx.constraintlayout)
@@ -111,14 +109,12 @@ dependencies {
     androidTestImplementation(libs.androidx.espresso.core)
     implementation(libs.hilt.android)
     ksp(libs.hilt.compiler)
-    implementation(libs.play.services.ads)
     implementation(libs.androidx.media3.exoplayer)
     implementation(libs.androidx.media3.exoplayer.dash)
     implementation(libs.androidx.media3.ui)
     implementation(libs.androidx.room.ktx)
     implementation(libs.androidx.room.runtime)
     ksp(libs.androidx.room.compiler)
-    implementation(libs.user.messaging.platform)
     implementation(libs.retrofit)
     implementation(libs.retrofit.converter.moshi)
     implementation(libs.okhttp.logging.interceptor)
@@ -151,15 +147,7 @@ dependencies {
     implementation(libs.androidx.recyclerview)
     implementation(libs.kotlinx.serialization.json)
     implementation(libs.kotlinx.coroutines.android)
-    implementation(libs.billing)
     implementation(libs.simpleratingbar)
-
-
-    //mediation
-    implementation(libs.facebook)
-    implementation(libs.mintegral)
-    implementation(libs.pangle)
-    implementation(libs.pag.sdk)
 
 
 }

@@ -25,13 +25,4 @@
         app:layout_constraintStart_toStartOf="@id/ivImage"
         app:layout_constraintTop_toTopOf="@id/ivImage" />
 
-    <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/ivVip"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="12dp"
-        android:src="@drawable/ic_vip_item"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
 </androidx.constraintlayout.widget.ConstraintLayout>

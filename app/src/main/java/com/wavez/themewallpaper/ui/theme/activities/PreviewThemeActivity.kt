@@ -7,8 +7,6 @@ import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.core.view.isVisible
 import com.wavez.themewallpaper.R
-import com.wavez.themewallpaper.ads.AdsId
-import com.wavez.themewallpaper.ads.native_ad.NativeAdPlacement
 import com.wavez.themewallpaper.core.base.BaseActivity
 import com.wavez.themewallpaper.core.base.UiState
 import com.wavez.themewallpaper.core.extensions.collectWithLifecycle
@@ -27,12 +25,9 @@ class PreviewThemeActivity : BaseActivity<ActivityPreviewThemeBinding>() {
     companion object {
         private const val ARG_THEME_ID = "arg_theme_id"
 
-        private const val ARG_IS_HOME = "arg_is_home"
-
-        fun newIntent(context: Context, themeId: String, isHome: Boolean = false): Intent {
+        fun newIntent(context: Context, themeId: String): Intent {
             return Intent(context, PreviewThemeActivity::class.java).apply {
                 putExtra(ARG_THEME_ID, themeId)
-                putExtra(ARG_IS_HOME, isHome)
             }
         }
     }
@@ -42,25 +37,9 @@ class PreviewThemeActivity : BaseActivity<ActivityPreviewThemeBinding>() {
     override fun initView(savedInstanceState: Bundle?) {
         super.initView(savedInstanceState)
         viewModel.loadTheme(intent.getStringExtra(ARG_THEME_ID).orEmpty())
-        initNative()
-        loadBanner()
     }
 
-    private fun loadBanner() {
-        binding.bannerAds.registerBanner(
-            this, adId = AdsId.getBannerInAppAds(),
-            shouldLoad = sharedPref.shouldShowBannerInApp ,
-        )
-    }
 
-    private fun initNative() {
-        setupNative(
-            NativeAdPlacement.PREVIEW_THEME,
-            binding.nativePremiumTheme,
-            shouldShow = sharedPref.shouldShowNativeInApp,
-            autoLoad = true,
-        )
-    }
 
     override fun initListener() {
         super.initListener()
@@ -121,16 +100,5 @@ class PreviewThemeActivity : BaseActivity<ActivityPreviewThemeBinding>() {
             theme.thumb,
             binding.viewThemeLoading.root,
         )
-    }
-
-    override fun onHandleBackPressed() {
-        val isHome = intent.getBooleanExtra(ARG_IS_HOME, false)
-        if (!isHome) {
-            super.onHandleBackPressed()
-        } else {
-            executeWithAds {
-                super.onHandleBackPressed()
-            }
-        }
     }
 }

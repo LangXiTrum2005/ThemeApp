@@ -13,9 +13,6 @@ import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import androidx.viewpager2.widget.ViewPager2
-import com.ads.admob.MMonetize
-import com.wavez.themewallpaper.ads.AdsId
-import com.wavez.themewallpaper.ads.native_ad.NativeAdPlacement
 import com.wavez.themewallpaper.core.base.BaseActivity
 import com.wavez.themewallpaper.core.base.UiState
 import com.wavez.themewallpaper.core.controllercenter.PermissionHelper
@@ -83,37 +80,11 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
         setupViewPager()
         setupBottomNavigation()
         viewModel.getWallpapers()
-        initNative()
-        loadBanner()
-        loadInterAds()
-        loadOpenAds()
         if (savedInstanceState == null) {
             RatePromptManager.showOnMainFromSplash(supportFragmentManager, sharedPref)
         }
 //        binding.togglePanelButton.setOnClickListener { togglePanel() }
 //        requestPermissions.launch(runtimePermissions.toTypedArray())
-    }
-
-    private fun loadOpenAds() {
-        MMonetize.openAdManager.setAdUnitId(AdsId.getOpenAds())
-        MMonetize.openAdManager.loadAd()
-    }
-
-    private fun loadBanner() {
-        binding.bannerAds.registerBanner(
-            this, adId = AdsId.getBannerHomeAds(),
-            shouldLoad = sharedPref.shouldShowBannerHome ,
-        )
-    }
-
-    private fun initNative() {
-        setupNative(
-            NativeAdPlacement.NATIVE_HOME,
-            binding.nativeHome,
-            shouldShow = sharedPref.shouldShowNativeHome,
-            autoReloadOnStart = true,
-            autoLoad = true,
-        )
     }
 
     private fun logHomeViewEvent() {

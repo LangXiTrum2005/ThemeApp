@@ -36,7 +36,7 @@ class MyGalleryThemesFragment : BaseFragment<FragmentMyGalleryPageBinding>() {
     override fun initListener() {
         super.initListener()
         adapter.onClickItem = { theme ->
-            startActivity(PreviewThemeActivity.newIntent(requireContext(), theme.id, true))
+            startActivity(PreviewThemeActivity.newIntent(requireContext(), theme.id))
         }
     }
 

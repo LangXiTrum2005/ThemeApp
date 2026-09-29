@@ -6,8 +6,6 @@ import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.core.view.isVisible
 import com.wavez.themewallpaper.R
-import com.wavez.themewallpaper.ads.AdsId
-import com.wavez.themewallpaper.ads.native_ad.NativeAdPlacement
 import com.wavez.themewallpaper.core.base.BaseActivity
 import com.wavez.themewallpaper.core.base.UiState
 import com.wavez.themewallpaper.core.extensions.collectWithLifecycle
@@ -16,7 +14,6 @@ import com.wavez.themewallpaper.data.model.icon.IconItemModel
 import com.wavez.themewallpaper.databinding.ActivityAppliedThemeBinding
 import com.wavez.themewallpaper.ui.home.MainActivity
 import com.wavez.themewallpaper.ui.home.fragment.theme.adapter.ThemeAdapter
-import com.wavez.themewallpaper.ui.premium.PremiumActivity
 import com.wavez.themewallpaper.ui.setting.dialog.RatePromptManager
 import com.wavez.themewallpaper.ui.theme.adapter.AppliedThemeIconAdapter
 import com.wavez.themewallpaper.ui.theme.viewmodel.AppliedThemeViewModel
@@ -64,28 +61,12 @@ class AppliedThemeActivity : BaseActivity<ActivityAppliedThemeBinding>() {
         binding.rcvRemainingIcons.adapter = remainingIconAdapter
         binding.rcvSuggestedThemes.adapter = suggestedThemeAdapter
         renderMode(intent.getStringExtra(EXTRA_MODE).orEmpty())
-        initNative()
-        loadBanner()
         if (savedInstanceState == null) {
             RatePromptManager.showAfterSuccessfulSetup(supportFragmentManager, sharedPref)
         }
     }
 
-    private fun loadBanner() {
-        binding.bannerAds.registerBanner(
-            this, adId = AdsId.getBannerInAppAds(),
-            shouldLoad = sharedPref.shouldShowBannerInApp ,
-        )
-    }
 
-    private fun initNative() {
-        setupNative(
-            NativeAdPlacement.NATIVE_THEME_APPLIED,
-            binding.nativeApply,
-            shouldShow = sharedPref.shouldShowNativeInApp,
-            autoLoad = true,
-        )
-    }
 
     override fun initListener() {
         super.initListener()
@@ -99,10 +80,6 @@ class AppliedThemeActivity : BaseActivity<ActivityAppliedThemeBinding>() {
         }
         binding.btnViewMoreIcons.setOnClickListener {
             finish()
-        }
-
-        binding.btnPremium.setOnClickListener {
-            startActivity(PremiumActivity.newIntent(this))
         }
     }
 

@@ -96,16 +96,6 @@ class ThemeRepositoryImpl @Inject constructor(
             .map { entities -> entities.map { it.toThemeModel() } }
             .flowOn(ioDispatcher)
 
-    override fun checkUnlockWallpaper(theme: ThemeModel): Boolean {
-        return sharedPref.isVip ||
-            !theme.isVip() ||
-            sharedPref.isThemeWallpaperUnlocked(theme.wallpaper.id)
-    }
-
-    override fun unlockWallpaper(theme: ThemeModel) {
-        sharedPref.unlockThemeWallpaper(theme.wallpaper.id)
-    }
-
     private fun ThemeModel.toDownloadedEntity(): DownloadedThemeEntity {
         return DownloadedThemeEntity(
             themeId = id,

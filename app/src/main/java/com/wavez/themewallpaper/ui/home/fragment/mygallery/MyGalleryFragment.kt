@@ -11,7 +11,6 @@ import com.wavez.themewallpaper.R
 import com.wavez.themewallpaper.databinding.FragmentMyGalleryBinding
 import com.wavez.themewallpaper.ui.customview.ThemeTabIcon
 import com.wavez.themewallpaper.ui.home.fragment.mygallery.adapter.MyGalleryPagerAdapter
-import com.wavez.themewallpaper.ui.premium.PremiumActivity
 import com.wavez.themewallpaper.ui.setting.SettingActivity
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -40,10 +39,6 @@ class MyGalleryFragment : BaseFragment<FragmentMyGalleryBinding>() {
         setupPager()
     }
 
-    override fun onResume() {
-        super.onResume()
-        binding.toolbar.btnPremium.isVisible = !sharedPref.isVip
-    }
 
 
     override fun initListener() {
@@ -52,9 +47,6 @@ class MyGalleryFragment : BaseFragment<FragmentMyGalleryBinding>() {
             startActivity(SettingActivity.newIntent(requireContext()))
         }
 
-        binding.toolbar.btnPremium.setOnClickListener {
-            startActivity(PremiumActivity.newIntent(requireContext()))
-        }
     }
 
     private fun setupPager() {

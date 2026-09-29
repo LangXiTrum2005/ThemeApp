@@ -24,8 +24,4 @@ data class WallpaperModel(
     override val categoryId: String,
     @param:Json(name = "tags")
     val tags: List<String> = emptyList(),
-) : ThemeRemoteItem, Parcelable {
-        fun isVip(): Boolean {
-            return premium == 1
-        }
-}
+) : ThemeRemoteItem, Parcelable

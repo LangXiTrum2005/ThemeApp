@@ -90,7 +90,6 @@ class SetIconAdapter : ListAdapter<IconPackItemUi, SetIconAdapter.IconViewHolder
             val state = when {
                 item.isApplied -> SetIconState.APPLIED
                 item.canInstall -> SetIconState.INSTALL
-                item.isInstallable -> SetIconState.UNLOCK
                 else -> SetIconState.CHOOSE
             }
 
@@ -103,15 +102,6 @@ class SetIconAdapter : ListAdapter<IconPackItemUi, SetIconAdapter.IconViewHolder
                             ContextCompat.getColor(context, R.color.success_high_em)
                         )
                         binding.btnAction.setButtonBackground(R.drawable.bg_button_applied)
-                    }
-
-                    SetIconState.UNLOCK -> {
-                        binding.btnAction.setText(context.getString(R.string.unlock))
-                        binding.btnAction.setIcon(R.drawable.ic_play)
-                        binding.btnAction.setTextColor(
-                            ContextCompat.getColor(context, R.color.primary_high_em)
-                        )
-                        binding.btnAction.setButtonBackground(R.drawable.bg_button_outline_1)
                     }
 
                     SetIconState.INSTALL -> {

@@ -14,25 +14,17 @@ import com.wavez.themewallpaper.core.base.BaseBottomSheetDialog
 import com.wavez.themewallpaper.core.extensions.getParcel
 import com.wavez.themewallpaper.core.widget.WidgetPinManager
 import com.wavez.themewallpaper.data.model.widget.WidgetsModel
-import com.wavez.themewallpaper.data.repository.SharedPref
 import com.wavez.themewallpaper.databinding.BottomSheetAddWidgetsBinding
-import com.wavez.themewallpaper.ui.dialog.PremiumThemeDialog
 import com.wavez.themewallpaper.ui.home.fragment.widget.adapter.WidgetPreviewPagerAdapter
 import com.wavez.themewallpaper.ui.home.fragment.widget.adapter.WidgetSize
-import com.wavez.themewallpaper.ui.premium.PremiumActivity
 import com.wavez.themewallpaper.ui.widgets.WidgetsSuccessActivity
 import dagger.hilt.android.AndroidEntryPoint
-import javax.inject.Inject
 
 @AndroidEntryPoint
-class AddWidgetsBottomSheetDialog : BaseBottomSheetDialog<BottomSheetAddWidgetsBinding>(),
-    PremiumThemeDialog.PremiumThemeListener {
+class AddWidgetsBottomSheetDialog : BaseBottomSheetDialog<BottomSheetAddWidgetsBinding>() {
 
     override fun bindingView(): BottomSheetAddWidgetsBinding =
         BottomSheetAddWidgetsBinding.inflate(layoutInflater)
-
-    @Inject
-    lateinit var sharedPref: SharedPref
 
     private val widget by lazy {
         requireArguments().getParcel<WidgetsModel>(ARG_WIDGET)
@@ -42,7 +34,7 @@ class AddWidgetsBottomSheetDialog : BaseBottomSheetDialog<BottomSheetAddWidgetsB
         WidgetPreviewPagerAdapter(requireNotNull(widget))
     }
 
-    /** When true the widget comes from a theme, so unlock state is stored in its own namespace. */
+    /** When true the widget comes from a theme, which selects the widget list mode. */
     private val isThemeWidget by lazy {
         requireArguments().getBoolean(ARG_IS_THEME_WIDGET, false)
     }
@@ -50,19 +42,6 @@ class AddWidgetsBottomSheetDialog : BaseBottomSheetDialog<BottomSheetAddWidgetsB
     private val initialSize by lazy {
         requireArguments().getString(ARG_INITIAL_SIZE)?.let { WidgetSize.valueOf(it) }
     }
-
-    private fun isUnlocked(id: String): Boolean =
-        if (isThemeWidget) sharedPref.isThemeWidgetUnlocked(id) else sharedPref.isWidgetUnlocked(id)
-
-    private fun unlock(id: String) {
-        if (isThemeWidget) sharedPref.unlockThemeWidget(id) else sharedPref.unlockWidget(id)
-    }
-
-    private val isLocked: Boolean
-        get() {
-            val model = requireNotNull(widget)
-            return model.isVip() && !sharedPref.isVip && !isUnlocked(model.id)
-        }
 
     private val pageChangeCallback = object : ViewPager2.OnPageChangeCallback() {
         override fun onPageSelected(position: Int) {
@@ -80,43 +59,11 @@ class AddWidgetsBottomSheetDialog : BaseBottomSheetDialog<BottomSheetAddWidgetsB
         initialSize?.let { size ->
             binding.vpPreview.setCurrentItem(previewAdapter.sizes.indexOf(size), false)
         }
-        updateActionButton()
     }
 
     override fun initListener() {
         binding.btnClose.setOnClickListener { dismiss() }
-        binding.btnUnlock.setOnClickListener {
-            if (isLocked) {
-                showPremiumDialog()
-            } else {
-                addSelectedWidget()
-            }
-        }
-    }
-
-    private fun updateActionButton() {
-        if (isLocked) {
-            binding.btnUnlock.setText(getString(R.string.unlock))
-            binding.btnUnlock.setIcon(R.drawable.ic_lock_2)
-        } else {
-            binding.btnUnlock.setText(getString(R.string.add))
-            binding.btnUnlock.setIcon(0)
-        }
-    }
-
-    private fun showPremiumDialog() {
-        if (childFragmentManager.findFragmentByTag(PremiumThemeDialog.TAG) != null) return
-        PremiumThemeDialog.newInstance().show(childFragmentManager, PremiumThemeDialog.TAG)
-    }
-
-    override fun onWatchAdsComplete() {
-        unlock(requireNotNull(widget).id)
-        updateActionButton()
-        addSelectedWidget()
-    }
-
-    override fun onGoPremiumClick() {
-        startActivity(PremiumActivity.newIntent(requireContext()))
+        binding.btnUnlock.setOnClickListener { addSelectedWidget() }
     }
 
     private fun addSelectedWidget() {

@@ -32,10 +32,6 @@ data class ThemeModel(
     @param:Json(name = "widget")
     val widget: ThemeWidgetModel? = null,
 ) : Parcelable {
-    fun isVip(): Boolean {
-        return premium == 1
-    }
-
     /** Builds a [WidgetsModel] from this theme's widget, or null when the theme has none. */
     fun toWidgetsModel(): WidgetsModel? {
         val widget = widget ?: return null

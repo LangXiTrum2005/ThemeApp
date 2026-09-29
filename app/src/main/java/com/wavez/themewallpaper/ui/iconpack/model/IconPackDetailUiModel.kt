@@ -15,12 +15,11 @@ data class IconPackItemUi(
     val selectedAppName: String? = null,
     val selectedAppIcon: Drawable? = null,
     val isManualMappingRequired: Boolean,
-    val isUnlocked: Boolean,
     val isApplied: Boolean = false,
 ) {
     val targetPackageName: String? get() = selectedPackageName ?: installedApp?.packageName
     val targetLabel: String get() = selectedAppName ?: installedApp?.appName ?: appName
     val targetIcon: Drawable? get() = selectedAppIcon ?: installedApp?.icon
     val isInstallable: Boolean get() = targetPackageName != null
-    val canInstall: Boolean get() = isInstallable && isUnlocked
+    val canInstall: Boolean get() = isInstallable
 }

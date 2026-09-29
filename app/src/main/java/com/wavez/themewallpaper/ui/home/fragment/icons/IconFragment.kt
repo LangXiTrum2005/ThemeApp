@@ -13,7 +13,6 @@ import com.wavez.themewallpaper.databinding.FragmentIconBinding
 import com.wavez.themewallpaper.ui.home.fragment.icons.adapter.IconAdapter
 import com.wavez.themewallpaper.ui.home.fragment.icons.viewmodel.IconsViewModel
 import com.wavez.themewallpaper.ui.iconpack.SetIconsActivity
-import com.wavez.themewallpaper.ui.premium.PremiumActivity
 import com.wavez.themewallpaper.ui.search.SearchActivity
 import com.wavez.themewallpaper.ui.search.model.SearchMode
 import com.wavez.themewallpaper.ui.setting.SettingActivity
@@ -42,20 +41,12 @@ class IconFragment : BaseFragment<FragmentIconBinding>() {
         binding.rcvIcons.adapter = iconAdapter
     }
 
-    override fun onResume() {
-        super.onResume()
-        binding.toolbar.btnPremium.isVisible = !sharedPref.isVip
-    }
 
 
     override fun initListener() {
         super.initListener()
         binding.toolbar.btnSetting.setOnClickListener {
             startActivity(SettingActivity.newIntent(requireContext()))
-        }
-
-        binding.toolbar.btnPremium.setOnClickListener {
-            startActivity(PremiumActivity.newIntent(requireContext()))
         }
 
         binding.edSearch.setOnClickListener {

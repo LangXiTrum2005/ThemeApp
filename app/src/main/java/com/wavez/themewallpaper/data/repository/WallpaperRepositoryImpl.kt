@@ -163,14 +163,6 @@ class WallpaperRepositoryImpl @Inject constructor(
             }
             .flowOn(ioDispatcher)
 
-    override fun checkUnlockWallpaper(wallpaper: WallpaperModel): Boolean {
-        return sharedPref.isVip || !wallpaper.isVip() || sharedPref.isWallpaperUnlocked(wallpaper.id)
-    }
-
-    override fun unlockWallpaper(wallpaper: WallpaperModel) {
-        sharedPref.unlockWallpaper(wallpaper.id)
-    }
-
     override suspend fun applyWallpaper(
         wallpaper: WallpaperModel,
         wallpaperTarget: WallpaperTarget

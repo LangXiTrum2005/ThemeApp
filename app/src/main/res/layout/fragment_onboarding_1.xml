@@ -30,7 +30,7 @@
             android:background="@drawable/state_button_next"
             android:gravity="center"
             android:paddingVertical="12dp"
-            app:layout_constraintBottom_toTopOf="@+id/viewAd">
+            app:layout_constraintBottom_toBottomOf="parent">
 
             <androidx.appcompat.widget.AppCompatTextView
                 style="@style/NunitoSemiBold.16"
@@ -41,33 +41,6 @@
                 android:textColor="@color/white" />
 
         </LinearLayout>
-
-        <FrameLayout
-            android:id="@+id/viewAd"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:layout_constraintBottom_toBottomOf="parent">
-
-            <com.wavez.themewallpaper.ads.native_ad.view.BigNativeAdTemplate
-                android:id="@+id/big_native_ad_view"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="bottom" />
-
-            <com.wavez.themewallpaper.ads.native_ad.view.BigNativeAdTemplate
-                android:id="@+id/bigNativeClick"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="bottom"
-                android:visibility="gone" />
-
-            <com.wavez.themewallpaper.ads.native_ad.view.BigNativeAdTemplate
-                android:id="@+id/viewFake"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="bottom"
-                android:visibility="invisible" />
-        </FrameLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

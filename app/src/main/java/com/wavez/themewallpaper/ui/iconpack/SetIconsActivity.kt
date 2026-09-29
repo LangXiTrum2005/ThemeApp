@@ -8,27 +8,24 @@ import androidx.activity.viewModels
 import androidx.core.view.isVisible
 import androidx.lifecycle.lifecycleScope
 import com.wavez.themewallpaper.R
-import com.wavez.themewallpaper.ads.AdsId
 import com.wavez.themewallpaper.core.base.BaseActivity
 import com.wavez.themewallpaper.core.base.UiState
 import com.wavez.themewallpaper.core.extensions.collectWithLifecycle
 import com.wavez.themewallpaper.core.icons.IconShortcutInstaller
 import com.wavez.themewallpaper.data.model.AppInfo
 import com.wavez.themewallpaper.databinding.ActivitySetIconsBinding
-import com.wavez.themewallpaper.ui.dialog.PremiumThemeDialog
 import com.wavez.themewallpaper.ui.iconpack.adapter.SetIconAdapter
 import com.wavez.themewallpaper.ui.iconpack.dialog.SelectAppBottomSheetDialog
 import com.wavez.themewallpaper.ui.iconpack.model.IconPackItemUi
 import com.wavez.themewallpaper.ui.iconpack.model.SetIconState
 import com.wavez.themewallpaper.ui.iconpack.viewmodel.IconPackDetailViewModel
-import com.wavez.themewallpaper.ui.premium.PremiumActivity
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @AndroidEntryPoint
 class SetIconsActivity : BaseActivity<ActivitySetIconsBinding>(),
-    SelectAppBottomSheetDialog.OnAppSelectedListener, PremiumThemeDialog.PremiumThemeListener {
+    SelectAppBottomSheetDialog.OnAppSelectedListener {
 
     companion object {
         private const val EXTRA_PACK_ID = "extra_pack_id"
@@ -60,21 +57,6 @@ class SetIconsActivity : BaseActivity<ActivitySetIconsBinding>(),
         val packId = intent.getStringExtra(EXTRA_PACK_ID) ?: return finish()
         viewModel.currentIconPackId = packId
         viewModel.load(packId)
-        loadBaner()
-    }
-
-    private fun loadBaner() {
-        binding.bannerAds.registerBanner(
-            this, adId = AdsId.getBannerInAppAds(),
-            shouldLoad = sharedPref.shouldShowBannerInApp,
-        )
-    }
-
-    override fun onVipChangedState(isPremium: Boolean) {
-        super.onVipChangedState(isPremium)
-        if (isPremium) {
-            viewModel.refreshUnlockState()
-        }
     }
 
     override fun initListener() {
@@ -86,19 +68,13 @@ class SetIconsActivity : BaseActivity<ActivitySetIconsBinding>(),
                 Toast.makeText(this, R.string.no_icons_to_install, Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
-            if (mappedItems.any { !it.isUnlocked }) {
-                viewModel.setInstallingAllAfterUnlock(true)
-                showPremiumDialog()
-            } else {
-                installAllShortcuts(mappedItems)
-            }
+            installAllShortcuts(mappedItems)
         }
 
         adapter.onActionClick = { item, state ->
             viewModel.itemIconPackItemUi = item
             when (state) {
                 SetIconState.APPLIED -> installShortcut(item)
-                SetIconState.UNLOCK -> unlockIcon()
                 SetIconState.INSTALL -> installShortcut(item)
                 SetIconState.CHOOSE -> showSelectApp(item)
             }
@@ -123,7 +99,6 @@ class SetIconsActivity : BaseActivity<ActivitySetIconsBinding>(),
                     binding.btnInstallAll.isVisible = true
                     val detail = state.value
                     adapter.submitList(detail.items)
-                    updateIconsAction(detail.items)
                 }
 
                 is UiState.Error -> {
@@ -142,37 +117,6 @@ class SetIconsActivity : BaseActivity<ActivitySetIconsBinding>(),
         SelectAppBottomSheetDialog.newInstance().show(
             supportFragmentManager, SelectAppBottomSheetDialog::class.java.simpleName
         )
-    }
-
-    private fun updateIconsAction(items: List<IconPackItemUi>) {
-        val pendingItems = items.filter { it.isInstallable && !it.isApplied }
-        val hasLockedIcons = pendingItems.any { !it.isUnlocked }
-        binding.btnInstallAll.setText(
-            getString(
-                if (hasLockedIcons) {
-                    R.string.unlock_all_icons
-                } else {
-                    R.string.install_all_icons
-                }
-            )
-        )
-        binding.btnInstallAll.setIcon(
-            if (hasLockedIcons) {
-                R.drawable.ic_lock_1
-            } else {
-                0
-            }
-        )
-    }
-
-    private fun unlockIcon() {
-        viewModel.setInstallingAllAfterUnlock(false)
-        showPremiumDialog()
-    }
-
-    private fun showPremiumDialog() {
-        if (supportFragmentManager.findFragmentByTag(PremiumThemeDialog.TAG) != null) return
-        PremiumThemeDialog.newInstance().show(supportFragmentManager, PremiumThemeDialog.TAG)
     }
 
     private fun installShortcut(item: IconPackItemUi) {
@@ -234,26 +178,5 @@ class SetIconsActivity : BaseActivity<ActivitySetIconsBinding>(),
 
     override fun onAppSelected(appInfo: AppInfo) {
         viewModel.applySelectedApp(appInfo)
-    }
-
-    override fun onWatchAdsComplete() {
-        if (viewModel.consumeInstallingAllAfterUnlock()) {
-            val mappedItems = viewModel.mappedIconsPendingInstall()
-            if (mappedItems.isNotEmpty()) {
-                viewModel.unlockIcons(mappedItems.map { it.id })
-            }
-        } else {
-            viewModel.unlockIcon()
-        }
-    }
-
-    override fun onGoPremiumClick() {
-        startActivity(PremiumActivity.newIntent(this))
-    }
-
-    override fun onHandleBackPressed() {
-        executeWithAds {
-            super.onHandleBackPressed()
-        }
     }
 }

@@ -4,7 +4,6 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.ImageView
-import androidx.core.view.isVisible
 import com.wavez.themewallpaper.core.base.BaseRecyclerViewAdapter
 import com.wavez.themewallpaper.core.extensions.loadWithLoading
 import com.wavez.themewallpaper.databinding.ItemWidgetSuggestBinding
@@ -33,6 +32,5 @@ class ThemeWidgetSizeAdapter :
     ) {
         binding.ivImage.scaleType = ImageView.ScaleType.FIT_CENTER
         binding.ivImage.loadWithLoading(data.imageUrl, binding.viewLoading.root)
-        binding.ivVip.isVisible = false
     }
 }

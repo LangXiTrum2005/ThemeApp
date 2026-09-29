@@ -18,8 +18,6 @@ class SettingLanguageActivity : BaseLanguageActivity() {
 
     override fun initConfig(savedInstanceState: Bundle?) {
         super.initConfig(savedInstanceState)
-        binding.nativeLanguage1.gone()
-        binding.nativeLanguage2.gone()
         binding.btnSave.visible()
         binding.btnSave.isSelected = true
         binding.btnNextLanguage.gone()

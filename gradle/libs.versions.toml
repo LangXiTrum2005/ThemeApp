@@ -45,7 +45,6 @@ mintegral = "17.1.61.0"
 facebookAdapter = "6.21.0.0"
 mintegralAdapter = "17.1.61.0"
 googleAdapter = "25.3.0.0"
-userMessagingPlatform = "4.0.0"
 billing = "8.3.0"
 installreferrerVersion = "2.2"
 recyclerview = "1.4.0"
@@ -113,7 +112,6 @@ applovin-adapter-google = { module = "com.applovin.mediation:google-adapter", ve
 applovin-adapter-mintegral = { module = "com.applovin.mediation:mintegral-adapter", version.ref = "mintegralAdapter" }
 facebook-adapter = { module = "com.applovin.mediation:facebook-adapter", version.ref = "facebookAdapter" }
 ssp-android = { module = "com.intuit.ssp:ssp-android", version.ref = "sspAndroid" }
-user-messaging-platform = { module = "com.google.android.ump:user-messaging-platform", version.ref = "userMessagingPlatform" }
 billing = { module = "com.android.billingclient:billing", version.ref = "billing" }
 simpleratingbar = { module = "com.github.ome450901:SimpleRatingBar", version.ref = "simpleratingbar" }
 

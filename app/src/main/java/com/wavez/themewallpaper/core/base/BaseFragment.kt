@@ -7,10 +7,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.viewbinding.ViewBinding
-import com.ads.admob.MMonetize
-import com.ads.admob.native_ads.NativeAdBinder
-import com.ads.admob.native_ads.adapter.NativeAdViewAd
-import com.wavez.themewallpaper.ads.native_ad.NativeAdPlacement
 import com.wavez.themewallpaper.data.repository.SharedPref
 import org.greenrobot.eventbus.EventBus
 import javax.inject.Inject
@@ -29,8 +25,6 @@ abstract class BaseFragment<T : ViewBinding> : Fragment() {
     lateinit var sharedPref: SharedPref
 
 
-    private val nativeAdBinder by lazy { NativeAdBinder() }
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {
@@ -47,33 +41,8 @@ abstract class BaseFragment<T : ViewBinding> : Fragment() {
         initObserver()
     }
 
-    fun setupNative(
-        position: NativeAdPlacement,
-        view: NativeAdViewAd,
-        shouldShow: Boolean = true,
-        autoLoad: Boolean = false,
-        preloadOnClick: Boolean = false,
-    ) {
-        nativeAdBinder.attach(
-            lifecycleOwner = viewLifecycleOwner,
-            placement = position.name,
-            view = view,
-            shouldShow = shouldShow,
-            autoLoad = autoLoad,
-            preloadOnClick = preloadOnClick,
-        )
-    }
-
-    fun loadNativeWithPosition(position: NativeAdPlacement) {
-        MMonetize.nativeAdRepository.loadAd(position.name)
-    }
-
-    fun navigateTo(intent: Intent, forceShowAd: Boolean = false) {
-        (requireActivity() as BaseActivity<*>).navigateTo(intent, forceShowAd)
-    }
-
-    fun executeWithAds(action: () -> Unit) {
-        (requireActivity() as BaseActivity<*>).executeWithAds(action)
+    fun navigateTo(intent: Intent) {
+        (requireActivity() as BaseActivity<*>).navigateTo(intent)
     }
 
     open fun onHandleBackPressed() {

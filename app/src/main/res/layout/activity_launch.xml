@@ -60,18 +60,11 @@
         android:max="100"
         android:progress="5"
         app:indicatorColor="@color/primary_med_em"
-        app:layout_constraintBottom_toTopOf="@+id/banner_ads"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:trackColor="@color/surface_3"
         app:trackCornerRadius="50dp"
         app:trackStopIndicatorSize="0dp"
         app:trackThickness="10dp" />
-
-    <com.ads.admob.banner_ads.BannerAdView
-        android:id="@+id/banner_ads"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="parent" />
-
 </androidx.constraintlayout.widget.ConstraintLayout>

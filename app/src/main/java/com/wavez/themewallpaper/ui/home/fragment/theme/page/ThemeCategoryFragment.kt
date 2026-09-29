@@ -36,7 +36,7 @@ class ThemeCategoryFragment : BaseFragment<FragmentThemeCategoryBinding>() {
     override fun initListener() {
         super.initListener()
         themeAdapter.onClickItem = { theme ->
-            navigateTo(PreviewThemeActivity.newIntent(requireContext(), theme.id, true))
+            navigateTo(PreviewThemeActivity.newIntent(requireContext(), theme.id))
         }
 
         binding.viewError.setOnRetryClickListener {

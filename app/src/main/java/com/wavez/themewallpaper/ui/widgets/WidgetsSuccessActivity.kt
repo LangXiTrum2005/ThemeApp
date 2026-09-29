@@ -8,8 +8,6 @@ import androidx.core.view.isVisible
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
-import com.wavez.themewallpaper.ads.AdsId
-import com.wavez.themewallpaper.ads.native_ad.NativeAdPlacement
 import com.wavez.themewallpaper.core.base.BaseActivity
 import com.wavez.themewallpaper.core.extensions.collectWithLifecycle
 import com.wavez.themewallpaper.core.extensions.getParcel
@@ -91,28 +89,12 @@ class WidgetsSuccessActivity : BaseActivity<ActivitySuccessWidgetsBinding>() {
             ListMode.GRID -> setupCategorySuggestions()
             ListMode.HORIZONTAL -> setupThemeSizeSuggestions()
         }
-        initNative()
-        loadBanner()
         if (savedInstanceState == null) {
             RatePromptManager.showAfterSuccessfulSetup(supportFragmentManager, sharedPref)
         }
     }
 
-    private fun loadBanner() {
-        binding.bannerAds.registerBanner(
-            this, adId = AdsId.getBannerInAppAds(),
-            shouldLoad = sharedPref.shouldShowBannerInApp ,
-        )
-    }
 
-    private fun initNative() {
-        setupNative(
-            NativeAdPlacement.NATIVE_WIDGET_SUCCESS,
-            binding.nativeGetTheme,
-            shouldShow = sharedPref.shouldShowNativeInApp,
-            autoLoad = true,
-        )
-    }
 
 
     override fun initListener() {

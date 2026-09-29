@@ -12,8 +12,6 @@ import com.bumptech.glide.load.engine.GlideException
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.bumptech.glide.request.RequestListener
 import com.bumptech.glide.request.target.Target
-import com.wavez.themewallpaper.ads.AdsId
-import com.wavez.themewallpaper.ads.native_ad.NativeAdPlacement
 import com.wavez.themewallpaper.core.base.BaseActivity
 import com.wavez.themewallpaper.core.base.UiState
 import com.wavez.themewallpaper.core.extensions.getParcel
@@ -55,28 +53,12 @@ class ApplyWallpaperActivity : BaseActivity<ActivityApplyWallpaperBinding>() {
         viewModel.currentWallpaper = wallpaperModel
         viewModel.getWallpapersByCategory()
         binding.rcvWallpaper.adapter = wallpaperAdapter
-        initNative()
-        loadBanner()
         if (savedInstanceState == null) {
             RatePromptManager.showAfterSuccessfulSetup(supportFragmentManager, sharedPref)
         }
     }
 
-    private fun loadBanner() {
-        binding.bannerAds.registerBanner(
-            this, adId = AdsId.getBannerInAppAds(),
-            shouldLoad = sharedPref.shouldShowBannerInApp ,
-        )
-    }
 
-    private fun initNative() {
-        setupNative(
-            NativeAdPlacement.NATIVE_WALLPAPER_APPLIED,
-            binding.nativeApply,
-            shouldShow = sharedPref.shouldShowNativeInApp,
-            autoLoad = true,
-        )
-    }
 
     override fun initView(savedInstanceState: Bundle?) {
         super.initView(savedInstanceState)

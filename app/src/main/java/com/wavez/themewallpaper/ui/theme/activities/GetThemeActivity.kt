@@ -14,8 +14,6 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
 import com.wavez.themewallpaper.R
-import com.wavez.themewallpaper.ads.AdsId
-import com.wavez.themewallpaper.ads.native_ad.NativeAdPlacement
 import com.wavez.themewallpaper.core.base.BaseActivity
 import com.wavez.themewallpaper.core.base.UiState
 import com.wavez.themewallpaper.core.download.DownloadState
@@ -30,7 +28,6 @@ import com.wavez.themewallpaper.data.model.icon.IconItemModel
 import com.wavez.themewallpaper.data.model.theme.ThemeModel
 import com.wavez.themewallpaper.databinding.ActivityGetThemesBinding
 import com.wavez.themewallpaper.ui.dialog.DownloadDialog
-import com.wavez.themewallpaper.ui.dialog.PremiumThemeDialog
 import com.wavez.themewallpaper.ui.home.MainActivity
 import com.wavez.themewallpaper.ui.home.fragment.widget.adapter.WidgetSize
 import com.wavez.themewallpaper.ui.home.fragment.widget.dialog.AddWidgetsBottomSheetDialog
@@ -38,7 +35,6 @@ import com.wavez.themewallpaper.ui.iconpack.adapter.SetIconAdapter
 import com.wavez.themewallpaper.ui.iconpack.dialog.SelectAppBottomSheetDialog
 import com.wavez.themewallpaper.ui.iconpack.model.IconPackItemUi
 import com.wavez.themewallpaper.ui.iconpack.model.SetIconState
-import com.wavez.themewallpaper.ui.premium.PremiumActivity
 import com.wavez.themewallpaper.ui.theme.adapter.ThemePageAdapter
 import com.wavez.themewallpaper.ui.theme.model.GetThemePage
 import com.wavez.themewallpaper.ui.theme.viewmodel.GetThemeViewModel
@@ -50,7 +46,7 @@ import javax.inject.Inject
 @AndroidEntryPoint
 class GetThemeActivity : BaseActivity<ActivityGetThemesBinding>(),
     SelectAppBottomSheetDialog.OnAppSelectedListener,
-    SetWallpaperDialog.SetWallpaperListener, PremiumThemeDialog.PremiumThemeListener {
+    SetWallpaperDialog.SetWallpaperListener {
     override fun bindingView(): ActivityGetThemesBinding {
         return ActivityGetThemesBinding.inflate(layoutInflater)
     }
@@ -71,7 +67,6 @@ class GetThemeActivity : BaseActivity<ActivityGetThemesBinding>(),
         intent.getParcel<ThemeModel>(ARG_THEME)
     }
     private var downloadDialog: DownloadDialog? = null
-    private var unlockingWallpaper = false
     private var availablePages = emptyList<GetThemePage>()
     private val pageChangeCallback = object : ViewPager2.OnPageChangeCallback() {
         override fun onPageSelected(position: Int) {
@@ -89,17 +84,6 @@ class GetThemeActivity : BaseActivity<ActivityGetThemesBinding>(),
             return
         }
         viewModel.load(currentTheme)
-        initNative()
-        loadBanner()
-    }
-
-    private fun initNative() {
-        setupNative(
-            NativeAdPlacement.NATIVE_GET_THEM,
-            binding.nativeGetTheme,
-            shouldShow = sharedPref.shouldShowNativeInApp,
-            autoLoad = true,
-        )
     }
 
     override fun initView(savedInstanceState: Bundle?) {
@@ -140,21 +124,6 @@ class GetThemeActivity : BaseActivity<ActivityGetThemesBinding>(),
         }
     }
 
-    private fun loadBanner() {
-        binding.bannerAds.registerBanner(
-            this, adId = AdsId.getBannerInAppAds(),
-            shouldLoad = sharedPref.shouldShowBannerInApp ,
-        )
-    }
-
-    override fun onVipChangedState(isPremium: Boolean) {
-        super.onVipChangedState(isPremium)
-        if (!viewModel.wallpaperApplied.value) updateWallpaperAction(viewModel.wallpaperDownloaded.value)
-        if (isPremium) {
-            viewModel.refreshUnlockState()
-        }
-    }
-
     override fun initListener() {
         super.initListener()
 
@@ -182,10 +151,8 @@ class GetThemeActivity : BaseActivity<ActivityGetThemesBinding>(),
             if (viewModel.wallpaperDownloaded.value) {
                 SetWallpaperDialog.newInstance()
                     .show(supportFragmentManager, SetWallpaperDialog::class.java.simpleName)
-            } else if (viewModel.canDownloadCurrentWallpaper()) {
-                startWallpaperDownload()
             } else {
-                unlockWallpaper()
+                startWallpaperDownload()
             }
         }
 
@@ -195,11 +162,7 @@ class GetThemeActivity : BaseActivity<ActivityGetThemesBinding>(),
                 Toast.makeText(this, R.string.no_icons_to_install, Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
-            if (mappedItems.any { !it.isUnlocked }) {
-                unlockAllIcons()
-            } else {
-                installAllShortcuts(mappedItems)
-            }
+            installAllShortcuts(mappedItems)
         }
 
         binding.btnGoToHome.setOnClickListener {
@@ -212,7 +175,6 @@ class GetThemeActivity : BaseActivity<ActivityGetThemesBinding>(),
             viewModel.itemIconPackItemUi = item
             when (state) {
                 SetIconState.APPLIED -> installShortcut(item)
-                SetIconState.UNLOCK -> unlockIcon()
                 SetIconState.INSTALL -> installShortcut(item)
                 SetIconState.CHOOSE -> showSelectApp(item)
             }
@@ -283,7 +245,6 @@ class GetThemeActivity : BaseActivity<ActivityGetThemesBinding>(),
                     binding.viewIconsLoading.isVisible = false
                     binding.rcvIcons.isVisible = true
                     iconAdapter.submitList(state.value)
-                    updateIconsAction(state.value)
                 }
 
                 is UiState.Error -> {
@@ -334,34 +295,10 @@ class GetThemeActivity : BaseActivity<ActivityGetThemesBinding>(),
         if (downloaded) {
             binding.btnApplyWallpaper.setIcon(0)
             binding.btnApplyWallpaper.setText(getString(R.string.apply))
-        } else if (viewModel.canDownloadCurrentWallpaper()) {
+        } else {
             binding.btnApplyWallpaper.setIcon(R.drawable.ic_download)
             binding.btnApplyWallpaper.setText(getString(R.string.download))
-        } else {
-            binding.btnApplyWallpaper.setIcon(R.drawable.ic_lock_1)
-            binding.btnApplyWallpaper.setText(getString(R.string.unlock))
         }
-    }
-
-    private fun updateIconsAction(items: List<IconPackItemUi>) {
-        val pendingItems = items.filter { it.isInstallable && !it.isApplied }
-        val hasLockedIcons = pendingItems.any { !it.isUnlocked }
-        binding.btnInstallAll.setText(
-            getString(
-                if (hasLockedIcons) {
-                    R.string.unlock_all_icons
-                } else {
-                    R.string.install_all_icons
-                }
-            )
-        )
-        binding.btnInstallAll.setIcon(
-            if (hasLockedIcons) {
-                R.drawable.ic_lock_1
-            } else {
-                0
-            }
-        )
     }
 
     private fun startWallpaperDownload() {
@@ -457,29 +394,6 @@ class GetThemeActivity : BaseActivity<ActivityGetThemesBinding>(),
         )
     }
 
-    private fun unlockIcon() {
-        unlockingWallpaper = false
-        viewModel.setInstallingAllAfterUnlock(false)
-        showPremiumDialog()
-    }
-
-    private fun unlockAllIcons() {
-        unlockingWallpaper = false
-        viewModel.setInstallingAllAfterUnlock(true)
-        showPremiumDialog()
-    }
-
-    private fun unlockWallpaper() {
-        unlockingWallpaper = true
-        viewModel.setInstallingAllAfterUnlock(false)
-        showPremiumDialog()
-    }
-
-    private fun showPremiumDialog() {
-        if (supportFragmentManager.findFragmentByTag(PremiumThemeDialog.TAG) != null) return
-        PremiumThemeDialog.newInstance().show(supportFragmentManager, PremiumThemeDialog.TAG)
-    }
-
     private fun openThemeWidgetDialog(size: WidgetSize) {
         val widgetModel = theme?.toWidgetsModel() ?: return
         AddWidgetsBottomSheetDialog.newInstance(
@@ -496,26 +410,6 @@ class GetThemeActivity : BaseActivity<ActivityGetThemesBinding>(),
 
     override fun onSetAsWallpaper(wallpaperTarget: WallpaperTarget) {
         viewModel.applyWallpaper(wallpaperTarget)
-    }
-
-    override fun onWatchAdsComplete() {
-        if (unlockingWallpaper) {
-            viewModel.unlockCurrentWallpaper()
-            updateWallpaperAction(downloaded = false)
-            startWallpaperDownload()
-            unlockingWallpaper = false
-        } else if (viewModel.consumeInstallingAllAfterUnlock()) {
-            val mappedItems = viewModel.mappedIconsPendingInstall()
-            if (mappedItems.isNotEmpty()) {
-                viewModel.unlockIcons(mappedItems.map { it.id })
-            }
-        } else {
-            viewModel.unlockIcon()
-        }
-    }
-
-    override fun onGoPremiumClick() {
-        startActivity(PremiumActivity.newIntent(this))
     }
 
 }

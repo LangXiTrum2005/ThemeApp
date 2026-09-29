@@ -78,21 +78,7 @@
         app:itemIconTint="@null"
         app:itemTextColor="@color/title_tab_color"
         app:labelVisibilityMode="labeled"
-        app:layout_constraintBottom_toTopOf="@+id/banner_ads"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:menu="@menu/menu_home" />
-
-    <com.ads.admob.banner_ads.BannerAdView
-        android:id="@+id/banner_ads"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="parent" />
-
-    <com.wavez.themewallpaper.ads.native_ad.view.BigNativeCollapsibleAdTemplate
-        android:id="@+id/native_home"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:elevation="10dp"
-        app:layout_constraintBottom_toBottomOf="parent" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+        app:menu="@menu/menu_home" /></androidx.constraintlayout.widget.ConstraintLayout>

@@ -169,5 +169,6 @@
     <string name="service_status_inactive">Service is inactive</string>
     <string name="controller_themes">Choose a Controller theme</string>
     <string name="controller_theme_applied">%s applied</string>
+    <string name="controller_theme_active">Applied</string>
 
 </resources>

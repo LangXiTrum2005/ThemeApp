@@ -167,6 +167,10 @@
             android:exported="false"
             android:screenOrientation="portrait" />
         <activity
+            android:name=".ui.home.fragment.controller.ControllerThemePreviewActivity"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+        <activity
             android:name=".ui.setting.SettingActivity"
             android:exported="false"
             android:screenOrientation="portrait"

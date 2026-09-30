@@ -76,32 +76,28 @@ object ControllerThemeCatalog {
     }
 
     fun config(context: Context, themeId: String): ControllerConfigModel? =
-        load(context).firstOrNull { it.control_id == themeId }?.toConfig()
+        load(context).firstOrNull { it.control_id == themeId }?.toConfig(context)
 
     fun theme(context: Context, themeId: String): ControllerTheme? =
         themes(context).firstOrNull { it.id == themeId }
 
-    /** Remote assets used by the overlay; the main background is downloaded first. */
+    /** Only URLs explicitly supplied by control_data.json; the required background is first. */
     fun assetUrls(context: Context, themeId: String): List<String> {
-        val config = config(context, themeId) ?: return emptyList()
+        val theme = load(context).firstOrNull { it.control_id == themeId } ?: return emptyList()
         return listOf(
-            config.homeBackground,
-            config.airplaneIcon, config.airplaneSelectedIcon,
-            config.bluetoothIcon, config.bluetoothSelectedIcon,
-            config.mobileDataIcon, config.mobileDataSelectedIcon,
-            config.wifiIcon, config.wifiSelectedIcon,
-            config.soundBackground, config.soundBigIcon, config.soundMuteIcon, config.soundSlider,
-            config.lightBackground, config.lightSlider, config.lightIcon, config.lightHomeIcon,
-            config.musicNextIcon, config.musicPauseIcon, config.musicPlayIcon, config.musicPreviousIcon,
-            config.musicBackground, config.homeControlBackground,
-            config.homeMusicBackground, config.controlBackground,
-            config.batteryIcon, config.calculatorIcon, config.cameraIcon, config.screenshotIcon,
-            config.setupIcon, config.timingIcon,
-            config.flashlightIcon, config.flashlightSelectedIcon,
-            config.recordIcon, config.recordSelectedIcon, config.recordingIcon,
-            config.focusIcon, config.focusSelectedIcon,
-            config.lockingIcon, config.lockingSelectedIcon,
-            config.ringIcon, config.ringSelectedIcon,
+            theme.bg_all,
+            theme.flight_on, theme.flight_off, theme.airdrop_on, theme.airdrop_off,
+            theme.bluetooth_on, theme.bluetooth_off, theme.wifi_on, theme.wifi_off,
+            theme.rotate_on, theme.rotate_off, theme.mute_on, theme.mute_off,
+            theme.flash_on, theme.flash_off, theme.battery_off,
+            theme.record_on, theme.record_off, theme.setting_off,
+            theme.lock_on, theme.lock_off, theme.time_off,
+            theme.calculator_off, theme.camera_off,
+            theme.sound, theme.mute, theme.light, theme.dark,
+            theme.back, theme.next, theme.play, theme.pause,
+            theme.bg_function, theme.bg_music, theme.bg_time,
+            theme.bg_light, theme.progress_light,
+            theme.bg_volume, theme.progress_volume,
         ).filter { it.startsWith("http") }.distinct()
     }
 
@@ -121,51 +117,53 @@ object ControllerThemeCatalog {
         return collection?.replace('-', ' ')?.plus(" ${theme.rank}") ?: "Theme ${theme.rank}"
     }
 
-    private fun ControllerThemeData.toConfig() = ControllerConfigModel(
+    private fun ControllerThemeData.toConfig(context: Context): ControllerConfigModel {
+        fun asset(url: String) = ControllerThemeAssets.resolve(context, control_id, url)
+        return ControllerConfigModel(
         key = control_id,
-        airplaneIcon = flight_off,
-        airplaneSelectedIcon = flight_on,
-        bluetoothIcon = bluetooth_off,
-        bluetoothSelectedIcon = bluetooth_on,
-        mobileDataIcon = airdrop_off,
-        mobileDataSelectedIcon = airdrop_on,
-        wifiIcon = wifi_off,
-        wifiSelectedIcon = wifi_on,
-        soundBackground = bg_volume,
-        soundBigIcon = sound,
-        soundMuteIcon = mute,
-        soundSlider = progress_volume,
-        lightBackground = bg_light,
-        lightSlider = progress_light,
-        lightIcon = light,
-        lightHomeIcon = light,
-        musicNextIcon = next,
-        musicPauseIcon = pause,
-        musicPlayIcon = play,
-        musicPreviousIcon = back,
-        musicBackground = bg_music,
-        homeBackground = bg_all,
-        homeControlBackground = bg_function,
-        homeMusicBackground = bg_music,
-        controlBackground = bg_function,
+        airplaneIcon = asset(flight_off),
+        airplaneSelectedIcon = asset(flight_on),
+        bluetoothIcon = asset(bluetooth_off),
+        bluetoothSelectedIcon = asset(bluetooth_on),
+        mobileDataIcon = asset(airdrop_off),
+        mobileDataSelectedIcon = asset(airdrop_on),
+        wifiIcon = asset(wifi_off),
+        wifiSelectedIcon = asset(wifi_on),
+        soundBackground = asset(bg_volume),
+        soundBigIcon = asset(sound),
+        soundMuteIcon = asset(mute),
+        soundSlider = asset(progress_volume),
+        lightBackground = asset(bg_light),
+        lightSlider = asset(progress_light),
+        lightIcon = asset(light),
+        lightHomeIcon = asset(light),
+        musicNextIcon = asset(next),
+        musicPauseIcon = asset(pause),
+        musicPlayIcon = asset(play),
+        musicPreviousIcon = asset(back),
+        musicBackground = asset(bg_music),
+        homeBackground = asset(bg_all),
+        homeControlBackground = asset(bg_function),
+        homeMusicBackground = asset(bg_music),
+        controlBackground = asset(bg_function),
         bottomDiyBackground = themeAsset("home_bottom_diy_bg.png"),
-        batteryIcon = battery_off,
-        calculatorIcon = calculator_off,
-        cameraIcon = camera_off,
+        batteryIcon = asset(battery_off),
+        calculatorIcon = asset(calculator_off),
+        cameraIcon = asset(camera_off),
         screenshotIcon = themeAsset("home_bottom_ic_screenshot.png"),
-        setupIcon = setting_off,
-        timingIcon = time_off,
-        flashlightIcon = flash_off,
-        flashlightSelectedIcon = flash_on,
-        recordIcon = record_off,
-        recordSelectedIcon = record_on,
-        recordingIcon = record_off,
-        focusIcon = bg_time,
-        focusSelectedIcon = bg_time,
-        lockingIcon = lock_off,
-        lockingSelectedIcon = lock_on,
-        ringIcon = mute_off,
-        ringSelectedIcon = mute_on,
+        setupIcon = asset(setting_off),
+        timingIcon = asset(time_off),
+        flashlightIcon = asset(flash_off),
+        flashlightSelectedIcon = asset(flash_on),
+        recordIcon = asset(record_off),
+        recordSelectedIcon = asset(record_on),
+        recordingIcon = asset(record_off),
+        focusIcon = asset(bg_time),
+        focusSelectedIcon = asset(bg_time),
+        lockingIcon = asset(lock_off),
+        lockingSelectedIcon = asset(lock_on),
+        ringIcon = asset(mute_off),
+        ringSelectedIcon = asset(mute_on),
         controllerJsonConfig = MyControllerJsonConfig(
             controlTextColor = screentime_font_color.toHexColor(),
             volumeTextColor = screentime_font_color.toHexColor(),
@@ -177,6 +175,7 @@ object ControllerThemeCatalog {
             musicTimeColor = music_font_color.toHexColor(),
         ),
     )
+    }
 
     private fun String.toHexColor(): String =
         removePrefix("0x").removePrefix("0X").let { "#$it" }

@@ -69,9 +69,6 @@ class ThemeFragment : BaseFragment<FragmentThemeBinding>() {
     private val onPageChangeCallback = object : ViewPager2.OnPageChangeCallback() {
         override fun onPageSelected(position: Int) {
             updateTabState(position)
-            lastSetupCategories?.getOrNull(position)?.let { category ->
-                binding.animatedBackground.setCategory(category.name)
-            }
         }
     }
 
@@ -204,9 +201,6 @@ class ThemeFragment : BaseFragment<FragmentThemeBinding>() {
             binding.vpTheme.setCurrentItem(savedPosition, true)
         }
         updateTabState(binding.vpTheme.currentItem)
-        categories.getOrNull(binding.vpTheme.currentItem)?.let { category ->
-            binding.animatedBackground.setCategory(category.name)
-        }
     }
 
     private fun setupBanners(categories: List<ThemeCategoryModel>) {

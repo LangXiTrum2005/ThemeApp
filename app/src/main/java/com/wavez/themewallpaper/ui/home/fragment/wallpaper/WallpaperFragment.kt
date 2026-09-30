@@ -57,9 +57,6 @@ class WallpaperFragment : BaseFragment<FragmentWallpaperBinding>() {
                     customView?.inactivate()
                 }
             }
-            categories.getOrNull(position)?.let { category ->
-                binding.animatedBackground.setCategory(category.name)
-            }
         }
     }
 
@@ -118,9 +115,6 @@ class WallpaperFragment : BaseFragment<FragmentWallpaperBinding>() {
                 override fun onTabReselected(tab: TabLayout.Tab) = Unit
             }
         )
-        categories.getOrNull(binding.vpTheme.currentItem)?.let { category ->
-            binding.animatedBackground.setCategory(category.name)
-        }
     }
 
 

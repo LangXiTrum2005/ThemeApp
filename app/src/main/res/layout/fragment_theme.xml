@@ -7,15 +7,6 @@
     android:clipChildren="true"
     tools:context=".ui.home.fragment.theme.ThemeFragment">
 
-    <com.wavez.themewallpaper.ui.customview.ThemeMoodBackgroundView
-        android:id="@+id/animatedBackground"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
     <include
         android:id="@+id/toolbar"
         layout="@layout/view_tool_bar"

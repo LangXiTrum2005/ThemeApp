@@ -43,9 +43,6 @@ class WidgetsFragment : BaseFragment<FragmentWidgetsBinding>() {
                 val tabView = binding.tabCategory.getTabAt(index)?.customView as? ThemeTabIcon
                 if (index == position) tabView?.activate() else tabView?.inactivate()
             }
-            categories.getOrNull(position)?.let { category ->
-                binding.animatedBackground.setCategory(category.name)
-            }
         }
     }
 
@@ -158,9 +155,6 @@ class WidgetsFragment : BaseFragment<FragmentWidgetsBinding>() {
                 override fun onTabReselected(tab: TabLayout.Tab) = Unit
             }
         )
-        categories.getOrNull(binding.vpTheme.currentItem)?.let { category ->
-            binding.animatedBackground.setCategory(category.name)
-        }
     }
 
     override fun release() {

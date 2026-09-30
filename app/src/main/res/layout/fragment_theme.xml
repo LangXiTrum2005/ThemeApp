@@ -4,9 +4,17 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
     android:clipChildren="true"
     tools:context=".ui.home.fragment.theme.ThemeFragment">
+
+    <com.wavez.themewallpaper.ui.customview.ThemeMoodBackgroundView
+        android:id="@+id/animatedBackground"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <include
         android:id="@+id/toolbar"
@@ -19,7 +27,7 @@
         android:id="@+id/coordinator"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:background="@color/white"
+        android:background="@color/transparent"
         android:clipChildren="true"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@id/toolbar">
@@ -28,19 +36,20 @@
             android:id="@+id/appBar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/white"
+            android:background="@color/transparent"
             android:clipChildren="true"
             android:elevation="0dp"
             android:stateListAnimator="@null"
-            app:backgroundTint="@color/white"
+            app:backgroundTint="@color/transparent"
             app:liftOnScroll="false"
-            app:liftOnScrollColor="@color/white">
+            app:liftOnScrollColor="@color/transparent">
 
             <FrameLayout
                 android:id="@+id/bannerContainer"
                 android:layout_width="match_parent"
                 android:layout_height="150dp"
-                android:clipChildren="true"
+                android:background="@color/transparent"
+                android:clipChildren="false"
                 app:layout_scrollFlags="scroll|exitUntilCollapsed|snap"
                 app:layout_scrollInterpolator="@android:interpolator/fast_out_slow_in">
 
@@ -55,14 +64,14 @@
                     android:id="@+id/viewLoadingBanner"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="@color/white"
+                    android:background="@color/transparent"
                     android:visibility="gone" />
 
                 <LinearLayout
                     android:id="@+id/viewErrorBanner"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="@color/white"
+                    android:background="@color/transparent"
                     android:gravity="center"
                     android:orientation="vertical"
                     android:visibility="gone">
@@ -114,7 +123,8 @@
                 style="@style/CustomSearchView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="16dp"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginVertical="12dp"
                 android:text="@string/search_themes" />
 
             <LinearLayout
@@ -122,7 +132,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="16dp"
-                android:gravity="center"
+                android:layout_marginBottom="6dp"
+                android:gravity="center_vertical"
                 android:orientation="horizontal">
 
                 <com.google.android.material.tabs.TabLayout
@@ -142,9 +153,10 @@
 
                 <androidx.appcompat.widget.AppCompatImageView
                     android:id="@+id/btnMoreCategory"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="?selectableItemBackground"
+                    android:layout_width="36dp"
+                    android:layout_height="36dp"
+                    android:background="?selectableItemBackgroundBorderless"
+                    android:padding="6dp"
                     android:src="@drawable/ic_more_category" />
 
             </LinearLayout>
@@ -154,25 +166,27 @@
         <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:background="@color/transparent"
             app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
             <androidx.viewpager2.widget.ViewPager2
                 android:id="@+id/vpTheme"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" />
+                android:layout_height="match_parent"
+                android:background="@color/transparent" />
 
             <com.wavez.themewallpaper.ui.customview.ServerErrorView
                 android:id="@+id/viewError"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@color/white"
+                android:background="@color/transparent"
                 android:visibility="gone" />
 
             <com.wavez.themewallpaper.ui.customview.ServerLoadingView
                 android:id="@+id/viewLoading"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@color/white"
+                android:background="@color/transparent"
                 android:visibility="gone" />
 
         </FrameLayout>

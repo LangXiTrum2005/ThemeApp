@@ -57,8 +57,13 @@ class WallpaperFragment : BaseFragment<FragmentWallpaperBinding>() {
                     customView?.inactivate()
                 }
             }
+            categories.getOrNull(position)?.let { category ->
+                binding.animatedBackground.setCategory(category.name)
+            }
         }
     }
+
+    private var categories: List<WallpaperCategoryModel> = emptyList()
 
     override fun initView(view: View, savedInstanceState: Bundle?) {
         super.initView(view, savedInstanceState)
@@ -71,6 +76,7 @@ class WallpaperFragment : BaseFragment<FragmentWallpaperBinding>() {
     private fun setupTabs(
         categories: List<WallpaperCategoryModel>
     ) {
+        this.categories = categories
         binding.vpTheme.adapter = CategoryPagerAdapter(this, categories)
         TabLayoutMediator(
             binding.tabCategory,
@@ -112,6 +118,9 @@ class WallpaperFragment : BaseFragment<FragmentWallpaperBinding>() {
                 override fun onTabReselected(tab: TabLayout.Tab) = Unit
             }
         )
+        categories.getOrNull(binding.vpTheme.currentItem)?.let { category ->
+            binding.animatedBackground.setCategory(category.name)
+        }
     }
 
 
@@ -189,6 +198,7 @@ class WallpaperFragment : BaseFragment<FragmentWallpaperBinding>() {
     }
 
     override fun release() {
+        categories = emptyList()
         binding.vpTheme.unregisterOnPageChangeCallback(onPageChangeCallback)
         super.release()
     }

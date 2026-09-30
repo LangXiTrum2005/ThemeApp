@@ -322,8 +322,11 @@
         <item name="android:background">@drawable/border_ed_search</item>
         <item name="android:drawableEnd">@drawable/ic_search</item>
         <item name="fontFamily">@font/nunito</item>
-        <item name="android:paddingVertical">12dp</item>
-        <item name="android:paddingHorizontal">16dp</item>
+        <item name="android:elevation">2dp</item>
+        <item name="android:paddingVertical">13dp</item>
+        <item name="android:paddingHorizontal">20dp</item>
+        <item name="android:textColor">@color/text_high_em</item>
+        <item name="android:textColorHint">@color/text_low_em</item>
     </style>
 
     <style name="round_img_4">
@@ -335,6 +338,10 @@
 
     <style name="round_img_16">
         <item name="cornerSize">16dp</item>
+    </style>
+
+    <style name="round_img_18">
+        <item name="cornerSize">18dp</item>
     </style>
 
     <style name="round_img_22">

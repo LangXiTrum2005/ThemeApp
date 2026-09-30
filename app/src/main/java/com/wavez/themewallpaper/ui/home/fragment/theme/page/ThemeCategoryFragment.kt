@@ -59,6 +59,7 @@ class ThemeCategoryFragment : BaseFragment<FragmentThemeCategoryBinding>() {
                 is UiState.Data -> {
                     setViewState(showContent = true, showLoading = false, showError = false)
                     themeAdapter.set(state.value)
+                    binding.rcvTheme.scheduleLayoutAnimation()
                 }
 
                 else -> Unit

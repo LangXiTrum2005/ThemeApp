@@ -4,16 +4,22 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/transparent"
     tools:context=".ui.home.fragment.theme.page.ThemeCategoryFragment">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rcvTheme"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:padding="10dp"
+        android:clipToPadding="false"
+        android:layoutAnimation="@anim/layout_anim_grid_fall_down"
+        android:overScrollMode="never"
+        android:paddingHorizontal="7dp"
+        android:paddingTop="6dp"
+        android:paddingBottom="24dp"
         app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
         app:spanCount="2"
-        tools:listitem="@layout/item_wallpaper" />
+        tools:listitem="@layout/item_theme" />
 
     <com.wavez.themewallpaper.ui.customview.ServerErrorView
         android:id="@+id/viewError"
@@ -26,6 +32,5 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:visibility="gone" />
-
 
 </FrameLayout>

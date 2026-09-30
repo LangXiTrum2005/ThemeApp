@@ -43,8 +43,13 @@ class WidgetsFragment : BaseFragment<FragmentWidgetsBinding>() {
                 val tabView = binding.tabCategory.getTabAt(index)?.customView as? ThemeTabIcon
                 if (index == position) tabView?.activate() else tabView?.inactivate()
             }
+            categories.getOrNull(position)?.let { category ->
+                binding.animatedBackground.setCategory(category.name)
+            }
         }
     }
+
+    private var categories: List<WidgetCategoryModel> = emptyList()
 
     override fun initView(view: View, savedInstanceState: Bundle?) {
         super.initView(view, savedInstanceState)
@@ -119,6 +124,7 @@ class WidgetsFragment : BaseFragment<FragmentWidgetsBinding>() {
     }
 
     private fun setupTabs(categories: List<WidgetCategoryModel>) {
+        this.categories = categories
         binding.vpTheme.adapter = WidgetCategoryPagerAdapter(this, categories)
         TabLayoutMediator(binding.tabCategory, binding.vpTheme) { tab, position ->
             val category = categories[position]
@@ -152,9 +158,13 @@ class WidgetsFragment : BaseFragment<FragmentWidgetsBinding>() {
                 override fun onTabReselected(tab: TabLayout.Tab) = Unit
             }
         )
+        categories.getOrNull(binding.vpTheme.currentItem)?.let { category ->
+            binding.animatedBackground.setCategory(category.name)
+        }
     }
 
     override fun release() {
+        categories = emptyList()
         binding.vpTheme.unregisterOnPageChangeCallback(onPageChangeCallback)
         super.release()
     }

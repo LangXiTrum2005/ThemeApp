@@ -20,17 +20,20 @@
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/btnMyGallery"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="?selectableItemBackground"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginEnd="6dp"
+        android:background="?selectableItemBackgroundBorderless"
         android:contentDescription="@string/my_gallery"
+        android:padding="8dp"
         android:src="@drawable/ic_tab_gralley" />
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/btnSetting"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="?selectableItemBackground"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:background="?selectableItemBackgroundBorderless"
+        android:padding="8dp"
         android:src="@drawable/ic_setting" />
 
 

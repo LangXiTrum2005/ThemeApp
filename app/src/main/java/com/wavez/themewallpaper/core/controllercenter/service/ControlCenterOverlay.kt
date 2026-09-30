@@ -1,8 +1,11 @@
 package com.wavez.themewallpaper.core.controllercenter.service
 
+import android.accessibilityservice.AccessibilityService
 import android.content.Context
 import android.graphics.PixelFormat
 import android.os.Build
+import android.os.Handler
+import android.os.Looper
 import android.util.Log
 import android.view.Gravity
 import android.view.LayoutInflater
@@ -39,6 +42,8 @@ class ControlCenterOverlay(private val context: Context) {
     private var isPanelAttached = false
     private var isPanelVisible = false
     private var panelParams: WindowManager.LayoutParams? = null
+    private val focusHandler = Handler(Looper.getMainLooper())
+    private var focusLockRunnable: Runnable? = null
     private val touchSlop by lazy {
         ViewConfiguration.get(context).scaledTouchSlop.toFloat()
     }
@@ -81,6 +86,7 @@ class ControlCenterOverlay(private val context: Context) {
     }
 
     fun destroy() {
+        focusLockRunnable?.let(focusHandler::removeCallbacks)
         detachPullBar()
         detachPanel()
     }
@@ -155,6 +161,8 @@ class ControlCenterOverlay(private val context: Context) {
         UtilsKt.loadImageOptimizeRam(sceneBinding.background, config.homeBackground)
         sceneBinding.main.initData(config)
         sceneBinding.main.setDismissListener { hidePanel() }
+        sceneBinding.main.setFocusClickListener { showFocusDurations() }
+        bindFocusDurations()
 
         sceneBinding.pullRoot.setPullDirection(PullDirection.UP)
         sceneBinding.pullRoot.setPullingListener(object : PullingListener {
@@ -188,6 +196,7 @@ class ControlCenterOverlay(private val context: Context) {
     private fun hidePanel() {
         if (!isPanelVisible) return
         isPanelVisible = false
+        sceneBinding.focusDurationPanel.visibility = View.GONE
         sceneBinding.main.animate()
             .alpha(0f).translationY(-60f).setDuration(220)
             .withEndAction { collapsePanelWindow() }
@@ -241,6 +250,7 @@ class ControlCenterOverlay(private val context: Context) {
     }
 
     private fun detachPanel() {
+        sceneBinding.focusDurationPanel.visibility = View.GONE
         sceneBinding.main.visibility = View.GONE
         sceneBinding.background.visibility = View.GONE
         sceneBinding.main.alpha = 1f
@@ -253,6 +263,30 @@ class ControlCenterOverlay(private val context: Context) {
     }
 
     // ─── Utilities ────────────────────────────────────────────────
+
+    private fun bindFocusDurations() {
+        sceneBinding.focus15s.setOnClickListener { scheduleScreenLock(15_000L) }
+        sceneBinding.focus30s.setOnClickListener { scheduleScreenLock(30_000L) }
+        sceneBinding.focus1m.setOnClickListener { scheduleScreenLock(60_000L) }
+        sceneBinding.focus2m.setOnClickListener { scheduleScreenLock(2 * 60_000L) }
+        sceneBinding.focus5m.setOnClickListener { scheduleScreenLock(5 * 60_000L) }
+        sceneBinding.focus10m.setOnClickListener { scheduleScreenLock(10 * 60_000L) }
+        sceneBinding.focus30m.setOnClickListener { scheduleScreenLock(30 * 60_000L) }
+    }
+
+    private fun showFocusDurations() {
+        sceneBinding.focusDurationPanel.visibility = View.VISIBLE
+    }
+
+    private fun scheduleScreenLock(delayMillis: Long) {
+        focusLockRunnable?.let(focusHandler::removeCallbacks)
+        focusLockRunnable = Runnable {
+            (context as? AccessibilityService)
+                ?.performGlobalAction(AccessibilityService.GLOBAL_ACTION_LOCK_SCREEN)
+            focusLockRunnable = null
+        }.also { focusHandler.postDelayed(it, delayMillis) }
+        hidePanel()
+    }
 
     private fun overlayFlags(): Int =
         WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE or

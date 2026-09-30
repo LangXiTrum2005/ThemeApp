@@ -81,6 +81,30 @@ object ControllerThemeCatalog {
     fun theme(context: Context, themeId: String): ControllerTheme? =
         themes(context).firstOrNull { it.id == themeId }
 
+    /** Remote assets used by the overlay; the main background is downloaded first. */
+    fun assetUrls(context: Context, themeId: String): List<String> {
+        val config = config(context, themeId) ?: return emptyList()
+        return listOf(
+            config.homeBackground,
+            config.airplaneIcon, config.airplaneSelectedIcon,
+            config.bluetoothIcon, config.bluetoothSelectedIcon,
+            config.mobileDataIcon, config.mobileDataSelectedIcon,
+            config.wifiIcon, config.wifiSelectedIcon,
+            config.soundBackground, config.soundBigIcon, config.soundMuteIcon, config.soundSlider,
+            config.lightBackground, config.lightSlider, config.lightIcon, config.lightHomeIcon,
+            config.musicNextIcon, config.musicPauseIcon, config.musicPlayIcon, config.musicPreviousIcon,
+            config.musicBackground, config.homeControlBackground,
+            config.homeMusicBackground, config.controlBackground,
+            config.batteryIcon, config.calculatorIcon, config.cameraIcon, config.screenshotIcon,
+            config.setupIcon, config.timingIcon,
+            config.flashlightIcon, config.flashlightSelectedIcon,
+            config.recordIcon, config.recordSelectedIcon, config.recordingIcon,
+            config.focusIcon, config.focusSelectedIcon,
+            config.lockingIcon, config.lockingSelectedIcon,
+            config.ringIcon, config.ringSelectedIcon,
+        ).filter { it.startsWith("http") }.distinct()
+    }
+
     private fun load(context: Context): List<ControllerThemeData> = cachedThemes ?: synchronized(this) {
         cachedThemes ?: context.assets.open(ASSET_FILE).bufferedReader().use { reader ->
             Gson().fromJson(reader, Array<ControllerThemeData>::class.java)

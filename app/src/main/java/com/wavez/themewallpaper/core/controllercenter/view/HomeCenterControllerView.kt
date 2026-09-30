@@ -40,7 +40,11 @@ import com.wavez.themewallpaper.core.extensions.openCalculatorApp
 import com.wavez.themewallpaper.core.extensions.openStopwatchApp
 import com.wavez.themewallpaper.databinding.LayoutControllerCenterBinding
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.DataSource
+import com.bumptech.glide.load.engine.GlideException
+import com.bumptech.glide.request.RequestListener
 import com.bumptech.glide.request.target.CustomTarget
+import com.bumptech.glide.request.target.Target
 import com.bumptech.glide.request.transition.Transition
 
 class HomeCenterControllerView @JvmOverloads constructor(
@@ -59,6 +63,7 @@ class HomeCenterControllerView @JvmOverloads constructor(
 
     private var config = ControllerConfigModel()
     private var onDismiss: () -> Unit = {}
+    private var onFocusClick: () -> Unit = {}
     private var boundMedia: MediaController? = null
     private var boundBrightness: BrightnessController? = null
     private var boundVolume: VolumeController? = null
@@ -172,7 +177,7 @@ class HomeCenterControllerView @JvmOverloads constructor(
         UtilsKt.loadImageOptimizeRam(binding.camera, m.cameraIcon)
 
         // --- Tool icons: row 2 ---
-        UtilsKt.loadImageOptimizeRam(binding.recordAudio, m.recordingIcon)
+        UtilsKt.loadImageOptimizeRam(binding.recordAudio, m.lockingIcon)
 
         binding.recordVideo.initData(
             openPath = m.recordSelectedIcon,
@@ -183,7 +188,7 @@ class HomeCenterControllerView @JvmOverloads constructor(
             playAnim = false
         )
         UtilsKt.loadImageOptimizeRam(binding.battery, m.batteryIcon)
-        UtilsKt.loadImageOptimizeRam(binding.screenShot, m.screenshotIcon)
+        loadScreenshotIcon(m.screenshotIcon, m.recordIcon)
 
         // --- Tool icons: row 3 ---
         UtilsKt.loadImageOptimizeRam(binding.setup, m.setupIcon)
@@ -191,6 +196,33 @@ class HomeCenterControllerView @JvmOverloads constructor(
     }
 
     // ================= BIND CONTROLLERS =================
+
+    private fun loadScreenshotIcon(screenshotIcon: String, fallbackFrame: String) {
+        binding.screenShotCaptureOverlay.visibility = View.VISIBLE
+        Glide.with(binding.screenShot)
+            .load(screenshotIcon)
+            .error(Glide.with(binding.screenShot).load(fallbackFrame))
+            .listener(object : RequestListener<Drawable> {
+                override fun onLoadFailed(
+                    e: GlideException?,
+                    model: Any?,
+                    target: Target<Drawable?>,
+                    isFirstResource: Boolean,
+                ) = false
+
+                override fun onResourceReady(
+                    resource: Drawable,
+                    model: Any,
+                    target: Target<Drawable?>?,
+                    dataSource: DataSource,
+                    isFirstResource: Boolean,
+                ): Boolean {
+                    binding.screenShotCaptureOverlay.visibility = View.GONE
+                    return false
+                }
+            })
+            .into(binding.screenShot)
+    }
 
     fun bindControllers(
         network: NetworkController,
@@ -421,7 +453,7 @@ class HomeCenterControllerView @JvmOverloads constructor(
 
         binding.autoRotate.onAvoidDoubleClick { toggleAutoRotate() }
         binding.mute.onAvoidDoubleClick { toggleMute(volume) }
-        binding.doNotDisturb.onAvoidDoubleClick { toggleDoNotDisturb() }
+        binding.doNotDisturb.onAvoidDoubleClick { onFocusClick() }
 
         binding.screenShot.onAvoidDoubleClick {
             (context as? AccessibilityService)
@@ -443,7 +475,8 @@ class HomeCenterControllerView @JvmOverloads constructor(
             if (context.openCalculatorApp()) dismiss()
         }
         binding.recordAudio.onAvoidDoubleClick {
-            openActivity(Intent(MediaStore.Audio.Media.RECORD_SOUND_ACTION))
+            (context as? AccessibilityService)
+                ?.performGlobalAction(AccessibilityService.GLOBAL_ACTION_LOCK_SCREEN)
             dismiss()
         }
 
@@ -606,6 +639,10 @@ class HomeCenterControllerView @JvmOverloads constructor(
 
     fun setDismissListener(listener: () -> Unit) {
         onDismiss = listener
+    }
+
+    fun setFocusClickListener(listener: () -> Unit) {
+        onFocusClick = listener
     }
 
     private fun dismiss() {

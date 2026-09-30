@@ -186,12 +186,23 @@
                 android:layout_gravity="center"
                 android:layout_weight="1" />
 
-            <ImageView
-                android:id="@+id/screenShot"
+            <FrameLayout
                 android:layout_width="0dp"
                 android:layout_height="@dimen/_65sdp"
                 android:layout_gravity="end"
-                android:layout_weight="1" />
+                android:layout_weight="1">
+
+                <ImageView
+                    android:id="@+id/screenShot"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+
+                <ImageView
+                    android:id="@+id/screenShotCaptureOverlay"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/ic_capture_screen" />
+            </FrameLayout>
         </LinearLayout>
 
         <LinearLayout

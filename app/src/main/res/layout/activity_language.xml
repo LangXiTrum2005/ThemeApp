@@ -12,10 +12,10 @@
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        android:elevation="@dimen/_5sdp"
+        android:elevation="0dp"
         android:gravity="center_vertical"
         android:orientation="horizontal"
-        android:paddingHorizontal="16dp"
+        android:paddingHorizontal="20dp"
         app:layout_constraintTop_toTopOf="parent">
 
         <androidx.appcompat.widget.AppCompatTextView
@@ -30,7 +30,7 @@
             android:id="@+id/btnNextLanguage"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="?selectableItemBackground"
+            android:background="?selectableItemBackgroundBorderless"
             android:src="@drawable/state_button_check_language"
             android:textAllCaps="false" />
 
@@ -38,7 +38,7 @@
             android:id="@+id/btnSave"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="?selectableItemBackground"
+            android:background="?selectableItemBackgroundBorderless"
             android:src="@drawable/state_button_check_language"
             android:visibility="gone" />
 
@@ -48,9 +48,11 @@
         android:id="@+id/languageRV"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1"
-        android:paddingHorizontal="12dp"
-        android:paddingTop="8dp"
+        android:clipToPadding="false"
+        android:overScrollMode="never"
+        android:paddingHorizontal="16dp"
+        android:paddingTop="6dp"
+        android:paddingBottom="24dp"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/toolbar"

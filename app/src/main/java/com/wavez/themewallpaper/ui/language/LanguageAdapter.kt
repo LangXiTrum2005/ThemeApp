@@ -27,9 +27,12 @@ class LanguageAdapter : BaseRecyclerViewAdapter<LanguageModel, ItemLanguageBindi
         position: Int,
         context: Context
     ) {
+        binding.ivFlag.setImageResource(data.flag)
         binding.tvLanguage.text = data.name
         binding.tvLanguageEn.text = data.englishName
-        binding.root.isSelected = data.code == isCodeSelected
+        val isSelected = data.code == isCodeSelected
+        binding.root.isSelected = isSelected
+        binding.ivRadioCheck.isSelected = isSelected
 
         binding.root.setOnClickListener {
             isCodeSelected = data.code

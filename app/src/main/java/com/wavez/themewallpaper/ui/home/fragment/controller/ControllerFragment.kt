@@ -5,12 +5,14 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
+import com.bumptech.glide.Glide
 import com.wavez.themewallpaper.R
 import com.wavez.themewallpaper.core.base.BaseFragment
 import com.wavez.themewallpaper.core.controllercenter.PermissionHelper
@@ -19,12 +21,13 @@ import com.wavez.themewallpaper.core.controllercenter.ControllerTheme
 import com.wavez.themewallpaper.core.controllercenter.ThemeLoader
 import com.wavez.themewallpaper.core.controllercenter.service.ControlCenterService
 import com.wavez.themewallpaper.databinding.FragmentControllerBinding
+import com.wavez.themewallpaper.ui.dialog.DownloadDialog
 import com.wavez.themewallpaper.ui.home.MainActivity
 import com.wavez.themewallpaper.ui.setting.SettingActivity
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
-import kotlinx.coroutines.delay
+import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
@@ -35,13 +38,12 @@ class ControllerFragment : BaseFragment<FragmentControllerBinding>() {
         FragmentControllerBinding.inflate(layoutInflater)
 
     companion object {
-        private const val THEME_UNLOCK_DELAY_MS = 1_500L
-
         fun newInstance(): ControllerFragment = ControllerFragment()
     }
 
     private var panelActive = false
     private var themeDownloadJob: Job? = null
+    private var downloadDialog: DownloadDialog? = null
 
     private val themeAdapter: ControllerThemeAdapter = ControllerThemeAdapter { theme, action ->
         themeDownloadJob?.cancel()
@@ -50,8 +52,7 @@ class ControllerFragment : BaseFragment<FragmentControllerBinding>() {
             ControllerThemeAction.DOWNLOAD -> {
                 themeAdapter.showLoading(theme)
                 themeDownloadJob = viewLifecycleOwner.lifecycleScope.launch {
-                    delay(THEME_UNLOCK_DELAY_MS)
-                    themeAdapter.showUnlock(theme)
+                    downloadThemeAssets(theme)
                 }
             }
             ControllerThemeAction.UNLOCK -> applyTheme(theme)
@@ -92,7 +93,7 @@ class ControllerFragment : BaseFragment<FragmentControllerBinding>() {
         super.initView(view, savedInstanceState)
         binding.toolbar.tvTitle.setText(R.string.controller)
         binding.rvControllerThemes.apply {
-            layoutManager = GridLayoutManager(requireContext(), 3)
+            layoutManager = GridLayoutManager(requireContext(), 2)
             adapter = themeAdapter
         }
     }
@@ -105,6 +106,7 @@ class ControllerFragment : BaseFragment<FragmentControllerBinding>() {
                 ControllerThemeCatalog.themes(appContext)
             }
             themeAdapter.submit(themes, sharedPref.activeThemeId)
+            binding.rvControllerThemes.scheduleLayoutAnimation()
         }
     }
 
@@ -145,7 +147,82 @@ class ControllerFragment : BaseFragment<FragmentControllerBinding>() {
 
     override fun release() {
         themeDownloadJob?.cancel()
+        dismissDownloadDialog()
         super.release()
+    }
+
+    private suspend fun downloadThemeAssets(theme: ControllerTheme) {
+        showDownloadDialog().updateProgress(1)
+        val assetUrls = withContext(Dispatchers.IO) {
+            ControllerThemeCatalog.assetUrls(requireContext().applicationContext, theme.id)
+        }
+        if (assetUrls.isEmpty()) {
+            dismissDownloadDialog()
+            themeAdapter.showDownload(theme)
+            return
+        }
+
+        val result = try {
+            assetUrls.forEachIndexed { index, assetUrl ->
+                try {
+                    withContext(Dispatchers.IO) {
+                        val target = Glide.with(requireContext().applicationContext)
+                            .downloadOnly()
+                            .load(assetUrl)
+                            .submit()
+                        try {
+                            target.get()
+                        } finally {
+                            Glide.with(requireContext().applicationContext).clear(target)
+                        }
+                    }
+                } catch (exception: CancellationException) {
+                    throw exception
+                } catch (exception: Exception) {
+                    if (index == 0) throw exception
+                    Log.w("ControllerFragment", "Optional theme asset unavailable: $assetUrl", exception)
+                }
+                showDownloadDialog().updateProgress((index + 1) * 100 / assetUrls.size)
+            }
+            Result.success(Unit)
+        } catch (exception: CancellationException) {
+            throw exception
+        } catch (exception: Exception) {
+            Result.failure(exception)
+        }
+        dismissDownloadDialog()
+        result.onSuccess {
+            themeAdapter.showUnlock(theme)
+        }.onFailure {
+            themeAdapter.showDownload(theme)
+            android.widget.Toast.makeText(
+                requireContext(),
+                getString(R.string.download_failed),
+                android.widget.Toast.LENGTH_SHORT,
+            ).show()
+        }
+    }
+
+    private fun showDownloadDialog(): DownloadDialog {
+        downloadDialog?.let { return it }
+        (parentFragmentManager.findFragmentByTag(DownloadDialog.TAG) as? DownloadDialog)?.let {
+            downloadDialog = it
+            return it
+        }
+        return DownloadDialog.newInstance().also { dialog ->
+            downloadDialog = dialog
+            if (!parentFragmentManager.isStateSaved) {
+                dialog.show(parentFragmentManager, DownloadDialog.TAG)
+            }
+        }
+    }
+
+    private fun dismissDownloadDialog() {
+        val dialog = downloadDialog
+        downloadDialog = null
+        if (dialog?.isAdded == true) {
+            dialog.dismissAllowingStateLoss()
+        }
     }
 
     private fun refreshState() {
@@ -191,7 +268,7 @@ class ControllerFragment : BaseFragment<FragmentControllerBinding>() {
             accessibilityReady && writeSettingsReady && notificationReady && runtimeGranted
         binding.tvPermissionsTitle.isVisible = !allControllerPermissionsGranted
         binding.cardPermissions.isVisible = !allControllerPermissionsGranted
-        binding.tvControllerThemesTitle.isVisible = allControllerPermissionsGranted
+        binding.tvControllerThemesTitle.isVisible = false
         binding.rvControllerThemes.isVisible = allControllerPermissionsGranted
 
         // 5. Theme Status

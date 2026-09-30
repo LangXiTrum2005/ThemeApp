@@ -28,7 +28,7 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:paddingHorizontal="16dp"
-            android:paddingTop="8dp"
+            android:paddingTop="0dp"
             android:paddingBottom="24dp">
 
             <!-- Hero Card: Control Center Status & Preview -->
@@ -39,7 +39,8 @@
                 android:background="@drawable/bg_card_controller"
                 android:elevation="2dp"
                 android:orientation="vertical"
-                android:padding="16dp">
+                android:padding="16dp"
+                android:visibility="gone">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -135,7 +136,7 @@
                 style="@style/NunitoBold.16"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="12dp"
                 android:layout_marginBottom="10dp"
                 android:text="Required Permissions"
                 android:textColor="@color/textHighEm" />
@@ -402,16 +403,21 @@
                 style="@style/NunitoBold.16"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
                 android:layout_marginBottom="6dp"
                 android:text="@string/controller_themes"
-                android:textColor="@color/textHighEm" />
+                android:textColor="@color/textHighEm"
+                android:visibility="gone" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rvControllerThemes"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:nestedScrollingEnabled="false" />
+                android:clipToPadding="false"
+                android:layoutAnimation="@anim/layout_anim_grid_fall_down"
+                android:nestedScrollingEnabled="false"
+                android:paddingHorizontal="3dp"
+                android:paddingBottom="24dp"
+                android:paddingTop="0dp" />
 
             <!-- Guide Card -->
             <LinearLayout

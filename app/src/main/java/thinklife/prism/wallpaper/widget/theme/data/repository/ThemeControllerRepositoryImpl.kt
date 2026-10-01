@@ -15,154 +15,136 @@ package thinklife.prism.wallpaper.widget.theme.data.repository
 import android.content.Context
 import android.content.Intent
 import android.util.Log
-import thinklife.prism.wallpaper.widget.theme.core.controllercenter.ThemeLoader
+import com.squareup.moshi.JsonAdapter
+import com.squareup.moshi.Moshi
+import com.squareup.moshi.Types
+import dagger.hilt.android.qualifiers.ApplicationContext
+import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.withContext
+import thinklife.prism.wallpaper.widget.theme.core.controllercenter.ControllerThemeAssets
+import thinklife.prism.wallpaper.widget.theme.core.controllercenter.assetUrls
 import thinklife.prism.wallpaper.widget.theme.core.controllercenter.model.ControllerConfigModel
 import thinklife.prism.wallpaper.widget.theme.core.controllercenter.service.ControlCenterService
-import thinklife.prism.wallpaper.widget.theme.di.IoDispatcher
-import thinklife.prism.wallpaper.widget.theme.core.download.DownloadState
-import thinklife.prism.wallpaper.widget.theme.core.download.ThemeDownloader
-import thinklife.prism.wallpaper.widget.theme.data.local.dao.DownloadedControllerDao
-import thinklife.prism.wallpaper.widget.theme.data.local.entity.DownloadedControllerEntity
-import thinklife.prism.wallpaper.widget.theme.data.local.controller.ControllerStorageManager
-import thinklife.prism.wallpaper.widget.theme.data.model.ControllerCategoryModel
+import thinklife.prism.wallpaper.widget.theme.core.controllercenter.toConfig
 import thinklife.prism.wallpaper.widget.theme.data.model.ControllerModel
 import thinklife.prism.wallpaper.widget.theme.data.model.DownloadedResInfo
 import thinklife.prism.wallpaper.widget.theme.data.network.api.ApiService
-import dagger.hilt.android.qualifiers.ApplicationContext
-import kotlinx.coroutines.CoroutineDispatcher
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.flow
-import kotlinx.coroutines.flow.flowOn
-import kotlinx.coroutines.flow.map
-import kotlinx.coroutines.withContext
+import thinklife.prism.wallpaper.widget.theme.di.IoDispatcher
 import java.io.File
 import javax.inject.Inject
 
 class ThemeControllerRepositoryImpl @Inject constructor(
     @ApplicationContext private val context: Context,
     private val apiService: ApiService,
-    private val downloadedThemeDao: DownloadedControllerDao,
-    private val themeStorageManager: ControllerStorageManager,
-    private val themeDownloader: ThemeDownloader,
     private val sharedPref: SharedPref,
+    moshi: Moshi,
     @IoDispatcher private val ioDispatcher: CoroutineDispatcher,
 ) : ThemeControllerRepository {
 
-    private var cachedCategories: List<ControllerCategoryModel>? = null
-    private var cachedControllerThemes: List<ControllerModel>? = null
+    companion object {
+        private const val TAG = "ThemeControllerRepo"
+        private const val BUNDLED_ASSET_FILE = "control_data.json"
+        private const val CACHE_FILE = "controller_themes_cache.json"
+    }
 
-    override suspend fun getCategoriesController(
+    private val listAdapter: JsonAdapter<List<ControllerModel>> = moshi.adapter(
+        Types.newParameterizedType(List::class.java, ControllerModel::class.java)
+    )
+
+    private val cacheFile get() = File(context.filesDir, CACHE_FILE)
+
+    // Danh sách lấy được từ API trong phiên này. Tách khỏi localThemes để lần gọi sau vẫn thử
+    // API lại nếu lần trước phải dùng tạm bản offline.
+    @Volatile
+    private var remoteThemes: List<ControllerModel>? = null
+
+    @Volatile
+    private var localThemes: List<ControllerModel>? = null
+
+    override suspend fun getControllerThemes(
         forceRefresh: Boolean
-    ): Result<List<ControllerCategoryModel>> {
+    ): Result<List<ControllerModel>> = withContext(ioDispatcher) {
         if (!forceRefresh) {
-            cachedCategories?.let { return Result.success(it) }
+            remoteThemes?.let { return@withContext Result.success(it) }
         }
 
-        return repositoryRequest { apiService.getCategoriesController() }
-            .onSuccess { cachedCategories = it }
-    }
+        // Server trả list rỗng cũng coi như hỏng: thà hiện bản offline còn hơn màn trống.
+        val remote = repositoryRequest { apiService.getAllControllerTheme() }
+            .onFailure { Log.w(TAG, "getAllControllerTheme failed, using offline data", it) }
+            .getOrNull()
+            ?.takeIf { it.isNotEmpty() }
+            ?.sortedBy { it.rank }
 
-    override suspend fun getAllControllerTheme(
-        forceRefresh: Boolean
-    ): Result<List<ControllerModel>> {
-        if (!forceRefresh) {
-            cachedControllerThemes?.let { return Result.success(it) }
-        }
-
-        return repositoryRequest { apiService.getAllControllerTheme() }
-            .onSuccess { cachedControllerThemes = it }
-    }
-
-    override suspend fun checkDownloaded(themeId: String): Boolean = withContext(ioDispatcher) {
-        val entity = downloadedThemeDao.getByThemeId(themeId) ?: return@withContext false
-        val file = File(entity.filePath)
-        if (file.isFile) {
-            true
+        if (remote != null) {
+            remoteThemes = remote
+            localThemes = remote
+            runCatching { cacheFile.writeText(listAdapter.toJson(remote)) }
+                .onFailure { Log.w(TAG, "Cannot write controller cache", it) }
+            Result.success(remote)
         } else {
-            downloadedThemeDao.deleteByThemeId(themeId)
-            false
+            runCatching { loadLocalThemes() }
         }
     }
 
-    override suspend fun getLocalThemeFile(themeId: String): File? = withContext(ioDispatcher) {
-        val entity = downloadedThemeDao.getByThemeId(themeId) ?: return@withContext null
-        val file = File(entity.filePath)
-        if (file.isFile) {
-            file
-        } else {
-            downloadedThemeDao.deleteByThemeId(themeId)
-            null
-        }
+    override suspend fun getTheme(themeId: String): ControllerModel? = withContext(ioDispatcher) {
+        findTheme(themeId)
     }
 
-    override fun observeDownloadedThemes(): Flow<List<ControllerModel>> =
-        downloadedThemeDao.observeAll()
-            .map { entities ->
-                val downloadedIds = entities.map { it.themeId }.toSet()
-                val order = entities.mapIndexed { index, entity -> entity.themeId to index }
-                    .toMap()
-                getAllControllerTheme()
-                    .getOrDefault(emptyList())
-                    .filter { it.id in downloadedIds }
-                    .sortedBy { order[it.id] ?: Int.MAX_VALUE }
-            }
-            .flowOn(ioDispatcher)
+    override fun getThemeConfig(themeId: String): ControllerConfigModel? =
+        findTheme(themeId)?.toConfig(context)
 
-    override suspend fun applyTheme(theme: ControllerModel): Result<ControllerConfigModel> {
-        return withContext(ioDispatcher) {
+    override fun getActiveThemeId(): String? = sharedPref.activeThemeId
+
+    override suspend fun isDownloaded(theme: ControllerModel): Boolean = withContext(ioDispatcher) {
+        ControllerThemeAssets.isDownloaded(context, theme.id, theme.assetUrls())
+    }
+
+    override suspend fun downloadTheme(
+        theme: ControllerModel,
+        onProgress: (Int) -> Unit,
+    ): Result<Unit> = withContext(ioDispatcher) {
+        runCatching {
+            val urls = theme.assetUrls()
+            // Phần tử đầu là bg_all, thiếu nó overlay không vẽ được nên bắt buộc phải tải được.
+            val requiredUrl = urls.firstOrNull() ?: error("Theme has no assets: ${theme.id}")
+            ControllerThemeAssets.download(context, theme.id, urls, requiredUrl, onProgress)
+            // Fire-and-forget stats update; failure must not block the download result
             runCatching {
-                getLocalThemeFile(theme.id)
-                    ?: error("Theme is not downloaded: ${theme.id}")
-                val themeDir = themeStorageManager.prepareThemeForApply(theme.id)
-                val config = ThemeLoader.loadFromDirectory(themeDir, theme.id)
-                // Persist so service and future sessions load the correct theme
-                sharedPref.activeThemeId = theme.id
-                // Notify ControlCenterService to reload its overlay with the new theme
-                context.sendBroadcast(
-                    Intent(ControlCenterService.ACTION_RELOAD_THEME)
-                        .setPackage(context.packageName)
-                )
-                config
+                apiService.updateWallpaperDownloadAmount(DownloadedResInfo.fromController(theme))
+            }.onFailure {
+                Log.e(TAG, "updateWallpaperDownloadAmount failed", it)
             }
+            Unit
         }
     }
 
-    override fun downloadControllerTheme(theme: ControllerModel): Flow<DownloadState<File>> = flow {
-        // Short-circuit: already fully downloaded
-        if (checkDownloaded(theme.id)) {
-            val zipFile = themeStorageManager.getThemeFile(theme.id)
-            emit(DownloadState.Success(zipFile))
-            return@flow
-        }
-        // Remove any orphaned DB record before starting fresh
-        downloadedThemeDao.deleteByThemeId(theme.id)
+    override fun applyTheme(theme: ControllerModel) {
+        // Persist so service and future sessions load the correct theme
+        sharedPref.activeThemeId = theme.id
+        context.sendBroadcast(
+            Intent(ControlCenterService.ACTION_RELOAD_THEME).setPackage(context.packageName)
+        )
+    }
 
-        themeDownloader.download(theme.id, theme.url).collect { state ->
-            when (state) {
-                is DownloadState.Saving -> {
-                    emit(DownloadState.Saving)
-                    // File is fully on disk — persist Room record
-                    val zipFile = themeStorageManager.getThemeFile(theme.id)
-                    downloadedThemeDao.upsert(
-                        DownloadedControllerEntity(
-                            themeId = theme.id,
-                            filePath = zipFile.absolutePath,
-                            downloadedAt = System.currentTimeMillis(),
-                            fileSize = zipFile.length(),
-                        )
-                    )
-                    // Fire-and-forget stats update; failure must not block the download result
-                    runCatching {
-                        DownloadedResInfo.fromResource(theme)
-                            ?.let { apiService.updateWallpaperDownloadAmount(it) }
-                    }.onFailure {
-                        Log.e("WallpaperRepository", "updateWallpaperDownloadAmount failed", it)
-                    }
+    private fun findTheme(themeId: String): ControllerModel? =
+        (remoteThemes ?: runCatching { loadLocalThemes() }.getOrNull())
+            ?.firstOrNull { it.id == themeId }
 
-                    emit(DownloadState.Success(zipFile))
-                }
-                else -> emit(state)
-            }
+    // Ưu tiên bản cache của lần gọi API thành công gần nhất, để theme đang áp dụng vẫn dựng
+    // được khi offline; chưa từng gọi được API thì dùng bản đóng gói trong APK.
+    private fun loadLocalThemes(): List<ControllerModel> = localThemes ?: synchronized(this) {
+        localThemes ?: (readCache() ?: readBundled()).also { localThemes = it }
+    }
+
+    private fun readCache(): List<ControllerModel>? = runCatching {
+        cacheFile.takeIf { it.isFile }
+            ?.readText()
+            ?.let(listAdapter::fromJson)
+            ?.takeIf { it.isNotEmpty() }
+    }.onFailure { Log.w(TAG, "Cannot read controller cache", it) }.getOrNull()
+
+    private fun readBundled(): List<ControllerModel> =
+        context.assets.open(BUNDLED_ASSET_FILE).bufferedReader().use { reader ->
+            listAdapter.fromJson(reader.readText()).orEmpty().sortedBy { it.rank }
         }
-    }.flowOn(ioDispatcher)
 }

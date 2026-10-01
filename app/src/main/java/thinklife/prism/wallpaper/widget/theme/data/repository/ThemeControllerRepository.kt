@@ -13,29 +13,28 @@
 package thinklife.prism.wallpaper.widget.theme.data.repository
 
 import thinklife.prism.wallpaper.widget.theme.core.controllercenter.model.ControllerConfigModel
-import thinklife.prism.wallpaper.widget.theme.core.download.DownloadState
-import thinklife.prism.wallpaper.widget.theme.data.model.ControllerCategoryModel
 import thinklife.prism.wallpaper.widget.theme.data.model.ControllerModel
-import kotlinx.coroutines.flow.Flow
-import java.io.File
 
 interface ThemeControllerRepository {
 
-    suspend fun getCategoriesController(
-        forceRefresh: Boolean = false
-    ): Result<List<ControllerCategoryModel>>
-
-    suspend fun getAllControllerTheme(
+    suspend fun getControllerThemes(
         forceRefresh: Boolean = false
     ): Result<List<ControllerModel>>
 
-    suspend fun checkDownloaded(themeId: String): Boolean
+    suspend fun getTheme(themeId: String): ControllerModel?
 
-    suspend fun getLocalThemeFile(themeId: String): File?
+    // Blocking: ControlCenterService dựng overlay đồng bộ trong onServiceConnected/onReceive,
+    // không có coroutine scope để chờ.
+    fun getThemeConfig(themeId: String): ControllerConfigModel?
 
-    fun observeDownloadedThemes(): Flow<List<ControllerModel>>
+    fun getActiveThemeId(): String?
 
-    suspend fun applyTheme(theme: ControllerModel): Result<ControllerConfigModel>
+    suspend fun isDownloaded(theme: ControllerModel): Boolean
 
-    fun downloadControllerTheme(theme: ControllerModel): Flow<DownloadState<File>>
+    suspend fun downloadTheme(
+        theme: ControllerModel,
+        onProgress: (Int) -> Unit,
+    ): Result<Unit>
+
+    fun applyTheme(theme: ControllerModel)
 }

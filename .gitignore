@@ -14,7 +14,8 @@ build/
 .cxx
 local.properties
 ontabb_rate/.idea
-
+/api-json
+api-json.zip
 # Signing material — never commit
 *.jks
 *.keystore

@@ -15,21 +15,18 @@ package thinklife.prism.wallpaper.widget.theme.presentation.controller
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
-import android.view.View
 import android.widget.Toast
-import androidx.lifecycle.lifecycleScope
+import androidx.activity.viewModels
+import androidx.core.view.isVisible
 import com.bumptech.glide.Glide
 import thinklife.prism.wallpaper.widget.theme.R
 import thinklife.prism.wallpaper.widget.theme.core.base.BaseActivity
-import thinklife.prism.wallpaper.widget.theme.core.controllercenter.ControllerThemeAssets
-import thinklife.prism.wallpaper.widget.theme.core.controllercenter.ControllerThemeCatalog
-import thinklife.prism.wallpaper.widget.theme.core.controllercenter.service.ControlCenterService
+import thinklife.prism.wallpaper.widget.theme.core.extensions.collectWithLifecycle
 import thinklife.prism.wallpaper.widget.theme.databinding.ActivityControllerThemePreviewBinding
+import thinklife.prism.wallpaper.widget.theme.presentation.controller.model.ControllerPreviewEvent
+import thinklife.prism.wallpaper.widget.theme.presentation.controller.model.ControllerPreviewUiState
+import thinklife.prism.wallpaper.widget.theme.presentation.controller.viewmodel.ControllerThemePreviewViewModel
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 
 @AndroidEntryPoint
 class ControllerThemePreviewActivity : BaseActivity<ActivityControllerThemePreviewBinding>() {
@@ -42,73 +39,56 @@ class ControllerThemePreviewActivity : BaseActivity<ActivityControllerThemePrevi
             Intent(context, ControllerThemePreviewActivity::class.java).putExtra(EXTRA_THEME_ID, themeId)
     }
 
-    private val themeId by lazy { intent.getStringExtra(EXTRA_THEME_ID).orEmpty() }
-    private var downloading = false
+    private val viewModel: ControllerThemePreviewViewModel by viewModels()
 
-    override fun initView(savedInstanceState: Bundle?) {
-        super.initView(savedInstanceState)
-        val theme = ControllerThemeCatalog.theme(this, themeId) ?: run {
-            finish()
-            return
-        }
-        Glide.with(this).load(theme.thumbnail).centerCrop().into(binding.ivPreview)
-        updateAction()
+    // Tránh gọi Glide lại mỗi lần state đổi (progress tải cập nhật liên tục).
+    private var loadedThumbnail: String? = null
+
+    override fun initConfig(savedInstanceState: Bundle?) {
+        super.initConfig(savedInstanceState)
+        viewModel.load(intent.getStringExtra(EXTRA_THEME_ID).orEmpty())
     }
 
     override fun initListener() {
         super.initListener()
         binding.btnBack.setOnClickListener { finish() }
-        binding.btnAction.setOnClickListener {
-            if (downloading) return@setOnClickListener
-            val urls = ControllerThemeCatalog.assetUrls(this, themeId)
-            val requiredUrl = urls.firstOrNull() ?: return@setOnClickListener
-            if (ControllerThemeAssets.isDownloaded(this, themeId, urls)) {
-                sharedPref.activeThemeId = themeId
-                sendBroadcast(Intent(ControlCenterService.ACTION_RELOAD_THEME).setPackage(packageName))
-                ControllerThemeCatalog.theme(this, themeId)?.let { theme ->
-                    Toast.makeText(this, getString(R.string.controller_theme_applied, theme.name), Toast.LENGTH_SHORT).show()
+        binding.btnAction.setOnClickListener { viewModel.onActionClick() }
+    }
+
+    override fun initObserver() {
+        super.initObserver()
+        viewModel.uiState.collectWithLifecycle(this, action = ::render)
+        viewModel.events.collectWithLifecycle(this) { event ->
+            when (event) {
+                ControllerPreviewEvent.NotFound -> finish()
+                ControllerPreviewEvent.DownloadFailed ->
+                    Toast.makeText(this, R.string.download_failed, Toast.LENGTH_SHORT).show()
+                is ControllerPreviewEvent.Applied -> {
+                    Toast.makeText(
+                        this,
+                        getString(R.string.controller_theme_applied, event.themeName),
+                        Toast.LENGTH_SHORT,
+                    ).show()
+                    finish()
                 }
-                finish()
-            } else {
-                download(requiredUrl)
             }
         }
     }
 
-    private fun updateAction() {
-        val urls = ControllerThemeCatalog.assetUrls(this, themeId)
-        val downloaded = ControllerThemeAssets.isDownloaded(this, themeId, urls)
+    private fun render(state: ControllerPreviewUiState) {
+        val theme = state.theme ?: return
+        if (loadedThumbnail != theme.thumbnail) {
+            loadedThumbnail = theme.thumbnail
+            Glide.with(this).load(theme.thumbnail).centerCrop().into(binding.ivPreview)
+        }
         binding.btnAction.text = when {
-            downloaded && sharedPref.activeThemeId == themeId -> getString(R.string.controller_theme_active)
-            downloaded -> getString(R.string.unlock)
+            state.downloading -> getString(R.string.downloading_please_wait_a_moment)
+            state.downloaded && state.active -> getString(R.string.controller_theme_active)
+            state.downloaded -> getString(R.string.unlock)
             else -> getString(R.string.download)
         }
-        binding.btnAction.isEnabled = !downloaded || sharedPref.activeThemeId != themeId
-    }
-
-    private fun download(requiredUrl: String) {
-        downloading = true
-        binding.btnAction.isEnabled = false
-        binding.btnAction.text = getString(R.string.downloading_please_wait_a_moment)
-        binding.progressDownload.progress = 0
-        binding.progressDownload.visibility = View.VISIBLE
-        lifecycleScope.launch {
-            val result = withContext(Dispatchers.IO) {
-                runCatching {
-                    val urls = ControllerThemeCatalog.assetUrls(applicationContext, themeId)
-                    ControllerThemeAssets.download(applicationContext, themeId, urls, requiredUrl) { progress ->
-                        runOnUiThread { binding.progressDownload.progress = progress }
-                    }
-                }
-            }
-            downloading = false
-            binding.btnAction.isEnabled = true
-            binding.progressDownload.visibility = View.GONE
-            result.onFailure { error ->
-                Log.w("ControllerThemePreview", "Theme download failed: $themeId", error)
-                Toast.makeText(this@ControllerThemePreviewActivity, R.string.download_failed, Toast.LENGTH_SHORT).show()
-            }
-            updateAction()
-        }
+        binding.btnAction.isEnabled = !state.downloading && !(state.downloaded && state.active)
+        binding.progressDownload.isVisible = state.downloading
+        binding.progressDownload.progress = state.progress
     }
 }

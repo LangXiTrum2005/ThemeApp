@@ -97,6 +97,7 @@ class LaunchActivity : BaseActivity<ActivityLaunchBinding>() {
             // Dù user đi Settings hay bỏ qua, splash vẫn chạy tiếp — không ai bị kẹt ở đây.
             startSplashFlow()
         }
+        viewModel.preloadData()
         requestNotificationPermission()
     }
 

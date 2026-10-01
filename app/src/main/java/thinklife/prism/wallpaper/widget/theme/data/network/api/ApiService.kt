@@ -12,7 +12,6 @@
 
 package thinklife.prism.wallpaper.widget.theme.data.network.api
 
-import thinklife.prism.wallpaper.widget.theme.data.model.ControllerCategoryListResponse
 import thinklife.prism.wallpaper.widget.theme.data.model.ControllerListResponse
 import thinklife.prism.wallpaper.widget.theme.data.model.DownloadedResInfo
 import thinklife.prism.wallpaper.widget.theme.data.model.PopularCategoryListResponse
@@ -32,47 +31,44 @@ interface ApiService {
 
     //theme
 
-    @GET("p67themecategory")
+    @GET(ApiEndpoints.THEME_CATEGORIES)
     suspend fun getThemeCategories(): ThemeCategoryListResponse
 
-    @GET("p67themes")
+    @GET(ApiEndpoints.THEMES)
     suspend fun getThemes(): ThemeListResponse
 
-    @GET("p67mostpopularthemes")
+    @GET(ApiEndpoints.MOST_POPULAR_THEMES)
     suspend fun getMostPopularThemes(): PopularCategoryListResponse
 
     //controller
-    @GET("p67getcontrollercategory")
-    suspend fun getCategoriesController(): ControllerCategoryListResponse
-
-    @GET("p67getallcontrollerthemes")
+    @GET(ApiEndpoints.CONTROLLER_THEMES)
     suspend fun getAllControllerTheme(): ControllerListResponse
 
     //wallpaper
-    @GET("p67getwallpapercategory")
+    @GET(ApiEndpoints.WALLPAPER_CATEGORIES)
     suspend fun getCategoriesUnlimited(): WallpaperCategoryListResponse
 
-    @GET("p67getallwallpapers")
+    @GET(ApiEndpoints.WALLPAPERS)
     suspend fun getAllWallpapersUnlimited(): WallpaperListResponse
 
-    @GET("p67mostpopularwallpapers")
+    @GET(ApiEndpoints.MOST_POPULAR_WALLPAPERS)
     suspend fun getMostPopularWallpapers(): PopularCategoryListResponse
 
-    @POST("api/updatedownloadp67")
+    @POST(ApiEndpoints.UPDATE_DOWNLOAD_AMOUNT)
     suspend fun updateWallpaperDownloadAmount(@Body info: DownloadedResInfo): Response<Unit>
 
     //icon packs
-    @GET("p67iconpacks")
+    @GET(ApiEndpoints.ICON_PACKS)
     suspend fun getIconPacks(): IconPackListResponse
 
-    @GET("p67mostpopularicons")
+    @GET(ApiEndpoints.MOST_POPULAR_ICONS)
     suspend fun getMostPopularIcons(): PopularCategoryListResponse
 
     //widget
-    @GET("p67widgetcategory")
+    @GET(ApiEndpoints.WIDGET_CATEGORIES)
     suspend fun getWidgetCategories(): WidgetCategoryListResponse
 
-    @GET("p67getallwidgets")
+    @GET(ApiEndpoints.WIDGETS)
     suspend fun getAllWidgets(): WidgetsListResponse
 
 }

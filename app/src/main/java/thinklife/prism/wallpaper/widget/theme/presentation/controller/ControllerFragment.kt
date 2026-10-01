@@ -17,20 +17,21 @@ import android.os.Bundle
 import android.view.View
 import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
-import androidx.lifecycle.lifecycleScope
+import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.GridLayoutManager
 import thinklife.prism.wallpaper.widget.theme.R
 import thinklife.prism.wallpaper.widget.theme.core.base.BaseFragment
+import thinklife.prism.wallpaper.widget.theme.core.base.UiState
 import thinklife.prism.wallpaper.widget.theme.core.controllercenter.PermissionHelper
 import thinklife.prism.wallpaper.widget.theme.core.controllercenter.ControllerThemeCatalog
+import thinklife.prism.wallpaper.widget.theme.core.controllercenter.ThemeLoader
+import thinklife.prism.wallpaper.widget.theme.core.extensions.collectWithLifecycle
 import thinklife.prism.wallpaper.widget.theme.core.controllercenter.service.ControlCenterService
 import thinklife.prism.wallpaper.widget.theme.databinding.FragmentControllerBinding
+import thinklife.prism.wallpaper.widget.theme.presentation.controller.viewmodel.ControllerViewModel
 import thinklife.prism.wallpaper.widget.theme.presentation.main.MainActivity
 import thinklife.prism.wallpaper.widget.theme.presentation.setting.SettingActivity
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 
 @AndroidEntryPoint
 class ControllerFragment : BaseFragment<FragmentControllerBinding>() {
@@ -41,6 +42,8 @@ class ControllerFragment : BaseFragment<FragmentControllerBinding>() {
     companion object {
         fun newInstance(): ControllerFragment = ControllerFragment()
     }
+
+    private val viewModel: ControllerViewModel by viewModels()
 
     private var panelActive = false
     private val themeAdapter = ControllerThemeAdapter { theme ->
@@ -58,13 +61,22 @@ class ControllerFragment : BaseFragment<FragmentControllerBinding>() {
 
     override fun initConfig(view: View, savedInstanceState: Bundle?) {
         super.initConfig(view, savedInstanceState)
-        val appContext = requireContext().applicationContext
-        viewLifecycleOwner.lifecycleScope.launch {
-            val themes = withContext(Dispatchers.IO) {
-                ControllerThemeCatalog.themes(appContext)
+        if (viewModel.themesState.value is UiState.Idle) {
+            viewModel.loadThemes()
+        }
+    }
+
+    override fun initObserver() {
+        super.initObserver()
+        viewModel.themesState.collectWithLifecycle(this) { state ->
+            if (state is UiState.Data) {
+                themeAdapter.submit(state.value, viewModel.activeTheme.value?.id)
+                binding.rvControllerThemes.scheduleLayoutAnimation()
             }
-            themeAdapter.submit(themes, sharedPref.activeThemeId)
-            binding.rvControllerThemes.scheduleLayoutAnimation()
+        }
+        viewModel.activeTheme.collectWithLifecycle(this) { theme ->
+            theme?.let(themeAdapter::markApplied)
+            refreshState()
         }
     }
 
@@ -92,9 +104,7 @@ class ControllerFragment : BaseFragment<FragmentControllerBinding>() {
         super.onResume()
         binding.toolbar.tvTitle.setText(R.string.controller)
         refreshState()
-        sharedPref.activeThemeId?.let { id ->
-            ControllerThemeCatalog.theme(requireContext(), id)?.let(themeAdapter::markApplied)
-        }
+        viewModel.refreshActiveTheme()
     }
 
     private fun refreshState() {

@@ -12,9 +12,16 @@
 
 package thinklife.prism.wallpaper.widget.theme.presentation.launch
 
+import androidx.lifecycle.viewModelScope
 import thinklife.prism.wallpaper.widget.theme.core.base.BaseViewModel
 import thinklife.prism.wallpaper.widget.theme.data.local.SharedPref
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import thinklife.prism.wallpaper.widget.theme.data.local.InstalledAppProvider
+import thinklife.prism.wallpaper.widget.theme.data.repository.IconPackRepository
+import thinklife.prism.wallpaper.widget.theme.data.repository.ThemeRepository
+import thinklife.prism.wallpaper.widget.theme.data.repository.WallpaperRepository
 import javax.inject.Inject
 
 /**
@@ -24,9 +31,29 @@ import javax.inject.Inject
 @HiltViewModel
 class LaunchViewModel @Inject constructor(
     private val sharedPref: SharedPref,
+    private val installedAppProvider: InstalledAppProvider,
+    private val wallpaperRepository: WallpaperRepository,
+    private val iconPackRepository: IconPackRepository,
+    private val themeRepository: ThemeRepository,
 ) : BaseViewModel() {
 
     fun markOpened() {
         sharedPref.hasOpenedBefore = true
+    }
+
+    fun preloadData() {
+        viewModelScope.launch(Dispatchers.IO) {
+            launch {
+                installedAppProvider.getInstalledApps()
+            }
+
+            launch {
+                themeRepository.getThemeCategories()
+            }
+
+            launch {
+                wallpaperRepository.getCategoriesUnlimited()
+            }
+        }
     }
 }

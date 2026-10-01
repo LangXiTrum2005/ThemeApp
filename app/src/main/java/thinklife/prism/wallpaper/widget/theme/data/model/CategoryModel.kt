@@ -18,7 +18,6 @@ import thinklife.prism.wallpaper.widget.theme.data.network.model.ApiResponse
 import thinklife.prism.wallpaper.widget.theme.presentation.main.dialog.FilterCategoryItem
 
 typealias WallpaperCategoryListResponse = ApiResponse<List<WallpaperCategoryModel>>
-typealias ControllerCategoryListResponse = ApiResponse<List<ControllerCategoryModel>>
 
 @JsonClass(generateAdapter = true)
 data class WallpaperCategoryModel(
@@ -34,10 +33,3 @@ data class WallpaperCategoryModel(
         )
     }
 }
-
-@JsonClass(generateAdapter = true)
-data class ControllerCategoryModel(
-    @param:Json(name = "id") override val id: String = "",
-    @param:Json(name = "name") override val name: String,
-    @param:Json(name = "icon") override val icon: String,
-) : ThemeCategory

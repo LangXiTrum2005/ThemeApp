@@ -158,4 +158,13 @@
   <color name="color1">#095a93</color>
   <color name="color2">#2C2C2C</color>
   <color name="surfaceDisabledHighEm">#B4AFBB</color>
+  <!-- Prism Category Bar Tokens -->
+  <color name="prism_tab_active_start">#8E54E9</color>
+  <color name="prism_tab_active_center">#6C5CE7</color>
+  <color name="prism_tab_active_end">#00D2FF</color>
+  <color name="prism_tab_active_stroke">#59FFFFFF</color>
+  <color name="prism_tab_inactive_bg">#F4F5FB</color>
+  <color name="prism_tab_inactive_stroke">#E5E7EB</color>
+  <color name="prism_tab_inactive_text">#475467</color>
+  <color name="prism_tab_active_text">#FFFFFF</color>
 </resources>

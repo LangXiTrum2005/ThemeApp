@@ -30,6 +30,7 @@ import thinklife.prism.wallpaper.widget.theme.R
 import thinklife.prism.wallpaper.widget.theme.core.base.UiState
 import thinklife.prism.wallpaper.widget.theme.core.extensions.collectWithLifecycle
 import thinklife.prism.wallpaper.widget.theme.data.model.theme.ThemeCategoryModel
+
 import thinklife.prism.wallpaper.widget.theme.databinding.FragmentThemeBinding
 import thinklife.prism.wallpaper.widget.theme.core.widget.ThemeTabIcon
 import thinklife.prism.wallpaper.widget.theme.presentation.main.dialog.FilterPopupHelper
@@ -132,7 +133,7 @@ class ThemeFragment : BaseFragment<FragmentThemeBinding>() {
 
             val selectedPos = binding.tabCategory.selectedTabPosition.coerceAtLeast(0)
             val selectedCategory = categories.getOrElse(selectedPos) { categories.first() }
-            val popupItems = categories.map { it.toFilterCategoryItem() }
+            val popupItems = categories.map { it.toFilterCategoryItem().copy(title = formatCategoryDisplayName(it.name)) }
 
             filterHelper.show(
                 activity = activity ?: return@setOnClickListener,
@@ -189,8 +190,9 @@ class ThemeFragment : BaseFragment<FragmentThemeBinding>() {
         tabMediator = TabLayoutMediator(binding.tabCategory, binding.vpTheme) { tab, position ->
             val item = categories[position]
             tab.customView = ThemeTabIcon(requireContext()).apply {
-                setName(item.name)
+                setName(formatCategoryDisplayName(item.name))
                 setIcon(item.icon)
+
                 setActiveBackground(
                     ContextCompat.getDrawable(
                         requireContext(),
@@ -204,7 +206,7 @@ class ThemeFragment : BaseFragment<FragmentThemeBinding>() {
                     )
                 )
                 setActiveTextColor(ContextCompat.getColor(requireContext(), R.color.white))
-                setInactiveTextColor(ContextCompat.getColor(requireContext(), R.color.text_med_em))
+                setInactiveTextColor(ContextCompat.getColor(requireContext(), R.color.prism_tab_inactive_text))
                 inactivate()
             }
         }.also { it.attach() }
@@ -213,6 +215,26 @@ class ThemeFragment : BaseFragment<FragmentThemeBinding>() {
             binding.vpTheme.setCurrentItem(savedPosition, true)
         }
         updateTabState(binding.vpTheme.currentItem)
+    }
+
+    private fun formatCategoryDisplayName(rawName: String): String {
+        return when (rawName.trim().lowercase()) {
+            "hot" -> "Trending"
+            "all" -> "Explore"
+            "sport", "sports" -> "Sports"
+            "cartoon", "cartoons" -> "Animation"
+            "anime" -> "Anime"
+            "aesthetic", "aesthetics" -> "Aesthetics"
+            "cute" -> "Cute & Kawaii"
+            "game", "games" -> "Gaming"
+            "nature" -> "Nature"
+            "cyber", "cyberpunk" -> "Cyber"
+            "minimal", "minimalist" -> "Minimal"
+            "neon" -> "Neon Glow"
+            else -> rawName.split(" ").joinToString(" ") { word ->
+                word.replaceFirstChar { if (it.isLowerCase()) it.titlecase() else it.toString() }
+            }
+        }
     }
 
     private fun setupBanners(categories: List<ThemeCategoryModel>) {

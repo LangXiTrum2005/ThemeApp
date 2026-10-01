@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Themie: ওয়ালপেপার এবং অ্যাপ আইকন</string>
+    <string name="cc_accessibility_description">Control Center ওভারলে — দ্রুত টগলের জন্য সিস্টেম-ব্যাপী পুল-ডাউন প্যানেল সক্ষম করে</string>
+    <string name="screen_recording_channel">স্ক্রিন রেকর্ডিং</string>
+    <string name="screen_recording_title">স্ক্রিন রেকর্ডিং</string>
+    <string name="screen_recording_message">রেকর্ডিং শেষ করতে থামুন ট্যাপ করুন</string>
+    <string name="screen_recording_stop">থামান</string>
+    <string name="screen_recording_saved">ভিডিও সংরক্ষিত হয়েছে</string>
+    <string name="screen_recording_notification_required">রেকর্ডিং শুরু করতে অনুগ্রহ করে বিজ্ঞপ্তি অনুমতি দিন</string>
+    <string name="themes">থিমগুলি</string>
+    <string name="wallpapers">ওয়ালপেপার</string>
+    <string name="icons">আইকনগুলি</string>
+    <string name="hello_blank_fragment">হ্যালো ব্ল্যাঙ্ক ফ্রেগমেন্ট</string>
+    <string name="search_themes">থিমগুলি খুঁজুন</string>
+    <string name="search_wallpapers">ওয়ালপেপার খুঁজুন</string>
+    <string name="search_icons">আইকন খুঁজুন</string>
+    <string name="most_popular">সবচেয়ে জনপ্রিয়</string>
+    <string name="newest_themes">নতুনতম থিমগুলি</string>
+    <string name="newest_wallpapers">সর্বশেষ ওয়ালপেপার</string>
+    <string name="newest_icons">সর্বশেষ আইকন</string>
+    <string name="no_results_found_for">\n\"%1$s\" এর জন্য কোনো ফলাফল পাওয়া যায়নি</string>
+    <string name="categories">বিভাগসমূহ</string>
+    <string name="first_fragment_label" translatable="false">First Fragment</string>
+    
+    <string name="second_fragment_label" translatable="false">Second Fragment</string>
+    
+    <string name="next">পরবর্তী</string>
+    <string name="previous">পূর্ববর্তী</string>
+    <string name="download">ডাউনলোড করুন</string>
+    <string name="premium_theme">প্রিমিয়াম থিম</string>
+    <string name="watch_a_short_ad_for_free_access_upgrade_to_premium_for_unlimited_use">● বিনামূল্যে অ্যাক্সেসের জন্য একটি সংক্ষিপ্ত বিজ্ঞাপন দেখুন। \n● সীমাহীন ব্যবহারের জন্য প্রিমিয়ামে আপগ্রেড করুন।</string>
+    <string name="watch_ad">বিজ্ঞাপন দেখুন</string>
+    <string name="go_premium">প্রিমিয়ামে যান</string>
+    <string name="downloading_please_wait_a_moment">ডাউনলোড হচ্ছে, একটি মুহূর্ত অপেক্ষা করুন …</string>
+    <string name="apply">প্রয়োগ করুন</string>
+    <string name="preview">পূর্বরূপ</string>
+    <string name="set_wallpaper_as">ওয়ালপেপার সেট করুন হিসাবে</string>
+    <string name="home_screen">হোম স্ক্রিন</string>
+    <string name="lock_screen">লক স্ক্রিন</string>
+    <string name="both_home_lock_screen">হোম এবং লক স্ক্রীন উভয়</string>
+    <string name="loading_please_wait_a_moment">লোড হচ্ছে, একটু অপেক্ষা করুন…</string>
+    <string name="loading">লোড হচ্ছে…</string>
+    <string name="reload">পুনরায় লোড করুন</string>
+    <string name="could_not_load_content">বিষয়বস্তু লোড করতে পারেনি</string>
+    <string name="server_error_message">কিছু ভুল হয়েছে। দয়া করে আবার চেষ্টা করুন!</string>
+    <string name="try_again">আবার চেষ্টা করুন</string>
+    <string name="suggested_wallpapers">সুপারিশকৃত ওয়ালপেপার</string>
+    <string name="applied">প্রয়োগ করা হয়েছে</string>
+    <string name="loading_image">ছবি লোড হচ্ছে…</string>
+    <string name="download_failed">ডাউনলোড ব্যর্থ হয়েছে</string>
+    <string name="my_gallery">আমার গ্যালারি</string>
+    <string name="view_all">সবকিছু দেখুন</string>
+    <string name="this_action_may_show_ads">এই অ্যাকশনে বিজ্ঞাপন থাকতে পারে</string>
+    <string name="install">ইনস্টল করুন</string>
+    <string name="install_all_icons">সমস্ত আইকন ইনস্টল করুন</string>
+    <string name="unlock_all_icons">সমস্ত আইকন আনলক করুন</string>
+    <string name="unlock">আনলক করুন</string>
+    <string name="choose">নির্বাচন করুন</string>
+    <string name="no_icons_to_install">ইনস্টল করার জন্য কোনো আইকন উপলব্ধ নেই</string>
+    <string name="shortcut_install_requested">শর্টকাট ইনস্টল অনুরোধ করা হয়েছে</string>
+    <string name="shortcut_install_failed">শর্টকাট ইনস্টল করা যায়নি</string>
+    <string name="select_app">অ্যাপ নির্বাচন করুন</string>
+    <string name="cannot_open_target_app">টার্গেট অ্যাপ খুলতে পারা যায়নি</string>
+    <string name="shortcut_applied_successfully">শর্টকাট সফলভাবে প্রয়োগ করা হয়েছে!</string>
+    <string name="suggested_icons">সুপারিশকৃত আইকন</string>
+    <string name="empty_gallery_title">আপনার বিভাগ খালি।</string>
+    <string name="empty_gallery_message">আপনার নিখুঁত সেটআপ তৈরি করতে ওয়ালপেপার, কন্ট্রোল এবং আইকন প্যাক ডাউনলোড করা শুরু করুন।</string>
+    <string name="setting">সেটিং</string>
+    <string name="language">ভাষা</string>
+    <string name="feedback">প্রতিক্রিয়া</string>
+    <string name="privacy_policy">গোপনীয়তা নীতি</string>
+    <string name="feedback_email" translatable="false">support@wavez.com</string>
+    
+    <string name="privacy_policy_url" translatable="false">https://wavez.com/privacy-policy</string>
+    
+    <string name="collection">সংগ্রহ</string>
+    <string name="get_themes">থিম পান</string>
+    <string name="theme_saved">থিম সংরক্ষিত হয়েছে</string>
+    <string name="theme_save_failed">থিম সংরক্ষণ করতে পারেনি</string>
+    <string name="successfully">সফলভাবে</string>
+    <string name="s_applied_successfully">%s সফলভাবে প্রয়োগ করা হয়েছে!</string>
+    <string name="suggested_themes">প্রস্তাবিত থিমগুলি</string>
+    <string name="view_more_icon">আরও আইকন দেখুন</string>
+    <string name="shortcut">শর্টকাট</string>
+    <string name="no_internet_connection">ইন্টারনেট সংযোগ নেই</string>
+    <string name="please_check_your_internet">আপনার ডিভাইসে আপনার ইন্টারনেট সংযোগ পরীক্ষা করুন</string>
+    <string name="go_to_settings">সেটিংসে যান</string>
+    <string name="please_select_your_language">দয়া করে আপনার ভাষা নির্বাচন করুন</string>
+    <string name="what_s_your_vibe">আপনার ভাইব কী? ✨</string>
+    <string name="select_option">দয়া করে কমপক্ষে একটি অপশন বেছে নিন</string>
+    <string name="anime">অ্যানিমে</string>
+    <string name="aesthetics">নান্দনিকতা</string>
+    <string name="cute">সুন্দর</string>
+    <string name="kpop" translatable="false">K-pop</string>
+    
+    <string name="obd_1_1_title">" দুর্দান্ত থিম এবং ওয়ালপেপার"</string>
+    <string name="obd_1_2_title">কিউরেট করা নান্দনিক সংগ্রহ দিয়ে আপনার ফোনকে পরিষ্কার এবং স্টাইলিশ নতুন চেহারা দিন।</string>
+    <string name="obd_2_1_title">প্রতিটি বিবরণ কাস্টমাইজ করুন</string>
+    <string name="obd_2_2_title">মাত্র কয়েকটি ট্যাপে ওয়ালপেপার, কাস্টম অ্যাপ আইকন এবং স্টাইলিশ Control Center লেআউট প্রয়োগ করুন।</string>
+    <string name="payment_failed">পেমেন্ট ব্যর্থ</string>
+    <string name="a_small_issue_stopped">একটি ছোট সমস্যা পেমেন্ট বন্ধ করেছে। অনুগ্রহ করে আবার চেষ্টা করুন</string>
+    <string name="payment_success">পেমেন্ট সফল</string>
+    <string name="your_premium_version">আপনার প্রিমিয়াম সংস্করণ এখন সক্রিয়। অ্যাপটি ব্যবহার করতে উপভোগ করুন!</string>
+    <string name="got_it">বুঝেছি</string>
+    <string name="s_continue">চালিয়ে যান</string>
+    <string name="start_free_trial">বিনামূল্যে ট্রায়াল শুরু করুন</string>
+    <string name="unlock_premium">"প্রিমিয়াম আনলক করুন "</string>
+    <string name="_100_no_ads">১০০% বিজ্ঞাপন মুক্ত</string>
+    <string name="premium_themes">প্রিমিয়াম থিম</string>
+    <string name="unlimited_wallpapers">সীমাহীন ওয়ালপেপার</string>
+    <string name="weekly">সাপ্তাহিক</string>
+    <string name="monthly">মাসিক</string>
+    <string name="s_month">%s / মাস</string>
+    <string name="yearly">বার্ষিক</string>
+    <string name="_3_day_free_trial">৩ দিনের বিনামূল্যে ট্রায়াল</string>
+    <string name="something_went_wrong">কিছু ভুল হয়েছে</string>
+    <string name="tv_des_failed_buy">দয়া করে এই ধাপগুলি অনুসরণ করুন এবং আবার চেষ্টা করুন: \n 1. আপনার নেটওয়ার্ক সংযোগ পরীক্ষা করুন \n 2. নিশ্চিত করুন যে আপনি আপনার Google অ্যাকাউন্টে লগইন করেছেন \n 3. নিশ্চিত করুন যে আপনি Google Play অ্যাপ্লিকেশন চালাতে পারেন</string>
+    <string name="cancel_anytime">যেকোনো সময় বাতিল করুন</string>
+    <string name="terms_of_use">ব্যবহারের শর্তাবলী</string>
+    <string name="we_d_love_to_hear_your">আমরা আমাদের অ্যাপ সম্পর্কে আপনার প্রতিক্রিয়া শুনতে চাই! আপনার মতামত অবিশ্বাস্যভাবে মূল্যবান এবং আমাদের আপনার জন্য অ্যাপটি আরও ভাল করতে সাহায্য করে।</string>
+    <string name="enter_your_feedback_here">এখানে আপনার মতামত লিখুন</string>
+    <string name="feed_back_empty">মতামত খালি</string>
+    <string name="loading_reward_ads">পুরস্কার বিজ্ঞাপন লোড হচ্ছে</string>
+    <string name="loading_reward_ads_failed">পুরস্কার বিজ্ঞাপন লোড ব্যর্থ</string>
+    <string name="tv_des_failed_reward">দুঃখিত! পুরস্কার বিজ্ঞাপন লোড করার সময় কিছু ত্রুটি হয়েছে। দয়া করে আবার চেষ্টা করুন</string>
+    <string name="close">বন্ধ করুন</string>
+    <string name="discard_changes">পরিবর্তনগুলি বাতিল করুন</string>
+    <string name="are_you_sure_you_want_to_discard_your_feedback">আপনি কি আপনার মতামত বাতিল করতে চান?</string>
+    <string name="keep_editing">সম্পাদনা চালিয়ে যান</string>
+    <string name="discard">বাতিল করুন</string>
+    <string name="get_start">শুরু করুন</string>
+</resources>

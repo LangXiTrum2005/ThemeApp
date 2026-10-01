@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Prism Wallpaper</string>
+    <string name="cc_accessibility_description">کنٹرول سینٹر اوور لے — فوری ٹوگلز کے لیے سسٹم وائڈ پل ڈاؤن پینل فعال کرتا ہے</string>
+    <string name="screen_recording_channel">اسکرین ریکارڈنگ</string>
+    <string name="screen_recording_title">اسکرین ریکارڈنگ</string>
+    <string name="screen_recording_message">ریکارڈنگ مکمل کرنے کے لیے رکو پر ٹیپ کریں</string>
+    <string name="screen_recording_stop">رکیں</string>
+    <string name="screen_recording_saved">ویڈیو محفوظ ہو گئی</string>
+    <string name="screen_recording_notification_required">ریکارڈنگ شروع کرنے کے لیے براہ کرم اطلاع کی اجازت دیں</string>
+    <string name="themes">تھیمز</string>
+    <string name="wallpapers">وال پیپرز</string>
+    <string name="icons">آئیکنز</string>
+    <string name="hello_blank_fragment">ہیلو خالی فریگمنٹ</string>
+    <string name="search_themes">تھیمز تلاش کریں</string>
+    <string name="search_wallpapers">والپیپرز تلاش کریں</string>
+    <string name="search_icons">آئیکنز تلاش کریں</string>
+    <string name="most_popular">سب سے مشہور</string>
+    <string name="newest_themes">نئی تھیمز</string>
+    <string name="newest_wallpapers">نئے والپیپرز</string>
+    <string name="newest_icons">نئے آئیکنز</string>
+    <string name="no_results_found_for">اس کے لیے کوئی نتائج نہیں ملے \n \"%1$s\"</string>
+    <string name="categories">زمرہ جات</string>
+    <string name="first_fragment_label" translatable="false">First Fragment</string>
+    
+    <string name="second_fragment_label" translatable="false">Second Fragment</string>
+    
+    <string name="next">اگلا</string>
+    <string name="previous">پچھلا</string>
+    <string name="download">ڈاؤن لوڈ کریں</string>
+    <string name="premium_theme">پریمیم تھیم</string>
+    <string name="watch_a_short_ad_for_free_access_upgrade_to_premium_for_unlimited_use">● مفت رسائی کے لیے مختصر اشتہار دیکھیں۔ \n● لامحدود استعمال کے لیے پریمیم میں اپ گریڈ کریں۔</string>
+    <string name="watch_ad">اشتہار دیکھیں</string>
+    <string name="go_premium">پریمیم میں جائیں</string>
+    <string name="downloading_please_wait_a_moment">ڈاؤن لوڈ ہو رہا ہے، براہ کرم ایک لمحہ انتظار کریں …</string>
+    <string name="apply">لاگو کریں</string>
+    <string name="preview">پیش نظارہ</string>
+    <string name="set_wallpaper_as">والپیپر کو اس طرح سیٹ کریں</string>
+    <string name="home_screen">ہوم اسکرین</string>
+    <string name="lock_screen">لاک اسکرین</string>
+    <string name="both_home_lock_screen">ہوم اور لاک اسکرین دونوں</string>
+    <string name="loading_please_wait_a_moment">لوڈ ہو رہا ہے، براہ کرم ایک لمحہ انتظار کریں …</string>
+    <string name="loading">لوڈ ہو رہا ہے…</string>
+    <string name="reload">دوبارہ لوڈ کریں</string>
+    <string name="could_not_load_content">مواد لوڈ نہیں کیا جا سکا</string>
+    <string name="server_error_message">کچھ غلط ہو گیا۔ براہ کرم دوبارہ کوشش کریں!</string>
+    <string name="try_again">دوبارہ کوشش کریں</string>
+    <string name="suggested_wallpapers">تجویز کردہ وال پیپرز</string>
+    <string name="applied">لاگو کر دیا گیا</string>
+    <string name="loading_image">تصویر لوڈ ہو رہی ہے…</string>
+    <string name="download_failed">ڈاؤن لوڈ ناکام</string>
+    <string name="my_gallery">میری گیلری</string>
+    <string name="view_all">سب دیکھیں</string>
+    <string name="this_action_may_show_ads">یہ عمل اشتہارات دکھا سکتا ہے</string>
+    <string name="install">انسٹال کریں</string>
+    <string name="install_all_icons">تمام آئیکنز انسٹال کریں</string>
+    <string name="unlock_all_icons">تمام آئیکنز کو انلاک کریں</string>
+    <string name="unlock">انلاک کریں</string>
+    <string name="choose">منتخب کریں</string>
+    <string name="no_icons_to_install">انسٹال کرنے کے لیے کوئی آئیکنز دستیاب نہیں</string>
+    <string name="shortcut_install_requested">شارٹ کٹ انسٹال کی درخواست کی گئی</string>
+    <string name="shortcut_install_failed">شارٹ کٹ انسٹال نہیں ہو سکا</string>
+    <string name="select_app">ایپ منتخب کریں</string>
+    <string name="cannot_open_target_app">ہدف ایپ کھول نہیں سکتے</string>
+    <string name="shortcut_applied_successfully">شارٹ کٹ کامیابی سے لاگو ہو گیا!</string>
+    <string name="suggested_icons">تجویز کردہ آئیکنز</string>
+    <string name="empty_gallery_title">آپ کا زمرہ خالی ہے۔</string>
+    <string name="empty_gallery_message">اپنا بہترین سیٹ اپ بنانے کے لیے والپیپرز، کنٹرول، اور آئکن پیکس ڈاؤن لوڈ کرنا شروع کریں۔</string>
+    <string name="setting">ترتیب</string>
+    <string name="language">زبان</string>
+    <string name="feedback">رائے</string>
+    <string name="privacy_policy">رازداری کی پالیسی</string>
+    <string name="feedback_email" translatable="false">support@wavez.com</string>
+    
+    <string name="privacy_policy_url" translatable="false">https://thinklifes.notion.site/Privacy-Policy-Prism-Wallpaper-Widget-Theme-3dffca1b75238095a9edfa6dc6923f54</string>
+    
+    <string name="collection">مجموعہ</string>
+    <string name="get_themes">تھیمز حاصل کریں</string>
+    <string name="theme_saved">تھیم محفوظ ہو گیا</string>
+    <string name="theme_save_failed">تھیم محفوظ نہیں کیا جا سکا</string>
+    <string name="successfully">کامیابی سے</string>
+    <string name="s_applied_successfully">%s کامیابی سے لاگو ہو گیا!</string>
+    <string name="suggested_themes">تجویز کردہ تھیمز</string>
+    <string name="view_more_icon">مزید آئیکن دیکھیں</string>
+    <string name="shortcut">شارٹ کٹ</string>
+    <string name="no_internet_connection">کوئی انٹرنیٹ کنکشن نہیں</string>
+    <string name="please_check_your_internet">براہ کرم اپنی ڈیوائس پر اپنی انٹرنیٹ کنکشن چیک کریں</string>
+    <string name="go_to_settings">سیٹنگز پر جائیں</string>
+    <string name="please_select_your_language">براہ کرم اپنی زبان منتخب کریں</string>
+    <string name="what_s_your_vibe">تمہارا موڈ کیا ہے؟</string>
+    <string name="select_option">براہ کرم کم از کم ایک آپشن منتخب کریں</string>
+    <string name="anime">اینیمے</string>
+    <string name="aesthetics">نظریاتی حسن</string>
+    <string name="cute">پیارا</string>
+    <string name="kpop" translatable="false">K-pop</string>
+    
+    <string name="obd_1_1_title">"بہترین تھیمز اور وال پیپرز"</string>
+    <string name="obd_1_2_title">کیورڈ شدہ جمالیاتی مجموعوں کے ساتھ اپنے فون کو صاف اور سٹائلش نیا لوک دیں۔</string>
+    <string name="obd_2_1_title">ہر تفصیل کو حسب ضرورت بنائیں</string>
+    <string name="obd_2_2_title">صرف کچھ ٹیپس میں والپیپرز، اپنی مرضی کے ایپ آئیکنز، اور سٹائلش کنٹرول سینٹر لے آؤٹ لاگو کریں۔</string>
+    <string name="payment_failed">ادائیگی ناکام</string>
+    <string name="a_small_issue_stopped">ایک چھوٹا سا مسئلہ ادائیگی کو روک گیا۔ براہ کرم دوبارہ کوشش کریں</string>
+    <string name="payment_success">ادائیگی کامیاب</string>
+    <string name="your_premium_version">آپ کا پریمیم ورژن اب فعال ہے۔ ایپ استعمال کرنے سے لطف اندوز ہوں!</string>
+    <string name="got_it">سمجھ گیا</string>
+    <string name="s_continue">جاری رکھیں</string>
+    <string name="start_free_trial">مفت ٹرائل شروع کریں</string>
+    <string name="unlock_premium">"پریمیم کو غیر مقفل کریں"</string>
+    <string name="_100_no_ads">100% کوئی اشتہارات نہیں</string>
+    <string name="premium_themes">پریمیم تھیمز</string>
+    <string name="unlimited_wallpapers">لامحدود وال پیپرز</string>
+    <string name="weekly">ہفتہ وار</string>
+    <string name="monthly">ماہانہ</string>
+    <string name="s_month">%s / ماہ</string>
+    <string name="yearly">سالانہ</string>
+    <string name="_3_day_free_trial">3 دن کا مفت ٹرائل</string>
+    <string name="something_went_wrong">کچھ غلط ہو گیا</string>
+    <string name="tv_des_failed_buy">براہ کرم اس مرحلے پر عمل کریں اور دوبارہ کوشش کریں: \n 1. اپنی نیٹ ورک کنکشن چیک کریں \n 2. یقینی بنائیں کہ آپ اپنے Google اکاؤنٹ میں لاگ ان ہیں \n 3. یقینی بنائیں کہ آپ Google Play ایپلیکیشن چلا سکتے ہیں</string>
+    <string name="cancel_anytime">کسی بھی وقت منسوخ کریں</string>
+    <string name="terms_of_use">استعمال کی شرائط</string>
+    <string name="we_d_love_to_hear_your">ہمیں اپنی ایپ پر آپ کی رائے سننا بہت پسند ہوگا! آپ کی رائے انتہائی قیمتی ہے اور ہمیں آپ کے لیے ایپ کو اور بہتر بنانے میں مدد کرتی ہے۔</string>
+    <string name="enter_your_feedback_here">اپنی رائے یہاں درج کریں</string>
+    <string name="feed_back_empty">رائے خالی ہے</string>
+    <string name="loading_reward_ads">انعام اشتہارات لوڈ ہو رہے ہیں</string>
+    <string name="loading_reward_ads_failed">انعام کے اشتہارات لوڈ کرنے میں ناکامی</string>
+    <string name="tv_des_failed_reward">معاف کیجیے! انعام کے اشتہارات لوڈ کرتے وقت کچھ خرابی ہے۔ براہ کرم دوبارہ کوشش کریں</string>
+    <string name="close">بند کریں</string>
+    <string name="discard_changes">تبدیلیوں کو مسترد کریں</string>
+    <string name="are_you_sure_you_want_to_discard_your_feedback">کیا آپ اپری رائے ضائع کرنا چاہتے ہیں؟</string>
+    <string name="keep_editing">ترمیم جاری رکھیں</string>
+    <string name="discard">مسترد کریں</string>
+    <string name="get_start">شروعات کریں</string>
+</resources>

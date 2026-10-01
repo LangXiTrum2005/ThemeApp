@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Prism Wallpaper</string>
+    <string name="cc_accessibility_description">Control Center overlay — activa un panell desplegable a nivell del sistema per a controls ràpids</string>
+    <string name="screen_recording_channel">Gravació de pantalla</string>
+    <string name="screen_recording_title">Gravant pantalla</string>
+    <string name="screen_recording_message">Toca Atura per acabar la gravació</string>
+    <string name="screen_recording_stop">Atura</string>
+    <string name="screen_recording_saved">Vídeo guardat</string>
+    <string name="screen_recording_notification_required">Si us plau, permet el permís de notificació per començar a gravar</string>
+    <string name="themes">Temes</string>
+    <string name="wallpapers">Fons de pantalla</string>
+    <string name="icons">Icones</string>
+    <string name="hello_blank_fragment">Hola fragment en blanc</string>
+    <string name="search_themes">Cercar temes</string>
+    <string name="search_wallpapers">Cercar fons de pantalla</string>
+    <string name="search_icons">Cerca icones</string>
+    <string name="most_popular">Més popular</string>
+    <string name="newest_themes">Temes més nous</string>
+    <string name="newest_wallpapers">Fons de pantalla més recents</string>
+    <string name="newest_icons">Icones més recents</string>
+    <string name="no_results_found_for">No s\'han trobat resultats per a\n\"%1$s\"</string>
+    <string name="categories">Categories</string>
+    <string name="first_fragment_label" translatable="false">First Fragment</string>
+    
+    <string name="second_fragment_label" translatable="false">Second Fragment</string>
+    
+    <string name="next">Següent</string>
+    <string name="previous">Anterior</string>
+    <string name="download">Descarrega</string>
+    <string name="premium_theme">Tema Premium</string>
+    <string name="watch_a_short_ad_for_free_access_upgrade_to_premium_for_unlimited_use">● Mira un anunci breu per accés gratuït. \n● Actualitza a Premium per a ús il·limitat.</string>
+    <string name="watch_ad">Veure anunci</string>
+    <string name="go_premium">Obtén Premium</string>
+    <string name="downloading_please_wait_a_moment">Descarregant, esperem un moment …</string>
+    <string name="apply">Aplica</string>
+    <string name="preview">Previsualitza</string>
+    <string name="set_wallpaper_as">Establir fons de pantalla com</string>
+    <string name="home_screen">Pantalla d\'Inici</string>
+    <string name="lock_screen">Pantalla de Bloqueig</string>
+    <string name="both_home_lock_screen">Pantalla d\'Inici i Bloqueig</string>
+    <string name="loading_please_wait_a_moment">Carregant, si us plau espera un moment …</string>
+    <string name="loading">Carregant…</string>
+    <string name="reload">Recarrega</string>
+    <string name="could_not_load_content">No s\'ha pogut carregar el contingut</string>
+    <string name="server_error_message">Quelcom ha anat malament. Torna-ho a intentar!</string>
+    <string name="try_again">Torna-ho a intentar</string>
+    <string name="suggested_wallpapers">Fons de pantalla suggerits</string>
+    <string name="applied">Aplicat</string>
+    <string name="loading_image">Carregant imatge…</string>
+    <string name="download_failed">La descàrrega ha fallat</string>
+    <string name="my_gallery">La Meva Galeria</string>
+    <string name="view_all">Veure tot</string>
+    <string name="this_action_may_show_ads">Aquesta acció pot contenir anuncis</string>
+    <string name="install">Instal·la</string>
+    <string name="install_all_icons">Instal·lar totes les icones</string>
+    <string name="unlock_all_icons">Desbloqueja tots els icones</string>
+    <string name="unlock">Desbloquejar</string>
+    <string name="choose">Tria</string>
+    <string name="no_icons_to_install">No hi ha icones disponibles per instal·lar</string>
+    <string name="shortcut_install_requested">S\'ha sol·licitat la instal·lació de drecera</string>
+    <string name="shortcut_install_failed">No s\'ha pogut instal·lar l\'accés directe</string>
+    <string name="select_app">Selecciona app</string>
+    <string name="cannot_open_target_app">No es pot obrir l\'aplicació destinatària</string>
+    <string name="shortcut_applied_successfully">Drecera aplicada correctament!</string>
+    <string name="suggested_icons">Icones suggerits</string>
+    <string name="empty_gallery_title">La teva categoria està buida.</string>
+    <string name="empty_gallery_message">Comença a descarregar fons de pantalla, controls i paquets d\'icones per crear la teva configuració perfecta.</string>
+    <string name="setting">Configuració</string>
+    <string name="language">Idioma</string>
+    <string name="feedback">Comentaris</string>
+    <string name="privacy_policy">Política de privacitat</string>
+    <string name="feedback_email" translatable="false">support@wavez.com</string>
+    
+    <string name="privacy_policy_url" translatable="false">https://thinklifes.notion.site/Privacy-Policy-Prism-Wallpaper-Widget-Theme-3dffca1b75238095a9edfa6dc6923f54</string>
+    
+    <string name="collection">Col·lecció</string>
+    <string name="get_themes">Obtenir temes</string>
+    <string name="theme_saved">Tema guardat</string>
+    <string name="theme_save_failed">No s\'ha pogut guardar el tema</string>
+    <string name="successfully">Correctament</string>
+    <string name="s_applied_successfully">%s aplicat correctament!</string>
+    <string name="suggested_themes">Temes suggerits</string>
+    <string name="view_more_icon">Veure més icones</string>
+    <string name="shortcut">Accés directe</string>
+    <string name="no_internet_connection">Sense connexió a Internet</string>
+    <string name="please_check_your_internet">Si us plau, comprova la connexió a Internet del teu dispositiu</string>
+    <string name="go_to_settings">Vés a configuració</string>
+    <string name="please_select_your_language">Si us plau, selecciona el teu idioma</string>
+    <string name="what_s_your_vibe">Quina és la teva onda?</string>
+    <string name="select_option">Si us plau, tria almenys una opció</string>
+    <string name="anime">Anime</string>
+    <string name="aesthetics">Estètica</string>
+    <string name="cute">Maco</string>
+    <string name="kpop" translatable="false">K-pop</string>
+    
+    <string name="obd_1_1_title">" Temes i fons de pantalla genials"</string>
+    <string name="obd_1_2_title">Dona al teu telèfon un aspecte nou, net i estilós amb col·leccions estètiques seleccionades.</string>
+    <string name="obd_2_1_title">Personalitza cada detall</string>
+    <string name="obd_2_2_title">Aplica fons de pantalla, icones d\'app personalitzades i disseny de Control Center estilitzat en només alguns tocs.</string>
+    <string name="payment_failed">El pagament ha fallat</string>
+    <string name="a_small_issue_stopped">Un petit problema ha aturat el pagament. Si us plau, torna-ho a intentar</string>
+    <string name="payment_success">Pagament reeixit</string>
+    <string name="your_premium_version">La teva versió Premium ja està activa. Gaudeix de l\'app!</string>
+    <string name="got_it">D\'acord</string>
+    <string name="s_continue">Continua</string>
+    <string name="start_free_trial">Comença la Prova Gratuïta</string>
+    <string name="unlock_premium">"Desbloquejar Premium "</string>
+    <string name="_100_no_ads">100% Sense anuncis</string>
+    <string name="premium_themes">Temes Premium</string>
+    <string name="unlimited_wallpapers">Fons de pantalla il·limitats</string>
+    <string name="weekly">Setmanal</string>
+    <string name="monthly">Mensual</string>
+    <string name="s_month">%s / mes</string>
+    <string name="yearly">Anual</string>
+    <string name="_3_day_free_trial">Prova gratuïta de 3 dies</string>
+    <string name="something_went_wrong">Alguna cosa ha anat malament</string>
+    <string name="tv_des_failed_buy">Si us plau, segueix aquest pas i torna a intentar-ho: \n 1. Comprova la connexió de xarxa \n 2. Assegura\'t que has iniciat sessió a la teva compte de Google \n 3. Assegura\'t que pots executar l\'aplicació Google Play</string>
+    <string name="cancel_anytime">Cancel·la en qualsevol moment</string>
+    <string name="terms_of_use">Condicions d\'ús</string>
+    <string name="we_d_love_to_hear_your">Ens encantaria conèixer la teva opinió sobre la nostra app! Els teus comentaris són increïblement valuosos i ens ajuden a fer l\'app encara millor per a tu.</string>
+    <string name="enter_your_feedback_here">Introdueix el teu comentari aquí</string>
+    <string name="feed_back_empty">Comentari buit</string>
+    <string name="loading_reward_ads">Carregant anuncis de recompensa</string>
+    <string name="loading_reward_ads_failed">Ha fallat la càrrega dels anuncis de recompensa</string>
+    <string name="tv_des_failed_reward">Disculpa! Hi ha hagut un error en carregar els anuncis de recompensa. Si us plau, torna a intentar-ho</string>
+    <string name="close">Tanca</string>
+    <string name="discard_changes">Descartar canvis</string>
+    <string name="are_you_sure_you_want_to_discard_your_feedback">Estàs segur que vols descartar el teu comentari?</string>
+    <string name="keep_editing">Continua editant</string>
+    <string name="discard">Descartar</string>
+    <string name="get_start">Comença</string>
+</resources>

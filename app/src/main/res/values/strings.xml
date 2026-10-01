@@ -9,88 +9,246 @@
   ~ decompilation or disassembly of this file, via any medium, is strictly
   ~ prohibited except with prior written permission of 1Tabb.
   -->
-
 <resources>
-    <!-- app_name do resValue trong app/build.gradle.kts sinh (debug có prefix "Dev "). -->
-    <string name="app_name">Template Android</string>
-    <string name="app_button_ad_icon_description">This action may show ads</string>
-
-    <!-- Splash -->
-    <string name="this_action_may_show_ads">This action may show ads</string>
-
-    <!-- Language (dùng cho cả màn first-open lẫn màn đổi ngôn ngữ trong Settings) -->
-    <string name="language">Language</string>
-    <string name="save">Save</string>
-    <string name="back">Back</string>
-    <string name="onboarding_next">Next</string>
-    <string name="onboarding_get_started">Get started</string>
-
-    <!-- Onboarding -->
-    <string name="survey_title">Select a...?</string>
-    <string name="survey_option_1">Entertainment</string>
-    <string name="survey_option_2">Privacy</string>
-    <string name="survey_option_3">Productivity</string>
-    <string name="survey_option_4">Other</string>
-    <string name="onboarding_title_1">Onboarding title 1</string>
-    <string name="onboarding_title_2">Onboarding title 2</string>
-    <string name="welcome_title">Welcome to\nthe app</string>
-
-    <!-- Welcome back (resume) -->
-    <string name="welcome_back">Welcome Back</string>
-    <string name="welcome_back_des">Welcome back to the app. Continue where you left off.</string>
-    <string name="s_continue">Continue</string>
-
-    <!-- Main tabs -->
-    <string name="tab_home">Home</string>
-    <string name="tab_2">Tab 2</string>
-    <string name="tab_3">Tab 3</string>
-    <string name="tab_settings">Settings</string>
-    <string name="tab_placeholder_hint">Replace this fragment with the real screen.</string>
-    <string name="rate_us">Rate us</string>
-
-    <!-- Permission dialog: chữ dùng chung + một bộ mẫu cho quyền thông báo -->
-    <string name="permission_allow">Allow</string>
-    <string name="permission_not_now">Not now</string>
-    <string name="permission_notification_title">Turn on notifications</string>
-    <string name="permission_notification_description">Get notified about important updates. You can turn this off any time in Settings.</string>
-    <!-- Dùng khi hệ thống không hiện hộp thoại quyền nữa, phải đưa user sang Settings -->
-    <string name="permission_open_settings">Open settings</string>
-    <string name="permission_notification_settings_title">Notifications are off</string>
-    <string name="permission_notification_settings_description">Turn notifications on in Settings so we can let you know about important updates.</string>
-
-    <!-- No internet dialog -->
-    <string name="text_no_internet_title">No Internet</string>
-    <string name="text_no_internet_message">Please check your connection and try again.</string>
-    <string name="text_try_again">Try again</string>
-
-    <!-- Tên ngôn ngữ ở màn Language: LUÔN hiển thị bằng chính ngôn ngữ đó, không dịch. -->
-    <string name="lang_hindi" translatable="false">हिन्दी</string>
-    <string name="lang_bangla" translatable="false">বাংলা</string>
-    <string name="lang_portuguese_br" translatable="false">Português (Brasil)</string>
-    <string name="lang_english_us" translatable="false">English (US)</string>
-    <string name="lang_english_uk" translatable="false">English (UK)</string>
-    <string name="lang_arabic_sa" translatable="false">العربية (السعودية)</string>
-    <string name="lang_arabic_tn" translatable="false">العربية (تونس)</string>
-    <string name="lang_arabic_om" translatable="false">العربية (عُمان)</string>
-    <string name="lang_indonesian" translatable="false">Bahasa Indonesia</string>
-    <string name="lang_portuguese" translatable="false">Português</string>
-    <string name="lang_spanish" translatable="false">Español</string>
-    <string name="lang_marathi" translatable="false">मराठी</string>
-    <string name="lang_telugu" translatable="false">తెలుగు</string>
-    <string name="lang_tamil" translatable="false">தமிழ்</string>
-    <string name="lang_russian" translatable="false">Русский</string>
-    <string name="lang_french" translatable="false">Français</string>
-    <string name="lang_vietnamese" translatable="false">Tiếng Việt</string>
-    <string name="lang_german" translatable="false">Deutsch</string>
-    <string name="lang_korean" translatable="false">한국어</string>
-    <string name="lang_japanese" translatable="false">日本語</string>
-    <string name="lang_turkish" translatable="false">Türkçe</string>
-    <string name="lang_chinese" translatable="false">中文</string>
-    <string name="lang_italian" translatable="false">Italiano</string>
-    <string name="lang_thai" translatable="false">ภาษาไทย</string>
-    <string name="lang_dutch" translatable="false">Nederlands</string>
-    <string name="lang_danish" translatable="false">Dansk</string>
-    <string name="lang_irish" translatable="false">Gaeilge</string>
-    <string name="lang_polish" translatable="false">Polski</string>
-    <string name="lang_zulu" translatable="false">isiZulu</string>
+  <!-- app_name do resValue trong app/build.gradle.kts sinh (debug có prefix "Dev "). -->
+  <string name="app_name">Prism Wallpaper</string>
+  <string name="app_button_ad_icon_description">This action may show ads</string>
+  <!-- Splash -->
+  <string name="this_action_may_show_ads">This action may show ads</string>
+  <!-- Language (dùng cho cả màn first-open lẫn màn đổi ngôn ngữ trong Settings) -->
+  <string name="language">Language</string>
+  <string name="save">Save</string>
+  <string name="back">Back</string>
+  <string name="onboarding_next">Next</string>
+  <string name="onboarding_get_started">Get started</string>
+  <!-- Onboarding -->
+  <string name="survey_title">Select a...?</string>
+  <string name="survey_option_1">Entertainment</string>
+  <string name="survey_option_2">Privacy</string>
+  <string name="survey_option_3">Productivity</string>
+  <string name="survey_option_4">Other</string>
+  <string name="onboarding_title_1">Stunning 4K Wallpapers\n&amp; Aesthetic Themes</string>
+  <string name="onboarding_desc_1">Discover thousands of unique themes and high-quality wallpapers to refresh your screen.</string>
+  <string name="onboarding_title_2">DIY Aesthetic Widgets\n&amp; Custom App Icons</string>
+  <string name="onboarding_desc_2">Mix and match stylish widgets and unique icon packs to build your dream home screen.</string>
+  <string name="welcome_title">Welcome to Themes\n&amp; Wallpapers</string>
+  <string name="welcome_desc">Your ultimate personalization kit is ready. Let\'s design your phone in your own unique style!</string>
+  <!-- Welcome back (resume) -->
+  <string name="welcome_back">Welcome Back</string>
+  <string name="welcome_back_des">Welcome back to the app. Continue where you left off.</string>
+  <string name="s_continue">Continue</string>
+  <!-- Main tabs -->
+  <string name="tab_home">Home</string>
+  <string name="tab_2">Tab 2</string>
+  <string name="tab_3">Tab 3</string>
+  <string name="tab_settings">Settings</string>
+  <string name="tab_placeholder_hint">Replace this fragment with the real screen.</string>
+  <string name="rate_us">Rate us</string>
+  <!-- Permission dialog: chữ dùng chung + một bộ mẫu cho quyền thông báo -->
+  <string name="permission_allow">Allow</string>
+  <string name="permission_not_now">Not now</string>
+  <string name="permission_notification_title">Turn on notifications</string>
+  <string name="permission_notification_description">Get notified about important updates. You can turn this off any time in Settings.</string>
+  <!-- Dùng khi hệ thống không hiện hộp thoại quyền nữa, phải đưa user sang Settings -->
+  <string name="permission_open_settings">Open settings</string>
+  <string name="permission_notification_settings_title">Notifications are off</string>
+  <string name="permission_notification_settings_description">Turn notifications on in Settings so we can let you know about important updates.</string>
+  <!-- No internet dialog -->
+  <string name="text_no_internet_title">No Internet</string>
+  <string name="text_no_internet_message">Please check your connection and try again.</string>
+  <string name="text_try_again">Try again</string>
+  <!-- Tên quốc gia ở màn Language: Hiển thị tên nước bằng tiếng Anh khớp với cờ từng nước -->
+  <string name="lang_hindi" translatable="false">India</string>
+  <string name="lang_bangla" translatable="false">Bangladesh</string>
+  <string name="lang_portuguese_br" translatable="false">Brazil</string>
+  <string name="lang_english_us" translatable="false">United States</string>
+  <string name="lang_english_uk" translatable="false">United Kingdom</string>
+  <string name="lang_arabic_sa" translatable="false">Saudi Arabia</string>
+  <string name="lang_arabic_tn" translatable="false">Tunisia</string>
+  <string name="lang_arabic_om" translatable="false">Oman</string>
+  <string name="lang_indonesian" translatable="false">Indonesia</string>
+  <string name="lang_portuguese" translatable="false">Portugal</string>
+  <string name="lang_spanish" translatable="false">Spain</string>
+  <string name="lang_marathi" translatable="false">India (Marathi)</string>
+  <string name="lang_telugu" translatable="false">India (Telugu)</string>
+  <string name="lang_tamil" translatable="false">India (Tamil)</string>
+  <string name="lang_russian" translatable="false">Russia</string>
+  <string name="lang_french" translatable="false">France</string>
+  <string name="lang_vietnamese" translatable="false">Vietnam</string>
+  <string name="lang_german" translatable="false">Germany</string>
+  <string name="lang_korean" translatable="false">South Korea</string>
+  <string name="lang_japanese" translatable="false">Japan</string>
+  <string name="lang_turkish" translatable="false">Turkey</string>
+  <string name="lang_chinese" translatable="false">China</string>
+  <string name="lang_italian" translatable="false">Italy</string>
+  <string name="lang_thai" translatable="false">Thailand</string>
+  <string name="lang_dutch" translatable="false">Netherlands</string>
+  <string name="lang_danish" translatable="false">Denmark</string>
+  <string name="lang_irish" translatable="false">Ireland</string>
+  <string name="lang_polish" translatable="false">Poland</string>
+  <string name="lang_zulu" translatable="false">South Africa</string>
+  <string name="cc_accessibility_description">Control Center overlay — enables system-wide pull-down panel for quick toggles</string>
+  <string name="screen_recording_channel">Screen recording</string>
+  <string name="screen_recording_title">Recording screen</string>
+  <string name="screen_recording_message">Tap Stop to finish recording</string>
+  <string name="screen_recording_stop">Stop</string>
+  <string name="screen_recording_saved">Video saved</string>
+  <string name="screen_recording_notification_required">Please allow notification permission to start recording</string>
+  <string name="themes">Themes</string>
+  <string name="wallpapers">Wallpapers</string>
+  <string name="icons">Icons</string>
+  <string name="hello_blank_fragment">Hello blank fragment</string>
+  <string name="search_themes">Search themes</string>
+  <string name="search_wallpapers">Search wallpapers</string>
+  <string name="search_icons">Search icons</string>
+  <string name="most_popular">Most popular</string>
+  <string name="newest_themes">Newest themes</string>
+  <string name="newest_wallpapers">Newest wallpapers</string>
+  <string name="newest_icons">Newest icons</string>
+  <string name="no_results_found_for">No results found for\n\"%1$s\"</string>
+  <string name="categories">Categories</string>
+  <!-- Strings used for fragments for navigation -->
+  <string name="first_fragment_label" translatable="false">First Fragment</string>
+  <string name="second_fragment_label" translatable="false">Second Fragment</string>
+  <string name="next">Next</string>
+  <string name="previous">Previous</string>
+  <string name="download">Download</string>
+  <string name="premium_theme">Premium Theme</string>
+  <string name="watch_a_short_ad_for_free_access_upgrade_to_premium_for_unlimited_use">● Watch a short ad for free access. \n● Upgrade to Premium for unlimited use.</string>
+  <string name="watch_ad">Watch ad</string>
+  <string name="go_premium">Go Premium</string>
+  <string name="downloading_please_wait_a_moment">Downloading, please wait a moment …</string>
+  <string name="apply">Apply</string>
+  <string name="preview">Preview</string>
+  <string name="set_wallpaper_as">Set Wallpaper as</string>
+  <string name="home_screen">Home Screen</string>
+  <string name="lock_screen">Lock Screen</string>
+  <string name="both_home_lock_screen"><![CDATA[Both Home & Lock Screen]]></string>
+  <string name="loading_please_wait_a_moment">Loading, please wait a moment …</string>
+  <string name="loading">Loading…</string>
+  <string name="reload">Reload</string>
+  <string name="could_not_load_content">Could\'t load content</string>
+  <string name="server_error_message">Something went wrong. Please try again!</string>
+  <string name="try_again">Try Again</string>
+  <string name="suggested_wallpapers">Suggested wallpapers</string>
+  <string name="applied">Applied</string>
+  <string name="loading_image">Loading image…</string>
+  <string name="download_failed">Download failed</string>
+  <string name="my_gallery">My Gallery</string>
+  <string name="view_all">View all</string>
+  <string name="install">Install</string>
+  <string name="install_all_icons">Install all icons</string>
+  <string name="unlock_all_icons">Unlock all icons</string>
+  <string name="unlock">Unlock</string>
+  <string name="choose">Choose</string>
+  <string name="no_icons_to_install">No icons available to install</string>
+  <string name="shortcut_install_requested">Shortcut install requested</string>
+  <string name="shortcut_install_failed">Could not install shortcut</string>
+  <string name="select_app">Select app</string>
+  <string name="cannot_open_target_app">Cannot open target app</string>
+  <string name="shortcut_applied_successfully">Shortcut applied successfully!</string>
+  <string name="suggested_icons">Suggested icons</string>
+  <string name="empty_gallery_title">Your category is empty.</string>
+  <string name="empty_gallery_message">Start downloading wallpapers, control, and icon packs to build your perfect setup.</string>
+  <string name="setting">Setting</string>
+  <string name="feedback">Feedback</string>
+  <string name="privacy_policy">Privacy policy</string>
+  <string name="feedback_email" translatable="false">support@wavez.com</string>
+  <string name="privacy_policy_url" translatable="false">https://thinklifes.notion.site/Privacy-Policy-Prism-Wallpaper-Widget-Theme-3dffca1b75238095a9edfa6dc6923f54</string>
+  <string name="collection">Collection</string>
+  <string name="get_themes">Get themes</string>
+  <string name="theme_saved">Theme saved</string>
+  <string name="theme_save_failed">Could not save theme</string>
+  <string name="successfully">Successfully</string>
+  <string name="s_applied_successfully">%s applied successfully!</string>
+  <string name="suggested_themes">Suggested themes</string>
+  <string name="view_more_icon">View more icon</string>
+  <string name="shortcut">Shortcut</string>
+  <string name="no_internet_connection">No Internet Connection</string>
+  <string name="please_check_your_internet">Please check your internet connection on your device</string>
+  <string name="go_to_settings">Go to settings</string>
+  <string name="please_select_your_language">Please select your language</string>
+  <string name="what_s_your_vibe">What\'s your vibe?</string>
+  <string name="select_option">Please choose at least one option</string>
+  <string name="anime">Anime</string>
+  <string name="aesthetics">Aesthetics</string>
+  <string name="cute">Cute</string>
+  <string name="kpop" translatable="false">K-pop</string>
+  <string name="obd_1_1_title"><![CDATA[" Nice Themes & Wallpapers"]]></string>
+  <string name="obd_1_2_title">Give your phone a clean and stylish new look with curated aesthetic collections.</string>
+  <string name="obd_2_1_title">Customize Every Detail</string>
+  <string name="obd_2_2_title">Apply wallpapers, custom app icons, and stylish Control Center layouts in just a few taps.</string>
+  <string name="payment_failed">Payment failed</string>
+  <string name="a_small_issue_stopped">A small issue stopped the payment. Please try again</string>
+  <string name="payment_success">Payment Success</string>
+  <string name="your_premium_version">Your Premium version is now active. Enjoy using the app!</string>
+  <string name="got_it">Got it</string>
+  <string name="start_free_trial">Start Free Trial</string>
+  <string name="unlock_premium">"Unlock Premium "</string>
+  <string name="_100_no_ads">100% No Ads</string>
+  <string name="premium_themes">Premium Themes</string>
+  <string name="unlimited_wallpapers">Unlimited Wallpapers</string>
+  <string name="weekly">Weekly</string>
+  <string name="monthly">Monthly</string>
+  <string name="s_month">%s / month</string>
+  <string name="yearly">Yearly</string>
+  <string name="_3_day_free_trial">3-day free trial</string>
+  <string name="something_went_wrong">Something went wrong</string>
+  <string name="tv_des_failed_buy">Please follow this step and try again: \n 1. Check your network connection \n 2. Make sure you are logged into your Google account \n 3. Make sure you can run the Google play application</string>
+  <string name="cancel_anytime">Cancel anytime</string>
+  <string name="terms_of_use">Term of use</string>
+  <string name="we_d_love_to_hear_your">We\'d love to hear your feedback on our app! Your input is incredibly valuable and helps us make the app even better for you.</string>
+  <string name="enter_your_feedback_here">Enter your feedback here</string>
+  <string name="feed_back_empty">Feedback Empty</string>
+  <string name="loading_reward_ads">Loading reward ads</string>
+  <string name="loading_reward_ads_failed">Loading reward ads failed</string>
+  <string name="tv_des_failed_reward">Sorry! There are some error when loading reward ads. Please try again</string>
+  <string name="close">Close</string>
+  <string name="discard_changes">Discard changes</string>
+  <string name="are_you_sure_you_want_to_discard_your_feedback">Are you sure you want to discard your feedback?</string>
+  <string name="keep_editing">Keep editing</string>
+  <string name="discard">Discard</string>
+  <string name="get_start">Get Started</string>
+  <string name="rate_dialog_button">Rate</string>
+  <string name="rate_dialog_title">Enjoying the app?</string>
+  <string name="rate_dialog_message">We\'d love to hear your thoughts. Tap an icon below to let us know!</string>
+  <string name="rate_dialog_title_1">Not happy?</string>
+  <string name="rate_dialog_message_1">We\'re sorry. Please tell us how we can improve your experience.</string>
+  <string name="rate_dialog_title_3">Just okay?</string>
+  <string name="rate_dialog_message_3">We\'d love your thoughts on how to make this app better.</string>
+  <string name="rate_dialog_title_4">Looking good!</string>
+  <string name="rate_dialog_message_4">If you like the app, please take a moment to \nrate it.</string>
+  <string name="rate_dialog_title_5">Thank you!</string>
+  <string name="rate_dialog_message_5">If you like the app, please take a moment to \nrate it.</string>
+  <string name="widgets">Widgets</string>
+  <string name="search_widgets">Search widgets</string>
+  <string name="add_to_home_screen">Add to Home Screen</string>
+  <string name="small">Small</string>
+  <string name="medium">Medium</string>
+  <string name="large">Large</string>
+  <string name="newest_widgets">Newest widgets</string>
+  <string name="widget_pin_not_supported">Your launcher doesn\'t support adding widgets automatically</string>
+  <string name="add">Add</string>
+  <string name="suggested_widgets">Suggested widgets</string>
+  <string name="controller">Controller</string>
+  <string name="control_center">Control Center</string>
+  <string name="control_center_desc">Easily manage and customize your quick toggle control panel</string>
+  <string name="accessibility_service">Accessibility Service</string>
+  <string name="accessibility_service_desc">Required to display overlay panel and handle swipe gesture</string>
+  <string name="write_settings_permission">Write Settings Permission</string>
+  <string name="write_settings_permission_desc">Required to adjust screen brightness</string>
+  <string name="notification_access">Notification Access</string>
+  <string name="notification_access_desc">Required to control media player and volume</string>
+  <string name="permission_granted">Granted</string>
+  <string name="permission_required">Action Required</string>
+  <string name="grant_permission">Grant</string>
+  <string name="enable_service">Enable</string>
+  <string name="test_control_panel">Preview Control Center</string>
+  <string name="hide_control_panel">Hide Control Center</string>
+  <string name="swipe_down_hint">Swipe down from the pull bar at top of screen to open Control Center anywhere.</string>
+  <string name="service_status_active">Service is active &amp; ready</string>
+  <string name="service_status_inactive">Service is inactive</string>
+  <string name="controller_themes">Choose a Controller theme</string>
+  <string name="controller_theme_applied">%s applied</string>
+  <string name="controller_theme_active">Applied</string>
 </resources>

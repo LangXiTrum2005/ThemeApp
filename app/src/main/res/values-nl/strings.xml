@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Prism Wallpaper</string>
+    <string name="cc_accessibility_description">Control Center-overlay — biedt systeembrede pull-down panel voor snelle schakelaars</string>
+    <string name="screen_recording_channel">Schermopname</string>
+    <string name="screen_recording_title">Scherm opnemen</string>
+    <string name="screen_recording_message">Tik op Stoppen om de opname af te ronden</string>
+    <string name="screen_recording_stop">Stoppen</string>
+    <string name="screen_recording_saved">Video opgeslagen</string>
+    <string name="screen_recording_notification_required">Geef meldingspermissie alstublieft om te beginnen met opnemen</string>
+    <string name="themes">Thema\'s</string>
+    <string name="wallpapers">Achtergronden</string>
+    <string name="icons">Pictogrammen</string>
+    <string name="hello_blank_fragment">Hallo leeg fragment</string>
+    <string name="search_themes">Thema\'s zoeken</string>
+    <string name="search_wallpapers">Achtergronden zoeken</string>
+    <string name="search_icons">Pictogrammen zoeken</string>
+    <string name="most_popular">Meest populair</string>
+    <string name="newest_themes">Nieuwste thema\'s</string>
+    <string name="newest_wallpapers">Nieuwste achtergronden</string>
+    <string name="newest_icons">Nieuwste pictogrammen</string>
+    <string name="no_results_found_for">Geen resultaten gevonden voor\n\"%1$s\"</string>
+    <string name="categories">Categorieën</string>
+    <string name="first_fragment_label" translatable="false">First Fragment</string>
+    
+    <string name="second_fragment_label" translatable="false">Second Fragment</string>
+    
+    <string name="next">Volgende</string>
+    <string name="previous">Vorige</string>
+    <string name="download">Download</string>
+    <string name="premium_theme">Premium thema</string>
+    <string name="watch_a_short_ad_for_free_access_upgrade_to_premium_for_unlimited_use">● Bekijk een korte advertentie voor gratis toegang. \n● Upgrade naar Premium voor onbeperkt gebruik.</string>
+    <string name="watch_ad">Bekijk advertentie</string>
+    <string name="go_premium">Ga naar Premium</string>
+    <string name="downloading_please_wait_a_moment">Downloaden, even geduld …</string>
+    <string name="apply">Toepassen</string>
+    <string name="preview">Voorbeeld</string>
+    <string name="set_wallpaper_as">Achtergrond instellen als</string>
+    <string name="home_screen">Startscherm</string>
+    <string name="lock_screen">Vergrendelingsscherm</string>
+    <string name="both_home_lock_screen">Zowel startscherm als vergrendelscherm</string>
+    <string name="loading_please_wait_a_moment">Bezig met laden, even geduld alstublieft …</string>
+    <string name="loading">Laden…</string>
+    <string name="reload">Opnieuw laden</string>
+    <string name="could_not_load_content">Kon inhoud niet laden</string>
+    <string name="server_error_message">Er is iets misgegaan. Probeer het opnieuw!</string>
+    <string name="try_again">Probeer opnieuw</string>
+    <string name="suggested_wallpapers">Aanbevolen achtergronden</string>
+    <string name="applied">Toegepast</string>
+    <string name="loading_image">Afbeelding laden…</string>
+    <string name="download_failed">Download mislukt</string>
+    <string name="my_gallery">Mijn galerij</string>
+    <string name="view_all">Alles weergeven</string>
+    <string name="this_action_may_show_ads">Deze actie kan advertenties bevatten</string>
+    <string name="install">Installeren</string>
+    <string name="install_all_icons">Alle pictogrammen installeren</string>
+    <string name="unlock_all_icons">Ontgrendel alle pictogrammen</string>
+    <string name="unlock">Ontgrendelen</string>
+    <string name="choose">Kiezen</string>
+    <string name="no_icons_to_install">Geen pictogrammen beschikbaar voor installatie</string>
+    <string name="shortcut_install_requested">Snelkoppeling installatie aangevraagd</string>
+    <string name="shortcut_install_failed">Kon snelkoppeling niet installeren</string>
+    <string name="select_app">App selecteren</string>
+    <string name="cannot_open_target_app">Kan doel-app niet openen</string>
+    <string name="shortcut_applied_successfully">Snelkoppeling succesvol toegepast!</string>
+    <string name="suggested_icons">Aanbevolen pictogrammen</string>
+    <string name="empty_gallery_title">Je categorie is leeg.</string>
+    <string name="empty_gallery_message">Begin met het downloaden van achtergronden, besturingselementen en icon-pakketten om je perfecte setup te bouwen.</string>
+    <string name="setting">Instelling</string>
+    <string name="language">Taal</string>
+    <string name="feedback">Feedback</string>
+    <string name="privacy_policy">Privacybeleid</string>
+    <string name="feedback_email" translatable="false">support@wavez.com</string>
+    
+    <string name="privacy_policy_url" translatable="false">https://thinklifes.notion.site/Privacy-Policy-Prism-Wallpaper-Widget-Theme-3dffca1b75238095a9edfa6dc6923f54</string>
+    
+    <string name="collection">Collectie</string>
+    <string name="get_themes">Thema\'s ophalen</string>
+    <string name="theme_saved">Thema opgeslagen</string>
+    <string name="theme_save_failed">Kon thema niet opslaan</string>
+    <string name="successfully">Succesvol</string>
+    <string name="s_applied_successfully">%s succesvol toegepast!</string>
+    <string name="suggested_themes">Aanbevolen thema\'s</string>
+    <string name="view_more_icon">Meer pictogrammen weergeven</string>
+    <string name="shortcut">Snelkoppeling</string>
+    <string name="no_internet_connection">Geen internetverbinding</string>
+    <string name="please_check_your_internet">Controleer alstublieft je internetverbinding op je apparaat</string>
+    <string name="go_to_settings">Ga naar instellingen</string>
+    <string name="please_select_your_language">Selecteer alstublieft je taal</string>
+    <string name="what_s_your_vibe">Wat is jouw vibe?</string>
+    <string name="select_option">Selecteer alstublieft minimaal één optie</string>
+    <string name="anime">Anime</string>
+    <string name="aesthetics">Esthetiek</string>
+    <string name="cute">Schattig</string>
+    <string name="kpop" translatable="false">K-pop</string>
+    
+    <string name="obd_1_1_title">" Mooie thema\'s &amp; achtergronden"</string>
+    <string name="obd_1_2_title">Geef je telefoon een schone en stijlvolle nieuwe look met curated esthetische collecties.</string>
+    <string name="obd_2_1_title">Pas elk detail aan</string>
+    <string name="obd_2_2_title">Pas achtergronden, aangepaste app-pictogrammen en stijlvolle Control Center-indelingen toe in slechts enkele tikken.</string>
+    <string name="payment_failed">Betaling mislukt</string>
+    <string name="a_small_issue_stopped">Een klein probleem heeft de betaling gestopt. Probeer het alstublieft opnieuw</string>
+    <string name="payment_success">Betaling geslaagd</string>
+    <string name="your_premium_version">Je Premium-versie is nu actief. Veel plezier met de app!</string>
+    <string name="got_it">Begrepen</string>
+    <string name="s_continue">Doorgaan</string>
+    <string name="start_free_trial">Gratis proefperiode starten</string>
+    <string name="unlock_premium">"Ontgrendel Premium "</string>
+    <string name="_100_no_ads">100% Geen advertenties</string>
+    <string name="premium_themes">Premium thema\'s</string>
+    <string name="unlimited_wallpapers">Onbeperkte achtergronden</string>
+    <string name="weekly">Wekelijks</string>
+    <string name="monthly">Maandelijks</string>
+    <string name="s_month">%s / maand</string>
+    <string name="yearly">Jaarlijks</string>
+    <string name="_3_day_free_trial">3 dagen gratis proberen</string>
+    <string name="something_went_wrong">Er is iets misgegaan</string>
+    <string name="tv_des_failed_buy">Volg deze stappen en probeer het opnieuw: \n 1. Controleer je internetverbinding \n 2. Zorg ervoor dat je bent ingelogd op je Google-account \n 3. Zorg ervoor dat je de Google Play-app kunt uitvoeren</string>
+    <string name="cancel_anytime">Zeg op elk moment op</string>
+    <string name="terms_of_use">Gebruiksvoorwaarden</string>
+    <string name="we_d_love_to_hear_your">We horen graag je feedback over onze app! Je mening is ongelooflijk waardevol en helpt ons de app nog beter voor je te maken.</string>
+    <string name="enter_your_feedback_here">Voer hier je feedback in</string>
+    <string name="feed_back_empty">Feedback leeg</string>
+    <string name="loading_reward_ads">Beloningsadvertenties laden</string>
+    <string name="loading_reward_ads_failed">Laden van beloningsadvertenties mislukt</string>
+    <string name="tv_des_failed_reward">Helaas! Er is een fout opgetreden bij het laden van beloningsadvertenties. Probeer het opnieuw</string>
+    <string name="close">Sluiten</string>
+    <string name="discard_changes">Wijzigingen negeren</string>
+    <string name="are_you_sure_you_want_to_discard_your_feedback">Weet je zeker dat je je feedback wilt verwijderen?</string>
+    <string name="keep_editing">Doorgaan met bewerken</string>
+    <string name="discard">Verwerpen</string>
+    <string name="get_start">Aan de slag</string>
+</resources>

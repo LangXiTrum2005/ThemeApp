@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">ಥೀಮ್‌ಗಳು: ವಾಲ್‌ಪೇಪರ್‌ಗಳು ಮತ್ತು ಅ್ಯಾಪ್ ಐಕನ್‌ಗಳು</string>
+    <string name="cc_accessibility_description">ನಿಯಂತ್ರಣ ಕೇಂದ್ರ ಮೇಲ್‌ಲೇ — ತ್ವರಿತ ಟಾಗಲ್‌ಗಳಿಗಾಗಿ ಸಿಸ್ಟಮ್‌-ವ್ಯಾಪಿ ಪುಲ್-ಡೌನ್ ಪ್ಯಾನೆಲ್ ಸಕ್ರಿಯ ಮಾಡುತ್ತದೆ</string>
+    <string name="screen_recording_channel">ಸ್ಕ್ರೀನ್ ರೆಕಾರ್ಡಿಂಗ್</string>
+    <string name="screen_recording_title">ಸ್ಕ್ರೀನ್ ರೆಕಾರ್ಡ್ ಮಾಡುತ್ತಿದೆ</string>
+    <string name="screen_recording_message">ರೆಕಾರ್ಡಿಂಗ್ ಅನ್ನು ಮುಕ್ತಾಯ ಮಾಡಲು ನಿಲ್ಲಿಸಲು ಟ್ಯಾಪ್ ಮಾಡಿ</string>
+    <string name="screen_recording_stop">ನಿಲ್ಲಿಸಿ</string>
+    <string name="screen_recording_saved">ವಿಡಿಯೋ ಸಾಂಚಿತ</string>
+    <string name="screen_recording_notification_required">ರೆಕಾರ್ಡಿಂಗ್ ಪ್ರಾರಂಭ ಮಾಡಲು ದಯವಿಟ್ಟು ಅಧಿಸೂಚನೆ ಅನುಮತಿಯನ್ನು ನೀಡಿ</string>
+    <string name="themes">ಥೀಮ್‌ಗಳು</string>
+    <string name="wallpapers">ವಾಲ್‌ಪೇಪರ್‌ಗಳು</string>
+    <string name="icons">ಐಕನ್‌ಗಳು</string>
+    <string name="hello_blank_fragment">ಹಲೋ ಖಾಲಿ ಫ್ರ್ಯಾಗ್‌ಮೆಂಟ್</string>
+    <string name="search_themes">ಥೀಮ್‌ಗಳನ್ನು ಹುಡುಕಿ</string>
+    <string name="search_wallpapers">ವಾಲ್‌ಪೇಪರ್‌ಗಳನ್ನು ಹುಡುಕಿ</string>
+    <string name="search_icons">ಐಕನ್‌ಗಳನ್ನು ಹುಡುಕಿ</string>
+    <string name="most_popular">ಅತ್ಯಂತ ಜನಪ್ರಿಯ</string>
+    <string name="newest_themes">ಹೊಸ ಥೀಮ್‌ಗಳು</string>
+    <string name="newest_wallpapers">ಹೊಸ ವಾಲ್‌ಪೇಪರ್‌ಗಳು</string>
+    <string name="newest_icons">ಹೊಸ ಐಕನ್‌ಗಳು</string>
+    <string name="no_results_found_for">\n\"%1$s\" ಗಾಗಿ ಯಾವುದೇ ಫಲಿತಾಂಶ ಕಂಡುಬಂದಿಲ್ಲ</string>
+    <string name="categories">ವರ್ಗಗಳು</string>
+    <string name="first_fragment_label" translatable="false">First Fragment</string>
+    
+    <string name="second_fragment_label" translatable="false">Second Fragment</string>
+    
+    <string name="next">ಮುಂದೆ</string>
+    <string name="previous">ಹಿಂದಿನ</string>
+    <string name="download">ಡೌನ್‌ಲೋಡ್ ಮಾಡಿ</string>
+    <string name="premium_theme">ಪ್ರಿಮಿಯಮ್ ಥೀಮ್</string>
+    <string name="watch_a_short_ad_for_free_access_upgrade_to_premium_for_unlimited_use">● ಉಚಿತ ಪ್ರವೇಶಕ್ಕಾಗಿ ಸ짧 ಜ್ಞಾಪನವನ್ನು ನೋಡಿ. \n● ಅನಿರ್ದೇಶಿತ ಬಳಕೆಗಾಗಿ ಪ್ರೀಮಿಯಂಗೆ ಅಪಗ್ರೇಡ್ ಮಾಡಿ.</string>
+    <string name="watch_ad">ಜಾಹೀರಾತನ್ನು ವೀಕ್ಷಿಸಿ</string>
+    <string name="go_premium">ಪ್ರೀಮಿಯಂಗೆ ಹೋಗಿ</string>
+    <string name="downloading_please_wait_a_moment">ಡೌನ್‌ಲೋಡ್ ಆಗುತ್ತಿದೆ, ದಯವಿಟ್ಟು ಒಂದು ಕ್ಷಣ ಸುಳಿವಿ …</string>
+    <string name="apply">ಅನ್ವಯಿಸಿ</string>
+    <string name="preview">ಪೂರ್ವವೀಕ್ಷಣೆ</string>
+    <string name="set_wallpaper_as">ವಾಲ್‌ಪೇಪರ್ ಅನ್ನು ಹೀಗೆ ಹೊಂದಿಸಿ</string>
+    <string name="home_screen">ಹೋಮ್ ಸ್ಕ್ರೀನ್</string>
+    <string name="lock_screen">ಲಾಕ್ ಸ್ಕ್ರೀನ್</string>
+    <string name="both_home_lock_screen">ಮುಖ್ಯ ಮತ್ತು ಲಾಕ್ ಸ್ಕ್ರೀನ್ ಎರಡೂ</string>
+    <string name="loading_please_wait_a_moment">ಲೋಡ್ ಆಗುತ್ತಿದೆ, ದಯವಿಟ್ಟು ಒಂದು ಕ್ಷಣ ಹೊಂದಿರಿ …</string>
+    <string name="loading">ಲೋಡ್ ಆಗುತ್ತಿದೆ…</string>
+    <string name="reload">ಮತ್ತೆ ಲೋಡ್ ಮಾಡಿ</string>
+    <string name="could_not_load_content">ವಿಷಯವನ್ನು ಲೋಡ್ ಮಾಡಲು ಸಾಧ್ಯವಾಗಲಿಲ್ಲ</string>
+    <string name="server_error_message">ಏನೋ ತಪ್ಪಾಯಿತು. ದಯವಿಟ್ಟು ಮತ್ತೆ ಪ್ರಯತ್ನಿಸಿ!</string>
+    <string name="try_again">ಮತ್ತೆ ಪ್ರಯತ್ನಿಸಿ</string>
+    <string name="suggested_wallpapers">ಸೂಚಿಸಲಾದ ವಾಲ್‌ಪೇಪರ್‌ಗಳು</string>
+    <string name="applied">ಅನ್ವಯಿಸಲಾಗಿದೆ</string>
+    <string name="loading_image">ಚಿತ್ರವನ್ನು ಲೋಡ್ ಮಾಡುತ್ತಿದೆ…</string>
+    <string name="download_failed">ಡೌನ್‌ಲೋಡ್ ವಿಫಲವಾಯಿತು</string>
+    <string name="my_gallery">ನನ್ನ ಗ್ಯಾಲರಿ</string>
+    <string name="view_all">ಎಲ್ಲವನ್ನೂ ವೀಕ್ಷಿಸಿ</string>
+    <string name="this_action_may_show_ads">ಈ ಕ್ರಿಯೆಯು ಜಾಹೀರಾತುಗಳನ್ನು ಹೊಂದಿರಬಹುದು</string>
+    <string name="install">ಇನ್‌ಸ್ಟಾಲ್ ಮಾಡಿ</string>
+    <string name="install_all_icons">ಎಲ್ಲಾ ಐಕನ್‌ಗಳನ್ನು ಇನ್‌ಸ್ಟಾಲ್ ಮಾಡಿ</string>
+    <string name="unlock_all_icons">ಎಲ್ಲಾ ಐಕನ್‌ಗಳನ್ನು ಅನ್‌ಲಾಕ್ ಮಾಡಿ</string>
+    <string name="unlock">ಅನ್‌ಲಾಕ್ ಮಾಡಿ</string>
+    <string name="choose">ಆರಿಸಿ</string>
+    <string name="no_icons_to_install">ಇನ್‌ಸ್ಟಾಲ್ ಮಾಡಲು ಐಕನ್‌ಗಳು ಲಭ್ಯವಿಲ್ಲ</string>
+    <string name="shortcut_install_requested">ಶಾರ್ಟ್‌ಕಟ್ ಇನ್‌ಸ್ಟಾಲ್ ಅನ್ನು ವಿನಂತಿಸಲಾಗಿದೆ</string>
+    <string name="shortcut_install_failed">ಶಾರ್ಟ್‌ಕಟ್ ಸ್ಥಾಪನೆ ವಿಫಲ</string>
+    <string name="select_app">ಅ್ಯಾಪ್ ಆರಿಸಿ</string>
+    <string name="cannot_open_target_app">ಗುರಿ ಅ್ಯಪ್ ತೆರೆಯಲಾಗಲಿಲ್ಲ</string>
+    <string name="shortcut_applied_successfully">ಶಾರ್ಟ್‌ಕಟ್ ಯಶಸ್ವಿಯಾಗಿ ಅನ್ವಯ ಮಾಡಲಾಗಿದೆ!</string>
+    <string name="suggested_icons">ಸೂಚಿಸಲಾದ ಐಕನ್‌ಗಳು</string>
+    <string name="empty_gallery_title">ನಿಮ್ಮ ವರ್ಗವು ಖಾಲಿಯಾಗಿದೆ.</string>
+    <string name="empty_gallery_message">ನಿಮ್ಮ ನಿಖುತ ಸೆಟಪ್ ನಿರ್ಮಿಸಲು ವಾಲ್‌ಪೇಪರ್‌ಗಳು, ನಿಯಂತ್ರಣ ಮತ್ತು ಐಕನ್ ಪ್ಯಾಕ್‌ಗಳನ್ನು ಡೌನ್‌ಲೋಡ್ ಮಾಡಲು ಪ್ರಾರಂಭಿಸಿ.</string>
+    <string name="setting">ಸೆಟ್ಟಿಂಗ್</string>
+    <string name="language">ಭಾಷೆ</string>
+    <string name="feedback">ಪ್ರತಿಕ್ರಿಯೆ</string>
+    <string name="privacy_policy">ಗೌಪ್ಯತೆ ನೀತಿ</string>
+    <string name="feedback_email" translatable="false">support@wavez.com</string>
+    
+    <string name="privacy_policy_url" translatable="false">https://wavez.com/privacy-policy</string>
+    
+    <string name="collection">ಸಂಗ್ರಹ</string>
+    <string name="get_themes">ಥೀಮ್‌ಗಳನ್ನು ಪಡೆಯಿರಿ</string>
+    <string name="theme_saved">ಥೀಮ್ ಉಳಿಸಲಾಗಿದೆ</string>
+    <string name="theme_save_failed">ಥೀಮ್ ಅನ್ನು ಸಂರಕ್ಷಿಸಲು ಸಾಧ್ಯವಾಗಲಿಲ್ಲ</string>
+    <string name="successfully">ಯಶಸ್ವಿಯಾಗಿ</string>
+    <string name="s_applied_successfully">%s ಯಶಸ್ವಿಯಾಗಿ ಅನ್ವಯ ಮಾಡಲಾಗಿದೆ!</string>
+    <string name="suggested_themes">ಸೂಚಿಸಿದ ಥೀಮ್‌ಗಳು</string>
+    <string name="view_more_icon">ಹೆಚ್ಚಿನ ಐಕನ್ ವೀಕ್ಷಿಸಿ</string>
+    <string name="shortcut">ಶಾರ್ಟ್‌ಕಟ್</string>
+    <string name="no_internet_connection">ಯಾವುದೇ ಇಂಟರ್‌ನೆಟ್ ಸಂಪರ್ಕ ಇಲ್ಲ</string>
+    <string name="please_check_your_internet">ದಯವಿಟ್ಟು ನಿಮ್ಮ ಸಾಧನದಲ್ಲಿ ಇಂಟರ್ನೆಟ್ ಸಂಪರ್ಕವನ್ನು ಪರಿಶೀಲಿಸಿ</string>
+    <string name="go_to_settings">ಸೆಟ್ಟಿಂಗ್‌ಗಳಿಗೆ ಹೋಗಿ</string>
+    <string name="please_select_your_language">ದಯವಿಟ್ಟು ನಿಮ್ಮ ಭಾಷೆಯನ್ನು ಆರಿಸಿ</string>
+    <string name="what_s_your_vibe">ನಿಮ್ಮ ವೈಬ್ ಏನು? ✨</string>
+    <string name="select_option">ದಯವಿಟ್ಟು ಕನಿಷ್ಠ ಒಂದು ಆಯ್ಕೆ ಆರಿಸಿ</string>
+    <string name="anime">ಅ್ಯಾನಿಮೆ</string>
+    <string name="aesthetics">ಸೌಂದರ್ಯ</string>
+    <string name="cute">ಮುದ್ದೆ 💕</string>
+    <string name="kpop" translatable="false">K-pop</string>
+    
+    <string name="obd_1_1_title">" ಋತುವಿನ ಥೀಮ್‌ಗಳು ಮತ್ತು ವಾಲ್‌ಪೇಪರ್‌ಗಳು"</string>
+    <string name="obd_1_2_title">ಕ್ಯುರೇಟೆಡ್ ಸೌಂದರ್ಯ ಸಂಗ್ರಹದೊಂದಿಗೆ ನಿಮ್ಮ ಫೋನ್‌ಗೆ ಸ್ವಚ್ಛ ಮತ್ತು ಸ್ಟೈಲಿಷ್ ನೂತನ ನೋಟ ನೀಡಿ.</string>
+    <string name="obd_2_1_title">ಪ್ರತಿಯೊಂದು ವಿವರವನ್ನು ಕಸ್ಟಮೈಜ್ ಮಾಡಿ</string>
+    <string name="obd_2_2_title">ಕೆಲವೇ ಟ್ಯಾಪ್‌ಗಳಲ್ಲಿ ವಾಲ್‌ಪೇಪರ್‌ಗಳು, ಕಸ್ಟಮ್ ಆ್ಯಪ್ ಐಕನ್‌ಗಳು, ಮತ್ತು ಶೈಲೀಕೃತ ನಿಯಂತ್ರಣ ಕೇಂದ್ರ ಲೇಔಟ್‌ಗಳನ್ನು ಅನ್ವಯ ಮಾಡಿ.</string>
+    <string name="payment_failed">ಪಾವತಿ ವಿಫಲವಾಯಿತು</string>
+    <string name="a_small_issue_stopped">ಒಂದು ಸಣ್ಣ ಸಮಸ್ಯೆ ಪೇಮೆಂಟ್ ಅನ್ನು ನಿಲ್ಲಿಸಿದೆ. ದಯವಿಟ್ಟು ಮತ್ತೆ ಪ್ರಯತ್ನ ಮಾಡಿ</string>
+    <string name="payment_success">ಪಾವತಿ ಯಶಸ್ವಿ</string>
+    <string name="your_premium_version">ನಿಮ್ಮ ಪ್ರಿಮಿಯಮ್ ಆವೃತ್ತಿ ಈಗ ಸಕ್ರಿಯವಾಗಿದೆ. ಅ್ಯಾಪ್ ಬಳಕೆ ಆನಂದಿಸಿ!</string>
+    <string name="got_it">ಸರಿ ಅರ್ಥವಾಯಿತು</string>
+    <string name="s_continue">ಮುಂದುವರಿಸಿ</string>
+    <string name="start_free_trial">ಉಚಿತ ಪರೀಕ್ಷೆ ಪ್ರಾರಂಭಿಸಿ</string>
+    <string name="unlock_premium">"ಪ್ರೀಮಿಯಂ ಅನ್‌ಲಾಕ್ ಮಾಡಿ "</string>
+    <string name="_100_no_ads">100% ಜಾಹೀರಾತು ಇಲ್ಲ</string>
+    <string name="premium_themes">ಪ್ರಿಮಿಯಮ್ ಥೀಮ್‌ಗಳು</string>
+    <string name="unlimited_wallpapers">ಅಸೀಮಿತ ವಾಲ್‌ಪೇಪರ್‌ಗಳು</string>
+    <string name="weekly">ಸಾಪ್ತಾಹಿಕ</string>
+    <string name="monthly">ಮಾಸಿಕ</string>
+    <string name="s_month">%s / ತಿಂಗಳು</string>
+    <string name="yearly">ವಾರ್ಷಿಕ</string>
+    <string name="_3_day_free_trial">3 ದಿನಗಳ ಉಚಿತ ಪರೀಕ್ಷೆ</string>
+    <string name="something_went_wrong">ಏನೋ ತಪ್ಪಾಯಿತು</string>
+    <string name="tv_des_failed_buy">ದಯವಿಟ್ಟು ಈ ಹಂತಗಳನ್ನು ಅನುಸರಿಸಿ ಮತ್ತೆ ಪ್ರಯತ್ನಿಸಿ: \n 1. ನಿಮ್ಮ ನೆಟ್‌ವರ್ಕ್ ಸಂಪರ್ಕವನ್ನು ಪರಿಶೀಲಿಸಿ \n 2. ನೀವು ನಿಮ್ಮ Google ಖಾತೆಗೆ ಲಾಗ್ ಇನ್ ಆಗಿದ್ದಿರಿ ಎಂದು ಖಚಿತಪಡಿಸಿ \n 3. ನೀವು Google Play ಅ್ಯಪ್ಲಿಕೇಶನ್ ಅನ್ನು ರನ್ ಮಾಡಲು ಸಾಧ್ಯವೆಂದು ಖಚಿತಪಡಿಸಿ</string>
+    <string name="cancel_anytime">ಯಾವುದೇ ಸಮಯದಲ್ಲಿ ರದ್ದುಗೊಳಿಸಿ</string>
+    <string name="terms_of_use">ಬಳಕೆಯ ನಿಯಮಗಳು</string>
+    <string name="we_d_love_to_hear_your">ನಮ್ಮ ಆ್ಯಪ್‌ನ ಬಗ್ಗೆ ನಿಮ್ಮ ಪ್ರತಿಕ್ರಿಯೆ ಕೇಳಲು ನಾವು ಇಚ್ಛುಕರಾಗಿದ್ದೇವೆ! ನಿಮ್ಮ ಇನ್‌ಪುಟ್ ಅತ್ಯಂತ ಮೂಲ್ಯವಾನ್ ಮತ್ತು ನಮಗೆ ಆ್ಯಪ್‌ಟಿ ನಿಮಗೆ ಇನ್ನೂ ಉತ್ತಮ ಮಾಡಲು ಸಹಾಯ ಮಾಡುತ್ತದೆ.</string>
+    <string name="enter_your_feedback_here">ಇಲ್ಲಿ ನಿಮ್ಮ ಪ್ರತಿಕ್ರಿಯೆ ನಮೂದಿಸಿ</string>
+    <string name="feed_back_empty">ಪ್ರತಿಕ್ರಿಯೆ ಖಾಲಿ</string>
+    <string name="loading_reward_ads">ಪುರಸ್ಕಾರ ಜ್ಞಾಪನಗಳನ್ನು ಲೋಡ್ ಮಾಡುತ್ತಿದೆ</string>
+    <string name="loading_reward_ads_failed">ಪುರಸ್ಕಾರ ಜಾಹೀರಾತುಗಳನ್ನು ಲೋಡ್ ಮಾಡುವುದು ವಿಫಲವಾಯಿತು</string>
+    <string name="tv_des_failed_reward">ಕ್ಷಮಿಸಿ! ಪುರಸ್ಕೃತ ಜಾಹೀರಾತುಗಳನ್ನು ಲೋಡ್ ಮಾಡುವಾಗ ಕೆಲವು ದೋಷಗಳಿವೆ. ದಯವಿಟ್ಟು ಮತ್ತೆ ಪ್ರಯತ್ನಿಸಿ</string>
+    <string name="close">ಮುಚ್ಚಿ</string>
+    <string name="discard_changes">ಬದಲಾವಣೆಗಳನ್ನು ತ್ಯಜಿಸಿ</string>
+    <string name="are_you_sure_you_want_to_discard_your_feedback">ನೀವು ನಿಜವಾಗಿಯೂ ನಿಮ್ಮ ಪ್ರತಿಕ್ರಿಯೆಯನ್ನು ಬಿತ್ತರಿಸಲು ಬಯಸುತ್ತೀರೆ?</string>
+    <string name="keep_editing">ಸಂಪಾದನೆ ಮುಂದುವರಿಸಿ</string>
+    <string name="discard">ತ್ಯಜಿಸಿ</string>
+    <string name="get_start">ಪ್ರಾರಂಭಿಸಿ</string>
+</resources>

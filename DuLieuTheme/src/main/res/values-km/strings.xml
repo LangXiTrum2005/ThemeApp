@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">ធემ៖ ផ្ទាំង &amp; រូបតំណាង</string>
+    <string name="cc_accessibility_description">Control Center overlay — បើកប្រព័ន្ធលក្ខណៈប្រទាលពីលើសម្រាប់ការបិទបើក</string>
+    <string name="screen_recording_channel">ការថតកម្មវីដេអូ</string>
+    <string name="screen_recording_title">កំពុងថតកម្មវីដេអូ</string>
+    <string name="screen_recording_message">ចុចឈប់ដើម្បីបញ្ចប់ការថតយន្ត</string>
+    <string name="screen_recording_stop">ឈប់</string>
+    <string name="screen_recording_saved">វីឌីអូបានរក្សាទុក</string>
+    <string name="screen_recording_notification_required">សូមអនុញ្ញាតការផ្តាប់ការជូនដំណឹង ដើម្បីចាប់ផ្តើមការថតកម្មវីដេអូ</string>
+    <string name="themes">ធემ</string>
+    <string name="wallpapers">ផ្ទាំងរូបភាព</string>
+    <string name="icons">រូបតំណាង</string>
+    <string name="hello_blank_fragment">សួស្តី fragment ទទេ</string>
+    <string name="search_themes">ស្វែងរកធემ</string>
+    <string name="search_wallpapers">ស្វែងរកផ្ទាំងរូបភាព</string>
+    <string name="search_icons">ស្វែងរកព្រាង</string>
+    <string name="most_popular">ពេញនិយមបំផុត</string>
+    <string name="newest_themes">ធេមថ្មីបំផុត</string>
+    <string name="newest_wallpapers">ផ្ទាំងរូបភាពថ្មីបំផុត</string>
+    <string name="newest_icons">រូបតំណាងថ្មីបំផុត</string>
+    <string name="no_results_found_for">មិនបានរកឃើញលទ្ធផលសម្រាប់\n\"%1$s\"</string>
+    <string name="categories">ប្រភេទ</string>
+    <string name="first_fragment_label" translatable="false">First Fragment</string>
+    
+    <string name="second_fragment_label" translatable="false">Second Fragment</string>
+    
+    <string name="next">បន្ទាប់</string>
+    <string name="previous">មុន</string>
+    <string name="download">ទាញយក</string>
+    <string name="premium_theme">ស្បែកលម្អិតប្រିមៀម</string>
+    <string name="watch_a_short_ad_for_free_access_upgrade_to_premium_for_unlimited_use">● មើលការផ្សាយពាណិជ្ជកម្មខ្លីមួយដើម្បីទទួលបានលទ្ធិឈានលាទ។ \n● ឡើងកម្រិតទៅ Premium សម្រាប់ការប្រើប្រាស់គ្មានដែនកំណត់។</string>
+    <string name="watch_ad">មើលការផ្សាយពាណិចន៍</string>
+    <string name="go_premium">ទៅ Premium</string>
+    <string name="downloading_please_wait_a_moment">កំពុងダウンロード សូមរង់ចាំបន្តិច…</string>
+    <string name="apply">អនុវត្ត</string>
+    <string name="preview">មើលជាមុន</string>
+    <string name="set_wallpaper_as">កំណត់ផ្ទាំងរូបភាពថា</string>
+    <string name="home_screen">អេក្រង់ដើម</string>
+    <string name="lock_screen">អេក្រង់ចាក់សោ</string>
+    <string name="both_home_lock_screen">ផ្ទាំងដើម &amp; អេក្រង់ចាក់សោ</string>
+    <string name="loading_please_wait_a_moment">កំពុងផ្ទុក សូមរង់ចាំមួយភ្លេត…</string>
+    <string name="loading">កំពុងផ្ទុក…</string>
+    <string name="reload">ផ្ទុកឡើងវិញ</string>
+    <string name="could_not_load_content">មិនអាចផ្ទុកខ្លឹមសារបានទេ</string>
+    <string name="server_error_message">មានបញ្ហាមួយ។ សូមព្យាយាមម្តងទៀត!</string>
+    <string name="try_again">ព្យាយាមម្តងទៀត</string>
+    <string name="suggested_wallpapers">ផ្ទាំងរូបភាពដែលបានស្នើសុំ</string>
+    <string name="applied">បានអនុវត្ត</string>
+    <string name="loading_image">កំពុងផ្ទុករូបភាព…</string>
+    <string name="download_failed">ការទាញយកបរាជ័យ</string>
+    <string name="my_gallery">កម្មវិធីសរុបរបស់ខ្ញុំ</string>
+    <string name="view_all">មើលទាំងអស់</string>
+    <string name="this_action_may_show_ads">សកម្មភាពនេះអាចមានការផ្សាយពាណិชន៍</string>
+    <string name="install">ដំឡើង</string>
+    <string name="install_all_icons">ដំឡើងរូបតំណាងទាំងអស់</string>
+    <string name="unlock_all_icons">আনলক সমস্ত আইকন</string>
+    <string name="unlock">ដោះលក់</string>
+    <string name="choose">ជ្រើស</string>
+    <string name="no_icons_to_install">មិនមានរូបតំណាងដែលអាចដំឡើងបាន</string>
+    <string name="shortcut_install_requested">ស្នើសុំដំឡើងផ្លូវកាត់</string>
+    <string name="shortcut_install_failed">មិនអាច安装ផ្លូវកាត់បានទេ</string>
+    <string name="select_app">ជ្រើសរើសកម្មវិធី</string>
+    <string name="cannot_open_target_app">មិនអាចបើករបាយការណ៍គោលដៅបានទេ</string>
+    <string name="shortcut_applied_successfully">ផ្លូវកាត់បានអនុវត្តដោយជោគជ័យ!</string>
+    <string name="suggested_icons">ព្រាងដែលបានស្នើសុំ</string>
+    <string name="empty_gallery_title">ប្រភេទរបស់អ្នកគឺទទេ។</string>
+    <string name="empty_gallery_message">ចាប់ផ្តើមទាញយក ផ្ទាំងរូបភាព ការគ្រប់គ្រង និងកញ្ចប់រូបតំណាងដើម្បីបង្កើតការរៀបចំដ៏ល្អឥតខ្ចោះរបស់អ្នក។</string>
+    <string name="setting">ការកំណត់</string>
+    <string name="language">ភាសា</string>
+    <string name="feedback">មតិយោបល់</string>
+    <string name="privacy_policy">គោលការណ៍ឯកជនភាព</string>
+    <string name="feedback_email" translatable="false">support@wavez.com</string>
+    
+    <string name="privacy_policy_url" translatable="false">https://wavez.com/privacy-policy</string>
+    
+    <string name="collection">ការប្រមូលផ្តុំ</string>
+    <string name="get_themes">ទទួលបានស្បែក</string>
+    <string name="theme_saved">ស្បែកលម្អិតបានរក្សាទុក</string>
+    <string name="theme_save_failed">មិនអាចរក្សាទុកប្រធានបទបានទេ</string>
+    <string name="successfully">ដោយជោគជ័យ</string>
+    <string name="s_applied_successfully">%s បានអនុវត្តដោយជោគជ័យ!</string>
+    <string name="suggested_themes">ធេមដែលបានណែនាំ</string>
+    <string name="view_more_icon">មើលរូបតំណាងលម្អិត</string>
+    <string name="shortcut">ផ្លូវកាត់</string>
+    <string name="no_internet_connection">គ្មានការតភ្ជាប់អ៊ីនធឺណេត</string>
+    <string name="please_check_your_internet">សូមពិនិត្យមើលការតភ្ជាប់អ៊ីនធឺណេតរបស់អ្នកលើឧបករណ៍របស់អ្នក</string>
+    <string name="go_to_settings">ទៅកាន់ការកំណត់</string>
+    <string name="please_select_your_language">សូមជ្រើសរើសភាសារបស់អ្នក</string>
+    <string name="what_s_your_vibe">តម្រូវរបស់អ្នកគឺដូច្នេះ?</string>
+    <string name="select_option">សូមជ្រើសរើសយ៉ាងហោចណាស់ជម្រើសមួយ</string>
+    <string name="anime">Anime</string>
+    <string name="aesthetics">សោភ័ណភាព</string>
+    <string name="cute">ទ화</string>
+    <string name="kpop" translatable="false">K-pop</string>
+    
+    <string name="obd_1_1_title">"ប្រធានបទ និងផ្ទាំងរូបភាពល្អ"</string>
+    <string name="obd_1_2_title">ផ្តល់ឱ្យទូរស័ព្ទរបស់អ្នកនូវឯកលักษណ៍ស្អាត និងស្ទាត់ល្បាច ដោយប្រើបណ្ណសម្រាប់សម្រង់។</string>
+    <string name="obd_2_1_title">カスタマイズលម្អិតបច្ចេកទេស</string>
+    <string name="obd_2_2_title">អនុវត្តផ្ទាំងរូបភាព រូបតំណាងកម្មវិធីលក្ខណៈផ្ទាល់ខ្លួន និងប្លង់ Control Center រចនាប័ទ្មក្នុងម្ដង់ចុចប៉ុណ្ណាក៏ដោយ។</string>
+    <string name="payment_failed">ការទូទាត់បានបរាជ័យ</string>
+    <string name="a_small_issue_stopped">បញ្ហាតូចមួយបានរារាំងការទូទាត់។ សូមព្យាយាមម្តងទៀត</string>
+    <string name="payment_success">ការទូទាត់បានជោគជ័យ</string>
+    <string name="your_premium_version">កំណែ Premium របស់អ្នកឥឡូវនេះបានកើតសកម្ម។ រីករាយក្នុងការប្រើប្រាស់កម្មវិធី!</string>
+    <string name="got_it">យល់ព្រម</string>
+    <string name="s_continue">បន្ត</string>
+    <string name="start_free_trial">ចាប់ផ្តើមសាកល្បងឥតគិតថ្លៃ</string>
+    <string name="unlock_premium">"ដោះលែក Premium "</string>
+    <string name="_100_no_ads">100% គ្មានការផ្សាយពាណិជ្ជកម្ម</string>
+    <string name="premium_themes">ប្រធានបទផ្នែកបង្កើន</string>
+    <string name="unlimited_wallpapers">ផ្ទាំងរូបភាពគ្មានដែនកំណត់</string>
+    <string name="weekly">ក្នុងសប្តាហ៍</string>
+    <string name="monthly">រាល់ខែ</string>
+    <string name="s_month">%s / ខែ</string>
+    <string name="yearly">ប្រចាំឆ្នាំ</string>
+    <string name="_3_day_free_trial">សាកល្បង ៣ ថ្ងៃឥតគិតថ្លៃ</string>
+    <string name="something_went_wrong">មានបញ្ហាមួយ</string>
+    <string name="tv_des_failed_buy">សូមធ្វើតាមជំហានទាំងនេះ ហើយព្យាយាមម្តងទៀត: \n 1. ពិនិត្យមើលការតភ្ជាប់បណ្តាញរបស់អ្នក \n 2. ធានាថាអ្នកបានចូលគណនី Google របស់អ្នក \n 3. ធានាថាអ្នកអាចដំណើរការកម្មវិធី Google Play</string>
+    <string name="cancel_anytime">បោះបង់នៅពេលណាក៏បាន</string>
+    <string name="terms_of_use">លក្ខខណ្ឌនៃការប្រើប្រាស់</string>
+    <string name="we_d_love_to_hear_your">យើ្ងចូលចិត្តលឺតពីមតិយោបល់របស់អ្នកអំពីកម្មវិធីរបស់យើ្ង! ការបញ្ចូលរបស់អ្នកគឺមានតម្លៃយ៉ាងខ្លាំង ហើយវាជួយឱ្យយើ្ងធ្វើឱ្យកម្មវិធីកាន់តែល្អប្រសើរសម្រាប់អ្នក។</string>
+    <string name="enter_your_feedback_here">បញ្ចូលមតិលម្អិតរបស់អ្នកនៅទីនេះ</string>
+    <string name="feed_back_empty">មតិលម្អិតទទេ</string>
+    <string name="loading_reward_ads">កំពុងផ្ទុកការផ្សាយពាណិជ្ជកម្ម보រិច័ពន</string>
+    <string name="loading_reward_ads_failed">ការផ្ទុកការផ្សាយពាណិជ្ជកម្មរង្វាន់បាន失败</string>
+    <string name="tv_des_failed_reward">សូមស្អប់ទេ! មានលម្អិតមួយចំនួនក្នុងការផ្ទុកការផ្សាយពាណិចន៍ដែលផ្តល់ផលឆ្នៃ។ សូមព្យាយាមម្តងទៀត</string>
+    <string name="close">បិទ</string>
+    <string name="discard_changes">បោះបង់ការផ្លាស់ប្តូរ</string>
+    <string name="are_you_sure_you_want_to_discard_your_feedback">តើអ្នកប្រាកដថាចង់ចោលមតិយោបល់របស់អ្នកឬ?</string>
+    <string name="keep_editing">បន្តកែសម្រួល</string>
+    <string name="discard">ទម្លាក់</string>
+    <string name="get_start">ចាប់ផ្តើម</string>
+</resources>

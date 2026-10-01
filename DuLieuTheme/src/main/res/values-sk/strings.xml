@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Témy: Tapéty a ikony aplikácií</string>
+    <string name="cc_accessibility_description">Prekrytie Kontrolného centra — umožňuje tabuľu s rýchlymi prepínačmi na celý systém</string>
+    <string name="screen_recording_channel">Nahrávanie obrazovky</string>
+    <string name="screen_recording_title">Nahrávanie obrazovky</string>
+    <string name="screen_recording_message">Klepnite na Zastaviť a dokončite nahrávanie</string>
+    <string name="screen_recording_stop">Zastaviť</string>
+    <string name="screen_recording_saved">Video uložené</string>
+    <string name="screen_recording_notification_required">Prosím, povolte povolenie pre oznámenia, aby ste mohli začať nahrávať</string>
+    <string name="themes">Témy</string>
+    <string name="wallpapers">Tapety</string>
+    <string name="icons">Ikony</string>
+    <string name="hello_blank_fragment">Ahoj prázdny fragment</string>
+    <string name="search_themes">Hľadať témy</string>
+    <string name="search_wallpapers">Hľadať tapety</string>
+    <string name="search_icons">Hľadajte ikony</string>
+    <string name="most_popular">Najobľúbenejšie</string>
+    <string name="newest_themes">Najnovšie témy</string>
+    <string name="newest_wallpapers">Najnovšie tapety</string>
+    <string name="newest_icons">Najnovšie ikony</string>
+    <string name="no_results_found_for">Žiadne výsledky nájdené pre\n\"%1$s\"</string>
+    <string name="categories">Kategórie</string>
+    <string name="first_fragment_label" translatable="false">First Fragment</string>
+    
+    <string name="second_fragment_label" translatable="false">Second Fragment</string>
+    
+    <string name="next">Ďalej</string>
+    <string name="previous">Predchádzajúce</string>
+    <string name="download">Stiahnuť</string>
+    <string name="premium_theme">Prémium téma</string>
+    <string name="watch_a_short_ad_for_free_access_upgrade_to_premium_for_unlimited_use">● Pozrite si krátku reklamu pre bezplatný prístup. \n● Upgradujte na Premium pre neobmedzené používanie.</string>
+    <string name="watch_ad">Pozrieť si reklamu</string>
+    <string name="go_premium">Prejdite na Premium</string>
+    <string name="downloading_please_wait_a_moment">Sťahovanie, počkajte chvíľu …</string>
+    <string name="apply">Použiť</string>
+    <string name="preview">Náhľad</string>
+    <string name="set_wallpaper_as">Nastaviť tapetu ako</string>
+    <string name="home_screen">Domovská obrazovka</string>
+    <string name="lock_screen">Uzamknutá obrazovka</string>
+    <string name="both_home_lock_screen">Domovská obrazovka a uzamykacia obrazovka</string>
+    <string name="loading_please_wait_a_moment">Načítavanie, prosím, počkajte chvíľu …</string>
+    <string name="loading">Načítavanie…</string>
+    <string name="reload">Znova načítať</string>
+    <string name="could_not_load_content">Obsah sa nepodarilo načítať</string>
+    <string name="server_error_message">Niečo sa pokazilo. Prosím, skúste znova!</string>
+    <string name="try_again">Skúsiť znova</string>
+    <string name="suggested_wallpapers">Odporúčané tapety</string>
+    <string name="applied">Použitá</string>
+    <string name="loading_image">Načítavanie obrázka…</string>
+    <string name="download_failed">Sťahovanie zlyhalo</string>
+    <string name="my_gallery">Moja galéria</string>
+    <string name="view_all">Zobraziť všetko</string>
+    <string name="this_action_may_show_ads">Táto akcia môže obsahovať reklamy</string>
+    <string name="install">Nainštalovať</string>
+    <string name="install_all_icons">Inštalovať všetky ikony</string>
+    <string name="unlock_all_icons">Odomknite všetky ikony</string>
+    <string name="unlock">Odomknúť</string>
+    <string name="choose">Vybrať</string>
+    <string name="no_icons_to_install">Žiadne dostupné ikony na inštaláciu</string>
+    <string name="shortcut_install_requested">Inštalácia skratky požadovaná</string>
+    <string name="shortcut_install_failed">Nepodarilo sa nainštalovať skratku</string>
+    <string name="select_app">Vyberte aplikáciu</string>
+    <string name="cannot_open_target_app">Nepodarilo sa otvoriť cieľovú aplikáciu</string>
+    <string name="shortcut_applied_successfully">Skratka úspešne použitá!</string>
+    <string name="suggested_icons">Odporúčané ikony</string>
+    <string name="empty_gallery_title">Vaša kategória je prázdna.</string>
+    <string name="empty_gallery_message">Začnite si sťahovať tapety, ovládacie prvky a balíčky ikon a vytvorte si svoj ideálny vzhľad.</string>
+    <string name="setting">Nastavenie</string>
+    <string name="language">Jazyk</string>
+    <string name="feedback">Spätná väzba</string>
+    <string name="privacy_policy">Zásady ochrany osobných údajov</string>
+    <string name="feedback_email" translatable="false">support@wavez.com</string>
+    
+    <string name="privacy_policy_url" translatable="false">https://wavez.com/privacy-policy</string>
+    
+    <string name="collection">Kolekcia</string>
+    <string name="get_themes">Získať témy</string>
+    <string name="theme_saved">Téma bola uložená</string>
+    <string name="theme_save_failed">Tému sa nepodarilo uložiť</string>
+    <string name="successfully">Úspešne</string>
+    <string name="s_applied_successfully">%s úspešne použité!</string>
+    <string name="suggested_themes">Odporúčané témy</string>
+    <string name="view_more_icon">Pozrieť si ďalšie ikony</string>
+    <string name="shortcut">Skratka</string>
+    <string name="no_internet_connection">Bez internetového pripojenia</string>
+    <string name="please_check_your_internet">Prosím, skontrolujte pripojenie na internetu na vašom zariadení</string>
+    <string name="go_to_settings">Prejsť na nastavenia</string>
+    <string name="please_select_your_language">Prosím, vyberte si svoj jazyk</string>
+    <string name="what_s_your_vibe">Aká je vaša energia?</string>
+    <string name="select_option">Prosím, vyberte aspoň jednu možnosť</string>
+    <string name="anime">Anime</string>
+    <string name="aesthetics">Estetika</string>
+    <string name="cute">Roztomilé</string>
+    <string name="kpop" translatable="false">K-pop</string>
+    
+    <string name="obd_1_1_title">" Úžasné témy a tapety"</string>
+    <string name="obd_1_2_title">Dajte svojmu telefónu čistý a štýlový nový vzhľad s kurátorom vybranými kolekciami.</string>
+    <string name="obd_2_1_title">Prispôsobte si každý detail</string>
+    <string name="obd_2_2_title">Aplikujte tapety, vlastné ikony aplikácií a štýlové rozloženia Kontrolného centra len pár kliknutiami.</string>
+    <string name="payment_failed">Platba zlyhala</string>
+    <string name="a_small_issue_stopped">Malá chyba zastavila platbu. Prosím, skúste znova</string>
+    <string name="payment_success">Platba bola úspešná</string>
+    <string name="your_premium_version">Vaša Prémium verzia je teraz aktívna. Užívajte si aplikáciu!</string>
+    <string name="got_it">Rozumiem</string>
+    <string name="s_continue">Pokračovať</string>
+    <string name="start_free_trial">Začať bezplatnú skúšobnú verziu</string>
+    <string name="unlock_premium">"Odomknúť Premium "</string>
+    <string name="_100_no_ads">100% Bez reklám</string>
+    <string name="premium_themes">Prémium témy</string>
+    <string name="unlimited_wallpapers">Neobmedzené tapety</string>
+    <string name="weekly">Týždenne</string>
+    <string name="monthly">Mesačne</string>
+    <string name="s_month">%s / mesiac</string>
+    <string name="yearly">Ročne</string>
+    <string name="_3_day_free_trial">3-dňová bezplatná skúšobná verzia</string>
+    <string name="something_went_wrong">Niečo sa pokazilo</string>
+    <string name="tv_des_failed_buy">Prosím, postupujte podľa týchto krokov a skúste znova: \n 1. Skontrolujte vašu sieťovú konexiu \n 2. Uistite sa, že ste prihlásení do svojho konta Google \n 3. Uistite sa, že môžete spustiť aplikáciu Google Play</string>
+    <string name="cancel_anytime">Zrušiť kedykoľvek</string>
+    <string name="terms_of_use">Podmienky používania</string>
+    <string name="we_d_love_to_hear_your">Radi by sme počuli vašu spätnú väzbu o našej aplikácii! Vaše názory sú neoceniteľné a pomáhajú nám vytvoriť aplikáciu ešte lepšou pre vás.</string>
+    <string name="enter_your_feedback_here">Sem napíšte svoju spätnú väzbu</string>
+    <string name="feed_back_empty">Spätná väzba je prázdna</string>
+    <string name="loading_reward_ads">Načítavanie odmieňovacích reklám</string>
+    <string name="loading_reward_ads_failed">Načítanie odmenových reklám zlyhalo</string>
+    <string name="tv_des_failed_reward">Ľutujeme! Pri načítavaní odmeňovacích reklám sa vyskytla chyba. Prosím, skúste znova</string>
+    <string name="close">Zatvoriť</string>
+    <string name="discard_changes">Zahodiť zmeny</string>
+    <string name="are_you_sure_you_want_to_discard_your_feedback">Ste si istí, že chcete zahodiť vašu spätnu väzbu?</string>
+    <string name="keep_editing">Pokračovať v úprave</string>
+    <string name="discard">Zahodiť</string>
+    <string name="get_start">Začať</string>
+</resources>

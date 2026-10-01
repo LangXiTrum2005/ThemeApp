@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Prism Wallpaper</string>
+    <string name="cc_accessibility_description">Control Center ఓవర్‌లే — క్విక్ టాగుల్‌ల కోసం సిస్టమ్-వ్యాప్త పుల్-డౌన్ প్యానెల్‌ను ఎనేబల్ చేస్తుంది</string>
+    <string name="screen_recording_channel">స్క్రీన్ రికార్డింగ్</string>
+    <string name="screen_recording_title">స్క్రీన్‌ను రికార్డ్ చేస్తున్నాము</string>
+    <string name="screen_recording_message">రికార్డింగ్ ముగించడానికి స్టాప్‌ను ట్యాప్ చేయండి</string>
+    <string name="screen_recording_stop">ఆపండి</string>
+    <string name="screen_recording_saved">వీడియో సేవ్ చేయబడింది</string>
+    <string name="screen_recording_notification_required">రికార్డింగ్ ప్రారంభించడానికి దయచేసి నోటిఫికేషన్ అనుమతిని అనుమతించండి</string>
+    <string name="themes">థీమ్‌లు</string>
+    <string name="wallpapers">వాల్‌పేపర్‌లు</string>
+    <string name="icons">చిహ్నాలు</string>
+    <string name="hello_blank_fragment">హలో ఖాళీ ఫ్రాగ్మెంట్</string>
+    <string name="search_themes">థీమ్‌లను శోధించండి</string>
+    <string name="search_wallpapers">వాల్‌పేపర్‌లను శోధించండి</string>
+    <string name="search_icons">ఐకాన్‌లను శోధించండి</string>
+    <string name="most_popular">చాలా జనప్రియ</string>
+    <string name="newest_themes">సరికొత్త థీమ్‌లు</string>
+    <string name="newest_wallpapers">సరికొత్త వాల్‌పేపర్‌లు</string>
+    <string name="newest_icons">సరికొత్త చిహ్నలు</string>
+    <string name="no_results_found_for">దీని కోసం ఫలితాలు కనుగొనబడలేదు\n\"%1$s\"</string>
+    <string name="categories">విభాగాలు</string>
+    <string name="first_fragment_label" translatable="false">First Fragment</string>
+    
+    <string name="second_fragment_label" translatable="false">Second Fragment</string>
+    
+    <string name="next">తర్వాత</string>
+    <string name="previous">మునుపటిది</string>
+    <string name="download">డౌన్‌లోడ్ చేయండి</string>
+    <string name="premium_theme">ప్రీమియం థీమ్</string>
+    <string name="watch_a_short_ad_for_free_access_upgrade_to_premium_for_unlimited_use">● ఉచితం ప్రాప్యత కోసం చిన్న ఆ్యడ్ చూడండి. \n● అపరిమిత ఉపయోగం కోసం ప్రీమియమ్‌కు అప్‌గ్రేడ్ చేయండి.</string>
+    <string name="watch_ad">ప్రకటనను చూడండి</string>
+    <string name="go_premium">ప్రీమియమ్‌కు వెళ్లండి</string>
+    <string name="downloading_please_wait_a_moment">డౌన్‌లోడ్ చేస్తోంది, దయచేసి కొద్ది క్షణం ఆపేకోండి …</string>
+    <string name="apply">వర్తించండి</string>
+    <string name="preview">ప్రివ్యూ</string>
+    <string name="set_wallpaper_as">వాల్‌పేపర్‌ను ఇలా సెట్ చేయండి</string>
+    <string name="home_screen">హోమ్ స్క్రీన్</string>
+    <string name="lock_screen">లాక్ స్క్రీన్</string>
+    <string name="both_home_lock_screen">హోమ్ &amp; లాక్ స్క్రీన్ రెండూ</string>
+    <string name="loading_please_wait_a_moment">లోడ్ చేస్తున్నాము, కొద్దిసేపు వేచి ఉండండి …</string>
+    <string name="loading">లోడ్ చేస్తోంది…</string>
+    <string name="reload">తిరిగి లోడ్ చేయండి</string>
+    <string name="could_not_load_content">కంటెంట్‌ను లోడ్ చేయలేకపోయాను</string>
+    <string name="server_error_message">ఏదో సరికాలేదు. దయచేసి మళ్లీ ప్రయత్నించండి!</string>
+    <string name="try_again">మళ్లీ ప్రయత్నించండి</string>
+    <string name="suggested_wallpapers">సూచించిన వాల్‌పేపర్‌లు</string>
+    <string name="applied">వర్తించబడింది</string>
+    <string name="loading_image">చిత్రం లోడ్ చేస్తోంది…</string>
+    <string name="download_failed">డౌన్‌లోడ్ విఫలమైంది</string>
+    <string name="my_gallery">నా గ్యాలరీ</string>
+    <string name="view_all">అందరినీ చూడండి</string>
+    <string name="this_action_may_show_ads">ఈ చర్య ప్రకటనలను కలిగి ఉండవచ్చు</string>
+    <string name="install">ఇన్‌స్టాల్ చేయండి</string>
+    <string name="install_all_icons">అన్ని చిహ్నాలను ఇన్‌స్టల్ చేయండి</string>
+    <string name="unlock_all_icons">అన్ని ఐకాన్‌లను అన్‌లాక్ చేయండి</string>
+    <string name="unlock">అన్‌లాక్ చేయండి</string>
+    <string name="choose">ఎంచుకోండి</string>
+    <string name="no_icons_to_install">ఇన్‌స్టల్ చేయడానికి చిహ్నాలు లేవు</string>
+    <string name="shortcut_install_requested">షార్ట్‌కట్ ఇన్‌స్టల్ అభ్యర్థించబడింది</string>
+    <string name="shortcut_install_failed">షార్టకట్‌ను ఇన్‌స్టాల్ చేయలేము</string>
+    <string name="select_app">యాప్‌ను ఎంచుకోండి</string>
+    <string name="cannot_open_target_app">టార్గెట్ అప్లికేషన్‌ను తెరవలేము</string>
+    <string name="shortcut_applied_successfully">షార్ట్‌కట్ విజయవంతంగా వర్తింపజేయబడింది!</string>
+    <string name="suggested_icons">సూచించిన ఐకాన్‌లు</string>
+    <string name="empty_gallery_title">మీ విభాగం ఖాళీగా ఉంది.</string>
+    <string name="empty_gallery_message">మీ ఖచ్చితమైన సెటప్‌ను రూపొందించడానికి వాల్‌పేపర్‌లు, నియంత్రణ మరియు చిహ్న ప్యాకేజీలను డౌన్‌లోడ్ చేయడం ప్రారంభించండి.</string>
+    <string name="setting">సెట్టింగ్</string>
+    <string name="language">భాష</string>
+    <string name="feedback">ప్రతిక్రియ</string>
+    <string name="privacy_policy">గోప్యతా విధానం</string>
+    <string name="feedback_email" translatable="false">support@wavez.com</string>
+    
+    <string name="privacy_policy_url" translatable="false">https://thinklifes.notion.site/Privacy-Policy-Prism-Wallpaper-Widget-Theme-3dffca1b75238095a9edfa6dc6923f54</string>
+    
+    <string name="collection">సంग్రహం</string>
+    <string name="get_themes">థీమ్‌లను పొందండి</string>
+    <string name="theme_saved">థీమ్ సংরక్షించబడింది</string>
+    <string name="theme_save_failed">థీమ్‌ను సేవ్ చేయలేకపోయాను</string>
+    <string name="successfully">విజయవంతంగా</string>
+    <string name="s_applied_successfully">%s విజయవంతంగా వర్తింపజేయబడింది!</string>
+    <string name="suggested_themes">సూచించిన థీమ్‌లు</string>
+    <string name="view_more_icon">మరిన్ని చిహ్నలను చూడండి</string>
+    <string name="shortcut">షార్టకట్</string>
+    <string name="no_internet_connection">ఇంటర్నెట్ కనెక్షన్ లేదు</string>
+    <string name="please_check_your_internet">దయచేసి మీ పరికరంలో ఇంటర్‌నెట్ సংযోగాన్ని తనిఖీ చేయండి</string>
+    <string name="go_to_settings">సెట్టింగ్‌ల కు వెళ్లండి</string>
+    <string name="please_select_your_language">దయచేసి మీ భాషను ఎంచుకోండి</string>
+    <string name="what_s_your_vibe">మీ వైబ్ ఏమిటి?</string>
+    <string name="select_option">దయచేసి కనీసం ఒక ఎంపికను ఎంచుకోండి</string>
+    <string name="anime">యానిమే</string>
+    <string name="aesthetics">సౌందర్యశాస్త్రం</string>
+    <string name="cute">かわいい 💕</string>
+    <string name="kpop" translatable="false">K-pop</string>
+    
+    <string name="obd_1_1_title">" చక్కటి థీమ్‌లు &amp; వాల్‌పేపర్‌లు"</string>
+    <string name="obd_1_2_title">క్యూరేట్ చేసిన సౌందర్య సంగ్రహాలతో మీ ఫోన్‌కు స్చ్ఛమైన మరియు స్టైలిష్ నতুన రూపం ఇవ్వండి.</string>
+    <string name="obd_2_1_title">ప్రతిটి వివరణను カస్టమైజ్ చేయండి</string>
+    <string name="obd_2_2_title">కేవలం కొన్ని ట్యాప్‌లలో వాల్‌పేపర్‌లు, కస్టమ్ యాప్ చిహ్నాలు మరియు స్టైలిష్ Control Center లేআউట్‌లను వర్తింపజేయండి.</string>
+    <string name="payment_failed">చెల్లింపు విఫలమైంది</string>
+    <string name="a_small_issue_stopped">చిన్న సమస్య చెల్లింపును ఆపివేసింది. దయచేసి మళ్లీ ప్రయత్నించండి</string>
+    <string name="payment_success">చెల్లింపు విజయవంతమైంది</string>
+    <string name="your_premium_version">మీ ప్రీమియం సంస్కరణ ఇప్పుడు క్రియాశీలమైంది. యాప్‌ను ఉపయోగించడం ఆనందించండి!</string>
+    <string name="got_it">సరే</string>
+    <string name="s_continue">కొనసాగించండి</string>
+    <string name="start_free_trial">ఉచిత ట్రయల్ ప్రారంభించండి</string>
+    <string name="unlock_premium">"ప్రీమియమ్‌ను అన్‌లాక్ చేయండి "</string>
+    <string name="_100_no_ads">100% ఎటువంటి ప్రకటనలు లేవు</string>
+    <string name="premium_themes">ప్రీమియం థీమ్‌లు</string>
+    <string name="unlimited_wallpapers">అపరిమిత వాల్‌పేపర్‌లు</string>
+    <string name="weekly">వారం</string>
+    <string name="monthly">నెలవారీ</string>
+    <string name="s_month">%s / నెల</string>
+    <string name="yearly">సంవత్సరానికి</string>
+    <string name="_3_day_free_trial">3-రోజుల ఉచిత ట్రయల్</string>
+    <string name="something_went_wrong">ఏదో తప్పు జరిగింది</string>
+    <string name="tv_des_failed_buy">దయచేసి ఈ దశను అనుసరించండి మరియు మళ్లీ ప్రయత్నించండి: \n 1. మీ నెట్‌వర్క్ కనెక్షన్‌ను తనిఖీ చేయండి \n 2. మీరు మీ Google ఖాతాలోకి లాగిన్ చేసారని నిশ్చితం చేయండి \n 3. మీరు Google play అప్లికేషన్‌ను అమలు చేయగలరని నిశ్చితం చేయండి</string>
+    <string name="cancel_anytime">ఎప్పుడైనా రద్దు చేయండి</string>
+    <string name="terms_of_use">ఉపయోగ నిబంధనలు</string>
+    <string name="we_d_love_to_hear_your">మా యాప్ గురించి మీ ప్రతిక్రియ వినడానికి మేము ఇష్టపడతాము! మీ ఇన్‌పుట్ అత్యంత విలువైనది మరియు అది మాకు యాప్‌ను మరింత మెరుగుగా చేయడానికి సహాయపడుతుంది.</string>
+    <string name="enter_your_feedback_here">ఇక్కడ మీ ప్రతిస్పందనను నమోదు చేయండి</string>
+    <string name="feed_back_empty">ప్రతిస్పందన ఖాళీ</string>
+    <string name="loading_reward_ads">రివార్డ్ ఆ్యడ్‌లను లోడ్ చేస్తోంది</string>
+    <string name="loading_reward_ads_failed">రివార్డ్ ప్రకటనలు లోడ్ చేయడం విఫలమైంది</string>
+    <string name="tv_des_failed_reward">క్షమించండి! రివార్డ్ ప్రకటనలను లోడ్ చేస్తున్నప్పుడు కొంత లోపం ఉంది. దయచేసి మళ్లీ ప్రయత్నించండి</string>
+    <string name="close">మూసివేయండి</string>
+    <string name="discard_changes">మార్పులను విస్మరించండి</string>
+    <string name="are_you_sure_you_want_to_discard_your_feedback">మీ ఫీడ్‌బ్యాక్‌ను విస్మరించాలనుకుంటున్నారా?</string>
+    <string name="keep_editing">సవరణ కొనసాగించండి</string>
+    <string name="discard">వదులుకోండి</string>
+    <string name="get_start">ప్రారంభించండి</string>
+</resources>

@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Prism Wallpaper</string>
+    <string name="cc_accessibility_description">Control Center-oorligplooi — aktiveer stelsel-wye trek-af-paneel vir vinnige skakelears</string>
+    <string name="screen_recording_channel">Bladopname</string>
+    <string name="screen_recording_title">Blad word opgeneem</string>
+    <string name="screen_recording_message">Tik Stop om opname te voltooi</string>
+    <string name="screen_recording_stop">Stop</string>
+    <string name="screen_recording_saved">Video gestoor</string>
+    <string name="screen_recording_notification_required">Gee asseblief toestemming vir kennisgewings om opnames te begin</string>
+    <string name="themes">Temas</string>
+    <string name="wallpapers">Agtergronde</string>
+    <string name="icons">Ikone</string>
+    <string name="hello_blank_fragment">Hallo leë fragment</string>
+    <string name="search_themes">Soek temas</string>
+    <string name="search_wallpapers">Soek behangpapiere</string>
+    <string name="search_icons">Soek ikone</string>
+    <string name="most_popular">Mees gewild</string>
+    <string name="newest_themes">Nuutste temas</string>
+    <string name="newest_wallpapers">Nuutste wallpapers</string>
+    <string name="newest_icons">Nuutste ikoontjies</string>
+    <string name="no_results_found_for">Geen resultate gevind vir\n\"%1$s\"</string>
+    <string name="categories">Kategorieë</string>
+    <string name="first_fragment_label" translatable="false">First Fragment</string>
+    
+    <string name="second_fragment_label" translatable="false">Second Fragment</string>
+    
+    <string name="next">Volgende</string>
+    <string name="previous">Vorige</string>
+    <string name="download">Laai af</string>
+    <string name="premium_theme">Premium Tema</string>
+    <string name="watch_a_short_ad_for_free_access_upgrade_to_premium_for_unlimited_use">● Kyk na \'n kort advertensie vir gratis toegang. \n● Opgradeer na Premium vir onbeperkte gebruik.</string>
+    <string name="watch_ad">Kyk na advertensie</string>
+    <string name="go_premium">Gaan Premium</string>
+    <string name="downloading_please_wait_a_moment">Laai tans af, wag asseblief \'n oomblik …</string>
+    <string name="apply">Pas toe</string>
+    <string name="preview">Voorskou</string>
+    <string name="set_wallpaper_as">Stel behangpapier as</string>
+    <string name="home_screen">Tuisblad</string>
+    <string name="lock_screen">Slotblad</string>
+    <string name="both_home_lock_screen">Beide Tuis &amp; Slotskerm</string>
+    <string name="loading_please_wait_a_moment">Laai tans, wag asseblief \'n oomblik …</string>
+    <string name="loading">Laai tans…</string>
+    <string name="reload">Herlaai</string>
+    <string name="could_not_load_content">Kon nie inhoud laai nie</string>
+    <string name="server_error_message">Iets het verkeerd gegaan. Probeer asseblief weer!</string>
+    <string name="try_again">Probeer weer</string>
+    <string name="suggested_wallpapers">Voorgestelde agtergronde</string>
+    <string name="applied">Toegepas</string>
+    <string name="loading_image">Laai beeld…</string>
+    <string name="download_failed">Aflaai het misluk</string>
+    <string name="my_gallery">My Galery</string>
+    <string name="view_all">Bekyk alles</string>
+    <string name="this_action_may_show_ads">Hierdie aksie kan advertensies bevat</string>
+    <string name="install">Installeer</string>
+    <string name="install_all_icons">Installeer alle ikone</string>
+    <string name="unlock_all_icons">Ontsluit alle ikone</string>
+    <string name="unlock">Ontsluit</string>
+    <string name="choose">Kies</string>
+    <string name="no_icons_to_install">Geen ikone beskikbaar om te installeer nie</string>
+    <string name="shortcut_install_requested">Kortpad-installasie aangevra</string>
+    <string name="shortcut_install_failed">Kon nie snarpad installeer nie</string>
+    <string name="select_app">Kies program</string>
+    <string name="cannot_open_target_app">Kan teikentoepassing nie oopmaak nie</string>
+    <string name="shortcut_applied_successfully">Kortpad is suksesvol toegepas!</string>
+    <string name="suggested_icons">Voorgestelde ikone</string>
+    <string name="empty_gallery_title">Jou kategorie is leeg.</string>
+    <string name="empty_gallery_message">Begin wallpapers, beheer en ikoontjies aflaai om jou perfekte opstelling te bou.</string>
+    <string name="setting">Instelling</string>
+    <string name="language">Taal</string>
+    <string name="feedback">Terugvoer</string>
+    <string name="privacy_policy">Privaatsbeleid</string>
+    <string name="feedback_email" translatable="false">support@wavez.com</string>
+    
+    <string name="privacy_policy_url" translatable="false">https://thinklifes.notion.site/Privacy-Policy-Prism-Wallpaper-Widget-Theme-3dffca1b75238095a9edfa6dc6923f54</string>
+    
+    <string name="collection">Versameling</string>
+    <string name="get_themes">Kry temas</string>
+    <string name="theme_saved">Tema gestoor</string>
+    <string name="theme_save_failed">Kon tema nie stoor nie</string>
+    <string name="successfully">Suksesvol</string>
+    <string name="s_applied_successfully">%s is suksesvol toegepas!</string>
+    <string name="suggested_themes">Voorgestelde temas</string>
+    <string name="view_more_icon">Bekyk meer ikoontjies</string>
+    <string name="shortcut">Snarpad</string>
+    <string name="no_internet_connection">Geen internetverbinding</string>
+    <string name="please_check_your_internet">Gaan asseblief jou internetverbinding op jou toestel na</string>
+    <string name="go_to_settings">Gaan na instellings</string>
+    <string name="please_select_your_language">Kies asseblief jou taal</string>
+    <string name="what_s_your_vibe">Wat is jou vibe?</string>
+    <string name="select_option">Kies asseblief ten minste een opsie</string>
+    <string name="anime">Anime</string>
+    <string name="aesthetics">Estetika</string>
+    <string name="cute">Snoepig</string>
+    <string name="kpop" translatable="false">K-pop</string>
+    
+    <string name="obd_1_1_title">" Mooi temas &amp; agtergronde"</string>
+    <string name="obd_1_2_title">Gee jou foon \'n skoon en stylvolle nuwe voorkoms met geselekteerde estetiese versamelings.</string>
+    <string name="obd_2_1_title">Pasmaak elke detail</string>
+    <string name="obd_2_2_title">Pas behangpapiere, pasgemaakte app-ikone en stylvolle Control Center-uitlegge in slegs \'n paar tikke toe.</string>
+    <string name="payment_failed">Betaling het misluk</string>
+    <string name="a_small_issue_stopped">Daar was \'n klein probleem met die betaling. Probeer asseblief weer</string>
+    <string name="payment_success">Betaling suksesvol</string>
+    <string name="your_premium_version">Jou Premium-weergawe is nou aktief. Geniet die gebruik van die program!</string>
+    <string name="got_it">Verstaan</string>
+    <string name="s_continue">Gaan voort</string>
+    <string name="start_free_trial">Begin Gratis Proefperiode</string>
+    <string name="unlock_premium">"Ontsluit Premium"</string>
+    <string name="_100_no_ads">100% Geen advertensies</string>
+    <string name="premium_themes">Premium temas</string>
+    <string name="unlimited_wallpapers">Onbeperkte agtergronde</string>
+    <string name="weekly">Weekliks</string>
+    <string name="monthly">Maandeliks</string>
+    <string name="s_month">%s / maand</string>
+    <string name="yearly">Jaarliks</string>
+    <string name="_3_day_free_trial">3-dae gratis proefperiode</string>
+    <string name="something_went_wrong">Iets het verkeerd gelui</string>
+    <string name="tv_des_failed_buy">Volg asseblief hierdie stap en probeer weer: \n 1. Kontroleer jou netwerkverbinding \n 2. Maak seker dat jy aangemeld is by jou Google-rekening \n 3. Maak seker dat jy die Google Play-toepassing kan uitvoer</string>
+    <string name="cancel_anytime">Kanselleer enige tyd</string>
+    <string name="terms_of_use">Gebruiksvoorwaardes</string>
+    <string name="we_d_love_to_hear_your">Ons hou van jou terugvoer oor ons app! Jou insette is ongeloflik waardevol en help ons die app nog beter vir jou maak.</string>
+    <string name="enter_your_feedback_here">Voer jou terugvoer hier in</string>
+    <string name="feed_back_empty">Terugvoer Leeg</string>
+    <string name="loading_reward_ads">Laai beloningsAdvertensies</string>
+    <string name="loading_reward_ads_failed">Laai van beloningsadvertensies het misluk</string>
+    <string name="tv_des_failed_reward">Jammer! Daar is \'n fout by die laai van beloningsadvertensies. Probeer asseblief weer</string>
+    <string name="close">Sluit</string>
+    <string name="discard_changes">Verwerp veranderinge</string>
+    <string name="are_you_sure_you_want_to_discard_your_feedback">Wil jy sekerlik jou terugvoer wegooien?</string>
+    <string name="keep_editing">Hou aan met redigering</string>
+    <string name="discard">Gooi weg</string>
+    <string name="get_start">Aan die slag</string>
+</resources>

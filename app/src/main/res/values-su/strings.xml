@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Prism Wallpaper</string>
+    <string name="cc_accessibility_description">Overlay Control Center — aktifkeun panél pull-down sistem pikeun toggle gancang</string>
+    <string name="screen_recording_channel">Parekaman layar</string>
+    <string name="screen_recording_title">Parekaman layar</string>
+    <string name="screen_recording_message">Ketok Stop pikeun néndesan rekaman</string>
+    <string name="screen_recording_stop">Eureun</string>
+    <string name="screen_recording_saved">Vidéo disimpen</string>
+    <string name="screen_recording_notification_required">Mangga otorisasi idin notifikasi pikeun ngamimitian parekaman</string>
+    <string name="themes">Téma</string>
+    <string name="wallpapers">Wallpaper</string>
+    <string name="icons">Ikon</string>
+    <string name="hello_blank_fragment">Halo fragmen kosong</string>
+    <string name="search_themes">Sungsi téma</string>
+    <string name="search_wallpapers">Sungsi wallpaper</string>
+    <string name="search_icons">Pilarian ikon</string>
+    <string name="most_popular">Paling populér</string>
+    <string name="newest_themes">Téma panganyar</string>
+    <string name="newest_wallpapers">Wallpaper panganyar</string>
+    <string name="newest_icons">Ikon panganyar</string>
+    <string name="no_results_found_for">Teu aya hasil dipilarian pikeun\n\"%1$s\"</string>
+    <string name="categories">Kategori</string>
+    <string name="first_fragment_label" translatable="false">First Fragment</string>
+    
+    <string name="second_fragment_label" translatable="false">Second Fragment</string>
+    
+    <string name="next">Salajengna</string>
+    <string name="previous">Saméméh</string>
+    <string name="download">Unggel</string>
+    <string name="premium_theme">Tema Premium</string>
+    <string name="watch_a_short_ad_for_free_access_upgrade_to_premium_for_unlimited_use">● Tingal hiji iklan pondok pikeun akses gratis. \n● Tingkatkeun kana Premium pikeun pamakéan tanpa wates.</string>
+    <string name="watch_ad">Tingali iklan</string>
+    <string name="go_premium">Jadi Premium</string>
+    <string name="downloading_please_wait_a_moment">Ngunggel, mangga antosan sakedap …</string>
+    <string name="apply">Terapkeun</string>
+    <string name="preview">Pratinjau</string>
+    <string name="set_wallpaper_as">Tetapkeun Wallpaper salaku</string>
+    <string name="home_screen">Layar Utama</string>
+    <string name="lock_screen">Layar Gembok</string>
+    <string name="both_home_lock_screen">Duanana Layar Rumah &amp; Layar Kunci</string>
+    <string name="loading_please_wait_a_moment">Keurs muat, mangga antosan satanapi… </string>
+    <string name="loading">Muat…</string>
+    <string name="reload">Muat Ulang</string>
+    <string name="could_not_load_content">Taya bisa muat eusi</string>
+    <string name="server_error_message">Aya anu lepat. Mangga coba deui!</string>
+    <string name="try_again">Coba Deui</string>
+    <string name="suggested_wallpapers">Wallpaper anu disarankeun</string>
+    <string name="applied">Geus Diterapkeun</string>
+    <string name="loading_image">Muat gambar…</string>
+    <string name="download_failed">Unduhan gagal</string>
+    <string name="my_gallery">Galeri Abdi</string>
+    <string name="view_all">Tingali sadayana</string>
+    <string name="this_action_may_show_ads">Aksi ieu bisa nunjukkeun iklan</string>
+    <string name="install">Pasang</string>
+    <string name="install_all_icons">Pasang sadaya ikon</string>
+    <string name="unlock_all_icons">Buka kunci sadaya ikon</string>
+    <string name="unlock">Buka</string>
+    <string name="choose">Pilih</string>
+    <string name="no_icons_to_install">Teu aya ikon pikeun dipasang</string>
+    <string name="shortcut_install_requested">Pamundut pasang shortcut</string>
+    <string name="shortcut_install_failed">Teu bisa masang pintas</string>
+    <string name="select_app">Pilih aplikasi</string>
+    <string name="cannot_open_target_app">Teu bisa muka aplikasi target</string>
+    <string name="shortcut_applied_successfully">Shortcut diterapkeun kasanggeus!</string>
+    <string name="suggested_icons">Ikon anu disarankeun</string>
+    <string name="empty_gallery_title">Kategori anjeun kosong.</string>
+    <string name="empty_gallery_message">Mimitian ngunggah wallpaper, kontrol, sareng pak ikon pikeun ngawangun setup anu sampurna anjeun.</string>
+    <string name="setting">Setélan</string>
+    <string name="language">Bahasa</string>
+    <string name="feedback">Umpalan</string>
+    <string name="privacy_policy">Kabijakan privasi</string>
+    <string name="feedback_email" translatable="false">support@wavez.com</string>
+    
+    <string name="privacy_policy_url" translatable="false">https://thinklifes.notion.site/Privacy-Policy-Prism-Wallpaper-Widget-Theme-3dffca1b75238095a9edfa6dc6923f54</string>
+    
+    <string name="collection">Koléksi</string>
+    <string name="get_themes">Meunang tema</string>
+    <string name="theme_saved">Tema disimpen</string>
+    <string name="theme_save_failed">Taya bisa neundeun tém</string>
+    <string name="successfully">Kasanggeus</string>
+    <string name="s_applied_successfully">%s diterapkeun kasanggeus!</string>
+    <string name="suggested_themes">Téma nu disarankeun</string>
+    <string name="view_more_icon">Tingali ikon lengkap</string>
+    <string name="shortcut">Pintas</string>
+    <string name="no_internet_connection">Taya Sambungan Internét</string>
+    <string name="please_check_your_internet">Mangga pariksa sambungan internét anjeun dina alat anjeun</string>
+    <string name="go_to_settings">Buka pangaturan</string>
+    <string name="please_select_your_language">Mangga pilih basa anjeun</string>
+    <string name="what_s_your_vibe">Naon vibe anjeun?</string>
+    <string name="select_option">Mangga pilih sahenteuna hiji pilihan</string>
+    <string name="anime">Anime</string>
+    <string name="aesthetics">Estetika</string>
+    <string name="cute">Lucu</string>
+    <string name="kpop" translatable="false">K-pop</string>
+    
+    <string name="obd_1_1_title">" Tém &amp; Wallpaper Anu Saé"</string>
+    <string name="obd_1_2_title">Berkeun telepon anjeun tampilan anyar anu bersih jeung bergaya kalayan koleksi estetika anu dikurasi.</string>
+    <string name="obd_2_1_title">Kostumisasi Unggal Détail</string>
+    <string name="obd_2_2_title">Terapkeun wallpaper, ikon aplikasi custom, sareng susun Control Center anu stylish ngan dina sababaraha ketok.</string>
+    <string name="payment_failed">Pamayaran Gagal</string>
+    <string name="a_small_issue_stopped">Masalah leutik ngahalangan pamayaran. Coba deui</string>
+    <string name="payment_success">Pamayaran Suksés</string>
+    <string name="your_premium_version">Versi Premium anjeun ayeuna aktip. Nikmati ngagunakeun aplikasina!</string>
+    <string name="got_it">Geus ieu</string>
+    <string name="s_continue">Lanjutkeun</string>
+    <string name="start_free_trial">Mimitian Uji Coba Gratis</string>
+    <string name="unlock_premium">"Buka Kunci Premium "</string>
+    <string name="_100_no_ads">100% Tanpa Iklan</string>
+    <string name="premium_themes">Tém Premium</string>
+    <string name="unlimited_wallpapers">Wallpaper Taya Wates</string>
+    <string name="weekly">Mingguan</string>
+    <string name="monthly">Bulanan</string>
+    <string name="s_month">%s / bulan</string>
+    <string name="yearly">Taunan</string>
+    <string name="_3_day_free_trial">Uji coba gratis 3 poé</string>
+    <string name="something_went_wrong">Aya anu lepat</string>
+    <string name="tv_des_failed_buy">Mangga turuti léngkah ieu sareng coba deui: \n 1. Pariksa sambungan jaringan anjeun \n 2. Pastikan anjeun asup kana akun Google anjeun \n 3. Pastikan anjeun tiasa ngajalankeun aplikasi Google Play</string>
+    <string name="cancel_anytime">Bisa dibatalkeun anjeun</string>
+    <string name="terms_of_use">Kalepatan panggunaan</string>
+    <string name="we_d_love_to_hear_your">Kami senang mandi umpalan anjeun ngeunaan aplikasi kami! Input anjeun sangat berharga sareng ngabantosan kami ningkatkeun aplikasi pikeun anjeun.</string>
+    <string name="enter_your_feedback_here">Ketik umpan balik anjeun di dieu</string>
+    <string name="feed_back_empty">Umpan Balik Kosong</string>
+    <string name="loading_reward_ads">Muat iklan ganjaran</string>
+    <string name="loading_reward_ads_failed">Gagal memuat iklan reward</string>
+    <string name="tv_des_failed_reward">Hatur nuhun! Aya sababaraha kasalahan nalika muat iklan reward. Mangga coba deui</string>
+    <string name="close">Tutup</string>
+    <string name="discard_changes">Buang parobahan</string>
+    <string name="are_you_sure_you_want_to_discard_your_feedback">Naha anjeun yakin hoyong buang umpan balik anjeun?</string>
+    <string name="keep_editing">Teras ngédit</string>
+    <string name="discard">Tumpak</string>
+    <string name="get_start">Mula Heula</string>
+</resources>

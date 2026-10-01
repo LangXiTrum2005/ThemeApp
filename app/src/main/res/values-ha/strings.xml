@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Prism Wallpaper</string>
+    <string name="cc_accessibility_description">Control Center overlay — yana kunna tsarin jujjuyawar talla domin saurin togawa</string>
+    <string name="screen_recording_channel">Ricin gida</string>
+    <string name="screen_recording_title">Ricin gida</string>
+    <string name="screen_recording_message">Taɓa Tsayarwa don gama yin rikodin</string>
+    <string name="screen_recording_stop">Tsaya</string>
+    <string name="screen_recording_saved">An ajiye bidiyo</string>
+    <string name="screen_recording_notification_required">Da fatan ba da izinin sanarwa don fara rikodin</string>
+    <string name="themes">Jigogi</string>
+    <string name="wallpapers">Bangare</string>
+    <string name="icons">Abubuwan ikon</string>
+    <string name="hello_blank_fragment">Sannu blank fragment</string>
+    <string name="search_themes">Nemi jigogi</string>
+    <string name="search_wallpapers">Nemi wallapepa</string>
+    <string name="search_icons">Nemi icons</string>
+    <string name="most_popular">Mafi sani</string>
+    <string name="newest_themes">Sabon jigogi</string>
+    <string name="newest_wallpapers">Sabuwar wallpapers</string>
+    <string name="newest_icons">Sabuwar icons</string>
+    <string name="no_results_found_for">Ba an sami sakamakon ga\n\"%1$s\"</string>
+    <string name="categories">Nau\'ikan</string>
+    <string name="first_fragment_label" translatable="false">First Fragment</string>
+    
+    <string name="second_fragment_label" translatable="false">Second Fragment</string>
+    
+    <string name="next">Gaba</string>
+    <string name="previous">Jiya</string>
+    <string name="download">Zua</string>
+    <string name="premium_theme">Jigo Premium</string>
+    <string name="watch_a_short_ad_for_free_access_upgrade_to_premium_for_unlimited_use">● Kalli a takoici ad domin samun sakattawa kyauta. \n● Dagawa zuwa Premium domin amfani ba tare da iyaka ba.</string>
+    <string name="watch_ad">Kallo talla</string>
+    <string name="go_premium">Tafi Premium</string>
+    <string name="downloading_please_wait_a_moment">Aiki na zua, jiya ku dakata …</string>
+    <string name="apply">Aiki</string>
+    <string name="preview">Duba</string>
+    <string name="set_wallpaper_as">Saita Wallapeper a matsayin</string>
+    <string name="home_screen">Gida Gida</string>
+    <string name="lock_screen">Kulle Gida</string>
+    <string name="both_home_lock_screen">Duka Gida &amp; Kullin Yakka</string>
+    <string name="loading_please_wait_a_moment">Ana loda, da fatan jira lokaci guda …</string>
+    <string name="loading">Ana loda…</string>
+    <string name="reload">Sake zua</string>
+    <string name="could_not_load_content">Ba za a iya zua abun ba</string>
+    <string name="server_error_message">Wani abu ya dace. Da fatan ka sake gwada!</string>
+    <string name="try_again">Sake gwada</string>
+    <string name="suggested_wallpapers">Wallpapers da aka ba da shawarar</string>
+    <string name="applied">An aiki</string>
+    <string name="loading_image">Ana loda hoton…</string>
+    <string name="download_failed">Zazzage ya kasa</string>
+    <string name="my_gallery">Gida na Gida</string>
+    <string name="view_all">Dubo duka</string>
+    <string name="this_action_may_show_ads">Wannan aikin na iya nuna talla</string>
+    <string name="install">Saka</string>
+    <string name="install_all_icons">Shiryarwa dukan abubuwan ikon</string>
+    <string name="unlock_all_icons">Buɗe duk icons</string>
+    <string name="unlock">Buɗe</string>
+    <string name="choose">Zaɓi</string>
+    <string name="no_icons_to_install">Babu abubuwan ikon da za a shiryarwa</string>
+    <string name="shortcut_install_requested">An bukaci shiryarwar takaici</string>
+    <string name="shortcut_install_failed">Ba a iya shiga takaice hanya ba</string>
+    <string name="select_app">Zaɓi app</string>
+    <string name="cannot_open_target_app">Ba a iya buɗe app iyakaci ba</string>
+    <string name="shortcut_applied_successfully">An yi amfani da takaici cikin nasara!</string>
+    <string name="suggested_icons">Icons da aka ba da shawarar</string>
+    <string name="empty_gallery_title">Catergori ku babu abin da ke ciki.</string>
+    <string name="empty_gallery_message">Fara saukar wallpapers, control, da icon packs don gina abun ka takaitawa.</string>
+    <string name="setting">Saita</string>
+    <string name="language">Harshe</string>
+    <string name="feedback">Rahowar nau\'i</string>
+    <string name="privacy_policy">Inabi-inabinta sirri</string>
+    <string name="feedback_email" translatable="false">support@wavez.com</string>
+    
+    <string name="privacy_policy_url" translatable="false">https://thinklifes.notion.site/Privacy-Policy-Prism-Wallpaper-Widget-Theme-3dffca1b75238095a9edfa6dc6923f54</string>
+    
+    <string name="collection">Tarin</string>
+    <string name="get_themes">Samu jigogi</string>
+    <string name="theme_saved">Jigon ajiye</string>
+    <string name="theme_save_failed">Ba za a iya kayar theme ba</string>
+    <string name="successfully">Cikin nasara</string>
+    <string name="s_applied_successfully">%s an yi amfani da shi cikin nasara!</string>
+    <string name="suggested_themes">Jigogi da aka shawaranci</string>
+    <string name="view_more_icon">Dubo ƙarin icon</string>
+    <string name="shortcut">Takaice hanya</string>
+    <string name="no_internet_connection">Babu Haɗin Intanet</string>
+    <string name="please_check_your_internet">Da fatan za a bincika haɗin intanet a kan na\'urin ku</string>
+    <string name="go_to_settings">Je zuwa saitunan</string>
+    <string name="please_select_your_language">Da fatan zaɓi harshenka</string>
+    <string name="what_s_your_vibe">Menene damuwa ku?</string>
+    <string name="select_option">Da fatan zaɓi aƙalla zaɓi daya</string>
+    <string name="anime">Anime</string>
+    <string name="aesthetics">Kyau-kyau</string>
+    <string name="cute">Kaɗai</string>
+    <string name="kpop" translatable="false">K-pop</string>
+    
+    <string name="obd_1_1_title">" Magaganan Themes &amp; Wallpapers"</string>
+    <string name="obd_1_2_title">Ba wa Android mumumuzu sauyi mai kyau da salo tare da tsammanin ƙa\'idoji masu kyau.</string>
+    <string name="obd_2_1_title">Daidaita Kowane Tafiya</string>
+    <string name="obd_2_2_title">Saita wallapepa, abubuwan saka ikon na aiki, da sassa na Control Center masu style a cikin ƴan taɓoɓɓu.</string>
+    <string name="payment_failed">Bayani ya kasa</string>
+    <string name="a_small_issue_stopped">Ƙaramin matsala ta dakatar da kudin. Da fatan za a sake gwada</string>
+    <string name="payment_success">Bayani Nasara</string>
+    <string name="your_premium_version">Abin Premium na yanzu yana aiki. Sha\'awa aiki da app!</string>
+    <string name="got_it">Na gane</string>
+    <string name="s_continue">Ci gaba</string>
+    <string name="start_free_trial">Fara Gwaje Kyauta</string>
+    <string name="unlock_premium">"Buɗe Premium "</string>
+    <string name="_100_no_ads">100% Babu Jingirau</string>
+    <string name="premium_themes">Jigogon Premium</string>
+    <string name="unlimited_wallpapers">Wallpapers Marasa iyaka</string>
+    <string name="weekly">Jiya</string>
+    <string name="monthly">Kowane wata</string>
+    <string name="s_month">%s / wata</string>
+    <string name="yearly">Shekara-shekara</string>
+    <string name="_3_day_free_trial">Gwaje kyauta na rana 3</string>
+    <string name="something_went_wrong">Wani abu ya yi karya</string>
+    <string name="tv_des_failed_buy">Da fatan karɓi wannan mataki kuma sai ka gwada kalin: \n 1. Baje jiyya haɗin sadarwa \n 2. Tabbatar da cewa ka shiga asusun Google \n 3. Tabbatar da cewa zaka iya gudnatawa da aikin Google play</string>
+    <string name="cancel_anytime">Soke a kowane lokaci</string>
+    <string name="terms_of_use">Shartukan amfani</string>
+    <string name="we_d_love_to_hear_your">Muna jin daɗin jin rahowar ku game da aikinmu! Haƙoƙinku yana da muhimmanci sosai kuma yana taimaka mana taimaka maka.</string>
+    <string name="enter_your_feedback_here">Shigar da alhabar ku ici</string>
+    <string name="feed_back_empty">Alhabar Cicewa Wofi</string>
+    <string name="loading_reward_ads">Ana loda kuɗi ads</string>
+    <string name="loading_reward_ads_failed">Aiki na dakin jingirau na gajiya ya kasa</string>
+    <string name="tv_des_failed_reward">Jiya! Akwai wasu kurakurai a lokacin loda talla ta gida. Da fatan sai ka gwada kalin</string>
+    <string name="close">Rufe</string>
+    <string name="discard_changes">Sauke sauye-sauye</string>
+    <string name="are_you_sure_you_want_to_discard_your_feedback">Kana tabbata kana so ka soke abin da ka ce?</string>
+    <string name="keep_editing">Ci gaba da gyara</string>
+    <string name="discard">Jefar</string>
+    <string name="get_start">Fara</string>
+</resources>

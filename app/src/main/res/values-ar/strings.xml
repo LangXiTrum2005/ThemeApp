@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Prism Wallpaper</string>
+    <string name="cc_accessibility_description">Control Center overlay — تفعّل لوحة قابلة للسحب من الأعلى على مستوى النظام لتبديلات سريعة</string>
+    <string name="screen_recording_channel">تسجيل الشاشة</string>
+    <string name="screen_recording_title">تسجيل الشاشة</string>
+    <string name="screen_recording_message">اضغط إيقاف لإنهاء التسجيل</string>
+    <string name="screen_recording_stop">إيقاف</string>
+    <string name="screen_recording_saved">تم حفظ الفيديو</string>
+    <string name="screen_recording_notification_required">يرجى السماح بإذن الإشعارات لبدء التسجيل</string>
+    <string name="themes">المظاهر</string>
+    <string name="wallpapers">خلفيات الشاشة</string>
+    <string name="icons">الأيقونات</string>
+    <string name="hello_blank_fragment">مرحبا بك في الشاشة الفارغة</string>
+    <string name="search_themes">البحث عن المظاهر</string>
+    <string name="search_wallpapers">البحث عن الخلفيات</string>
+    <string name="search_icons">ابحث عن الأيقونات</string>
+    <string name="most_popular">الأكثر شيوعاً</string>
+    <string name="newest_themes">أحدث المظاهر</string>
+    <string name="newest_wallpapers">أحدث الخلفيات</string>
+    <string name="newest_icons">أحدث الرموز</string>
+    <string name="no_results_found_for">لم يتم العثور على نتائج لـ\n\"%1$s\"</string>
+    <string name="categories">الفئات</string>
+    <string name="first_fragment_label" translatable="false">First Fragment</string>
+    
+    <string name="second_fragment_label" translatable="false">Second Fragment</string>
+    
+    <string name="next">التالي</string>
+    <string name="previous">السابق</string>
+    <string name="download">تحميل</string>
+    <string name="premium_theme">موضوع Premium</string>
+    <string name="watch_a_short_ad_for_free_access_upgrade_to_premium_for_unlimited_use">● شاهد إعلاناً قصيراً للوصول المجاني. \n● الترقية إلى Premium للاستخدام غير المحدود.</string>
+    <string name="watch_ad">شاهد إعلاناً</string>
+    <string name="go_premium">اشترك في Premium</string>
+    <string name="downloading_please_wait_a_moment">جاري التحميل، يرجى الانتظار قليلاً …</string>
+    <string name="apply">تطبيق</string>
+    <string name="preview">معاينة</string>
+    <string name="set_wallpaper_as">اضبط الخلفية كـ</string>
+    <string name="home_screen">الشاشة الرئيسية</string>
+    <string name="lock_screen">شاشة القفل</string>
+    <string name="both_home_lock_screen">الشاشة الرئيسية وشاشة القفل معاً</string>
+    <string name="loading_please_wait_a_moment">جاري التحميل، يرجى الانتظار قليلاً …</string>
+    <string name="loading">جاري التحميل…</string>
+    <string name="reload">إعادة تحميل</string>
+    <string name="could_not_load_content">لم يتمكن من تحميل المحتوى</string>
+    <string name="server_error_message">حدث خطأ ما. يرجى المحاولة مرة أخرى!</string>
+    <string name="try_again">حاول مرة أخرى</string>
+    <string name="suggested_wallpapers">خلفيات الشاشة المقترحة</string>
+    <string name="applied">تم التطبيق</string>
+    <string name="loading_image">جاري تحميل الصورة…</string>
+    <string name="download_failed">فشل التنزيل</string>
+    <string name="my_gallery">معرضي</string>
+    <string name="view_all">عرض الكل</string>
+    <string name="this_action_may_show_ads">قد يحتوي هذا الإجراء على إعلانات</string>
+    <string name="install">تثبيت</string>
+    <string name="install_all_icons">تثبيت جميع الأيقونات</string>
+    <string name="unlock_all_icons">فتح جميع الأيقونات</string>
+    <string name="unlock">فتح</string>
+    <string name="choose">اختر</string>
+    <string name="no_icons_to_install">لا توجد أيقونات متاحة للتثبيت</string>
+    <string name="shortcut_install_requested">تم طلب تثبيت الاختصار</string>
+    <string name="shortcut_install_failed">تعذر تثبيت الاختصار</string>
+    <string name="select_app">اختر التطبيق</string>
+    <string name="cannot_open_target_app">لا يمكن فتح التطبيق المستهدف</string>
+    <string name="shortcut_applied_successfully">تم تطبيق الاختصار بنجاح!</string>
+    <string name="suggested_icons">الأيقونات المقترحة</string>
+    <string name="empty_gallery_title">فئتك فارغة.</string>
+    <string name="empty_gallery_message">ابدأ بتحميل الخلفيات والتحكم وحزم الرموز لبناء إعدادك المثالي.</string>
+    <string name="setting">الإعداد</string>
+    <string name="language">اللغة</string>
+    <string name="feedback">تعليقاتك</string>
+    <string name="privacy_policy">سياسة الخصوصية</string>
+    <string name="feedback_email" translatable="false">support@wavez.com</string>
+    
+    <string name="privacy_policy_url" translatable="false">https://thinklifes.notion.site/Privacy-Policy-Prism-Wallpaper-Widget-Theme-3dffca1b75238095a9edfa6dc6923f54</string>
+    
+    <string name="collection">المجموعة</string>
+    <string name="get_themes">احصل على المزيد من المواضيع</string>
+    <string name="theme_saved">تم حفظ المظهر</string>
+    <string name="theme_save_failed">فشل حفظ المظهر</string>
+    <string name="successfully">بنجاح</string>
+    <string name="s_applied_successfully">تم تطبيق %s بنجاح!</string>
+    <string name="suggested_themes">المظاهر المقترحة</string>
+    <string name="view_more_icon">عرض المزيد من الرموز</string>
+    <string name="shortcut">اختصار</string>
+    <string name="no_internet_connection">لا توجد اتصال إنترنت</string>
+    <string name="please_check_your_internet">يرجى التحقق من اتصال الإنترنت على جهازك</string>
+    <string name="go_to_settings">انتقل إلى الإعدادات</string>
+    <string name="please_select_your_language">يرجى اختيار لغتك</string>
+    <string name="what_s_your_vibe">ما طراز أسلوبك؟ ✨</string>
+    <string name="select_option">يرجى اختيار خيار واحد على الأقل</string>
+    <string name="anime">Anime</string>
+    <string name="aesthetics">الجماليات</string>
+    <string name="cute">لطيف</string>
+    <string name="kpop" translatable="false">K-pop</string>
+    
+    <string name="obd_1_1_title">"مواضيع وخلفيات رائعة"</string>
+    <string name="obd_1_2_title">امنح هاتفك مظهراً جديداً نظيفاً وأنيقاً مع مجموعات جمالية منتقاة.</string>
+    <string name="obd_2_1_title">خصّص كل تفصيلة</string>
+    <string name="obd_2_2_title">طبّق الخلفيات وأيقونات التطبيقات المخصصة وتخطيطات Control Center الأنيقة بنقرات قليلة فقط.</string>
+    <string name="payment_failed">فشل الدفع</string>
+    <string name="a_small_issue_stopped">حدث خطأ صغير أثناء الدفع. يرجى المحاولة مرة أخرى</string>
+    <string name="payment_success">نجاح الدفع</string>
+    <string name="your_premium_version">نسختك المتميزة نشطة الآن. استمتع باستخدام التطبيق!</string>
+    <string name="got_it">حسناً</string>
+    <string name="s_continue">متابعة</string>
+    <string name="start_free_trial">ابدأ النسخة التجريبية المجانية</string>
+    <string name="unlock_premium">"فتح Premium "</string>
+    <string name="_100_no_ads">100% بدون إعلانات</string>
+    <string name="premium_themes">المواضيع المتميزة</string>
+    <string name="unlimited_wallpapers">خلفيات شاشة غير محدودة</string>
+    <string name="weekly">أسبوعي</string>
+    <string name="monthly">شهري</string>
+    <string name="s_month">%s / شهر</string>
+    <string name="yearly">سنوياً</string>
+    <string name="_3_day_free_trial">نسخة تجريبية مجانية لمدة 3 أيام</string>
+    <string name="something_went_wrong">حدث خطأ ما</string>
+    <string name="tv_des_failed_buy">يرجى اتباع هذه الخطوات والمحاولة مرة أخرى: \n 1. تحقق من اتصال الشبكة الخاص بك \n 2. تأكد من تسجيل دخولك إلى حسابك على Google \n 3. تأكد من أنه يمكنك تشغيل تطبيق Google Play</string>
+    <string name="cancel_anytime">إلغاء في أي وقت</string>
+    <string name="terms_of_use">شروط الاستخدام</string>
+    <string name="we_d_love_to_hear_your">نود سماع آرائك عن تطبيقنا! ملاحظاتك قيّمة جداً وتساعدنا على تحسين التطبيق أكثر لك.</string>
+    <string name="enter_your_feedback_here">أدخل ملاحظاتك هنا</string>
+    <string name="feed_back_empty">الملاحظات فارغة</string>
+    <string name="loading_reward_ads">جاري تحميل الإعلانات المجزية</string>
+    <string name="loading_reward_ads_failed">فشل تحميل الإعلانات المكافأة</string>
+    <string name="tv_des_failed_reward">آسفاً! حدث خطأ ما عند تحميل إعلانات المكافآت. يرجى المحاولة مرة أخرى</string>
+    <string name="close">إغلاق</string>
+    <string name="discard_changes">تجاهل التغييرات</string>
+    <string name="are_you_sure_you_want_to_discard_your_feedback">هل أنت متأكد أنك تريد تجاهل ملاحظاتك؟</string>
+    <string name="keep_editing">متابعة التعديل</string>
+    <string name="discard">رفض</string>
+    <string name="get_start">ابدأ الآن</string>
+</resources>

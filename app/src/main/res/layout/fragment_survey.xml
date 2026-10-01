@@ -11,9 +11,11 @@
   -->
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/bg_main"
+    android:background="@android:color/transparent"
     android:orientation="vertical">
 
     <!-- AdsHub: slot neo cứng NGOÀI vùng scroll, không bao giờ đè nội dung -->
@@ -23,32 +25,36 @@
         android:layout_height="wrap_content"
         android:tag="ads_slot:onb1_slot_top" />
 
-    <LinearLayout xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:orientation="vertical"
-        android:paddingTop="16dp">
+        android:background="@android:color/transparent">
 
         <TextView
-            style="@style/NunitoBold.24"
+            android:id="@+id/tvTitle"
+            style="@style/NunitoExtraBold.24"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="22dp"
-            android:layout_marginTop="8dp"
-            android:text="@string/survey_title"
-            android:textColor="@color/text_primary" />
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginTop="20dp"
+            android:gravity="center"
+            android:text="@string/what_s_your_vibe"
+            android:textAlignment="center"
+            android:textColor="@color/primary_high_em"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvOptions"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_marginHorizontal="16dp"
+            android:layout_marginHorizontal="10dp"
             android:layout_marginTop="16dp"
-            android:layout_weight="1"
+            android:clipToPadding="false"
             android:nestedScrollingEnabled="false"
             app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+            app:layout_constraintBottom_toTopOf="@+id/btnNext"
+            app:layout_constraintTop_toBottomOf="@+id/tvTitle"
             app:spanCount="2"
             tools:itemCount="4"
             tools:listitem="@layout/item_survey_option" />
@@ -56,34 +62,42 @@
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/btnNext"
             style="@style/NunitoBold.16"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/bg_button_next"
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginBottom="28dp"
+            android:background="@drawable/state_button_next"
+            android:clickable="true"
+            android:focusable="true"
             android:gravity="center"
-            android:paddingHorizontal="12dp"
-            android:paddingVertical="6dp"
-            android:layout_gravity="end"
-            android:layout_marginHorizontal="16dp"
-            android:layout_marginVertical="16dp"
-            android:text="@string/onboarding_next"
+            android:paddingVertical="14dp"
+            android:text="@string/next"
             android:textAllCaps="false"
-            android:textColor="@color/accent"
-            android:visibility="invisible" />
+            android:textColor="@color/white"
+            app:layout_constraintBottom_toTopOf="@+id/adsLanSlots" />
 
         <!-- AdsHub: vị trí CUỐI content. adsSlotOnb1ClickEnd cố ý KHÔNG gắn tag —
              trạng thái sau khi user chọn option đầu tiên render tay. -->
-        <FrameLayout
-            android:id="@+id/adsSlotOnb1End"
+        <LinearLayout
+            android:id="@+id/adsLanSlots"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:tag="ads_slot:onb1_slot_end" />
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="parent">
 
-        <FrameLayout
-            android:id="@+id/adsSlotOnb1ClickEnd"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            <FrameLayout
+                android:id="@+id/adsSlotOnb1End"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:tag="ads_slot:onb1_slot_end" />
 
-    </LinearLayout>
+            <FrameLayout
+                android:id="@+id/adsSlotOnb1ClickEnd"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <FrameLayout
         android:id="@+id/onb1SlotBottom"

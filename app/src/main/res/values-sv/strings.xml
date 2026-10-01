@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Prism Wallpaper</string>
+    <string name="cc_accessibility_description">Control Center-överlagring — aktiverar systemomfattande pull-down-panel för snabbknappar</string>
+    <string name="screen_recording_channel">Skärminspelning</string>
+    <string name="screen_recording_title">Inspelning av skärm</string>
+    <string name="screen_recording_message">Tryck Stopp för att avsluta inspelningen</string>
+    <string name="screen_recording_stop">Stopp</string>
+    <string name="screen_recording_saved">Video sparad</string>
+    <string name="screen_recording_notification_required">Tillåt aviseringsbehörighet för att börja spela in</string>
+    <string name="themes">Teman</string>
+    <string name="wallpapers">Bakgrunder</string>
+    <string name="icons">Ikoner</string>
+    <string name="hello_blank_fragment">Hej tomt fragment</string>
+    <string name="search_themes">Sök teman</string>
+    <string name="search_wallpapers">Sök bakgrunder</string>
+    <string name="search_icons">Sök ikoner</string>
+    <string name="most_popular">Mest populär</string>
+    <string name="newest_themes">Nyaste teman</string>
+    <string name="newest_wallpapers">Senaste bakgrunderna</string>
+    <string name="newest_icons">Senaste ikonerna</string>
+    <string name="no_results_found_for">Inga resultat hittade för\n\"%1$s\"</string>
+    <string name="categories">Kategorier</string>
+    <string name="first_fragment_label" translatable="false">First Fragment</string>
+    
+    <string name="second_fragment_label" translatable="false">Second Fragment</string>
+    
+    <string name="next">Nästa</string>
+    <string name="previous">Föregående</string>
+    <string name="download">Ladda ned</string>
+    <string name="premium_theme">Premiumtema</string>
+    <string name="watch_a_short_ad_for_free_access_upgrade_to_premium_for_unlimited_use">● Titta på en kort annons för gratis åtkomst. \n● Uppgradera till Premium för obegränsad användning.</string>
+    <string name="watch_ad">Se annons</string>
+    <string name="go_premium">Gå Premium</string>
+    <string name="downloading_please_wait_a_moment">Laddar ned, vänta ett ögonblick …</string>
+    <string name="apply">Verkställ</string>
+    <string name="preview">Förhandsvisning</string>
+    <string name="set_wallpaper_as">Ange bakgrund som</string>
+    <string name="home_screen">Startskärm</string>
+    <string name="lock_screen">Låsskärm</string>
+    <string name="both_home_lock_screen">Både hemskärm och låsskärm</string>
+    <string name="loading_please_wait_a_moment">Läser in, vänta ett ögonblick …</string>
+    <string name="loading">Laddar…</string>
+    <string name="reload">Ladda om</string>
+    <string name="could_not_load_content">Kunde inte ladda innehåll</string>
+    <string name="server_error_message">Något gick fel. Försök igen!</string>
+    <string name="try_again">Försök igen</string>
+    <string name="suggested_wallpapers">Föreslagna bakgrunder</string>
+    <string name="applied">Verkställd</string>
+    <string name="loading_image">Laddar bild…</string>
+    <string name="download_failed">Nedladdning misslyckades</string>
+    <string name="my_gallery">Min samling</string>
+    <string name="view_all">Visa alla</string>
+    <string name="this_action_may_show_ads">Den här åtgärden kan innehålla annonser</string>
+    <string name="install">Installera</string>
+    <string name="install_all_icons">Installera alla ikoner</string>
+    <string name="unlock_all_icons">Lås upp alla ikoner</string>
+    <string name="unlock">Lås upp</string>
+    <string name="choose">Välj</string>
+    <string name="no_icons_to_install">Inga ikoner tillgängliga för installation</string>
+    <string name="shortcut_install_requested">Genväginstallation begärd</string>
+    <string name="shortcut_install_failed">Kunde inte installera genvägen</string>
+    <string name="select_app">Välj app</string>
+    <string name="cannot_open_target_app">Kan inte öppna målappen</string>
+    <string name="shortcut_applied_successfully">Genvägen användes utan problem!</string>
+    <string name="suggested_icons">Föreslagna ikoner</string>
+    <string name="empty_gallery_title">Din kategori är tom.</string>
+    <string name="empty_gallery_message">Börja ladda ner bakgrunder, kontroller och ikonpaket för att bygga din perfekta setup.</string>
+    <string name="setting">Inställning</string>
+    <string name="language">Språk</string>
+    <string name="feedback">Feedback</string>
+    <string name="privacy_policy">Sekretesspolicy</string>
+    <string name="feedback_email" translatable="false">support@wavez.com</string>
+    
+    <string name="privacy_policy_url" translatable="false">https://thinklifes.notion.site/Privacy-Policy-Prism-Wallpaper-Widget-Theme-3dffca1b75238095a9edfa6dc6923f54</string>
+    
+    <string name="collection">Samling</string>
+    <string name="get_themes">Hämta teman</string>
+    <string name="theme_saved">Tema sparat</string>
+    <string name="theme_save_failed">Kunde inte spara tema</string>
+    <string name="successfully">Utan problem</string>
+    <string name="s_applied_successfully">%s användes utan problem!</string>
+    <string name="suggested_themes">Föreslagna teman</string>
+    <string name="view_more_icon">Se fler ikoner</string>
+    <string name="shortcut">Genväg</string>
+    <string name="no_internet_connection">Ingen internetanslutning</string>
+    <string name="please_check_your_internet">Kontrollera din internetanslutning på enheten</string>
+    <string name="go_to_settings">Gå till inställningar</string>
+    <string name="please_select_your_language">Välj ditt språk</string>
+    <string name="what_s_your_vibe">Vilken är din stil?</string>
+    <string name="select_option">Välj minst ett alternativ</string>
+    <string name="anime">Anime</string>
+    <string name="aesthetics">Estetik</string>
+    <string name="cute">Söt</string>
+    <string name="kpop" translatable="false">K-pop</string>
+    
+    <string name="obd_1_1_title">" Snygga teman &amp; bakgrunder"</string>
+    <string name="obd_1_2_title">Ge din telefon ett rent och stiligt nytt utseende med kurerade estetiska samlingar.</string>
+    <string name="obd_2_1_title">Anpassa varje detalj</string>
+    <string name="obd_2_2_title">Använd bakgrunder, anpassade appikoner och snygga Control Center-layouter på bara några få tryck.</string>
+    <string name="payment_failed">Betalningen misslyckades</string>
+    <string name="a_small_issue_stopped">Ett litet problem stoppade betalningen. Försök igen</string>
+    <string name="payment_success">Betalningen lyckades</string>
+    <string name="your_premium_version">Din Premium-version är nu aktiv. Njut av appen!</string>
+    <string name="got_it">Okej</string>
+    <string name="s_continue">Fortsätt</string>
+    <string name="start_free_trial">Starta kostnadsfri provperiod</string>
+    <string name="unlock_premium">"Lås upp Premium "</string>
+    <string name="_100_no_ads">100% Inga annonser</string>
+    <string name="premium_themes">Premium-teman</string>
+    <string name="unlimited_wallpapers">Obegränsade bakgrunder</string>
+    <string name="weekly">Veckovis</string>
+    <string name="monthly">Månadsvis</string>
+    <string name="s_month">%s / månad</string>
+    <string name="yearly">Årligt</string>
+    <string name="_3_day_free_trial">3 dagars kostnadsfri provperiod</string>
+    <string name="something_went_wrong">Något gick fel</string>
+    <string name="tv_des_failed_buy">Följ dessa steg och försök igen: \n 1. Kontrollera din nätverksanslutning \n 2. Se till att du är inloggad på ditt Google-konto \n 3. Se till att du kan köra Google Play-appen</string>
+    <string name="cancel_anytime">Avbryt när som helst</string>
+    <string name="terms_of_use">Användarvillkor</string>
+    <string name="we_d_love_to_hear_your">Vi älskar att höra din feedback på vår app! Din åsikt är otroligt värdefull och hjälper oss att göra appen ännu bättre för dig.</string>
+    <string name="enter_your_feedback_here">Skriv din feedback här</string>
+    <string name="feed_back_empty">Feedback tom</string>
+    <string name="loading_reward_ads">Laddar belöningsannonser</string>
+    <string name="loading_reward_ads_failed">Misslyckades att ladda belöningsannonser</string>
+    <string name="tv_des_failed_reward">Tyvärr! Det uppstod ett fel när belöningsannonser laddades. Försök igen</string>
+    <string name="close">Stäng</string>
+    <string name="discard_changes">Ignorera ändringar</string>
+    <string name="are_you_sure_you_want_to_discard_your_feedback">Är du säker på att du vill ta bort din feedback?</string>
+    <string name="keep_editing">Fortsätt redigera</string>
+    <string name="discard">Avvisa</string>
+    <string name="get_start">Kom igång</string>
+</resources>

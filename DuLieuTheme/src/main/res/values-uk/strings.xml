@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Теми: Шпалери та значки програм</string>
+    <string name="cc_accessibility_description">Накладка Control Center — увімкнути системну панель швидких налаштувань</string>
+    <string name="screen_recording_channel">Запис екрана</string>
+    <string name="screen_recording_title">Запис екрана</string>
+    <string name="screen_recording_message">Натисніть Зупинити, щоб завершити запис</string>
+    <string name="screen_recording_stop">Зупинити</string>
+    <string name="screen_recording_saved">Відео збережено</string>
+    <string name="screen_recording_notification_required">Будь ласка, дозвольте дозвіл на сповіщення, щоб розпочати запис</string>
+    <string name="themes">Теми</string>
+    <string name="wallpapers">Шпалери</string>
+    <string name="icons">Значки</string>
+    <string name="hello_blank_fragment">Привіт, порожній фрагмент</string>
+    <string name="search_themes">Пошук тем</string>
+    <string name="search_wallpapers">Пошук шпалер</string>
+    <string name="search_icons">Пошук значків</string>
+    <string name="most_popular">Найпопулярніші</string>
+    <string name="newest_themes">Найновіші теми</string>
+    <string name="newest_wallpapers">Найновіші шпалери</string>
+    <string name="newest_icons">Найновіші іконки</string>
+    <string name="no_results_found_for">За запитом\n\"%1$s\" результатів не знайдено</string>
+    <string name="categories">Категорії</string>
+    <string name="first_fragment_label" translatable="false">First Fragment</string>
+    
+    <string name="second_fragment_label" translatable="false">Second Fragment</string>
+    
+    <string name="next">Далі</string>
+    <string name="previous">Попередній</string>
+    <string name="download">Завантажити</string>
+    <string name="premium_theme">Преміум-тема</string>
+    <string name="watch_a_short_ad_for_free_access_upgrade_to_premium_for_unlimited_use">● Подивіться коротку рекламу для безплатного доступу. \n● Перейдіть на Premium для необмеженого використання.</string>
+    <string name="watch_ad">Переглянути оголошення</string>
+    <string name="go_premium">Перейти на Premium</string>
+    <string name="downloading_please_wait_a_moment">Завантаження, будь ласка, зачекайте …</string>
+    <string name="apply">Застосувати</string>
+    <string name="preview">Попередній перегляд</string>
+    <string name="set_wallpaper_as">Встановити шпалери як</string>
+    <string name="home_screen">Домашній екран</string>
+    <string name="lock_screen">Екран блокування</string>
+    <string name="both_home_lock_screen">Домашній екран і екран блокування</string>
+    <string name="loading_please_wait_a_moment">Завантаження, будь ласка, чекайте…</string>
+    <string name="loading">Завантаження…</string>
+    <string name="reload">Перезавантажити</string>
+    <string name="could_not_load_content">Не вдалося завантажити вміст</string>
+    <string name="server_error_message">Щось пішло не так. Спробуйте ще раз!</string>
+    <string name="try_again">Спробувати ще раз</string>
+    <string name="suggested_wallpapers">Рекомендовані шпалери</string>
+    <string name="applied">Застосовано</string>
+    <string name="loading_image">Завантаження зображення…</string>
+    <string name="download_failed">Завантаження не вдалося</string>
+    <string name="my_gallery">Моя галерея</string>
+    <string name="view_all">Показати все</string>
+    <string name="this_action_may_show_ads">Ця дія може містити оголошення</string>
+    <string name="install">Встановити</string>
+    <string name="install_all_icons">Встановити всі значки</string>
+    <string name="unlock_all_icons">Розблокувати всі значки</string>
+    <string name="unlock">Розблокувати</string>
+    <string name="choose">Виберіть</string>
+    <string name="no_icons_to_install">Немає значків для встановлення</string>
+    <string name="shortcut_install_requested">Встановлення ярлика запрошено</string>
+    <string name="shortcut_install_failed">Не вдалося встановити ярлик</string>
+    <string name="select_app">Виберіть програму</string>
+    <string name="cannot_open_target_app">Не вдалося відкрити цільовий додаток</string>
+    <string name="shortcut_applied_successfully">Ярлик успішно застосовано!</string>
+    <string name="suggested_icons">Рекомендовані значки</string>
+    <string name="empty_gallery_title">Ваша категорія пуста.</string>
+    <string name="empty_gallery_message">Почніть завантажувати шпалери, елементи керування та пакети іконок, щоб створити свій ідеальний дизайн.</string>
+    <string name="setting">Налаштування</string>
+    <string name="language">Мова</string>
+    <string name="feedback">Зворотний зв\'язок</string>
+    <string name="privacy_policy">Політика конфіденційності</string>
+    <string name="feedback_email" translatable="false">support@wavez.com</string>
+    
+    <string name="privacy_policy_url" translatable="false">https://wavez.com/privacy-policy</string>
+    
+    <string name="collection">Колекція</string>
+    <string name="get_themes">Отримати теми</string>
+    <string name="theme_saved">Тему збережено</string>
+    <string name="theme_save_failed">Не вдалося зберегти тему</string>
+    <string name="successfully">Успішно</string>
+    <string name="s_applied_successfully">%s успішно застосовано!</string>
+    <string name="suggested_themes">Рекомендовані теми</string>
+    <string name="view_more_icon">Переглянути більше іконок</string>
+    <string name="shortcut">Ярлик</string>
+    <string name="no_internet_connection">Немає підключення до Інтернету</string>
+    <string name="please_check_your_internet">Будь ласка, перевірте своє інтернет-з\'єднання на пристрої</string>
+    <string name="go_to_settings">Перейти до налаштувань</string>
+    <string name="please_select_your_language">Будь ласка, виберіть вашу мову</string>
+    <string name="what_s_your_vibe">Який твій стиль?</string>
+    <string name="select_option">Будь ласка, виберіть принаймні один варіант</string>
+    <string name="anime">Аніме</string>
+    <string name="aesthetics">Естетика</string>
+    <string name="cute">Мило</string>
+    <string name="kpop" translatable="false">K-pop</string>
+    
+    <string name="obd_1_1_title">"Крутезні теми та шпалери"</string>
+    <string name="obd_1_2_title">Надайте своєму телефону чистий і стильний новий вигляд за допомогою підібраних естетичних колекцій.</string>
+    <string name="obd_2_1_title">Налаштуйте кожну деталь</string>
+    <string name="obd_2_2_title">Застосуйте шпалери, значки користувача та стильні макети Control Center всього за кілька дотиків.</string>
+    <string name="payment_failed">Платіж не пройшов</string>
+    <string name="a_small_issue_stopped">Невелика проблема зупинила платіж. Будь ласка, спробуйте ще раз</string>
+    <string name="payment_success">Платіж успішний</string>
+    <string name="your_premium_version">Ваша Преміум-версія тепер активна. Насолоджуйтесь використанням програми!</string>
+    <string name="got_it">Зрозуміло</string>
+    <string name="s_continue">Продовжити</string>
+    <string name="start_free_trial">Почати безплатний період</string>
+    <string name="unlock_premium">"Розблокувати Premium "</string>
+    <string name="_100_no_ads">100% Без реклами</string>
+    <string name="premium_themes">Преміум-теми</string>
+    <string name="unlimited_wallpapers">Безліміт шпалер</string>
+    <string name="weekly">Щотижня</string>
+    <string name="monthly">Щомісячно</string>
+    <string name="s_month">%s / місяць</string>
+    <string name="yearly">Щорічно</string>
+    <string name="_3_day_free_trial">3-денний безплатний період</string>
+    <string name="something_went_wrong">Щось пішло не так</string>
+    <string name="tv_des_failed_buy">Будь ласка, виконайте ці кроки та спробуйте ще раз: \n 1. Перевірте своє підключення до мережі \n 2. Переконайтеся, що ви увійшли у свій обліковий запис Google \n 3. Переконайтеся, що можете запустити додаток Google Play</string>
+    <string name="cancel_anytime">Скасуйте будь-коли</string>
+    <string name="terms_of_use">Умови використання</string>
+    <string name="we_d_love_to_hear_your">Нам дуже цікаво ваша думка про наш додаток! Ваш відгук неймовірно цінний і допомагає нам зробити додаток ще кращим для вас.</string>
+    <string name="enter_your_feedback_here">Введіть свій відгук тут</string>
+    <string name="feed_back_empty">Відгук пустий</string>
+    <string name="loading_reward_ads">Завантаження рекламних пропозицій</string>
+    <string name="loading_reward_ads_failed">Помилка завантаження винагородної реклами</string>
+    <string name="tv_des_failed_reward">Вибачте! Під час завантаження винагородних оголошень сталася помилка. Будь ласка, спробуйте ще раз</string>
+    <string name="close">Закрити</string>
+    <string name="discard_changes">Скасувати зміни</string>
+    <string name="are_you_sure_you_want_to_discard_your_feedback">Ви впевнені, що хочете відхилити свій відгук?</string>
+    <string name="keep_editing">Продовжити редагування</string>
+    <string name="discard">Скасувати</string>
+    <string name="get_start">Починаємо</string>
+</resources>

@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Prism Wallpaper</string>
+    <string name="cc_accessibility_description">Control Center zichiligi — tez almashtiruvchilar uchun tizimli pastga tortish panelini yoqadi</string>
+    <string name="screen_recording_channel">Ekrani yozib olish</string>
+    <string name="screen_recording_title">Ekrani yozib olish</string>
+    <string name="screen_recording_message">Yozuvni tugatish uchun Toxtatish tugmasini bosing</string>
+    <string name="screen_recording_stop">Toxtatish</string>
+    <string name="screen_recording_saved">Video saqlandi</string>
+    <string name="screen_recording_notification_required">Yozuvni boshlash uchun bildirishnoma ruxsatini bering</string>
+    <string name="themes">Mavzular</string>
+    <string name="wallpapers">Tapetlar</string>
+    <string name="icons">Nishonlar</string>
+    <string name="hello_blank_fragment">Salom bo\'sh fragment</string>
+    <string name="search_themes">Mavzularni qidirish</string>
+    <string name="search_wallpapers">Devor rasmlarini qidirish</string>
+    <string name="search_icons">Ikonkalarni qidiring</string>
+    <string name="most_popular">Eng mashhur</string>
+    <string name="newest_themes">Yangi mavzular</string>
+    <string name="newest_wallpapers">Eng yangi devoralar</string>
+    <string name="newest_icons">Eng yangi nishonlar</string>
+    <string name="no_results_found_for">\n\"%1$s\" uchun natija topilmadi</string>
+    <string name="categories">Kategoriyalar</string>
+    <string name="first_fragment_label" translatable="false">First Fragment</string>
+    
+    <string name="second_fragment_label" translatable="false">Second Fragment</string>
+    
+    <string name="next">Keyingi</string>
+    <string name="previous">Oldingi</string>
+    <string name="download">Yuklab olish</string>
+    <string name="premium_theme">Premium Mavzu</string>
+    <string name="watch_a_short_ad_for_free_access_upgrade_to_premium_for_unlimited_use">● Bepul kirish uchun qisqa reklama tomosha qiling. \n● Cheksiz foydalanish uchun Premium ga yangilang.</string>
+    <string name="watch_ad">Reklamani ko\'rish</string>
+    <string name="go_premium">Premium ga o\'ting</string>
+    <string name="downloading_please_wait_a_moment">Yuklanmoqda, bir lahza kuting …</string>
+    <string name="apply">Qo\'llash</string>
+    <string name="preview">Ko\'rib chiqish</string>
+    <string name="set_wallpaper_as">Devor rasmini qo\'yish</string>
+    <string name="home_screen">Bosh ekran</string>
+    <string name="lock_screen">Qulflangan ekran</string>
+    <string name="both_home_lock_screen">Uy &amp; Qulfli ekran</string>
+    <string name="loading_please_wait_a_moment">Yuklanmoqda, bir lahza kuting …</string>
+    <string name="loading">Yuklanmoqda…</string>
+    <string name="reload">Qayta yuklash</string>
+    <string name="could_not_load_content">Kontentni yuklash mumkin emas edi</string>
+    <string name="server_error_message">Xatolik yuz berdi. Iltimos, qaytadan urinib ko\'ring!</string>
+    <string name="try_again">Qaytadan urinib ko\'ring</string>
+    <string name="suggested_wallpapers">Tavsiya etilgan tapetlar</string>
+    <string name="applied">Qo\'llanildi</string>
+    <string name="loading_image">Rasm yuklanmoqda…</string>
+    <string name="download_failed">Yuklab olish muvaffaq bo\'lmadi</string>
+    <string name="my_gallery">Mening Galereyam</string>
+    <string name="view_all">Barchasini ko\'rish</string>
+    <string name="this_action_may_show_ads">Bu amal reklamalarni ko\'rsatishi mumkin</string>
+    <string name="install">O\'rnatish</string>
+    <string name="install_all_icons">Barcha nishonlarni o\'rnatish</string>
+    <string name="unlock_all_icons">Barcha ikonkalarni ochib qo\'ying</string>
+    <string name="unlock">Ochish</string>
+    <string name="choose">Tanlang</string>
+    <string name="no_icons_to_install">O\'rnatish uchun nishonlar mavjud emas</string>
+    <string name="shortcut_install_requested">Yorliq o\'rnatish so\'ralindi</string>
+    <string name="shortcut_install_failed">Qisqa yo\'lni o\'rnatib bo\'lmadi</string>
+    <string name="select_app">Ilovani tanlang</string>
+    <string name="cannot_open_target_app">Maqsadli ilovani ochib bo\'lmadi</string>
+    <string name="shortcut_applied_successfully">Yorliq muvaffaqiyatli qo\'llandi!</string>
+    <string name="suggested_icons">Tavsiya etilgan ikonkalar</string>
+    <string name="empty_gallery_title">Sizning kategoriya bo\'sh.</string>
+    <string name="empty_gallery_message">Devoralar, boshqaruv va nishon paketlarini yuklab olishni boshlang va o\'zingizning mukammal o\'rnatilishingizni yarating.</string>
+    <string name="setting">Sozlash</string>
+    <string name="language">Til</string>
+    <string name="feedback">Fikr-mulohaza</string>
+    <string name="privacy_policy">Maxfiylik siyosati</string>
+    <string name="feedback_email" translatable="false">support@wavez.com</string>
+    
+    <string name="privacy_policy_url" translatable="false">https://thinklifes.notion.site/Privacy-Policy-Prism-Wallpaper-Widget-Theme-3dffca1b75238095a9edfa6dc6923f54</string>
+    
+    <string name="collection">To\'plam</string>
+    <string name="get_themes">Mavzularni olish</string>
+    <string name="theme_saved">Mavzu saqlandi</string>
+    <string name="theme_save_failed">Mavzuni saqlash mumkin emas edi</string>
+    <string name="successfully">Muvaffaqiyatli</string>
+    <string name="s_applied_successfully">%s muvaffaqiyatli qo\'llandi!</string>
+    <string name="suggested_themes">Taklif qilingan mavzular</string>
+    <string name="view_more_icon">Ko\'proq nishonlarni ko\'rish</string>
+    <string name="shortcut">Qisqa yo\'l</string>
+    <string name="no_internet_connection">Internet aloqasi yo\'q</string>
+    <string name="please_check_your_internet">Iltimos, qurilmangizda internet aloqasini tekshiring</string>
+    <string name="go_to_settings">Sozlamalarga o\'ting</string>
+    <string name="please_select_your_language">Iltimos, tilni tanlang</string>
+    <string name="what_s_your_vibe">Sizning uslubingiz qanday?</string>
+    <string name="select_option">Iltimos, kamida bitta variantni tanlang</string>
+    <string name="anime">Anime</string>
+    <string name="aesthetics">Estetika</string>
+    <string name="cute">Yoqimli</string>
+    <string name="kpop" translatable="false">K-pop</string>
+    
+    <string name="obd_1_1_title">" Zo\'r Mavzular &amp; Tapetlar"</string>
+    <string name="obd_1_2_title">Telefoningizga tanlab olgan estetik to\'plamlar bilan tozalik va uslubli yangi ko\'rinish bering.</string>
+    <string name="obd_2_1_title">Har Bir Detallarni Moslash</string>
+    <string name="obd_2_2_title">Devor rasmlari, maxsus ilovalar nishonlari va uslubli Control Center tarazmalarini bir necha zarbada qo\'llang.</string>
+    <string name="payment_failed">To\'lov amalga oshmadi</string>
+    <string name="a_small_issue_stopped">Kichik muammo to\'lovni to\'xtattdi. Iltimos, qayta urinib ko\'ring</string>
+    <string name="payment_success">To\'lov Muvaffaqiyatli</string>
+    <string name="your_premium_version">Sizning Premium versiyangiz endi faol. Ilovadan foydalanishni davom ettiring!</string>
+    <string name="got_it">Tushunarli</string>
+    <string name="s_continue">Davom ettirish</string>
+    <string name="start_free_trial">Bepul sinovni boshlang</string>
+    <string name="unlock_premium">"Premium ni ochish "</string>
+    <string name="_100_no_ads">100% Reklamali emas</string>
+    <string name="premium_themes">Premium Mavzular</string>
+    <string name="unlimited_wallpapers">Cheksiz Tapetlar</string>
+    <string name="weekly">Haftalik</string>
+    <string name="monthly">Oylik</string>
+    <string name="s_month">%s / oy</string>
+    <string name="yearly">Yillik</string>
+    <string name="_3_day_free_trial">3 kunlik bepul sinovni</string>
+    <string name="something_went_wrong">Nimadir noto\'g\'ri bo\'ldi</string>
+    <string name="tv_des_failed_buy">Iltimos, quyidagi qadamlarni bajaring va qayta urinib ko\'ring: \n 1. Sizning tarmoq ulanishini tekshiring \n 2. Google hisobingizga kirganligingizni tekshiring \n 3. Google Play ilovasini ishga tushira olishingizni tekshiring</string>
+    <string name="cancel_anytime">Istalgan vaqtda bekor qilish</string>
+    <string name="terms_of_use">Foydalanish shartlari</string>
+    <string name="we_d_love_to_hear_your">Biz sizning ilovamiz haqidagi fikr-mulohazalaringizni eshitmaqchi! Sizning fikringiz juda qimmatbaho va ilovani siz uchun yanada yaxshi qilishga yordam beradi.</string>
+    <string name="enter_your_feedback_here">Bu yerga fikr-mulohazangizni kiriting</string>
+    <string name="feed_back_empty">Fikr-mulohaza bo\'sh</string>
+    <string name="loading_reward_ads">Mukofot reklamalarini yuklanmoqda</string>
+    <string name="loading_reward_ads_failed">Mukofot reklamalarini yuklash amalga oshmadi</string>
+    <string name="tv_des_failed_reward">Afsus! Reward reklamalarini yuklaganda xatolik yuz berdi. Iltimos, qayta urinib ko\'ring</string>
+    <string name="close">Yopish</string>
+    <string name="discard_changes">O\'zgarishlarni bekor qilish</string>
+    <string name="are_you_sure_you_want_to_discard_your_feedback">Rostanham fikr-mulohazalarni bekor qilmoqchisiz?</string>
+    <string name="keep_editing">Tahrirlashda davom etish</string>
+    <string name="discard">Bekor qilish</string>
+    <string name="get_start">Boshlaylik</string>
+</resources>

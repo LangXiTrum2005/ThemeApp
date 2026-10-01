@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "721074827993",
+    "project_id": "ta097---wallpaper",
+    "storage_bucket": "ta097---wallpaper.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:721074827993:android:2acdc77a585aa46055c4c8",
+        "android_client_info": {
+          "package_name": "thinklife.prism.wallpaper.widget.theme"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBj6fy9T4fwo6lhkmwI2hCS2vbuk6cMApQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:721074827993:android:ce32afb653d150fd55c4c8",
+        "android_client_info": {
+          "package_name": "thinklife.prism.wallpaper.widget.theme.dev"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBj6fy9T4fwo6lhkmwI2hCS2vbuk6cMApQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

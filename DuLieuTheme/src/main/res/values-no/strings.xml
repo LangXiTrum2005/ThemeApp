@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Themie: Bakgrunner &amp; App-ikoner</string>
+    <string name="cc_accessibility_description">Control Center-overlegg — muliggjør system-wide nedtrekkspanel for raske snarveier</string>
+    <string name="screen_recording_channel">Skjermopptak</string>
+    <string name="screen_recording_title">Opptar skjerm</string>
+    <string name="screen_recording_message">Trykk Stopp for å avslutte opptak</string>
+    <string name="screen_recording_stop">Stopp</string>
+    <string name="screen_recording_saved">Video lagret</string>
+    <string name="screen_recording_notification_required">Vennligst tillat varselsrettigheter for å starte opptak</string>
+    <string name="themes">Temaer</string>
+    <string name="wallpapers">Bakgrunner</string>
+    <string name="icons">Ikoner</string>
+    <string name="hello_blank_fragment">Hallo blank fragment</string>
+    <string name="search_themes">Søk i temaer</string>
+    <string name="search_wallpapers">Søk i bakgrunnsbilder</string>
+    <string name="search_icons">Søk etter ikoner</string>
+    <string name="most_popular">Mest populære</string>
+    <string name="newest_themes">Nyeste temaer</string>
+    <string name="newest_wallpapers">Nyeste bakgrunnsbilder</string>
+    <string name="newest_icons">Nyeste ikoner</string>
+    <string name="no_results_found_for">Ingen resultater funnet for\n\"%1$s\"</string>
+    <string name="categories">Kategorier</string>
+    <string name="first_fragment_label" translatable="false">First Fragment</string>
+    
+    <string name="second_fragment_label" translatable="false">Second Fragment</string>
+    
+    <string name="next">Neste</string>
+    <string name="previous">Forrige</string>
+    <string name="download">Last ned</string>
+    <string name="premium_theme">Premium tema</string>
+    <string name="watch_a_short_ad_for_free_access_upgrade_to_premium_for_unlimited_use">● Se en kort annonse for gratis tilgang. \n● Oppgrader til Premium for ubegrenset bruk.</string>
+    <string name="watch_ad">Se annonse</string>
+    <string name="go_premium">Gå Premium</string>
+    <string name="downloading_please_wait_a_moment">Laster ned, vær så snill vent et øyeblikk …</string>
+    <string name="apply">Bruk</string>
+    <string name="preview">Forhåndsvisning</string>
+    <string name="set_wallpaper_as">Angi bakgrunnsbilde som</string>
+    <string name="home_screen">Startskjerm</string>
+    <string name="lock_screen">Låseskjerm</string>
+    <string name="both_home_lock_screen">Både startskjerm og låseskjerm</string>
+    <string name="loading_please_wait_a_moment">Laster, vennligst vent et øyeblikk …</string>
+    <string name="loading">Laster inn…</string>
+    <string name="reload">Last på nytt</string>
+    <string name="could_not_load_content">Kunne ikke laste inn innhold</string>
+    <string name="server_error_message">Noe gikk galt. Prøv igjen!</string>
+    <string name="try_again">Prøv igjen</string>
+    <string name="suggested_wallpapers">Foreslåtte bakgrunner</string>
+    <string name="applied">Brukt</string>
+    <string name="loading_image">Laster inn bilde…</string>
+    <string name="download_failed">Nedlasting mislyktes</string>
+    <string name="my_gallery">Mit galleri</string>
+    <string name="view_all">Vis alle</string>
+    <string name="this_action_may_show_ads">Denne handlingen kan inneholde annonser</string>
+    <string name="install">Installer</string>
+    <string name="install_all_icons">Installer alle ikoner</string>
+    <string name="unlock_all_icons">Lås opp alle ikoner</string>
+    <string name="unlock">Lås opp</string>
+    <string name="choose">Velg</string>
+    <string name="no_icons_to_install">Ingen ikoner tilgjengelig for installasjon</string>
+    <string name="shortcut_install_requested">Snarveisinstallasjon forespurt</string>
+    <string name="shortcut_install_failed">Kunne ikke installere snarvei</string>
+    <string name="select_app">Velg app</string>
+    <string name="cannot_open_target_app">Kan ikke åpne målappen</string>
+    <string name="shortcut_applied_successfully">Snarvei brukt med suksess!</string>
+    <string name="suggested_icons">Foreslåtte ikoner</string>
+    <string name="empty_gallery_title">Kategorien din er tom.</string>
+    <string name="empty_gallery_message">Start med å laste ned bakgrunnsbilder, kontroller og ikenpakker for å bygge din perfekte oppsett.</string>
+    <string name="setting">Innstilling</string>
+    <string name="language">Språk</string>
+    <string name="feedback">Tilbakemelding</string>
+    <string name="privacy_policy">Personvernerklæring</string>
+    <string name="feedback_email" translatable="false">support@wavez.com</string>
+    
+    <string name="privacy_policy_url" translatable="false">https://wavez.com/privacy-policy</string>
+    
+    <string name="collection">Samling</string>
+    <string name="get_themes">Få temaer</string>
+    <string name="theme_saved">Tema lagret</string>
+    <string name="theme_save_failed">Kunne ikke lagre tema</string>
+    <string name="successfully">Vellykket</string>
+    <string name="s_applied_successfully">%s brukt med suksess!</string>
+    <string name="suggested_themes">Foreslåtte temaer</string>
+    <string name="view_more_icon">Vis flere ikoner</string>
+    <string name="shortcut">Snarvei</string>
+    <string name="no_internet_connection">Ingen internettforbindelse</string>
+    <string name="please_check_your_internet">Kontroller internetttilkoblingen på enheten din</string>
+    <string name="go_to_settings">Gå til innstillinger</string>
+    <string name="please_select_your_language">Vennligst velg ditt språk</string>
+    <string name="what_s_your_vibe">Hva er ditt stil?</string>
+    <string name="select_option">Vennligst velg minst ett alternativ</string>
+    <string name="anime">Anime</string>
+    <string name="aesthetics">Estetikk</string>
+    <string name="cute">Søt</string>
+    <string name="kpop" translatable="false">K-pop</string>
+    
+    <string name="obd_1_1_title">"Flotte temaer &amp; bakgrunner"</string>
+    <string name="obd_1_2_title">Gi telefonen din et rent og stilig nytt utseende med utvalgte estetiske samlinger.</string>
+    <string name="obd_2_1_title">Tilpass hver detalj</string>
+    <string name="obd_2_2_title">Bruk bakgrunnsbilder, egendefinerte appikoner og stilige Control Center-oppsett på bare noen få trykk.</string>
+    <string name="payment_failed">Betaling mislyktes</string>
+    <string name="a_small_issue_stopped">En liten feil stanset betalingen. Prøv igjen</string>
+    <string name="payment_success">Betaling vellykket</string>
+    <string name="your_premium_version">Din Premium-versjon er nå aktiv. Nyt bruken av appen!</string>
+    <string name="got_it">Skjønner</string>
+    <string name="s_continue">Fortsett</string>
+    <string name="start_free_trial">Start gratis prøveperiode</string>
+    <string name="unlock_premium">"Lås opp Premium "</string>
+    <string name="_100_no_ads">100% Ingen annonser</string>
+    <string name="premium_themes">Premium-temaer</string>
+    <string name="unlimited_wallpapers">Ubegrensede bakgrunner</string>
+    <string name="weekly">Ukentlig</string>
+    <string name="monthly">Månedlig</string>
+    <string name="s_month">%s / måned</string>
+    <string name="yearly">Årlig</string>
+    <string name="_3_day_free_trial">3 dagers gratis prøveperiode</string>
+    <string name="something_went_wrong">Noe gikk galt</string>
+    <string name="tv_des_failed_buy">Vennligst følg disse trinnene og prøv igjen: \n 1. Sjekk nettverkstilkoblingen din \n 2. Sørg for at du er logget inn på Google-kontoen din \n 3. Sørg for at du kan kjøre Google Play-appen</string>
+    <string name="cancel_anytime">Avbryt når som helst</string>
+    <string name="terms_of_use">Vilkår for bruk</string>
+    <string name="we_d_love_to_hear_your">Vi gleder oss til å høre dine tanker om appen vår! Din tilbakemelding er utrolig verdifull og hjelper oss med å gjøre appen enda bedre for deg.</string>
+    <string name="enter_your_feedback_here">Skriv inn tilbakemeldingen din her</string>
+    <string name="feed_back_empty">Tilbakemelding tom</string>
+    <string name="loading_reward_ads">Laster inn belønningsannonser</string>
+    <string name="loading_reward_ads_failed">Lasting av belønningsannonser mislyktes</string>
+    <string name="tv_des_failed_reward">Beklager! Det oppstod en feil ved innlasting av belønningsannonser. Prøv igjen</string>
+    <string name="close">Lukk</string>
+    <string name="discard_changes">Forkast endringer</string>
+    <string name="are_you_sure_you_want_to_discard_your_feedback">Er du sikker på at du vil forkaste tilbakemeldingen din?</string>
+    <string name="keep_editing">Fortsett redigering</string>
+    <string name="discard">Forkast</string>
+    <string name="get_start">Kom i gang</string>
+</resources>

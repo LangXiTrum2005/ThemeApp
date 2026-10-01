@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Témák: Háttérképek &amp; Alkalmazásikonok</string>
+    <string name="cc_accessibility_description">Control Center overlay — lehetővé teszi a rendszerzintű lenyúlási panelt a gyors kapcsolók számára</string>
+    <string name="screen_recording_channel">Képernyő felvétele</string>
+    <string name="screen_recording_title">Képernyő felvétele</string>
+    <string name="screen_recording_message">Koppints a Leállítás gombra a felvétel befejezéséhez</string>
+    <string name="screen_recording_stop">Leállítás</string>
+    <string name="screen_recording_saved">Videó mentve</string>
+    <string name="screen_recording_notification_required">Kérjük, engedélyezd az értesítési engedélyt a felvétel elkezdéséhez</string>
+    <string name="themes">Témák</string>
+    <string name="wallpapers">Háttérképek</string>
+    <string name="icons">Ikonok</string>
+    <string name="hello_blank_fragment">Szia üres fragment</string>
+    <string name="search_themes">Témák keresése</string>
+    <string name="search_wallpapers">Háttérképek keresése</string>
+    <string name="search_icons">Ikonok keresése</string>
+    <string name="most_popular">Legnépszerűbb</string>
+    <string name="newest_themes">Legújabb témák</string>
+    <string name="newest_wallpapers">Legújabb háttérképek</string>
+    <string name="newest_icons">Legújabb ikonok</string>
+    <string name="no_results_found_for">Nincs találat a következőhöz:\n\"%1$s\"</string>
+    <string name="categories">Kategóriák</string>
+    <string name="first_fragment_label" translatable="false">First Fragment</string>
+    
+    <string name="second_fragment_label" translatable="false">Second Fragment</string>
+    
+    <string name="next">Tovább</string>
+    <string name="previous">Előző</string>
+    <string name="download">Letöltés</string>
+    <string name="premium_theme">Prémium téma</string>
+    <string name="watch_a_short_ad_for_free_access_upgrade_to_premium_for_unlimited_use">● Nézz meg egy rövid hirdetést az ingyenes hozzáféréshez. \n● Frissítsen Prémiumra a korlátlan használathoz.</string>
+    <string name="watch_ad">Reklám megtekintése</string>
+    <string name="go_premium">Prémium verzióra frissítés</string>
+    <string name="downloading_please_wait_a_moment">Letöltés folyamatban, kérjük, várjon egy pillanatot …</string>
+    <string name="apply">Alkalmaz</string>
+    <string name="preview">Előnézet</string>
+    <string name="set_wallpaper_as">Háttérkép beállítása mint</string>
+    <string name="home_screen">Kezdőképernyő</string>
+    <string name="lock_screen">Zárolási képernyő</string>
+    <string name="both_home_lock_screen">Kezdőképernyő és zárolási képernyő egyaránt</string>
+    <string name="loading_please_wait_a_moment">Betöltés, kérjük, várj egy pillanatot …</string>
+    <string name="loading">Betöltés…</string>
+    <string name="reload">Újratöltés</string>
+    <string name="could_not_load_content">Nem sikerült a tartalom betöltése</string>
+    <string name="server_error_message">Valami hiba történt. Kérjük, próbálja újra!</string>
+    <string name="try_again">Próbáld újra</string>
+    <string name="suggested_wallpapers">Javasolt háttérképek</string>
+    <string name="applied">Alkalmazva</string>
+    <string name="loading_image">Kép betöltése…</string>
+    <string name="download_failed">A letöltés nem sikerült</string>
+    <string name="my_gallery">Saját gyűjtemény</string>
+    <string name="view_all">Az összes megjelenítése</string>
+    <string name="this_action_may_show_ads">Ez a művelet reklámokat tartalmazhat</string>
+    <string name="install">Telepítés</string>
+    <string name="install_all_icons">Összes ikon telepítése</string>
+    <string name="unlock_all_icons">Összes ikon feloldása</string>
+    <string name="unlock">Feloldás</string>
+    <string name="choose">Válassz</string>
+    <string name="no_icons_to_install">Nincs telepíthető ikon</string>
+    <string name="shortcut_install_requested">Parancsikon telepítése kérve</string>
+    <string name="shortcut_install_failed">Nem sikerült telepíteni a parancsikonyt</string>
+    <string name="select_app">Alkalmazás kiválasztása</string>
+    <string name="cannot_open_target_app">Nem lehet megnyitni a célazonosítású alkalmazást</string>
+    <string name="shortcut_applied_successfully">Parancsikon sikeresen alkalmazva!</string>
+    <string name="suggested_icons">Javasolt ikonok</string>
+    <string name="empty_gallery_title">A te kategóriád üres.</string>
+    <string name="empty_gallery_message">Kezdj el letölteni háttérképeket, vezérlőelemeket és ikonpaketteket, hogy felépítsd a tökéletes beállítást.</string>
+    <string name="setting">Beállítás</string>
+    <string name="language">Nyelv</string>
+    <string name="feedback">Visszajelzés</string>
+    <string name="privacy_policy">Adatvédelmi szabályzat</string>
+    <string name="feedback_email" translatable="false">support@wavez.com</string>
+    
+    <string name="privacy_policy_url" translatable="false">https://wavez.com/privacy-policy</string>
+    
+    <string name="collection">Gyűjtemény</string>
+    <string name="get_themes">Témák beszerzése</string>
+    <string name="theme_saved">Téma mentve</string>
+    <string name="theme_save_failed">Nem sikerült a téma mentése</string>
+    <string name="successfully">Sikeresen</string>
+    <string name="s_applied_successfully">%s sikeresen alkalmazva!</string>
+    <string name="suggested_themes">Javasolt témák</string>
+    <string name="view_more_icon">További ikon megtekintése</string>
+    <string name="shortcut">Parancsikon</string>
+    <string name="no_internet_connection">Nincs internetkapcsolat</string>
+    <string name="please_check_your_internet">Kérjük, ellenőrizd az internetes kapcsolatot az eszközödön</string>
+    <string name="go_to_settings">Beállítások megnyitása</string>
+    <string name="please_select_your_language">Kérjük, válaszd ki a nyelvedet</string>
+    <string name="what_s_your_vibe">Mi az a vibráció?</string>
+    <string name="select_option">Kérjük, válassz ki legalább egy lehetőséget</string>
+    <string name="anime">Anime</string>
+    <string name="aesthetics">Esztétika</string>
+    <string name="cute">Csini</string>
+    <string name="kpop" translatable="false">K-pop</string>
+    
+    <string name="obd_1_1_title">" Szép témák &amp; háttérképek"</string>
+    <string name="obd_1_2_title">Adj a telefonodnak egy tiszta és stílusos új megjelenést válogatott esztétikai kollekcióinkkal.</string>
+    <string name="obd_2_1_title">Szabadítsd meg minden részletét</string>
+    <string name="obd_2_2_title">Alkalmazz háttérképeket, egyéni alkalmazásikonokat és stílusos Control Center elrendezéseket mindössze néhány koppintással.</string>
+    <string name="payment_failed">Fizetés sikertelen</string>
+    <string name="a_small_issue_stopped">Egy kis hiba megállította a fizetést. Kérjük, próbálja újra</string>
+    <string name="payment_success">Fizetés sikeres</string>
+    <string name="your_premium_version">A prémium verzió most aktív. Élvezd az alkalmazást!</string>
+    <string name="got_it">Értem</string>
+    <string name="s_continue">Folytatás</string>
+    <string name="start_free_trial">Ingyenes próbaverzió megkezdése</string>
+    <string name="unlock_premium">"Prémium verzió feloldása "</string>
+    <string name="_100_no_ads">100% Reklammentes</string>
+    <string name="premium_themes">Prémium témák</string>
+    <string name="unlimited_wallpapers">Korlátlan háttérképek</string>
+    <string name="weekly">Heti</string>
+    <string name="monthly">Havi</string>
+    <string name="s_month">%s / hó</string>
+    <string name="yearly">Éves</string>
+    <string name="_3_day_free_trial">3 napos ingyenes próbaverzió</string>
+    <string name="something_went_wrong">Valami hiba történt</string>
+    <string name="tv_des_failed_buy">Kérjük, kövesd az alábbi lépéseket és próbáld újra: \n 1. Ellenőrizd az internetkapcsolatodat \n 2. Győződj meg arról, hogy bejelentkeztél a Google-fiókodba \n 3. Győződj meg arról, hogy futtathatod a Google Play alkalmazást</string>
+    <string name="cancel_anytime">Bármikor lemondható</string>
+    <string name="terms_of_use">Felhasználási feltételek</string>
+    <string name="we_d_love_to_hear_your">Szeretnénk hallani az alkalmazásról szóló visszajelzésed! A te véleményed rendkívül értékes, és segít nekünk, hogy az alkalmazást még jobbá tegyük számodra.</string>
+    <string name="enter_your_feedback_here">Add meg az észrevételedet itt</string>
+    <string name="feed_back_empty">Üres visszajelzés</string>
+    <string name="loading_reward_ads">Jutalmak hirdetésének betöltése</string>
+    <string name="loading_reward_ads_failed">Jutalmazási hirdetések betöltése sikertelen</string>
+    <string name="tv_des_failed_reward">Sajnos hiba történt a jutalmazott reklámok betöltésekor. Kérjük, próbáld újra</string>
+    <string name="close">Bezárás</string>
+    <string name="discard_changes">Módosítások elvetése</string>
+    <string name="are_you_sure_you_want_to_discard_your_feedback">Biztosan elveteted a visszajelzésedet?</string>
+    <string name="keep_editing">Szerkesztés folytatása</string>
+    <string name="discard">Elvetés</string>
+    <string name="get_start">Kezdjük!</string>
+</resources>

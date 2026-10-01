@@ -31,6 +31,22 @@ coilNetworkOkhttp = "3.6.0"
 glide = "5.0.9"
 lottie = "6.7.1"
 playServicesAdsIdentifier = "18.3.0"
+room = "2.8.4"
+retrofit = "2.11.0"
+moshi = "1.15.2"
+okhttpLogging = "4.12.0"
+libpag = "4.5.52"
+simpleRatingBar = "1.5.1"
+media3 = "1.5.1"
+eventbus = "3.3.1"
+shimmer = "0.5.0"
+gson = "2.11.0"
+adjust = "5.7.0"
+installReferrer = "2.2"
+cardview = "1.0.0"
+navigation = "2.8.8"
+kotlinxSerialization = "1.7.3"
+inferAnnotation = "0.18.0"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -70,6 +86,32 @@ firebase-crashlytics-ndk = { module = "com.google.firebase:firebase-crashlytics-
 firebase-config = { module = "com.google.firebase:firebase-config" }
 firebase-database = { module = "com.google.firebase:firebase-database" }
 
+androidx-room-runtime = { group = "androidx.room", name = "room-runtime", version.ref = "room" }
+androidx-room-ktx = { group = "androidx.room", name = "room-ktx", version.ref = "room" }
+androidx-room-compiler = { group = "androidx.room", name = "room-compiler", version.ref = "room" }
+retrofit = { group = "com.squareup.retrofit2", name = "retrofit", version.ref = "retrofit" }
+retrofit-converter-moshi = { group = "com.squareup.retrofit2", name = "converter-moshi", version.ref = "retrofit" }
+okhttp-logging-interceptor = { group = "com.squareup.okhttp3", name = "logging-interceptor", version.ref = "okhttpLogging" }
+moshi = { group = "com.squareup.moshi", name = "moshi", version.ref = "moshi" }
+moshi-kotlin-codegen = { group = "com.squareup.moshi", name = "moshi-kotlin-codegen", version.ref = "moshi" }
+libpag = { group = "com.tencent.tav", name = "libpag", version.ref = "libpag" }
+simpleratingbar = { group = "com.github.ome450901", name = "SimpleRatingBar", version.ref = "simpleRatingBar" }
+androidx-media3-exoplayer = { group = "androidx.media3", name = "media3-exoplayer", version.ref = "media3" }
+androidx-media3-exoplayer-dash = { group = "androidx.media3", name = "media3-exoplayer-dash", version.ref = "media3" }
+androidx-media3-ui = { group = "androidx.media3", name = "media3-ui", version.ref = "media3" }
+eventbus = { group = "org.greenrobot", name = "eventbus", version.ref = "eventbus" }
+shimmer = { group = "com.facebook.shimmer", name = "shimmer", version.ref = "shimmer" }
+gson = { group = "com.google.code.gson", name = "gson", version.ref = "gson" }
+adjust-android = { group = "com.adjust.sdk", name = "adjust-android", version.ref = "adjust" }
+adjust-android-webbridge = { group = "com.adjust.sdk", name = "adjust-android-webbridge", version.ref = "adjust" }
+adjust-android-huawei-referrer = { group = "com.adjust.sdk", name = "adjust-android-huawei-referrer", version.ref = "adjust" }
+android-installreferrer = { group = "com.android.installreferrer", name = "installreferrer", version.ref = "installReferrer" }
+androidx-cardview = { group = "androidx.cardview", name = "cardview", version.ref = "cardview" }
+androidx-navigation-fragment-ktx = { group = "androidx.navigation", name = "navigation-fragment-ktx", version.ref = "navigation" }
+androidx-navigation-ui-ktx = { group = "androidx.navigation", name = "navigation-ui-ktx", version.ref = "navigation" }
+kotlinx-serialization-json = { group = "org.jetbrains.kotlinx", name = "kotlinx-serialization-json", version.ref = "kotlinxSerialization" }
+infer-annotation = { group = "com.facebook.infer.annotation", name = "infer-annotation", version.ref = "inferAnnotation" }
+
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
 google-firebase-crashlytics = { id = "com.google.firebase.crashlytics", version.ref = "googleFirebaseCrashlytics" }
@@ -81,4 +123,5 @@ tabb-android-application = { id = "com.1tabb.app.android.application", version =
 ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
 hilt = { id = "com.google.dagger.hilt.android", version.ref = "hilt" }
 kotlin-parcelize = { id = "org.jetbrains.kotlin.plugin.parcelize", version.ref = "kotlin" }
+kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
 android-library = { id = "com.android.library", version.ref = "agp" }

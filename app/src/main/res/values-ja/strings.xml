@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Prism Wallpaper</string>
+    <string name="cc_accessibility_description">コントロールセンターオーバーレイ — システム全体のプルダウンパネルを有効にしてクイック切り替え</string>
+    <string name="screen_recording_channel">画面録画</string>
+    <string name="screen_recording_title">画面を録画中</string>
+    <string name="screen_recording_message">停止をタップして録画を終了します</string>
+    <string name="screen_recording_stop">停止</string>
+    <string name="screen_recording_saved">ビデオが保存されました</string>
+    <string name="screen_recording_notification_required">録画を開始するには、通知権限を許可してください</string>
+    <string name="themes">テーマ</string>
+    <string name="wallpapers">壁紙</string>
+    <string name="icons">アイコン</string>
+    <string name="hello_blank_fragment">こんにちは、空のフラグメント</string>
+    <string name="search_themes">テーマを検索</string>
+    <string name="search_wallpapers">壁紙を検索</string>
+    <string name="search_icons">アイコンを検索</string>
+    <string name="most_popular">最も人気</string>
+    <string name="newest_themes">最新テーマ</string>
+    <string name="newest_wallpapers">最新の壁紙</string>
+    <string name="newest_icons">最新のアイコン</string>
+    <string name="no_results_found_for">\n\"%1$s\"の検索結果が見つかりません</string>
+    <string name="categories">カテゴリ</string>
+    <string name="first_fragment_label" translatable="false">First Fragment</string>
+    
+    <string name="second_fragment_label" translatable="false">Second Fragment</string>
+    
+    <string name="next">次へ</string>
+    <string name="previous">前へ</string>
+    <string name="download">ダウンロード</string>
+    <string name="premium_theme">プレミアムテーマ</string>
+    <string name="watch_a_short_ad_for_free_access_upgrade_to_premium_for_unlimited_use">● 短い広告を見て無料アクセスを取得。\n● Premiumにアップグレードして無制限に使用。</string>
+    <string name="watch_ad">広告を視聴</string>
+    <string name="go_premium">Premiumにアップグレード</string>
+    <string name="downloading_please_wait_a_moment">ダウンロード中です。少々お待ちください…</string>
+    <string name="apply">適用</string>
+    <string name="preview">プレビュー</string>
+    <string name="set_wallpaper_as">壁紙として設定</string>
+    <string name="home_screen">ホーム画面</string>
+    <string name="lock_screen">ロック画面</string>
+    <string name="both_home_lock_screen">ホーム画面とロック画面の両方</string>
+    <string name="loading_please_wait_a_moment">読み込み中、少々お待ちください …</string>
+    <string name="loading">読み込み中…</string>
+    <string name="reload">再読み込み</string>
+    <string name="could_not_load_content">コンテンツを読み込めませんでした</string>
+    <string name="server_error_message">エラーが発生しました。もう一度お試しください！</string>
+    <string name="try_again">もう一度試す</string>
+    <string name="suggested_wallpapers">おすすめ壁紙</string>
+    <string name="applied">適用済み</string>
+    <string name="loading_image">画像を読み込み中…</string>
+    <string name="download_failed">ダウンロードに失敗しました</string>
+    <string name="my_gallery">マイギャラリー</string>
+    <string name="view_all">すべて表示</string>
+    <string name="this_action_may_show_ads">このアクションは広告を含む場合があります</string>
+    <string name="install">インストール</string>
+    <string name="install_all_icons">すべてのアイコンをインストール</string>
+    <string name="unlock_all_icons">すべてのアイコンをロック解除</string>
+    <string name="unlock">ロック解除</string>
+    <string name="choose">選択</string>
+    <string name="no_icons_to_install">インストール可能なアイコンがありません</string>
+    <string name="shortcut_install_requested">ショートカットのインストールをリクエストしました</string>
+    <string name="shortcut_install_failed">ショートカットをインストールできませんでした</string>
+    <string name="select_app">アプリを選択</string>
+    <string name="cannot_open_target_app">ターゲットアプリを開くことができません</string>
+    <string name="shortcut_applied_successfully">ショートカットが正常に適用されました！</string>
+    <string name="suggested_icons">おすすめアイコン</string>
+    <string name="empty_gallery_title">このカテゴリは空です。</string>
+    <string name="empty_gallery_message">壁紙、コントロール、アイコンパックをダウンロードして、完璧なセットアップを構築しましょう!</string>
+    <string name="setting">設定</string>
+    <string name="language">言語</string>
+    <string name="feedback">フィードバック</string>
+    <string name="privacy_policy">プライバシーポリシー</string>
+    <string name="feedback_email" translatable="false">support@wavez.com</string>
+    
+    <string name="privacy_policy_url" translatable="false">https://thinklifes.notion.site/Privacy-Policy-Prism-Wallpaper-Widget-Theme-3dffca1b75238095a9edfa6dc6923f54</string>
+    
+    <string name="collection">コレクション</string>
+    <string name="get_themes">テーマを取得</string>
+    <string name="theme_saved">テーマが保存されました</string>
+    <string name="theme_save_failed">テーマを保存できませんでした</string>
+    <string name="successfully">成功</string>
+    <string name="s_applied_successfully">%sが正常に適用されました！</string>
+    <string name="suggested_themes">おすすめテーマ</string>
+    <string name="view_more_icon">さらにアイコンを表示</string>
+    <string name="shortcut">ショートカット</string>
+    <string name="no_internet_connection">インターネット接続がありません</string>
+    <string name="please_check_your_internet">デバイスのインターネット接続を確認してください</string>
+    <string name="go_to_settings">設定に移動</string>
+    <string name="please_select_your_language">言語を選択してください</string>
+    <string name="what_s_your_vibe">あなたのテイストは?</string>
+    <string name="select_option">少なくとも1つのオプションを選択してください</string>
+    <string name="anime">アニメ</string>
+    <string name="aesthetics">美的デザイン</string>
+    <string name="cute">かわいい</string>
+    <string name="kpop" translatable="false">K-pop</string>
+    
+    <string name="obd_1_1_title">「素敵なテーマと壁紙」</string>
+    <string name="obd_1_2_title">厳選された美的コレクションで、スマートフォンをクリーンでスタイリッシュな新しいルックに変身させましょう。</string>
+    <string name="obd_2_1_title">すべての詳細をカスタマイズ</string>
+    <string name="obd_2_2_title">ほんの数タップで、壁紙、カスタムアプリアイコン、スタイリッシュなコントロールセンターレイアウトを適用できます。</string>
+    <string name="payment_failed">お支払いに失敗しました</string>
+    <string name="a_small_issue_stopped">小さな問題が決済を中断しました。もう一度試してください</string>
+    <string name="payment_success">お支払い完了</string>
+    <string name="your_premium_version">プレミアム版が有効になりました。アプリをお楽しみください！</string>
+    <string name="got_it">了解！</string>
+    <string name="s_continue">続ける</string>
+    <string name="start_free_trial">無料トライアルを開始</string>
+    <string name="unlock_premium">「Premiumをアンロック」</string>
+    <string name="_100_no_ads">100% 広告なし</string>
+    <string name="premium_themes">プレミアムテーマ</string>
+    <string name="unlimited_wallpapers">無限の壁紙</string>
+    <string name="weekly">週間</string>
+    <string name="monthly">月額</string>
+    <string name="s_month">%s/月</string>
+    <string name="yearly">年間</string>
+    <string name="_3_day_free_trial">3日間の無料トライアル</string>
+    <string name="something_went_wrong">問題が発生しました</string>
+    <string name="tv_des_failed_buy">以下の手順に従ってもう一度お試しください: \n 1. ネットワーク接続を確認してください \n 2. Google アカウントにログインしていることを確認してください \n 3. Google Play アプリケーションを実行できることを確認してください</string>
+    <string name="cancel_anytime">いつでもキャンセルできます</string>
+    <string name="terms_of_use">利用規約</string>
+    <string name="we_d_love_to_hear_your">アプリについてのご意見をお聞かせください！皆様のご指摘は非常に貴重で、アプリをより良くするのに役立ちます。</string>
+    <string name="enter_your_feedback_here">ここにフィードバックを入力してください</string>
+    <string name="feed_back_empty">フィードバックなし</string>
+    <string name="loading_reward_ads">リワード広告を読み込み中</string>
+    <string name="loading_reward_ads_failed">リワード広告の読み込みに失敗しました</string>
+    <string name="tv_des_failed_reward">申し訳ございません!リワード広告を読み込む際にエラーが発生しました。もう一度お試しください</string>
+    <string name="close">閉じる</string>
+    <string name="discard_changes">変更を破棄</string>
+    <string name="are_you_sure_you_want_to_discard_your_feedback">フィードバックを破棄してもよろしいですか？</string>
+    <string name="keep_editing">編集を続ける</string>
+    <string name="discard">破棄</string>
+    <string name="get_start">さあ始めよう</string>
+</resources>

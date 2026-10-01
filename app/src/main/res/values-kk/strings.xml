@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Prism Wallpaper</string>
+    <string name="cc_accessibility_description">Control Center қабаты — жылдам ажымдар үшін жүйелік-деңгей төсеу панелін іске қосады</string>
+    <string name="screen_recording_channel">Экранды жазу</string>
+    <string name="screen_recording_title">Экранды жазу</string>
+    <string name="screen_recording_message">Жазбаны аяқтау үшін Тоқтау басыңыз</string>
+    <string name="screen_recording_stop">Тоқтату</string>
+    <string name="screen_recording_saved">Видео сақталды</string>
+    <string name="screen_recording_notification_required">Жазбаны бастау үшін ескертпе рұқсатын беріңіз</string>
+    <string name="themes">Темалар</string>
+    <string name="wallpapers">Тұсқағаздар</string>
+    <string name="icons">Белгілер</string>
+    <string name="hello_blank_fragment">Сәлем бос фрагмент</string>
+    <string name="search_themes">Темаларды іздеу</string>
+    <string name="search_wallpapers">Тұсқандарды іздеу</string>
+    <string name="search_icons">Белгішелерді іздеу</string>
+    <string name="most_popular">Ең танымал</string>
+    <string name="newest_themes">Ең жаңа темалар</string>
+    <string name="newest_wallpapers">Ең жаңа тұс қағаздары</string>
+    <string name="newest_icons">Ең жаңа значоктар</string>
+    <string name="no_results_found_for">\n\"%1$s\" үшін нәтиже табылмады</string>
+    <string name="categories">Санаттар</string>
+    <string name="first_fragment_label" translatable="false">First Fragment</string>
+    
+    <string name="second_fragment_label" translatable="false">Second Fragment</string>
+    
+    <string name="next">Келесі</string>
+    <string name="previous">Алдыңғы</string>
+    <string name="download">Жүктеу</string>
+    <string name="premium_theme">Премиум тақырыпты</string>
+    <string name="watch_a_short_ad_for_free_access_upgrade_to_premium_for_unlimited_use">● Тегін қатынау үшін қысқа жарнама қарап шығыңыз. \n● Шектеусіз пайдалану үшін Premium немесе жоғарылатыңыз.</string>
+    <string name="watch_ad">Жарнаманы қарау</string>
+    <string name="go_premium">Premium ге өтіңіз</string>
+    <string name="downloading_please_wait_a_moment">Жүктеліп тұр, ертең күтіңіз …</string>
+    <string name="apply">Қолдану</string>
+    <string name="preview">Алдын ала қарау</string>
+    <string name="set_wallpaper_as">Тұсқанды орнату</string>
+    <string name="home_screen">Басты экран</string>
+    <string name="lock_screen">Экранды құлпылау</string>
+    <string name="both_home_lock_screen">Басты экран және құлпын экран</string>
+    <string name="loading_please_wait_a_moment">Жүктеліп жатыр, біраз күтіңіз …</string>
+    <string name="loading">Жүктелуде…</string>
+    <string name="reload">Қайта жүктеу</string>
+    <string name="could_not_load_content">Мазмұнды жүктеп алу мүмкін болмады</string>
+    <string name="server_error_message">Бірдеме қате болды. Қайта спробалап көріңіз!</string>
+    <string name="try_again">Қайта спробалау</string>
+    <string name="suggested_wallpapers">Ұсынылған тұсқағаздар</string>
+    <string name="applied">Қолданылды</string>
+    <string name="loading_image">Сурет жүктелуде…</string>
+    <string name="download_failed">Жүктеп алу сәтсіз аяқталды</string>
+    <string name="my_gallery">Менің галереям</string>
+    <string name="view_all">Барлығын қарау</string>
+    <string name="this_action_may_show_ads">Бұл әрекет жарнамаларды көрсетуі мүмкін</string>
+    <string name="install">Орнату</string>
+    <string name="install_all_icons">Барлық белгілерді орнату</string>
+    <string name="unlock_all_icons">Барлық белгішелерді ашу</string>
+    <string name="unlock">Ашу</string>
+    <string name="choose">Таңдау</string>
+    <string name="no_icons_to_install">Орнатуға арналған белгілер жоқ</string>
+    <string name="shortcut_install_requested">Төте орнату сұралды</string>
+    <string name="shortcut_install_failed">Төте жолды орнату сәтсіз болды</string>
+    <string name="select_app">Қолданбаны таңдау</string>
+    <string name="cannot_open_target_app">Мақсат қосымшасын ашу мүмкін емес</string>
+    <string name="shortcut_applied_successfully">Төте сәтті түрде қолданылды!</string>
+    <string name="suggested_icons">Ұсынылған белгішелер</string>
+    <string name="empty_gallery_title">Сіздің санатыңыз бос.</string>
+    <string name="empty_gallery_message">Өзіңіздің идеалды орнатылымын құру үшін тұс қағаздарын, басқарудың және значок пакеттерін жүктеп алуды бастаңыз.</string>
+    <string name="setting">Параметр</string>
+    <string name="language">Тіл</string>
+    <string name="feedback">Пікіргесі</string>
+    <string name="privacy_policy">Құпиялылық саясаты</string>
+    <string name="feedback_email" translatable="false">support@wavez.com</string>
+    
+    <string name="privacy_policy_url" translatable="false">https://thinklifes.notion.site/Privacy-Policy-Prism-Wallpaper-Widget-Theme-3dffca1b75238095a9edfa6dc6923f54</string>
+    
+    <string name="collection">Жинақ</string>
+    <string name="get_themes">Тақырыптарды алу</string>
+    <string name="theme_saved">Тақырыпты сақтадық</string>
+    <string name="theme_save_failed">Тақырыпты сақтау мүмкін болмады</string>
+    <string name="successfully">Сәтті түрде</string>
+    <string name="s_applied_successfully">%s сәтті түрде қолданылды!</string>
+    <string name="suggested_themes">Ұсынылған темалар</string>
+    <string name="view_more_icon">Тағы да көп значок қарау</string>
+    <string name="shortcut">Төте жол</string>
+    <string name="no_internet_connection">Интернет байланысы жоқ</string>
+    <string name="please_check_your_internet">Өзіңіздің құрылғыңыздағы интернет байланысын тексеріңіз</string>
+    <string name="go_to_settings">Параметрлерге барыңыз</string>
+    <string name="please_select_your_language">Өзіңіздің тіліңізді таңдаңыз</string>
+    <string name="what_s_your_vibe">Сіздің ауасы қалай?</string>
+    <string name="select_option">Ең болмағанда бір опцияны таңдаңыз</string>
+    <string name="anime">Аниме</string>
+    <string name="aesthetics">Эстетика</string>
+    <string name="cute">Сүйкімді</string>
+    <string name="kpop" translatable="false">K-pop</string>
+    
+    <string name="obd_1_1_title">" Тамаша Тақырыптар &amp; Тұсқағаздар"</string>
+    <string name="obd_1_2_title">Өзіңіздің телефонына ұқыпты және стильді ново түрін беріңіз өндіген эстетикалық жинақтарымен.</string>
+    <string name="obd_2_1_title">Әрбір детальды өзгерт</string>
+    <string name="obd_2_2_title">Тұсқандарды, арнайы қосымша белгілерін және стильді Control Center макеттерін бірнеше түймемен қолданыңыз.</string>
+    <string name="payment_failed">Төлем сәтсіз аяқталды</string>
+    <string name="a_small_issue_stopped">Төмен проблема төлемді тоқтатты. Қайталап көріңіз</string>
+    <string name="payment_success">Төлем сәтті болды</string>
+    <string name="your_premium_version">Сіздің Premium нұсқасы енді белсенді. Қолданбаны пайдалануды ләззат алыңыз!</string>
+    <string name="got_it">Түсіндім</string>
+    <string name="s_continue">Жалғастыру</string>
+    <string name="start_free_trial">Тегін сынақ нұсқасын бастау</string>
+    <string name="unlock_premium">"Premium ді ашыңыз "</string>
+    <string name="_100_no_ads">100% Жарнамасыз</string>
+    <string name="premium_themes">Premium Тақырыптар</string>
+    <string name="unlimited_wallpapers">Шексіз Тұсқағаздар</string>
+    <string name="weekly">Апталық</string>
+    <string name="monthly">Ай сайын</string>
+    <string name="s_month">%s / ай</string>
+    <string name="yearly">Жылық</string>
+    <string name="_3_day_free_trial">3 күндік тегін сынақ</string>
+    <string name="something_went_wrong">Қандай да бір қате орын алды</string>
+    <string name="tv_des_failed_buy">Осы қадамдарды орындап, қайталап көріңіз: \n 1. Желі байланысыңызды тексеріңіз \n 2. Google аккаунтына кіргеніңіз бойынша тексеріңіз \n 3. Google Play қосымшасын іске қоса алатыныңызды тексеріңіз</string>
+    <string name="cancel_anytime">Кез келген уақытта бас тарту</string>
+    <string name="terms_of_use">Пайдалану шарттары</string>
+    <string name="we_d_love_to_hear_your">Біз сіздің біздің қосымша туралы пікіріңізді естіргіміз келеді! Сіздің ойыңыз өте құнды және қосымшаны сіз үшін әрі қарай жақсартуға көмектеседі.</string>
+    <string name="enter_your_feedback_here">Өзіңіздің пікіріңізді сюда енгізіңіз</string>
+    <string name="feed_back_empty">Пікір бос</string>
+    <string name="loading_reward_ads">Сыйлық жарнамалары жүктелуде</string>
+    <string name="loading_reward_ads_failed">Сыйлау жарнамасын жүктеу сәтсіз аяқталды</string>
+    <string name="tv_des_failed_reward">Өкінішке орай! Сыйлық жарнамасын жүктеген кезде қате болды. Қайталап көріңіз</string>
+    <string name="close">Жабу</string>
+    <string name="discard_changes">Өзгерістерді сметтеу</string>
+    <string name="are_you_sure_you_want_to_discard_your_feedback">Сіз өзіңіздің пікіріңізді алып тастағыңыз келсе ме?</string>
+    <string name="keep_editing">Өңдеуді жалғастыру</string>
+    <string name="discard">Қалдыру</string>
+    <string name="get_start">Бастау</string>
+</resources>

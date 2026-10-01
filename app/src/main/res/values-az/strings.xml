@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Prism Wallpaper</string>
+    <string name="cc_accessibility_description">Control Center üst-üstə düşmə — sürətli keçişlər üçün sistem genişliyi aşağı çəkmə panelini aktivləşdirir</string>
+    <string name="screen_recording_channel">Ekran yazısı</string>
+    <string name="screen_recording_title">Ekranı yazırdır</string>
+    <string name="screen_recording_message">Qeydiyyatı bitirmək üçün Dayandır düyməsinə toxunun</string>
+    <string name="screen_recording_stop">Dayandır</string>
+    <string name="screen_recording_saved">Video saxlanıldı</string>
+    <string name="screen_recording_notification_required">Yazını başlatmaq üçün bildiriş icazəsini verin</string>
+    <string name="themes">Temalar</string>
+    <string name="wallpapers">Divar kağızları</string>
+    <string name="icons">Nişanlar</string>
+    <string name="hello_blank_fragment">Salam boş fragment</string>
+    <string name="search_themes">Temalar axtarışı</string>
+    <string name="search_wallpapers">Divar kağızları axtarışı</string>
+    <string name="search_icons">İkonları axtar</string>
+    <string name="most_popular">Ən populyar</string>
+    <string name="newest_themes">Yeni temalar</string>
+    <string name="newest_wallpapers">Ən yeni divar kağızları</string>
+    <string name="newest_icons">Ən yeni iconlar</string>
+    <string name="no_results_found_for">\n\"%1$s\" üçün nəticə tapılmadı</string>
+    <string name="categories">Kateqoriyalar</string>
+    <string name="first_fragment_label" translatable="false">First Fragment</string>
+    
+    <string name="second_fragment_label" translatable="false">Second Fragment</string>
+    
+    <string name="next">Sonrakı</string>
+    <string name="previous">Əvvəlki</string>
+    <string name="download">Endir</string>
+    <string name="premium_theme">Premium Tema</string>
+    <string name="watch_a_short_ad_for_free_access_upgrade_to_premium_for_unlimited_use">● Pulsuz giriş üçün qısa reklam izləyin. \n● Limitləri olmayan istifadə üçün Premium-a keçin.</string>
+    <string name="watch_ad">Reklamı izlə</string>
+    <string name="go_premium">Premium-a Keçin</string>
+    <string name="downloading_please_wait_a_moment">Endirilir, bir az gözləyin …</string>
+    <string name="apply">Tətbiq et</string>
+    <string name="preview">Önizlə</string>
+    <string name="set_wallpaper_as">Divar kağızını Kimi Təyin Edin</string>
+    <string name="home_screen">Ana Ekran</string>
+    <string name="lock_screen">Kilit Ekranı</string>
+    <string name="both_home_lock_screen">Həm Ev &amp; Kilit Ekranı</string>
+    <string name="loading_please_wait_a_moment">Yüklənir, bir az gözləyin…</string>
+    <string name="loading">Yüklənir…</string>
+    <string name="reload">Yenidən yüklə</string>
+    <string name="could_not_load_content">Məzmun yükləmə uğursuz oldu</string>
+    <string name="server_error_message">Xəta baş verdi. Zəhmət olmasa yenidən cəhd edin!</string>
+    <string name="try_again">Yenidən cəhd et</string>
+    <string name="suggested_wallpapers">Tövsiyə edilən divar kağızları</string>
+    <string name="applied">Tətbiq edildi</string>
+    <string name="loading_image">Şəkil yüklənir…</string>
+    <string name="download_failed">Yükləmə uğursuz oldu</string>
+    <string name="my_gallery">Mənim Qalereya</string>
+    <string name="view_all">Hamısını göstər</string>
+    <string name="this_action_may_show_ads">Bu hərəkət reklamlar göstərə bilər</string>
+    <string name="install">Qur</string>
+    <string name="install_all_icons">Bütün nişanları quraşdırın</string>
+    <string name="unlock_all_icons">Bütün ikonları aç</string>
+    <string name="unlock">Açın</string>
+    <string name="choose">Seç</string>
+    <string name="no_icons_to_install">Quraşdırmaq üçün nişan yoxdur</string>
+    <string name="shortcut_install_requested">Qısayol quraşdırılması istənildi</string>
+    <string name="shortcut_install_failed">Qısayol quraşdırıla bilmədi</string>
+    <string name="select_app">Tətbiqini seç</string>
+    <string name="cannot_open_target_app">Hədəf tətbiqi açıla bilmədi</string>
+    <string name="shortcut_applied_successfully">Qısayol uğurla tətbiq olundu!</string>
+    <string name="suggested_icons">Tövsiyə edilən ikonlar</string>
+    <string name="empty_gallery_title">Sənin kateqoriyan boşdur.</string>
+    <string name="empty_gallery_message">Mükəmməl sətupunuzu yaratmaq üçün divar kağızları, kontrol və icon paketlərini yükləməyə başlayın.</string>
+    <string name="setting">Parametr</string>
+    <string name="language">Dil</string>
+    <string name="feedback">Rəy</string>
+    <string name="privacy_policy">Gizlilik siyasəti</string>
+    <string name="feedback_email" translatable="false">support@wavez.com</string>
+    
+    <string name="privacy_policy_url" translatable="false">https://thinklifes.notion.site/Privacy-Policy-Prism-Wallpaper-Widget-Theme-3dffca1b75238095a9edfa6dc6923f54</string>
+    
+    <string name="collection">Koleksiya</string>
+    <string name="get_themes">Temaları al</string>
+    <string name="theme_saved">Tema yadda saxlandı</string>
+    <string name="theme_save_failed">Tema saxlana bilmədi</string>
+    <string name="successfully">Uğurla</string>
+    <string name="s_applied_successfully">%s uğurla tətbiq olundu!</string>
+    <string name="suggested_themes">Təklif olunan temalar</string>
+    <string name="view_more_icon">Daha çox icon göstər</string>
+    <string name="shortcut">Qısayol</string>
+    <string name="no_internet_connection">İnternet Bağlantısı Yoxdur</string>
+    <string name="please_check_your_internet">Zəhmət olmasa cihazınızda internet bağlantınızı yoxlayın</string>
+    <string name="go_to_settings">Ayarlara git</string>
+    <string name="please_select_your_language">Lütfen dilini seç</string>
+    <string name="what_s_your_vibe">Sənin vibe-ın nə? ✨</string>
+    <string name="select_option">Lütfen ən azı bir seçəni seçin</string>
+    <string name="anime">Anime</string>
+    <string name="aesthetics">Estetika</string>
+    <string name="cute">Sevimli</string>
+    <string name="kpop" translatable="false">K-pop</string>
+    
+    <string name="obd_1_1_title">"Gözəl Temalar &amp; Divar Kağızları"</string>
+    <string name="obd_1_2_title">Telefonunuza seçilmiş estetik kolleksiyalar ilə təmiz və şık yeni görünüş verin.</string>
+    <string name="obd_2_1_title">Hər Detali Özüncə Qur</string>
+    <string name="obd_2_2_title">Divar kağızları, fərdi tətbiq nişanları və şık Control Center düzənlərini cəmi bir neçə dokunuşla tətbiq edin.</string>
+    <string name="payment_failed">Ödəniş uğursuz oldu</string>
+    <string name="a_small_issue_stopped">Kiçik bir problem ödənişi dayandırdı. Zəhmət olmasa yenidən cəhd edin</string>
+    <string name="payment_success">Ödəniş Uğurlu</string>
+    <string name="your_premium_version">Premium versiyannız indi aktiv. Tətbiqin istifadəsini davam ettirin!</string>
+    <string name="got_it">Anladım</string>
+    <string name="s_continue">Davam et</string>
+    <string name="start_free_trial">Pulsuz Sınaq Başlat</string>
+    <string name="unlock_premium">"Premium Açın "</string>
+    <string name="_100_no_ads">100% Reklamsız</string>
+    <string name="premium_themes">Premium Temalar</string>
+    <string name="unlimited_wallpapers">Sınırsız Divar Kağızları</string>
+    <string name="weekly">Həftəlik</string>
+    <string name="monthly">Aylıq</string>
+    <string name="s_month">%s / ay</string>
+    <string name="yearly">Hər il</string>
+    <string name="_3_day_free_trial">3 gün pulsuz sınaq</string>
+    <string name="something_went_wrong">Bir şey səhv oldu</string>
+    <string name="tv_des_failed_buy">Lütfen bu addımları izləyin və yenidən cəhd edin: \n 1. Şəbəkə bağlantınızı yoxlayın \n 2. Google hesabınıza daxil olduğunuzdan əmin olun \n 3. Google Play tətbiqini çalışdıra biləcəyinizə əmin olun</string>
+    <string name="cancel_anytime">İstənilən vaxt ləğv edin</string>
+    <string name="terms_of_use">İstifadə Şərtləri</string>
+    <string name="we_d_love_to_hear_your">Tətbiqimiz haqqında sizin rəyinizi eşitmək istərdik! Sizin fikirləriniz çox qiymətlidir və bizə tətbiqi sizin üçün daha yaxşı etməyə kömək edir.</string>
+    <string name="enter_your_feedback_here">Burada öz rəyinizi daxil edin</string>
+    <string name="feed_back_empty">Rəy Boşdur</string>
+    <string name="loading_reward_ads">Mükafat reklamları yüklənir</string>
+    <string name="loading_reward_ads_failed">Mükafat reklamını yükləmə uğursuz oldu</string>
+    <string name="tv_des_failed_reward">Üzr istəyirəm! Mükafat reklamlarını yükləmədə səhv baş verdi. Lütfen yenidən cəhd edin</string>
+    <string name="close">Bağla</string>
+    <string name="discard_changes">Dəyişiklikləri ləğv edin</string>
+    <string name="are_you_sure_you_want_to_discard_your_feedback">Rəyinizi silmək istədiyinizə əminsiniz?</string>
+    <string name="keep_editing">Redaktəni davam ettirin</string>
+    <string name="discard">Ləğv et</string>
+    <string name="get_start">Başla</string>
+</resources>

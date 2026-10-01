@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Prism Wallpaper</string>
+    <string name="cc_accessibility_description">Control Center ओव्हरले — द्रुत टॉगलसाठी सिस्टम-व्यापी पुल-डाउन पॅनेल सक्षम करते</string>
+    <string name="screen_recording_channel">स्क्रीन रेकॉर्डिंग</string>
+    <string name="screen_recording_title">स्क्रीन रेकॉर्ड करत आहे</string>
+    <string name="screen_recording_message">रेकॉर्डिंग संपवण्यासाठी थांबा टॅप करा</string>
+    <string name="screen_recording_stop">थांबवा</string>
+    <string name="screen_recording_saved">व्हिडिओ सेव्ह झाली</string>
+    <string name="screen_recording_notification_required">रेकॉर्डिंग सुरू करण्यासाठी कृपया सूचना अनुमती दा</string>
+    <string name="themes">थीम्स</string>
+    <string name="wallpapers">वॉलपेपर</string>
+    <string name="icons">आयकन</string>
+    <string name="hello_blank_fragment">नमस्कार रिक्त फ्रॅगमेंट</string>
+    <string name="search_themes">थीम्स शोधा</string>
+    <string name="search_wallpapers">वॉलपेपर शोधा</string>
+    <string name="search_icons">आयकन शोधा</string>
+    <string name="most_popular">सर्वात लोकप्रिय</string>
+    <string name="newest_themes">सर्वात नवीन थीम्स</string>
+    <string name="newest_wallpapers">सर्वात नवीन वॉलपेपर</string>
+    <string name="newest_icons">सर्वात नवीन आयकन</string>
+    <string name="no_results_found_for">\n\"%1$s\"साठी कोणते परिणाम सापडले नाहीत</string>
+    <string name="categories">श्रेणी</string>
+    <string name="first_fragment_label" translatable="false">First Fragment</string>
+    
+    <string name="second_fragment_label" translatable="false">Second Fragment</string>
+    
+    <string name="next">पुढे</string>
+    <string name="previous">मागील</string>
+    <string name="download">डाउनलोड करा</string>
+    <string name="premium_theme">प्रीमियम थीम</string>
+    <string name="watch_a_short_ad_for_free_access_upgrade_to_premium_for_unlimited_use">● मुक्त प्रवेशासाठी एक लहान जाहिरात पहा. \n● मर्यादित वापरासाठी प्रीमियमवर अपग्रेड करा.</string>
+    <string name="watch_ad">जाहिरात पहा</string>
+    <string name="go_premium">प्रीमियमवर जा</string>
+    <string name="downloading_please_wait_a_moment">डाउनलोड होत आहे, कृपया थोडा मोमेंट प्रतीक्षा करा …</string>
+    <string name="apply">लागू करा</string>
+    <string name="preview">प्रिव्यू</string>
+    <string name="set_wallpaper_as">वॉलपेपर असे सेट करा</string>
+    <string name="home_screen">होम स्क्रीन</string>
+    <string name="lock_screen">लॉक स्क्रीन</string>
+    <string name="both_home_lock_screen">होम आणि लॉक स्क्रीन दोन्ही</string>
+    <string name="loading_please_wait_a_moment">लोड होत आहे, कृपया एक क्षण प्रतीक्षा करा …</string>
+    <string name="loading">लोड करत आहे…</string>
+    <string name="reload">पुन्हा लोड करा</string>
+    <string name="could_not_load_content">सामग्री लोड करू शकलो नाही</string>
+    <string name="server_error_message">काहीतरी चूक झाली. कृपया पुन्हा प्रयत्न करा!</string>
+    <string name="try_again">पुन्हा प्रयत्न करा</string>
+    <string name="suggested_wallpapers">सुझावित वॉलपेपर</string>
+    <string name="applied">लागू केले</string>
+    <string name="loading_image">प्रतिमा लोड करत आहे…</string>
+    <string name="download_failed">डाउनलोड अयशस्वी झाली</string>
+    <string name="my_gallery">माझी गॅलरी</string>
+    <string name="view_all">सर्व पहा</string>
+    <string name="this_action_may_show_ads">या क्रियेमध्ये जाहिरातीचा समावेश असू शकतो</string>
+    <string name="install">इंस्टॉल करा</string>
+    <string name="install_all_icons">सर्व आयकन इंस्टॉल करा</string>
+    <string name="unlock_all_icons">सर्व आयकन अनलॉक करा</string>
+    <string name="unlock">अनलॉक करा</string>
+    <string name="choose">निवडा</string>
+    <string name="no_icons_to_install">इंस्टॉल करण्यासाठी कोणतेही आयकन उपलब्ध नाहीत</string>
+    <string name="shortcut_install_requested">शॉर्टकट इंस्टॉल करण्याची विनंती केली गेली</string>
+    <string name="shortcut_install_failed">शॉर्टकट स्थापित करू शकले नाही</string>
+    <string name="select_app">अ‍ॅप निवडा</string>
+    <string name="cannot_open_target_app">लक्ष्य अॅप उघडू शकत नाही</string>
+    <string name="shortcut_applied_successfully">शॉर्टकट यशस्वीरित्या लागू झाला!</string>
+    <string name="suggested_icons">सुझावित आयकन</string>
+    <string name="empty_gallery_title">आपली श्रेणी रिक्त आहे।</string>
+    <string name="empty_gallery_message">आपली परिपूर्ण सेटअप तयार करण्यासाठी वॉलपेपर, नियंत्रण आणि आयकन पॅक डाउनलोड करणे सुरू करा।</string>
+    <string name="setting">सेटिंग</string>
+    <string name="language">भाषा</string>
+    <string name="feedback">अभिप्राय</string>
+    <string name="privacy_policy">गोपनीयता धोरण</string>
+    <string name="feedback_email" translatable="false">support@wavez.com</string>
+    
+    <string name="privacy_policy_url" translatable="false">https://thinklifes.notion.site/Privacy-Policy-Prism-Wallpaper-Widget-Theme-3dffca1b75238095a9edfa6dc6923f54</string>
+    
+    <string name="collection">संग्रह</string>
+    <string name="get_themes">थीम मिळवा</string>
+    <string name="theme_saved">थीम सेव केले गेले</string>
+    <string name="theme_save_failed">थीम सेव्ह करू शकलो नाही</string>
+    <string name="successfully">यशस्वीरित्या</string>
+    <string name="s_applied_successfully">%s यशस्वीरित्या लागू झाले!</string>
+    <string name="suggested_themes">सूचित थीम्स</string>
+    <string name="view_more_icon">अधिक आयकन पहा</string>
+    <string name="shortcut">शॉर्टकट</string>
+    <string name="no_internet_connection">इंटरनेट कनेक्शन नाही</string>
+    <string name="please_check_your_internet">कृपया आपल्या डिव्हाइसवर इंटरनेट कनेक्शन तपासा</string>
+    <string name="go_to_settings">सेटिंग्समध्ये जा</string>
+    <string name="please_select_your_language">कृपया आपली भाषा निवडा</string>
+    <string name="what_s_your_vibe">तुमचा वाइब काय आहे?</string>
+    <string name="select_option">कृपया कमीतकमी एक पर्याय निवडा</string>
+    <string name="anime">अ‍ॅनिमे</string>
+    <string name="aesthetics">सौंदर्य</string>
+    <string name="cute">प्रिय</string>
+    <string name="kpop" translatable="false">K-pop</string>
+    
+    <string name="obd_1_1_title">" छान थीम्स &amp; वॉलपेपर"</string>
+    <string name="obd_1_2_title">क्यूरेटेड एस्थेटिक कलेक्शनसह तुमच्या फोनला स्वच्छ आणि स्टाइलिश नई लूक द्या।</string>
+    <string name="obd_2_1_title">प्रत्येक तपशील कस्टमाइজ करा</string>
+    <string name="obd_2_2_title">वॉलपेपर, कस्टम अ‍ॅप आयकन आणि स्टाइलिश Control Center लेआउट काही टॅपमध्ये लागू करा.</string>
+    <string name="payment_failed">पेमेंट अयोग्य</string>
+    <string name="a_small_issue_stopped">एका लहान समस्येमुळे पेमेंट थांबली. कृपया पुन्हा प्रयत्न करा</string>
+    <string name="payment_success">पेमेंट यशस्वी</string>
+    <string name="your_premium_version">तुमची प्रीमियम आवृत्ती आता सक्रिय आहे. अ‍ॅप वापरण्याचा आनंद घ्या!</string>
+    <string name="got_it">समजले</string>
+    <string name="s_continue">पुढे जा</string>
+    <string name="start_free_trial">विनामूल्य चाचणी सुरू करा</string>
+    <string name="unlock_premium">"प्रीमियम अनलॉक करा "</string>
+    <string name="_100_no_ads">१००% विज्ञापन नाही</string>
+    <string name="premium_themes">प्रीमियम थीम्स</string>
+    <string name="unlimited_wallpapers">अमर्यादित वॉलपेपर</string>
+    <string name="weekly">साप्ताहिक</string>
+    <string name="monthly">मासिक</string>
+    <string name="s_month">%s / महिना</string>
+    <string name="yearly">वार्षिक</string>
+    <string name="_3_day_free_trial">३-दिवसीय विनामूल्य चाचणी</string>
+    <string name="something_went_wrong">काहीतरी चूक झाली</string>
+    <string name="tv_des_failed_buy">कृपया या चरणांचे अनुसरण करा आणि पुन्हा प्रयत्न करा: \n 1. आपले नेटवर्क कनेक्शन तपासा \n 2. सुनिश्चित करा की आप आपल्या Google खात्यामध्ये लॉग इन आहात \n 3. सुनिश्चित करा की आप Google play अॅप्लिकेशन चालू करू शकता</string>
+    <string name="cancel_anytime">कधीही रद्द करा</string>
+    <string name="terms_of_use">वापरण्याचे अटी</string>
+    <string name="we_d_love_to_hear_your">आमच्या अ‍ॅपबद्दल आपले अभिप्राय ऐकून आम्हाला खुशी होईल! आपली मते अत्यंत मूल्यवान आहे आणि ती आम्हाला अ‍ॅप आपल्यासाठी आणखी चांगला करण्यास मदत करते.</string>
+    <string name="enter_your_feedback_here">आपले अभिप्राय येथे प्रविष्ट करा</string>
+    <string name="feed_back_empty">अभिप्राय रिक्त</string>
+    <string name="loading_reward_ads">रिवॉर्ड जाहिरात लोड करत आहे</string>
+    <string name="loading_reward_ads_failed">रिवॉर्ड विज्ञापन लोड करणे अयोग्य</string>
+    <string name="tv_des_failed_reward">खेद! पुरस्कार जाहिरातीचा भार कमी करताना काही त्रुटी आहे। कृपया पुन्हा प्रयत्न करा</string>
+    <string name="close">बंद करा</string>
+    <string name="discard_changes">बदल टाकून द्या</string>
+    <string name="are_you_sure_you_want_to_discard_your_feedback">तुम्हाला खात्री आहे का की तुम्ही तुमचा अभिप्राय टाकून देऊ इच्छिता?</string>
+    <string name="keep_editing">संपादन सुरू ठेवा</string>
+    <string name="discard">टाकून द्या</string>
+    <string name="get_start">सुरुवात करा</string>
+</resources>

@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginVertical="8dp"
+    android:background="@drawable/bg_set_icon"
+    android:gravity="center_vertical"
+    android:orientation="horizontal"
+    android:padding="12dp">
+
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/ivPackIcon"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:scaleType="centerCrop"
+        android:src="@mipmap/ic_launcher"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:shapeAppearance="@style/round_img_4" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/tvArrow"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="12dp"
+        android:src="@drawable/ic_arow_rights"
+        app:layout_constraintBottom_toBottomOf="@id/ivPackIcon"
+        app:layout_constraintStart_toEndOf="@id/ivPackIcon"
+        app:layout_constraintTop_toTopOf="@id/ivPackIcon" />
+
+    <FrameLayout
+        android:id="@+id/containerAppIcon"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        app:layout_constraintBottom_toBottomOf="@id/ivPackIcon"
+        app:layout_constraintStart_toEndOf="@id/tvArrow"
+        app:layout_constraintTop_toTopOf="@id/ivPackIcon">
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/ivAppIcon"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop"
+            android:visibility="gone"
+            app:shapeAppearance="@style/round_img_4"
+            tools:src="@mipmap/ic_launcher"
+            tools:visibility="visible" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/tvPlus"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/bg_plus_circle"
+            android:gravity="center"
+            android:padding="8dp"
+            android:src="@drawable/ic_add"
+            android:textColor="@color/text_med_em"
+            android:textSize="20sp"
+            android:visibility="visible" />
+
+    </FrameLayout>
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/ivEdit"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:layout_marginStart="4dp"
+        android:src="@drawable/ic_edit_pencil"
+        app:layout_constraintBottom_toBottomOf="@id/containerAppIcon"
+        app:layout_constraintStart_toEndOf="@id/containerAppIcon"
+        app:layout_constraintTop_toTopOf="@id/containerAppIcon"
+        tools:visibility="visible" />
+
+    <Space
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1" />
+
+    <com.wavez.themewallpaper.ui.customview.IconTextButton
+        android:id="@+id/btnAction"
+        style="@style/NunitoMedium.14"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAllCaps="false"
+        app:btnBackground="@drawable/bg_button_outline_1"
+        app:btnText="Choose"
+        app:btnTextColor="@color/primary_high_em"
+        tools:text="Choose" />
+
+</LinearLayout>

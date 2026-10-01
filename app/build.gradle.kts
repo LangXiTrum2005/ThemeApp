@@ -22,12 +22,13 @@ plugins {
     alias(libs.plugins.ksp)
     alias(libs.plugins.hilt)
     alias(libs.plugins.kotlin.parcelize)
+    alias(libs.plugins.kotlin.serialization)
 }
 
-val baseApplicationId = "com.onetabb.template.android"
+val baseApplicationId = "thinklife.prism.wallpaper.widget.theme"
 
 android {
-    namespace = "com.onetabb.template.android"
+    namespace = "thinklife.prism.wallpaper.widget.theme"
     compileSdk {
         version = release(37)
     }
@@ -43,15 +44,38 @@ android {
 
         buildConfigField("String", "STORE_ID", "\"$baseApplicationId\"")
         buildConfigField("String", "APPSFLYER_DEV_KEY", "\"X6Kiaov2ZqhCk3fc7dGnCd\"")
+
+        externalNativeBuild {
+            cmake {
+                cppFlags("-std=c++17")
+            }
+        }
+    }
+
+    externalNativeBuild {
+        cmake {
+            path = file("src/main/cpp/CMakeLists.txt")
+            version = "3.22.1"
+        }
     }
 
     buildTypes {
         debug {
+            externalNativeBuild {
+                cmake {
+                    arguments("-DBASE_URL=https://themesmobiletechnologyvn.xyz/")
+                }
+            }
         }
 
         release {
             isMinifyEnabled = true
             isShrinkResources = true
+            externalNativeBuild {
+                cmake {
+                    arguments("-DBASE_URL=https://themesmobiletechnologyvn.xyz/")
+                }
+            }
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro",
@@ -122,6 +146,41 @@ dependencies {
     implementation(libs.firebase.crashlytics.ndk)
     implementation(libs.firebase.config)
     implementation(libs.firebase.database)
+
+    // Room
+    implementation(libs.androidx.room.runtime)
+    implementation(libs.androidx.room.ktx)
+    ksp(libs.androidx.room.compiler)
+
+    // Retrofit & Moshi
+    implementation(libs.retrofit)
+    implementation(libs.retrofit.converter.moshi)
+    implementation(libs.okhttp.logging.interceptor)
+    implementation(libs.moshi)
+    ksp(libs.moshi.kotlin.codegen)
+
+    // Media & Animation
+    implementation(libs.libpag)
+    implementation(libs.simpleratingbar)
+    implementation(libs.androidx.media3.exoplayer)
+    implementation(libs.androidx.media3.exoplayer.dash)
+    implementation(libs.androidx.media3.ui)
+    implementation(libs.eventbus)
+    implementation(libs.shimmer)
+    implementation(libs.gson)
+
+    // Adjust & Referrer
+    implementation(libs.adjust.android)
+    implementation(libs.adjust.android.webbridge)
+    implementation(libs.adjust.android.huawei.referrer)
+    implementation(libs.android.installreferrer)
+
+    // UI & Navigation
+    implementation(libs.androidx.cardview)
+    implementation(libs.androidx.navigation.fragment.ktx)
+    implementation(libs.androidx.navigation.ui.ktx)
+    implementation(libs.kotlinx.serialization.json)
+    implementation(libs.infer.annotation)
 
     // ads
     implementation(libs.play.services.ads.api)

@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Prism Wallpaper</string>
+    <string name="cc_accessibility_description">Suprapunere Control Center — activează panoul de tragere din sistem pentru comutatoare rapide</string>
+    <string name="screen_recording_channel">Înregistrare ecran</string>
+    <string name="screen_recording_title">Se înregistrează ecranul</string>
+    <string name="screen_recording_message">Apasă Stop pentru a termina înregistrarea</string>
+    <string name="screen_recording_stop">Oprire</string>
+    <string name="screen_recording_saved">Video salvat</string>
+    <string name="screen_recording_notification_required">Te rog permite permisiunea de notificare pentru a începe înregistrarea</string>
+    <string name="themes">Teme</string>
+    <string name="wallpapers">Imagini de fundal</string>
+    <string name="icons">Iconițe</string>
+    <string name="hello_blank_fragment">Salut fragment gol</string>
+    <string name="search_themes">Căutare teme</string>
+    <string name="search_wallpapers">Căutare imagini de fundal</string>
+    <string name="search_icons">Caută pictograme</string>
+    <string name="most_popular">Cel mai popular</string>
+    <string name="newest_themes">Teme noi</string>
+    <string name="newest_wallpapers">Cele mai noi imagini de fundal</string>
+    <string name="newest_icons">Cele mai noi pictograme</string>
+    <string name="no_results_found_for">Nu s-au găsit rezultate pentru\n\"%1$s\"</string>
+    <string name="categories">Categorii</string>
+    <string name="first_fragment_label" translatable="false">First Fragment</string>
+    
+    <string name="second_fragment_label" translatable="false">Second Fragment</string>
+    
+    <string name="next">Următorul</string>
+    <string name="previous">Anterior</string>
+    <string name="download">Descarcă</string>
+    <string name="premium_theme">Temă Premium</string>
+    <string name="watch_a_short_ad_for_free_access_upgrade_to_premium_for_unlimited_use">● Vizionează un anunț scurt pentru acces gratuit. \n● Upgrade la Premium pentru utilizare nelimitată.</string>
+    <string name="watch_ad">Urmărește un anunț</string>
+    <string name="go_premium">Activează Premium</string>
+    <string name="downloading_please_wait_a_moment">Se descarcă, te rog așteptă un moment …</string>
+    <string name="apply">Aplică</string>
+    <string name="preview">Previzualizare</string>
+    <string name="set_wallpaper_as">Setează imaginea de fundal ca</string>
+    <string name="home_screen">Ecran de pornire</string>
+    <string name="lock_screen">Ecran de blocare</string>
+    <string name="both_home_lock_screen">Ambele Ecran principal &amp; Ecran blocat</string>
+    <string name="loading_please_wait_a_moment">Se încarcă, te rog așteptă un moment …</string>
+    <string name="loading">Se încarcă…</string>
+    <string name="reload">Reîncarcă</string>
+    <string name="could_not_load_content">Nu s-a putut încărca conținutul</string>
+    <string name="server_error_message">Ceva nu a funcționat. Te rog încearcă din nou!</string>
+    <string name="try_again">Încearcă Din Nou</string>
+    <string name="suggested_wallpapers">Imagini de fundal sugerate</string>
+    <string name="applied">Aplicat</string>
+    <string name="loading_image">Se încarcă imaginea…</string>
+    <string name="download_failed">Descărcarea a eșuat</string>
+    <string name="my_gallery">Galeria mea</string>
+    <string name="view_all">Vezi toate</string>
+    <string name="this_action_may_show_ads">Această acțiune poate conține anunțuri</string>
+    <string name="install">Instalează</string>
+    <string name="install_all_icons">Instalează toate iconițele</string>
+    <string name="unlock_all_icons">Deblochează toate pictogramele</string>
+    <string name="unlock">Deblochează</string>
+    <string name="choose">Alege</string>
+    <string name="no_icons_to_install">Nu sunt disponibile iconițe de instalat</string>
+    <string name="shortcut_install_requested">Instalare comenzi rapide solicitată</string>
+    <string name="shortcut_install_failed">Nu s-a putut instala comanda rapidă</string>
+    <string name="select_app">Selectează aplicația</string>
+    <string name="cannot_open_target_app">Nu se poate deschide aplicația țintă</string>
+    <string name="shortcut_applied_successfully">Comanda rapidă aplicată cu succes!</string>
+    <string name="suggested_icons">Pictograme sugerate</string>
+    <string name="empty_gallery_title">Categoria ta este goală.</string>
+    <string name="empty_gallery_message">Descarcă imagini de fundal, comenzi și pachete de pictograme pentru a-ți construi configurația perfectă.</string>
+    <string name="setting">Setare</string>
+    <string name="language">Limba</string>
+    <string name="feedback">Feedback</string>
+    <string name="privacy_policy">Politica de confidențialitate</string>
+    <string name="feedback_email" translatable="false">support@wavez.com</string>
+    
+    <string name="privacy_policy_url" translatable="false">https://thinklifes.notion.site/Privacy-Policy-Prism-Wallpaper-Widget-Theme-3dffca1b75238095a9edfa6dc6923f54</string>
+    
+    <string name="collection">Colecție</string>
+    <string name="get_themes">Obține teme</string>
+    <string name="theme_saved">Temă salvată</string>
+    <string name="theme_save_failed">Nu s-a putut salva tema</string>
+    <string name="successfully">Cu succes</string>
+    <string name="s_applied_successfully">%s aplicat cu succes!</string>
+    <string name="suggested_themes">Teme sugerate</string>
+    <string name="view_more_icon">Vezi mai multe pictograme</string>
+    <string name="shortcut">Comandă rapidă</string>
+    <string name="no_internet_connection">Nicio Conexiune Internet</string>
+    <string name="please_check_your_internet">Te rog verifică conexiunea la internet pe dispozitivul tău</string>
+    <string name="go_to_settings">Du-te la setări</string>
+    <string name="please_select_your_language">Te rog selectează-ți limba</string>
+    <string name="what_s_your_vibe">Care-ți e vibe-ul?</string>
+    <string name="select_option">Te rog alege cel puțin o opțiune</string>
+    <string name="anime">Anime</string>
+    <string name="aesthetics">Estetică</string>
+    <string name="cute">Frumos</string>
+    <string name="kpop" translatable="false">K-pop</string>
+    
+    <string name="obd_1_1_title">" Teme Frumoase &amp; Imagini de Fundal"</string>
+    <string name="obd_1_2_title">Dă telefonului tău o înfățișare nouă, curată și stilată cu colecții estetice curate.</string>
+    <string name="obd_2_1_title">Personalizează Fiecare Detaliu</string>
+    <string name="obd_2_2_title">Aplică imagini de fundal, iconițe de aplicații personalizate și aspect-uri Control Center stilate în doar câteva atingeri.</string>
+    <string name="payment_failed">Plata a eșuat</string>
+    <string name="a_small_issue_stopped">O mică problemă a oprit plata. Te rog încearcă din nou</string>
+    <string name="payment_success">Plată Reușită</string>
+    <string name="your_premium_version">Versiunea ta Premium este acum activă. Bucură-te de utilizarea aplicației!</string>
+    <string name="got_it">Am înțeles</string>
+    <string name="s_continue">Continuă</string>
+    <string name="start_free_trial">Începe Perioada de Încercare Gratuită</string>
+    <string name="unlock_premium">"Deblochează Premium "</string>
+    <string name="_100_no_ads">100% Fără Reclame</string>
+    <string name="premium_themes">Teme Premium</string>
+    <string name="unlimited_wallpapers">Imagini de Fundal Nelimitate</string>
+    <string name="weekly">Săptămânal</string>
+    <string name="monthly">Lunar</string>
+    <string name="s_month">%s / lună</string>
+    <string name="yearly">Anual</string>
+    <string name="_3_day_free_trial">Perioada de încercare de 3 zile</string>
+    <string name="something_went_wrong">Ceva n-a mers bine</string>
+    <string name="tv_des_failed_buy">Te rog urmează acești pași și încearcă din nou: \n 1. Verifică conexiunea ta la internet \n 2. Asigură-te că ești conectat la contul tău Google \n 3. Asigură-te că poți rula aplicația Google Play</string>
+    <string name="cancel_anytime">Anulezi oricând</string>
+    <string name="terms_of_use">Condiții de utilizare</string>
+    <string name="we_d_love_to_hear_your">Ne-ar plăcea să auzim feedback-ul tău despre aplicația noastră! Opinia ta este incredibil de valoroasă și ne ajută să facem aplicația și mai bună pentru tine.</string>
+    <string name="enter_your_feedback_here">Introduce-ți feedback-ul aici</string>
+    <string name="feed_back_empty">Feedback gol</string>
+    <string name="loading_reward_ads">Se încarcă anunțuri de recompensă</string>
+    <string name="loading_reward_ads_failed">Încărcarea reclamelor de recompensă a eșuat</string>
+    <string name="tv_des_failed_reward">Ne pare rău! A apărut o eroare la încărcarea anunțurilor de recompensă. Te rog încearcă din nou</string>
+    <string name="close">Închide</string>
+    <string name="discard_changes">Renunță la modificări</string>
+    <string name="are_you_sure_you_want_to_discard_your_feedback">Ești sigur că vrei să renunți la feedback-ul tău?</string>
+    <string name="keep_editing">Continuă editarea</string>
+    <string name="discard">Anulează</string>
+    <string name="get_start">Începe</string>
+</resources>

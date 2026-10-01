@@ -15,8 +15,11 @@ package thinklife.prism.wallpaper.widget.theme.presentation.language
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import androidx.activity.viewModels
+import androidx.core.widget.doAfterTextChanged
 import androidx.recyclerview.widget.LinearLayoutManager
+import dagger.hilt.android.AndroidEntryPoint
 import thinklife.prism.wallpaper.widget.theme.ads.AdsScreen
 import thinklife.prism.wallpaper.widget.theme.ads.AdsTrigger
 import thinklife.prism.wallpaper.widget.theme.core.base.BaseActivity
@@ -24,7 +27,6 @@ import thinklife.prism.wallpaper.widget.theme.core.extensions.finishWithoutAnima
 import thinklife.prism.wallpaper.widget.theme.core.extensions.setAppLocale
 import thinklife.prism.wallpaper.widget.theme.databinding.ActivitySettingLanguageBinding
 import thinklife.prism.wallpaper.widget.theme.presentation.language.adapter.LanguageAdapter
-import dagger.hilt.android.AndroidEntryPoint
 
 /**
  * Đổi ngôn ngữ đi từ Settings. Tách khỏi [LanguageActivity] (màn first-open) vì khác cả hành vi
@@ -69,6 +71,25 @@ class SettingLanguageActivity : BaseActivity<ActivitySettingLanguageBinding>() {
                 adapter.setSelectedLanguage(language.code)
             }
         }
+        binding.btnClearSearch.setOnClickListener {
+            binding.etSearch.text?.clear()
+        }
+        binding.etSearch.doAfterTextChanged { text ->
+            val query = text?.toString()?.trim().orEmpty()
+            binding.btnClearSearch.visibility = if (query.isNotEmpty()) View.VISIBLE else View.GONE
+            val filtered = if (query.isEmpty()) {
+                viewModel.languages
+            } else {
+                viewModel.languages.filter { item ->
+                    getString(item.nameRes).contains(query, ignoreCase = true) ||
+                        item.code.contains(query, ignoreCase = true)
+                }
+            }
+            adapter.submitList(filtered)
+            val isEmpty = filtered.isEmpty()
+            binding.layoutEmpty.visibility = if (isEmpty) View.VISIBLE else View.GONE
+            binding.rvLanguages.visibility = if (isEmpty) View.GONE else View.VISIBLE
+        }
     }
 
     /**
@@ -77,6 +98,7 @@ class SettingLanguageActivity : BaseActivity<ActivitySettingLanguageBinding>() {
      */
     private fun saveLanguage() {
         viewModel.saveLanguage()
+        setResult(android.app.Activity.RESULT_OK)
         if (setAppLocale(viewModel.pendingLanguage.code)) finishWithoutAnimation() else finish()
     }
 }

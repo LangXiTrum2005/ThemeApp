@@ -19,6 +19,7 @@ import android.util.Log
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.viewpager2.widget.ViewPager2
+import thinklife.prism.wallpaper.widget.theme.R
 import thinklife.prism.wallpaper.widget.theme.core.base.BaseActivity
 import thinklife.prism.wallpaper.widget.theme.core.base.UiState
 import thinklife.prism.wallpaper.widget.theme.core.extensions.collectWithLifecycle
@@ -109,7 +110,13 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
         )
     }
 
+    override fun onResume() {
+        super.onResume()
+        updateBottomNavTitles()
+    }
+
     private fun setupBottomNavigation() {
+        updateBottomNavTitles()
         binding.bottomNav.setOnItemSelectedListener { item ->
             if (isSyncingPage) return@setOnItemSelectedListener true
 
@@ -123,6 +130,14 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
 
             true
         }
+    }
+
+    private fun updateBottomNavTitles() {
+        binding.bottomNav.menu.findItem(R.id.nav_theme)?.setTitle(R.string.themes)
+        binding.bottomNav.menu.findItem(R.id.nav_wallpaper)?.setTitle(R.string.wallpapers)
+        binding.bottomNav.menu.findItem(R.id.nav_widgets)?.setTitle(R.string.widgets)
+        binding.bottomNav.menu.findItem(R.id.nav_controller)?.setTitle(R.string.controller)
+        binding.bottomNav.menu.findItem(R.id.nav_icons)?.setTitle(R.string.icons)
     }
 
     fun showMyGallery() {
@@ -151,18 +166,18 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
         viewModel.applyState.collectWithLifecycle(this) { state ->
             when (state) {
                 UiState.Idle -> Unit
-                UiState.Loading -> Toast.makeText(this, "Đang xử lý wallpaper…", Toast.LENGTH_SHORT)
+                UiState.Loading -> Toast.makeText(this, R.string.toast_processing_wallpaper, Toast.LENGTH_SHORT)
                     .show()
 
                 is UiState.Data -> Toast.makeText(
                     this,
-                    "Wallpaper đã được apply!",
+                    R.string.toast_wallpaper_applied,
                     Toast.LENGTH_SHORT
                 ).show()
 
                 is UiState.Error -> {
                     Log.d("log_loiii", "observeViewModel: ${state.message}")
-                    Toast.makeText(this, "Lỗi: ${state.message}", Toast.LENGTH_LONG).show()
+                    Toast.makeText(this, getString(R.string.toast_error_prefix, state.message), Toast.LENGTH_LONG).show()
                 }
             }
         }

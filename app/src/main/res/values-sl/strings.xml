@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Prism Wallpaper</string>
     <string name="cc_accessibility_description">Prekrivanje Kontrolnega centra — omogoči sistemsko povleceno ploščo za hitre spremembe</string>
@@ -130,4 +130,5 @@
     <string name="keep_editing">Nadaljujte z urejanjem</string>
     <string name="discard">Zavrzi</string>
     <string name="get_start">Začni</string>
+    <string name="controller">Krmilnik</string>
 </resources>

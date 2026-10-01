@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Prism Wallpaper</string>
     <string name="cc_accessibility_description">Control Center overlay — បើកប្រព័ន្ធលក្ខណៈប្រទាលពីលើសម្រាប់ការបិទបើក</string>
@@ -130,4 +130,5 @@
     <string name="keep_editing">បន្តកែសម្រួល</string>
     <string name="discard">ទម្លាក់</string>
     <string name="get_start">ចាប់ផ្តើម</string>
+    <string name="controller">ឧបករណ៍បញ្ជា</string>
 </resources>

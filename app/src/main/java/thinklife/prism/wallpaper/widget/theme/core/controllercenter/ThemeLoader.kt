@@ -254,6 +254,8 @@ object ThemeLoader {
             calculatorIcon = p(Assets.CALCULATOR),
             cameraIcon     = p(Assets.CAMERA),
             screenshotIcon = p(Assets.SCREENSHOT),
+            screenLockIcon = p(Assets.LOCKING),
+            screenLockSelectedIcon = p(Assets.LOCKING_SELECTED),
             setupIcon      = p(Assets.SETUP),
             timingIcon     = p(Assets.TIMING),
 

@@ -30,17 +30,31 @@
   <color name="text_muted">#8B96A3</color>
   <color name="white">#FFFFFFFF</color>
   <color name="black">#FF000000</color>
+  <color name="screen_lock_rim_highlight">#66FFFFFF</color>
+  <color name="screen_lock_rim_shadow">#33000000</color>
+  <color name="screen_lock_face_highlight">#3A3E47</color>
+  <color name="screen_lock_face_shadow">#1E2127</color>
   <!-- Teal Ä‘á»§ Ä‘áº­m Ä‘á»ƒ chá»¯ tráº¯ng Ä‘áº·t lÃªn cÃ²n Ä‘á»c Ä‘Æ°á»£c; nháº¡t hÆ¡n ná»¯a lÃ  nÃºt máº¥t tÆ°Æ¡ng pháº£n. -->
-  <color name="accent">#0E9384</color>
-  <color name="accent_dark">#0B7A6E</color>
-  <color name="accent_soft">#1F0E9384</color>
-  <color name="accent_gradient_start">#12A594</color>
-  <color name="accent_gradient_end">#0B7A6E</color>
-  <color name="accent_glow">#330E9384</color>
+  <color name="accent">#865CFA</color>
+  <color name="accent_dark">#5E3FC9</color>
+  <color name="accent_soft">#1F865CFA</color>
+  <color name="accent_gradient_start">#8E54E9</color>
+  <color name="accent_gradient_end">#6C5CE7</color>
+  <color name="accent_glow">#40865CFA</color>
   <!-- MÃ u chá»¯/icon Ä‘áº·t TRÃŠN ná»n accent (nÃºt chÃ­nh). -->
   <color name="on_accent">#FFFFFFFF</color>
-  <color name="list_item_selected_bg">#E6F5F2</color>
+  <color name="list_item_selected_bg">#F4F0FF</color>
   <color name="transparent_white_24">#3DFFFFFF</color>
+
+  <!-- Setting Screen Icons & Badges -->
+  <color name="setting_icon_bg_language">#F0EBFF</color>
+  <color name="setting_icon_tint_language">#865CFA</color>
+  <color name="setting_icon_bg_feedback">#E8F4FD</color>
+  <color name="setting_icon_tint_feedback">#2B8EE5</color>
+  <color name="setting_icon_bg_rate">#FFF6E5</color>
+  <color name="setting_icon_tint_rate">#F79009</color>
+  <color name="setting_icon_bg_privacy">#E8F8F0</color>
+  <color name="setting_icon_tint_privacy">#12B76A</color>
   <!-- Alias dÃ¹ng trong dialog no-internet -->
   <color name="sub_text">@color/text_secondary</color>
   <color name="primary">@color/accent</color>
@@ -49,7 +63,7 @@
   <color name="ad_native_border">#14101418</color>
   <color name="ad_native_text_primary">#101418</color>
   <color name="ad_native_text_secondary">#5A6673</color>
-  <color name="ad_native_button_bg">#0E9384</color>
+  <color name="ad_native_button_bg">#865CFA</color>
   <color name="ad_native_button_text">#FFFFFF</color>
   <color name="surface">#F9F9FA</color>
   <color name="surfaceBg">#FFFFFF</color>

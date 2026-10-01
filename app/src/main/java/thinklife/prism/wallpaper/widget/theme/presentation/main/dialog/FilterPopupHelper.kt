@@ -36,6 +36,23 @@ class FilterPopupHelper(
     private val layoutInflater: LayoutInflater,
 ) {
 
+    private var currentPopup: PopupWindow? = null
+    private var lastDismissTimeMs: Long = 0L
+
+    val isShowing: Boolean
+        get() = currentPopup?.isShowing == true
+
+    fun dismiss() {
+        try {
+            if (currentPopup?.isShowing == true) {
+                currentPopup?.dismiss()
+            }
+        } catch (_: Exception) {
+        } finally {
+            currentPopup = null
+        }
+    }
+
     fun show(
         anchorView: View,
         activity: Activity,
@@ -43,8 +60,17 @@ class FilterPopupHelper(
         selectedItemId: String,
         onSelected: (FilterCategoryItem) -> Unit,
     ) {
+        if (isShowing) {
+            dismiss()
+            return
+        }
+
+        val now = System.currentTimeMillis()
+        if (now - lastDismissTimeMs < 300L) {
+            return
+        }
+
         val binding = PopupFilterBinding.inflate(layoutInflater)
-        var popup: PopupWindow? = null
 
         binding.rcvCategory.apply {
             layoutManager = GridLayoutManager(context, 2)
@@ -53,21 +79,22 @@ class FilterPopupHelper(
                 selectedItemId = selectedItemId,
                 onSelected = { item ->
                     onSelected(item)
-                    popup?.dismiss()
+                    dismiss()
                 },
             )
         }
 
-        popup = PopupWindow(
+        val popup = PopupWindow(
             binding.root,
             ViewGroup.LayoutParams.WRAP_CONTENT,
             ViewGroup.LayoutParams.WRAP_CONTENT,
-            false,
+            true,
         ).apply {
             elevation = dp(12).toFloat()
             setBackgroundDrawable(ContextCompat.getDrawable(context, R.drawable.bg_popup_rounded))
             isOutsideTouchable = true
         }
+        currentPopup = popup
 
         binding.root.measure(
             View.MeasureSpec.UNSPECIFIED,
@@ -76,19 +103,30 @@ class FilterPopupHelper(
         val xOffset = anchorView.width - binding.root.measuredWidth
         popup.showAsDropDown(anchorView, xOffset, dp(8))
         hideNavigationBar(activity)
-        activity.window.setDimAmount(0.5f)
-        activity.window.addFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND)
+        try {
+            activity.window.setDimAmount(0.5f)
+            activity.window.addFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND)
+        } catch (_: Exception) {
+        }
 
         popup.setOnDismissListener {
-            activity.window.clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND)
-            hideNavigationBar(activity)
+            lastDismissTimeMs = System.currentTimeMillis()
+            currentPopup = null
+            try {
+                activity.window.clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND)
+                hideNavigationBar(activity)
+            } catch (_: Exception) {
+            }
         }
     }
 
     private fun hideNavigationBar(activity: Activity) {
-        WindowInsetsControllerCompat(activity.window, activity.window.decorView).apply {
-            systemBarsBehavior = WindowInsetsControllerCompat.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE
-            hide(WindowInsetsCompat.Type.navigationBars())
+        try {
+            WindowInsetsControllerCompat(activity.window, activity.window.decorView).apply {
+                systemBarsBehavior = WindowInsetsControllerCompat.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE
+                hide(WindowInsetsCompat.Type.navigationBars())
+            }
+        } catch (_: Exception) {
         }
     }
 

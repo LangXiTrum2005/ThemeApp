@@ -277,6 +277,9 @@ class ControlCenterOverlay(private val context: Context) {
     // ─── Utilities ────────────────────────────────────────────────
 
     private fun bindFocusDurations() {
+        sceneBinding.focusDurationPanel.setOnClickListener {
+            sceneBinding.focusDurationPanel.visibility = View.GONE
+        }
         sceneBinding.focus15s.setOnClickListener { scheduleScreenLock(15_000L) }
         sceneBinding.focus30s.setOnClickListener { scheduleScreenLock(30_000L) }
         sceneBinding.focus1m.setOnClickListener { scheduleScreenLock(60_000L) }

@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Prism Wallpaper</string>
     <string name="cc_accessibility_description">Control Center overlay — jẹ́ rìn yíyan ìṣẹ̀ jọjọ láti ní sẹ̀tù ìnípò</string>
@@ -130,4 +130,5 @@
     <string name="keep_editing">Tẹsiwaju ṣiṣe atunṣe</string>
     <string name="discard">Tu silẹ</string>
     <string name="get_start">Lọ síbẹ̀</string>
+    <string name="controller">Oludari</string>
 </resources>

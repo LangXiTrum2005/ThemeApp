@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Prism Wallpaper</string>
     <string name="cc_accessibility_description">Sobreposição da Central de Controle — ativa um painel retrátil em todo o sistema para alternâncias rápidas</string>
@@ -130,4 +130,30 @@
     <string name="keep_editing">Continuar editando</string>
     <string name="discard">Descartar</string>
     <string name="get_start">Começar</string>
+    <string name="rate_dialog_title">Gostando do app?</string>
+    <string name="rate_dialog_title_5">Obrigado!</string>
+    <string name="text_no_internet_title">Sem Internet</string>
+    <string name="rate_dialog_title_3">Apenas ok?</string>
+    <string name="rate_dialog_title_1">Não gostou?</string>
+    <string name="permission_notification_settings_description">Ative as notificações nas Configurações para que possamos avisá-lo sobre atualizações importantes.</string>
+    <string name="widgets">Widgets</string>
+    <string name="back">Voltar</string>
+    <string name="save">Salvar</string>
+    <string name="rate_dialog_message_5">Se você gosta do app, reserve um momento para avaliá-lo.</string>
+    <string name="permission_notification_title">Ativar notificações</string>
+    <string name="text_try_again">Tentar novamente</string>
+    <string name="rate_dialog_button">Avaliar</string>
+    <string name="permission_notification_settings_title">Notificações desativadas</string>
+    <string name="permission_open_settings">Abrir configurações</string>
+    <string name="permission_allow">Permitir</string>
+    <string name="rate_dialog_message_1">Sentimos muito. Diga-nos como podemos melhorar sua experiência.</string>
+    <string name="rate_us">Avalie-nos</string>
+    <string name="permission_notification_description">Receba notificações sobre atualizações importantes. Você pode desativar a qualquer momento nas Configurações.</string>
+    <string name="permission_not_now">Agora não</string>
+    <string name="rate_dialog_message">Adoraríamos ouvir sua opinião. Toque em um ícone abaixo para nos dizer!</string>
+    <string name="text_no_internet_message">Verifique sua conexão e tente novamente.</string>
+    <string name="rate_dialog_title_4">Muito bom!</string>
+    <string name="rate_dialog_message_4">Se você gosta do app, reserve um momento para avaliá-lo.</string>
+    <string name="rate_dialog_message_3">Gostaríamos de saber como melhorar este aplicativo.</string>
+    <string name="controller">Controle</string>
 </resources>

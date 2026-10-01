@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Prism Wallpaper</string>
     <string name="cc_accessibility_description">Control Center overlay — aktifaké panel tarik mudhun sistem kanggo toggle cepet</string>
@@ -130,4 +130,5 @@
     <string name="keep_editing">Terus babagan</string>
     <string name="discard">Buang</string>
     <string name="get_start">Mulai</string>
+    <string name="controller">Kontroler</string>
 </resources>

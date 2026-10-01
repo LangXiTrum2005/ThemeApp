@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Prism Wallpaper</string>
     <string name="cc_accessibility_description">Control Center üst-üstə düşmə — sürətli keçişlər üçün sistem genişliyi aşağı çəkmə panelini aktivləşdirir</string>
@@ -130,4 +130,5 @@
     <string name="keep_editing">Redaktəni davam ettirin</string>
     <string name="discard">Ləğv et</string>
     <string name="get_start">Başla</string>
+    <string name="controller">Nəzarətçi</string>
 </resources>

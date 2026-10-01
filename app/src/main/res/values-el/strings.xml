@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Prism Wallpaper</string>
     <string name="cc_accessibility_description">Επικάλυψη Control Center — ενεργοποιεί panel ολόκληρου του συστήματος με πτώση προς τα κάτω για γρήγορες εναλλαγές</string>
@@ -130,4 +130,5 @@
     <string name="keep_editing">Συνέχιση επεξεργασίας</string>
     <string name="discard">Απόρριψη</string>
     <string name="get_start">Ξεκινήστε</string>
+    <string name="controller">Χειριστήριο</string>
 </resources>

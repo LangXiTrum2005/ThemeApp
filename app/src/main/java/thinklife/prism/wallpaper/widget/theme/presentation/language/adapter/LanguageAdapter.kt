@@ -13,8 +13,8 @@
 package thinklife.prism.wallpaper.widget.theme.presentation.language.adapter
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import thinklife.prism.wallpaper.widget.theme.R
 import thinklife.prism.wallpaper.widget.theme.core.base.BaseDiffCallback
 import thinklife.prism.wallpaper.widget.theme.core.base.BaseListAdapter
@@ -36,15 +36,24 @@ class LanguageAdapter :
         if (newIndex >= 0) notifyItemChanged(newIndex)
     }
 
-    override fun inflateBinding(parent: ViewGroup, viewType: Int): ItemLanguageBinding = ItemLanguageBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+    override fun inflateBinding(parent: ViewGroup, viewType: Int): ItemLanguageBinding =
+        ItemLanguageBinding.inflate(LayoutInflater.from(parent.context), parent, false)
 
     override fun bindData(binding: ItemLanguageBinding, item: LanguageItem, position: Int) {
         binding.ivFlag.setImageResource(item.flagRes)
         binding.tvName.setText(item.nameRes)
         val selected = item.matches(selectedLanguage)
-        binding.ivCheck.visibility = if (selected) View.VISIBLE else View.INVISIBLE
+        binding.ivCheck.setImageResource(
+            if (selected) R.drawable.ic_language_radio_selected else R.drawable.ic_language_radio_unselected,
+        )
         binding.root.setBackgroundResource(
             if (selected) R.drawable.bg_list_item_selected else R.drawable.bg_list_item,
+        )
+        binding.tvName.setTextColor(
+            ContextCompat.getColor(
+                binding.root.context,
+                if (selected) R.color.accent else R.color.text_primary,
+            ),
         )
     }
 }

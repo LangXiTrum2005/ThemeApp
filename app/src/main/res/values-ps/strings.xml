@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Prism Wallpaper</string>
     <string name="cc_accessibility_description">Control Center پرت - د چټو ټوګلونو لپاره سیسټم وسیع ډاون پینل فعال کوي</string>
@@ -130,4 +130,5 @@
     <string name="keep_editing">ترميم جاري رکړئ</string>
     <string name="discard">رد کړئ</string>
     <string name="get_start">شروع کړئ</string>
+    <string name="controller">کنټرولر</string>
 </resources>

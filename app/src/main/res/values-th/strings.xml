@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Prism Wallpaper</string>
     <string name="cc_accessibility_description">Control Center overlay — เปิดใช้พาเนลแบบดึงลงจากระบบเพื่อสลับอย่างรวดเร็ว</string>
@@ -130,4 +130,5 @@
     <string name="keep_editing">เก็บไว้แก้ไข</string>
     <string name="discard">ยกเลิก</string>
     <string name="get_start">เริ่มต้นเลย</string>
+    <string name="controller">ตัวควบคุม</string>
 </resources>

@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Prism Wallpaper</string>
     <string name="cc_accessibility_description">Nakładka Control Center — umożliwia panel pull-down na poziomie systemu do szybkich przełączników</string>
@@ -130,4 +130,5 @@
     <string name="keep_editing">Kontynuuj edycję</string>
     <string name="discard">Odrzuć</string>
     <string name="get_start">Zaczynamy</string>
+    <string name="controller">Kontroler</string>
 </resources>

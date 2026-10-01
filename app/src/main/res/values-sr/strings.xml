@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Prism Wallpaper</string>
     <string name="cc_accessibility_description">Overlay Control Center-a — omogućava povlačenje odozgo za brze opcije</string>
@@ -130,4 +130,5 @@
     <string name="keep_editing">Настави са уређивањем</string>
     <string name="discard">Одбаци</string>
     <string name="get_start">Почните</string>
+    <string name="controller">Контролер</string>
 </resources>

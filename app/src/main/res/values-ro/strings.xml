@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Prism Wallpaper</string>
     <string name="cc_accessibility_description">Suprapunere Control Center — activează panoul de tragere din sistem pentru comutatoare rapide</string>
@@ -130,4 +130,5 @@
     <string name="keep_editing">Continuă editarea</string>
     <string name="discard">Anulează</string>
     <string name="get_start">Începe</string>
+    <string name="controller">Controler</string>
 </resources>

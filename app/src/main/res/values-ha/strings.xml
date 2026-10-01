@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Prism Wallpaper</string>
     <string name="cc_accessibility_description">Control Center overlay — yana kunna tsarin jujjuyawar talla domin saurin togawa</string>
@@ -130,4 +130,5 @@
     <string name="keep_editing">Ci gaba da gyara</string>
     <string name="discard">Jefar</string>
     <string name="get_start">Fara</string>
+    <string name="controller">Mai sarrafawa</string>
 </resources>

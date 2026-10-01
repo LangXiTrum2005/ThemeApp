@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Prism Wallpaper</string>
     <string name="cc_accessibility_description">કંટ્રોલ સેન્ટર ઓવરલે — ઝડપી ટોગલ્સ માટે સિસ્ટમ-વ્યાપી પુલ-ડાઉન પેનલ સક્ષમ કરે છે</string>
@@ -130,4 +130,5 @@
     <string name="keep_editing">સંપાદન ચાલુ રાખો</string>
     <string name="discard">છોડી દો</string>
     <string name="get_start">શરૂ કરો</string>
+    <string name="controller">નિયંત્રક</string>
 </resources>

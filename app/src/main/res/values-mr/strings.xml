@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Prism Wallpaper</string>
     <string name="cc_accessibility_description">Control Center ओव्हरले — द्रुत टॉगलसाठी सिस्टम-व्यापी पुल-डाउन पॅनेल सक्षम करते</string>
@@ -130,4 +130,5 @@
     <string name="keep_editing">संपादन सुरू ठेवा</string>
     <string name="discard">टाकून द्या</string>
     <string name="get_start">सुरुवात करा</string>
+    <string name="controller">नियंत्रक</string>
 </resources>

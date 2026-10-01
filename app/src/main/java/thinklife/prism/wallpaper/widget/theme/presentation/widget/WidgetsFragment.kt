@@ -49,12 +49,11 @@ class WidgetsFragment : BaseFragment<FragmentWidgetsBinding>() {
     private val filterHelper by lazy { FilterPopupHelper(requireContext(), layoutInflater) }
     private val viewModel by viewModels<WidgetViewModel>()
 
+    private var tabMediator: TabLayoutMediator? = null
+
     private val onPageChangeCallback = object : ViewPager2.OnPageChangeCallback() {
         override fun onPageSelected(position: Int) {
-            for (index in 0 until binding.tabCategory.tabCount) {
-                val tabView = binding.tabCategory.getTabAt(index)?.customView as? ThemeTabIcon
-                if (index == position) tabView?.activate() else tabView?.inactivate()
-            }
+            updateTabState(position)
         }
     }
 
@@ -83,6 +82,10 @@ class WidgetsFragment : BaseFragment<FragmentWidgetsBinding>() {
             viewModel.getCategories(forceRefresh = true)
         }
         binding.btnMoreCategory.setOnClickListener { anchor ->
+            if (filterHelper.isShowing) {
+                filterHelper.dismiss()
+                return@setOnClickListener
+            }
             val categories = (viewModel.categoriesState.value as? UiState.Data)?.value
                 ?: return@setOnClickListener
             if (categories.isEmpty()) return@setOnClickListener
@@ -92,7 +95,9 @@ class WidgetsFragment : BaseFragment<FragmentWidgetsBinding>() {
             filterHelper.show(
                 activity = activity ?: return@setOnClickListener,
                 anchorView = anchor,
-                items = categories.map { it.toFilterCategoryItem() },
+                items = categories.map {
+                    it.toFilterCategoryItem().copy(title = formatCategoryDisplayName(it.name))
+                },
                 selectedItemId = selectedCategory.id,
             ) { selectedItem ->
                 val position = categories.indexOfFirst { it.id == selectedItem.id }
@@ -111,9 +116,10 @@ class WidgetsFragment : BaseFragment<FragmentWidgetsBinding>() {
                     binding.viewLoading.isVisible = false
                     val savedPosition = binding.vpTheme.currentItem
                     setupTabs(state.value)
-                    if (savedPosition > 0) {
+                    if (savedPosition > 0 && savedPosition < state.value.size) {
                         binding.vpTheme.setCurrentItem(savedPosition, false)
                     }
+                    updateTabState(binding.vpTheme.currentItem)
                 }
 
                 is UiState.Error -> {
@@ -134,11 +140,12 @@ class WidgetsFragment : BaseFragment<FragmentWidgetsBinding>() {
 
     private fun setupTabs(categories: List<WidgetCategoryModel>) {
         this.categories = categories
+        tabMediator?.detach()
         binding.vpTheme.adapter = WidgetCategoryPagerAdapter(this, categories)
-        TabLayoutMediator(binding.tabCategory, binding.vpTheme) { tab, position ->
+        tabMediator = TabLayoutMediator(binding.tabCategory, binding.vpTheme) { tab, position ->
             val category = categories[position]
             tab.customView = ThemeTabIcon(requireContext()).apply {
-                setName(category.name)
+                setName(formatCategoryDisplayName(category.name))
                 setIcon(category.icon)
                 setActiveBackground(
                     ContextCompat.getDrawable(requireContext(), R.drawable.bg_tab_selected)
@@ -152,7 +159,7 @@ class WidgetsFragment : BaseFragment<FragmentWidgetsBinding>() {
                 )
                 inactivate()
             }
-        }.attach()
+        }.also { it.attach() }
 
         binding.tabCategory.addOnTabSelectedListener(
             object : TabLayout.OnTabSelectedListener {
@@ -167,11 +174,79 @@ class WidgetsFragment : BaseFragment<FragmentWidgetsBinding>() {
                 override fun onTabReselected(tab: TabLayout.Tab) = Unit
             }
         )
+        updateTabState(binding.vpTheme.currentItem)
+    }
+
+    private fun updateTabState(selectedPosition: Int) {
+        for (index in 0 until binding.tabCategory.tabCount) {
+            val tabView = binding.tabCategory.getTabAt(index)?.customView as? ThemeTabIcon
+            if (index == selectedPosition) {
+                tabView?.activate()
+            } else {
+                tabView?.inactivate()
+            }
+        }
+    }
+
+    private fun formatCategoryDisplayName(rawName: String): String {
+        val trimmed = rawName.trim()
+        val cleanName = trimmed.replace(
+            Regex("^[\\p{So}\\p{Sk}\\p{Sm}\\p{Sc}\\p{Cs}\\p{Cn}\\p{Co}\\p{Punct}\\s]+"),
+            "",
+        ).trim()
+        val emoji = when (cleanName.lowercase()) {
+            "hot" -> "🔥"
+            "aesthetic", "aesthetics" -> "🎀"
+            "cute" -> "🥰"
+            "kpop" -> "🫰"
+            "anime" -> "🌸"
+            "sport", "sports" -> "⚽"
+            "animal", "animals" -> "🐾"
+            "cartoon", "cartoons" -> "🎬"
+            "game", "games" -> "🎮"
+            "nature" -> "🌿"
+            "capybara" -> "🦫"
+            "cat" -> "🐱"
+            "dog" -> "🐶"
+            "car", "cars" -> "🚗"
+            "ai", "ai art" -> "✨"
+            "valentine", "love" -> "💖"
+            "sky" -> "☁️"
+            "halloween" -> "🎃"
+            "marvel" -> "🦸"
+            "new year" -> "🎉"
+            "ramadan" -> "🌙"
+            "spider man" -> "🕷️"
+            "christmas" -> "🎄"
+            else -> null
+        }
+
+        return if (emoji != null) {
+            if (trimmed.startsWith(emoji) || trimmed.firstOrNull()?.isHighSurrogate() == true) {
+                trimmed
+            } else {
+                "$emoji $trimmed"
+            }
+        } else {
+            trimmed
+        }
+    }
+
+    override fun onHandleBackPressed(): Boolean {
+        if (filterHelper.isShowing) {
+            filterHelper.dismiss()
+            return true
+        }
+        return super.onHandleBackPressed()
     }
 
     override fun release() {
+        filterHelper.dismiss()
         categories = emptyList()
         binding.vpTheme.unregisterOnPageChangeCallback(onPageChangeCallback)
+        tabMediator?.detach()
+        tabMediator = null
+        binding.vpTheme.adapter = null
         super.release()
     }
 }

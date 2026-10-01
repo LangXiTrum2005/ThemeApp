@@ -127,6 +127,10 @@ class ThemeFragment : BaseFragment<FragmentThemeBinding>() {
         }
 
         binding.btnMoreCategory.setOnClickListener {
+            if (filterHelper.isShowing) {
+                filterHelper.dismiss()
+                return@setOnClickListener
+            }
             val categories = (viewModel.categoriesResult.value as? UiState.Data)?.value
                 ?: return@setOnClickListener
             if (categories.isEmpty()) return@setOnClickListener
@@ -300,7 +304,16 @@ class ThemeFragment : BaseFragment<FragmentThemeBinding>() {
         }
     }
 
+    override fun onHandleBackPressed(): Boolean {
+        if (filterHelper.isShowing) {
+            filterHelper.dismiss()
+            return true
+        }
+        return super.onHandleBackPressed()
+    }
+
     override fun release() {
+        filterHelper.dismiss()
         lastSetupCategories = null
         binding.appBar.removeOnOffsetChangedListener(appBarOffsetChangedListener)
         binding.vpTheme.unregisterOnPageChangeCallback(onPageChangeCallback)

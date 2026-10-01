@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Prism Wallpaper</string>
     <string name="cc_accessibility_description">Overlay Control Center — aktifkeun panél pull-down sistem pikeun toggle gancang</string>
@@ -130,4 +130,5 @@
     <string name="keep_editing">Teras ngédit</string>
     <string name="discard">Tumpak</string>
     <string name="get_start">Mula Heula</string>
+    <string name="controller">Pangontrol</string>
 </resources>

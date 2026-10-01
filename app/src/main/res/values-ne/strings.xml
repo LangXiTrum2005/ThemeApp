@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Prism Wallpaper</string>
     <string name="cc_accessibility_description">कन्ट्रोल सेन्टर ओभरले — द्रुत टगलहरूको लागि प्रणाली-व्यापी पुल-डाउन प्यानल सक्षम गर्छ</string>
@@ -130,4 +130,5 @@
     <string name="keep_editing">सम्पादन जारी राख्नुहोस्</string>
     <string name="discard">त्याग गर्नुहोस्</string>
     <string name="get_start">सुरु गर्नुहोस्</string>
+    <string name="controller">नियन्त्रक</string>
 </resources>

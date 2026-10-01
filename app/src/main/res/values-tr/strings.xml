@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Prism Wallpaper</string>
     <string name="cc_accessibility_description">Kontrol Merkezi overlay — hızlı geçişler için sistem genelinde aşağı çekme paneli sağlar</string>
@@ -130,4 +130,5 @@
     <string name="keep_editing">Düzenlemeli devam et</string>
     <string name="discard">İptal et</string>
     <string name="get_start">Başla</string>
+    <string name="controller">Denetleyici</string>
 </resources>

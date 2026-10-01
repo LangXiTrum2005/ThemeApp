@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Prism Wallpaper</string>
     <string name="cc_accessibility_description">ڪنٽرول سينٽر اوور لے — سسٽم وائڊ پل ڈاون پينل تيز ٹاگل لاء تازو ڪري ٿو</string>
@@ -130,4 +130,5 @@
     <string name="keep_editing">ترميم جاري رکو</string>
     <string name="discard">رد ڪريو</string>
     <string name="get_start">شروع ڪريو</string>
+    <string name="controller">ڪنٽرولر</string>
 </resources>

@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Prism Wallpaper</string>
     <string name="cc_accessibility_description">Prekrytie Kontrolného centra — umožňuje tabuľu s rýchlymi prepínačmi na celý systém</string>
@@ -130,4 +130,5 @@
     <string name="keep_editing">Pokračovať v úprave</string>
     <string name="discard">Zahodiť</string>
     <string name="get_start">Začať</string>
+    <string name="controller">Ovládač</string>
 </resources>

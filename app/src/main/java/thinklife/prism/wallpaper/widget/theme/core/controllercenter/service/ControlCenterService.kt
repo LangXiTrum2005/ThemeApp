@@ -21,6 +21,7 @@ import android.util.Log
 import android.view.accessibility.AccessibilityEvent
 import androidx.core.content.ContextCompat
 import thinklife.prism.wallpaper.widget.theme.core.controllercenter.ControllerThemeCatalog
+import thinklife.prism.wallpaper.widget.theme.core.controllercenter.PermissionHelper
 import thinklife.prism.wallpaper.widget.theme.core.controllercenter.ThemeLoader
 import thinklife.prism.wallpaper.widget.theme.core.controllercenter.controllers.BluetoothController
 import thinklife.prism.wallpaper.widget.theme.core.controllercenter.controllers.BrightnessController
@@ -42,6 +43,8 @@ class ControlCenterService : AccessibilityService() {
             "thinklife.prism.wallpaper.widget.theme.controlcenter.ACTION_ACTIVE_CONTROL_PANEL"
         const val ACTION_RELOAD_THEME =
             "thinklife.prism.wallpaper.widget.theme.controlcenter.ACTION_RELOAD_THEME"
+        const val ACTION_TOGGLE_FLASHLIGHT =
+            "thinklife.prism.wallpaper.widget.theme.controlcenter.ACTION_TOGGLE_FLASHLIGHT"
         const val EXTRA_SHOW = "extra_show"
         private const val TAG = "ControlCenter"
     }
@@ -78,6 +81,8 @@ class ControlCenterService : AccessibilityService() {
                     Log.d(TAG, "Theme reload requested")
                     overlay?.reload(loadActiveTheme())
                 }
+
+                ACTION_TOGGLE_FLASHLIGHT -> flashlightController.toggle()
             }
         }
     }
@@ -90,6 +95,7 @@ class ControlCenterService : AccessibilityService() {
             val filter = IntentFilter().apply {
                 addAction(ACTION_ACTIVE_CONTROL_PANEL)
                 addAction(ACTION_RELOAD_THEME)
+                addAction(ACTION_TOGGLE_FLASHLIGHT)
             }
             ContextCompat.registerReceiver(
                 this,
@@ -111,6 +117,19 @@ class ControlCenterService : AccessibilityService() {
             volume = volumeController,
             brightness = brightnessController
         )
+
+        PermissionHelper.markPermissionCompleted(this)
+
+        if (PermissionHelper.isWaitingForAccessibility(this)) {
+            val targetClass = PermissionHelper.getTargetActivityClass(this)
+            PermissionHelper.clearWaitingForAccessibility(this)
+            android.os.Handler(android.os.Looper.getMainLooper()).postDelayed({
+                val intent = Intent(this, targetClass).apply {
+                    addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_REORDER_TO_FRONT or Intent.FLAG_ACTIVITY_SINGLE_TOP)
+                }
+                startActivity(intent)
+            }, 200L)
+        }
     }
 
     override fun onAccessibilityEvent(event: AccessibilityEvent?) = Unit

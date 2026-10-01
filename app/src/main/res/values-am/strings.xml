@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Prism Wallpaper</string>
     <string name="cc_accessibility_description">Control Center overlay — ለፍጥጫ መቀያየር ፓነል ስርዓት ሁለንተናዊ ይሞክሩ</string>
@@ -130,4 +130,5 @@
     <string name="keep_editing">ማስተካከልን ይቀጥሉ</string>
     <string name="discard">ተወው</string>
     <string name="get_start">ጀምር</string>
+    <string name="controller">ተቆጣጣሪ</string>
 </resources>

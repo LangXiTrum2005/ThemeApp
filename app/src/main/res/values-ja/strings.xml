@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Prism Wallpaper</string>
     <string name="cc_accessibility_description">コントロールセンターオーバーレイ — システム全体のプルダウンパネルを有効にしてクイック切り替え</string>
@@ -130,4 +130,5 @@
     <string name="keep_editing">編集を続ける</string>
     <string name="discard">破棄</string>
     <string name="get_start">さあ始めよう</string>
+    <string name="controller">コントロール</string>
 </resources>

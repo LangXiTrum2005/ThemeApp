@@ -60,9 +60,17 @@ abstract class BaseActivity<VB : ViewBinding> : AppCompatActivity() {
 
     private var networkTracker: NetworkTracker? = null
     private var networkDialog: NetworkDialog? = null
+    private var currentLanguageTag: String? = null
+
+    override fun attachBaseContext(newBase: android.content.Context) {
+        val savedLang = thinklife.prism.wallpaper.widget.theme.core.extensions.getSavedAppLanguage(newBase)
+        val localizedContext = thinklife.prism.wallpaper.widget.theme.core.extensions.applySelectedLocale(newBase, savedLang)
+        super.attachBaseContext(localizedContext)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        currentLanguageTag = sharedPref.getConfigLanguage()
         // light(): icon thanh hệ thống màu TỐI, hợp nền sáng. Đổi app sang chủ đề tối thì đổi
         // hai dòng này sang SystemBarStyle.dark(...) cùng lúc với bảng màu trong colors.xml.
         enableEdgeToEdge(
@@ -114,6 +122,15 @@ abstract class BaseActivity<VB : ViewBinding> : AppCompatActivity() {
             finish()
         } else {
             supportFragmentManager.popBackStack()
+        }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        val savedLang = sharedPref.getConfigLanguage()
+        if (currentLanguageTag != null && currentLanguageTag != savedLang) {
+            currentLanguageTag = savedLang
+            recreate()
         }
     }
 

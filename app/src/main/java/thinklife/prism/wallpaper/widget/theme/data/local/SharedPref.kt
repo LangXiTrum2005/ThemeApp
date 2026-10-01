@@ -70,4 +70,5 @@ interface SharedPref {
 
     var hasLoggedSplashView: Boolean
     var hasLoggedHomeView: Boolean
+    var isControllerPermissionCompleted: Boolean
 }

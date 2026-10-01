@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Prism Wallpaper</string>
     <string name="cc_accessibility_description">Control Center-överlagring — aktiverar systemomfattande pull-down-panel för snabbknappar</string>
@@ -130,4 +130,5 @@
     <string name="keep_editing">Fortsätt redigera</string>
     <string name="discard">Avvisa</string>
     <string name="get_start">Kom igång</string>
+    <string name="controller">Kontroll</string>
 </resources>

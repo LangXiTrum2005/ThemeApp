@@ -131,6 +131,18 @@ object ControllerThemeCatalog {
 
     private fun ControllerThemeData.toConfig(context: Context): ControllerConfigModel {
         fun asset(url: String) = ControllerThemeAssets.resolve(context, control_id, url)
+        val resolvedLockOff = if (lock_off.contains("Screen Mirroring", ignoreCase = true) || lock_off.isBlank()) {
+            if (rotate_off.isNotBlank()) rotate_off else lock_off
+        } else {
+            lock_off
+        }
+        val resolvedLockOn = if (lock_on.contains("Screen Mirroring", ignoreCase = true) || lock_on.isBlank()) {
+            if (rotate_on.isNotBlank()) rotate_on else lock_on
+        } else {
+            lock_on
+        }
+        val resolvedRotateOff = if (rotate_off.isNotBlank()) rotate_off else lock_off
+        val resolvedRotateOn = if (rotate_on.isNotBlank()) rotate_on else lock_on
         return ControllerConfigModel(
         key = control_id,
         airplaneIcon = asset(flight_off),
@@ -163,6 +175,8 @@ object ControllerThemeCatalog {
         calculatorIcon = asset(calculator_off),
         cameraIcon = asset(camera_off),
         screenshotIcon = themeAsset("home_bottom_ic_screenshot.png"),
+        screenLockIcon = asset(resolvedLockOff),
+        screenLockSelectedIcon = asset(resolvedLockOn),
         setupIcon = asset(setting_off),
         timingIcon = asset(time_off),
         flashlightIcon = asset(flash_off),
@@ -172,8 +186,8 @@ object ControllerThemeCatalog {
         recordingIcon = asset(record_off),
         focusIcon = asset(bg_time),
         focusSelectedIcon = asset(bg_time),
-        lockingIcon = asset(lock_off),
-        lockingSelectedIcon = asset(lock_on),
+        lockingIcon = asset(resolvedRotateOff),
+        lockingSelectedIcon = asset(resolvedRotateOn),
         ringIcon = asset(mute_off),
         ringSelectedIcon = asset(mute_on),
         controllerJsonConfig = MyControllerJsonConfig(

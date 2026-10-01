@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Prism Wallpaper</string>
     <string name="cc_accessibility_description">കൺട്രോൾ സെന്റർ ഓവർലേ — ത്വരിത ടോഗിലുകൾക്കായി സിസ്റ്റം വ്യാപകമായ പുൾ-ഡൗൺ പാനൽ പ്രവർത്തനക്ഷമമാക്കുന്നു</string>
@@ -130,4 +130,5 @@
     <string name="keep_editing">എഡിറ്റിംഗ് തുടരുക</string>
     <string name="discard">നിരസിക്കുക</string>
     <string name="get_start">শুরু করুন</string>
+    <string name="controller">കൺട്രോളർ</string>
 </resources>

@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Prism Wallpaper</string>
     <string name="cc_accessibility_description">컨트롤 센터 오버레이 — 빠른 토글을 위한 시스템 전체 풀다운 패널 활성화</string>
@@ -130,4 +130,5 @@
     <string name="keep_editing">계속 편집하기</string>
     <string name="discard">취소</string>
     <string name="get_start">시작하기</string>
+    <string name="controller">컨트롤러</string>
 </resources>

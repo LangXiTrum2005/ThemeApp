@@ -48,7 +48,6 @@ import thinklife.prism.wallpaper.widget.theme.core.controllercenter.service.reco
 import thinklife.prism.wallpaper.widget.theme.core.controllercenter.utils.UtilsKt
 import thinklife.prism.wallpaper.widget.theme.core.controllercenter.view.SeekBarControlView.OnProgressChangeListener
 import thinklife.prism.wallpaper.widget.theme.core.extensions.onAvoidDoubleClick
-import thinklife.prism.wallpaper.widget.theme.core.extensions.openCalculatorApp
 import thinklife.prism.wallpaper.widget.theme.core.extensions.openStopwatchApp
 import thinklife.prism.wallpaper.widget.theme.databinding.LayoutControllerCenterBinding
 import com.bumptech.glide.Glide
@@ -185,12 +184,10 @@ class HomeCenterControllerView @JvmOverloads constructor(
             playAnim = false
         )
         UtilsKt.loadImageOptimizeRam(binding.timing, m.timingIcon)
-        UtilsKt.loadImageOptimizeRam(binding.calculator, m.calculatorIcon)
         UtilsKt.loadImageOptimizeRam(binding.camera, m.cameraIcon)
 
         // --- Tool icons: row 2 ---
-        UtilsKt.loadImageOptimizeRam(binding.recordAudio, m.lockingIcon)
-
+        binding.screenLockButton.visibility = View.GONE
         binding.recordVideo.initData(
             openPath = m.recordSelectedIcon,
             closePath = m.recordIcon,
@@ -208,6 +205,39 @@ class HomeCenterControllerView @JvmOverloads constructor(
     }
 
     // ================= BIND CONTROLLERS =================
+
+    private fun loadScreenLockIcon(screenLockIcon: String, fallbackFrame: String) {
+        binding.screenLockOverlay.visibility = View.VISIBLE
+        if (screenLockIcon.isNotBlank()) {
+            Glide.with(binding.screenLock)
+                .load(screenLockIcon)
+                .error(Glide.with(binding.screenLock).load(fallbackFrame))
+                .listener(object : RequestListener<Drawable> {
+                    override fun onLoadFailed(
+                        e: GlideException?,
+                        model: Any?,
+                        target: Target<Drawable?>,
+                        isFirstResource: Boolean,
+                    ) = false
+
+                    override fun onResourceReady(
+                        resource: Drawable,
+                        model: Any,
+                        target: Target<Drawable?>?,
+                        dataSource: DataSource,
+                        isFirstResource: Boolean,
+                    ): Boolean {
+                        binding.screenLockOverlay.visibility = View.GONE
+                        return false
+                    }
+                })
+                .into(binding.screenLock)
+        } else {
+            Glide.with(binding.screenLock)
+                .load(fallbackFrame)
+                .into(binding.screenLock)
+        }
+    }
 
     private fun loadScreenshotIcon(screenshotIcon: String, fallbackFrame: String) {
         binding.screenShotCaptureOverlay.visibility = View.VISIBLE
@@ -429,6 +459,7 @@ class HomeCenterControllerView @JvmOverloads constructor(
 
         binding.volume.progressListener = object : OnProgressChangeListener {
             override fun onProgressChanged(progress: Int) {
+                if (!hasControlPermission()) return
                 volume.setMediaVolume(progress)
             }
 
@@ -451,10 +482,7 @@ class HomeCenterControllerView @JvmOverloads constructor(
         )
         binding.brightness.progressListener = object : OnProgressChangeListener {
             override fun onProgressChanged(progress: Int) {
-                if (!brightness.canWriteSettings()) {
-                    openWriteSettingsOnce()
-                    return
-                }
+                if (!hasControlPermission()) return
                 brightness.setBrightness(progress)
             }
         }
@@ -464,8 +492,12 @@ class HomeCenterControllerView @JvmOverloads constructor(
         syncStaticStates(volume)
 
         binding.autoRotate.onAvoidDoubleClick { toggleAutoRotate() }
-        binding.mute.onAvoidDoubleClick { toggleMute(volume) }
-        binding.doNotDisturb.onAvoidDoubleClick { onFocusClick() }
+        binding.mute.onAvoidDoubleClick {
+            if (hasControlPermission()) toggleMute(volume)
+        }
+        binding.doNotDisturb.onAvoidDoubleClick {
+            if (hasControlPermission()) onFocusClick()
+        }
 
         binding.screenShot.onAvoidDoubleClick {
             (context as? AccessibilityService)
@@ -483,10 +515,7 @@ class HomeCenterControllerView @JvmOverloads constructor(
         binding.timing.onAvoidDoubleClick {
             if (context.openStopwatchApp()) dismiss()
         }
-        binding.calculator.onAvoidDoubleClick {
-            if (context.openCalculatorApp()) dismiss()
-        }
-        binding.recordAudio.onAvoidDoubleClick {
+        binding.screenLockButton.onAvoidDoubleClick {
             (context as? AccessibilityService)
                 ?.performGlobalAction(AccessibilityService.GLOBAL_ACTION_LOCK_SCREEN)
             dismiss()
@@ -672,6 +701,12 @@ class HomeCenterControllerView @JvmOverloads constructor(
         dismiss()
     }
 
+    private fun hasControlPermission(): Boolean {
+        if (PermissionHelper.hasWriteSettings(context)) return true
+        openWriteSettingsOnce()
+        return false
+    }
+
     private fun syncRecordVideoState(isRecording: Boolean, playAnim: Boolean) {
         binding.recordVideo.setState(
             if (isRecording) {
@@ -719,6 +754,7 @@ class HomeCenterControllerView @JvmOverloads constructor(
             boundMedia?.let { syncMediaState(it, refreshSessions = true) }
             syncRecordVideoState(ScreenRecordService.isRecording(), playAnim = false)
             boundBrightness?.let { binding.brightness.syncProgress(it.getBrightness()) }
+            boundVolume?.let { binding.volume.syncProgress(it.getCurrentVolume()) }
         }
     }
 }

@@ -37,10 +37,11 @@
             android:id="@+id/tabCategory"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
             android:layout_weight="1"
             android:background="@color/transparent"
             app:tabIndicatorHeight="0dp"
-            app:tabMode="auto"
+            app:tabMode="scrollable"
             app:tabPaddingBottom="0dp"
             app:tabPaddingEnd="8dp"
             app:tabPaddingStart="0dp"
@@ -49,11 +50,11 @@
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/btnMoreCategory"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="?selectableItemBackground"
+            android:layout_width="38dp"
+            android:layout_height="38dp"
+            android:background="?selectableItemBackgroundBorderless"
+            android:padding="2dp"
             android:src="@drawable/ic_more_category" />
-
     </LinearLayout>
 
 

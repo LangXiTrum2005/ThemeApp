@@ -50,7 +50,7 @@ fun Activity.finishWithoutAnimation() {
 }
 
 fun setAppLocale(languageTag: String): Boolean {
-    val normalizedTag = languageTag.trim()
+    val normalizedTag = languageTag.trim().replace('_', '-')
     val locales = if (normalizedTag.isEmpty()) {
         LocaleListCompat.getEmptyLocaleList()
     } else {
@@ -60,6 +60,22 @@ fun setAppLocale(languageTag: String): Boolean {
 
     AppCompatDelegate.setApplicationLocales(locales)
     return true
+}
+
+fun getSavedAppLanguage(context: Context): String {
+    val sp = context.getSharedPreferences("shared_preferences_app_data", Context.MODE_PRIVATE)
+    return sp.getString("app_language", "") ?: ""
+}
+
+fun applySelectedLocale(context: Context, languageTag: String): Context {
+    val normalizedTag = languageTag.trim().replace('_', '-')
+    if (normalizedTag.isEmpty()) return context
+    val locale = java.util.Locale.forLanguageTag(normalizedTag)
+    java.util.Locale.setDefault(locale)
+    val configuration = android.content.res.Configuration(context.resources.configuration)
+    configuration.setLocale(locale)
+    configuration.setLayoutDirection(locale)
+    return context.createConfigurationContext(configuration)
 }
 
 fun Context.openUrl(url: String) {

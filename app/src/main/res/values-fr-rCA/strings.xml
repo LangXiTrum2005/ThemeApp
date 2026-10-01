@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Prism Wallpaper</string>
     <string name="cc_accessibility_description">Superposition Control Center — active un panneau de tirage système pour les commutateurs rapides</string>
@@ -130,4 +130,5 @@
     <string name="keep_editing">Continuer à modifier</string>
     <string name="discard">Abandonner</string>
     <string name="get_start">Commencer</string>
+    <string name="controller">Contrôleur</string>
 </resources>

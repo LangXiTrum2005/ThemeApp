@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Prism Wallpaper</string>
     <string name="cc_accessibility_description">कंट्रोल सेंटर ओवरले — त्वरित टॉगल के लिए सिस्टम-व्यापी पुल-डाउन पैनल सक्षम करता है</string>
@@ -130,4 +130,30 @@
     <string name="keep_editing">संपादन जारी रखें</string>
     <string name="discard">छोड़ें</string>
     <string name="get_start">शुरुआत करें</string>
+    <string name="rate_dialog_title">क्या आपको ऐप पसंद आ रहा है?</string>
+    <string name="rate_dialog_title_5">धन्यवाद!</string>
+    <string name="text_no_internet_title">कोई इंटरनेट नहीं</string>
+    <string name="rate_dialog_title_3">ठीक-ठाक?</string>
+    <string name="rate_dialog_title_1">संतुष्ट नहीं हैं?</string>
+    <string name="permission_notification_settings_description">महत्वपूर्ण अपडेट के लिए सेटिंग्स में सूचनाएं चालू करें।</string>
+    <string name="widgets">विजेट्स</string>
+    <string name="back">वापस</string>
+    <string name="save">सहेजें</string>
+    <string name="rate_dialog_message_5">यदि आपको ऐप पसंद है, तो कृपया इसे रेट करने के लिए कुछ समय निकालें।</string>
+    <string name="permission_notification_title">सूचनाएं चालू करें</string>
+    <string name="text_try_again">पुनः प्रयास करें</string>
+    <string name="rate_dialog_button">रेट करें</string>
+    <string name="permission_notification_settings_title">सूचनाएं बंद हैं</string>
+    <string name="permission_open_settings">सेटिंग्स खोलें</string>
+    <string name="permission_allow">अनुमति दें</string>
+    <string name="rate_dialog_message_1">हमें खेद है। कृपया बताएं कि हम आपके अनुभव को कैसे बेहतर बना सकते हैं।</string>
+    <string name="rate_us">हमें रेट करें</string>
+    <string name="permission_notification_description">महत्वपूर्ण अपडेट के बारे में सूचित रहें। आप इसे सेटिंग में कभी भी बंद कर सकते हैं।</string>
+    <string name="permission_not_now">अभी नहीं</string>
+    <string name="rate_dialog_message">हम आपकी राय जानना चाहते हैं। हमें बताने के लिए नीचे दिए गए आइकन पर टैप करें!</string>
+    <string name="text_no_internet_message">कृपया अपना कनेक्शन जांचें और पुनः प्रयास करें।</string>
+    <string name="rate_dialog_title_4">बहुत बढ़िया!</string>
+    <string name="rate_dialog_message_4">यदि आपको ऐप पसंद है, तो कृपया इसे रेट करने के लिए कुछ समय निकालें।</string>
+    <string name="rate_dialog_message_3">हम इस ऐप को बेहतर बनाने के लिए आपके सुझाव चाहते हैं।</string>
+    <string name="controller">कंट्रोलर</string>
 </resources>

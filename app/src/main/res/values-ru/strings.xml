@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Prism Wallpaper</string>
     <string name="cc_accessibility_description">Панель Control Center — включает системную выдвижную панель с быстрыми переключателями</string>
@@ -130,4 +130,5 @@
     <string name="keep_editing">Продолжить редактирование</string>
     <string name="discard">Отменить</string>
     <string name="get_start">Начать</string>
+    <string name="controller">Управление</string>
 </resources>

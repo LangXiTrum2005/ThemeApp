@@ -10,6 +10,7 @@
   ~ prohibited except with prior written permission of 1Tabb.
   -->
 <resources>
+    <string name="control_screen_lock">Lock screen</string>
   <!-- app_name do resValue trong app/build.gradle.kts sinh (debug có prefix "Dev "). -->
   <string name="app_name">Prism Wallpaper</string>
   <string name="app_button_ad_icon_description">This action may show ads</string>
@@ -151,6 +152,10 @@
   <string name="empty_gallery_title">Your category is empty.</string>
   <string name="empty_gallery_message">Start downloading wallpapers, control, and icon packs to build your perfect setup.</string>
   <string name="setting">Setting</string>
+  <string name="setting_feedback_desc">Share your thoughts &amp; suggestions</string>
+  <string name="setting_rate_desc">Love our app? Leave a review</string>
+  <string name="setting_privacy_desc">Terms of service &amp; privacy policy</string>
+  <string name="app_version_format">Version %1$s</string>
   <string name="feedback">Feedback</string>
   <string name="privacy_policy">Privacy policy</string>
   <string name="feedback_email" translatable="false">support@wavez.com</string>
@@ -251,4 +256,12 @@
   <string name="controller_themes">Choose a Controller theme</string>
   <string name="controller_theme_applied">%s applied</string>
   <string name="controller_theme_active">Applied</string>
+  <string name="controller_service_active">ACTIVE</string>
+  <string name="controller_service_inactive">INACTIVE</string>
+  <string name="controller_theme_status_checking">Theme status: Checking…</string>
+  <string name="toast_processing_wallpaper">Processing wallpaper…</string>
+  <string name="toast_wallpaper_applied">Wallpaper applied successfully!</string>
+  <string name="toast_error_prefix">Error: %s</string>
+  <string name="search_language">Search language</string>
+  <string name="no_language_found">No language found</string>
 </resources>

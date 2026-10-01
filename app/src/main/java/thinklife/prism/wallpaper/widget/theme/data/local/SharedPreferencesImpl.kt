@@ -45,6 +45,7 @@ class SharedPreferencesImpl(private val context: Context) : SharedPref {
         private const val ADDED_THEME_WIDGET_SIZES_PREFIX = "added_theme_widget_sizes_"
         private const val HAS_LOGGED_SPLASH_VIEW = "has_logged_splash_view"
         private const val HAS_LOGGED_HOME_VIEW = "has_logged_home_view"
+        private const val KEY_CONTROLLER_PERMISSION_COMPLETED = "key_controller_permission_completed"
     }
 
     override val sharedPref: SharedPreferences =
@@ -185,5 +186,11 @@ class SharedPreferencesImpl(private val context: Context) : SharedPref {
         get() = sharedPref.getBoolean(HAS_LOGGED_HOME_VIEW, false)
         set(value) {
             editor.putBoolean(HAS_LOGGED_HOME_VIEW, value).apply()
+        }
+
+    override var isControllerPermissionCompleted: Boolean
+        get() = sharedPref.getBoolean(KEY_CONTROLLER_PERMISSION_COMPLETED, false)
+        set(value) {
+            editor.putBoolean(KEY_CONTROLLER_PERMISSION_COMPLETED, value).apply()
         }
 }

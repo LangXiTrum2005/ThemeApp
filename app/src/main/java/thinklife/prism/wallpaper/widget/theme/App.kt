@@ -48,6 +48,10 @@ class App : Application() {
     override fun onCreate() {
         super.onCreate()
         app = this
+        val savedLang = sharedPref.getConfigLanguage()
+        if (savedLang.isNotEmpty()) {
+            thinklife.prism.wallpaper.widget.theme.core.extensions.setAppLocale(savedLang)
+        }
         appRemoteConfig.fetchRemoteConfig()
         FirebaseApp.initializeApp(this)
         // `isNeedGotoWalkthrough` = true nghĩa là user CHƯA xong onboarding (lật ở trang cuối

@@ -74,6 +74,8 @@ data class ControllerConfigModel(
     val calculatorIcon: String = "",
     val cameraIcon: String = "",
     val screenshotIcon: String = "",
+    val screenLockIcon: String = "",
+    val screenLockSelectedIcon: String = "",
     val setupIcon: String = "",
     val timingIcon: String = "",
 

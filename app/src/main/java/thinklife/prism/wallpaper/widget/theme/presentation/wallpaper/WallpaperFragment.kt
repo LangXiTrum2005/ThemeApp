@@ -151,6 +151,10 @@ class WallpaperFragment : BaseFragment<FragmentWallpaperBinding>() {
         }
 
         binding.btnMoreCategory.setOnClickListener {
+            if (filterHelper.isShowing) {
+                filterHelper.dismiss()
+                return@setOnClickListener
+            }
             val categories = (viewModel.categoriesResult.value as? UiState.Data)?.value
                 ?: return@setOnClickListener
             if (categories.isEmpty()) return@setOnClickListener
@@ -203,7 +207,16 @@ class WallpaperFragment : BaseFragment<FragmentWallpaperBinding>() {
         }
     }
 
+    override fun onHandleBackPressed(): Boolean {
+        if (filterHelper.isShowing) {
+            filterHelper.dismiss()
+            return true
+        }
+        return super.onHandleBackPressed()
+    }
+
     override fun release() {
+        filterHelper.dismiss()
         categories = emptyList()
         binding.vpTheme.unregisterOnPageChangeCallback(onPageChangeCallback)
         super.release()

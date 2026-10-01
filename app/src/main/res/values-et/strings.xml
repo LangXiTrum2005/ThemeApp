@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Prism Wallpaper</string>
     <string name="cc_accessibility_description">Control Center\'i ülekaade — võimaldab süsteemilaiast allapoole tõmmatavat paneeli kiirtoimingutega</string>
@@ -130,4 +130,5 @@
     <string name="keep_editing">Jätka redigeerimist</string>
     <string name="discard">Eira</string>
     <string name="get_start">Alustamine</string>
+    <string name="controller">Kontroller</string>
 </resources>

@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Prism Wallpaper</string>
     <string name="cc_accessibility_description">ನಿಯಂತ್ರಣ ಕೇಂದ್ರ ಮೇಲ್‌ಲೇ — ತ್ವರಿತ ಟಾಗಲ್‌ಗಳಿಗಾಗಿ ಸಿಸ್ಟಮ್‌-ವ್ಯಾಪಿ ಪುಲ್-ಡೌನ್ ಪ್ಯಾನೆಲ್ ಸಕ್ರಿಯ ಮಾಡುತ್ತದೆ</string>
@@ -130,4 +130,5 @@
     <string name="keep_editing">ಸಂಪಾದನೆ ಮುಂದುವರಿಸಿ</string>
     <string name="discard">ತ್ಯಜಿಸಿ</string>
     <string name="get_start">ಪ್ರಾರಂಭಿಸಿ</string>
+    <string name="controller">ನಿಯಂತ್ರಕ</string>
 </resources>

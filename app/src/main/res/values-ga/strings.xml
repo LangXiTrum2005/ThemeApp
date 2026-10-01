@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Prism Wallpaper</string>
     <string name="cc_accessibility_description">Control Center overlay — cumasaíonn sé painéal tarraing síos ar fud an chórais do dhúlagar tapa</string>
@@ -130,4 +130,5 @@
     <string name="keep_editing">Coinnigh ar an bhfoilsiú</string>
     <string name="discard">Cuir ar leataobh</string>
     <string name="get_start">Tús Ar Bhonn</string>
+    <string name="controller">Rialaitheoir</string>
 </resources>

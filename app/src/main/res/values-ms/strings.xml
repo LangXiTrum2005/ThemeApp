@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Prism Wallpaper</string>
     <string name="cc_accessibility_description">Tindihan Pusat Kawalan — membolehkan panel seret-turun seluruh sistem untuk togol pantas</string>
@@ -130,4 +130,5 @@
     <string name="keep_editing">Terus menyunting</string>
     <string name="discard">Buang</string>
     <string name="get_start">Mulakan</string>
+    <string name="controller">Pengawal</string>
 </resources>

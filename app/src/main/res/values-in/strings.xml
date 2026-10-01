@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Prism Wallpaper</string>
     <string name="cc_accessibility_description">Overlay Control Center — mengaktifkan panel pull-down di seluruh sistem untuk toggle cepat</string>
@@ -130,4 +130,5 @@
     <string name="keep_editing">Lanjutkan edit</string>
     <string name="discard">Buang</string>
     <string name="get_start">Mulai Sekarang</string>
+    <string name="controller">Pengontrol</string>
 </resources>

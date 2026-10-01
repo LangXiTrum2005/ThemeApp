@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Prism Wallpaper</string>
     <string name="cc_accessibility_description">کنٹرول سینٹر اوور لے — فوری ٹوگلز کے لیے سسٹم وائڈ پل ڈاؤن پینل فعال کرتا ہے</string>
@@ -130,4 +130,5 @@
     <string name="keep_editing">ترمیم جاری رکھیں</string>
     <string name="discard">مسترد کریں</string>
     <string name="get_start">شروعات کریں</string>
+    <string name="controller">کنٹرولر</string>
 </resources>

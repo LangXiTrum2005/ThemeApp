@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Prism Wallpaper</string>
     <string name="cc_accessibility_description">Panel de control — habilita un panel desplegable en todo el sistema para accesos rápidos</string>
@@ -130,4 +130,5 @@
     <string name="keep_editing">Seguir editando</string>
     <string name="discard">Descartar</string>
     <string name="get_start">Comenzar</string>
+    <string name="controller">Controlador</string>
 </resources>

@@ -14,15 +14,11 @@ package thinklife.prism.wallpaper.widget.theme.core.controllercenter
 
 import android.content.Context
 import thinklife.prism.wallpaper.widget.theme.core.controllercenter.model.ControllerConfigModel
+import thinklife.prism.wallpaper.widget.theme.core.controllercenter.model.ControllerTheme
 import thinklife.prism.wallpaper.widget.theme.core.controllercenter.model.MyControllerJsonConfig
 import thinklife.prism.wallpaper.widget.theme.data.model.ControllerModel
 
-data class ControllerTheme(
-    val id: String,
-    val name: String,
-    val thumbnail: String,
-    val rank: Int,
-)
+
 
 private const val URL_PREFIX = "http"
 private const val COLOR_PREFIX = "0x"

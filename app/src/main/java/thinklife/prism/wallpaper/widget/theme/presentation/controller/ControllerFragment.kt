@@ -19,19 +19,18 @@ import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.GridLayoutManager
+import dagger.hilt.android.AndroidEntryPoint
 import thinklife.prism.wallpaper.widget.theme.R
 import thinklife.prism.wallpaper.widget.theme.core.base.BaseFragment
 import thinklife.prism.wallpaper.widget.theme.core.base.UiState
-import thinklife.prism.wallpaper.widget.theme.core.controllercenter.PermissionHelper
 import thinklife.prism.wallpaper.widget.theme.core.controllercenter.ControllerThemeCatalog
-import thinklife.prism.wallpaper.widget.theme.core.controllercenter.ThemeLoader
-import thinklife.prism.wallpaper.widget.theme.core.extensions.collectWithLifecycle
+import thinklife.prism.wallpaper.widget.theme.core.controllercenter.PermissionHelper
 import thinklife.prism.wallpaper.widget.theme.core.controllercenter.service.ControlCenterService
+import thinklife.prism.wallpaper.widget.theme.core.extensions.collectWithLifecycle
 import thinklife.prism.wallpaper.widget.theme.databinding.FragmentControllerBinding
 import thinklife.prism.wallpaper.widget.theme.presentation.controller.viewmodel.ControllerViewModel
 import thinklife.prism.wallpaper.widget.theme.presentation.main.MainActivity
 import thinklife.prism.wallpaper.widget.theme.presentation.setting.SettingActivity
-import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class ControllerFragment : BaseFragment<FragmentControllerBinding>() {

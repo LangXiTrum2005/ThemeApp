@@ -12,8 +12,7 @@
 
 package thinklife.prism.wallpaper.widget.theme.presentation.controller.model
 
-import thinklife.prism.wallpaper.widget.theme.core.controllercenter.ControllerTheme
-
+import thinklife.prism.wallpaper.widget.theme.core.controllercenter.model.ControllerTheme
 data class ControllerPreviewUiState(
     val theme: ControllerTheme? = null,
     val downloaded: Boolean = false,

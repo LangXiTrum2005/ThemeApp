@@ -20,7 +20,7 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import thinklife.prism.wallpaper.widget.theme.core.base.UiState
-import thinklife.prism.wallpaper.widget.theme.core.controllercenter.ControllerTheme
+import thinklife.prism.wallpaper.widget.theme.core.controllercenter.model.ControllerTheme
 import thinklife.prism.wallpaper.widget.theme.core.controllercenter.toControllerTheme
 import thinklife.prism.wallpaper.widget.theme.data.repository.ThemeControllerRepository
 import javax.inject.Inject
@@ -39,12 +39,10 @@ class ControllerViewModel @Inject constructor(
     fun loadThemes(forceRefresh: Boolean = false) {
         viewModelScope.launch {
             _themesState.value = UiState.Loading
-            controllerRepository.getControllerThemes(forceRefresh)
-                .onSuccess { themes ->
+            controllerRepository.getControllerThemes(forceRefresh).onSuccess { themes ->
                     _themesState.value = UiState.Data(themes.map { it.toControllerTheme() })
                     refreshActiveTheme()
-                }
-                .onFailure { error ->
+                }.onFailure { error ->
                     val message = error.message.orEmpty().ifBlank { "Unknown error" }
                     _themesState.value = UiState.Error(error, message)
                 }
@@ -54,9 +52,9 @@ class ControllerViewModel @Inject constructor(
     // Gọi lại mỗi lần màn resume vì theme có thể vừa được áp dụng ở màn preview.
     fun refreshActiveTheme() {
         viewModelScope.launch {
-            _activeTheme.value = controllerRepository.getActiveThemeId()
-                ?.let { controllerRepository.getTheme(it) }
-                ?.toControllerTheme()
+            _activeTheme.value =
+                controllerRepository.getActiveThemeId()?.let { controllerRepository.getTheme(it) }
+                    ?.toControllerTheme()
         }
     }
 }

@@ -20,7 +20,6 @@ import android.content.IntentFilter
 import android.util.Log
 import android.view.accessibility.AccessibilityEvent
 import androidx.core.content.ContextCompat
-import thinklife.prism.wallpaper.widget.theme.core.controllercenter.ControllerThemeCatalog
 import thinklife.prism.wallpaper.widget.theme.core.controllercenter.PermissionHelper
 import thinklife.prism.wallpaper.widget.theme.core.controllercenter.ThemeLoader
 import thinklife.prism.wallpaper.widget.theme.core.controllercenter.controllers.BluetoothController

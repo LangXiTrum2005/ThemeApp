@@ -16,7 +16,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import thinklife.prism.wallpaper.widget.theme.core.controllercenter.ControllerTheme
+import thinklife.prism.wallpaper.widget.theme.core.controllercenter.model.ControllerTheme
 import thinklife.prism.wallpaper.widget.theme.databinding.ItemControllerThemeBinding
 
 class ControllerThemeAdapter(
@@ -45,9 +45,7 @@ class ControllerThemeAdapter(
         val theme = themes[position]
         holder.binding.root.isSelected = theme.id == appliedThemeId
         holder.binding.tvThemeName.text = theme.name
-        Glide.with(holder.binding.ivTheme)
-            .load(theme.thumbnail)
-            .centerCrop()
+        Glide.with(holder.binding.ivTheme).load(theme.thumbnail).centerCrop()
             .into(holder.binding.ivTheme)
         holder.binding.root.setOnClickListener {
             onThemeSelected(theme)
@@ -56,5 +54,6 @@ class ControllerThemeAdapter(
 
     override fun getItemCount(): Int = themes.size
 
-    class ViewHolder(val binding: ItemControllerThemeBinding) : RecyclerView.ViewHolder(binding.root)
+    class ViewHolder(val binding: ItemControllerThemeBinding) :
+        RecyclerView.ViewHolder(binding.root)
 }

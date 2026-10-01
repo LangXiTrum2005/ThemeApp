@@ -15,14 +15,9 @@ package thinklife.prism.wallpaper.widget.theme.core.controllercenter
 import android.content.Context
 import com.google.gson.Gson
 import thinklife.prism.wallpaper.widget.theme.core.controllercenter.model.ControllerConfigModel
+import thinklife.prism.wallpaper.widget.theme.core.controllercenter.model.ControllerTheme
 import thinklife.prism.wallpaper.widget.theme.core.controllercenter.model.MyControllerJsonConfig
 
-data class ControllerTheme(
-    val id: String,
-    val name: String,
-    val thumbnail: String,
-    val rank: Int,
-)
 
 private data class ControllerThemeData(
     val control_id: String,

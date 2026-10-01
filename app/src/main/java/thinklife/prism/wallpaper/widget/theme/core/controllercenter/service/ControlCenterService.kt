@@ -20,7 +20,6 @@ import android.content.IntentFilter
 import android.util.Log
 import android.view.accessibility.AccessibilityEvent
 import androidx.core.content.ContextCompat
-import thinklife.prism.wallpaper.widget.theme.core.controllercenter.ControllerThemeCatalog
 import thinklife.prism.wallpaper.widget.theme.core.controllercenter.ThemeLoader
 import thinklife.prism.wallpaper.widget.theme.core.controllercenter.controllers.BluetoothController
 import thinklife.prism.wallpaper.widget.theme.core.controllercenter.controllers.BrightnessController
@@ -31,6 +30,7 @@ import thinklife.prism.wallpaper.widget.theme.core.controllercenter.controllers.
 import thinklife.prism.wallpaper.widget.theme.core.controllercenter.model.ControllerConfigModel
 import thinklife.prism.wallpaper.widget.theme.data.local.controller.ControllerFilePathProvider
 import thinklife.prism.wallpaper.widget.theme.data.local.SharedPref
+import thinklife.prism.wallpaper.widget.theme.data.repository.ThemeControllerRepository
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -62,6 +62,8 @@ class ControlCenterService : AccessibilityService() {
     lateinit var sharedPref: SharedPref
     @Inject
     lateinit var themeFilePathProvider: ControllerFilePathProvider
+    @Inject
+    lateinit var controllerRepository: ThemeControllerRepository
 
     private var overlay: ControlCenterOverlay? = null
 
@@ -135,7 +137,7 @@ class ControlCenterService : AccessibilityService() {
     private fun loadActiveTheme(): ControllerConfigModel {
         val themeId = sharedPref.activeThemeId
         if (themeId != null) {
-            ControllerThemeCatalog.config(this, themeId)?.let { return it }
+            controllerRepository.getThemeConfig(themeId)?.let { return it }
             val dir = themeFilePathProvider.getExtractedThemeDir(themeId)
             if (dir.isDirectory && dir.listFiles()?.isNotEmpty() == true) {
                 return ThemeLoader.loadFromDirectory(dir, themeId)

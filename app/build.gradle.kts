@@ -63,7 +63,7 @@ android {
         debug {
             externalNativeBuild {
                 cmake {
-                    arguments("-DBASE_URL=https://themesmobiletechnologyvn.xyz/")
+                    arguments("-DBASE_URL=https://theme-wallpaper.wwsmind.com/api/")
                 }
             }
         }
@@ -73,7 +73,7 @@ android {
             isShrinkResources = true
             externalNativeBuild {
                 cmake {
-                    arguments("-DBASE_URL=https://themesmobiletechnologyvn.xyz/")
+                    arguments("-DBASE_URL=https://theme-wallpaper.wwsmind.com/api/")
                 }
             }
             proguardFiles(

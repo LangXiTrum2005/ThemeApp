@@ -34,7 +34,6 @@ data class DownloadedResInfo(
         fun fromResource(res: ThemeRemoteItem): DownloadedResInfo? {
             val resType = when (res) {
                 is WallpaperModel -> TYPE_WALLPAPER
-                is ControllerModel -> TYPE_CONTROLLER
                 else -> return null
             }
             return DownloadedResInfo(resType, res.id)
@@ -42,6 +41,9 @@ data class DownloadedResInfo(
 
         fun fromTheme(theme: ThemeModel): DownloadedResInfo =
             DownloadedResInfo(TYPE_THEME, theme.id)
+
+        fun fromController(controller: ControllerModel): DownloadedResInfo =
+            DownloadedResInfo(TYPE_CONTROLLER, controller.id)
     }
 
 }

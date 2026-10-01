@@ -64,7 +64,7 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "Template-Android"
+rootProject.name = "ta097-theme-wallpaper"
 include(":app")
 include(":ontabb_rate")
  

@@ -12,6 +12,8 @@
 
 package thinklife.prism.wallpaper.widget.theme.presentation.theme.activities
 
+import thinklife.prism.wallpaper.widget.theme.ads.AdsTrigger
+import thinklife.prism.wallpaper.widget.theme.ads.AdsScreen
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
@@ -59,6 +61,9 @@ import javax.inject.Inject
 class GetThemeActivity : BaseActivity<ActivityGetThemesBinding>(),
     SelectAppBottomSheetDialog.OnAppSelectedListener,
     SetWallpaperDialog.SetWallpaperListener {
+
+    override val adsScreenId = AdsScreen.GET_THEME_VIEW
+
     override fun bindingView(): ActivityGetThemesBinding {
         return ActivityGetThemesBinding.inflate(layoutInflater)
     }
@@ -144,56 +149,100 @@ class GetThemeActivity : BaseActivity<ActivityGetThemesBinding>(),
         }
 
         binding.tabWallpapers.setOnClickListener {
-            viewModel.selectPage(GetThemePage.WALLPAPERS)
+            triggerAds(AdsTrigger.GET_THEME_CLICK_TAB_WALLPAPERS) {
+                runWhenResumed {
+                    viewModel.selectPage(GetThemePage.WALLPAPERS)
+                }
+            }
         }
 
         binding.tabIcons.setOnClickListener {
-            viewModel.selectPage(GetThemePage.ICONS)
+            triggerAds(AdsTrigger.GET_THEME_CLICK_TAB_ICONS) {
+                runWhenResumed {
+                    viewModel.selectPage(GetThemePage.ICONS)
+                }
+            }
         }
 
         binding.tabWidgets.setOnClickListener {
-            viewModel.selectPage(GetThemePage.WIDGETS)
+            triggerAds(AdsTrigger.GET_THEME_CLICK_TAB_WIDGETS) {
+                runWhenResumed {
+                    viewModel.selectPage(GetThemePage.WIDGETS)
+                }
+            }
         }
 
-        binding.frameWidgetSmall.setOnClickListener { openThemeWidgetDialog(WidgetSize.SMALL) }
-        binding.frameWidgetMedium.setOnClickListener { openThemeWidgetDialog(WidgetSize.MEDIUM) }
-        binding.frameWidgetLarge.setOnClickListener { openThemeWidgetDialog(WidgetSize.LARGE) }
+        binding.frameWidgetSmall.setOnClickListener {
+            triggerAds(AdsTrigger.GET_THEME_CLICK_FRAME_WIDGET_SMALL) {
+                runWhenResumed { openThemeWidgetDialog(WidgetSize.SMALL) }
+            }
+        }
+        binding.frameWidgetMedium.setOnClickListener {
+            triggerAds(AdsTrigger.GET_THEME_CLICK_FRAME_WIDGET_MEDIUM) {
+                runWhenResumed { openThemeWidgetDialog(WidgetSize.MEDIUM) }
+            }
+        }
+        binding.frameWidgetLarge.setOnClickListener {
+            triggerAds(AdsTrigger.GET_THEME_CLICK_FRAME_WIDGET_LARGE) {
+                runWhenResumed { openThemeWidgetDialog(WidgetSize.LARGE) }
+            }
+        }
 
         binding.btnApplyWallpaper.setOnClickListener {
-            if (viewModel.wallpaperDownloaded.value) {
-                SetWallpaperDialog.newInstance()
-                    .show(supportFragmentManager, SetWallpaperDialog::class.java.simpleName)
-            } else {
-                startWallpaperDownload()
+            triggerAds(AdsTrigger.GET_THEME_CLICK_APPLY_WALLPAPER) {
+                runWhenResumed {
+                    if (viewModel.wallpaperDownloaded.value) {
+                        SetWallpaperDialog.newInstance()
+                            .show(supportFragmentManager, SetWallpaperDialog::class.java.simpleName)
+                    } else {
+                        startWallpaperDownload()
+                    }
+                }
             }
         }
 
         binding.btnInstallAll.setOnClickListener {
-            val mappedItems = viewModel.mappedIconsPendingInstall()
-            if (mappedItems.isEmpty()) {
-                Toast.makeText(this, R.string.no_icons_to_install, Toast.LENGTH_SHORT).show()
-                return@setOnClickListener
+            triggerAds(AdsTrigger.GET_THEME_CLICK_INSTALL_ALL) {
+                runWhenResumed {
+                    val mappedItems = viewModel.mappedIconsPendingInstall()
+                    if (mappedItems.isEmpty()) {
+                        Toast.makeText(this, R.string.no_icons_to_install, Toast.LENGTH_SHORT).show()
+                        return@runWhenResumed
+                    }
+                    installAllShortcuts(mappedItems)
+                }
             }
-            installAllShortcuts(mappedItems)
         }
 
         binding.btnGoToHome.setOnClickListener {
-            startActivity(MainActivity.newIntent(this).apply {
-                flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP
-            })
+            triggerAds(AdsTrigger.GET_THEME_CLICK_GO_TO_HOME) {
+                runWhenResumed {
+                    startActivity(MainActivity.newIntent(this).apply {
+                        flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP
+                    })
+                }
+            }
         }
 
         iconAdapter.onActionClick = { item, state ->
-            viewModel.itemIconPackItemUi = item
-            when (state) {
-                SetIconState.APPLIED -> installShortcut(item)
-                SetIconState.INSTALL -> installShortcut(item)
-                SetIconState.CHOOSE -> showSelectApp(item)
+            triggerAds(AdsTrigger.GET_THEME_CLICK_ICON_ADAPTER_ACTION_CLICK) {
+                runWhenResumed {
+                    viewModel.itemIconPackItemUi = item
+                    when (state) {
+                        SetIconState.APPLIED -> installShortcut(item)
+                        SetIconState.INSTALL -> installShortcut(item)
+                        SetIconState.CHOOSE -> showSelectApp(item)
+                    }
+                }
             }
         }
 
         iconAdapter.onEditClick = { item ->
-            showSelectApp(item)
+            triggerAds(AdsTrigger.GET_THEME_CLICK_ICON_ADAPTER_EDIT_CLICK) {
+                runWhenResumed {
+                    showSelectApp(item)
+                }
+            }
         }
     }
 
@@ -304,6 +353,7 @@ class GetThemeActivity : BaseActivity<ActivityGetThemesBinding>(),
     }
 
     private fun updateWallpaperAction(downloaded: Boolean) {
+        binding.btnApplyWallpaper.setIconRight(if (downloaded) 0 else R.drawable.ic_ad)
         if (downloaded) {
             binding.btnApplyWallpaper.setIcon(0)
             binding.btnApplyWallpaper.setText(getString(R.string.apply))
@@ -314,6 +364,10 @@ class GetThemeActivity : BaseActivity<ActivityGetThemesBinding>(),
     }
 
     private fun startWallpaperDownload() {
+        triggerRewardAds(AdsTrigger.GET_THEME_CLICK_START_WALLPAPER_DOWNLOAD) { performStartWallpaperDownload() }
+    }
+
+    private fun performStartWallpaperDownload() {
         showDownloadDialog().updateProgress(1)
         viewModel.downloadWallpaper()
     }
@@ -348,6 +402,11 @@ class GetThemeActivity : BaseActivity<ActivityGetThemesBinding>(),
 
     private fun installShortcut(item: IconPackItemUi) {
         if (!item.canInstall) return
+        triggerRewardAds(AdsTrigger.GET_THEME_CLICK_INSTALL_SHORTCUT) { performInstallShortcut(item) }
+    }
+
+    private fun performInstallShortcut(item: IconPackItemUi) {
+        if (!item.canInstall) return
         lifecycleScope.launch {
             val success = requestInstallShortcut(item)
             if (success) {
@@ -372,6 +431,10 @@ class GetThemeActivity : BaseActivity<ActivityGetThemesBinding>(),
     }
 
     private fun installAllShortcuts(items: List<IconPackItemUi>) {
+        triggerRewardAds(AdsTrigger.GET_THEME_CLICK_INSTALL_ALL_SHORTCUTS) { performInstallAllShortcuts(items) }
+    }
+
+    private fun performInstallAllShortcuts(items: List<IconPackItemUi>) {
         lifecycleScope.launch {
             val appliedIds = items.mapNotNull { item ->
                 if (requestInstallShortcut(item)) item.id else null
@@ -422,6 +485,10 @@ class GetThemeActivity : BaseActivity<ActivityGetThemesBinding>(),
 
     override fun onSetAsWallpaper(wallpaperTarget: WallpaperTarget) {
         viewModel.applyWallpaper(wallpaperTarget)
+    }
+
+    override fun onHandleBackPressed() {
+        triggerBackAds(AdsTrigger.GET_THEME_CLICK_BACK) { finish() }
     }
 
 }

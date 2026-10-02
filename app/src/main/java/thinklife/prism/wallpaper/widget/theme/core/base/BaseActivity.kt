@@ -54,6 +54,31 @@ abstract class BaseActivity<VB : ViewBinding> : AppCompatActivity() {
     open fun inflateBinding(): VB =
         bindingView() ?: throw UnsupportedOperationException("Activity must implement inflateBinding or bindingView")
 
+    override fun startActivityForResult(intent: android.content.Intent, requestCode: Int, options: Bundle?) {
+        super.startActivityForResult(prepareAdsNavigation(intent), requestCode, options)
+    }
+
+    fun prepareAdsNavigation(intent: android.content.Intent): android.content.Intent = intent.apply {
+        if (adsScreenId == thinklife.prism.wallpaper.widget.theme.ads.AdsScreen.MAIN_VIEW &&
+            component?.packageName == packageName) {
+            putExtra(EXTRA_RETURN_TO_HOME, true)
+        }
+    }
+
+    protected fun triggerBackAds(triggerId: String, action: () -> Unit) {
+        triggerAds(triggerId) {
+            if (intent.getBooleanExtra(EXTRA_RETURN_TO_HOME, false)) {
+                triggerAds(thinklife.prism.wallpaper.widget.theme.ads.AdsTrigger.RETURN_HOME) {
+                    runWhenResumed(action)
+                }
+            } else runWhenResumed(action)
+        }
+    }
+
+    private companion object {
+        const val EXTRA_RETURN_TO_HOME = "ads_return_to_home"
+    }
+
     open fun navigateTo(intent: android.content.Intent) {
         startActivity(intent)
     }
@@ -61,6 +86,7 @@ abstract class BaseActivity<VB : ViewBinding> : AppCompatActivity() {
     private var networkTracker: NetworkTracker? = null
     private var networkDialog: NetworkDialog? = null
     private var currentLanguageTag: String? = null
+    private var hasResumedForAds = false
 
     override fun attachBaseContext(newBase: android.content.Context) {
         val savedLang = thinklife.prism.wallpaper.widget.theme.core.extensions.getSavedAppLanguage(newBase)
@@ -119,7 +145,11 @@ abstract class BaseActivity<VB : ViewBinding> : AppCompatActivity() {
 
     open fun onHandleBackPressed() {
         if (supportFragmentManager.backStackEntryCount == 0) {
-            finish()
+            if (intent.getBooleanExtra(EXTRA_RETURN_TO_HOME, false)) {
+                triggerAds(thinklife.prism.wallpaper.widget.theme.ads.AdsTrigger.RETURN_HOME) {
+                    runWhenResumed { finish() }
+                }
+            } else finish()
         } else {
             supportFragmentManager.popBackStack()
         }
@@ -127,6 +157,10 @@ abstract class BaseActivity<VB : ViewBinding> : AppCompatActivity() {
 
     override fun onResume() {
         super.onResume()
+        if (hasResumedForAds && ConfigManager.isInitialConfigLoaded && bindAdsScreenOnCreate) {
+            adsScreenId?.let(AdsBootstrap::notifyScreenEnter)
+        }
+        hasResumedForAds = true
         val savedLang = sharedPref.getConfigLanguage()
         if (currentLanguageTag != null && currentLanguageTag != savedLang) {
             currentLanguageTag = savedLang
@@ -192,7 +226,7 @@ abstract class BaseActivity<VB : ViewBinding> : AppCompatActivity() {
 
     /** Root để SDK quét slot — cả cây view của Activity, không phụ thuộc kiểu ViewBinding. */
     protected open val adsRootView: View
-        get() = findViewById(android.R.id.content)
+        get() = binding.root
 
     /** Override để gán tag slot động trước khi bind (1 layout dùng cho nhiều màn). */
     protected open fun onPrepareAdsSlots() = Unit
@@ -234,6 +268,20 @@ abstract class BaseActivity<VB : ViewBinding> : AppCompatActivity() {
      * Kéo cò quảng cáo. onFinished LUÔN được gọi (kể cả khi ads bị chặn bởi capping/VIP/hết đạn)
      * → đặt toàn bộ logic điều hướng vào đó, user không bao giờ kẹt.
      */
+    private var isRewardPending = false
+
+    protected fun triggerRewardAds(triggerId: String, action: () -> Unit) {
+        if (isRewardPending) return
+        isRewardPending = true
+        thinklife.prism.wallpaper.widget.theme.ads.AdsBootstrap.triggerReward(
+            activity = this,
+            triggerId = triggerId,
+            screenId = adsScreenId,
+            onAllowed = { runWhenResumed(action) },
+            onFinished = { isRewardPending = false },
+        )
+    }
+
     protected fun triggerAds(
         triggerId: String,
         fromScreen: String? = adsScreenId,

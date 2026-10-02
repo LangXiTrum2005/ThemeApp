@@ -11,6 +11,7 @@
   ~ prohibited except with prior written permission of 1Tabb.
   -->
 <resources>
+  <dimen name="icon_item_layout_zero">0dp</dimen>
   <dimen name="controller_layout_zero">0dp</dimen>
   <dimen name="app_button_min_height">52dp</dimen>
   <dimen name="app_button_padding_horizontal">24dp</dimen>
@@ -1877,4 +1878,5 @@
   <dimen name="bottom_nav_padding_bottom">8dp</dimen>
   <dimen name="bottom_nav_text_size_active">10.5sp</dimen>
   <dimen name="bottom_nav_text_size_inactive">10sp</dimen>
+    <dimen name="ads_weighted_content_height">0dp</dimen>
 </resources>

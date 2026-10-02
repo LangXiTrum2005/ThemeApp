@@ -1,6 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+    <FrameLayout
+        android:id="@+id/adsSlotTop"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:tag="ads_slot:set_wallpaper_slot_top" />
+<LinearLayout
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@drawable/border_top_16"
@@ -47,6 +57,7 @@
                 style="@style/NunitoMedium.14"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:drawableEnd="@drawable/ic_ad"
                 android:drawableStart="@drawable/ic_home"
                 android:drawablePadding="12dp"
                 android:paddingHorizontal="12dp"
@@ -65,6 +76,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="12dp"
+                android:drawableEnd="@drawable/ic_ad"
                 android:drawableStart="@drawable/ic_lock"
                 android:drawablePadding="12dp"
                 android:paddingHorizontal="12dp"
@@ -83,6 +95,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="12dp"
+                android:drawableEnd="@drawable/ic_ad"
                 android:drawableStart="@drawable/ic_both"
                 android:drawablePadding="12dp"
                 android:paddingHorizontal="12dp"
@@ -95,4 +108,10 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
+</LinearLayout>
+    <FrameLayout
+        android:id="@+id/adsSlotBottom"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:tag="ads_slot:set_wallpaper_slot_bottom" />
 </LinearLayout>

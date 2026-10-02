@@ -12,6 +12,8 @@
 
 package thinklife.prism.wallpaper.widget.theme.presentation.main
 
+import thinklife.prism.wallpaper.widget.theme.ads.AdsTrigger
+import thinklife.prism.wallpaper.widget.theme.ads.AdsScreen
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
@@ -34,6 +36,9 @@ import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class MainActivity : BaseActivity<ActivityMainBinding>() {
+
+    override val adsScreenId = AdsScreen.MAIN_VIEW
+
 
     override fun bindingView(): ActivityMainBinding {
         return ActivityMainBinding.inflate(layoutInflater)
@@ -62,6 +67,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
 
     override fun initConfig(savedInstanceState: Bundle?) {
         super.initConfig(savedInstanceState)
+        if (savedInstanceState != null) com.adshub.monetization.AdsController.notifyAppRestoredFromBackground()
         logHomeViewEvent()
         setupViewPager()
         setupBottomNavigation()
@@ -122,9 +128,13 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
             val tab = MainTab.fromMenuId(item.itemId)
 
             if (binding.vpMain.currentItem != tab.position) {
-                isSyncingPage = true
-                binding.vpMain.setCurrentItem(tab.position, false)
-                isSyncingPage = false
+                triggerAds(tab.adsTrigger) {
+                    runWhenResumed {
+                        isSyncingPage = true
+                        binding.vpMain.setCurrentItem(tab.position, false)
+                        isSyncingPage = false
+                    }
+                }
             }
 
             true
@@ -183,6 +193,10 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
     }
 
     override fun onHandleBackPressed() {
-        finish()
+        triggerAds(AdsTrigger.MAIN_CLICK_BACK) {
+            runWhenResumed {
+                finish()
+            }
+        }
     }
 }

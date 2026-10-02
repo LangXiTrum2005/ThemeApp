@@ -293,4 +293,5 @@
   <string name="toast_error_prefix">Error: %s</string>
   <string name="search_language">Search language</string>
   <string name="no_language_found">No language found</string>
+    <string name="ads_reward_unavailable">Ad unavailable. Please try again to unlock this content.</string>
 </resources>

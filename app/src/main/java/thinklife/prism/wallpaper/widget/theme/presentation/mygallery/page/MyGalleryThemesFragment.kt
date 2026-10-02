@@ -12,6 +12,10 @@
 
 package thinklife.prism.wallpaper.widget.theme.presentation.mygallery.page
 
+import thinklife.prism.wallpaper.widget.theme.ads.AdsSlot
+import thinklife.prism.wallpaper.widget.theme.ads.NativeFeedAdapter
+import thinklife.prism.wallpaper.widget.theme.ads.AdsTrigger
+import thinklife.prism.wallpaper.widget.theme.ads.AdsScreen
 import android.os.Bundle
 import android.view.View
 import androidx.core.view.isVisible
@@ -29,6 +33,9 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class MyGalleryThemesFragment : BaseFragment<FragmentMyGalleryPageBinding>() {
 
+    override val adsScreenId = AdsScreen.GALLERY_THEMES_VIEW
+
+
     override fun bindingView(): FragmentMyGalleryPageBinding {
         return FragmentMyGalleryPageBinding.inflate(layoutInflater)
     }
@@ -42,13 +49,17 @@ class MyGalleryThemesFragment : BaseFragment<FragmentMyGalleryPageBinding>() {
 
     override fun initView(view: View, savedInstanceState: Bundle?) {
         super.initView(view, savedInstanceState)
-        binding.rcvGallery.adapter = adapter
+        binding.rcvGallery.adapter = NativeFeedAdapter(adapter, adsScreenId, AdsSlot.GALLERY_THEMES_SLOT_FEED, viewLifecycleOwner)
     }
 
     override fun initListener() {
         super.initListener()
         adapter.onClickItem = { theme ->
-            startActivity(PreviewThemeActivity.newIntent(requireContext(), theme.id))
+            triggerAds(AdsTrigger.GALLERY_THEMES_CLICK_ADAPTER_CLICK_ITEM) {
+                runWhenResumed {
+                    startActivity(PreviewThemeActivity.newIntent(requireContext(), theme.id))
+                }
+            }
         }
     }
 
@@ -84,4 +95,9 @@ class MyGalleryThemesFragment : BaseFragment<FragmentMyGalleryPageBinding>() {
             else -> Unit
         }
     }
+    override fun onPrepareAdsSlots() {
+        binding.adsSlotTop.tag = thinklife.prism.wallpaper.widget.theme.ads.AdsSlot.tag(thinklife.prism.wallpaper.widget.theme.ads.AdsSlot.GALLERY_THEMES_SLOT_TOP)
+        binding.adsSlotBottom.tag = thinklife.prism.wallpaper.widget.theme.ads.AdsSlot.tag(thinklife.prism.wallpaper.widget.theme.ads.AdsSlot.GALLERY_THEMES_SLOT_BOTTOM)
+    }
+
 }

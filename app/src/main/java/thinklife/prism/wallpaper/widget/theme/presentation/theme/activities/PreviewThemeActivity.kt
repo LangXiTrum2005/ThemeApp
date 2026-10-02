@@ -12,6 +12,8 @@
 
 package thinklife.prism.wallpaper.widget.theme.presentation.theme.activities
 
+import thinklife.prism.wallpaper.widget.theme.ads.AdsTrigger
+import thinklife.prism.wallpaper.widget.theme.ads.AdsScreen
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
@@ -30,6 +32,9 @@ import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class PreviewThemeActivity : BaseActivity<ActivityPreviewThemeBinding>() {
+
+    override val adsScreenId = AdsScreen.PREVIEW_THEME_VIEW
+
     override fun bindingView(): ActivityPreviewThemeBinding {
         return ActivityPreviewThemeBinding.inflate(layoutInflater)
     }
@@ -59,7 +64,11 @@ class PreviewThemeActivity : BaseActivity<ActivityPreviewThemeBinding>() {
             onHandleBackPressed()
         }
         binding.btnGetThemes.setOnClickListener {
-            viewModel.continueToGetTheme()
+            triggerAds(AdsTrigger.PREVIEW_THEME_CLICK_GET_THEMES) {
+                runWhenResumed {
+                    viewModel.continueToGetTheme()
+                }
+            }
         }
     }
 
@@ -113,4 +122,8 @@ class PreviewThemeActivity : BaseActivity<ActivityPreviewThemeBinding>() {
             binding.viewThemeLoading.root,
         )
     }
+    override fun onHandleBackPressed() {
+        triggerBackAds(AdsTrigger.PREVIEW_THEME_CLICK_BACK) { finish() }
+    }
+
 }

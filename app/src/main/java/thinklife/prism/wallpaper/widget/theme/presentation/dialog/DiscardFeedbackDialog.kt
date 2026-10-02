@@ -12,11 +12,16 @@
 
 package thinklife.prism.wallpaper.widget.theme.presentation.dialog
 
+import thinklife.prism.wallpaper.widget.theme.ads.AdsTrigger
+import thinklife.prism.wallpaper.widget.theme.ads.AdsScreen
 import android.content.Context
 import thinklife.prism.wallpaper.widget.theme.core.base.BaseDialogFragment
 import thinklife.prism.wallpaper.widget.theme.databinding.DialogDiscardFeedbackBinding
 
 class DiscardFeedbackDialog : BaseDialogFragment<DialogDiscardFeedbackBinding>() {
+
+    override val adsScreenId = AdsScreen.DISCARD_FEEDBACK_VIEW
+
     override fun bindingView(): DialogDiscardFeedbackBinding {
         return DialogDiscardFeedbackBinding.inflate(layoutInflater)
     }
@@ -45,12 +50,20 @@ class DiscardFeedbackDialog : BaseDialogFragment<DialogDiscardFeedbackBinding>()
         super.initListener()
 
         binding.btnDiscard.setOnClickListener {
-            listener?.onDiscardConfirmed()
-            dismiss()
+            triggerAds(AdsTrigger.DISCARD_FEEDBACK_CLICK_DISCARD) {
+                runWhenResumed {
+                    listener?.onDiscardConfirmed()
+                    dismiss()
+                }
+            }
         }
 
         binding.btnKeepEditing.setOnClickListener {
-            dismiss()
+            triggerAds(AdsTrigger.DISCARD_FEEDBACK_CLICK_KEEP_EDITING) {
+                runWhenResumed {
+                    dismiss()
+                }
+            }
         }
     }
 

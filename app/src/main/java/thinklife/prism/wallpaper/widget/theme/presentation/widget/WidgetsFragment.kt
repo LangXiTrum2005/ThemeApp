@@ -12,6 +12,8 @@
 
 package thinklife.prism.wallpaper.widget.theme.presentation.widget
 
+import thinklife.prism.wallpaper.widget.theme.ads.AdsTrigger
+import thinklife.prism.wallpaper.widget.theme.ads.AdsScreen
 import android.os.Bundle
 import android.view.View
 import androidx.core.content.ContextCompat
@@ -38,6 +40,9 @@ import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class WidgetsFragment : BaseFragment<FragmentWidgetsBinding>() {
+
+    override val adsScreenId = AdsScreen.TAB3_VIEW
+
 
     override fun bindingView(): FragmentWidgetsBinding =
         FragmentWidgetsBinding.inflate(layoutInflater)
@@ -70,38 +75,58 @@ class WidgetsFragment : BaseFragment<FragmentWidgetsBinding>() {
     override fun initListener() {
         super.initListener()
         binding.toolbar.btnSetting.setOnClickListener {
-            startActivity(SettingActivity.newIntent(requireContext()))
+            triggerAds(AdsTrigger.TAB3_CLICK_SETTING) {
+                runWhenResumed {
+                    startActivity(SettingActivity.newIntent(requireContext()))
+                }
+            }
         }
         binding.toolbar.btnMyGallery.setOnClickListener {
-            (activity as? MainActivity)?.showMyGallery()
+            triggerAds(AdsTrigger.TAB3_CLICK_MY_GALLERY) {
+                runWhenResumed {
+                    (activity as? MainActivity)?.showMyGallery()
+                }
+            }
         }
         binding.edSearch.setOnClickListener {
-            startActivity(SearchActivity.newIntent(requireContext(), SearchMode.WIDGETS))
+            triggerAds(AdsTrigger.TAB3_CLICK_ED_SEARCH) {
+                runWhenResumed {
+                    startActivity(SearchActivity.newIntent(requireContext(), SearchMode.WIDGETS))
+                }
+            }
         }
         binding.viewError.setOnRetryClickListener {
-            viewModel.getCategories(forceRefresh = true)
+            triggerAds(AdsTrigger.TAB3_CLICK_ERROR_RETRY) {
+                runWhenResumed {
+                    viewModel.getCategories(forceRefresh = true)
+                }
+            }
         }
         binding.btnMoreCategory.setOnClickListener { anchor ->
-            if (filterHelper.isShowing) {
-                filterHelper.dismiss()
-                return@setOnClickListener
-            }
-            val categories = (viewModel.categoriesState.value as? UiState.Data)?.value
-                ?: return@setOnClickListener
-            if (categories.isEmpty()) return@setOnClickListener
+            triggerAds(AdsTrigger.TAB3_CLICK_MORE_CATEGORY) {
+                runWhenResumed {
+                    if (filterHelper.isShowing) {
+                        filterHelper.dismiss()
+                        return@runWhenResumed
+                    }
+                    val categories = (viewModel.categoriesState.value as? UiState.Data)?.value
+                        ?: return@runWhenResumed
+                    if (categories.isEmpty()) return@runWhenResumed
 
-            val selectedPosition = binding.tabCategory.selectedTabPosition.coerceAtLeast(0)
-            val selectedCategory = categories.getOrElse(selectedPosition) { categories.first() }
-            filterHelper.show(
-                activity = activity ?: return@setOnClickListener,
-                anchorView = anchor,
-                items = categories.map {
-                    it.toFilterCategoryItem().copy(title = formatCategoryDisplayName(it.name))
-                },
-                selectedItemId = selectedCategory.id,
-            ) { selectedItem ->
-                val position = categories.indexOfFirst { it.id == selectedItem.id }
-                if (position >= 0) binding.vpTheme.currentItem = position
+                    val selectedPosition = binding.tabCategory.selectedTabPosition.coerceAtLeast(0)
+                    val selectedCategory = categories.getOrElse(selectedPosition) { categories.first() }
+                    filterHelper.show(
+                        activity = activity ?: return@runWhenResumed,
+                        anchorView = anchor,
+                        items = categories.map {
+                            it.toFilterCategoryItem().copy(title = formatCategoryDisplayName(it.name))
+                        },
+                        selectedItemId = selectedCategory.id,
+                    ) { selectedItem ->
+                        val position = categories.indexOfFirst { it.id == selectedItem.id }
+                        if (position >= 0) binding.vpTheme.currentItem = position
+                    }
+                }
             }
         }
     }

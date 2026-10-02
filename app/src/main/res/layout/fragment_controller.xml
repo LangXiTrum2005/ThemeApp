@@ -110,7 +110,9 @@
                 android:clipToPadding="false"
                 android:layoutAnimation="@anim/layout_anim_grid_fall_down"
                 android:nestedScrollingEnabled="false"
+                app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
                 android:paddingHorizontal="@dimen/_3sdp"
+                app:spanCount="3"
                 android:paddingTop="@dimen/controller_layout_zero"
                 android:paddingBottom="@dimen/_24sdp" />
 

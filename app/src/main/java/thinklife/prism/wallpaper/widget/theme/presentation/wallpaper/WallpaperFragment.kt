@@ -12,6 +12,8 @@
 
 package thinklife.prism.wallpaper.widget.theme.presentation.wallpaper
 
+import thinklife.prism.wallpaper.widget.theme.ads.AdsTrigger
+import thinklife.prism.wallpaper.widget.theme.ads.AdsScreen
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -39,6 +41,9 @@ import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class WallpaperFragment : BaseFragment<FragmentWallpaperBinding>() {
+
+    override val adsScreenId = AdsScreen.TAB2_VIEW
+
     override fun bindingView(): FragmentWallpaperBinding {
         return FragmentWallpaperBinding.inflate(layoutInflater)
     }
@@ -134,43 +139,63 @@ class WallpaperFragment : BaseFragment<FragmentWallpaperBinding>() {
         super.initListener()
         binding.toolbar.apply {
             btnSetting.setOnClickListener {
-                startActivity(SettingActivity.newIntent(requireContext()))
+            triggerAds(AdsTrigger.TAB2_CLICK_SETTING) {
+                runWhenResumed {
+                        startActivity(SettingActivity.newIntent(requireContext()))
+                }
             }
+        }
             btnMyGallery.setOnClickListener {
-                (activity as? MainActivity)?.showMyGallery()
+            triggerAds(AdsTrigger.TAB2_CLICK_MY_GALLERY) {
+                runWhenResumed {
+                        (activity as? MainActivity)?.showMyGallery()
+                }
             }
+        }
 
         }
 
         binding.edSearch.setOnClickListener {
-            startActivity(SearchActivity.newIntent(requireContext(), SearchMode.WALLPAPERS))
+            triggerAds(AdsTrigger.TAB2_CLICK_ED_SEARCH) {
+                runWhenResumed {
+                    startActivity(SearchActivity.newIntent(requireContext(), SearchMode.WALLPAPERS))
+                }
+            }
         }
 
         binding.viewError.setOnRetryClickListener {
-            viewModel.getCategories()
+            triggerAds(AdsTrigger.TAB2_CLICK_ERROR_RETRY) {
+                runWhenResumed {
+                    viewModel.getCategories()
+                }
+            }
         }
 
         binding.btnMoreCategory.setOnClickListener {
-            if (filterHelper.isShowing) {
-                filterHelper.dismiss()
-                return@setOnClickListener
-            }
-            val categories = (viewModel.categoriesResult.value as? UiState.Data)?.value
-                ?: return@setOnClickListener
-            if (categories.isEmpty()) return@setOnClickListener
+            triggerAds(AdsTrigger.TAB2_CLICK_MORE_CATEGORY) {
+                runWhenResumed {
+                    if (filterHelper.isShowing) {
+                        filterHelper.dismiss()
+                        return@runWhenResumed
+                    }
+                    val categories = (viewModel.categoriesResult.value as? UiState.Data)?.value
+                        ?: return@runWhenResumed
+                    if (categories.isEmpty()) return@runWhenResumed
 
-            val selectedPos = binding.tabCategory.selectedTabPosition.coerceAtLeast(0)
-            val selectedCategory = categories.getOrElse(selectedPos) { categories.first() }
-            val popupItems = categories.map { it.toFilterCategoryItem() }
+                    val selectedPos = binding.tabCategory.selectedTabPosition.coerceAtLeast(0)
+                    val selectedCategory = categories.getOrElse(selectedPos) { categories.first() }
+                    val popupItems = categories.map { it.toFilterCategoryItem() }
 
-            filterHelper.show(
-                activity = activity ?: return@setOnClickListener,
-                anchorView = it,
-                items = popupItems,
-                selectedItemId = selectedCategory.id,
-            ) { selectedItem ->
-                val pos = categories.indexOfFirst { category -> category.id == selectedItem.id }
-                if (pos >= 0) binding.vpTheme.currentItem = pos
+                    filterHelper.show(
+                        activity = activity ?: return@runWhenResumed,
+                        anchorView = it,
+                        items = popupItems,
+                        selectedItemId = selectedCategory.id,
+                    ) { selectedItem ->
+                        val pos = categories.indexOfFirst { category -> category.id == selectedItem.id }
+                        if (pos >= 0) binding.vpTheme.currentItem = pos
+                    }
+                }
             }
         }
     }

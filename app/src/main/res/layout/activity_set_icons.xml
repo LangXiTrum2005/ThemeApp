@@ -1,10 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical">
+    <FrameLayout
+        android:id="@+id/adsSlotTop"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:tag="ads_slot:set_icons_slot_top" />
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/ads_weighted_content_height"
+    android:layout_weight="1"
     android:background="@color/surface_1"
     android:fitsSystemWindows="true"
     tools:context=".ui.iconpack.SetIconsActivity">
@@ -75,7 +86,8 @@
         app:btnTextColor="@color/on_accent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:btnIconRight="@drawable/ic_ad" />
 
     <thinklife.prism.wallpaper.widget.theme.core.widget.ServerLoadingView
         android:id="@+id/viewLoading"
@@ -88,3 +100,9 @@
         app:layout_constraintStart_toStartOf="@+id/rcvIcons"
         app:layout_constraintTop_toTopOf="@+id/rcvIcons" />
 </androidx.constraintlayout.widget.ConstraintLayout>
+    <FrameLayout
+        android:id="@+id/adsSlotBottom"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:tag="ads_slot:set_icons_slot_bottom" />
+</LinearLayout>

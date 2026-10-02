@@ -12,6 +12,8 @@
 
 package thinklife.prism.wallpaper.widget.theme.presentation.mygallery
 
+import thinklife.prism.wallpaper.widget.theme.ads.AdsTrigger
+import thinklife.prism.wallpaper.widget.theme.ads.AdsScreen
 import android.os.Bundle
 import android.view.View
 import androidx.core.content.ContextCompat
@@ -29,6 +31,9 @@ import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class MyGalleryFragment : BaseFragment<FragmentMyGalleryBinding>() {
+
+    override val adsScreenId = AdsScreen.GALLERY_VIEW
+
     override fun bindingView(): FragmentMyGalleryBinding {
         return FragmentMyGalleryBinding.inflate(layoutInflater)
     }
@@ -57,10 +62,18 @@ class MyGalleryFragment : BaseFragment<FragmentMyGalleryBinding>() {
     override fun initListener() {
         super.initListener()
         binding.toolbar.btnSetting.setOnClickListener {
-            startActivity(SettingActivity.newIntent(requireContext()))
+            triggerAds(AdsTrigger.GALLERY_CLICK_SETTING) {
+                runWhenResumed {
+                    startActivity(SettingActivity.newIntent(requireContext()))
+                }
+            }
         }
         binding.toolbar.btnMyGallery.setOnClickListener {
-            (activity as? MainActivity)?.showMyGallery()
+            triggerAds(AdsTrigger.GALLERY_CLICK_MY_GALLERY) {
+                runWhenResumed {
+                    (activity as? MainActivity)?.showMyGallery()
+                }
+            }
         }
 
     }

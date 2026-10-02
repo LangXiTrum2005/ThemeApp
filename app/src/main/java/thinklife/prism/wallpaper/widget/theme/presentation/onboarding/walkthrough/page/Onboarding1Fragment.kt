@@ -12,6 +12,8 @@
 
 package thinklife.prism.wallpaper.widget.theme.presentation.onboarding.walkthrough.page
 
+import thinklife.prism.wallpaper.widget.theme.ads.AdsTrigger
+import thinklife.prism.wallpaper.widget.theme.ads.AdsScreen
 import android.os.Bundle
 import android.view.Gravity
 import android.view.View
@@ -28,6 +30,9 @@ import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class Onboarding1Fragment : BaseFragment<FragmentOnboarding1Binding>() {
+
+    override val adsScreenId = AdsScreen.WALKTHROUGH_INTRO_VIEW
+
 
     override fun bindingView() = FragmentOnboarding1Binding.inflate(layoutInflater)
 
@@ -48,12 +53,16 @@ class Onboarding1Fragment : BaseFragment<FragmentOnboarding1Binding>() {
     override fun initListener() {
         super.initListener()
         binding.btnNext.setOnClickListener {
-            if (habitsAdapter.getSelectedItems().isEmpty()) {
-                showSelectToast()
-            } else {
-                HabitsProvider.pushEvent(habitsAdapter.getSelectedItems())
-                FirebaseControlLogEvent.logEvent(AppEvent.ONBOARDING_1_CLICK_NEXT)
-                (activity as WalkthroughActivity).nextScreen()
+            triggerAds(AdsTrigger.WALKTHROUGH_INTRO_CLICK_NEXT) {
+                runWhenResumed {
+                    if (habitsAdapter.getSelectedItems().isEmpty()) {
+                        showSelectToast()
+                    } else {
+                        HabitsProvider.pushEvent(habitsAdapter.getSelectedItems())
+                        FirebaseControlLogEvent.logEvent(AppEvent.ONBOARDING_1_CLICK_NEXT)
+                        (activity as WalkthroughActivity).nextScreen()
+                    }
+                }
             }
         }
     }

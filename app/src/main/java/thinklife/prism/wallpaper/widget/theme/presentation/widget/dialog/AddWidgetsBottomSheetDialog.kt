@@ -12,6 +12,8 @@
 
 package thinklife.prism.wallpaper.widget.theme.presentation.widget.dialog
 
+import thinklife.prism.wallpaper.widget.theme.ads.AdsTrigger
+import thinklife.prism.wallpaper.widget.theme.ads.AdsScreen
 import android.app.PendingIntent
 import android.content.Intent
 import android.os.Bundle
@@ -34,6 +36,9 @@ import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class AddWidgetsBottomSheetDialog : BaseBottomSheetDialog<BottomSheetAddWidgetsBinding>() {
+
+    override val adsScreenId = AdsScreen.ADD_WIDGETS_VIEW
+
 
     override fun bindingView(): BottomSheetAddWidgetsBinding =
         BottomSheetAddWidgetsBinding.inflate(layoutInflater)
@@ -74,8 +79,16 @@ class AddWidgetsBottomSheetDialog : BaseBottomSheetDialog<BottomSheetAddWidgetsB
     }
 
     override fun initListener() {
-        binding.btnClose.setOnClickListener { dismiss() }
-        binding.btnUnlock.setOnClickListener { addSelectedWidget() }
+        binding.btnClose.setOnClickListener {
+            triggerAds(AdsTrigger.ADD_WIDGETS_CLICK_CLOSE) {
+                runWhenResumed { dismiss() }
+            }
+        }
+        binding.btnUnlock.setOnClickListener {
+            triggerRewardAds(AdsTrigger.ADD_WIDGETS_CLICK_UNLOCK) {
+                runWhenResumed { addSelectedWidget() }
+            }
+        }
     }
 
     private fun addSelectedWidget() {
@@ -95,7 +108,8 @@ class AddWidgetsBottomSheetDialog : BaseBottomSheetDialog<BottomSheetAddWidgetsB
             requireContext(),
             size.ordinal,
             WidgetsSuccessActivity.newIntent(requireContext(), model, imageUrl, size, listMode)
-                .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK),
+                .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                .also { (activity as? thinklife.prism.wallpaper.widget.theme.core.base.BaseActivity<*>)?.prepareAdsNavigation(it) },
             PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE,
         )
         val requested = WidgetPinManager.requestPin(requireContext(), size, imageUrl, successCallback)

@@ -72,7 +72,11 @@ class SettingLanguageActivity : BaseActivity<ActivitySettingLanguageBinding>() {
             }
         }
         binding.btnClearSearch.setOnClickListener {
-            binding.etSearch.text?.clear()
+            triggerAds(AdsTrigger.SETTING_LAN_CLICK_CLEAR_SEARCH) {
+                runWhenResumed {
+                    binding.etSearch.text?.clear()
+                }
+            }
         }
         binding.etSearch.doAfterTextChanged { text ->
             val query = text?.toString()?.trim().orEmpty()
@@ -101,4 +105,8 @@ class SettingLanguageActivity : BaseActivity<ActivitySettingLanguageBinding>() {
         setResult(android.app.Activity.RESULT_OK)
         if (setAppLocale(viewModel.pendingLanguage.code)) finishWithoutAnimation() else finish()
     }
+    override fun onHandleBackPressed() {
+        triggerBackAds(AdsTrigger.SETTING_LAN_CLICK_BACK) { finish() }
+    }
+
 }

@@ -12,6 +12,10 @@
 
 package thinklife.prism.wallpaper.widget.theme.presentation.icons
 
+import thinklife.prism.wallpaper.widget.theme.ads.AdsSlot
+import thinklife.prism.wallpaper.widget.theme.ads.NativeFeedAdapter
+import thinklife.prism.wallpaper.widget.theme.ads.AdsTrigger
+import thinklife.prism.wallpaper.widget.theme.ads.AdsScreen
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -33,6 +37,9 @@ import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class IconFragment : BaseFragment<FragmentIconBinding>() {
+
+    override val adsScreenId = AdsScreen.ICONS_VIEW
+
     override fun bindingView(): FragmentIconBinding {
         return FragmentIconBinding.inflate(layoutInflater)
     }
@@ -51,7 +58,7 @@ class IconFragment : BaseFragment<FragmentIconBinding>() {
         super.initView(view, savedInstanceState)
         viewModel.getIcons()
         binding.toolbar.tvTitle.text = getString(R.string.icons)
-        binding.rcvIcons.adapter = iconAdapter
+        binding.rcvIcons.adapter = NativeFeedAdapter(iconAdapter, adsScreenId, AdsSlot.ICONS_SLOT_FEED, viewLifecycleOwner)
     }
 
 
@@ -59,27 +66,47 @@ class IconFragment : BaseFragment<FragmentIconBinding>() {
     override fun initListener() {
         super.initListener()
         binding.toolbar.btnSetting.setOnClickListener {
-            startActivity(SettingActivity.newIntent(requireContext()))
+            triggerAds(AdsTrigger.ICONS_CLICK_SETTING) {
+                runWhenResumed {
+                    startActivity(SettingActivity.newIntent(requireContext()))
+                }
+            }
         }
         binding.toolbar.btnMyGallery.setOnClickListener {
-            (activity as? MainActivity)?.showMyGallery()
+            triggerAds(AdsTrigger.ICONS_CLICK_MY_GALLERY) {
+                runWhenResumed {
+                    (activity as? MainActivity)?.showMyGallery()
+                }
+            }
         }
 
         binding.edSearch.setOnClickListener {
-            startActivity(SearchActivity.newIntent(requireContext(), SearchMode.ICONS))
+            triggerAds(AdsTrigger.ICONS_CLICK_ED_SEARCH) {
+                runWhenResumed {
+                    startActivity(SearchActivity.newIntent(requireContext(), SearchMode.ICONS))
+                }
+            }
         }
 
 
         binding.viewError.setOnRetryClickListener {
-            viewModel.getIcons()
+            triggerAds(AdsTrigger.ICONS_CLICK_ERROR_RETRY) {
+                runWhenResumed {
+                    viewModel.getIcons()
+                }
+            }
         }
 
         iconAdapter.onClickItem = { pack ->
-            startActivity(
-                SetIconsActivity.newIntent(
-                    requireContext(), pack.id, pack.name
-                )
-            )
+            triggerAds(AdsTrigger.ICONS_CLICK_ICON_ADAPTER_CLICK_ITEM) {
+                runWhenResumed {
+                    startActivity(
+                        SetIconsActivity.newIntent(
+                            requireContext(), pack.id, pack.name
+                        )
+                    )
+                }
+            }
         }
     }
 

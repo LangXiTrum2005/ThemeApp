@@ -65,19 +65,19 @@
             android:textColor="@color/text_secondary"
             app:layout_constraintBottom_toTopOf="@+id/btnNext" />
 
-        <androidx.appcompat.widget.AppCompatButton
+        <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/btnNext"
             style="@style/NunitoBold.16"
-            android:layout_width="match_parent"
-            android:layout_height="52dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_marginHorizontal="16dp"
-            android:layout_marginBottom="32dp"
-            android:background="@drawable/bg_btn_primary_gradient"
+            android:layout_marginBottom="16dp"
             android:elevation="0dp"
             android:gravity="center"
             android:stateListAnimator="@null"
             android:text="@string/onboarding_get_started"
             android:textAllCaps="false"
+            app:layout_constraintEnd_toEndOf="parent"
             android:textColor="@color/on_accent"
             app:layout_constraintBottom_toBottomOf="parent" />
 

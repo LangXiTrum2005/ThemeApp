@@ -12,6 +12,8 @@
 
 package thinklife.prism.wallpaper.widget.theme.presentation.onboarding.walkthrough
 
+import thinklife.prism.wallpaper.widget.theme.ads.AdsTrigger
+import thinklife.prism.wallpaper.widget.theme.ads.AdsScreen
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
@@ -29,6 +31,9 @@ import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class WalkthroughActivity : BaseActivity<ActivityWalkthroughBinding>() {
+
+    override val adsScreenId = AdsScreen.WALKTHROUGH_VIEW
+
 
     override fun bindingView(): ActivityWalkthroughBinding {
         return ActivityWalkthroughBinding.inflate(layoutInflater)
@@ -64,7 +69,11 @@ class WalkthroughActivity : BaseActivity<ActivityWalkthroughBinding>() {
         })
 
         binding.ivClose.setOnClickListener {
-            nextScreen()
+            triggerAds(AdsTrigger.WALKTHROUGH_CLICK_IV_CLOSE) {
+                runWhenResumed {
+                    nextScreen()
+                }
+            }
         }
     }
 
@@ -88,6 +97,10 @@ class WalkthroughActivity : BaseActivity<ActivityWalkthroughBinding>() {
         binding.imageViewPager.adapter =
             OnboardingViewPagerAdapter(supportFragmentManager, lifecycle, fragments)
         binding.imageViewPager.isSaveEnabled = true
+    }
+
+    override fun onHandleBackPressed() {
+        triggerBackAds(AdsTrigger.WALKTHROUGH_CLICK_BACK) { finish() }
     }
 
 }

@@ -36,9 +36,9 @@ class IconAdapter(
         context: Context,
     ) {
         binding.tvName.isVisible = !isApply
-        binding.tvViewAll.isVisible = !isApply
 
         binding.tvName.text = data.name
+        binding.root.contentDescription = data.name
         binding.ivImage.isVisible = true
         binding.ivImage.loadWithLoading(data.thumb, loadingView = binding.viewLoading.root)
 

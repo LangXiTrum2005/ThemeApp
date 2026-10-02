@@ -12,6 +12,8 @@
 
 package thinklife.prism.wallpaper.widget.theme.presentation.theme
 
+import thinklife.prism.wallpaper.widget.theme.ads.AdsTrigger
+import thinklife.prism.wallpaper.widget.theme.ads.AdsScreen
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -50,6 +52,9 @@ import kotlin.math.abs
 
 @AndroidEntryPoint
 class ThemeFragment : BaseFragment<FragmentThemeBinding>() {
+
+    override val adsScreenId = AdsScreen.HOME_VIEW
+
     override fun bindingView(): FragmentThemeBinding {
         return FragmentThemeBinding.inflate(layoutInflater)
     }
@@ -102,56 +107,84 @@ class ThemeFragment : BaseFragment<FragmentThemeBinding>() {
     override fun initListener() {
         super.initListener()
         binding.toolbar.btnSetting.setOnClickListener {
-            startActivity(SettingActivity.newIntent(requireContext()))
+            triggerAds(AdsTrigger.HOME_CLICK_SETTING) {
+                runWhenResumed {
+                    startActivity(SettingActivity.newIntent(requireContext()))
+                }
+            }
         }
         binding.toolbar.btnMyGallery.setOnClickListener {
-            (activity as? MainActivity)?.showMyGallery()
+            triggerAds(AdsTrigger.HOME_CLICK_MY_GALLERY) {
+                runWhenResumed {
+                    (activity as? MainActivity)?.showMyGallery()
+                }
+            }
         }
 
         binding.edSearch.setOnClickListener {
-            startActivity(SearchActivity.newIntent(requireContext(), SearchMode.THEMES))
+            triggerAds(AdsTrigger.HOME_CLICK_ED_SEARCH) {
+                runWhenResumed {
+                    startActivity(SearchActivity.newIntent(requireContext(), SearchMode.THEMES))
+                }
+            }
         }
 
         bannerAdapter.onClickItem = { category ->
-            navigateTo(
-                DetailBannerActivity.newIntent(
-                    context = requireContext(),
-                    categoryId = category.id,
-                    bannerUrl = category.banner.orEmpty(),
-                )
-            )
+            triggerAds(AdsTrigger.HOME_CLICK_BANNER_ADAPTER_CLICK_ITEM) {
+                runWhenResumed {
+                    navigateTo(
+                        DetailBannerActivity.newIntent(
+                            context = requireContext(),
+                            categoryId = category.id,
+                            bannerUrl = category.banner.orEmpty(),
+                        )
+                    )
+                }
+            }
         }
 
         binding.viewError.setOnRetryClickListener {
-            viewModel.getCategories(forceRefresh = true)
+            triggerAds(AdsTrigger.HOME_CLICK_ERROR_RETRY) {
+                runWhenResumed {
+                    viewModel.getCategories(forceRefresh = true)
+                }
+            }
         }
 
         binding.btnMoreCategory.setOnClickListener {
-            if (filterHelper.isShowing) {
-                filterHelper.dismiss()
-                return@setOnClickListener
-            }
-            val categories = (viewModel.categoriesResult.value as? UiState.Data)?.value
-                ?: return@setOnClickListener
-            if (categories.isEmpty()) return@setOnClickListener
+            triggerAds(AdsTrigger.HOME_CLICK_MORE_CATEGORY) {
+                runWhenResumed {
+                    if (filterHelper.isShowing) {
+                        filterHelper.dismiss()
+                        return@runWhenResumed
+                    }
+                    val categories = (viewModel.categoriesResult.value as? UiState.Data)?.value
+                        ?: return@runWhenResumed
+                    if (categories.isEmpty()) return@runWhenResumed
 
-            val selectedPos = binding.tabCategory.selectedTabPosition.coerceAtLeast(0)
-            val selectedCategory = categories.getOrElse(selectedPos) { categories.first() }
-            val popupItems = categories.map { it.toFilterCategoryItem().copy(title = formatCategoryDisplayName(it.name)) }
+                    val selectedPos = binding.tabCategory.selectedTabPosition.coerceAtLeast(0)
+                    val selectedCategory = categories.getOrElse(selectedPos) { categories.first() }
+                    val popupItems = categories.map { it.toFilterCategoryItem().copy(title = formatCategoryDisplayName(it.name)) }
 
-            filterHelper.show(
-                activity = activity ?: return@setOnClickListener,
-                anchorView = it,
-                items = popupItems,
-                selectedItemId = selectedCategory.id,
-            ) { selectedItem ->
-                val pos = categories.indexOfFirst { category -> category.id == selectedItem.id }
-                if (pos >= 0) binding.vpTheme.currentItem = pos
+                    filterHelper.show(
+                        activity = activity ?: return@runWhenResumed,
+                        anchorView = it,
+                        items = popupItems,
+                        selectedItemId = selectedCategory.id,
+                    ) { selectedItem ->
+                        val pos = categories.indexOfFirst { category -> category.id == selectedItem.id }
+                        if (pos >= 0) binding.vpTheme.currentItem = pos
+                    }
+                }
             }
         }
 
         binding.btnRetry.setOnClickListener {
-            viewModel.getCategories(forceRefresh = true)
+            triggerAds(AdsTrigger.HOME_CLICK_RETRY) {
+                runWhenResumed {
+                    viewModel.getCategories(forceRefresh = true)
+                }
+            }
         }
     }
 

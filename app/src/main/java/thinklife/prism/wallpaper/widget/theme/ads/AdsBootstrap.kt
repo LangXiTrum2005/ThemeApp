@@ -12,6 +12,7 @@
 
 package thinklife.prism.wallpaper.widget.theme.ads
 
+import thinklife.prism.wallpaper.widget.theme.R
 import android.app.Activity
 import android.app.Application
 import android.content.pm.ApplicationInfo
@@ -21,6 +22,8 @@ import com.adshub.monetization.AdsController
 import com.adshub.monetization.config.ConfigManager
 import com.adshub.monetization.engine.cache.PreloadEngine
 import com.adshub.monetization.engine.inline.AdsSlotScanner
+import com.adshub.monetization.engine.inline.NativeAdRenderer
+import com.adshub.monetization.engine.inline.NativeSkeletonLayout
 import com.adshub.monetization.engine.tracking.TrackingManager
 import com.adshub.monetization.init.AdNetworkInitializer
 import com.adshub.monetization.init.CmpManager
@@ -56,7 +59,7 @@ object AdsBootstrap {
      *
      * TODO(project): đổi thành key của app (mỗi app một param riêng trên Firebase Console).
      */
-    const val REMOTE_CONFIG_KEY_ADS = "ads_config_v1"
+    const val REMOTE_CONFIG_KEY_ADS = "ads_config_v100"
     private const val REMOTE_CONFIG_TIMEOUT_MS = 6_000L
 
     private val coldStartMutex = Mutex()
@@ -123,7 +126,7 @@ object AdsBootstrap {
 
             remoteConfigJob?.await()?.let { json ->
                 isRemoteConfigApplied = true
-                AdsController.updateRemoteConfig(json)
+                AdsController.updateRemoteConfig(completeFeedSlotConfig(json))
             }
 
             withContext(Dispatchers.IO) {
@@ -230,10 +233,64 @@ object AdsBootstrap {
         AdsSlotScanner.removeSlotFromRegistry(slotId)
     }
 
+    fun isSlotOwnedBy(slotId: String, container: ViewGroup): Boolean =
+        AdsSlotScanner.getSlotContainer(slotId) === container
+
+    fun availableFeedSlot(baseSlotId: String): String? {
+        val config = ConfigManager.currentConfig
+        if (!config.global.adsEnabled || config.slots[baseSlotId]?.enabled != true) return null
+        return AdsSlot.feedSlots(baseSlotId).firstOrNull { id ->
+            val slot = config.slots[id]
+            slot?.enabled == true && config.inventories[slot.inventoryId]?.enabled == true &&
+                AdsSlotScanner.getSlotContainer(id) == null &&
+                AdsSlot.feedSlotGroups.flatten().none { other ->
+                    config.slots[other]?.inventoryId == slot.inventoryId &&
+                        AdsSlotScanner.getSlotContainer(other) != null
+                }
+        }
+    }
+
+    fun nativeSlotTimeoutMs(slotId: String): Long {
+        val config = ConfigManager.currentConfig
+        val inventoryId = config.slots[slotId]?.inventoryId
+        return config.inventories[inventoryId]?.timeoutMs ?: DEFAULT_NATIVE_TIMEOUT_MS
+    }
+
+    // Skeleton cũng chứa NativeAdView, nên phải loại wrapper loading trước khi nhận là đã render.
+    fun isNativeSlotRendered(container: ViewGroup): Boolean =
+        container.childCount > 0 && container.getChildAt(0) !is NativeSkeletonLayout &&
+            NativeAdRenderer.findNativeAdView(container) != null
+
+    private const val DEFAULT_NATIVE_TIMEOUT_MS = 16_000L
+
     // =========================================================================
     // Remote Config: 1 key duy nhất, giá trị = nguyên chuỗi JSON
     // (SDK không tự đọc Firebase — app fetch rồi bơm vào updateRemoteConfig)
     // =========================================================================
+
+    /** Callback thưởng có thể tới trước lúc đóng video; đợi onFinished rồi mới đổi UI. */
+    fun triggerReward(
+        activity: android.app.Activity,
+        triggerId: String,
+        screenId: String?,
+        onAllowed: () -> Unit,
+        onFinished: () -> Unit,
+    ) {
+        val config = ConfigManager.currentConfig
+        val enabled = config.global.adsEnabled && config.triggers[triggerId]?.enabled == true
+        var earned = false
+        AdsController.trigger(
+            activity = activity,
+            triggerId = triggerId,
+            fromScreen = screenId,
+            onRewardEarned = { earned = true },
+            onFinished = {
+                onFinished()
+                if (earned || !enabled) onAllowed()
+                else android.widget.Toast.makeText(activity, R.string.ads_reward_unavailable, android.widget.Toast.LENGTH_SHORT).show()
+            },
+        )
+    }
 
     /** Fetch chuỗi JSON cấu hình ads từ Firebase Remote Config. Trả về null nếu hỏng/rỗng. */
     private suspend fun fetchAdsConfigJson(): String? = withTimeoutOrNull(REMOTE_CONFIG_TIMEOUT_MS.milliseconds) {

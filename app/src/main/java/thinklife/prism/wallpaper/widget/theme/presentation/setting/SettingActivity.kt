@@ -72,11 +72,19 @@ class SettingActivity : BaseActivity<ActivitySettingBinding>() {
         }
 
         binding.btnPrivacy.setOnClickListener {
-            openUrl(PRIVACY_POLICY_URL)
+            triggerAds(AdsTrigger.SETTINGS_CLICK_PRIVACY) {
+                runWhenResumed {
+                    openUrl(PRIVACY_POLICY_URL)
+                }
+            }
         }
 
         binding.btnFeedback.setOnClickListener {
-            startActivity(FeedbackActivity.newIntent(this))
+            triggerAds(AdsTrigger.SETTINGS_CLICK_FEEDBACK) {
+                runWhenResumed {
+                    startActivity(FeedbackActivity.newIntent(this))
+                }
+            }
         }
 
         binding.btnRate.setOnClickListener {
@@ -107,4 +115,8 @@ class SettingActivity : BaseActivity<ActivitySettingBinding>() {
             binding.tvCurrentLanguage.text = currentTag
         }
     }
+    override fun onHandleBackPressed() {
+        triggerBackAds(AdsTrigger.SETTINGS_CLICK_BACK) { finish() }
+    }
+
 }

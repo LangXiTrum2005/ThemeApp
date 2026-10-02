@@ -12,6 +12,10 @@
 
 package thinklife.prism.wallpaper.widget.theme.presentation.wallpaper.page
 
+import thinklife.prism.wallpaper.widget.theme.ads.AdsSlot
+import thinklife.prism.wallpaper.widget.theme.ads.NativeFeedAdapter
+import thinklife.prism.wallpaper.widget.theme.ads.AdsTrigger
+import thinklife.prism.wallpaper.widget.theme.ads.AdsScreen
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -28,6 +32,9 @@ import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class WallpaperCategoryFragment : BaseFragment<FragmentWallpaperCategoryBinding>() {
+
+    override val adsScreenId = AdsScreen.WALLPAPER_CATEGORY_VIEW
+
     override fun bindingView(): FragmentWallpaperCategoryBinding {
         return FragmentWallpaperCategoryBinding.inflate(layoutInflater)
     }
@@ -53,7 +60,7 @@ class WallpaperCategoryFragment : BaseFragment<FragmentWallpaperCategoryBinding>
 
     override fun initConfig(view: View, savedInstanceState: Bundle?) {
         super.initConfig(view, savedInstanceState)
-        binding.rcvWallpaper.adapter = wallpaperAdapter
+        binding.rcvWallpaper.adapter = NativeFeedAdapter(wallpaperAdapter, adsScreenId, AdsSlot.WALLPAPER_CATEGORY_SLOT_FEED, viewLifecycleOwner)
         viewModel.getWallpapersByCategory(categoryId)
     }
 
@@ -61,11 +68,19 @@ class WallpaperCategoryFragment : BaseFragment<FragmentWallpaperCategoryBinding>
         super.initListener()
 
         wallpaperAdapter.onClickItem = { wallpaper ->
-            startActivity(PreviewWallpaperActivity.newIntent(requireContext(), wallpaper))
+            triggerAds(AdsTrigger.WALLPAPER_CATEGORY_CLICK_WALLPAPER_ADAPTER_CLICK_ITEM) {
+                runWhenResumed {
+                    startActivity(PreviewWallpaperActivity.newIntent(requireContext(), wallpaper))
+                }
+            }
         }
 
         binding.viewError.setOnRetryClickListener {
-            viewModel.getWallpapersByCategory(categoryId, forceRefresh = true)
+            triggerAds(AdsTrigger.WALLPAPER_CATEGORY_CLICK_ERROR_RETRY) {
+                runWhenResumed {
+                    viewModel.getWallpapersByCategory(categoryId, forceRefresh = true)
+                }
+            }
         }
     }
 
@@ -97,4 +112,9 @@ class WallpaperCategoryFragment : BaseFragment<FragmentWallpaperCategoryBinding>
         binding.viewLoading.isVisible = showLoading
         binding.viewError.isVisible = showError
     }
+    override fun onPrepareAdsSlots() {
+        binding.adsSlotTop.tag = thinklife.prism.wallpaper.widget.theme.ads.AdsSlot.tag(thinklife.prism.wallpaper.widget.theme.ads.AdsSlot.WALLPAPER_CATEGORY_SLOT_TOP)
+        binding.adsSlotBottom.tag = thinklife.prism.wallpaper.widget.theme.ads.AdsSlot.tag(thinklife.prism.wallpaper.widget.theme.ads.AdsSlot.WALLPAPER_CATEGORY_SLOT_BOTTOM)
+    }
+
 }

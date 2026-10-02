@@ -12,6 +12,8 @@
 
 package thinklife.prism.wallpaper.widget.theme.presentation.widget
 
+import thinklife.prism.wallpaper.widget.theme.ads.AdsTrigger
+import thinklife.prism.wallpaper.widget.theme.ads.AdsScreen
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
@@ -37,6 +39,9 @@ import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class WidgetsSuccessActivity : BaseActivity<ActivitySuccessWidgetsBinding>() {
+
+    override val adsScreenId = AdsScreen.WIDGETS_SUCCESS_VIEW
+
     override fun bindingView(): ActivitySuccessWidgetsBinding {
         return ActivitySuccessWidgetsBinding.inflate(layoutInflater)
     }
@@ -111,11 +116,17 @@ class WidgetsSuccessActivity : BaseActivity<ActivitySuccessWidgetsBinding>() {
 
     override fun initListener() {
         super.initListener()
-        binding.btnBack.setOnClickListener { finish() }
+        binding.btnBack.setOnClickListener {
+            onHandleBackPressed()
+        }
         binding.btnHome.setOnClickListener {
-            navigateTo(MainActivity.newIntent(this).apply {
-                flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP
-            })
+            triggerAds(AdsTrigger.WIDGETS_SUCCESS_CLICK_HOME) {
+                runWhenResumed {
+                    navigateTo(MainActivity.newIntent(this).apply {
+                        flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP
+                    })
+                }
+            }
         }
     }
 
@@ -125,8 +136,12 @@ class WidgetsSuccessActivity : BaseActivity<ActivitySuccessWidgetsBinding>() {
         binding.rcvWidget.isNestedScrollingEnabled = false
         binding.rcvWidget.adapter = categoryAdapter
         categoryAdapter.onClickItem = { selected ->
-            AddWidgetsBottomSheetDialog.newInstance(selected)
-                .show(supportFragmentManager, AddWidgetsBottomSheetDialog.TAG)
+            triggerAds(AdsTrigger.WIDGETS_SUCCESS_CLICK_CATEGORY_ADAPTER_CLICK_ITEM) {
+                runWhenResumed {
+                    AddWidgetsBottomSheetDialog.newInstance(selected)
+                        .show(supportFragmentManager, AddWidgetsBottomSheetDialog.TAG)
+                }
+            }
         }
         viewModel.suggestedWidgets.collectWithLifecycle(this) { widgets ->
             val hasItems = widgets.isNotEmpty()
@@ -154,11 +169,15 @@ class WidgetsSuccessActivity : BaseActivity<ActivitySuccessWidgetsBinding>() {
         binding.rcvWidget.isNestedScrollingEnabled = false
         binding.rcvWidget.adapter = sizeAdapter
         sizeAdapter.onClickItem = { item ->
-            AddWidgetsBottomSheetDialog.newInstance(
-                widget = model,
-                initialSize = item.size,
-                isThemeWidget = true,
-            ).show(supportFragmentManager, AddWidgetsBottomSheetDialog.TAG)
+            triggerAds(AdsTrigger.WIDGETS_SUCCESS_CLICK_SIZE_ADAPTER_CLICK_ITEM) {
+                runWhenResumed {
+                    AddWidgetsBottomSheetDialog.newInstance(
+                        widget = model,
+                        initialSize = item.size,
+                        isThemeWidget = true,
+                    ).show(supportFragmentManager, AddWidgetsBottomSheetDialog.TAG)
+                }
+            }
         }
         sizeAdapter.set(remaining)
     }
@@ -168,4 +187,8 @@ class WidgetsSuccessActivity : BaseActivity<ActivitySuccessWidgetsBinding>() {
         WidgetSize.MEDIUM -> contentM
         WidgetSize.LARGE -> contentL
     }
+    override fun onHandleBackPressed() {
+        triggerBackAds(AdsTrigger.WIDGETS_SUCCESS_CLICK_BACK) { finish() }
+    }
+
 }

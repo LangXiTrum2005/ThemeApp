@@ -26,6 +26,16 @@ enum class MainTab(
     ICONS(4, R.id.nav_icons),
     MY_GALLERY(5, R.id.nav_gallery);
 
+    val adsTrigger: String
+        get() = when (this) {
+            THEMES -> thinklife.prism.wallpaper.widget.theme.ads.AdsTrigger.MAIN_CLICK_NAV_HOME
+            WALLPAPERS -> thinklife.prism.wallpaper.widget.theme.ads.AdsTrigger.MAIN_CLICK_NAV_TAB2
+            WIDGETS -> thinklife.prism.wallpaper.widget.theme.ads.AdsTrigger.MAIN_CLICK_NAV_TAB3
+            CONTROLLER -> thinklife.prism.wallpaper.widget.theme.ads.AdsTrigger.MAIN_CLICK_NAV_CONTROLLER
+            ICONS -> thinklife.prism.wallpaper.widget.theme.ads.AdsTrigger.MAIN_CLICK_NAV_ICONS
+            MY_GALLERY -> thinklife.prism.wallpaper.widget.theme.ads.AdsTrigger.MAIN_CLICK_NAV_GALLERY
+        }
+
     companion object {
         fun fromPosition(position: Int): MainTab {
             return entries.firstOrNull { it.position == position } ?: THEMES

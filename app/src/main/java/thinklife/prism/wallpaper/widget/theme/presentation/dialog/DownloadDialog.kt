@@ -12,12 +12,17 @@
 
 package thinklife.prism.wallpaper.widget.theme.presentation.dialog
 
+import thinklife.prism.wallpaper.widget.theme.ads.AdsTrigger
+import thinklife.prism.wallpaper.widget.theme.ads.AdsScreen
 import android.os.Bundle
 import android.view.View
 import thinklife.prism.wallpaper.widget.theme.core.base.BaseDialogFragment
 import thinklife.prism.wallpaper.widget.theme.databinding.DialogDownloadBinding
 
 class DownloadDialog : BaseDialogFragment<DialogDownloadBinding>() {
+
+    override val adsScreenId = AdsScreen.DOWNLOAD_VIEW
+
     override fun bindingView(): DialogDownloadBinding {
         return DialogDownloadBinding.inflate(layoutInflater)
     }

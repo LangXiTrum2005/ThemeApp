@@ -1,10 +1,10 @@
 {
   "schema_version": 1,
-  "config_version": 3,
+  "config_version": 6,
   "environment": "production",
   "global": {
-    "admob_app_id": "ca-app-pub-3940256099942544~3347511713",
-    "ads_enabled": false,
+    "admob_app_id": "ca-app-pub-2701366067425803~7927250533",
+    "ads_enabled": true,
     "use_test_ads": true,
     "global_fullscreen_cooldown_sec": 0,
     "max_fullscreen_per_day": 999,
@@ -32,20 +32,7 @@
       "description": "Nhu tren nhung dem theo session (false o session dau, true tu session 2)"
     }
   },
-  "show_rules": {
-    "inter_home_rules": {
-      "interval_sec": 0,
-      "action_pattern": "odd",
-      "max_per_session": 999,
-      "max_per_day": 999
-    },
-    "inter_home_2nd_rules": {
-      "interval_sec": 0,
-      "action_pattern": "even",
-      "max_per_session": 999,
-      "max_per_day": 999
-    }
-  },
+  "show_rules": {},
   "screen_rules": {},
   "safety_rules": {
     "block_fullscreen_on_screens": [],
@@ -60,7 +47,7 @@
     "send_waterfall_event": true,
     "send_show_event": true,
     "send_revenue_event": true,
-    "hash_ad_unit_id": true
+    "hash_ad_unit_id": false
   },
   "screens": {
     "splash_view_1": {
@@ -166,7 +153,11 @@
         "main_click_nav_home",
         "main_click_nav_tab2",
         "main_click_nav_tab3",
-        "main_click_nav_settings"
+        "main_click_nav_settings",
+        "main_click_nav_controller",
+        "main_click_nav_icons",
+        "main_click_nav_gallery",
+        "main_click_back"
       ],
       "slots": [
         "main_slot_top",
@@ -174,7 +165,15 @@
       ]
     },
     "home_view": {
-      "triggers": [],
+      "triggers": [
+        "home_click_setting",
+        "home_click_my_gallery",
+        "home_click_ed_search",
+        "home_click_banner_adapter_click_item",
+        "home_click_error_retry",
+        "home_click_more_category",
+        "home_click_retry"
+      ],
       "slots": [
         "home_slot_top",
         "home_slot_start",
@@ -183,7 +182,13 @@
       ]
     },
     "tab2_view": {
-      "triggers": [],
+      "triggers": [
+        "tab2_click_setting",
+        "tab2_click_my_gallery",
+        "tab2_click_ed_search",
+        "tab2_click_error_retry",
+        "tab2_click_more_category"
+      ],
       "slots": [
         "tab2_slot_top",
         "tab2_slot_start",
@@ -192,7 +197,13 @@
       ]
     },
     "tab3_view": {
-      "triggers": [],
+      "triggers": [
+        "tab3_click_setting",
+        "tab3_click_my_gallery",
+        "tab3_click_ed_search",
+        "tab3_click_error_retry",
+        "tab3_click_more_category"
+      ],
       "slots": [
         "tab3_slot_top",
         "tab3_slot_start",
@@ -213,7 +224,10 @@
         "controller_slot_end",
         "controller_slot_bottom",
         "controller_slot_1st_item",
-        "controller_slot_3rd_item"
+        "controller_slot_3rd_item",
+        "controller_slot_feed",
+        "controller_slot_feed_2",
+        "controller_slot_feed_3"
       ]
     },
     "controller_preview_view": {
@@ -244,7 +258,10 @@
     "settings_view": {
       "triggers": [
         "settings_click_language",
-        "settings_click_rate"
+        "settings_click_rate",
+        "settings_click_privacy",
+        "settings_click_feedback",
+        "settings_click_back"
       ],
       "slots": [
         "settings_slot_top",
@@ -257,7 +274,8 @@
       "triggers": [
         "setting_lan_click_item",
         "setting_lan_click_back",
-        "setting_lan_click_save"
+        "setting_lan_click_save",
+        "setting_lan_click_clear_search"
       ],
       "slots": [
         "setting_lan_slot_top",
@@ -294,6 +312,336 @@
       "slots": [
         "permission_dialog_slot_top",
         "permission_dialog_slot_bottom"
+      ]
+    },
+    "discard_feedback_view": {
+      "triggers": [
+        "discard_feedback_click_discard",
+        "discard_feedback_click_keep_editing"
+      ],
+      "slots": [
+        "discard_feedback_slot_top",
+        "discard_feedback_slot_bottom"
+      ]
+    },
+    "download_view": {
+      "triggers": [],
+      "slots": [
+        "download_slot_top",
+        "download_slot_bottom"
+      ]
+    },
+    "apply_icons_view": {
+      "triggers": [
+        "apply_icons_click_home",
+        "apply_icons_click_more_icons",
+        "apply_icons_click_back"
+      ],
+      "slots": [
+        "apply_icons_slot_top",
+        "apply_icons_slot_bottom"
+      ]
+    },
+    "set_icons_view": {
+      "triggers": [
+        "set_icons_click_install_all",
+        "set_icons_click_adapter_action_click",
+        "set_icons_click_adapter_edit_click",
+        "set_icons_click_back",
+        "set_icons_click_install_shortcut",
+        "set_icons_click_install_all_shortcuts"
+      ],
+      "slots": [
+        "set_icons_slot_top",
+        "set_icons_slot_bottom"
+      ]
+    },
+    "icons_view": {
+      "triggers": [
+        "icons_click_setting",
+        "icons_click_my_gallery",
+        "icons_click_ed_search",
+        "icons_click_error_retry",
+        "icons_click_icon_adapter_click_item"
+      ],
+      "slots": [
+        "icons_slot_top",
+        "icons_slot_bottom",
+        "icons_slot_feed",
+        "icons_slot_feed_2",
+        "icons_slot_feed_3"
+      ]
+    },
+    "gallery_view": {
+      "triggers": [
+        "gallery_click_setting",
+        "gallery_click_my_gallery"
+      ],
+      "slots": [
+        "gallery_slot_top",
+        "gallery_slot_bottom"
+      ]
+    },
+    "search_view": {
+      "triggers": [
+        "search_click_error_retry",
+        "search_click_popular_adapter_click_item",
+        "search_click_theme_adapter_click_item",
+        "search_click_wallpaper_adapter_click_item",
+        "search_click_icon_adapter_click_item",
+        "search_click_widget_adapter_click_item",
+        "search_click_back"
+      ],
+      "slots": [
+        "search_slot_top",
+        "search_slot_bottom"
+      ]
+    },
+    "apply_wallpaper_view": {
+      "triggers": [
+        "apply_wallpaper_click_wallpaper_adapter_click_item",
+        "apply_wallpaper_click_home",
+        "apply_wallpaper_click_back"
+      ],
+      "slots": [
+        "apply_wallpaper_slot_top",
+        "apply_wallpaper_slot_bottom"
+      ]
+    },
+    "preview_wallpaper_view": {
+      "triggers": [
+        "preview_wallpaper_click_download",
+        "preview_wallpaper_click_preview",
+        "preview_wallpaper_click_apply",
+        "preview_wallpaper_click_back"
+      ],
+      "slots": [
+        "preview_wallpaper_slot_top",
+        "preview_wallpaper_slot_bottom"
+      ]
+    },
+    "widgets_success_view": {
+      "triggers": [
+        "widgets_success_click_back",
+        "widgets_success_click_home",
+        "widgets_success_click_category_adapter_click_item",
+        "widgets_success_click_size_adapter_click_item"
+      ],
+      "slots": [
+        "widgets_success_slot_top",
+        "widgets_success_slot_bottom"
+      ]
+    },
+    "select_app_view": {
+      "triggers": [
+        "select_app_click_close",
+        "select_app_click_adapter_click_item"
+      ],
+      "slots": [
+        "select_app_slot_top",
+        "select_app_slot_bottom"
+      ]
+    },
+    "gallery_themes_view": {
+      "triggers": [
+        "gallery_themes_click_adapter_click_item"
+      ],
+      "slots": [
+        "gallery_themes_slot_top",
+        "gallery_themes_slot_bottom",
+        "gallery_themes_slot_feed",
+        "gallery_themes_slot_feed_2",
+        "gallery_themes_slot_feed_3"
+      ]
+    },
+    "gallery_wallpapers_view": {
+      "triggers": [
+        "gallery_wallpapers_click_adapter_click_item"
+      ],
+      "slots": [
+        "gallery_wallpapers_slot_top",
+        "gallery_wallpapers_slot_bottom",
+        "gallery_wallpapers_slot_feed",
+        "gallery_wallpapers_slot_feed_2",
+        "gallery_wallpapers_slot_feed_3"
+      ]
+    },
+    "gallery_widgets_view": {
+      "triggers": [
+        "gallery_widgets_click_adapter_click_item"
+      ],
+      "slots": [
+        "gallery_widgets_slot_top",
+        "gallery_widgets_slot_bottom",
+        "gallery_widgets_slot_feed",
+        "gallery_widgets_slot_feed_2",
+        "gallery_widgets_slot_feed_3"
+      ]
+    },
+    "walkthrough_view": {
+      "triggers": [
+        "walkthrough_click_iv_close",
+        "walkthrough_click_back"
+      ],
+      "slots": [
+        "walkthrough_slot_top",
+        "walkthrough_slot_bottom"
+      ]
+    },
+    "walkthrough_intro_view": {
+      "triggers": [
+        "walkthrough_intro_click_next"
+      ],
+      "slots": [
+        "walkthrough_intro_slot_top",
+        "walkthrough_intro_slot_bottom"
+      ]
+    },
+    "walkthrough_detail_view": {
+      "triggers": [
+        "walkthrough_detail_click_next"
+      ],
+      "slots": [
+        "walkthrough_detail_slot_top",
+        "walkthrough_detail_slot_bottom"
+      ]
+    },
+    "rate_view": {
+      "triggers": [
+        "rate_click_close",
+        "rate_click_rate"
+      ],
+      "slots": [
+        "rate_slot_top",
+        "rate_slot_bottom"
+      ]
+    },
+    "feedback_view": {
+      "triggers": [
+        "feedback_click_send_feedback",
+        "feedback_click_add_image",
+        "feedback_click_back",
+        "feedback_click_remove_image"
+      ],
+      "slots": [
+        "feedback_slot_top",
+        "feedback_slot_bottom"
+      ]
+    },
+    "applied_theme_view": {
+      "triggers": [
+        "applied_theme_click_home",
+        "applied_theme_click_more_icons",
+        "applied_theme_click_back"
+      ],
+      "slots": [
+        "applied_theme_slot_top",
+        "applied_theme_slot_bottom"
+      ]
+    },
+    "detail_banner_view": {
+      "triggers": [
+        "detail_banner_click_theme_adapter_click_item",
+        "detail_banner_click_error_retry",
+        "detail_banner_click_back"
+      ],
+      "slots": [
+        "detail_banner_slot_top",
+        "detail_banner_slot_bottom"
+      ]
+    },
+    "get_theme_view": {
+      "triggers": [
+        "get_theme_click_tab_wallpapers",
+        "get_theme_click_tab_icons",
+        "get_theme_click_tab_widgets",
+        "get_theme_click_frame_widget_small",
+        "get_theme_click_frame_widget_medium",
+        "get_theme_click_frame_widget_large",
+        "get_theme_click_apply_wallpaper",
+        "get_theme_click_install_all",
+        "get_theme_click_go_to_home",
+        "get_theme_click_icon_adapter_action_click",
+        "get_theme_click_icon_adapter_edit_click",
+        "get_theme_click_back",
+        "get_theme_click_install_shortcut",
+        "get_theme_click_install_all_shortcuts",
+        "get_theme_click_start_wallpaper_download"
+      ],
+      "slots": [
+        "get_theme_slot_top",
+        "get_theme_slot_bottom"
+      ]
+    },
+    "preview_theme_view": {
+      "triggers": [
+        "preview_theme_click_get_themes",
+        "preview_theme_click_back"
+      ],
+      "slots": [
+        "preview_theme_slot_top",
+        "preview_theme_slot_bottom"
+      ]
+    },
+    "theme_category_view": {
+      "triggers": [
+        "theme_category_click_theme_adapter_click_item",
+        "theme_category_click_error_retry"
+      ],
+      "slots": [
+        "theme_category_slot_top",
+        "theme_category_slot_bottom",
+        "theme_category_slot_feed",
+        "theme_category_slot_feed_2",
+        "theme_category_slot_feed_3"
+      ]
+    },
+    "set_wallpaper_view": {
+      "triggers": [
+        "set_wallpaper_click_close",
+        "set_wallpaper_click_home_screen",
+        "set_wallpaper_click_lock_screen",
+        "set_wallpaper_click_both"
+      ],
+      "slots": [
+        "set_wallpaper_slot_top",
+        "set_wallpaper_slot_bottom"
+      ]
+    },
+    "wallpaper_category_view": {
+      "triggers": [
+        "wallpaper_category_click_wallpaper_adapter_click_item",
+        "wallpaper_category_click_error_retry"
+      ],
+      "slots": [
+        "wallpaper_category_slot_top",
+        "wallpaper_category_slot_bottom",
+        "wallpaper_category_slot_feed",
+        "wallpaper_category_slot_feed_2",
+        "wallpaper_category_slot_feed_3"
+      ]
+    },
+    "add_widgets_view": {
+      "triggers": [
+        "add_widgets_click_close",
+        "add_widgets_click_unlock"
+      ],
+      "slots": [
+        "add_widgets_slot_top",
+        "add_widgets_slot_bottom"
+      ]
+    },
+    "widget_category_view": {
+      "triggers": [
+        "widget_category_click_widget_adapter_click_item",
+        "widget_category_click_error_retry"
+      ],
+      "slots": [
+        "widget_category_slot_top",
+        "widget_category_slot_bottom",
+        "widget_category_slot_feed",
+        "widget_category_slot_feed_2",
+        "widget_category_slot_feed_3"
       ]
     }
   },
@@ -426,7 +774,7 @@
     },
     "home_slot_top": {
       "enabled": false,
-      "inventory_id": "inv_native_home"
+      "inventory_id": ""
     },
     "home_slot_start": {
       "enabled": false,
@@ -437,8 +785,8 @@
       "inventory_id": ""
     },
     "home_slot_bottom": {
-      "enabled": true,
-      "inventory_id": "inv_native_home",
+      "enabled": false,
+      "inventory_id": "",
       "refresh_policy": "on_click"
     },
     "tab2_slot_top": {
@@ -454,8 +802,8 @@
       "inventory_id": ""
     },
     "tab2_slot_bottom": {
-      "enabled": true,
-      "inventory_id": "inv_native_home",
+      "enabled": false,
+      "inventory_id": "",
       "refresh_policy": "on_click"
     },
     "tab3_slot_top": {
@@ -471,8 +819,8 @@
       "inventory_id": ""
     },
     "tab3_slot_bottom": {
-      "enabled": true,
-      "inventory_id": "inv_native_home",
+      "enabled": false,
+      "inventory_id": "",
       "refresh_policy": "on_click"
     },
     "controller_slot_top": {
@@ -512,8 +860,8 @@
       "inventory_id": ""
     },
     "controller_preview_slot_bottom": {
-      "enabled": false,
-      "inventory_id": ""
+      "enabled": true,
+      "inventory_id": "inv_native_inapp"
     },
     "controller_tutorial_slot_top": {
       "enabled": false,
@@ -528,8 +876,8 @@
       "inventory_id": ""
     },
     "controller_tutorial_slot_bottom": {
-      "enabled": false,
-      "inventory_id": ""
+      "enabled": true,
+      "inventory_id": "inv_native_inapp"
     },
     "settings_slot_top": {
       "enabled": false,
@@ -544,8 +892,8 @@
       "inventory_id": ""
     },
     "settings_slot_bottom": {
-      "enabled": false,
-      "inventory_id": ""
+      "enabled": true,
+      "inventory_id": "inv_native_inapp"
     },
     "setting_lan_slot_top": {
       "enabled": false,
@@ -556,8 +904,8 @@
       "inventory_id": ""
     },
     "setting_lan_slot_bottom": {
-      "enabled": false,
-      "inventory_id": ""
+      "enabled": true,
+      "inventory_id": "inv_native_inapp"
     },
     "setting_lan_slot_1st_item": {
       "enabled": false,
@@ -590,6 +938,326 @@
     "permission_dialog_slot_bottom": {
       "enabled": false,
       "inventory_id": ""
+    },
+    "discard_feedback_slot_top": {
+      "enabled": false,
+      "inventory_id": ""
+    },
+    "discard_feedback_slot_bottom": {
+      "enabled": false,
+      "inventory_id": ""
+    },
+    "download_slot_top": {
+      "enabled": false,
+      "inventory_id": ""
+    },
+    "download_slot_bottom": {
+      "enabled": false,
+      "inventory_id": ""
+    },
+    "apply_icons_slot_top": {
+      "enabled": false,
+      "inventory_id": ""
+    },
+    "apply_icons_slot_bottom": {
+      "enabled": true,
+      "inventory_id": "inv_native_inapp"
+    },
+    "set_icons_slot_top": {
+      "enabled": false,
+      "inventory_id": ""
+    },
+    "set_icons_slot_bottom": {
+      "enabled": true,
+      "inventory_id": "inv_native_inapp"
+    },
+    "icons_slot_top": {
+      "enabled": false,
+      "inventory_id": ""
+    },
+    "icons_slot_bottom": {
+      "enabled": false,
+      "inventory_id": ""
+    },
+    "gallery_slot_top": {
+      "enabled": false,
+      "inventory_id": ""
+    },
+    "gallery_slot_bottom": {
+      "enabled": false,
+      "inventory_id": ""
+    },
+    "search_slot_top": {
+      "enabled": false,
+      "inventory_id": ""
+    },
+    "search_slot_bottom": {
+      "enabled": true,
+      "inventory_id": "inv_native_inapp"
+    },
+    "apply_wallpaper_slot_top": {
+      "enabled": false,
+      "inventory_id": ""
+    },
+    "apply_wallpaper_slot_bottom": {
+      "enabled": true,
+      "inventory_id": "inv_native_inapp"
+    },
+    "preview_wallpaper_slot_top": {
+      "enabled": false,
+      "inventory_id": ""
+    },
+    "preview_wallpaper_slot_bottom": {
+      "enabled": true,
+      "inventory_id": "inv_native_inapp"
+    },
+    "widgets_success_slot_top": {
+      "enabled": false,
+      "inventory_id": ""
+    },
+    "widgets_success_slot_bottom": {
+      "enabled": true,
+      "inventory_id": "inv_native_inapp"
+    },
+    "select_app_slot_top": {
+      "enabled": false,
+      "inventory_id": ""
+    },
+    "select_app_slot_bottom": {
+      "enabled": true,
+      "inventory_id": "inv_native_inapp"
+    },
+    "gallery_themes_slot_top": {
+      "enabled": false,
+      "inventory_id": ""
+    },
+    "gallery_themes_slot_bottom": {
+      "enabled": false,
+      "inventory_id": ""
+    },
+    "gallery_wallpapers_slot_top": {
+      "enabled": false,
+      "inventory_id": ""
+    },
+    "gallery_wallpapers_slot_bottom": {
+      "enabled": false,
+      "inventory_id": ""
+    },
+    "gallery_widgets_slot_top": {
+      "enabled": false,
+      "inventory_id": ""
+    },
+    "gallery_widgets_slot_bottom": {
+      "enabled": false,
+      "inventory_id": ""
+    },
+    "walkthrough_slot_top": {
+      "enabled": false,
+      "inventory_id": ""
+    },
+    "walkthrough_slot_bottom": {
+      "enabled": false,
+      "inventory_id": ""
+    },
+    "walkthrough_intro_slot_top": {
+      "enabled": false,
+      "inventory_id": ""
+    },
+    "walkthrough_intro_slot_bottom": {
+      "enabled": false,
+      "inventory_id": ""
+    },
+    "walkthrough_detail_slot_top": {
+      "enabled": false,
+      "inventory_id": ""
+    },
+    "walkthrough_detail_slot_bottom": {
+      "enabled": false,
+      "inventory_id": ""
+    },
+    "rate_slot_top": {
+      "enabled": false,
+      "inventory_id": ""
+    },
+    "rate_slot_bottom": {
+      "enabled": false,
+      "inventory_id": ""
+    },
+    "feedback_slot_top": {
+      "enabled": false,
+      "inventory_id": ""
+    },
+    "feedback_slot_bottom": {
+      "enabled": true,
+      "inventory_id": "inv_native_inapp"
+    },
+    "applied_theme_slot_top": {
+      "enabled": false,
+      "inventory_id": ""
+    },
+    "applied_theme_slot_bottom": {
+      "enabled": true,
+      "inventory_id": "inv_native_inapp"
+    },
+    "detail_banner_slot_top": {
+      "enabled": false,
+      "inventory_id": ""
+    },
+    "detail_banner_slot_bottom": {
+      "enabled": true,
+      "inventory_id": "inv_native_inapp"
+    },
+    "get_theme_slot_top": {
+      "enabled": false,
+      "inventory_id": ""
+    },
+    "get_theme_slot_bottom": {
+      "enabled": true,
+      "inventory_id": "inv_native_inapp"
+    },
+    "preview_theme_slot_top": {
+      "enabled": false,
+      "inventory_id": ""
+    },
+    "preview_theme_slot_bottom": {
+      "enabled": true,
+      "inventory_id": "inv_native_inapp"
+    },
+    "theme_category_slot_top": {
+      "enabled": false,
+      "inventory_id": ""
+    },
+    "theme_category_slot_bottom": {
+      "enabled": false,
+      "inventory_id": ""
+    },
+    "set_wallpaper_slot_top": {
+      "enabled": false,
+      "inventory_id": ""
+    },
+    "set_wallpaper_slot_bottom": {
+      "enabled": true,
+      "inventory_id": "inv_native_inapp"
+    },
+    "wallpaper_category_slot_top": {
+      "enabled": false,
+      "inventory_id": ""
+    },
+    "wallpaper_category_slot_bottom": {
+      "enabled": false,
+      "inventory_id": ""
+    },
+    "add_widgets_slot_top": {
+      "enabled": false,
+      "inventory_id": ""
+    },
+    "add_widgets_slot_bottom": {
+      "enabled": true,
+      "inventory_id": "inv_native_inapp"
+    },
+    "widget_category_slot_top": {
+      "enabled": false,
+      "inventory_id": ""
+    },
+    "widget_category_slot_bottom": {
+      "enabled": false,
+      "inventory_id": ""
+    },
+    "theme_category_slot_feed": {
+      "enabled": true,
+      "inventory_id": "inv_native_home"
+    },
+    "wallpaper_category_slot_feed": {
+      "enabled": true,
+      "inventory_id": "inv_native_home"
+    },
+    "widget_category_slot_feed": {
+      "enabled": true,
+      "inventory_id": "inv_native_home"
+    },
+    "icons_slot_feed": {
+      "enabled": true,
+      "inventory_id": "inv_native_home"
+    },
+    "controller_slot_feed": {
+      "enabled": true,
+      "inventory_id": "inv_native_home"
+    },
+    "gallery_themes_slot_feed": {
+      "enabled": true,
+      "inventory_id": "inv_native_home"
+    },
+    "gallery_wallpapers_slot_feed": {
+      "enabled": true,
+      "inventory_id": "inv_native_home"
+    },
+    "gallery_widgets_slot_feed": {
+      "enabled": true,
+      "inventory_id": "inv_native_home"
+    },
+    "gallery_widgets_slot_feed_2": {
+      "enabled": true,
+      "inventory_id": "inv_native_home_2"
+    },
+    "gallery_widgets_slot_feed_3": {
+      "enabled": true,
+      "inventory_id": "inv_native_home_3"
+    },
+    "gallery_wallpapers_slot_feed_2": {
+      "enabled": true,
+      "inventory_id": "inv_native_home_2"
+    },
+    "gallery_wallpapers_slot_feed_3": {
+      "enabled": true,
+      "inventory_id": "inv_native_home_3"
+    },
+    "gallery_themes_slot_feed_2": {
+      "enabled": true,
+      "inventory_id": "inv_native_home_2"
+    },
+    "gallery_themes_slot_feed_3": {
+      "enabled": true,
+      "inventory_id": "inv_native_home_3"
+    },
+    "controller_slot_feed_2": {
+      "enabled": true,
+      "inventory_id": "inv_native_home_2"
+    },
+    "controller_slot_feed_3": {
+      "enabled": true,
+      "inventory_id": "inv_native_home_3"
+    },
+    "icons_slot_feed_2": {
+      "enabled": true,
+      "inventory_id": "inv_native_home_2"
+    },
+    "icons_slot_feed_3": {
+      "enabled": true,
+      "inventory_id": "inv_native_home_3"
+    },
+    "widget_category_slot_feed_2": {
+      "enabled": true,
+      "inventory_id": "inv_native_home_2"
+    },
+    "widget_category_slot_feed_3": {
+      "enabled": true,
+      "inventory_id": "inv_native_home_3"
+    },
+    "wallpaper_category_slot_feed_2": {
+      "enabled": true,
+      "inventory_id": "inv_native_home_2"
+    },
+    "wallpaper_category_slot_feed_3": {
+      "enabled": true,
+      "inventory_id": "inv_native_home_3"
+    },
+    "theme_category_slot_feed_2": {
+      "enabled": true,
+      "inventory_id": "inv_native_home_2"
+    },
+    "theme_category_slot_feed_3": {
+      "enabled": true,
+      "inventory_id": "inv_native_home_3"
     }
   },
   "triggers": {
@@ -668,109 +1336,19 @@
       "inventory_id": ""
     },
     "main_click_nav_home": {
-      "enabled": true,
+      "enabled": false,
       "screen": "main_view",
-      "ad_type": "interstitial",
-      "inventory_id": "inv_inter_home_2nd",
-      "rules": [
-        {
-          "inventory_id": "inv_inter_home",
-          "conditions": [
-            {
-              "type": "user_property",
-              "variable_name": "is_onboarding_completed_session",
-              "variable_operator": "==",
-              "variable_value": false
-            }
-          ]
-        },
-        {
-          "inventory_id": "inv_inter_home_2nd",
-          "conditions": [
-            {
-              "type": "user_property",
-              "variable_name": "is_onboarding_completed_session",
-              "variable_operator": "==",
-              "variable_value": true
-            }
-          ]
-        }
-      ],
-      "trigger": {
-        "type": "",
-        "background_sec_gte": 0,
-        "show_loading_ui": true
-      }
+      "inventory_id": ""
     },
     "main_click_nav_tab2": {
-      "enabled": true,
+      "enabled": false,
       "screen": "main_view",
-      "ad_type": "interstitial",
-      "inventory_id": "inv_inter_home_2nd",
-      "rules": [
-        {
-          "inventory_id": "inv_inter_home",
-          "conditions": [
-            {
-              "type": "user_property",
-              "variable_name": "is_onboarding_completed_session",
-              "variable_operator": "==",
-              "variable_value": false
-            }
-          ]
-        },
-        {
-          "inventory_id": "inv_inter_home_2nd",
-          "conditions": [
-            {
-              "type": "user_property",
-              "variable_name": "is_onboarding_completed_session",
-              "variable_operator": "==",
-              "variable_value": true
-            }
-          ]
-        }
-      ],
-      "trigger": {
-        "type": "",
-        "background_sec_gte": 0,
-        "show_loading_ui": true
-      }
+      "inventory_id": ""
     },
     "main_click_nav_tab3": {
-      "enabled": true,
+      "enabled": false,
       "screen": "main_view",
-      "ad_type": "interstitial",
-      "inventory_id": "inv_inter_home_2nd",
-      "rules": [
-        {
-          "inventory_id": "inv_inter_home",
-          "conditions": [
-            {
-              "type": "user_property",
-              "variable_name": "is_onboarding_completed_session",
-              "variable_operator": "==",
-              "variable_value": false
-            }
-          ]
-        },
-        {
-          "inventory_id": "inv_inter_home_2nd",
-          "conditions": [
-            {
-              "type": "user_property",
-              "variable_name": "is_onboarding_completed_session",
-              "variable_operator": "==",
-              "variable_value": true
-            }
-          ]
-        }
-      ],
-      "trigger": {
-        "type": "",
-        "background_sec_gte": 0,
-        "show_loading_ui": true
-      }
+      "inventory_id": ""
     },
     "main_click_nav_settings": {
       "enabled": false,
@@ -803,10 +1381,10 @@
       "inventory_id": ""
     },
     "controller_preview_click_action": {
-      "enabled": false,
+      "enabled": true,
       "screen": "controller_preview_view",
       "ad_type": "interstitial",
-      "inventory_id": ""
+      "inventory_id": "inv_reward_apply"
     },
     "controller_preview_click_back": {
       "enabled": false,
@@ -893,14 +1471,22 @@
       "inventory_id": "inv_native_resume",
       "refresh_policy": "on_resume",
       "trigger": {
+        "type": "not_on_screens",
         "not_on_screens": [
+          "splash_view_1",
+          "splash_view_2",
           "lan_view",
           "lan2_view",
           "onb_view",
           "onb1_view",
+          "onb1_click_view",
           "onb2_view",
           "onb3_view",
-          "welcome_view"
+          "welcome_view",
+          "welcome_back_view",
+          "walkthrough_view",
+          "walkthrough_intro_view",
+          "walkthrough_detail_view"
         ]
       }
     },
@@ -914,6 +1500,566 @@
       "enabled": false,
       "screen": "permission_dialog_view",
       "ad_type": "interstitial",
+      "inventory_id": ""
+    },
+    "discard_feedback_click_discard": {
+      "enabled": false,
+      "screen": "discard_feedback_view",
+      "inventory_id": ""
+    },
+    "discard_feedback_click_keep_editing": {
+      "enabled": false,
+      "screen": "discard_feedback_view",
+      "inventory_id": ""
+    },
+    "apply_icons_click_home": {
+      "enabled": true,
+      "screen": "apply_icons_view",
+      "inventory_id": "inv_inter_back"
+    },
+    "apply_icons_click_more_icons": {
+      "enabled": false,
+      "screen": "apply_icons_view",
+      "inventory_id": ""
+    },
+    "apply_icons_click_back": {
+      "enabled": false,
+      "screen": "apply_icons_view",
+      "inventory_id": ""
+    },
+    "set_icons_click_install_all": {
+      "enabled": false,
+      "screen": "set_icons_view",
+      "inventory_id": ""
+    },
+    "set_icons_click_adapter_action_click": {
+      "enabled": false,
+      "screen": "set_icons_view",
+      "inventory_id": ""
+    },
+    "set_icons_click_adapter_edit_click": {
+      "enabled": false,
+      "screen": "set_icons_view",
+      "inventory_id": ""
+    },
+    "set_icons_click_back": {
+      "enabled": false,
+      "screen": "set_icons_view",
+      "inventory_id": ""
+    },
+    "icons_click_setting": {
+      "enabled": false,
+      "screen": "icons_view",
+      "inventory_id": ""
+    },
+    "icons_click_my_gallery": {
+      "enabled": false,
+      "screen": "icons_view",
+      "inventory_id": ""
+    },
+    "icons_click_ed_search": {
+      "enabled": false,
+      "screen": "icons_view",
+      "inventory_id": ""
+    },
+    "icons_click_error_retry": {
+      "enabled": false,
+      "screen": "icons_view",
+      "inventory_id": ""
+    },
+    "icons_click_icon_adapter_click_item": {
+      "enabled": false,
+      "screen": "icons_view",
+      "inventory_id": ""
+    },
+    "setting_lan_click_clear_search": {
+      "enabled": false,
+      "screen": "setting_lan_view",
+      "inventory_id": ""
+    },
+    "gallery_click_setting": {
+      "enabled": false,
+      "screen": "gallery_view",
+      "inventory_id": ""
+    },
+    "gallery_click_my_gallery": {
+      "enabled": false,
+      "screen": "gallery_view",
+      "inventory_id": ""
+    },
+    "search_click_error_retry": {
+      "enabled": false,
+      "screen": "search_view",
+      "inventory_id": ""
+    },
+    "search_click_popular_adapter_click_item": {
+      "enabled": false,
+      "screen": "search_view",
+      "inventory_id": ""
+    },
+    "search_click_theme_adapter_click_item": {
+      "enabled": false,
+      "screen": "search_view",
+      "inventory_id": ""
+    },
+    "search_click_wallpaper_adapter_click_item": {
+      "enabled": false,
+      "screen": "search_view",
+      "inventory_id": ""
+    },
+    "search_click_icon_adapter_click_item": {
+      "enabled": false,
+      "screen": "search_view",
+      "inventory_id": ""
+    },
+    "search_click_widget_adapter_click_item": {
+      "enabled": false,
+      "screen": "search_view",
+      "inventory_id": ""
+    },
+    "search_click_back": {
+      "enabled": false,
+      "screen": "search_view",
+      "inventory_id": ""
+    },
+    "settings_click_privacy": {
+      "enabled": false,
+      "screen": "settings_view",
+      "inventory_id": ""
+    },
+    "settings_click_feedback": {
+      "enabled": false,
+      "screen": "settings_view",
+      "inventory_id": ""
+    },
+    "settings_click_back": {
+      "enabled": false,
+      "screen": "settings_view",
+      "inventory_id": ""
+    },
+    "home_click_setting": {
+      "enabled": false,
+      "screen": "home_view",
+      "inventory_id": ""
+    },
+    "home_click_my_gallery": {
+      "enabled": false,
+      "screen": "home_view",
+      "inventory_id": ""
+    },
+    "home_click_ed_search": {
+      "enabled": false,
+      "screen": "home_view",
+      "inventory_id": ""
+    },
+    "home_click_banner_adapter_click_item": {
+      "enabled": false,
+      "screen": "home_view",
+      "inventory_id": ""
+    },
+    "home_click_error_retry": {
+      "enabled": false,
+      "screen": "home_view",
+      "inventory_id": ""
+    },
+    "home_click_more_category": {
+      "enabled": false,
+      "screen": "home_view",
+      "inventory_id": ""
+    },
+    "home_click_retry": {
+      "enabled": false,
+      "screen": "home_view",
+      "inventory_id": ""
+    },
+    "apply_wallpaper_click_wallpaper_adapter_click_item": {
+      "enabled": false,
+      "screen": "apply_wallpaper_view",
+      "inventory_id": ""
+    },
+    "apply_wallpaper_click_home": {
+      "enabled": true,
+      "screen": "apply_wallpaper_view",
+      "inventory_id": "inv_inter_back"
+    },
+    "apply_wallpaper_click_back": {
+      "enabled": false,
+      "screen": "apply_wallpaper_view",
+      "inventory_id": ""
+    },
+    "preview_wallpaper_click_download": {
+      "enabled": true,
+      "screen": "preview_wallpaper_view",
+      "inventory_id": "inv_reward_apply"
+    },
+    "preview_wallpaper_click_preview": {
+      "enabled": false,
+      "screen": "preview_wallpaper_view",
+      "inventory_id": ""
+    },
+    "preview_wallpaper_click_apply": {
+      "enabled": false,
+      "screen": "preview_wallpaper_view",
+      "inventory_id": ""
+    },
+    "tab2_click_setting": {
+      "enabled": false,
+      "screen": "tab2_view",
+      "inventory_id": ""
+    },
+    "tab2_click_my_gallery": {
+      "enabled": false,
+      "screen": "tab2_view",
+      "inventory_id": ""
+    },
+    "tab2_click_ed_search": {
+      "enabled": false,
+      "screen": "tab2_view",
+      "inventory_id": ""
+    },
+    "tab2_click_error_retry": {
+      "enabled": false,
+      "screen": "tab2_view",
+      "inventory_id": ""
+    },
+    "tab2_click_more_category": {
+      "enabled": false,
+      "screen": "tab2_view",
+      "inventory_id": ""
+    },
+    "tab3_click_setting": {
+      "enabled": false,
+      "screen": "tab3_view",
+      "inventory_id": ""
+    },
+    "tab3_click_my_gallery": {
+      "enabled": false,
+      "screen": "tab3_view",
+      "inventory_id": ""
+    },
+    "tab3_click_ed_search": {
+      "enabled": false,
+      "screen": "tab3_view",
+      "inventory_id": ""
+    },
+    "tab3_click_error_retry": {
+      "enabled": false,
+      "screen": "tab3_view",
+      "inventory_id": ""
+    },
+    "tab3_click_more_category": {
+      "enabled": false,
+      "screen": "tab3_view",
+      "inventory_id": ""
+    },
+    "widgets_success_click_back": {
+      "enabled": false,
+      "screen": "widgets_success_view",
+      "inventory_id": ""
+    },
+    "widgets_success_click_home": {
+      "enabled": true,
+      "screen": "widgets_success_view",
+      "inventory_id": "inv_inter_back"
+    },
+    "widgets_success_click_category_adapter_click_item": {
+      "enabled": false,
+      "screen": "widgets_success_view",
+      "inventory_id": ""
+    },
+    "widgets_success_click_size_adapter_click_item": {
+      "enabled": false,
+      "screen": "widgets_success_view",
+      "inventory_id": ""
+    },
+    "select_app_click_close": {
+      "enabled": false,
+      "screen": "select_app_view",
+      "inventory_id": ""
+    },
+    "select_app_click_adapter_click_item": {
+      "enabled": false,
+      "screen": "select_app_view",
+      "inventory_id": ""
+    },
+    "gallery_themes_click_adapter_click_item": {
+      "enabled": false,
+      "screen": "gallery_themes_view",
+      "inventory_id": ""
+    },
+    "gallery_wallpapers_click_adapter_click_item": {
+      "enabled": false,
+      "screen": "gallery_wallpapers_view",
+      "inventory_id": ""
+    },
+    "gallery_widgets_click_adapter_click_item": {
+      "enabled": false,
+      "screen": "gallery_widgets_view",
+      "inventory_id": ""
+    },
+    "walkthrough_click_iv_close": {
+      "enabled": false,
+      "screen": "walkthrough_view",
+      "inventory_id": ""
+    },
+    "walkthrough_click_back": {
+      "enabled": false,
+      "screen": "walkthrough_view",
+      "inventory_id": ""
+    },
+    "walkthrough_intro_click_next": {
+      "enabled": false,
+      "screen": "walkthrough_intro_view",
+      "inventory_id": ""
+    },
+    "walkthrough_detail_click_next": {
+      "enabled": false,
+      "screen": "walkthrough_detail_view",
+      "inventory_id": ""
+    },
+    "rate_click_close": {
+      "enabled": false,
+      "screen": "rate_view",
+      "inventory_id": ""
+    },
+    "rate_click_rate": {
+      "enabled": false,
+      "screen": "rate_view",
+      "inventory_id": ""
+    },
+    "feedback_click_send_feedback": {
+      "enabled": false,
+      "screen": "feedback_view",
+      "inventory_id": ""
+    },
+    "feedback_click_add_image": {
+      "enabled": false,
+      "screen": "feedback_view",
+      "inventory_id": ""
+    },
+    "applied_theme_click_home": {
+      "enabled": true,
+      "screen": "applied_theme_view",
+      "inventory_id": "inv_inter_back"
+    },
+    "applied_theme_click_more_icons": {
+      "enabled": false,
+      "screen": "applied_theme_view",
+      "inventory_id": ""
+    },
+    "applied_theme_click_back": {
+      "enabled": false,
+      "screen": "applied_theme_view",
+      "inventory_id": ""
+    },
+    "detail_banner_click_theme_adapter_click_item": {
+      "enabled": false,
+      "screen": "detail_banner_view",
+      "inventory_id": ""
+    },
+    "detail_banner_click_error_retry": {
+      "enabled": false,
+      "screen": "detail_banner_view",
+      "inventory_id": ""
+    },
+    "detail_banner_click_back": {
+      "enabled": false,
+      "screen": "detail_banner_view",
+      "inventory_id": ""
+    },
+    "get_theme_click_tab_wallpapers": {
+      "enabled": false,
+      "screen": "get_theme_view",
+      "inventory_id": ""
+    },
+    "get_theme_click_tab_icons": {
+      "enabled": false,
+      "screen": "get_theme_view",
+      "inventory_id": ""
+    },
+    "get_theme_click_tab_widgets": {
+      "enabled": false,
+      "screen": "get_theme_view",
+      "inventory_id": ""
+    },
+    "get_theme_click_frame_widget_small": {
+      "enabled": false,
+      "screen": "get_theme_view",
+      "inventory_id": ""
+    },
+    "get_theme_click_frame_widget_medium": {
+      "enabled": false,
+      "screen": "get_theme_view",
+      "inventory_id": ""
+    },
+    "get_theme_click_frame_widget_large": {
+      "enabled": false,
+      "screen": "get_theme_view",
+      "inventory_id": ""
+    },
+    "get_theme_click_apply_wallpaper": {
+      "enabled": false,
+      "screen": "get_theme_view",
+      "inventory_id": ""
+    },
+    "get_theme_click_install_all": {
+      "enabled": false,
+      "screen": "get_theme_view",
+      "inventory_id": ""
+    },
+    "get_theme_click_go_to_home": {
+      "enabled": true,
+      "screen": "get_theme_view",
+      "inventory_id": "inv_inter_back"
+    },
+    "get_theme_click_icon_adapter_action_click": {
+      "enabled": false,
+      "screen": "get_theme_view",
+      "inventory_id": ""
+    },
+    "get_theme_click_icon_adapter_edit_click": {
+      "enabled": false,
+      "screen": "get_theme_view",
+      "inventory_id": ""
+    },
+    "get_theme_click_back": {
+      "enabled": false,
+      "screen": "get_theme_view",
+      "inventory_id": ""
+    },
+    "preview_theme_click_get_themes": {
+      "enabled": false,
+      "screen": "preview_theme_view",
+      "inventory_id": ""
+    },
+    "preview_theme_click_back": {
+      "enabled": false,
+      "screen": "preview_theme_view",
+      "inventory_id": ""
+    },
+    "theme_category_click_theme_adapter_click_item": {
+      "enabled": false,
+      "screen": "theme_category_view",
+      "inventory_id": ""
+    },
+    "theme_category_click_error_retry": {
+      "enabled": false,
+      "screen": "theme_category_view",
+      "inventory_id": ""
+    },
+    "set_wallpaper_click_close": {
+      "enabled": false,
+      "screen": "set_wallpaper_view",
+      "inventory_id": ""
+    },
+    "set_wallpaper_click_home_screen": {
+      "enabled": true,
+      "screen": "set_wallpaper_view",
+      "inventory_id": "inv_reward_apply"
+    },
+    "set_wallpaper_click_lock_screen": {
+      "enabled": true,
+      "screen": "set_wallpaper_view",
+      "inventory_id": "inv_reward_apply"
+    },
+    "set_wallpaper_click_both": {
+      "enabled": true,
+      "screen": "set_wallpaper_view",
+      "inventory_id": "inv_reward_apply"
+    },
+    "wallpaper_category_click_wallpaper_adapter_click_item": {
+      "enabled": false,
+      "screen": "wallpaper_category_view",
+      "inventory_id": ""
+    },
+    "wallpaper_category_click_error_retry": {
+      "enabled": false,
+      "screen": "wallpaper_category_view",
+      "inventory_id": ""
+    },
+    "add_widgets_click_close": {
+      "enabled": false,
+      "screen": "add_widgets_view",
+      "inventory_id": ""
+    },
+    "add_widgets_click_unlock": {
+      "enabled": true,
+      "screen": "add_widgets_view",
+      "inventory_id": "inv_reward_apply"
+    },
+    "widget_category_click_widget_adapter_click_item": {
+      "enabled": false,
+      "screen": "widget_category_view",
+      "inventory_id": ""
+    },
+    "widget_category_click_error_retry": {
+      "enabled": false,
+      "screen": "widget_category_view",
+      "inventory_id": ""
+    },
+    "return_home": {
+      "enabled": true,
+      "screen": "app",
+      "inventory_id": "inv_inter_back"
+    },
+    "set_icons_click_install_shortcut": {
+      "enabled": true,
+      "screen": "set_icons_view",
+      "inventory_id": "inv_reward_apply"
+    },
+    "set_icons_click_install_all_shortcuts": {
+      "enabled": true,
+      "screen": "set_icons_view",
+      "inventory_id": "inv_reward_apply"
+    },
+    "get_theme_click_install_shortcut": {
+      "enabled": true,
+      "screen": "get_theme_view",
+      "inventory_id": "inv_reward_apply"
+    },
+    "get_theme_click_install_all_shortcuts": {
+      "enabled": true,
+      "screen": "get_theme_view",
+      "inventory_id": "inv_reward_apply"
+    },
+    "get_theme_click_start_wallpaper_download": {
+      "enabled": true,
+      "screen": "get_theme_view",
+      "inventory_id": "inv_reward_apply"
+    },
+    "main_click_nav_controller": {
+      "enabled": false,
+      "screen": "main_view",
+      "inventory_id": ""
+    },
+    "main_click_nav_icons": {
+      "enabled": false,
+      "screen": "main_view",
+      "inventory_id": ""
+    },
+    "main_click_nav_gallery": {
+      "enabled": false,
+      "screen": "main_view",
+      "inventory_id": ""
+    },
+    "preview_wallpaper_click_back": {
+      "enabled": false,
+      "screen": "preview_wallpaper_view",
+      "inventory_id": ""
+    },
+    "feedback_click_back": {
+      "enabled": false,
+      "screen": "feedback_view",
+      "inventory_id": ""
+    },
+    "main_click_back": {
+      "enabled": false,
+      "screen": "main_view",
+      "inventory_id": ""
+    },
+    "feedback_click_remove_image": {
+      "enabled": false,
+      "screen": "feedback_view",
       "inventory_id": ""
     }
   },
@@ -1108,19 +2254,49 @@
       "inventory_id": "inv_native_home",
       "enabled": true,
       "ad_type": "native",
-      "timeout_ms": 6000,
+      "timeout_ms": 16000,
       "waterfall_id": "native_home",
-      "native_style_id": "native_home",
+      "native_style_id": "native_small",
       "priority": 50,
       "load_strategy": {
-        "mode": "render_immediately",
+        "mode": "preload",
+        "sticky": true,
+        "reload_after_render": true,
+        "cache_ttl_sec": 1800,
         "preload_triggers": [
           {
             "type": "screen_enter",
-            "screen": "home_view"
+            "screen": "controller_view"
+          },
+          {
+            "type": "screen_enter",
+            "screen": "icons_view"
+          },
+          {
+            "type": "screen_enter",
+            "screen": "gallery_themes_view"
+          },
+          {
+            "type": "screen_enter",
+            "screen": "gallery_wallpapers_view"
+          },
+          {
+            "type": "screen_enter",
+            "screen": "gallery_widgets_view"
+          },
+          {
+            "type": "screen_enter",
+            "screen": "theme_category_view"
+          },
+          {
+            "type": "screen_enter",
+            "screen": "wallpaper_category_view"
+          },
+          {
+            "type": "screen_enter",
+            "screen": "widget_category_view"
           }
-        ],
-        "reload_after_render": false
+        ]
       }
     },
     "inv_banner_home": {
@@ -1132,60 +2308,6 @@
       "waterfall_id": "banner_home",
       "priority": 40
     },
-    "inv_inter_home": {
-      "inventory_id": "inv_inter_home",
-      "enabled": true,
-      "ad_type": "interstitial",
-      "timeout_ms": 30000,
-      "waterfall_id": "inter_home",
-      "show_rule": "inter_home_rules",
-      "priority": 70,
-      "load_conditions": [
-        {
-          "type": "user_property",
-          "variable_name": "is_onboarding_completed_session",
-          "variable_operator": "==",
-          "variable_value": false
-        }
-      ],
-      "load_strategy": {
-        "mode": "load_on_demand",
-        "preload_triggers": [
-          {
-            "type": "screen_enter",
-            "screen": "home_view"
-          }
-        ],
-        "reload_after_show": false
-      }
-    },
-    "inv_inter_home_2nd": {
-      "inventory_id": "inv_inter_home_2nd",
-      "enabled": true,
-      "ad_type": "interstitial",
-      "timeout_ms": 30000,
-      "waterfall_id": "inter_home",
-      "show_rule": "inter_home_2nd_rules",
-      "priority": 70,
-      "load_conditions": [
-        {
-          "type": "user_property",
-          "variable_name": "is_onboarding_completed_session",
-          "variable_operator": "==",
-          "variable_value": true
-        }
-      ],
-      "load_strategy": {
-        "mode": "load_on_demand",
-        "preload_triggers": [
-          {
-            "type": "screen_enter",
-            "screen": "home_view"
-          }
-        ],
-        "reload_after_show": false
-      }
-    },
     "inv_native_resume": {
       "inventory_id": "inv_native_resume",
       "enabled": true,
@@ -1194,7 +2316,159 @@
       "waterfall_id": "native_resume",
       "native_style_id": "welcome_back",
       "load_strategy": {
-        "mode": "load_on_demand"
+        "mode": "preload",
+        "preload_triggers": [
+          {
+            "type": "app_start"
+          }
+        ],
+        "reload_after_show": true,
+        "cache_ttl_sec": 3600
+      }
+    },
+    "inv_inter_back": {
+      "inventory_id": "inv_inter_back",
+      "enabled": true,
+      "ad_type": "interstitial",
+      "timeout_ms": 16000,
+      "waterfall_id": "inter_back",
+      "load_strategy": {
+        "mode": "load_on_demand",
+        "preload_triggers": [],
+        "cache_ttl_sec": 3600,
+        "reload_after_show": false
+      }
+    },
+    "inv_native_inapp": {
+      "inventory_id": "inv_native_inapp",
+      "enabled": true,
+      "ad_type": "native",
+      "timeout_ms": 16000,
+      "waterfall_id": "native_inapp",
+      "load_strategy": {
+        "mode": "render_immediately",
+        "preload_triggers": [],
+        "cache_ttl_sec": 3600,
+        "reload_after_show": false
+      },
+      "native_style_id": "native_small"
+    },
+    "inv_reward_apply": {
+      "inventory_id": "inv_reward_apply",
+      "enabled": true,
+      "ad_type": "rewarded",
+      "timeout_ms": 16000,
+      "waterfall_id": "reward_apply",
+      "load_strategy": {
+        "mode": "load_on_demand",
+        "preload_triggers": [],
+        "cache_ttl_sec": 3600,
+        "reload_after_show": false
+      },
+      "rewards": [
+        {
+          "type": "unlock_content",
+          "amount": 1,
+          "grant_on": "reward_earned"
+        }
+      ]
+    },
+    "inv_native_home_2": {
+      "inventory_id": "inv_native_home_2",
+      "enabled": true,
+      "ad_type": "native",
+      "timeout_ms": 16000,
+      "waterfall_id": "native_home",
+      "native_style_id": "native_small",
+      "priority": 50,
+      "load_strategy": {
+        "mode": "preload",
+        "sticky": true,
+        "reload_after_render": true,
+        "cache_ttl_sec": 1800,
+        "preload_triggers": [
+          {
+            "type": "screen_enter",
+            "screen": "controller_view"
+          },
+          {
+            "type": "screen_enter",
+            "screen": "icons_view"
+          },
+          {
+            "type": "screen_enter",
+            "screen": "gallery_themes_view"
+          },
+          {
+            "type": "screen_enter",
+            "screen": "gallery_wallpapers_view"
+          },
+          {
+            "type": "screen_enter",
+            "screen": "gallery_widgets_view"
+          },
+          {
+            "type": "screen_enter",
+            "screen": "theme_category_view"
+          },
+          {
+            "type": "screen_enter",
+            "screen": "wallpaper_category_view"
+          },
+          {
+            "type": "screen_enter",
+            "screen": "widget_category_view"
+          }
+        ]
+      }
+    },
+    "inv_native_home_3": {
+      "inventory_id": "inv_native_home_3",
+      "enabled": true,
+      "ad_type": "native",
+      "timeout_ms": 16000,
+      "waterfall_id": "native_home",
+      "native_style_id": "native_small",
+      "priority": 50,
+      "load_strategy": {
+        "mode": "preload",
+        "sticky": true,
+        "reload_after_render": true,
+        "cache_ttl_sec": 1800,
+        "preload_triggers": [
+          {
+            "type": "screen_enter",
+            "screen": "controller_view"
+          },
+          {
+            "type": "screen_enter",
+            "screen": "icons_view"
+          },
+          {
+            "type": "screen_enter",
+            "screen": "gallery_themes_view"
+          },
+          {
+            "type": "screen_enter",
+            "screen": "gallery_wallpapers_view"
+          },
+          {
+            "type": "screen_enter",
+            "screen": "gallery_widgets_view"
+          },
+          {
+            "type": "screen_enter",
+            "screen": "theme_category_view"
+          },
+          {
+            "type": "screen_enter",
+            "screen": "wallpaper_category_view"
+          },
+          {
+            "type": "screen_enter",
+            "screen": "widget_category_view"
+          }
+        ]
       }
     }
   },
@@ -1202,11 +2476,11 @@
     "banner_splash": {
       "waterfall_id": "banner_splash",
       "strategy": "sequential",
-      "total_timeout_ms": 30000,
+      "total_timeout_ms": 16000,
       "items": [
         {
           "ad_network": "admob",
-          "ad_unit_id": "ca-app-pub-3940256099942544/6300978111",
+          "ad_unit_id": "ca-app-pub-2701366067425803/2370923095",
           "level": "all",
           "enabled": true,
           "timeout_ms": 15000
@@ -1216,18 +2490,18 @@
     "inter_splash": {
       "waterfall_id": "inter_splash",
       "strategy": "sequential",
-      "total_timeout_ms": 30000,
+      "total_timeout_ms": 16000,
       "items": [
         {
           "ad_network": "admob",
-          "ad_unit_id": "ca-app-pub-3940256099942544/1033173712",
+          "ad_unit_id": "ca-app-pub-2701366067425803/6422597172",
           "level": "high",
           "enabled": true,
           "timeout_ms": 15000
         },
         {
           "ad_network": "admob",
-          "ad_unit_id": "ca-app-pub-3940256099942544/1033173712",
+          "ad_unit_id": "ca-app-pub-2701366067425803/6637471165",
           "level": "all",
           "enabled": true,
           "timeout_ms": 15000
@@ -1237,18 +2511,18 @@
     "inter_splash_2nd": {
       "waterfall_id": "inter_splash_2nd",
       "strategy": "sequential",
-      "total_timeout_ms": 30000,
+      "total_timeout_ms": 16000,
       "items": [
         {
           "ad_network": "admob",
-          "ad_unit_id": "ca-app-pub-3940256099942544/1033173712",
+          "ad_unit_id": "ca-app-pub-2701366067425803/8761995065",
           "level": "high",
           "enabled": true,
           "timeout_ms": 15000
         },
         {
           "ad_network": "admob",
-          "ad_unit_id": "ca-app-pub-3940256099942544/1033173712",
+          "ad_unit_id": "ca-app-pub-2701366067425803/2698226155",
           "level": "all",
           "enabled": true,
           "timeout_ms": 15000
@@ -1258,18 +2532,18 @@
     "native_resume": {
       "waterfall_id": "native_resume",
       "strategy": "sequential",
-      "total_timeout_ms": 30000,
+      "total_timeout_ms": 16000,
       "items": [
         {
           "ad_network": "admob",
-          "ad_unit_id": "ca-app-pub-3940256099942544/2247696110",
+          "ad_unit_id": "ca-app-pub-2701366067425803/1385144480",
           "level": "high",
           "enabled": true,
           "timeout_ms": 15000
         },
         {
           "ad_network": "admob",
-          "ad_unit_id": "ca-app-pub-3940256099942544/2247696110",
+          "ad_unit_id": "ca-app-pub-2701366067425803/3256629359",
           "level": "all",
           "enabled": true,
           "timeout_ms": 15000
@@ -1279,18 +2553,18 @@
     "native_lfo1": {
       "waterfall_id": "native_lfo1",
       "strategy": "sequential",
-      "total_timeout_ms": 30000,
+      "total_timeout_ms": 16000,
       "items": [
         {
           "ad_network": "admob",
-          "ad_unit_id": "ca-app-pub-3940256099942544/2247696110",
+          "ad_unit_id": "ca-app-pub-2701366067425803/5313704641",
           "level": "high",
           "enabled": true,
           "timeout_ms": 15000
         },
         {
           "ad_network": "admob",
-          "ad_unit_id": "ca-app-pub-3940256099942544/2247696110",
+          "ad_unit_id": "ca-app-pub-2701366067425803/1193572793",
           "level": "all",
           "enabled": true,
           "timeout_ms": 15000
@@ -1300,18 +2574,18 @@
     "native_lfo2": {
       "waterfall_id": "native_lfo2",
       "strategy": "sequential",
-      "total_timeout_ms": 30000,
+      "total_timeout_ms": 16000,
       "items": [
         {
           "ad_network": "admob",
-          "ad_unit_id": "ca-app-pub-3940256099942544/2247696110",
+          "ad_unit_id": "ca-app-pub-2701366067425803/3432723328",
           "level": "high",
           "enabled": true,
           "timeout_ms": 15000
         },
         {
           "ad_network": "admob",
-          "ad_unit_id": "ca-app-pub-3940256099942544/2247696110",
+          "ad_unit_id": "ca-app-pub-2701366067425803/8493478319",
           "level": "all",
           "enabled": true,
           "timeout_ms": 15000
@@ -1321,18 +2595,18 @@
     "native_onb1": {
       "waterfall_id": "native_onb1",
       "strategy": "sequential",
-      "total_timeout_ms": 30000,
+      "total_timeout_ms": 16000,
       "items": [
         {
           "ad_network": "admob",
-          "ad_unit_id": "ca-app-pub-3940256099942544/2247696110",
+          "ad_unit_id": "ca-app-pub-2701366067425803/4941246115",
           "level": "high",
           "enabled": true,
           "timeout_ms": 15000
         },
         {
           "ad_network": "admob",
-          "ad_unit_id": "ca-app-pub-3940256099942544/2247696110",
+          "ad_unit_id": "ca-app-pub-2701366067425803/1002001101",
           "level": "all",
           "enabled": true,
           "timeout_ms": 15000
@@ -1342,18 +2616,18 @@
     "native_onb1_click": {
       "waterfall_id": "native_onb1_click",
       "strategy": "sequential",
-      "total_timeout_ms": 30000,
+      "total_timeout_ms": 16000,
       "items": [
         {
           "ad_network": "admob",
-          "ad_unit_id": "ca-app-pub-3940256099942544/2247696110",
+          "ad_unit_id": "ca-app-pub-2701366067425803/8688919438",
           "level": "high",
           "enabled": true,
           "timeout_ms": 15000
         },
         {
           "ad_network": "admob",
-          "ad_unit_id": "ca-app-pub-3940256099942544/2247696110",
+          "ad_unit_id": "ca-app-pub-2701366067425803/3533719113",
           "level": "all",
           "enabled": true,
           "timeout_ms": 15000
@@ -1363,18 +2637,18 @@
     "native_full1": {
       "waterfall_id": "native_full1",
       "strategy": "sequential",
-      "total_timeout_ms": 30000,
+      "total_timeout_ms": 16000,
       "items": [
         {
           "ad_network": "admob",
-          "ad_unit_id": "ca-app-pub-3940256099942544/2247696110",
+          "ad_unit_id": "ca-app-pub-2701366067425803/6062756098",
           "level": "high",
           "enabled": true,
           "timeout_ms": 15000
         },
         {
           "ad_network": "admob",
-          "ad_unit_id": "ca-app-pub-3940256099942544/2247696110",
+          "ad_unit_id": "ca-app-pub-2701366067425803/8301906621",
           "level": "all",
           "enabled": true,
           "timeout_ms": 15000
@@ -1384,18 +2658,18 @@
     "native_full2": {
       "waterfall_id": "native_full2",
       "strategy": "sequential",
-      "total_timeout_ms": 30000,
+      "total_timeout_ms": 16000,
       "items": [
         {
           "ad_network": "admob",
-          "ad_unit_id": "ca-app-pub-3940256099942544/2247696110",
+          "ad_unit_id": "ca-app-pub-2701366067425803/3809051286",
           "level": "high",
           "enabled": true,
           "timeout_ms": 15000
         },
         {
           "ad_network": "admob",
-          "ad_unit_id": "ca-app-pub-3940256099942544/2247696110",
+          "ad_unit_id": "ca-app-pub-2701366067425803/6988824952",
           "level": "all",
           "enabled": true,
           "timeout_ms": 15000
@@ -1405,18 +2679,18 @@
     "native_welcome": {
       "waterfall_id": "native_welcome",
       "strategy": "sequential",
-      "total_timeout_ms": 30000,
+      "total_timeout_ms": 16000,
       "items": [
         {
           "ad_network": "admob",
-          "ad_unit_id": "ca-app-pub-3940256099942544/2247696110",
+          "ad_unit_id": "ca-app-pub-2701366067425803/3509668389",
           "level": "high",
           "enabled": true,
           "timeout_ms": 15000
         },
         {
           "ad_network": "admob",
-          "ad_unit_id": "ca-app-pub-3940256099942544/2247696110",
+          "ad_unit_id": "ca-app-pub-2701366067425803/7544107156",
           "level": "all",
           "enabled": true,
           "timeout_ms": 15000
@@ -1426,18 +2700,18 @@
     "native_home": {
       "waterfall_id": "native_home",
       "strategy": "sequential",
-      "total_timeout_ms": 30000,
+      "total_timeout_ms": 16000,
       "items": [
         {
           "ad_network": "admob",
-          "ad_unit_id": "ca-app-pub-3940256099942544/2247696110",
+          "ad_unit_id": "ca-app-pub-2701366067425803/9810429413",
           "level": "high",
           "enabled": true,
           "timeout_ms": 15000
         },
         {
           "ad_network": "admob",
-          "ad_unit_id": "ca-app-pub-3940256099942544/2247696110",
+          "ad_unit_id": "ca-app-pub-2701366067425803/3190833134",
           "level": "all",
           "enabled": true,
           "timeout_ms": 15000
@@ -1447,32 +2721,74 @@
     "banner_home": {
       "waterfall_id": "banner_home",
       "strategy": "sequential",
-      "total_timeout_ms": 30000,
+      "total_timeout_ms": 16000,
       "items": [
         {
           "ad_network": "admob",
-          "ad_unit_id": "ca-app-pub-3940256099942544/6300978111",
+          "ad_unit_id": "ca-app-pub-2701366067425803/5274070990",
           "level": "all",
           "enabled": true,
           "timeout_ms": 15000
         }
       ]
     },
-    "inter_home": {
-      "waterfall_id": "inter_home",
+    "inter_back": {
+      "waterfall_id": "inter_back",
       "strategy": "sequential",
-      "total_timeout_ms": 30000,
+      "total_timeout_ms": 16000,
       "items": [
         {
           "ad_network": "admob",
-          "ad_unit_id": "ca-app-pub-3940256099942544/1033173712",
+          "ad_unit_id": "ca-app-pub-2701366067425803/3960989324",
           "level": "high",
           "enabled": true,
           "timeout_ms": 15000
         },
         {
           "ad_network": "admob",
-          "ad_unit_id": "ca-app-pub-3940256099942544/1033173712",
+          "ad_unit_id": "ca-app-pub-2701366067425803/6938506459",
+          "level": "all",
+          "enabled": true,
+          "timeout_ms": 15000
+        }
+      ]
+    },
+    "native_inapp": {
+      "waterfall_id": "native_inapp",
+      "strategy": "sequential",
+      "total_timeout_ms": 16000,
+      "items": [
+        {
+          "ad_network": "admob",
+          "ad_unit_id": "ca-app-pub-2701366067425803/2647907655",
+          "level": "high",
+          "enabled": true,
+          "timeout_ms": 15000
+        },
+        {
+          "ad_network": "admob",
+          "ad_unit_id": "ca-app-pub-2701366067425803/4532844123",
+          "level": "all",
+          "enabled": true,
+          "timeout_ms": 15000
+        }
+      ]
+    },
+    "reward_apply": {
+      "waterfall_id": "reward_apply",
+      "strategy": "sequential",
+      "total_timeout_ms": 16000,
+      "items": [
+        {
+          "ad_network": "admob",
+          "ad_unit_id": "ca-app-pub-2701366067425803/1334825982",
+          "level": "high",
+          "enabled": true,
+          "timeout_ms": 15000
+        },
+        {
+          "ad_network": "admob",
+          "ad_unit_id": "ca-app-pub-2701366067425803/7991733671",
           "level": "all",
           "enabled": true,
           "timeout_ms": 15000

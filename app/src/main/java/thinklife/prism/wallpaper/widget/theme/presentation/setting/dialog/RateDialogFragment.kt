@@ -12,6 +12,8 @@
 
 package thinklife.prism.wallpaper.widget.theme.presentation.setting.dialog
 
+import thinklife.prism.wallpaper.widget.theme.ads.AdsTrigger
+import thinklife.prism.wallpaper.widget.theme.ads.AdsScreen
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
@@ -26,6 +28,9 @@ import javax.inject.Inject
 
 @AndroidEntryPoint
 class RateDialogFragment : BaseDialogFragment<DialogRateBinding>() {
+
+    override val adsScreenId = AdsScreen.RATE_VIEW
+
 
     override fun bindingView(): DialogRateBinding = DialogRateBinding.inflate(layoutInflater)
 
@@ -60,19 +65,27 @@ class RateDialogFragment : BaseDialogFragment<DialogRateBinding>() {
             }
         }
         binding.btnClose.setOnClickListener {
-            stopAnimation()
-            dismiss()
+            triggerAds(AdsTrigger.RATE_CLICK_CLOSE) {
+                runWhenResumed {
+                    stopAnimation()
+                    dismiss()
+                }
+            }
         }
         binding.btnRate.setOnClickListener {
-            val stars = binding.ratingBar.rating.toInt()
-            if (stars <= 0) {
-                return@setOnClickListener
+            triggerAds(AdsTrigger.RATE_CLICK_RATE) {
+                runWhenResumed {
+                    val stars = binding.ratingBar.rating.toInt()
+                    if (stars <= 0) {
+                        return@runWhenResumed
+                    }
+                    stopAnimation()
+                    sharedPref.ratedStars = stars
+                    sharedPref.isRate = true
+                    if (stars >= 4) requireContext().rateApp()
+                    dismiss()
+                }
             }
-            stopAnimation()
-            sharedPref.ratedStars = stars
-            sharedPref.isRate = true
-            if (stars >= 4) requireContext().rateApp()
-            dismiss()
         }
     }
 

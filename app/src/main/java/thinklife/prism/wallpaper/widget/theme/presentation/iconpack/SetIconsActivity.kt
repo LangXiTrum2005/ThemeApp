@@ -12,6 +12,8 @@
 
 package thinklife.prism.wallpaper.widget.theme.presentation.iconpack
 
+import thinklife.prism.wallpaper.widget.theme.ads.AdsTrigger
+import thinklife.prism.wallpaper.widget.theme.ads.AdsScreen
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
@@ -38,6 +40,9 @@ import javax.inject.Inject
 @AndroidEntryPoint
 class SetIconsActivity : BaseActivity<ActivitySetIconsBinding>(),
     SelectAppBottomSheetDialog.OnAppSelectedListener {
+
+    override val adsScreenId = AdsScreen.SET_ICONS_VIEW
+
 
     companion object {
         private const val EXTRA_PACK_ID = "extra_pack_id"
@@ -75,25 +80,37 @@ class SetIconsActivity : BaseActivity<ActivitySetIconsBinding>(),
         super.initListener()
         binding.btnBack.setOnClickListener { onHandleBackPressed() }
         binding.btnInstallAll.setOnClickListener {
-            val mappedItems = viewModel.mappedIconsPendingInstall()
-            if (mappedItems.isEmpty()) {
-                Toast.makeText(this, R.string.no_icons_to_install, Toast.LENGTH_SHORT).show()
-                return@setOnClickListener
+            triggerAds(AdsTrigger.SET_ICONS_CLICK_INSTALL_ALL) {
+                runWhenResumed {
+                    val mappedItems = viewModel.mappedIconsPendingInstall()
+                    if (mappedItems.isEmpty()) {
+                        Toast.makeText(this, R.string.no_icons_to_install, Toast.LENGTH_SHORT).show()
+                        return@runWhenResumed
+                    }
+                    installAllShortcuts(mappedItems)
+                }
             }
-            installAllShortcuts(mappedItems)
         }
 
         adapter.onActionClick = { item, state ->
-            viewModel.itemIconPackItemUi = item
-            when (state) {
-                SetIconState.APPLIED -> installShortcut(item)
-                SetIconState.INSTALL -> installShortcut(item)
-                SetIconState.CHOOSE -> showSelectApp(item)
+            triggerAds(AdsTrigger.SET_ICONS_CLICK_ADAPTER_ACTION_CLICK) {
+                runWhenResumed {
+                    viewModel.itemIconPackItemUi = item
+                    when (state) {
+                        SetIconState.APPLIED -> installShortcut(item)
+                        SetIconState.INSTALL -> installShortcut(item)
+                        SetIconState.CHOOSE -> showSelectApp(item)
+                    }
+                }
             }
         }
 
         adapter.onEditClick = { item ->
-            showSelectApp(item)
+            triggerAds(AdsTrigger.SET_ICONS_CLICK_ADAPTER_EDIT_CLICK) {
+                runWhenResumed {
+                    showSelectApp(item)
+                }
+            }
         }
     }
 
@@ -133,6 +150,11 @@ class SetIconsActivity : BaseActivity<ActivitySetIconsBinding>(),
 
     private fun installShortcut(item: IconPackItemUi) {
         if (!item.canInstall) return
+        triggerRewardAds(AdsTrigger.SET_ICONS_CLICK_INSTALL_SHORTCUT) { performInstallShortcut(item) }
+    }
+
+    private fun performInstallShortcut(item: IconPackItemUi) {
+        if (!item.canInstall) return
         lifecycleScope.launch {
             val success = requestInstallShortcut(item)
             if (success) {
@@ -155,6 +177,10 @@ class SetIconsActivity : BaseActivity<ActivitySetIconsBinding>(),
     }
 
     private fun installAllShortcuts(items: List<IconPackItemUi>) {
+        triggerRewardAds(AdsTrigger.SET_ICONS_CLICK_INSTALL_ALL_SHORTCUTS) { performInstallAllShortcuts(items) }
+    }
+
+    private fun performInstallAllShortcuts(items: List<IconPackItemUi>) {
         lifecycleScope.launch {
             val appliedIds = items.mapNotNull { item ->
                 if (requestInstallShortcut(item)) item.id else null
@@ -191,4 +217,8 @@ class SetIconsActivity : BaseActivity<ActivitySetIconsBinding>(),
     override fun onAppSelected(appInfo: AppInfo) {
         viewModel.applySelectedApp(appInfo)
     }
+    override fun onHandleBackPressed() {
+        triggerBackAds(AdsTrigger.SET_ICONS_CLICK_BACK) { finish() }
+    }
+
 }

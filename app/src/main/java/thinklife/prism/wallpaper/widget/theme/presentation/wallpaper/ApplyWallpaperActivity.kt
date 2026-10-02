@@ -12,6 +12,8 @@
 
 package thinklife.prism.wallpaper.widget.theme.presentation.wallpaper
 
+import thinklife.prism.wallpaper.widget.theme.ads.AdsTrigger
+import thinklife.prism.wallpaper.widget.theme.ads.AdsScreen
 import android.content.Context
 import android.content.Intent
 import android.graphics.drawable.Drawable
@@ -38,6 +40,9 @@ import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class ApplyWallpaperActivity : BaseActivity<ActivityApplyWallpaperBinding>() {
+
+    override val adsScreenId = AdsScreen.APPLY_WALLPAPER_VIEW
+
     override fun bindingView(): ActivityApplyWallpaperBinding {
         return ActivityApplyWallpaperBinding.inflate(layoutInflater)
     }
@@ -105,13 +110,21 @@ class ApplyWallpaperActivity : BaseActivity<ActivityApplyWallpaperBinding>() {
         }
 
         wallpaperAdapter.onClickItem = { wallpaper ->
-            startActivity(PreviewWallpaperActivity.newIntent(this, wallpaper))
+            triggerAds(AdsTrigger.APPLY_WALLPAPER_CLICK_WALLPAPER_ADAPTER_CLICK_ITEM) {
+                runWhenResumed {
+                    startActivity(PreviewWallpaperActivity.newIntent(this, wallpaper))
+                }
+            }
         }
 
         binding.btnHome.setOnClickListener {
-            navigateTo(MainActivity.newIntent(this).apply {
-                flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP
-            })
+            triggerAds(AdsTrigger.APPLY_WALLPAPER_CLICK_HOME) {
+                runWhenResumed {
+                    navigateTo(MainActivity.newIntent(this).apply {
+                        flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP
+                    })
+                }
+            }
         }
     }
 
@@ -131,4 +144,8 @@ class ApplyWallpaperActivity : BaseActivity<ActivityApplyWallpaperBinding>() {
             }
         }
     }
+    override fun onHandleBackPressed() {
+        triggerBackAds(AdsTrigger.APPLY_WALLPAPER_CLICK_BACK) { finish() }
+    }
+
 }

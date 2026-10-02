@@ -53,7 +53,8 @@ class LanguageActivity : BaseActivity<ActivityLanguageBinding>() {
     private val adapter by lazy { LanguageAdapter() }
 
     /** Trạng thái 1 của màn Language (chưa chọn). Trạng thái 2 = lan2_view, render tay. */
-    override val adsScreenId = AdsScreen.LAN_VIEW
+    override val adsScreenId
+        get() = if (isFistSelectedLanguage) AdsScreen.LAN2_VIEW else AdsScreen.LAN_VIEW
 
     override fun initConfig(savedInstanceState: Bundle?) {
         binding.rvLanguages.layoutManager = LinearLayoutManager(this)

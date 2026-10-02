@@ -69,7 +69,7 @@ class ControllerTutorialActivity : BaseActivity<ActivityControllerTutorialBindin
     }
 
     override fun onHandleBackPressed() {
-        triggerAds(AdsTrigger.CONTROLLER_TUTORIAL_CLICK_BACK) {
+        triggerBackAds(AdsTrigger.CONTROLLER_TUTORIAL_CLICK_BACK) {
             runWhenResumed { finish() }
         }
     }

@@ -113,7 +113,10 @@ abstract class BaseFragment<VB : ViewBinding> : Fragment() {
      */
     override fun onResume() {
         super.onResume()
-        if (hasBoundAds) return
+        if (hasBoundAds) {
+            adsScreenId?.let(thinklife.prism.wallpaper.widget.theme.ads.AdsBootstrap::notifyScreenEnter)
+            return
+        }
         hasBoundAds = true
         bindAdsScreen()
     }
@@ -128,13 +131,28 @@ abstract class BaseFragment<VB : ViewBinding> : Fragment() {
         }
         viewLifecycleOwner.lifecycleScope.launch {
             while (!ConfigManager.isInitialConfigLoaded) delay(50L)
-            val aliveRoot = view ?: return@launch
-            onPrepareAdsSlots()
-            AdsController.bindScreen(screenId, aliveRoot, viewLifecycleOwner)
+            viewLifecycleOwner.lifecycle.withStateAtLeast(Lifecycle.State.RESUMED) {
+                val aliveRoot = view ?: return@withStateAtLeast
+                onPrepareAdsSlots()
+                AdsController.bindScreen(screenId, aliveRoot, viewLifecycleOwner)
+            }
         }
     }
 
-    /** onFinished LUÔN chạy kể cả khi ads bị chặn → user không bao giờ kẹt. */
+    private var isRewardPending = false
+
+    protected fun triggerRewardAds(triggerId: String, action: () -> Unit) {
+        if (isRewardPending) return
+        isRewardPending = true
+        thinklife.prism.wallpaper.widget.theme.ads.AdsBootstrap.triggerReward(
+            activity = requireActivity(),
+            triggerId = triggerId,
+            screenId = adsScreenId,
+            onAllowed = { runWhenResumed(action) },
+            onFinished = { isRewardPending = false },
+        )
+    }
+
     protected fun triggerAds(
         triggerId: String,
         fromScreen: String? = adsScreenId,
@@ -152,8 +170,9 @@ abstract class BaseFragment<VB : ViewBinding> : Fragment() {
 
     /** Xem chú thích ở BaseActivity.runWhenResumed — fragment dùng viewLifecycleOwner. */
     protected fun runWhenResumed(action: () -> Unit) {
-        viewLifecycleOwner.lifecycleScope.launch {
-            viewLifecycleOwner.lifecycle.withStateAtLeast(Lifecycle.State.RESUMED) { action() }
+        val owner = viewLifecycleOwnerLiveData.value ?: return
+        owner.lifecycleScope.launch {
+            owner.lifecycle.withStateAtLeast(Lifecycle.State.RESUMED) { action() }
         }
     }
 

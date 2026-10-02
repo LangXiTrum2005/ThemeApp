@@ -127,7 +127,20 @@ abstract class BaseDialogFragment<T : ViewBinding> : DialogFragment() {
         }
     }
 
-    /** onFinished LUÔN chạy kể cả khi ads bị chặn → user không bao giờ kẹt. */
+    private var isRewardPending = false
+
+    protected fun triggerRewardAds(triggerId: String, action: () -> Unit) {
+        if (isRewardPending) return
+        isRewardPending = true
+        thinklife.prism.wallpaper.widget.theme.ads.AdsBootstrap.triggerReward(
+            activity = requireActivity(),
+            triggerId = triggerId,
+            screenId = adsScreenId,
+            onAllowed = { runWhenResumed(action) },
+            onFinished = { isRewardPending = false },
+        )
+    }
+
     protected fun triggerAds(
         triggerId: String,
         fromScreen: String? = adsScreenId,
@@ -144,8 +157,9 @@ abstract class BaseDialogFragment<T : ViewBinding> : DialogFragment() {
     }
 
     protected fun runWhenResumed(action: () -> Unit) {
-        viewLifecycleOwner.lifecycleScope.launch {
-            viewLifecycleOwner.lifecycle.withStateAtLeast(Lifecycle.State.RESUMED) { action() }
+        val owner = viewLifecycleOwnerLiveData.value ?: return
+        owner.lifecycleScope.launch {
+            owner.lifecycle.withStateAtLeast(Lifecycle.State.RESUMED) { action() }
         }
     }
 

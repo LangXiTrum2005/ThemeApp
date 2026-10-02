@@ -16,6 +16,7 @@ build/
 local.properties
 ontabb_rate/.idea
 /api-json
+.kotlin
 api-json.zip
 # Signing material — never commit
 *.jks

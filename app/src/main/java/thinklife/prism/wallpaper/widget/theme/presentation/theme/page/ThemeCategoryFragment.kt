@@ -12,6 +12,10 @@
 
 package thinklife.prism.wallpaper.widget.theme.presentation.theme.page
 
+import thinklife.prism.wallpaper.widget.theme.ads.AdsSlot
+import thinklife.prism.wallpaper.widget.theme.ads.NativeFeedAdapter
+import thinklife.prism.wallpaper.widget.theme.ads.AdsTrigger
+import thinklife.prism.wallpaper.widget.theme.ads.AdsScreen
 import android.os.Bundle
 import android.view.View
 import androidx.core.view.isVisible
@@ -28,6 +32,9 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class ThemeCategoryFragment : BaseFragment<FragmentThemeCategoryBinding>() {
 
+    override val adsScreenId = AdsScreen.THEME_CATEGORY_VIEW
+
+
     override fun bindingView(): FragmentThemeCategoryBinding {
         return FragmentThemeCategoryBinding.inflate(layoutInflater)
     }
@@ -41,18 +48,26 @@ class ThemeCategoryFragment : BaseFragment<FragmentThemeCategoryBinding>() {
 
     override fun initConfig(view: View, savedInstanceState: Bundle?) {
         super.initConfig(view, savedInstanceState)
-        binding.rcvTheme.adapter = themeAdapter
+        binding.rcvTheme.adapter = NativeFeedAdapter(themeAdapter, adsScreenId, AdsSlot.THEME_CATEGORY_SLOT_FEED, viewLifecycleOwner)
         viewModel.getThemesByCategory(categoryId)
     }
 
     override fun initListener() {
         super.initListener()
         themeAdapter.onClickItem = { theme ->
-            navigateTo(PreviewThemeActivity.newIntent(requireContext(), theme.id))
+            triggerAds(AdsTrigger.THEME_CATEGORY_CLICK_THEME_ADAPTER_CLICK_ITEM) {
+                runWhenResumed {
+                    navigateTo(PreviewThemeActivity.newIntent(requireContext(), theme.id))
+                }
+            }
         }
 
         binding.viewError.setOnRetryClickListener {
-            viewModel.getThemesByCategory(categoryId, forceRefresh = true)
+            triggerAds(AdsTrigger.THEME_CATEGORY_CLICK_ERROR_RETRY) {
+                runWhenResumed {
+                    viewModel.getThemesByCategory(categoryId, forceRefresh = true)
+                }
+            }
         }
     }
 

@@ -99,11 +99,10 @@
         android:usesCleartextTraffic="true"
         tools:replace="android:dataExtractionRules,android:fullBackupContent">
 
-        <!-- AAR AdsHub khai sẵn App ID TEST → tools:replace bắt buộc, thiếu là Manifest Merger fail.
-             TODO(project): thay bằng AdMob App ID thật (đồng bộ với global.admob_app_id trong assets/ads_config.json). -->
+        <!-- AAR có App ID test nên phải override bằng App ID của ứng dụng. -->
         <meta-data
             android:name="com.google.android.gms.ads.APPLICATION_ID"
-            android:value="ca-app-pub-3940256099942544~3347511713"
+            android:value="ca-app-pub-2701366067425803~7927250533"
             tools:replace="android:value" />
         <meta-data
             android:name="com.google.android.gms.ads.flag.OPTIMIZE_INITIALIZATION"

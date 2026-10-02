@@ -52,6 +52,10 @@ class LaunchViewModel @Inject constructor(
             }
 
             launch {
+                themeRepository.getThemes()
+            }
+
+            launch {
                 wallpaperRepository.getCategoriesUnlimited()
             }
         }

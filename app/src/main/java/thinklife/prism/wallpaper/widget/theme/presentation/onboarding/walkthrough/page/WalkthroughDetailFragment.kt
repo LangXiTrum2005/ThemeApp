@@ -12,6 +12,8 @@
 
 package thinklife.prism.wallpaper.widget.theme.presentation.onboarding.walkthrough.page
 
+import thinklife.prism.wallpaper.widget.theme.ads.AdsTrigger
+import thinklife.prism.wallpaper.widget.theme.ads.AdsScreen
 import android.os.Bundle
 import android.view.View
 import com.bumptech.glide.Glide
@@ -27,6 +29,9 @@ import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class WalkthroughDetailFragment : BaseFragment<FragmentOnboardingDetailBinding>() {
+
+    override val adsScreenId = AdsScreen.WALKTHROUGH_DETAIL_VIEW
+
 
     override fun bindingView() = FragmentOnboardingDetailBinding.inflate(layoutInflater)
 
@@ -53,8 +58,12 @@ class WalkthroughDetailFragment : BaseFragment<FragmentOnboardingDetailBinding>(
     override fun initListener() {
         super.initListener()
         binding.btnNext.setOnClickListener {
-            logNextEvent()
-            (activity as WalkthroughActivity).nextScreen()
+            triggerAds(AdsTrigger.WALKTHROUGH_DETAIL_CLICK_NEXT) {
+                runWhenResumed {
+                    logNextEvent()
+                    (activity as WalkthroughActivity).nextScreen()
+                }
+            }
         }
     }
 

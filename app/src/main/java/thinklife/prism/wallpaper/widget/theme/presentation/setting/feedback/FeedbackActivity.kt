@@ -12,6 +12,8 @@
 
 package thinklife.prism.wallpaper.widget.theme.presentation.setting.feedback
 
+import thinklife.prism.wallpaper.widget.theme.ads.AdsTrigger
+import thinklife.prism.wallpaper.widget.theme.ads.AdsScreen
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
@@ -41,6 +43,9 @@ import kotlinx.coroutines.launch
 @AndroidEntryPoint
 class FeedbackActivity : BaseActivity<ActivityFeedbackBinding>(),
     DiscardFeedbackDialog.DiscardFeedbackListener {
+
+    override val adsScreenId = AdsScreen.FEEDBACK_VIEW
+
 
     override fun bindingView(): ActivityFeedbackBinding {
         return ActivityFeedbackBinding.inflate(LayoutInflater.from(this))
@@ -80,8 +85,10 @@ class FeedbackActivity : BaseActivity<ActivityFeedbackBinding>(),
     private fun initFeedbackImageAdapter() {
         adapter = FeedbackImageAdapter()
 
-        adapter.onRemoveItem = {
-            feedbackViewModel.updateListImage(it, true)
+        adapter.onRemoveItem = { image ->
+            triggerAds(AdsTrigger.FEEDBACK_CLICK_REMOVE_IMAGE) {
+                runWhenResumed { feedbackViewModel.updateListImage(image, true) }
+            }
         }
         binding.rcvImage.adapter = adapter
     }
@@ -122,18 +129,26 @@ class FeedbackActivity : BaseActivity<ActivityFeedbackBinding>(),
         binding.btnBack.setOnClickListener { onHandleBackPressed() }
 
         binding.btnSendFeedback.setOnClickListener {
-            if (validateFeedbackForm()) {
-                hasSentFeedback = true
-                val strDes = binding.edFeedback.text.toString()
-                feedbackViewModel.addDescription(strDes)
-                feedbackViewModel.submitFeedback(this)
-            } else {
-                Toast.makeText(this, getString(R.string.feed_back_empty), Toast.LENGTH_SHORT).show()
+            triggerAds(AdsTrigger.FEEDBACK_CLICK_SEND_FEEDBACK) {
+                runWhenResumed {
+                    if (validateFeedbackForm()) {
+                        hasSentFeedback = true
+                        val strDes = binding.edFeedback.text.toString()
+                        feedbackViewModel.addDescription(strDes)
+                        feedbackViewModel.submitFeedback(this)
+                    } else {
+                        Toast.makeText(this, getString(R.string.feed_back_empty), Toast.LENGTH_SHORT).show()
+                    }
+                }
             }
         }
 
         binding.btnAddImage.setOnClickListener {
-            imagePickerLauncher?.launch("image/*")
+            triggerAds(AdsTrigger.FEEDBACK_CLICK_ADD_IMAGE) {
+                runWhenResumed {
+                    imagePickerLauncher?.launch("image/*")
+                }
+            }
         }
 
     }
@@ -156,13 +171,17 @@ class FeedbackActivity : BaseActivity<ActivityFeedbackBinding>(),
     }
 
     override fun onHandleBackPressed() {
-        if (hasSentFeedback || (!validateFeedbackForm())) {
-            super.onHandleBackPressed()
-        } else {
-            DiscardFeedbackDialog().show(
-                supportFragmentManager,
-                DiscardFeedbackDialog::class.java.simpleName
-            )
+        triggerAds(AdsTrigger.FEEDBACK_CLICK_BACK) {
+            runWhenResumed {
+                if (hasSentFeedback || (!validateFeedbackForm())) {
+                    super.onHandleBackPressed()
+                } else {
+                    DiscardFeedbackDialog().show(
+                        supportFragmentManager,
+                        DiscardFeedbackDialog::class.java.simpleName
+                    )
+                }
+            }
         }
     }
 

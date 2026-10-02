@@ -12,6 +12,8 @@
 
 package thinklife.prism.wallpaper.widget.theme.presentation.wallpaper
 
+import thinklife.prism.wallpaper.widget.theme.ads.AdsTrigger
+import thinklife.prism.wallpaper.widget.theme.ads.AdsScreen
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
@@ -38,6 +40,9 @@ import kotlinx.coroutines.launch
 @AndroidEntryPoint
 class PreviewWallpaperActivity : BaseActivity<ActivityPreviewWallpaperBinding>(),
     SetWallpaperDialog.SetWallpaperListener {
+
+    override val adsScreenId = AdsScreen.PREVIEW_WALLPAPER_VIEW
+
     override fun bindingView(): ActivityPreviewWallpaperBinding {
         return ActivityPreviewWallpaperBinding.inflate(layoutInflater)
     }
@@ -87,16 +92,28 @@ class PreviewWallpaperActivity : BaseActivity<ActivityPreviewWallpaperBinding>()
         }
 
         binding.btnDownload.setOnClickListener {
-            startDownload()
+            triggerRewardAds(AdsTrigger.PREVIEW_WALLPAPER_CLICK_DOWNLOAD) {
+                runWhenResumed {
+                    startDownload()
+                }
+            }
         }
 
         binding.btnPreview.setOnClickListener {
-            binding.viewPreview.root.visible()
+            triggerAds(AdsTrigger.PREVIEW_WALLPAPER_CLICK_PREVIEW) {
+                runWhenResumed {
+                    binding.viewPreview.root.visible()
+                }
+            }
         }
 
         binding.btnApply.setOnClickListener {
-            SetWallpaperDialog.newInstance()
-                .show(supportFragmentManager, SetWallpaperDialog::class.java.simpleName)
+            triggerAds(AdsTrigger.PREVIEW_WALLPAPER_CLICK_APPLY) {
+                runWhenResumed {
+                    SetWallpaperDialog.newInstance()
+                        .show(supportFragmentManager, SetWallpaperDialog::class.java.simpleName)
+                }
+            }
         }
 
     }
@@ -166,10 +183,14 @@ class PreviewWallpaperActivity : BaseActivity<ActivityPreviewWallpaperBinding>()
     }
 
     override fun onHandleBackPressed() {
-        if (binding.viewPreview.root.isVisible) {
-            binding.viewPreview.root.gone()
-        } else {
-            super.onHandleBackPressed()
+        triggerAds(AdsTrigger.PREVIEW_WALLPAPER_CLICK_BACK) {
+            runWhenResumed {
+                if (binding.viewPreview.root.isVisible) {
+                    binding.viewPreview.root.gone()
+                } else {
+                    super.onHandleBackPressed()
+                }
+            }
         }
     }
 

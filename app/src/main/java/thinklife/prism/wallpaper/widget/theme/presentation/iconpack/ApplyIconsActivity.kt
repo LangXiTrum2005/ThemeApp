@@ -12,6 +12,8 @@
 
 package thinklife.prism.wallpaper.widget.theme.presentation.iconpack
 
+import thinklife.prism.wallpaper.widget.theme.ads.AdsTrigger
+import thinklife.prism.wallpaper.widget.theme.ads.AdsScreen
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
@@ -33,6 +35,9 @@ import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class ApplyIconsActivity : BaseActivity<ActivityApplyIconsBinding>() {
+
+    override val adsScreenId = AdsScreen.APPLY_ICONS_VIEW
+
 
     override fun bindingView(): ActivityApplyIconsBinding {
         return ActivityApplyIconsBinding.inflate(layoutInflater)
@@ -87,12 +92,20 @@ class ApplyIconsActivity : BaseActivity<ActivityApplyIconsBinding>() {
             onHandleBackPressed()
         }
         binding.btnHome.setOnClickListener {
-            navigateTo(MainActivity.newIntent(this).apply {
-                flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP
-            })
+            triggerAds(AdsTrigger.APPLY_ICONS_CLICK_HOME) {
+                runWhenResumed {
+                    navigateTo(MainActivity.newIntent(this).apply {
+                        flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP
+                    })
+                }
+            }
         }
         binding.btnViewMoreIcons.setOnClickListener {
-            finish()
+            triggerAds(AdsTrigger.APPLY_ICONS_CLICK_MORE_ICONS) {
+                runWhenResumed {
+                    finish()
+                }
+            }
         }    }
 
     override fun initObserver() {
@@ -122,5 +135,9 @@ class ApplyIconsActivity : BaseActivity<ActivityApplyIconsBinding>() {
         }
     }
 
+
+    override fun onHandleBackPressed() {
+        triggerBackAds(AdsTrigger.APPLY_ICONS_CLICK_BACK) { finish() }
+    }
 
 }

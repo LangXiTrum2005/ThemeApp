@@ -59,7 +59,7 @@ class ControllerThemePreviewActivity : BaseActivity<ActivityControllerThemePrevi
         super.initListener()
         binding.btnBack.setOnClickListener { onHandleBackPressed() }
         binding.btnAction.setOnClickListener {
-            triggerAds(AdsTrigger.CONTROLLER_PREVIEW_CLICK_ACTION) {
+            triggerRewardAds(AdsTrigger.CONTROLLER_PREVIEW_CLICK_ACTION) {
                 runWhenResumed { viewModel.onActionClick() }
             }
         }
@@ -98,6 +98,7 @@ class ControllerThemePreviewActivity : BaseActivity<ActivityControllerThemePrevi
         binding.tvThemeStatus.setText(state.statusLabelRes)
         binding.btnAction.setText(state.actionLabelRes)
         binding.btnAction.isEnabled = state.actionEnabled
+        binding.btnAction.isAdIconVisible = state.actionEnabled
         binding.btnAction.alpha =
             if (state.actionEnabled) ENABLED_ACTION_ALPHA else DISABLED_ACTION_ALPHA
         binding.progressDownload.isVisible = state.downloading
@@ -117,7 +118,7 @@ class ControllerThemePreviewActivity : BaseActivity<ActivityControllerThemePrevi
     }
 
     override fun onHandleBackPressed() {
-        triggerAds(AdsTrigger.CONTROLLER_PREVIEW_CLICK_BACK) {
+        triggerBackAds(AdsTrigger.CONTROLLER_PREVIEW_CLICK_BACK) {
             runWhenResumed { finish() }
         }
     }

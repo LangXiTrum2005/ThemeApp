@@ -16,6 +16,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.view.isInvisible
+import androidx.core.view.isVisible
 import thinklife.prism.wallpaper.widget.theme.R
 import thinklife.prism.wallpaper.widget.theme.ads.AdsBootstrap
 import thinklife.prism.wallpaper.widget.theme.ads.AdsScreen
@@ -48,7 +49,8 @@ class SurveyFragment : BaseFragment<FragmentSurveyBinding>() {
     private var isSelectedOption = false
 
     /** Trạng thái 1 của onb1. Trạng thái 2 (đã chọn option) = onb1_click_view, render tay. */
-    override val adsScreenId = AdsScreen.ONB1_VIEW
+    override val adsScreenId
+        get() = if (isSelectedOption) AdsScreen.ONB1_CLICK_VIEW else AdsScreen.ONB1_VIEW
 
     override fun initConfig(savedInstanceState: Bundle?) {
         val options = listOf(
@@ -111,6 +113,6 @@ class SurveyFragment : BaseFragment<FragmentSurveyBinding>() {
 
     private fun updateNextButtonState() {
         val hasSelection = adapter.getSelectedIds().isNotEmpty()
-        binding.btnNext.isSelected = hasSelection
+        binding.btnNext.isVisible = hasSelection
     }
 }

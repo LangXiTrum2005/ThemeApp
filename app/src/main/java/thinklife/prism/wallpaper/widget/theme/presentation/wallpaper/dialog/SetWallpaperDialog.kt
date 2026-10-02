@@ -12,12 +12,17 @@
 
 package thinklife.prism.wallpaper.widget.theme.presentation.wallpaper.dialog
 
+import thinklife.prism.wallpaper.widget.theme.ads.AdsTrigger
+import thinklife.prism.wallpaper.widget.theme.ads.AdsScreen
 import android.content.Context
 import thinklife.prism.wallpaper.widget.theme.core.base.BaseBottomSheetDialog
 import thinklife.prism.wallpaper.widget.theme.core.wallpaper.model.WallpaperTarget
 import thinklife.prism.wallpaper.widget.theme.databinding.BottomDialogSetWallpaperBinding
 
 class SetWallpaperDialog : BaseBottomSheetDialog<BottomDialogSetWallpaperBinding>() {
+
+    override val adsScreenId = AdsScreen.SET_WALLPAPER_VIEW
+
     override fun bindingView(): BottomDialogSetWallpaperBinding {
         return BottomDialogSetWallpaperBinding.inflate(layoutInflater)
     }
@@ -42,22 +47,38 @@ class SetWallpaperDialog : BaseBottomSheetDialog<BottomDialogSetWallpaperBinding
         super.initListener()
 
         binding.btnClose.setOnClickListener {
-            dismiss()
+            triggerAds(AdsTrigger.SET_WALLPAPER_CLICK_CLOSE) {
+                runWhenResumed {
+                    dismiss()
+                }
+            }
         }
 
         binding.btnHomeScreen.setOnClickListener {
-            listener?.onSetAsWallpaper(WallpaperTarget.HOME)
-            dismiss()
+            triggerRewardAds(AdsTrigger.SET_WALLPAPER_CLICK_HOME_SCREEN) {
+                runWhenResumed {
+                    listener?.onSetAsWallpaper(WallpaperTarget.HOME)
+                    dismiss()
+                }
+            }
         }
 
         binding.btnLockScreen.setOnClickListener {
-            listener?.onSetAsWallpaper(WallpaperTarget.LOCK)
-            dismiss()
+            triggerRewardAds(AdsTrigger.SET_WALLPAPER_CLICK_LOCK_SCREEN) {
+                runWhenResumed {
+                    listener?.onSetAsWallpaper(WallpaperTarget.LOCK)
+                    dismiss()
+                }
+            }
         }
 
         binding.btnBoth.setOnClickListener {
-            listener?.onSetAsWallpaper(WallpaperTarget.BOTH)
-            dismiss()
+            triggerRewardAds(AdsTrigger.SET_WALLPAPER_CLICK_BOTH) {
+                runWhenResumed {
+                    listener?.onSetAsWallpaper(WallpaperTarget.BOTH)
+                    dismiss()
+                }
+            }
         }
     }
 

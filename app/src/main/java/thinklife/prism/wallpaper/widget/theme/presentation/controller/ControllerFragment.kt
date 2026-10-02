@@ -12,6 +12,8 @@
 
 package thinklife.prism.wallpaper.widget.theme.presentation.controller
 
+import thinklife.prism.wallpaper.widget.theme.ads.AdsSlot
+import thinklife.prism.wallpaper.widget.theme.ads.NativeFeedAdapter
 import android.os.Bundle
 import android.view.View
 import androidx.core.view.isVisible
@@ -57,8 +59,7 @@ class ControllerFragment : BaseFragment<FragmentControllerBinding>() {
     override fun initConfig(view: View, savedInstanceState: Bundle?) {
         binding.toolbar.tvTitle.setText(R.string.controller)
         binding.rvControllerThemes.apply {
-            layoutManager = GridLayoutManager(requireContext(), THEME_GRID_SPAN_COUNT)
-            adapter = themeAdapter
+            adapter = NativeFeedAdapter(themeAdapter, adsScreenId, AdsSlot.CONTROLLER_SLOT_FEED, viewLifecycleOwner)
         }
         viewModel.loadThemesIfNeeded()
     }
@@ -92,6 +93,14 @@ class ControllerFragment : BaseFragment<FragmentControllerBinding>() {
             }
         }
         binding.btnEnableController.setOnClickListener {
+            triggerAds(AdsTrigger.CONTROLLER_CLICK_ENABLE) {
+                runWhenResumed {
+                    startActivity(ControllerTutorialActivity.newIntent(requireContext()))
+                }
+            }
+        }
+
+        binding.cardEnableController.setOnClickListener {
             triggerAds(AdsTrigger.CONTROLLER_CLICK_ENABLE) {
                 runWhenResumed {
                     startActivity(ControllerTutorialActivity.newIntent(requireContext()))

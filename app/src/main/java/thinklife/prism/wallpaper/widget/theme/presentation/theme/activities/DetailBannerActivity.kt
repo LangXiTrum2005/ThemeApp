@@ -12,6 +12,8 @@
 
 package thinklife.prism.wallpaper.widget.theme.presentation.theme.activities
 
+import thinklife.prism.wallpaper.widget.theme.ads.AdsTrigger
+import thinklife.prism.wallpaper.widget.theme.ads.AdsScreen
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
@@ -28,6 +30,9 @@ import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class DetailBannerActivity : BaseActivity<ActivityDetailBannerBinding>() {
+
+    override val adsScreenId = AdsScreen.DETAIL_BANNER_VIEW
+
 
     override fun bindingView(): ActivityDetailBannerBinding {
         return ActivityDetailBannerBinding.inflate(layoutInflater)
@@ -73,10 +78,18 @@ class DetailBannerActivity : BaseActivity<ActivityDetailBannerBinding>() {
             onHandleBackPressed()
         }
         themeAdapter.onClickItem = { theme ->
-            startActivity(PreviewThemeActivity.newIntent(this, theme.id))
+            triggerAds(AdsTrigger.DETAIL_BANNER_CLICK_THEME_ADAPTER_CLICK_ITEM) {
+                runWhenResumed {
+                    startActivity(PreviewThemeActivity.newIntent(this, theme.id))
+                }
+            }
         }
         binding.viewError.setOnRetryClickListener {
-            viewModel.getThemesByCategory(categoryId, forceRefresh = true)
+            triggerAds(AdsTrigger.DETAIL_BANNER_CLICK_ERROR_RETRY) {
+                runWhenResumed {
+                    viewModel.getThemesByCategory(categoryId, forceRefresh = true)
+                }
+            }
         }
     }
 
@@ -106,6 +119,10 @@ class DetailBannerActivity : BaseActivity<ActivityDetailBannerBinding>() {
                 else -> Unit
             }
         }
+    }
+
+    override fun onHandleBackPressed() {
+        triggerBackAds(AdsTrigger.DETAIL_BANNER_CLICK_BACK) { finish() }
     }
 
 }

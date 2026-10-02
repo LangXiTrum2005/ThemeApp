@@ -12,6 +12,8 @@
 
 package thinklife.prism.wallpaper.widget.theme.presentation.iconpack.dialog
 
+import thinklife.prism.wallpaper.widget.theme.ads.AdsTrigger
+import thinklife.prism.wallpaper.widget.theme.ads.AdsScreen
 import android.content.Context
 import android.os.Bundle
 import android.view.View
@@ -27,6 +29,9 @@ import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class SelectAppBottomSheetDialog : BaseBottomSheetDialog<BottomSheetSelectAppBinding>() {
+
+    override val adsScreenId = AdsScreen.SELECT_APP_VIEW
+
 
     override fun bindingView() = BottomSheetSelectAppBinding.inflate(layoutInflater)
 
@@ -54,11 +59,19 @@ class SelectAppBottomSheetDialog : BaseBottomSheetDialog<BottomSheetSelectAppBin
     }
 
     override fun initListener() {
-        binding.btnClose.setOnClickListener { dismiss() }
+        binding.btnClose.setOnClickListener {
+            triggerAds(AdsTrigger.SELECT_APP_CLICK_CLOSE) {
+                runWhenResumed { dismiss() }
+            }
+        }
 
         adapter.onClickItem = { app ->
-            listener?.onAppSelected(app)
-            dismiss()
+            triggerAds(AdsTrigger.SELECT_APP_CLICK_ADAPTER_CLICK_ITEM) {
+                runWhenResumed {
+                    listener?.onAppSelected(app)
+                    dismiss()
+                }
+            }
         }
     }
 

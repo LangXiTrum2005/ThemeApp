@@ -12,6 +12,8 @@
 
 package thinklife.prism.wallpaper.widget.theme.presentation.search
 
+import thinklife.prism.wallpaper.widget.theme.ads.AdsTrigger
+import thinklife.prism.wallpaper.widget.theme.ads.AdsScreen
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
@@ -43,6 +45,9 @@ import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class SearchActivity : BaseActivity<ActivitySearchBinding>() {
+
+    override val adsScreenId = AdsScreen.SEARCH_VIEW
+
     override fun bindingView(): ActivitySearchBinding {
         return ActivitySearchBinding.inflate(layoutInflater)
     }
@@ -128,26 +133,50 @@ class SearchActivity : BaseActivity<ActivitySearchBinding>() {
         }
 
         binding.viewError.setOnRetryClickListener {
-            viewModel.load(searchMode, forceRefresh = true)
+            triggerAds(AdsTrigger.SEARCH_CLICK_ERROR_RETRY) {
+                runWhenResumed {
+                    viewModel.load(searchMode, forceRefresh = true)
+                }
+            }
         }
 
         popularAdapter.onClickItem = { category ->
-            binding.edSearch.setText(category.name)
-            binding.edSearch.setSelection(binding.edSearch.text?.length ?: 0)
+            triggerAds(AdsTrigger.SEARCH_CLICK_POPULAR_ADAPTER_CLICK_ITEM) {
+                runWhenResumed {
+                    binding.edSearch.setText(category.name)
+                    binding.edSearch.setSelection(binding.edSearch.text?.length ?: 0)
+                }
+            }
         }
 
         themeAdapter.onClickItem = { theme ->
-            startActivity(PreviewThemeActivity.newIntent(this, theme.id))
+            triggerAds(AdsTrigger.SEARCH_CLICK_THEME_ADAPTER_CLICK_ITEM) {
+                runWhenResumed {
+                    startActivity(PreviewThemeActivity.newIntent(this, theme.id))
+                }
+            }
         }
         wallpaperAdapter.onClickItem = { wallpaper ->
-            startActivity(PreviewWallpaperActivity.newIntent(this, wallpaper))
+            triggerAds(AdsTrigger.SEARCH_CLICK_WALLPAPER_ADAPTER_CLICK_ITEM) {
+                runWhenResumed {
+                    startActivity(PreviewWallpaperActivity.newIntent(this, wallpaper))
+                }
+            }
         }
         iconAdapter.onClickItem = { pack ->
-            startActivity(SetIconsActivity.newIntent(this, pack.id, pack.name))
+            triggerAds(AdsTrigger.SEARCH_CLICK_ICON_ADAPTER_CLICK_ITEM) {
+                runWhenResumed {
+                    startActivity(SetIconsActivity.newIntent(this, pack.id, pack.name))
+                }
+            }
         }
         widgetAdapter.onClickItem = { widget ->
-            AddWidgetsBottomSheetDialog.newInstance(widget)
-                .show(supportFragmentManager, AddWidgetsBottomSheetDialog.TAG)
+            triggerAds(AdsTrigger.SEARCH_CLICK_WIDGET_ADAPTER_CLICK_ITEM) {
+                runWhenResumed {
+                    AddWidgetsBottomSheetDialog.newInstance(widget)
+                        .show(supportFragmentManager, AddWidgetsBottomSheetDialog.TAG)
+                }
+            }
         }
     }
 
@@ -185,4 +214,8 @@ class SearchActivity : BaseActivity<ActivitySearchBinding>() {
             state.query,
         )
     }
+    override fun onHandleBackPressed() {
+        triggerBackAds(AdsTrigger.SEARCH_CLICK_BACK) { finish() }
+    }
+
 }

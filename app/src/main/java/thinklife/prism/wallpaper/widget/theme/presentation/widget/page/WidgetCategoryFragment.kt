@@ -12,6 +12,10 @@
 
 package thinklife.prism.wallpaper.widget.theme.presentation.widget.page
 
+import thinklife.prism.wallpaper.widget.theme.ads.AdsSlot
+import thinklife.prism.wallpaper.widget.theme.ads.NativeFeedAdapter
+import thinklife.prism.wallpaper.widget.theme.ads.AdsTrigger
+import thinklife.prism.wallpaper.widget.theme.ads.AdsScreen
 import android.os.Bundle
 import android.view.View
 import androidx.core.view.isVisible
@@ -27,6 +31,9 @@ import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class WidgetCategoryFragment : BaseFragment<FragmentWallpaperCategoryBinding>() {
+
+    override val adsScreenId = AdsScreen.WIDGET_CATEGORY_VIEW
+
 
     override fun bindingView(): FragmentWallpaperCategoryBinding =
         FragmentWallpaperCategoryBinding.inflate(layoutInflater)
@@ -45,18 +52,26 @@ class WidgetCategoryFragment : BaseFragment<FragmentWallpaperCategoryBinding>() 
 
     override fun initConfig(view: View, savedInstanceState: Bundle?) {
         super.initConfig(view, savedInstanceState)
-        binding.rcvWallpaper.adapter = widgetAdapter
+        binding.rcvWallpaper.adapter = NativeFeedAdapter(widgetAdapter, adsScreenId, AdsSlot.WIDGET_CATEGORY_SLOT_FEED, viewLifecycleOwner)
         viewModel.getWidgetsByCategory(categoryId)
     }
 
     override fun initListener() {
         super.initListener()
         widgetAdapter.onClickItem = { widget ->
-            AddWidgetsBottomSheetDialog.newInstance(widget)
-                .show(childFragmentManager, AddWidgetsBottomSheetDialog.TAG)
+            triggerAds(AdsTrigger.WIDGET_CATEGORY_CLICK_WIDGET_ADAPTER_CLICK_ITEM) {
+                runWhenResumed {
+                    AddWidgetsBottomSheetDialog.newInstance(widget)
+                        .show(childFragmentManager, AddWidgetsBottomSheetDialog.TAG)
+                }
+            }
         }
         binding.viewError.setOnRetryClickListener {
-            viewModel.getWidgetsByCategory(categoryId, forceRefresh = true)
+            triggerAds(AdsTrigger.WIDGET_CATEGORY_CLICK_ERROR_RETRY) {
+                runWhenResumed {
+                    viewModel.getWidgetsByCategory(categoryId, forceRefresh = true)
+                }
+            }
         }
     }
 
@@ -87,4 +102,9 @@ class WidgetCategoryFragment : BaseFragment<FragmentWallpaperCategoryBinding>() 
         binding.viewLoading.isVisible = showLoading
         binding.viewError.isVisible = showError
     }
+    override fun onPrepareAdsSlots() {
+        binding.adsSlotTop.tag = thinklife.prism.wallpaper.widget.theme.ads.AdsSlot.tag(thinklife.prism.wallpaper.widget.theme.ads.AdsSlot.WIDGET_CATEGORY_SLOT_TOP)
+        binding.adsSlotBottom.tag = thinklife.prism.wallpaper.widget.theme.ads.AdsSlot.tag(thinklife.prism.wallpaper.widget.theme.ads.AdsSlot.WIDGET_CATEGORY_SLOT_BOTTOM)
+    }
+
 }

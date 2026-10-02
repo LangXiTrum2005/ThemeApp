@@ -106,6 +106,9 @@ class SetIconAdapter : ListAdapter<IconPackItemUi, SetIconAdapter.IconViewHolder
             }
 
             binding.btnAction.animate().alpha(1f).setDuration(80).withEndAction {
+                binding.btnAction.setIconRight(
+                    if (state == SetIconState.CHOOSE) 0 else R.drawable.ic_ad
+                )
                 when (state) {
                     SetIconState.APPLIED -> {
                         binding.btnAction.setText(context.getString(R.string.applied))

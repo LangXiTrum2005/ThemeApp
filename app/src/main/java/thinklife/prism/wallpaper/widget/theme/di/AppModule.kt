@@ -13,6 +13,8 @@
 package thinklife.prism.wallpaper.widget.theme.di
 
 import android.content.Context
+import thinklife.prism.wallpaper.widget.theme.core.permission.ControllerPermissionChecker
+import thinklife.prism.wallpaper.widget.theme.core.permission.ControllerPermissionCheckerImpl
 import androidx.room.Room
 import thinklife.prism.wallpaper.widget.theme.core.wallpaper.WallpaperManagerCore
 import thinklife.prism.wallpaper.widget.theme.data.local.SharedPref
@@ -45,6 +47,12 @@ import javax.inject.Singleton
 @Module
 @InstallIn(SingletonComponent::class)
 class AppModule {
+
+    @Provides
+    @Singleton
+    fun provideControllerPermissionChecker(
+        impl: ControllerPermissionCheckerImpl,
+    ): ControllerPermissionChecker = impl
 
     @Provides
     @Singleton

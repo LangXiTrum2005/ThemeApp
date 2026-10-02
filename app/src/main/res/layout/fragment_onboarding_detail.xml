@@ -42,7 +42,7 @@
             android:maxLines="2"
             android:paddingHorizontal="12dp"
             android:textAlignment="center"
-            android:textColor="@color/primary_high_em"
+            android:textColor="@color/accent_text"
             app:layout_constraintBottom_toTopOf="@+id/tvDes"
             tools:text="Draw Anything Easily" />
 
@@ -79,7 +79,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="16dp"
                 android:text="@string/next"
-                android:textColor="@color/white" />
+                android:textColor="@color/on_accent" />
 
         </LinearLayout>
 

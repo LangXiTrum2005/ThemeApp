@@ -19,7 +19,7 @@
             android:layout_width="28dp"
             android:layout_height="28dp"
             android:indeterminate="true"
-            android:indeterminateTint="@color/primary_high_em" />
+            android:indeterminateTint="@color/accent_text" />
 
         <androidx.appcompat.widget.AppCompatTextView
             style="@style/NunitoMedium.12"

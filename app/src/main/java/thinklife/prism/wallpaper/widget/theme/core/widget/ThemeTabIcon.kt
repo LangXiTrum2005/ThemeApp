@@ -55,7 +55,7 @@ class ThemeTabIcon @JvmOverloads constructor(
 
             activeTextColor = typedArray.getColor(
                 R.styleable.ThemeTabIcon_tabActiveTextColor,
-                context.getColor(R.color.white),
+                context.getColor(R.color.prism_tab_active_text),
             )
             inactiveTextColor = typedArray.getColor(
                 R.styleable.ThemeTabIcon_tabInactiveTextColor,

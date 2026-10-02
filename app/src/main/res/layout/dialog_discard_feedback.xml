@@ -47,7 +47,7 @@
                 android:layout_weight="1"
                 app:btnBackground="@drawable/bg_button_outline_1"
                 app:btnText="@string/discard"
-                app:btnTextColor="@color/primary_high_em" />
+                app:btnTextColor="@color/accent_text" />
 
             <Space
                 android:layout_width="8dp"

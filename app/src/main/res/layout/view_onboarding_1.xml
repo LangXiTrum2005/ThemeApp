@@ -34,7 +34,7 @@
         android:paddingHorizontal="@dimen/_2sdp"
         android:text="@string/what_s_your_vibe"
         android:textAlignment="center"
-        android:textColor="@color/primary_high_em"
+        android:textColor="@color/accent_text"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

@@ -35,7 +35,7 @@
             android:ellipsize="end"
             android:maxLines="1"
             android:text="@string/preview"
-            android:textColor="@color/primary_high_em" />
+            android:textColor="@color/accent_text" />
 
     </LinearLayout>
 

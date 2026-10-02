@@ -41,7 +41,7 @@
             android:gravity="center"
             android:text="@string/what_s_your_vibe"
             android:textAlignment="center"
-            android:textColor="@color/primary_high_em"
+            android:textColor="@color/accent_text"
             app:layout_constraintTop_toTopOf="parent" />
 
         <androidx.recyclerview.widget.RecyclerView
@@ -73,7 +73,7 @@
             android:paddingVertical="14dp"
             android:text="@string/next"
             android:textAllCaps="false"
-            android:textColor="@color/white"
+            android:textColor="@color/on_accent"
             app:layout_constraintBottom_toTopOf="@+id/adsLanSlots" />
 
         <!-- AdsHub: vị trí CUỐI content. adsSlotOnb1ClickEnd cố ý KHÔNG gắn tag —

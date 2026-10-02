@@ -7,7 +7,7 @@
         android:layout_width="48dp"
         android:layout_height="48dp"
         android:indeterminate="true"
-        android:indeterminateTint="@color/primary_high_em" />
+        android:indeterminateTint="@color/accent_text" />
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/tvMessage"

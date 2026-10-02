@@ -56,8 +56,8 @@ class AppButton @JvmOverloads constructor(
     /** Bộ nền + màu chữ. Thêm kiểu mới thì thêm ở đây VÀ trong `attrs.xml`, giữ đúng thứ tự. */
     enum class Style(@DrawableRes val background: Int?, val contentColor: Int) {
         PRIMARY(R.drawable.bg_btn_primary_gradient, R.color.on_accent),
-        OUTLINE(R.drawable.bg_btn_outline, R.color.accent),
-        TEXT(null, R.color.accent),
+        OUTLINE(R.drawable.bg_btn_outline, R.color.accent_text),
+        TEXT(null, R.color.accent_text),
     }
 
     private val binding = ViewAppButtonBinding.inflate(LayoutInflater.from(context), this)

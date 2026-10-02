@@ -5,7 +5,7 @@
     android:viewportHeight="18">
     <group>
         <path
-            android:fillColor="#865CFA"
+            android:fillColor="@color/accent_text"
             android:fillType="evenOdd"
             android:pathData="M0.19 9c0-4.87 3.94-8.81 8.81-8.81 4.87 0 8.81 3.94 8.81 8.81 0 4.87-3.94 8.81-8.81 8.81-4.87 0-8.81-3.94-8.81-8.81Zm12.58-1.85c0.22-0.22 0.22-0.58 0-0.8-0.22-0.22-0.57-0.22-0.8 0l-4.1 4.1L6.03 8.6c-0.22-0.22-0.57-0.22-0.8 0-0.21 0.22-0.21 0.58 0 0.8l2.26 2.25c0.22 0.22 0.57 0.22 0.8 0l4.5-4.5Z"/>
     </group>

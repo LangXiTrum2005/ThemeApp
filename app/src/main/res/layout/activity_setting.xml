@@ -113,7 +113,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="2dp"
-                            android:textColor="@color/accent"
+                            android:textColor="@color/accent_text"
                             tools:text="English" />
                     </LinearLayout>
 

@@ -18,10 +18,12 @@ import android.os.Bundle
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.core.view.isVisible
-import com.bumptech.glide.Glide
 import thinklife.prism.wallpaper.widget.theme.R
+import thinklife.prism.wallpaper.widget.theme.ads.AdsScreen
+import thinklife.prism.wallpaper.widget.theme.ads.AdsTrigger
 import thinklife.prism.wallpaper.widget.theme.core.base.BaseActivity
 import thinklife.prism.wallpaper.widget.theme.core.extensions.collectWithLifecycle
+import thinklife.prism.wallpaper.widget.theme.core.extensions.loadWithLoading
 import thinklife.prism.wallpaper.widget.theme.databinding.ActivityControllerThemePreviewBinding
 import thinklife.prism.wallpaper.widget.theme.presentation.controller.model.ControllerPreviewEvent
 import thinklife.prism.wallpaper.widget.theme.presentation.controller.model.ControllerPreviewUiState
@@ -30,10 +32,14 @@ import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class ControllerThemePreviewActivity : BaseActivity<ActivityControllerThemePreviewBinding>() {
-    override fun bindingView() = ActivityControllerThemePreviewBinding.inflate(layoutInflater)
+    override fun inflateBinding() = ActivityControllerThemePreviewBinding.inflate(layoutInflater)
+
+    override val adsScreenId = AdsScreen.CONTROLLER_PREVIEW_VIEW
 
     companion object {
         private const val EXTRA_THEME_ID = "controller_theme_id"
+        private const val ENABLED_ACTION_ALPHA = 1f
+        private const val DISABLED_ACTION_ALPHA = 0.55f
 
         fun newIntent(context: Context, themeId: String) =
             Intent(context, ControllerThemePreviewActivity::class.java).putExtra(EXTRA_THEME_ID, themeId)
@@ -51,8 +57,12 @@ class ControllerThemePreviewActivity : BaseActivity<ActivityControllerThemePrevi
 
     override fun initListener() {
         super.initListener()
-        binding.btnBack.setOnClickListener { finish() }
-        binding.btnAction.setOnClickListener { viewModel.onActionClick() }
+        binding.btnBack.setOnClickListener { onHandleBackPressed() }
+        binding.btnAction.setOnClickListener {
+            triggerAds(AdsTrigger.CONTROLLER_PREVIEW_CLICK_ACTION) {
+                runWhenResumed { viewModel.onActionClick() }
+            }
+        }
     }
 
     override fun initObserver() {
@@ -60,7 +70,7 @@ class ControllerThemePreviewActivity : BaseActivity<ActivityControllerThemePrevi
         viewModel.uiState.collectWithLifecycle(this, action = ::render)
         viewModel.events.collectWithLifecycle(this) { event ->
             when (event) {
-                ControllerPreviewEvent.NotFound -> finish()
+                ControllerPreviewEvent.NotFound -> runWhenResumed { finish() }
                 ControllerPreviewEvent.DownloadFailed ->
                     Toast.makeText(this, R.string.download_failed, Toast.LENGTH_SHORT).show()
                 is ControllerPreviewEvent.Applied -> {
@@ -69,26 +79,46 @@ class ControllerThemePreviewActivity : BaseActivity<ActivityControllerThemePrevi
                         getString(R.string.controller_theme_applied, event.themeName),
                         Toast.LENGTH_SHORT,
                     ).show()
-                    finish()
+                    runWhenResumed { finish() }
                 }
             }
         }
     }
 
     private fun render(state: ControllerPreviewUiState) {
-        val theme = state.theme ?: return
-        if (loadedThumbnail != theme.thumbnail) {
-            loadedThumbnail = theme.thumbnail
-            Glide.with(this).load(theme.thumbnail).centerCrop().into(binding.ivPreview)
+        state.theme?.let { theme ->
+            binding.tvThemeName.text = theme.name
+            binding.ivPreview.contentDescription =
+                getString(R.string.controller_preview_image_description, theme.name)
+            if (loadedThumbnail != theme.thumbnail) {
+                loadedThumbnail = theme.thumbnail
+                loadPreviewImage(theme.thumbnail)
+            }
         }
-        binding.btnAction.text = when {
-            state.downloading -> getString(R.string.downloading_please_wait_a_moment)
-            state.downloaded && state.active -> getString(R.string.controller_theme_active)
-            state.downloaded -> getString(R.string.unlock)
-            else -> getString(R.string.download)
-        }
-        binding.btnAction.isEnabled = !state.downloading && !(state.downloaded && state.active)
+        binding.tvThemeStatus.setText(state.statusLabelRes)
+        binding.btnAction.setText(state.actionLabelRes)
+        binding.btnAction.isEnabled = state.actionEnabled
+        binding.btnAction.alpha =
+            if (state.actionEnabled) ENABLED_ACTION_ALPHA else DISABLED_ACTION_ALPHA
         binding.progressDownload.isVisible = state.downloading
         binding.progressDownload.progress = state.progress
+        binding.tvDownloadProgress.isVisible = state.downloading
+        binding.tvDownloadProgress.text =
+            getString(R.string.controller_preview_download_progress, state.progress)
+    }
+
+    private fun loadPreviewImage(thumbnail: String) {
+        binding.ivPreview.loadWithLoading(thumbnail, binding.previewLoading.root)
+        binding.previewLoading.errorGroup.setOnClickListener {
+            triggerAds(AdsTrigger.CONTROLLER_PREVIEW_CLICK_RETRY) {
+                runWhenResumed { loadPreviewImage(thumbnail) }
+            }
+        }
+    }
+
+    override fun onHandleBackPressed() {
+        triggerAds(AdsTrigger.CONTROLLER_PREVIEW_CLICK_BACK) {
+            runWhenResumed { finish() }
+        }
     }
 }

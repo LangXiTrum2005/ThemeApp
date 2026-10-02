@@ -34,21 +34,35 @@
   <color name="screen_lock_rim_shadow">#33000000</color>
   <color name="screen_lock_face_highlight">#3A3E47</color>
   <color name="screen_lock_face_shadow">#1E2127</color>
-  <!-- Teal Ä‘á»§ Ä‘áº­m Ä‘á»ƒ chá»¯ tráº¯ng Ä‘áº·t lÃªn cÃ²n Ä‘á»c Ä‘Æ°á»£c; nháº¡t hÆ¡n ná»¯a lÃ  nÃºt máº¥t tÆ°Æ¡ng pháº£n. -->
-  <color name="accent">#865CFA</color>
-  <color name="accent_dark">#5E3FC9</color>
-  <color name="accent_soft">#1F865CFA</color>
-  <color name="accent_gradient_start">#8E54E9</color>
-  <color name="accent_gradient_end">#6C5CE7</color>
-  <color name="accent_glow">#40865CFA</color>
+  <!-- Rose sáng cần màu chữ riêng để giữ tương phản trên nền trắng và nền nút. -->
+  <color name="accent_text">#B33461</color>
+  <color name="accent_pressed">#E9789B</color>
+  <color name="accent_subtle">#FFF7FA</color>
+  <color name="accent_outline_soft">#18F184A6</color>
+  <color name="screen_primary_glow_start">#18F184A6</color>
+  <color name="screen_primary_glow_center">#08F184A6</color>
+  <color name="screen_secondary_glow_start">#1EFF6DE9</color>
+  <color name="screen_secondary_glow_center">#0DFF6DE9</color>
+  <color name="search_surface">#EBFFFFFF</color>
+  <!-- Giữ màu minh họa gốc khi palette primary của giao diện thay đổi. -->
+  <color name="illustration_primary">#865CFA</color>
+  <color name="illustration_primary_soft">#1F865CFA</color>
+  <color name="accent">#F184A6</color>
+  <color name="accent_dark">@color/accent_text</color>
+  <color name="accent_soft">#1FF184A6</color>
+  <color name="accent_gradient_start">#FA9BBA</color>
+  <color name="accent_gradient_end">@color/accent</color>
+  <color name="accent_glow">#40F184A6</color>
   <!-- MÃ u chá»¯/icon Ä‘áº·t TRÃŠN ná»n accent (nÃºt chÃ­nh). -->
-  <color name="on_accent">#FFFFFFFF</color>
-  <color name="list_item_selected_bg">#F4F0FF</color>
+  <color name="on_accent">#3F1726</color>
+  <color name="list_item_selected_bg">#FFF1F6</color>
+  <color name="transparent_white_16">#29FFFFFF</color>
+  <color name="transparent_black_12">#1F000000</color>
   <color name="transparent_white_24">#3DFFFFFF</color>
 
   <!-- Setting Screen Icons & Badges -->
-  <color name="setting_icon_bg_language">#F0EBFF</color>
-  <color name="setting_icon_tint_language">#865CFA</color>
+  <color name="setting_icon_bg_language">@color/list_item_selected_bg</color>
+  <color name="setting_icon_tint_language">@color/accent_text</color>
   <color name="setting_icon_bg_feedback">#E8F4FD</color>
   <color name="setting_icon_tint_feedback">#2B8EE5</color>
   <color name="setting_icon_bg_rate">#FFF6E5</color>
@@ -63,14 +77,14 @@
   <color name="ad_native_border">#14101418</color>
   <color name="ad_native_text_primary">#101418</color>
   <color name="ad_native_text_secondary">#5A6673</color>
-  <color name="ad_native_button_bg">#865CFA</color>
-  <color name="ad_native_button_text">#FFFFFF</color>
+  <color name="ad_native_button_bg">@color/accent</color>
+  <color name="ad_native_button_text">@color/on_accent</color>
   <color name="surface">#F9F9FA</color>
   <color name="surfaceBg">#FFFFFF</color>
-  <color name="surfacePrimaryHighEm">#865CFA</color>
-  <color name="surfacePrimaryLowEm">#EEE8FF</color>
-  <color name="surfacePrimaryBaseEm">#F6F3FF</color>
-  <color name="surfacePrimaryMedEm">#8D7AFF</color>
+  <color name="surfacePrimaryHighEm">@color/accent</color>
+  <color name="surfacePrimaryLowEm">@color/list_item_selected_bg</color>
+  <color name="surfacePrimaryBaseEm">@color/accent_subtle</color>
+  <color name="surfacePrimaryMedEm">@color/accent</color>
   <color name="surfaceSecondaryBaseEm">#FFF3FD</color>
   <color name="surfaceSecondaryMedEm">#FF6DE9</color>
   <color name="surfaceDangerHighEm">#F03D3D</color>
@@ -86,15 +100,15 @@
   <color name="textDangerLowEm">#FDE7E7</color>
   <color name="textDangerHighEm">#E92020</color>
   <color name="textSecondaryLowEm">#E316C7</color>
-  <color name="colorPrimary">#D7D5FF</color>
+  <color name="colorPrimary">@color/list_item_selected_bg</color>
   <color name="outlineEm">#EBECF0</color>
-  <color name="outlinePrimaryMedEm">#C7B3FF</color>
+  <color name="outlinePrimaryMedEm">#F7BDD1</color>
   <color name="outlineSecondaryMedEm">#FFA3F2</color>
   <color name="surfaceWarningHighEm">#FCBF04</color>
   <color name="textLowEm">#938C9C</color>
   <color name="surface2">#F4F4F6</color>
   <color name="textBaseEm">#C3C6CC</color>
-  <color name="surfacePrimaryHighEmV2">#7B5CFA</color>
+  <color name="surfacePrimaryHighEmV2">@color/accent</color>
   <color name="surfaceSecondaryHighEm">#FF2EE7</color>
   <color name="outlineSuccessMedEm">#7FE76F</color>
   <color name="surfaceSecondaryLowEm">#FFE6FD</color>
@@ -107,9 +121,9 @@
   <color name="surfaceDangerLowEm">#FCD9D9</color>
   <color name="outlineInfoHighEm">#118BE8</color>
   <color name="surfaceDangerBaseEm">#FEECEC</color>
-  <color name="primaryContainer">#D0E4FF</color>
-  <color name="onPrimaryContainer">#280D68</color>
-  <color name="ripple">#D8D8D8</color>
+  <color name="primaryContainer">@color/list_item_selected_bg</color>
+  <color name="onPrimaryContainer">@color/on_accent</color>
+  <color name="ripple">@color/accent_soft</color>
   <color name="textSuccessHighEm">#2A9919</color>
   <color name="transparent">#00FFFFFF</color>
   <color name="surface_0">#FFFFFF</color>
@@ -123,12 +137,12 @@
   <color name="surface_dark_2">#141414</color>
   <color name="surface_dark_3">#202020</color>
   <color name="surface_dark_4">#3A3A3A</color>
-  <color name="primary_high_em">#865CFA</color>
-  <color name="primary_med_em">#865CFA</color>
-  <color name="primary_low_em">#FFC7D4</color>
-  <color name="primary_base_em">#F6F3FF</color>
+  <color name="primary_high_em">@color/accent</color>
+  <color name="primary_med_em">@color/accent</color>
+  <color name="primary_low_em">@color/list_item_selected_bg</color>
+  <color name="primary_base_em">@color/accent_subtle</color>
   <color name="high_em">#0A0C11</color>
-  <color name="primary_text_high_em">#6635F2</color>
+  <color name="primary_text_high_em">@color/accent_text</color>
   <color name="disable_med_em">#C7C3CC</color>
   <color name="secondary_high_em">#1084D7</color>
   <color name="secondary_med_em">#FF6DE9</color>
@@ -168,21 +182,21 @@
   <color name="drawable_end_ic">#F7B733</color>
   <color name="outline_hover">#3FC3C6CC</color>
   <color name="bg_dialog">#80000000</color>
-  <color name="align">#8D7AFF</color>
+  <color name="align">@color/accent_text</color>
   <color name="color1">#095a93</color>
   <color name="color2">#2C2C2C</color>
   <color name="surfaceDisabledHighEm">#B4AFBB</color>
   <!-- Prism Category Bar Tokens -->
-  <color name="prism_tab_active_start">#8E54E9</color>
-  <color name="prism_tab_active_center">#6C5CE7</color>
-  <color name="prism_tab_active_end">#00D2FF</color>
+  <color name="prism_tab_active_start">@color/accent_gradient_start</color>
+  <color name="prism_tab_active_center">#F58FB0</color>
+  <color name="prism_tab_active_end">@color/accent_gradient_end</color>
   <color name="prism_tab_active_stroke">#59FFFFFF</color>
   <color name="prism_tab_inactive_bg">#F4F5FB</color>
   <color name="prism_tab_inactive_stroke">#E5E7EB</color>
   <color name="prism_tab_inactive_text">#475467</color>
-  <color name="prism_tab_active_text">#FFFFFF</color>
+  <color name="prism_tab_active_text">@color/on_accent</color>
   <!-- Floating Bottom Navigation Reskin Tokens -->
   <color name="bottom_nav_bg">#FFFFFF</color>
-  <color name="bottom_nav_active_indicator">#EEE8FF</color>
-  <color name="bottom_nav_stroke">#1F865CFA</color>
+  <color name="bottom_nav_active_indicator">@color/list_item_selected_bg</color>
+  <color name="bottom_nav_stroke">@color/accent_soft</color>
 </resources>

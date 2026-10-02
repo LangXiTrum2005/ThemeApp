@@ -107,7 +107,7 @@ class WallpaperFragment : BaseFragment<FragmentWallpaperBinding>() {
                         R.drawable.bg_tab_unselected
                     )
                 )
-                setActiveTextColor(ContextCompat.getColor(requireContext(), R.color.white))
+                setActiveTextColor(ContextCompat.getColor(requireContext(), R.color.prism_tab_active_text))
                 setInactiveTextColor(ContextCompat.getColor(requireContext(), R.color.text_med_em))
                 inactivate()
             }

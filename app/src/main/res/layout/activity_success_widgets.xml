@@ -35,7 +35,7 @@
             android:ellipsize="end"
             android:maxLines="1"
             android:text="@string/successfully"
-            android:textColor="@color/primary_high_em" />
+            android:textColor="@color/accent_text" />
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/btnHome"

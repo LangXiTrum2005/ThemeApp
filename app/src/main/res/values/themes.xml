@@ -13,8 +13,10 @@
 <resources>
   <style name="Theme.TemplateAndroid" parent="Theme.MaterialComponents.DayNight.NoActionBar">
     <item name="colorPrimary">@color/accent</item>
+    <item name="colorOnPrimary">@color/on_accent</item>
     <item name="colorPrimaryDark">@color/accent_dark</item>
     <item name="colorAccent">@color/accent</item>
+    <item name="colorControlActivated">@color/accent_text</item>
     <item name="android:colorControlHighlight">@color/accent_soft</item>
     <item name="android:windowBackground">@color/bg_main</item>
     <item name="android:statusBarColor">@color/bg_main</item>

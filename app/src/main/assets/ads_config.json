@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "config_version": 1,
+  "config_version": 3,
   "environment": "production",
   "global": {
     "admob_app_id": "ca-app-pub-3940256099942544~3347511713",
@@ -198,6 +198,47 @@
         "tab3_slot_start",
         "tab3_slot_end",
         "tab3_slot_bottom"
+      ]
+    },
+    "controller_view": {
+      "triggers": [
+        "controller_click_enable",
+        "controller_click_theme",
+        "controller_click_settings",
+        "controller_click_gallery"
+      ],
+      "slots": [
+        "controller_slot_top",
+        "controller_slot_start",
+        "controller_slot_end",
+        "controller_slot_bottom",
+        "controller_slot_1st_item",
+        "controller_slot_3rd_item"
+      ]
+    },
+    "controller_preview_view": {
+      "triggers": [
+        "controller_preview_click_action",
+        "controller_preview_click_back",
+        "controller_preview_click_retry"
+      ],
+      "slots": [
+        "controller_preview_slot_top",
+        "controller_preview_slot_start",
+        "controller_preview_slot_end",
+        "controller_preview_slot_bottom"
+      ]
+    },
+    "controller_tutorial_view": {
+      "triggers": [
+        "controller_tutorial_click_enable",
+        "controller_tutorial_click_back"
+      ],
+      "slots": [
+        "controller_tutorial_slot_top",
+        "controller_tutorial_slot_start",
+        "controller_tutorial_slot_end",
+        "controller_tutorial_slot_bottom"
       ]
     },
     "settings_view": {
@@ -433,6 +474,62 @@
       "enabled": true,
       "inventory_id": "inv_native_home",
       "refresh_policy": "on_click"
+    },
+    "controller_slot_top": {
+      "enabled": false,
+      "inventory_id": ""
+    },
+    "controller_slot_start": {
+      "enabled": false,
+      "inventory_id": ""
+    },
+    "controller_slot_end": {
+      "enabled": false,
+      "inventory_id": ""
+    },
+    "controller_slot_bottom": {
+      "enabled": false,
+      "inventory_id": ""
+    },
+    "controller_slot_1st_item": {
+      "enabled": false,
+      "inventory_id": ""
+    },
+    "controller_slot_3rd_item": {
+      "enabled": false,
+      "inventory_id": ""
+    },
+    "controller_preview_slot_top": {
+      "enabled": false,
+      "inventory_id": ""
+    },
+    "controller_preview_slot_start": {
+      "enabled": false,
+      "inventory_id": ""
+    },
+    "controller_preview_slot_end": {
+      "enabled": false,
+      "inventory_id": ""
+    },
+    "controller_preview_slot_bottom": {
+      "enabled": false,
+      "inventory_id": ""
+    },
+    "controller_tutorial_slot_top": {
+      "enabled": false,
+      "inventory_id": ""
+    },
+    "controller_tutorial_slot_start": {
+      "enabled": false,
+      "inventory_id": ""
+    },
+    "controller_tutorial_slot_end": {
+      "enabled": false,
+      "inventory_id": ""
+    },
+    "controller_tutorial_slot_bottom": {
+      "enabled": false,
+      "inventory_id": ""
     },
     "settings_slot_top": {
       "enabled": false,
@@ -678,6 +775,60 @@
     "main_click_nav_settings": {
       "enabled": false,
       "screen": "main_view",
+      "ad_type": "interstitial",
+      "inventory_id": ""
+    },
+    "controller_click_enable": {
+      "enabled": false,
+      "screen": "controller_view",
+      "ad_type": "interstitial",
+      "inventory_id": ""
+    },
+    "controller_click_theme": {
+      "enabled": false,
+      "screen": "controller_view",
+      "ad_type": "interstitial",
+      "inventory_id": ""
+    },
+    "controller_click_settings": {
+      "enabled": false,
+      "screen": "controller_view",
+      "ad_type": "interstitial",
+      "inventory_id": ""
+    },
+    "controller_click_gallery": {
+      "enabled": false,
+      "screen": "controller_view",
+      "ad_type": "interstitial",
+      "inventory_id": ""
+    },
+    "controller_preview_click_action": {
+      "enabled": false,
+      "screen": "controller_preview_view",
+      "ad_type": "interstitial",
+      "inventory_id": ""
+    },
+    "controller_preview_click_back": {
+      "enabled": false,
+      "screen": "controller_preview_view",
+      "ad_type": "interstitial",
+      "inventory_id": ""
+    },
+    "controller_preview_click_retry": {
+      "enabled": false,
+      "screen": "controller_preview_view",
+      "ad_type": "interstitial",
+      "inventory_id": ""
+    },
+    "controller_tutorial_click_enable": {
+      "enabled": false,
+      "screen": "controller_tutorial_view",
+      "ad_type": "interstitial",
+      "inventory_id": ""
+    },
+    "controller_tutorial_click_back": {
+      "enabled": false,
+      "screen": "controller_tutorial_view",
       "ad_type": "interstitial",
       "inventory_id": ""
     },
@@ -1335,8 +1486,8 @@
     "native_big_with_icon": {
       "native_template": "kickads_native_inline_4",
       "cta_height": 48,
-      "cta_bg_color": "#0E9384",
-      "cta_text_color": "#FFFFFF",
+      "cta_bg_color": "#F184A6",
+      "cta_text_color": "#3F1726",
       "bg_color": "#F4F6F8",
       "title_color": "#101418",
       "desc_color": "#5A6673",
@@ -1354,8 +1505,8 @@
     "native_small": {
       "native_template": "kickads_native_inline_1",
       "cta_height": 35,
-      "cta_bg_color": "#0E9384",
-      "cta_text_color": "#FFFFFF",
+      "cta_bg_color": "#F184A6",
+      "cta_text_color": "#3F1726",
       "bg_color": "#F4F6F8",
       "title_color": "#101418",
       "desc_color": "#5A6673",
@@ -1374,8 +1525,8 @@
     "native_fullscreen": {
       "native_template": "kickads_native_full_2",
       "cta_height": 48,
-      "cta_bg_color": "#0E9384",
-      "cta_text_color": "#FFFFFF",
+      "cta_bg_color": "#F184A6",
+      "cta_text_color": "#3F1726",
       "bg_color": "#F4F6F8",
       "title_color": "#101418",
       "desc_color": "#5A6673",
@@ -1394,8 +1545,8 @@
     "native_resume": {
       "native_template": "kickads_native_resume_1",
       "cta_height": 48,
-      "cta_bg_color": "#0E9384",
-      "cta_text_color": "#FFFFFF",
+      "cta_bg_color": "#F184A6",
+      "cta_text_color": "#3F1726",
       "bg_color": "#F4F6F8",
       "title_color": "#101418",
       "desc_color": "#5A6673",
@@ -1421,8 +1572,8 @@
       "bg_color": "#F4F6F8",
       "title_color": "#101418",
       "desc_color": "#5A6673",
-      "cta_bg_color": "#0E9384",
-      "cta_text_color": "#FFFFFF",
+      "cta_bg_color": "#F184A6",
+      "cta_text_color": "#3F1726",
       "cta_height": 35,
       "padding_left": 12,
       "padding_top": 8,

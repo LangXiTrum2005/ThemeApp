@@ -1,53 +1,180 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@android:color/black">
+    android:background="@drawable/bg_screen"
+    android:orientation="vertical">
 
-    <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/ivPreview"
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:scaleType="centerCrop" />
+        android:layout_height="wrap_content"
+        android:tag="ads_slot:controller_preview_slot_top" />
 
-    <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/btnBack"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:layout_margin="12dp"
-        android:background="@drawable/bg_card_controller"
-        android:padding="10dp"
-        android:src="@drawable/ic_back"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingHorizontal="@dimen/_20sdp"
+        android:paddingVertical="@dimen/_12sdp">
 
-    <ProgressBar
-        android:id="@+id/progressDownload"
-        style="?android:attr/progressBarStyleHorizontal"
-        android:layout_width="0dp"
-        android:layout_height="6dp"
-        android:layout_marginHorizontal="16dp"
-        android:layout_marginBottom="8dp"
-        android:max="100"
-        android:visibility="gone"
-        app:layout_constraintBottom_toTopOf="@id/btnAction"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/btnBack"
+            android:layout_width="@dimen/_48sdp"
+            android:layout_height="@dimen/_48sdp"
+            android:background="@drawable/bg_controller_enable_go"
+            android:contentDescription="@string/back"
+            android:padding="@dimen/_12sdp"
+            android:src="@drawable/ic_back_1"
+            app:tint="@color/text_primary" />
 
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/btnAction"
-        style="@style/NunitoBold.14"
-        android:layout_width="0dp"
-        android:layout_height="48dp"
-        android:layout_marginHorizontal="16dp"
-        android:layout_marginBottom="20dp"
-        android:background="@drawable/bg_button_grant"
-        android:text="@string/download"
-        android:textAllCaps="false"
-        android:textColor="@color/white"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        <TextView
+            style="@style/NunitoExtraBold.20"
+            android:layout_width="@dimen/controller_layout_zero"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_12sdp"
+            android:layout_weight="1"
+            android:text="@string/controller_preview_title"
+            android:textColor="@color/text_primary" />
+    </LinearLayout>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/controller_layout_zero"
+        android:layout_marginHorizontal="@dimen/_20sdp"
+        android:layout_marginTop="@dimen/_4sdp"
+        android:layout_marginBottom="@dimen/_12sdp"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:tag="ads_slot:controller_preview_slot_start" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/controller_layout_zero"
+            android:layout_weight="1"
+            android:background="@drawable/bg_controller_preview_stage">
+
+            <FrameLayout
+                android:id="@+id/phonePreview"
+                android:layout_width="@dimen/controller_layout_zero"
+                android:layout_height="@dimen/controller_layout_zero"
+                android:layout_marginHorizontal="@dimen/_16sdp"
+                android:layout_marginTop="@dimen/_16sdp"
+                android:layout_marginBottom="@dimen/_12sdp"
+                android:background="@drawable/bg_controller_preview_phone"
+                android:clipToOutline="true"
+                android:elevation="@dimen/_4sdp"
+                android:padding="@dimen/_4sdp"
+                app:layout_constraintBottom_toTopOf="@id/tvPreviewCaption"
+                app:layout_constraintDimensionRatio="9:16"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintWidth_max="@dimen/_280sdp">
+
+                <com.google.android.material.imageview.ShapeableImageView
+                    android:id="@+id/ivPreview"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scaleType="fitCenter"
+                    app:shapeAppearance="@style/round_img_24" />
+
+                <include
+                    android:id="@+id/previewLoading"
+                    layout="@layout/view_image_loading"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+            </FrameLayout>
+
+            <TextView
+                android:id="@+id/tvPreviewCaption"
+                style="@style/NunitoMedium.12"
+                android:layout_width="@dimen/controller_layout_zero"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/_16sdp"
+                android:layout_marginBottom="@dimen/_16sdp"
+                android:gravity="center"
+                android:text="@string/controller_preview_caption"
+                android:textColor="@color/text_secondary"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:tag="ads_slot:controller_preview_slot_end" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_controller_preview_footer"
+        android:orientation="vertical"
+        android:paddingHorizontal="@dimen/_24sdp"
+        android:paddingTop="@dimen/_16sdp"
+        android:paddingBottom="@dimen/_20sdp">
+
+        <TextView
+            android:id="@+id/tvThemeName"
+            style="@style/NunitoExtraBold.24"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:maxLines="@integer/controller_preview_name_max_lines"
+            android:text="@string/loading"
+            android:textColor="@color/text_primary" />
+
+        <TextView
+            android:id="@+id/tvThemeStatus"
+            style="@style/NunitoMedium.14"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_4sdp"
+            android:text="@string/controller_preview_loading_details"
+            android:textColor="@color/text_secondary" />
+
+        <TextView
+            android:id="@+id/tvDownloadProgress"
+            style="@style/NunitoBold.12"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_12sdp"
+            android:accessibilityLiveRegion="polite"
+            android:textColor="@color/accent_text"
+            android:visibility="gone" />
+
+        <ProgressBar
+            android:id="@+id/progressDownload"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_4sdp"
+            android:layout_marginTop="@dimen/_8sdp"
+            android:importantForAccessibility="no"
+            android:max="@integer/controller_preview_download_max"
+            android:progressBackgroundTint="@color/accent_soft"
+            android:progressTint="@color/accent_text"
+            android:visibility="gone" />
+
+        <thinklife.prism.wallpaper.widget.theme.core.widget.AppButton
+            android:id="@+id/btnAction"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_16sdp"
+            android:enabled="false"
+            app:abShowAdIcon="false"
+            app:abStyle="primary"
+            app:abText="@string/loading" />
+    </LinearLayout>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:tag="ads_slot:controller_preview_slot_bottom" />
+</LinearLayout>

@@ -8,9 +8,9 @@
     android:focusable="true"
     android:stateListAnimator="@animator/card_press_bounce"
     app:cardBackgroundColor="@color/white"
-    app:cardCornerRadius="18dp"
+    app:cardCornerRadius="12dp"
     app:cardElevation="5dp"
-    app:strokeColor="#18865CFA"
+    app:strokeColor="@color/accent_outline_soft"
     app:strokeWidth="1dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -25,7 +25,7 @@
             android:src="@mipmap/ic_launcher"
             app:layout_constraintDimensionRatio="9:16"
             app:layout_constraintTop_toTopOf="parent"
-            app:shapeAppearance="@style/round_img_18" />
+            app:shapeAppearance="@style/round_img_12" />
 
         <include
             android:id="@+id/viewLoading"

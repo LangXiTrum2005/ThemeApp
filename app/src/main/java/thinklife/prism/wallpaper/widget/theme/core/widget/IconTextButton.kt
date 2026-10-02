@@ -13,7 +13,7 @@
 package thinklife.prism.wallpaper.widget.theme.core.widget
 
 import android.content.Context
-import android.graphics.Color
+import android.content.res.ColorStateList
 import android.util.AttributeSet
 import android.view.Gravity
 import android.widget.LinearLayout
@@ -50,9 +50,9 @@ class IconTextButton @JvmOverloads constructor(
 
             val textColor = ta.getColor(
                 R.styleable.IconTextButton_btnTextColor,
-                Color.WHITE
+                context.getColor(R.color.on_accent)
             )
-            textView.setTextColor(textColor)
+            setTextColor(textColor)
 
             ta.getResourceId(R.styleable.IconTextButton_btnBackground, 0)
                 .takeIf { it != 0 }
@@ -69,6 +69,10 @@ class IconTextButton @JvmOverloads constructor(
 
     fun setTextColor(color: Int) {
         textView.setTextColor(color)
+        // Icon cũ có màu trắng trong asset, nên phải tint cùng chữ trên nền Rose sáng.
+        val tint = ColorStateList.valueOf(color)
+        iconView.imageTintList = tint
+        iconRightView.imageTintList = tint
     }
 
     fun setIcon(iconRes: Int) {

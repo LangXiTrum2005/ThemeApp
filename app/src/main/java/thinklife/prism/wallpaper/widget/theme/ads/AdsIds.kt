@@ -34,6 +34,9 @@ object AdsScreen {
     const val HOME_VIEW = "home_view"
     const val TAB2_VIEW = "tab2_view"
     const val TAB3_VIEW = "tab3_view"
+    const val CONTROLLER_VIEW = "controller_view"
+    const val CONTROLLER_PREVIEW_VIEW = "controller_preview_view"
+    const val CONTROLLER_TUTORIAL_VIEW = "controller_tutorial_view"
     const val SETTINGS_VIEW = "settings_view"
 
     // Đổi ngôn ngữ đi từ Settings — màn RIÊNG, không dùng lại lan_view của luồng first-open.
@@ -45,6 +48,22 @@ object AdsScreen {
 }
 
 object AdsSlot {
+    const val CONTROLLER_PREVIEW_SLOT_TOP = "controller_preview_slot_top"
+    const val CONTROLLER_PREVIEW_SLOT_START = "controller_preview_slot_start"
+    const val CONTROLLER_PREVIEW_SLOT_END = "controller_preview_slot_end"
+    const val CONTROLLER_PREVIEW_SLOT_BOTTOM = "controller_preview_slot_bottom"
+
+    const val CONTROLLER_SLOT_TOP = "controller_slot_top"
+    const val CONTROLLER_SLOT_START = "controller_slot_start"
+    const val CONTROLLER_SLOT_END = "controller_slot_end"
+    const val CONTROLLER_SLOT_BOTTOM = "controller_slot_bottom"
+    const val CONTROLLER_SLOT_1ST_ITEM = "controller_slot_1st_item"
+    const val CONTROLLER_SLOT_3RD_ITEM = "controller_slot_3rd_item"
+    const val CONTROLLER_TUTORIAL_SLOT_TOP = "controller_tutorial_slot_top"
+    const val CONTROLLER_TUTORIAL_SLOT_START = "controller_tutorial_slot_start"
+    const val CONTROLLER_TUTORIAL_SLOT_END = "controller_tutorial_slot_end"
+    const val CONTROLLER_TUTORIAL_SLOT_BOTTOM = "controller_tutorial_slot_bottom"
+
     // BỘ SLOT CHUẨN mỗi màn:
     //   <màn>_slot_top / _bottom  — neo cứng ngoài vùng scroll (LUÔN có ở mọi màn)
     //   <màn>_slot_start / _end   — đầu / cuối content cuộn
@@ -124,6 +143,17 @@ object AdsSlot {
 }
 
 object AdsTrigger {
+    const val CONTROLLER_PREVIEW_CLICK_ACTION = "controller_preview_click_action"
+    const val CONTROLLER_PREVIEW_CLICK_BACK = "controller_preview_click_back"
+    const val CONTROLLER_PREVIEW_CLICK_RETRY = "controller_preview_click_retry"
+
+    const val CONTROLLER_CLICK_ENABLE = "controller_click_enable"
+    const val CONTROLLER_CLICK_THEME = "controller_click_theme"
+    const val CONTROLLER_CLICK_SETTINGS = "controller_click_settings"
+    const val CONTROLLER_CLICK_GALLERY = "controller_click_gallery"
+    const val CONTROLLER_TUTORIAL_CLICK_ENABLE = "controller_tutorial_click_enable"
+    const val CONTROLLER_TUTORIAL_CLICK_BACK = "controller_tutorial_click_back"
+
     // TOÀN BỘ nút bấm trong app đều đi qua triggerAds() với trigger khai ở config.
     // Nút chưa có plan ads → config để enabled:false + inventory_id:"" (đếm ngầm,
     // AdOps bật sau bằng Remote Config, không cần build lại app).

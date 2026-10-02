@@ -52,7 +52,7 @@ class LanguageAdapter :
         binding.tvName.setTextColor(
             ContextCompat.getColor(
                 binding.root.context,
-                if (selected) R.color.accent else R.color.text_primary,
+                if (selected) R.color.accent_text else R.color.text_primary,
             ),
         )
     }

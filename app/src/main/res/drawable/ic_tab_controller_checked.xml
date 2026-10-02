@@ -4,27 +4,27 @@
     android:viewportWidth="24"
     android:viewportHeight="24">
     <path
-        android:strokeColor="#FF865CFA"
+        android:strokeColor="@color/accent_text"
         android:strokeWidth="2"
         android:strokeLineCap="round"
         android:pathData="M3,6h18"/>
     <path
-        android:fillColor="#FF865CFA"
+        android:fillColor="@color/accent_text"
         android:pathData="M8,6m-3,0a3,3 0 1,0 6,0a3,3 0 1,0 -6,0"/>
     <path
-        android:strokeColor="#FF865CFA"
+        android:strokeColor="@color/accent_text"
         android:strokeWidth="2"
         android:strokeLineCap="round"
         android:pathData="M3,12h18"/>
     <path
-        android:fillColor="#FF865CFA"
+        android:fillColor="@color/accent_text"
         android:pathData="M16,12m-3,0a3,3 0 1,0 6,0a3,3 0 1,0 -6,0"/>
     <path
-        android:strokeColor="#FF865CFA"
+        android:strokeColor="@color/accent_text"
         android:strokeWidth="2"
         android:strokeLineCap="round"
         android:pathData="M3,18h18"/>
     <path
-        android:fillColor="#FF865CFA"
+        android:fillColor="@color/accent_text"
         android:pathData="M10,18m-3,0a3,3 0 1,0 6,0a3,3 0 1,0 -6,0"/>
 </vector>

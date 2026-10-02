@@ -78,7 +78,7 @@
                 android:tag="native_ad_close_button"
                 android:text="@string/onboarding_get_started"
                 android:textAllCaps="false"
-                android:textColor="@color/accent"
+                android:textColor="@color/accent_text"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent" />
 

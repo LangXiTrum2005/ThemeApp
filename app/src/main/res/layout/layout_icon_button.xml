@@ -18,7 +18,7 @@
         style="@style/NunitoSemiBold.16"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="@color/white" />
+        android:textColor="@color/on_accent" />
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/btnIconRight"

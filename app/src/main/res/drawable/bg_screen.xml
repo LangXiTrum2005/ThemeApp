@@ -10,10 +10,7 @@
   ~ prohibited except with prior written permission of 1Tabb.
   -->
 
-<!--
-  Nền chung của các màn trong luồng: tông pastel lavender hài hòa với app Theme & Wallpaper,
-  kết hợp vệt ánh tím (#865CFA) và hồng phấn (#FF6DE9) nhẹ nhàng ở phía trên.
--->
+<!-- Vệt Rose dùng cùng palette primary để màu nhấn giữa các màn nhất quán. -->
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android">
     <item>
         <color android:color="@color/bg_main" />
@@ -22,8 +19,8 @@
         <shape android:shape="rectangle">
             <gradient
                 android:angle="270"
-                android:startColor="#18865CFA"
-                android:centerColor="#08865CFA"
+                android:startColor="@color/screen_primary_glow_start"
+                android:centerColor="@color/screen_primary_glow_center"
                 android:endColor="@android:color/transparent"
                 android:type="linear" />
         </shape>
@@ -31,12 +28,12 @@
     <item>
         <shape android:shape="rectangle">
             <gradient
-                android:centerColor="#0DFF6DE9"
+                android:centerColor="@color/screen_secondary_glow_center"
                 android:centerX="0.85"
                 android:centerY="0.10"
                 android:endColor="@android:color/transparent"
                 android:gradientRadius="480dp"
-                android:startColor="#1EFF6DE9"
+                android:startColor="@color/screen_secondary_glow_start"
                 android:type="radial" />
         </shape>
     </item>

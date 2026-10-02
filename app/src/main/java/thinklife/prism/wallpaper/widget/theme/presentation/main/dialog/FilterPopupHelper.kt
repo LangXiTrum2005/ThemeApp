@@ -165,7 +165,7 @@ class FilterPopupHelper(
                 binding.tvTitle.setTextColor(
                     ContextCompat.getColor(
                         context,
-                        if (isSelected) R.color.white else R.color.text_med_em,
+                        if (isSelected) R.color.prism_tab_active_text else R.color.text_med_em,
                     ),
                 )
                 if (item.iconUrl.isNullOrEmpty()) {

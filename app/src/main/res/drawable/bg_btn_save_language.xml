@@ -11,7 +11,7 @@
   ~ prohibited except with prior written permission of 1Tabb.
   -->
 <ripple xmlns:android="http://schemas.android.com/apk/res/android"
-    android:color="@color/accent_dark">
+    android:color="@color/accent_soft">
     <item>
         <shape>
             <solid android:color="@color/accent" />

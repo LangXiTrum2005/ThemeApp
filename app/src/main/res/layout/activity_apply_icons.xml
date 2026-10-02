@@ -36,7 +36,7 @@
             android:ellipsize="end"
             android:maxLines="1"
             android:text="@string/successfully"
-            android:textColor="@color/primary_high_em" />
+            android:textColor="@color/accent_text" />
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/btnHome"
@@ -111,7 +111,7 @@
                     app:btnBackground="@drawable/bg_button_outline_1"
                     app:btnIconRight="@drawable/ic_arow_right"
                     app:btnText="@string/view_more_icon"
-                    app:btnTextColor="@color/primary_high_em" />
+                    app:btnTextColor="@color/accent_text" />
 
             </LinearLayout>
 

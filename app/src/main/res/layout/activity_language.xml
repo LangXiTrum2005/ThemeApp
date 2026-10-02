@@ -61,7 +61,7 @@
                 android:paddingVertical="6dp"
                 android:text="@string/onboarding_next"
                 android:textAllCaps="false"
-                android:textColor="@color/accent"
+                android:textColor="@color/accent_text"
                 android:visibility="invisible"
                 tools:visibility="visible" />
 

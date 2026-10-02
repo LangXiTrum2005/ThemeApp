@@ -27,7 +27,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/feedback"
-            android:textColor="@color/primary_high_em" />
+            android:textColor="@color/accent_text" />
 
     </LinearLayout>
 
@@ -114,7 +114,7 @@
         android:paddingVertical="8dp"
         android:text="@string/feedback"
         android:textAllCaps="false"
-        android:textColor="@color/white"
+        android:textColor="@color/on_accent"
         app:cornerRadius="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

@@ -22,12 +22,12 @@
         android:fillColor="#233A86FF"
         android:pathData="M68,13a43,43 0,1 0,0 86a43,43 0,1 0,0 -86" />
     <path
-        android:fillColor="@color/primary"
+        android:fillColor="@color/illustration_primary"
         android:pathData="M68,18a3,3 0,1 0,0 6a3,3 0,1 0,0 -6" />
     <path
         android:fillColor="@android:color/transparent"
         android:pathData="M60,18C60,13.6 63.6,10 68,10C72.4,10 76,13.6 76,18M55,18C55,10.8 60.8,5 68,5C75.2,5 81,10.8 81,18"
-        android:strokeColor="@color/primary"
+        android:strokeColor="@color/illustration_primary"
         android:strokeLineCap="round"
         android:strokeWidth="2.4" />
     <path

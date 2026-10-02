@@ -94,7 +94,6 @@ class LaunchActivity : BaseActivity<ActivityLaunchBinding>() {
             if (isAccepted) {
                 PermissionHelper.openSettings(this, PermissionHelper.NOTIFICATION_PERMISSION)
             }
-            // Dù user đi Settings hay bỏ qua, splash vẫn chạy tiếp — không ai bị kẹt ở đây.
             startSplashFlow()
         }
         viewModel.preloadData()

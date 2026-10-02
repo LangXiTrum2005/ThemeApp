@@ -120,7 +120,7 @@ class SetIconAdapter : ListAdapter<IconPackItemUi, SetIconAdapter.IconViewHolder
                         binding.btnAction.setText(context.getString(R.string.install))
                         binding.btnAction.setIcon(R.drawable.ic_download_2)
                         binding.btnAction.setTextColor(
-                            ContextCompat.getColor(context, R.color.primary_high_em)
+                            ContextCompat.getColor(context, R.color.accent_text)
                         )
                         binding.btnAction.setButtonBackground(R.drawable.bg_button_outline_1)
                     }
@@ -129,7 +129,7 @@ class SetIconAdapter : ListAdapter<IconPackItemUi, SetIconAdapter.IconViewHolder
                         binding.btnAction.setText(context.getString(R.string.choose))
                         binding.btnAction.setIcon(0)
                         binding.btnAction.setTextColor(
-                            ContextCompat.getColor(context, R.color.primary_high_em)
+                            ContextCompat.getColor(context, R.color.accent_text)
                         )
                         binding.btnAction.setButtonBackground(R.drawable.bg_button_outline_1)
                     }

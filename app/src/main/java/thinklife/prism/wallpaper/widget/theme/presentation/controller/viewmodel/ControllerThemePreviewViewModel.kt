@@ -13,8 +13,6 @@
 package thinklife.prism.wallpaper.widget.theme.presentation.controller.viewmodel
 
 import android.util.Log
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -23,7 +21,7 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
-import kotlinx.coroutines.launch
+import thinklife.prism.wallpaper.widget.theme.core.base.BaseViewModel
 import thinklife.prism.wallpaper.widget.theme.core.controllercenter.toControllerTheme
 import thinklife.prism.wallpaper.widget.theme.data.model.ControllerModel
 import thinklife.prism.wallpaper.widget.theme.data.repository.ThemeControllerRepository
@@ -34,7 +32,7 @@ import javax.inject.Inject
 @HiltViewModel
 class ControllerThemePreviewViewModel @Inject constructor(
     private val controllerRepository: ThemeControllerRepository,
-) : ViewModel() {
+) : BaseViewModel() {
 
     companion object {
         private const val TAG = "ControllerThemePreview"
@@ -50,10 +48,10 @@ class ControllerThemePreviewViewModel @Inject constructor(
 
     fun load(themeId: String) {
         if (model != null) return
-        viewModelScope.launch {
+        launchSafely(onError = { _events.tryEmit(ControllerPreviewEvent.NotFound) }) {
             val theme = controllerRepository.getTheme(themeId) ?: run {
                 _events.emit(ControllerPreviewEvent.NotFound)
-                return@launch
+                return@launchSafely
             }
             model = theme
             _uiState.value = ControllerPreviewUiState(
@@ -79,7 +77,11 @@ class ControllerThemePreviewViewModel @Inject constructor(
 
     private fun download(theme: ControllerModel) {
         _uiState.update { it.copy(downloading = true, progress = 0) }
-        viewModelScope.launch {
+        launchSafely(onError = { error ->
+            Log.w(TAG, "Theme download failed: ${theme.id}", error)
+            _uiState.update { it.copy(downloading = false) }
+            _events.tryEmit(ControllerPreviewEvent.DownloadFailed)
+        }) {
             val result = controllerRepository.downloadTheme(theme) { progress ->
                 _uiState.update { it.copy(progress = progress) }
             }

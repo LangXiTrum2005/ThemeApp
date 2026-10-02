@@ -12,6 +12,8 @@
 
 package thinklife.prism.wallpaper.widget.theme.presentation.controller.model
 
+import androidx.annotation.StringRes
+import thinklife.prism.wallpaper.widget.theme.R
 import thinklife.prism.wallpaper.widget.theme.core.controllercenter.model.ControllerTheme
 data class ControllerPreviewUiState(
     val theme: ControllerTheme? = null,
@@ -19,7 +21,30 @@ data class ControllerPreviewUiState(
     val active: Boolean = false,
     val downloading: Boolean = false,
     val progress: Int = 0,
-)
+) {
+    val actionEnabled: Boolean
+        get() = theme != null && !downloading && !(downloaded && active)
+
+    @get:StringRes
+    val actionLabelRes: Int
+        get() = when {
+            theme == null -> R.string.loading
+            downloading -> R.string.controller_preview_downloading
+            downloaded && active -> R.string.controller_theme_active
+            downloaded -> R.string.controller_preview_apply_action
+            else -> R.string.controller_preview_download_action
+        }
+
+    @get:StringRes
+    val statusLabelRes: Int
+        get() = when {
+            theme == null -> R.string.controller_preview_loading_details
+            downloading -> R.string.controller_preview_downloading_hint
+            downloaded && active -> R.string.controller_preview_applied_hint
+            downloaded -> R.string.controller_preview_ready_hint
+            else -> R.string.controller_preview_download_hint
+        }
+}
 
 sealed interface ControllerPreviewEvent {
     data object NotFound : ControllerPreviewEvent

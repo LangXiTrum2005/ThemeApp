@@ -209,7 +209,7 @@ class ThemeFragment : BaseFragment<FragmentThemeBinding>() {
                         R.drawable.bg_tab_unselected
                     )
                 )
-                setActiveTextColor(ContextCompat.getColor(requireContext(), R.color.white))
+                setActiveTextColor(ContextCompat.getColor(requireContext(), R.color.prism_tab_active_text))
                 setInactiveTextColor(ContextCompat.getColor(requireContext(), R.color.prism_tab_inactive_text))
                 inactivate()
             }

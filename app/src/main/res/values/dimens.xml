@@ -11,7 +11,7 @@
   ~ prohibited except with prior written permission of 1Tabb.
   -->
 <resources>
-  <!-- AppButton: kÃ­ch thÆ°á»›c chuáº©n cá»§a nÃºt dÃ¹ng chung, Ä‘á»•i má»™t chá»— lÃ  cáº£ app Ä‘á»•i theo. -->
+  <dimen name="controller_layout_zero">0dp</dimen>
   <dimen name="app_button_min_height">52dp</dimen>
   <dimen name="app_button_padding_horizontal">24dp</dimen>
   <dimen name="app_button_padding_vertical">12dp</dimen>

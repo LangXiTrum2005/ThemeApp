@@ -11,7 +11,7 @@
     app:cardBackgroundColor="@color/white"
     app:cardCornerRadius="18dp"
     app:cardElevation="5dp"
-    app:strokeColor="#18865CFA"
+    app:strokeColor="@color/accent_outline_soft"
     app:strokeWidth="1dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -52,7 +52,7 @@
             android:layout_marginBottom="8dp"
             android:background="@drawable/bg_button_grant"
             android:textAllCaps="false"
-            android:textColor="@color/white"
+            android:textColor="@color/on_accent"
             android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

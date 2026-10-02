@@ -87,7 +87,7 @@
         android:textAllCaps="false"
         app:btnBackground="@drawable/bg_button_outline_1"
         app:btnText="Choose"
-        app:btnTextColor="@color/primary_high_em"
+        app:btnTextColor="@color/accent_text"
         tools:text="Choose" />
 
 </LinearLayout>

@@ -36,7 +36,7 @@
             android:ellipsize="end"
             android:maxLines="1"
             android:text="@string/install"
-            android:textColor="@color/primary_high_em"
+            android:textColor="@color/accent_text"
              />
 
     </LinearLayout>
@@ -72,7 +72,7 @@
         android:textAllCaps="false"
         app:btnBackground="@drawable/bg_button_1"
         app:btnText="@string/install_all_icons"
-        app:btnTextColor="@color/white"
+        app:btnTextColor="@color/on_accent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />

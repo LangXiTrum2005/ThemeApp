@@ -55,7 +55,6 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
 
     override fun initView(savedInstanceState: Bundle?) {
         super.initView(savedInstanceState)
-        binding.bottomNav.itemActiveIndicatorColor = null
         binding.bottomNav.itemIconTintList = null
         binding.bottomNav.setOnApplyWindowInsetsListener(null)
         binding.bottomNav.setPadding(0, 0, 0, 0)

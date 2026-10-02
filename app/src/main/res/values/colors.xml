@@ -181,4 +181,8 @@
   <color name="prism_tab_inactive_stroke">#E5E7EB</color>
   <color name="prism_tab_inactive_text">#475467</color>
   <color name="prism_tab_active_text">#FFFFFF</color>
+  <!-- Floating Bottom Navigation Reskin Tokens -->
+  <color name="bottom_nav_bg">#FFFFFF</color>
+  <color name="bottom_nav_active_indicator">#EEE8FF</color>
+  <color name="bottom_nav_stroke">#1F865CFA</color>
 </resources>

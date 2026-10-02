@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <!--
   ~ Copyright (c) 2026 1Tabb. All rights reserved.
   ~ https://1tabb.com
@@ -288,5 +288,27 @@
   </style>
   <style name="round_img_18">
     <item name="cornerSize">18dp</item>
+  </style>
+
+  <!-- Floating Bottom Navigation Reskin Styles -->
+  <style name="Widget.App.BottomNav.ActiveIndicator" parent="Widget.Material3.BottomNavigationView.ActiveIndicator">
+    <item name="android:width">@dimen/bottom_nav_indicator_width</item>
+    <item name="android:height">@dimen/bottom_nav_indicator_height</item>
+    <item name="android:color">@color/bottom_nav_active_indicator</item>
+    <item name="shapeAppearance">@style/ShapeAppearance.BottomNav.ActiveIndicator</item>
+  </style>
+
+  <style name="ShapeAppearance.BottomNav.ActiveIndicator" parent="ShapeAppearance.Material3.Corner.Full">
+    <item name="cornerSize">@dimen/bottom_nav_indicator_corner_radius</item>
+  </style>
+
+  <style name="BottomNavTextActive" parent="NunitoBold">
+    <item name="android:textSize">@dimen/bottom_nav_text_size_active</item>
+    <item name="android:textColor">@color/primary_med_em</item>
+  </style>
+
+  <style name="BottomNavTextInactive" parent="NunitoMedium">
+    <item name="android:textSize">@dimen/bottom_nav_text_size_inactive</item>
+    <item name="android:textColor">@color/text_med_em</item>
   </style>
 </resources>

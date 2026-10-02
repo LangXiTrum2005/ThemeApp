@@ -15,7 +15,7 @@
         android:importantForAccessibility="no"
         android:scaleType="centerCrop"
         android:src="@drawable/bg_main_aurora"
-        app:layout_constraintBottom_toTopOf="@id/bottomNav"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -32,16 +32,25 @@
 
     <thinklife.prism.wallpaper.widget.theme.core.widget.ExtendedBottomNavigationView
         android:id="@+id/bottomNav"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_margin="0dp"
+        android:layout_marginHorizontal="@dimen/bottom_nav_margin_horizontal"
+        android:layout_marginBottom="@dimen/bottom_nav_margin_bottom"
         android:background="@drawable/bg_nav_home"
-        app:elevation="4dp"
-        app:itemActiveIndicatorStyle="@null"
+        android:clipToOutline="true"
+        android:elevation="@dimen/bottom_nav_elevation"
+        android:outlineProvider="background"
+        app:elevation="@dimen/bottom_nav_elevation"
+        app:itemActiveIndicatorStyle="@style/Widget.App.BottomNav.ActiveIndicator"
         app:itemIconTint="@null"
+        app:itemPaddingBottom="@dimen/bottom_nav_padding_bottom"
+        app:itemPaddingTop="@dimen/bottom_nav_padding_top"
+        app:itemTextAppearanceActive="@style/BottomNavTextActive"
+        app:itemTextAppearanceInactive="@style/BottomNavTextInactive"
         app:itemTextColor="@color/title_tab_color"
         app:labelVisibilityMode="labeled"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:menu="@menu/menu_home" /></androidx.constraintlayout.widget.ConstraintLayout>
+        app:menu="@menu/menu_home" />
+</androidx.constraintlayout.widget.ConstraintLayout>

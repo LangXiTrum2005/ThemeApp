@@ -20,8 +20,9 @@ enum class MainTab(
 ) {
     THEMES(0, R.id.nav_theme),
     WALLPAPERS(1, R.id.nav_wallpaper),
-    WIDGETS(2, R.id.nav_widgets),
-    CONTROLLER(3, R.id.nav_controller),
+    CONTROLLER(2, R.id.nav_controller),
+
+    WIDGETS(3, R.id.nav_widgets),
     ICONS(4, R.id.nav_icons),
     MY_GALLERY(5, R.id.nav_gallery);
 

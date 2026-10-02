@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/transparent"
+    android:clickable="true"
+    android:focusable="true">
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rcvHabits"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginHorizontal="8dp"
+        android:layout_marginTop="16dp"
+        android:orientation="vertical"
+        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvTextToolbar"
+        app:spanCount="2"
+        tools:itemCount="4"
+        tools:listitem="@layout/item_habits" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tvTextToolbar"
+        style="@style/NunitoExtraBold.24"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginBottom="@dimen/_4sdp"
+        android:gravity="center"
+        android:paddingHorizontal="@dimen/_2sdp"
+        android:text="@string/what_s_your_vibe"
+        android:textAlignment="center"
+        android:textColor="@color/accent_text"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

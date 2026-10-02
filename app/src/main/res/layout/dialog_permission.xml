@@ -48,7 +48,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:tint="@color/accent"
+            app:tint="@color/accent_text"
             tools:src="@drawable/ic_permission_notification" />
 
         <androidx.appcompat.widget.AppCompatTextView
@@ -78,7 +78,7 @@
             app:layout_constraintTop_toBottomOf="@id/tvTitle"
             tools:text="@string/permission_notification_description" />
 
-        <com.onetabb.template.android.core.widget.AppButton
+        <thinklife.prism.wallpaper.widget.theme.core.widget.AppButton
             android:id="@+id/btnPositive"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -90,7 +90,7 @@
             tools:abText="@string/permission_allow" />
 
         <!-- Ẩn hẳn (gone) khi quyền là bắt buộc — xem PermissionDialogArgs.negativeText. -->
-        <com.onetabb.template.android.core.widget.AppButton
+        <thinklife.prism.wallpaper.widget.theme.core.widget.AppButton
             android:id="@+id/btnNegative"
             android:layout_width="0dp"
             android:layout_height="wrap_content"

@@ -25,15 +25,15 @@
         android:strokeColor="@color/card_stroke"
         android:strokeWidth="2" />
     <path
-        android:fillColor="@color/accent_soft"
+        android:fillColor="@color/illustration_primary_soft"
         android:pathData="M140,88 m-44,0 a44,44 0 1,0 88,0 a44,44 0 1,0 -88,0" />
     <path
-        android:fillColor="@color/accent"
+        android:fillColor="@color/illustration_primary"
         android:pathData="M140,88 m-22,0 a22,22 0 1,0 44,0 a22,22 0 1,0 -44,0" />
     <path
-        android:fillColor="@color/accent_soft"
+        android:fillColor="@color/illustration_primary_soft"
         android:pathData="M56,160 L224,160 A8,8 0 0 1 232,168 L232,176 A8,8 0 0 1 224,184 L56,184 A8,8 0 0 1 48,176 L48,168 A8,8 0 0 1 56,160 Z" />
     <path
-        android:fillColor="@color/accent_soft"
+        android:fillColor="@color/illustration_primary_soft"
         android:pathData="M84,200 L196,200 A8,8 0 0 1 204,208 L204,212 A8,8 0 0 1 196,220 L84,220 A8,8 0 0 1 76,212 L76,208 A8,8 0 0 1 84,200 Z" />
 </vector>

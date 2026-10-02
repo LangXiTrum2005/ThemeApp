@@ -15,7 +15,30 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+    <uses-permission android:name="android.permission.SET_WALLPAPER" />
+    <uses-permission android:name="android.permission.SET_WALLPAPER_HINTS" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <uses-permission android:name="android.permission.WRITE_SETTINGS" />
+    <uses-permission
+        android:name="android.permission.FOREGROUND_SERVICE"
+        tools:ignore="ForegroundServicesPolicy" />
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+    <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.BLUETOOTH_CONNECT" />
+    <uses-permission
+        android:name="android.permission.BLUETOOTH"
+        android:maxSdkVersion="30" />
+    <uses-permission
+        android:name="android.permission.BLUETOOTH_ADMIN"
+        android:maxSdkVersion="30" />
+    <uses-permission android:name="com.samsung.android.mapsagent.permission.READ_APP_INFO" />
+
+    <uses-feature
+        android:name="android.software.wallpaper"
+        android:required="false" />
+
     <!-- AdsHub: thiếu AD_ID là mất attribution AppsFlyer + targeting AdMob -->
     <uses-permission
         android:name="com.google.android.gms.permission.AD_ID"
@@ -23,6 +46,11 @@
 
     <!-- AdsHub: API 30+ cần queries để AppsFlyer phân giải install-referrer, UMP mở Custom Tabs -->
     <queries>
+        <package android:name="com.facebook.katana" />
+        <package android:name="com.instagram.android" />
+        <package android:name="com.facebook.lite" />
+        <package android:name="com.samsung.android.mapsagent" />
+
         <intent>
             <action android:name="com.appsflyer.referrer.INSTALL_PROVIDER" />
         </intent>
@@ -37,6 +65,25 @@
             <category android:name="android.intent.category.BROWSABLE" />
             <data android:scheme="https" />
         </intent>
+        <intent>
+            <action android:name="android.intent.action.INSERT" />
+            <data android:mimeType="vnd.android.cursor.dir/event" />
+        </intent>
+        <intent>
+            <action android:name="android.intent.action.VIEW" />
+            <data android:scheme="sms" />
+        </intent>
+        <intent>
+            <action android:name="android.intent.action.DIAL" />
+            <data android:path="tel:" />
+        </intent>
+        <intent>
+            <action android:name="android.intent.action.MAIN" />
+            <category android:name="android.intent.category.LAUNCHER" />
+        </intent>
+        <intent>
+            <action android:name="android.intent.action.VIEW" />
+        </intent>
     </queries>
 
     <application
@@ -49,13 +96,13 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.TemplateAndroid"
+        android:usesCleartextTraffic="true"
         tools:replace="android:dataExtractionRules,android:fullBackupContent">
 
-        <!-- AAR AdsHub khai sẵn App ID TEST → tools:replace bắt buộc, thiếu là Manifest Merger fail.
-             TODO(project): thay bằng AdMob App ID thật (đồng bộ với global.admob_app_id trong assets/ads_config.json). -->
+        <!-- AAR có App ID test nên phải override bằng App ID của ứng dụng. -->
         <meta-data
             android:name="com.google.android.gms.ads.APPLICATION_ID"
-            android:value="ca-app-pub-3940256099942544~3347511713"
+            android:value="ca-app-pub-2701366067425803~7927250533"
             tools:replace="android:value" />
         <meta-data
             android:name="com.google.android.gms.ads.flag.OPTIMIZE_INITIALIZATION"
@@ -112,6 +159,11 @@
             android:windowSoftInputMode="adjustResize" />
 
         <activity
+            android:name=".presentation.onboarding.walkthrough.WalkthroughActivity"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+
+        <activity
             android:name=".presentation.main.MainActivity"
             android:exported="false"
             android:screenOrientation="portrait"
@@ -121,6 +173,195 @@
             android:name=".presentation.welcomeback.WelcomeBackActivity"
             android:exported="false"
             android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".presentation.theme.activities.AppliedThemeActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".presentation.setting.feedback.FeedbackActivity"
+            android:exported="true"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".presentation.theme.activities.PreviewThemeActivity"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".presentation.theme.activities.GetThemeActivity"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".presentation.theme.activities.DetailBannerActivity"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".presentation.search.SearchActivity"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".presentation.iconpack.SetIconsActivity"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".presentation.wallpaper.ApplyWallpaperActivity"
+            android:exported="false"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.TemplateAndroid" />
+
+        <activity
+            android:name=".presentation.iconpack.ApplyIconsActivity"
+            android:exported="false"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.TemplateAndroid" />
+
+        <activity
+            android:name=".presentation.wallpaper.PreviewWallpaperActivity"
+            android:exported="false"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.TemplateAndroid" />
+
+        <activity
+            android:name=".presentation.controller.ControllerThemePreviewActivity"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".presentation.controllertutorial.ControllerTutorialActivity"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".presentation.setting.SettingActivity"
+            android:exported="false"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.TemplateAndroid" />
+
+        <activity
+            android:name=".core.controllercenter.service.record.ScreenRecordPermissionActivity"
+            android:excludeFromRecents="true"
+            android:exported="false"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.ScreenRecordPermission" />
+
+        <activity
+            android:name=".presentation.iconpack.activities.ShortcutProxyActivity"
+            android:excludeFromRecents="true"
+            android:exported="true"
+            android:icon="@drawable/icon_translucent"
+            android:launchMode="singleInstance"
+            android:noHistory="true"
+            android:roundIcon="@drawable/icon_translucent"
+            android:theme="@style/Theme.Shortcut.Transparent">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <data
+                    android:host="shortcut"
+                    android:scheme="demoicons" />
+            </intent-filter>
+        </activity>
+
+        <activity
+            android:name=".presentation.widget.WidgetsSuccessActivity"
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize" />
+
+        <service
+            android:name=".core.wallpaper.controller.WavezLiveWallpaperService"
+            android:exported="true"
+            android:label="@string/app_name"
+            android:permission="android.permission.BIND_WALLPAPER">
+            <intent-filter>
+                <action android:name="android.service.wallpaper.WallpaperService" />
+            </intent-filter>
+            <meta-data
+                android:name="android.service.wallpaper"
+                android:resource="@xml/wallpaper_video" />
+        </service>
+
+        <service
+            android:name=".presentation.notification.FMMessagingService"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
+
+        <service
+            android:name=".core.controllercenter.service.ControlCenterService"
+            android:enabled="true"
+            android:exported="true"
+            android:permission="android.permission.BIND_ACCESSIBILITY_SERVICE"
+            tools:ignore="AccessibilityPolicy">
+            <intent-filter>
+                <action android:name="android.accessibilityservice.AccessibilityService" />
+            </intent-filter>
+            <meta-data
+                android:name="android.accessibilityservice"
+                android:resource="@xml/cc_accessibility_config" />
+        </service>
+
+        <service
+            android:name=".core.controllercenter.service.ControlNotificationListener"
+            android:exported="true"
+            android:permission="android.permission.BIND_NOTIFICATION_LISTENER_SERVICE">
+            <intent-filter>
+                <action android:name="android.service.notification.NotificationListenerService" />
+            </intent-filter>
+        </service>
+
+        <receiver
+            android:name=".core.widget.WidgetProviderSmall"
+            android:exported="false"
+            android:label="@string/widgets">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/widget_info_small" />
+        </receiver>
+
+        <receiver
+            android:name=".core.widget.WidgetProviderMedium"
+            android:exported="false"
+            android:label="@string/widgets">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/widget_info_medium" />
+        </receiver>
+
+        <receiver
+            android:name=".core.widget.WidgetProviderLarge"
+            android:exported="false"
+            android:label="@string/widgets">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/widget_info_large" />
+        </receiver>
+
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="${applicationId}.provider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/provider_paths" />
+        </provider>
 
         <!-- Lưu locale app do AppCompatDelegate.setApplicationLocales() chọn (màn Language) -->
         <service

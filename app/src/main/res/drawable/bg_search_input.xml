@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- Viền đậm giúp trạng thái focus rõ trên nền sáng. -->
+    <item android:state_enabled="true" android:state_focused="true">
+        <layer-list>
+
+            <item>
+                <shape>
+                    <solid android:color="@color/list_item_selected_bg" />
+                    <corners android:radius="12dp" />
+
+                </shape>
+            </item>
+            <item android:bottom="2dp" android:end="2dp" android:start="2dp" android:top="2dp">
+                <shape android:shape="rectangle">
+                    <solid android:color="@color/surface_1" />
+                    <stroke android:width="2dp" android:color="@color/accent_text" />
+                    <corners android:radius="12dp" />
+                </shape>
+            </item>
+        </layer-list>
+
+    </item>
+
+    <item android:state_enabled="true">
+        <shape android:shape="rectangle">
+            <solid android:color="@color/surface_2" />
+            <stroke android:width="2dp" android:color="@color/surface_2" />
+            <corners android:radius="12dp" />
+        </shape>
+    </item>
+
+</selector>

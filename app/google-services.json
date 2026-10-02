@@ -1,21 +1,21 @@
 {
   "project_info": {
-    "project_number": "1082447263017",
-    "project_id": "automation-example-45ef2",
-    "storage_bucket": "automation-example-45ef2.firebasestorage.app"
+    "project_number": "721074827993",
+    "project_id": "ta097---wallpaper",
+    "storage_bucket": "ta097---wallpaper.firebasestorage.app"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:1082447263017:android:4ba9be489a3220fa2f7338",
+        "mobilesdk_app_id": "1:721074827993:android:2acdc77a585aa46055c4c8",
         "android_client_info": {
-          "package_name": "com.onetabb.template.android"
+          "package_name": "thinklife.prism.wallpaper.widget.theme"
         }
       },
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyBNYsi9-LeTj7yc2sK6pAfnNnncDlT8xKA"
+          "current_key": "AIzaSyBj6fy9T4fwo6lhkmwI2hCS2vbuk6cMApQ"
         }
       ],
       "services": {
@@ -26,15 +26,15 @@
     },
     {
       "client_info": {
-        "mobilesdk_app_id": "1:1082447263017:android:832977354e5665112f7338",
+        "mobilesdk_app_id": "1:721074827993:android:ce32afb653d150fd55c4c8",
         "android_client_info": {
-          "package_name": "com.onetabb.template.android.dev"
+          "package_name": "thinklife.prism.wallpaper.widget.theme.dev"
         }
       },
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyBNYsi9-LeTj7yc2sK6pAfnNnncDlT8xKA"
+          "current_key": "AIzaSyBj6fy9T4fwo6lhkmwI2hCS2vbuk6cMApQ"
         }
       ],
       "services": {

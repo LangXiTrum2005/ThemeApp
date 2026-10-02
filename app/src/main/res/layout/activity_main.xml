@@ -1,60 +1,72 @@
-<?xml version="1.0" encoding="utf-8"?><!--
-  ~ Copyright (c) 2026 1Tabb. All rights reserved.
-  ~ https://1tabb.com
-  ~
-  ~ SPDX-License-Identifier: LicenseRef-1Tabb-Proprietary
-  ~
-  ~ Proprietary and confidential. Contains trade secrets of 1Tabb.
-  ~ Unauthorized copying, modification, distribution, reverse engineering,
-  ~ decompilation or disassembly of this file, via any medium, is strictly
-  ~ prohibited except with prior written permission of 1Tabb.
-  -->
-
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/bg_main"
     android:orientation="vertical">
-
-    <!-- AdsHub: slot neo cứng NGOÀI vùng scroll, không bao giờ đè nội dung -->
     <FrameLayout
-        android:id="@+id/mainSlotTop"
+        android:id="@+id/adsSlotTop"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:tag="ads_slot:main_slot_top" />
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:id="@+id/root"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/ads_weighted_content_height"
+    android:layout_weight="1"
+    android:background="@color/white"
+    android:gravity="center"
+    android:orientation="vertical">
 
-    <androidx.constraintlayout.widget.ConstraintLayout xmlns:app="http://schemas.android.com/apk/res-auto"
+    <androidx.appcompat.widget.AppCompatImageView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:contentDescription="@null"
+        android:importantForAccessibility="no"
+        android:scaleType="centerCrop"
+        android:src="@drawable/bg_main_aurora"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/vpMain"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1"
-        android:background="@color/bg_main">
+        android:background="@color/transparent"
+        android:clickable="true"
+        android:focusable="true"
+        app:layout_constraintBottom_toTopOf="@+id/bottomNav"
+        app:layout_constraintTop_toTopOf="parent" />
 
-        <androidx.viewpager2.widget.ViewPager2
-            android:id="@+id/viewPager"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            app:layout_constraintBottom_toTopOf="@id/bottomNavigation"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <com.google.android.material.bottomnavigation.BottomNavigationView
-            android:id="@+id/bottomNavigation"
-            android:layout_width="0dp"
-            android:layout_height="72dp"
-            android:background="@color/bg_surface"
-            app:itemIconSize="22dp"
-            app:itemIconTint="@color/bottom_nav_colors"
-            app:itemTextColor="@color/bottom_nav_colors"
-            app:labelVisibilityMode="labeled"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:menu="@menu/bottom_navigation" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
+    <thinklife.prism.wallpaper.widget.theme.core.widget.ExtendedBottomNavigationView
+        android:id="@+id/bottomNav"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/bottom_nav_margin_horizontal"
+        android:layout_marginBottom="@dimen/bottom_nav_margin_bottom"
+        android:background="@drawable/bg_nav_home"
+        android:clipToOutline="true"
+        android:elevation="@dimen/bottom_nav_elevation"
+        android:outlineProvider="background"
+        app:elevation="@dimen/bottom_nav_elevation"
+        app:itemActiveIndicatorStyle="@style/Widget.App.BottomNav.ActiveIndicator"
+        app:itemIconTint="@null"
+        app:itemPaddingBottom="@dimen/bottom_nav_padding_bottom"
+        app:itemPaddingTop="@dimen/bottom_nav_padding_top"
+        app:itemTextAppearanceActive="@style/BottomNavTextActive"
+        app:itemTextAppearanceInactive="@style/BottomNavTextInactive"
+        app:itemTextColor="@color/title_tab_color"
+        app:labelVisibilityMode="labeled"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:menu="@menu/menu_home" />
+</androidx.constraintlayout.widget.ConstraintLayout>
     <FrameLayout
-        android:id="@+id/mainSlotBottom"
+        android:id="@+id/adsSlotBottom"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:tag="ads_slot:main_slot_bottom" />

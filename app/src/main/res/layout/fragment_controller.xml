@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@color/transparent">
+
+    <FrameLayout
+        android:id="@+id/controllerSlotTop"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:tag="ads_slot:controller_slot_top"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/view_tool_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/controllerSlotTop" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/cardEnableController"
+        android:layout_width="@dimen/controller_layout_zero"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/_16sdp"
+        android:layout_marginTop="@dimen/_8sdp"
+        android:clipToOutline="true"
+        android:minHeight="@dimen/_60sdp"
+        android:visibility="gone"
+        tools:visibility="visible"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/toolbar">
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:layout_width="@dimen/controller_layout_zero"
+            android:layout_height="@dimen/controller_layout_zero"
+            android:importantForAccessibility="no"
+            android:scaleType="centerCrop"
+            android:src="@drawable/bg_controller_enable_art"
+            app:shapeAppearance="@style/round_img_16"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tvEnableControllerTitle"
+            style="@style/NunitoBold.16"
+            android:layout_width="@dimen/controller_layout_zero"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_16sdp"
+            android:layout_marginEnd="@dimen/_12sdp"
+            android:layout_marginVertical="@dimen/_8sdp"
+            android:text="@string/controller_enable_card_title"
+            android:textColor="@color/on_accent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/btnEnableController"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/btnEnableController"
+            style="@style/NunitoBold.14"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/_12sdp"
+            android:layout_marginVertical="@dimen/_8sdp"
+            android:background="@drawable/bg_controller_enable_go"
+            android:paddingHorizontal="@dimen/_16sdp"
+            android:paddingVertical="@dimen/_6sdp"
+            android:text="@string/controller_enable_go"
+            android:textAllCaps="false"
+            android:textColor="@color/accent_text"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/controllerScroll"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/controller_layout_zero"
+        android:layout_marginTop="@dimen/_12sdp"
+        android:fillViewport="true"
+        android:overScrollMode="never"
+        app:layout_constraintBottom_toTopOf="@id/controllerSlotBottom"
+        app:layout_constraintTop_toBottomOf="@id/cardEnableController"
+        app:layout_goneMarginTop="@dimen/controller_layout_zero">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingHorizontal="@dimen/_16sdp"
+            android:paddingTop="@dimen/controller_layout_zero"
+            android:paddingBottom="@dimen/_24sdp">
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:tag="ads_slot:controller_slot_start" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvControllerThemes"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:clipToPadding="false"
+                android:layoutAnimation="@anim/layout_anim_grid_fall_down"
+                android:nestedScrollingEnabled="false"
+                app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+                android:paddingHorizontal="@dimen/_3sdp"
+                app:spanCount="3"
+                android:paddingTop="@dimen/controller_layout_zero"
+                android:paddingBottom="@dimen/_24sdp" />
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:tag="ads_slot:controller_slot_end" />
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+
+    <FrameLayout
+        android:id="@+id/controllerSlotBottom"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:tag="ads_slot:controller_slot_bottom"
+        app:layout_constraintBottom_toBottomOf="parent" />
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -15,7 +15,7 @@
         <shape android:shape="rectangle">
             <gradient
                 android:angle="0"
-                android:startColor="@color/accent_dark"
+                android:startColor="@color/accent_pressed"
                 android:endColor="@color/accent_gradient_end" />
             <corners android:radius="26dp" />
         </shape>

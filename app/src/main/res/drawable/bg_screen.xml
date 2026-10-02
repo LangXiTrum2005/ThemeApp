@@ -10,10 +10,7 @@
   ~ prohibited except with prior written permission of 1Tabb.
   -->
 
-<!--
-  Nền chung của các màn trong luồng: nền sáng + một vệt accent rất nhạt toả từ phía trên để màn
-  không phẳng lì. Đổi chủ đề thì sửa đúng file này, layout không phải đụng tới.
--->
+<!-- Vệt Rose dùng cùng palette primary để màu nhấn giữa các màn nhất quán. -->
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android">
     <item>
         <color android:color="@color/bg_main" />
@@ -21,12 +18,22 @@
     <item>
         <shape android:shape="rectangle">
             <gradient
-                android:centerColor="#0A0E9384"
-                android:centerX="0.5"
-                android:centerY="0.16"
+                android:angle="270"
+                android:startColor="@color/screen_primary_glow_start"
+                android:centerColor="@color/screen_primary_glow_center"
                 android:endColor="@android:color/transparent"
-                android:gradientRadius="520dp"
-                android:startColor="#1A0E9384"
+                android:type="linear" />
+        </shape>
+    </item>
+    <item>
+        <shape android:shape="rectangle">
+            <gradient
+                android:centerColor="@color/screen_secondary_glow_center"
+                android:centerX="0.85"
+                android:centerY="0.10"
+                android:endColor="@android:color/transparent"
+                android:gradientRadius="480dp"
+                android:startColor="@color/screen_secondary_glow_start"
                 android:type="radial" />
         </shape>
     </item>

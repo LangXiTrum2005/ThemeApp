@@ -1,0 +1,263 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:tag="layout/layout_controller_center_0">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/network_layout"
+        android:layout_width="@dimen/_144sdp"
+        android:layout_height="@dimen/_144sdp"
+        android:layout_marginStart="@dimen/_7sdp"
+        android:padding="@dimen/_15sdp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/airplane"
+            android:layout_width="@dimen/_51sdp"
+            android:layout_height="@dimen/_51sdp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/wifi"
+            android:layout_width="@dimen/_51sdp"
+            android:layout_height="@dimen/_51sdp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <ImageView
+            android:id="@+id/mobile_data"
+            android:layout_width="@dimen/_51sdp"
+            android:layout_height="@dimen/_51sdp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/blue_tooth"
+            android:layout_width="@dimen/_51sdp"
+            android:layout_height="@dimen/_51sdp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/music_layout"
+        android:layout_width="@dimen/_144sdp"
+        android:layout_height="@dimen/_144sdp"
+        android:layout_marginEnd="@dimen/_7sdp"
+        android:padding="@dimen/_15sdp"
+        android:tag="binding_1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <include
+            android:id="@+id/music_info"
+            layout="@layout/layout_music_info"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <include
+            android:id="@+id/music_controller"
+            layout="@layout/layout_music_controller"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_24sdp"
+            android:layout_marginBottom="@dimen/_9sdp"
+            app:layout_constraintBottom_toBottomOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <thinklife.prism.wallpaper.widget.theme.core.controllercenter.view.AnimationImageView
+        android:id="@+id/auto_rotate"
+        android:layout_width="@dimen/_65sdp"
+        android:layout_height="@dimen/_65sdp"
+        android:layout_marginTop="@dimen/_12sdp"
+        app:layout_constraintStart_toStartOf="@+id/network_layout"
+        app:layout_constraintTop_toBottomOf="@+id/network_layout" />
+
+    <thinklife.prism.wallpaper.widget.theme.core.controllercenter.view.AnimationImageView
+        android:id="@+id/mute"
+        android:layout_width="@dimen/_65sdp"
+        android:layout_height="@dimen/_65sdp"
+        android:layout_marginTop="@dimen/_12sdp"
+        app:layout_constraintEnd_toEndOf="@+id/network_layout"
+        app:layout_constraintTop_toBottomOf="@+id/network_layout" />
+
+    <thinklife.prism.wallpaper.widget.theme.core.controllercenter.view.AnimationImageView
+        android:id="@+id/doNotDisturb"
+        android:layout_width="@dimen/_144sdp"
+        android:layout_height="@dimen/_65sdp"
+        android:layout_marginTop="@dimen/_14sdp"
+
+        app:layout_constraintTop_toBottomOf="@id/auto_rotate"
+        app:layout_constraintStart_toStartOf="@id/network_layout"
+        app:layout_constraintEnd_toEndOf="@id/network_layout"/>
+
+    <thinklife.prism.wallpaper.widget.theme.core.controllercenter.view.SeekBarControlView
+        android:id="@+id/brightness"
+        android:layout_width="@dimen/_65sdp"
+        android:layout_height="@dimen/_144sdp"
+        app:defaultHeight="@dimen/_144sdp"
+        app:defaultWidth="@dimen/_65sdp"
+        app:iconMarginBottom="@dimen/_15sdp"
+        app:iconWH="@dimen/_35sdp"
+        app:layout_constraintStart_toStartOf="@+id/music_layout"
+        app:layout_constraintTop_toTopOf="@+id/auto_rotate" />
+
+    <thinklife.prism.wallpaper.widget.theme.core.controllercenter.view.SeekBarControlView
+        android:id="@+id/volume"
+        android:layout_width="@dimen/_65sdp"
+        android:layout_height="@dimen/_144sdp"
+        app:defaultHeight="@dimen/_144sdp"
+        app:defaultWidth="@dimen/_65sdp"
+        app:iconMarginBottom="@dimen/_15sdp"
+        app:iconWH="@dimen/_35sdp"
+        app:layout_constraintEnd_toEndOf="@+id/music_layout"
+        app:layout_constraintTop_toTopOf="@+id/auto_rotate" />
+
+    <LinearLayout
+        android:id="@+id/layoutTools"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintTop_toBottomOf="@+id/doNotDisturb">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_16sdp"
+            android:orientation="horizontal">
+
+            <thinklife.prism.wallpaper.widget.theme.core.controllercenter.view.AnimationImageView
+                android:id="@+id/flash"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/_65sdp"
+                android:layout_gravity="start"
+                android:layout_weight="1" />
+
+            <ImageView
+                android:id="@+id/timing"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/_65sdp"
+                android:layout_gravity="center"
+                android:layout_weight="1" />
+
+            <ImageView
+                android:id="@+id/setup"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/_65sdp"
+                android:layout_gravity="center"
+                android:layout_weight="1" />
+
+            <ImageView
+                android:id="@+id/camera"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/_65sdp"
+                android:layout_gravity="end"
+                android:layout_weight="1" />
+        </LinearLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_16sdp">
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guide_col1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.25" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guide_col2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.5" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guide_col3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.75" />
+
+            <FrameLayout
+                android:id="@+id/screenLockButton"
+                android:layout_width="@dimen/_65sdp"
+                android:layout_height="@dimen/_65sdp"
+                android:visibility="gone"
+                android:contentDescription="@string/control_screen_lock"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <ImageView
+                    android:id="@+id/screenLock"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:importantForAccessibility="no"
+                    android:src="@drawable/bg_screen_lock_button" />
+
+                <ImageView
+                    android:id="@+id/screenLockOverlay"
+                    android:layout_width="@dimen/_28sdp"
+                    android:layout_height="@dimen/_28sdp"
+                    android:layout_gravity="center"
+                    android:importantForAccessibility="no"
+                    android:src="@drawable/ic_lock_1" />
+            </FrameLayout>
+
+            <thinklife.prism.wallpaper.widget.theme.core.controllercenter.view.AnimationImageView
+                android:id="@+id/recordVideo"
+                android:layout_width="@dimen/_65sdp"
+                android:layout_height="@dimen/_65sdp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@id/guide_col1"
+                app:layout_constraintStart_toStartOf="@id/guide_col1"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/battery"
+                android:layout_width="@dimen/_65sdp"
+                android:layout_height="@dimen/_65sdp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@id/guide_col2"
+                app:layout_constraintStart_toStartOf="@id/guide_col2"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <FrameLayout
+                android:layout_width="@dimen/_65sdp"
+                android:layout_height="@dimen/_65sdp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@id/guide_col3"
+                app:layout_constraintStart_toStartOf="@id/guide_col3"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <ImageView
+                    android:id="@+id/screenShot"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+
+                <ImageView
+                    android:id="@+id/screenShotCaptureOverlay"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/ic_capture_screen" />
+            </FrameLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/bottomDiy"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_72sdp"
+        android:layout_marginTop="@dimen/_18sdp"
+        android:adjustViewBounds="true"
+        android:scaleType="fitCenter"
+        app:layout_constraintTop_toBottomOf="@id/layoutTools" />
+</androidx.constraintlayout.widget.ConstraintLayout>

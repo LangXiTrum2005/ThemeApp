@@ -1,0 +1,263 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg_screen"
+    android:orientation="vertical">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:tag="ads_slot:controller_tutorial_slot_top" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingHorizontal="@dimen/_20sdp"
+        android:paddingVertical="@dimen/_12sdp">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/btnBack"
+            android:layout_width="@dimen/_48sdp"
+            android:layout_height="@dimen/_48sdp"
+            android:background="@drawable/bg_controller_enable_go"
+            android:contentDescription="@string/back"
+            android:padding="@dimen/_12sdp"
+            android:src="@drawable/ic_back_1"
+            app:tint="@color/text_primary" />
+
+        <TextView
+            style="@style/NunitoExtraBold.20"
+            android:layout_width="@dimen/controller_layout_zero"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_12sdp"
+            android:layout_weight="1"
+            android:text="@string/controller_tutorial_toolbar_title"
+            android:textColor="@color/text_primary" />
+    </LinearLayout>
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/controller_layout_zero"
+        android:layout_weight="1"
+        android:fillViewport="true"
+        android:overScrollMode="never">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingHorizontal="@dimen/_20sdp"
+            android:paddingBottom="@dimen/_8sdp">
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:tag="ads_slot:controller_tutorial_slot_start" />
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_4sdp"
+                android:background="@drawable/bg_controller_tutorial_hero"
+                android:clipToOutline="true">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_224sdp"
+                    android:importantForAccessibility="no"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/ill_controller_tutorial" />
+            </FrameLayout>
+
+            <TextView
+                style="@style/NunitoBold.28"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_16sdp"
+                android:gravity="center"
+                android:text="@string/controller_tutorial_headline"
+                android:textColor="@color/text_primary" />
+
+            <TextView
+                style="@style/NunitoMedium.14"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_8sdp"
+                android:gravity="center"
+                android:text="@string/controller_tutorial_description"
+                android:textColor="@color/text_secondary" />
+
+            <TextView
+                style="@style/NunitoBold.16"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_24sdp"
+                android:layout_marginBottom="@dimen/_16sdp"
+                android:text="@string/controller_tutorial_steps_title"
+                android:textColor="@color/text_primary" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/_16sdp"
+                android:gravity="top"
+                android:orientation="horizontal">
+
+                <TextView
+                    style="@style/NunitoBold.16"
+                    android:layout_width="@dimen/_40sdp"
+                    android:layout_height="@dimen/_40sdp"
+                    android:background="@drawable/bg_controller_tutorial_step"
+                    android:gravity="center"
+                    android:text="@string/controller_tutorial_step_one"
+                    android:textColor="@color/accent_text" />
+
+                <LinearLayout
+                    android:layout_width="@dimen/controller_layout_zero"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_12sdp"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        style="@style/NunitoBold.16"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/controller_tutorial_step_open_settings"
+                        android:textColor="@color/text_primary" />
+
+                    <TextView
+                        style="@style/NunitoMedium.14"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_4sdp"
+                        android:text="@string/controller_tutorial_step_open_settings_description"
+                        android:textColor="@color/text_secondary" />
+                </LinearLayout>
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/_16sdp"
+                android:gravity="top"
+                android:orientation="horizontal">
+
+                <TextView
+                    style="@style/NunitoBold.16"
+                    android:layout_width="@dimen/_40sdp"
+                    android:layout_height="@dimen/_40sdp"
+                    android:background="@drawable/bg_controller_tutorial_step"
+                    android:gravity="center"
+                    android:text="@string/controller_tutorial_step_two"
+                    android:textColor="@color/accent_text" />
+
+                <LinearLayout
+                    android:layout_width="@dimen/controller_layout_zero"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_12sdp"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        style="@style/NunitoBold.16"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/controller_tutorial_step_select_app_title"
+                        android:textColor="@color/text_primary" />
+
+                    <TextView
+                        android:id="@+id/tvStepSelectApp"
+                        style="@style/NunitoMedium.14"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_4sdp"
+                        android:textColor="@color/text_secondary" />
+                </LinearLayout>
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/_16sdp"
+                android:gravity="top"
+                android:orientation="horizontal">
+
+                <TextView
+                    style="@style/NunitoBold.16"
+                    android:layout_width="@dimen/_40sdp"
+                    android:layout_height="@dimen/_40sdp"
+                    android:background="@drawable/bg_controller_tutorial_step"
+                    android:gravity="center"
+                    android:text="@string/controller_tutorial_step_three"
+                    android:textColor="@color/accent_text" />
+
+                <LinearLayout
+                    android:layout_width="@dimen/controller_layout_zero"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_12sdp"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        style="@style/NunitoBold.16"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/controller_tutorial_step_enable"
+                        android:textColor="@color/text_primary" />
+
+                    <TextView
+                        style="@style/NunitoMedium.14"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_4sdp"
+                        android:text="@string/controller_tutorial_step_enable_description"
+                        android:textColor="@color/text_secondary" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:tag="ads_slot:controller_tutorial_slot_end" />
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/bg_surface"
+        android:orientation="vertical"
+        android:paddingHorizontal="@dimen/_20sdp"
+        android:paddingTop="@dimen/_12sdp"
+        android:paddingBottom="@dimen/_16sdp">
+
+        <thinklife.prism.wallpaper.widget.theme.core.widget.AppButton
+            android:id="@+id/btnEnableController"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:abShowAdIcon="false"
+            app:abStyle="primary"
+            app:abText="@string/permission_open_settings" />
+
+        <TextView
+            style="@style/NunitoMedium.12"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_8sdp"
+            android:gravity="center"
+            android:text="@string/controller_tutorial_return_hint"
+            android:textColor="@color/text_secondary" />
+    </LinearLayout>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:tag="ads_slot:controller_tutorial_slot_bottom" />
+</LinearLayout>

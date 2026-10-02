@@ -1,0 +1,73 @@
+/*
+ * Copyright (c) 2026 1Tabb. All rights reserved.
+ * https://1tabb.com
+ *
+ * SPDX-License-Identifier: LicenseRef-1Tabb-Proprietary
+ *
+ * Proprietary and confidential. Contains trade secrets of 1Tabb.
+ * Unauthorized copying, modification, distribution, reverse engineering,
+ * decompilation or disassembly of this file, via any medium, is strictly
+ * prohibited except with prior written permission of 1Tabb.
+ */
+
+package thinklife.prism.wallpaper.widget.theme.presentation.main.viewmodel
+
+import android.util.Log
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import thinklife.prism.wallpaper.widget.theme.core.base.UiState
+import thinklife.prism.wallpaper.widget.theme.core.wallpaper.model.WallpaperTarget
+import thinklife.prism.wallpaper.widget.theme.data.local.InstalledAppProvider
+import thinklife.prism.wallpaper.widget.theme.data.model.wallpaper.WallpaperModel
+import thinklife.prism.wallpaper.widget.theme.data.repository.WallpaperRepository
+import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.launch
+import javax.inject.Inject
+
+@HiltViewModel
+class MainViewModel @Inject constructor(
+    private val wallpaperRepository: WallpaperRepository,
+    private val provider: InstalledAppProvider
+) : ViewModel() {
+
+    private val _wallpapersState =
+        MutableStateFlow<UiState<List<WallpaperModel>>>(UiState.Idle)
+    val wallpapersState: StateFlow<UiState<List<WallpaperModel>>> =
+        _wallpapersState.asStateFlow()
+
+    private val _applyState = MutableStateFlow<UiState<Unit>>(UiState.Idle)
+    val applyState: StateFlow<UiState<Unit>> = _applyState.asStateFlow()
+
+    fun getWallpapers(forceRefresh: Boolean = false) {
+        viewModelScope.launch {
+            _wallpapersState.value = UiState.Loading
+            Log.d("Log_data", "getWallpapers: start")
+
+            val result = wallpaperRepository.getAllWallpapersUnlimited(forceRefresh)
+            result.onSuccess { wallpapers ->
+                Log.d("Log_data", "getWallpapers: $wallpapers")
+                _wallpapersState.value = UiState.Data(wallpapers)
+            }.onFailure { error ->
+                val message = error.message.orEmpty().ifBlank { "Unknown error" }
+                Log.e("Log_data", "onFailure: $message", error)
+                _wallpapersState.value = UiState.Error(error, message)
+            }
+        }
+    }
+
+    fun applyWallpaper(wallpaper: WallpaperModel) {
+        viewModelScope.launch {
+            _applyState.value = UiState.Loading
+            wallpaperRepository.applyWallpaper(wallpaper, WallpaperTarget.HOME)
+                .onSuccess { _applyState.value = UiState.Data(Unit) }
+                .onFailure { error ->
+                    val message = error.message.orEmpty().ifBlank { "Unknown error" }
+                    Log.e("Log_data", "applyWallpaper failed: $message", error)
+                    _applyState.value = UiState.Error(error, message)
+                }
+        }
+    }
+}

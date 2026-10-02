@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <integer name="icon_item_name_lines">2</integer>
+    <integer name="controller_preview_name_max_lines">2</integer>
+    <integer name="controller_preview_download_max">100</integer>
+</resources>

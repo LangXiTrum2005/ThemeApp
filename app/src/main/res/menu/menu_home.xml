@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/nav_theme"
+        android:icon="@drawable/ic_tab_theme_selector"
+        android:title="@string/themes" />
+
+    <item
+        android:id="@+id/nav_wallpaper"
+        android:icon="@drawable/ic_tab_wallpaper_selector"
+        android:title="@string/wallpapers" />
+
+    <item
+        android:id="@+id/nav_controller"
+        android:icon="@drawable/ic_tab_controller_selector"
+        android:title="@string/controller" />
+
+    <item
+        android:id="@+id/nav_widgets"
+        android:icon="@drawable/ic_tab_widget_selector"
+        android:title="@string/widgets" />
+
+
+    <item
+        android:id="@+id/nav_icons"
+        android:icon="@drawable/ic_tab_icons_selector"
+        android:title="@string/icons" />
+
+</menu>

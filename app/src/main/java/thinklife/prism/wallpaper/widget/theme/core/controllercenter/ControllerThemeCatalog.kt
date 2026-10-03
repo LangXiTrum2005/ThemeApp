@@ -170,6 +170,7 @@ object ControllerThemeCatalog {
         calculatorIcon = asset(calculator_off),
         cameraIcon = asset(camera_off),
         screenshotIcon = themeAsset("home_bottom_ic_screenshot.png"),
+        showScreenshotButton = hasScreenshotIcon(control_id),
         screenLockIcon = asset(resolvedLockOff),
         screenLockSelectedIcon = asset(resolvedLockOn),
         setupIcon = asset(setting_off),

@@ -66,6 +66,9 @@ class HomeCenterControllerView @JvmOverloads constructor(
 
     companion object {
         private const val START_RECORD_DELAY_MS = 3_000L
+        private const val RECORD_ALIGNED_WITH_FLASH_PERCENT = 0.125f
+        private const val BATTERY_ALIGNED_WITH_TIMING_PERCENT = 0.375f
+        private const val SCREENSHOT_ALIGNED_WITH_SETUP_PERCENT = 0.625f
         const val TAG = "HomeCenterControllerView"
     }
 
@@ -197,7 +200,17 @@ class HomeCenterControllerView @JvmOverloads constructor(
             playAnim = false
         )
         UtilsKt.loadImageOptimizeRam(binding.battery, m.batteryIcon)
-        loadScreenshotIcon(m.screenshotIcon, m.recordIcon)
+        // Ba nút hàng dưới cùng tâm ba cột đầu của hàng trên, kể cả khi screenshot bị ẩn.
+        binding.guideCol1.setGuidelinePercent(RECORD_ALIGNED_WITH_FLASH_PERCENT)
+        binding.guideCol2.setGuidelinePercent(BATTERY_ALIGNED_WITH_TIMING_PERCENT)
+        binding.guideCol3.setGuidelinePercent(SCREENSHOT_ALIGNED_WITH_SETUP_PERCENT)
+        binding.screenshotButtonContainer.visibility =
+            if (m.showScreenshotButton) View.VISIBLE else View.GONE
+        if (m.showScreenshotButton) {
+            loadScreenshotIcon(m.screenshotIcon, m.recordIcon)
+        } else {
+            Glide.with(binding.screenShot).clear(binding.screenShot)
+        }
 
         // --- Tool icons: row 3 ---
         UtilsKt.loadImageOptimizeRam(binding.setup, m.setupIcon)

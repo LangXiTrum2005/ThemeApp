@@ -26,6 +26,16 @@ private const val DOUBLE_PNG_SUFFIX = ".png.png"
 private const val PNG_SUFFIX = ".png"
 private const val BOTTOM_DIY_BG_FILE = "home_bottom_diy_bg.png"
 private const val SCREENSHOT_ICON_FILE = "home_bottom_ic_screenshot.png"
+private const val FIRST_MISSING_SCREENSHOT_THEME_ID = 1
+private const val LAST_MISSING_SCREENSHOT_THEME_ID = 32
+private const val SPIDER_MAN_2_THEME_ID = "44"
+
+// CDN thiếu ảnh screenshot của các theme này; ảnh record dự phòng sẽ làm hai biểu tượng chồng nhau.
+internal fun hasScreenshotIcon(themeId: String): Boolean {
+    val numericId = themeId.toIntOrNull()
+    return themeId != SPIDER_MAN_2_THEME_ID &&
+        (numericId == null || numericId !in FIRST_MISSING_SCREENSHOT_THEME_ID..LAST_MISSING_SCREENSHOT_THEME_ID)
+}
 
 fun ControllerModel.toControllerTheme() = ControllerTheme(
     id = id,
@@ -85,6 +95,7 @@ fun ControllerModel.toConfig(context: Context): ControllerConfigModel {
         calculatorIcon = asset(calculatorOff),
         cameraIcon = asset(cameraOff),
         screenshotIcon = themeAsset(SCREENSHOT_ICON_FILE),
+        showScreenshotButton = hasScreenshotIcon(id),
         setupIcon = asset(settingOff),
         timingIcon = asset(timeOff),
         flashlightIcon = asset(flashOff),

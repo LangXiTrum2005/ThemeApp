@@ -18,6 +18,8 @@ import android.net.Uri
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.WindowInsetsCompat
+import androidx.core.view.WindowInsetsControllerCompat
 import com.ontabb.rate.databinding.ActivityFeedbackBinding
 
 /**
@@ -36,6 +38,7 @@ class FeedbackActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        WindowInsetsControllerCompat(window, window.decorView).hide(WindowInsetsCompat.Type.statusBars())
         binding = ActivityFeedbackBinding.inflate(layoutInflater)
         setContentView(binding.root)
 

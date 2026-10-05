@@ -103,19 +103,14 @@ abstract class BaseActivity<VB : ViewBinding> : AppCompatActivity() {
             statusBarStyle = SystemBarStyle.light(Color.TRANSPARENT, Color.TRANSPARENT),
             navigationBarStyle = SystemBarStyle.light(Color.TRANSPARENT, Color.TRANSPARENT),
         )
+        hideSystemBars()
         nullableBinding = inflateBinding()
         setContentView(binding.root)
         ViewCompat.setOnApplyWindowInsetsListener(binding.root) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-            // Ads full-screen của SDK bật immersive (setSystemUiVisibility 5894) nên status bar bị
-            // ẩn -> inset top của màn phía sau về 0 -> cả màn nhảy lên rồi nhảy xuống khi ad đóng.
-            // Lấy chiều cao status bar KỂ CẢ lúc nó đang ẩn để padding đứng yên.
-            val stableTop = insets
-                .getInsetsIgnoringVisibility(WindowInsetsCompat.Type.systemBars()).top
-            v.setPadding(systemBars.left, stableTop, systemBars.right, systemBars.bottom)
+            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             WindowInsetsCompat.CONSUMED
         }
-        hideBottomNavigation()
         networkTracker = NetworkTracker(this, lifecycle)
         if (registerEventBus) {
             org.greenrobot.eventbus.EventBus.getDefault().register(this)
@@ -157,6 +152,7 @@ abstract class BaseActivity<VB : ViewBinding> : AppCompatActivity() {
 
     override fun onResume() {
         super.onResume()
+        hideSystemBars()
         if (hasResumedForAds && ConfigManager.isInitialConfigLoaded && bindAdsScreenOnCreate) {
             adsScreenId?.let(AdsBootstrap::notifyScreenEnter)
         }
@@ -310,10 +306,10 @@ abstract class BaseActivity<VB : ViewBinding> : AppCompatActivity() {
 
     // endregion AdsHub ======================================================
 
-    protected fun hideBottomNavigation() {
+    private fun hideSystemBars() {
         WindowCompat.setDecorFitsSystemWindows(window, false)
-        WindowInsetsControllerCompat(window, binding.root).let { controller ->
-            controller.hide(WindowInsetsCompat.Type.navigationBars())
+        WindowInsetsControllerCompat(window, window.decorView).let { controller ->
+            controller.hide(WindowInsetsCompat.Type.systemBars())
             controller.systemBarsBehavior =
                 WindowInsetsControllerCompat.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE
         }

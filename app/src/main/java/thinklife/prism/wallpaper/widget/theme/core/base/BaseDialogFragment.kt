@@ -73,6 +73,7 @@ abstract class BaseDialogFragment<T : ViewBinding> : DialogFragment() {
             } else {
                 setLayout(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT)
             }
+            WindowInsetsControllerCompat(this, decorView).hide(WindowInsetsCompat.Type.statusBars())
         }
         if (hideNavigationBar) {
             dialog?.window?.let { window ->

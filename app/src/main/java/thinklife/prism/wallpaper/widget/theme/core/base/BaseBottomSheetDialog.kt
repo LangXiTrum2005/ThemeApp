@@ -60,6 +60,9 @@ abstract class BaseBottomSheetDialog<T : ViewBinding> : BottomSheetDialogFragmen
 
     override fun onStart() {
         super.onStart()
+        dialog?.window?.let { window ->
+            WindowInsetsControllerCompat(window, window.decorView).hide(WindowInsetsCompat.Type.statusBars())
+        }
         if (!useDim) {
             dialog?.window?.setBackgroundDrawableResource(android.R.color.transparent)
         }

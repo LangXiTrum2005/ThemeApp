@@ -21,6 +21,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.WindowManager
 import androidx.core.os.bundleOf
+import androidx.core.view.WindowInsetsCompat
+import androidx.core.view.WindowInsetsControllerCompat
 import androidx.fragment.app.DialogFragment
 import com.ontabb.rate.databinding.DialogRateAppBinding
 
@@ -55,6 +57,9 @@ class RateAppDialog : DialogFragment() {
 
     override fun onStart() {
         super.onStart()
+        dialog?.window?.let { window ->
+            WindowInsetsControllerCompat(window, window.decorView).hide(WindowInsetsCompat.Type.statusBars())
+        }
         dialog?.window?.setLayout(
             WindowManager.LayoutParams.MATCH_PARENT,
             WindowManager.LayoutParams.WRAP_CONTENT,

@@ -198,5 +198,4 @@
   <!-- Floating Bottom Navigation Reskin Tokens -->
   <color name="bottom_nav_bg">#FFFFFF</color>
   <color name="bottom_nav_active_indicator">@color/list_item_selected_bg</color>
-  <color name="bottom_nav_stroke">@color/accent_soft</color>
 </resources>
